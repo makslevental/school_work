@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir=".." name="filesystem-IDE">
+    <import file="../build.xml"/>
+    <!-- TODO: edit the following target according to your needs -->
+    <!-- (more info: http://www.netbeans.org/kb/articles/freeform-config.html#debugj2se) -->
+    <target description="run" name="debug-nb">
+        <nbjpdastart addressproperty="jpda.address" name="filesystem" transport="dt_socket"/>
+        <java classname="FileSystem" failonerror="yes" fork="true">
+            <arg line=""/>
+            <jvmarg value="-Xdebug"/>
+            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
+        </java>
+    </target>
+</project>

@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<graphml>
+ <key id='nodeKey1'
+     for='node'
+     attr.name='label'
+     attr.type='String' />
+ <key id='nodeKey2'
+     for='node'
+     attr.name='VertexCoordinates'
+     attr.type='String' />
+ <key id='nodeKey3'
+     for='node'
+     attr.name='VertexLabels'
+     attr.type='String' />
+ <key id='nodeKey4'
+     for='node'
+     attr.name='VertexShapeFunction'
+     attr.type='String' />
+ <key id='nodeKey5'
+     for='node'
+     attr.name='VertexSize'
+     attr.type='String' />
+ <key id='nodeKey6'
+     for='node'
+     attr.name='VertexStyle'
+     attr.type='String' />
+ <key id='edgeKey1'
+     for='edge'
+     attr.name='EdgeLabels'
+     attr.type='String' />
+ <key id='edgeKey2'
+     for='edge'
+     attr.name='EdgeStyle'
+     attr.type='String' />
+ <key id='edgeKey3'
+     for='edge'
+     attr.name='label'
+     attr.type='String' />
+ <key id='edgeKey4'
+     for='edge'
+     attr.name='Probability'
+     attr.type='String' />
+ <graph id='Graph1'
+     edgedefault='directed'>
+  <node id='1'>
+   <data key='nodeKey1'>Name</data>
+   <data key='nodeKey2'>List[1.373408028380104`, 0.7351976517923728`]</data>
+   <data key='nodeKey3'>Placed[&quot;Name&quot;, Center]</data>
+   <data key='nodeKey4'>Circle</data>
+   <data key='nodeKey5'>0.27`</data>
+   <data key='nodeKey6'>Hue[0.14`, 1, 0.9`]</data>
+  </node>
+  <node id='2'>
+   <data key='nodeKey1'>Name</data>
+   <data key='nodeKey2'>List[0.8367520641029215`, 0.`]</data>
+   <data key='nodeKey3'>Placed[&quot;Name&quot;, Center]</data>
+   <data key='nodeKey4'>Circle</data>
+   <data key='nodeKey5'>0.27`</data>
+   <data key='nodeKey6'>Hue[0.14`, 1, 0.9`]</data>
+  </node>
+  <node id='3'>
+   <data key='nodeKey1'>Name</data>
+   <data key='nodeKey2'>List[1.9321719173765572`, 1.277790254296879`]</data>
+   <data key='nodeKey3'>Placed[&quot;Name&quot;, Center]</data>
+   <data key='nodeKey4'>Circle</data>
+   <data key='nodeKey5'>0.27`</data>
+   <data key='nodeKey6'>Hue[0.14`, 1, 0.9`]</data>
+  </node>
+  <node id='4'>
+   <data key='nodeKey1'>Name</data>
+   <data key='nodeKey2'>List[1.931176611506315`, 0.1925315659415081`]</data>
+   <data key='nodeKey3'>Placed[&quot;Name&quot;, Center]</data>
+   <data key='nodeKey4'>Circle</data>
+   <data key='nodeKey5'>0.27`</data>
+   <data key='nodeKey6'>Hue[0.14`, 1, 0.9`]</data>
+  </node>
+  <node id='5'>
+   <data key='nodeKey1'>Name</data>
+   <data key='nodeKey2'>List[0.`, 0.737055110769505`]</data>
+   <data key='nodeKey3'>Placed[&quot;Name&quot;, Center]</data>
+   <data key='nodeKey4'>Circle</data>
+   <data key='nodeKey5'>0.27`</data>
+   <data key='nodeKey6'>Hue[0.14`, 1, 0.9`]</data>
+  </node>
+  <node id='6'>
+   <data key='nodeKey1'>Name</data>
+   <data key='nodeKey2'>List[0.8395371426991274`, 1.4716436154441377`]</data>
+   <data key='nodeKey3'>Placed[&quot;Name&quot;, Center]</data>
+   <data key='nodeKey4'>Circle</data>
+   <data key='nodeKey5'>0.27`</data>
+   <data key='nodeKey6'>Hue[0.14`, 1, 0.9`]</data>
+  </node>
+  <edge id='e1'
+      source='1'
+      target='2'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>0.5`</data>
+   <data key='edgeKey1'>Placed[0.5`2., Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e2'
+      source='1'
+      target='3'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>0.5`</data>
+   <data key='edgeKey1'>Placed[0.5`2., Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e3'
+      source='2'
+      target='4'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>1</data>
+   <data key='edgeKey1'>Placed[1, Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e4'
+      source='3'
+      target='4'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>0.4`</data>
+   <data key='edgeKey1'>Placed[0.40000000000000002220446049250313080847`2., Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e5'
+      source='3'
+      target='6'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>0.6`</data>
+   <data key='edgeKey1'>Placed[0.59999999999999997779553950749686919153`2., Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e6'
+      source='4'
+      target='1'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>1</data>
+   <data key='edgeKey1'>Placed[1, Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e7'
+      source='5'
+      target='2'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>1</data>
+   <data key='edgeKey1'>Placed[1, Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e8'
+      source='6'
+      target='1'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>0.2`</data>
+   <data key='edgeKey1'>Placed[0.20000000000000001110223024625156540424`2., Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+  <edge id='e9'
+      source='6'
+      target='5'>
+   <data key='nodeKey1'>MathematicaExpression</data>
+   <data key='edgeKey4'>0.8`</data>
+   <data key='edgeKey1'>Placed[0.80000000000000004440892098500626161695`2., Tooltip]</data>
+   <data key='edgeKey2'>Arrowheads[Medium]</data>
+  </edge>
+ </graph>
+</graphml>

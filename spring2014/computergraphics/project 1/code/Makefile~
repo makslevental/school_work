@@ -1,0 +1,32 @@
+# Name: Maksim Levental
+
+# UF ID: 3186-7826
+
+# Gator ID: mlevental86
+
+# Discussion Section #: 1085
+
+# *****************************************************
+# Parameters to control Makefile operation
+
+G = g++ 
+FLAGS = -W -Wall -Wextra
+DEBUGGER = -ggdb
+GLUT = -lglut -lGL -lGLU
+C0x = -std=c++0x
+# ****************************************************
+
+main: surfaces.o ray_tracer.o surfaces.h
+	$(G) -o main surfaces.o ray_tracer.o $(GLUT)
+
+surfaces.o: surfaces.cpp surfaces.h
+	$(G) $(C0x) -c surfaces.cpp
+
+ray_tracer.o: ray_tracer.cpp surfaces.h
+	$(G) $(C0x) -c ray_tracer.cpp
+
+clean:
+	rm -rf *.o main maksim_levental_3186_7826.tar
+
+tarfile: 
+	tar -cf maksim_levental_3186_7826.tar surfaces.cpp ray_tracer.cpp surfaces.h Makefile

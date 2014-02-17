@@ -1,0 +1,187 @@
+#include <GL/glut.h>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/io.hpp>
+#include <math.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <map>
+#include <string>
+
+typedef boost::numeric::ublas::vector<int,std::vector<int> > int_vec;
+typedef boost::numeric::ublas::vector<double,std::vector<double> > dbl_vec;
+typedef boost::numeric::ublas::vector<GLubyte,std::vector<GLubyte> > GLubyte_vec;
+
+#define CHECK_IMAGE_WIDTH 500
+#define CHECK_IMAGE_HEIGHT 500
+#define PHONG_EXP 15.0
+#define K_S .5
+#define K_D .5
+#define K_A .2
+#define ILLUM 1
+
+dbl_vec light_src(3, std::vector<double>{1000,500,500});
+dbl_vec unit_light_src(light_src/norm_2(light_src));
+static GLubyte checkImage[CHECK_IMAGE_WIDTH][CHECK_IMAGE_HEIGHT][3];
+int_vec ray_directiion(3, std::vector<int>{-1,0,0});
+GLubyte_vec GLubyte_white(3,std::vector<GLubyte>{255,255,255});
+GLubyte_vec GLubyte_black(3,std::vector<GLubyte>{0,0,0});
+
+class surface{
+
+public:
+
+  virtual double intersection_test(dbl_vec, dbl_vec) = 0;
+  virtual dbl_vec unit_normal(dbl_vec) = 0;
+  virtual GLubyte_vec* shader(dbl_vec) = 0;
+  
+  GLubyte color[3];
+  
+};
+
+class sphere : public surface{ 
+
+public:
+  int_vec center;
+  double radius;
+
+  sphere(GLubyte surface_color[3], int_vec center, double radius){
+    color[0] = surface_color[0];
+    color[1] = surface_color[1];
+    color[2] = surface_color[2];
+    this->center = center;
+    this->radius = radius;
+  }
+
+  dbl_vec unit_normal(dbl_vec point){
+    dbl_vec normal = point - this->center;
+    return normal/norm_2(normal);
+  }
+
+
+  double intersection_test(dbl_vec ray_start_vec, dbl_vec ray_dir_vec){
+
+    dbl_vec pov_to_center = ray_start_vec - center;
+    double v_dot_d = inner_prod(pov_to_center, ray_dir_vec);
+    double vSquared = inner_prod(pov_to_center, pov_to_center);
+    double rSquared = radius*radius;
+    double discr = v_dot_d*v_dot_d - (vSquared - rSquared);
+
+    if( discr > 0 ){
+      double sqrtdiscr = sqrt(discr);
+      double t1 = -(v_dot_d) + sqrtdiscr;
+      double t2 = -(v_dot_d) - sqrtdiscr;
+      return std::min(t1,t2);
+    }
+    else{
+      return -1;
+    }
+    return 0;
+    
+  }
+
+  GLubyte_vec* shader(dbl_vec point){
+    static GLubyte_vec shades[3];
+    // static because perspective RAY direction (not perspective pixel itself) is the same globally
+    static dbl_vec bisector = (light_src + -1*ray_directiion)/norm_2(light_src + -1*ray_directiion);
+    GLubyte_vec this_color(3, std::vector<GLubyte>{this->color[0],this->color[1],this->color[2]});
+
+    double norm_dot_light = inner_prod(this->unit_normal(point),unit_light_src);
+    double diffuse_lighting = K_D*std::max(0.,norm_dot_light);
+    double norm_dot_bi = inner_prod(this->unit_normal(point),bisector);
+    double specular_lighting = K_S*pow(std::max(0.,norm_dot_bi),PHONG_EXP);
+    double ambient_lighting = K_A;
+
+    shades[0] = ILLUM*diffuse_lighting*GLubyte_white;
+    shades[1] = ILLUM*specular_lighting*GLubyte_white;    
+    shades[2] = ILLUM*ambient_lighting*this_color;
+
+    return shades;
+  }
+};
+
+
+
+
+void makeCheckImage(std::vector<surface*>& bob) {
+
+  int i, j; 
+
+  for (i = 0; i < CHECK_IMAGE_HEIGHT; i++){
+    
+    for (j = 0; j < CHECK_IMAGE_WIDTH; j++) {
+      int_vec perspective(3, std::vector<int>{500,j,i});
+      std::map<double,surface*> objects_intersected;
+      
+      for( std::vector<surface*>::iterator it = bob.begin(); it != bob.end(); it++ ){
+	double intersQ = (*it)->intersection_test(perspective, ray_directiion);
+	if ( intersQ > 0 )
+	  objects_intersected[intersQ] = *it;
+      }
+
+      if( !objects_intersected.empty() ){
+	surface* foreground_ob = objects_intersected.begin()->second;
+	double foreground_ob_dist = objects_intersected.begin()->first;
+	dbl_vec point_on_surface = perspective + foreground_ob_dist*ray_directiion;
+   
+	GLubyte_vec* shading = foreground_ob->shader(point_on_surface);
+
+        checkImage[i][j][0] = (GLubyte)std::min(255,shading[0][0] + shading[1][0] + shading[2][0]);
+        checkImage[i][j][1] = (GLubyte)std::min(255,shading[0][1] + shading[1][1] + shading[2][1]);
+	checkImage[i][j][2] = (GLubyte)std::min(255,shading[0][2] + shading[1][2] + shading[2][2]);
+      }
+      else{
+	checkImage[i][j][0] = 0;
+	checkImage[i][j][1] = 0;
+	checkImage[i][j][2] = 0;
+      }
+    }
+  }
+  for (i = 1; i < CHECK_IMAGE_HEIGHT-1; i++){
+    checkImage[i][0][0] = checkImage[i][CHECK_IMAGE_WIDTH-1][0] = 255; 
+    checkImage[i][0][1] = checkImage[i][CHECK_IMAGE_WIDTH-1][1] = 0;
+    checkImage[i][0][2] = checkImage[i][CHECK_IMAGE_WIDTH-1][2] = 0;
+  }
+  for (j = 0; j < CHECK_IMAGE_WIDTH; j++){
+    checkImage[0][j][0] = checkImage[CHECK_IMAGE_HEIGHT-1][j][0] = 255; 
+    checkImage[0][j][1] = checkImage[CHECK_IMAGE_HEIGHT-1][j][1] = 0;
+    checkImage[0][j][2] = checkImage[CHECK_IMAGE_HEIGHT-1][j][2] = 0;
+  }
+  
+  
+  
+}
+
+void init(std::vector<surface*>& bob) {
+  glClearColor(0.0, 0.0, 0.0, 0.0);
+  glShadeModel(GL_FLAT);
+  makeCheckImage(bob);
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+}
+
+void display() {
+  glClear(GL_COLOR_BUFFER_BIT);
+  glRasterPos2i(-1,-1);
+  glDrawPixels(CHECK_IMAGE_WIDTH, CHECK_IMAGE_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, checkImage);
+  glFlush();
+}
+
+int main(int argc, char **argv) {
+  
+  int_vec center_circ(3, std::vector<int>{0,250,250});	      	
+  
+  surface* sphere1 = new sphere((GLubyte[]){0,255,0}, dbl_vec(3, std::vector<double>{100, 100,100}), 100);
+  surface* sphere2 = new sphere((GLubyte[]){255,0,0}, dbl_vec(3, std::vector<double>{10,250,250}), 100);
+  std::vector<surface*> surfaces = {sphere1, sphere2};
+ 
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_RGB);
+  glutInitWindowSize(600,600);
+  glutCreateWindow(argv[0]);
+  glutDisplayFunc(display);
+  init(surfaces);
+  glutMainLoop();
+ 
+  return 0;
+  
+}
