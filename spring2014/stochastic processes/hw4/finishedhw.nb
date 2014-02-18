@@ -1,0 +1,1216 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     41763,       1207]
+NotebookOptionsPosition[     38970,       1117]
+NotebookOutlinePosition[     39307,       1132]
+CellTagsIndexPosition[     39264,       1129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Homework 4", "Subtitle",
+ CellChangeTimes->{{3.60172352206133*^9, 3.601723524956093*^9}}],
+
+Cell["Maksim Levental", "Subsubtitle",
+ CellChangeTimes->{{3.601723526140051*^9, 3.601723531452051*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Problem a", "Section",
+ CellChangeTimes->{{3.601723542523553*^9, 3.6017235439643*^9}, 
+   3.601724980787698*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+How many turns on average does it take to complete the game? \
+\>", "Subsection",
+ CellChangeTimes->{{3.6017235490204763`*^9, 3.601723567099588*^9}}],
+
+Cell["\<\
+We compute the expected hitting time for state \[OpenCurlyDoubleQuote]9\
+\[CloseCurlyDoubleQuote]. Define the transition matrix P\
+\>", "Text",
+ CellChangeTimes->{{3.601723589211939*^9, 3.60172360322688*^9}, {
+  3.6017241444961987`*^9, 3.601724171492217*^9}}],
+
+Cell[BoxData[{GridBox[{
+   {
+    RowBox[{"                   ", "1"}], 
+    RowBox[{"       ", "4"}], 
+    RowBox[{"      ", "5"}], 
+    RowBox[{"       ", "7"}], 
+    RowBox[{"      ", "9"}]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+    "RowsIndexed" -> {}},
+  GridBoxSpacings->{"Columns" -> {
+      Offset[0.27999999999999997`], {
+       Offset[0.7]}, 
+      Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+      Offset[0.2], {
+       Offset[0.4]}, 
+      Offset[0.2]}, "RowsIndexed" -> {}}], "\[IndentingNewLine]", 
+ RowBox[{"P", " ", "=", 
+  RowBox[{GridBox[{
+     {"1"},
+     {"4"},
+     {"5"},
+     {"7"},
+     {"9"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], " ", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", "0", "0.5`", "0.5`", "0"},
+       {"0.5`", "0", "0.5`", "0", "0"},
+       {"0.5`", "0", "0", "0.5`", "0"},
+       {"0", "0.5`", "0", "0", "0.5`"},
+       {"0", "0", "0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}]}]}], "Input",
+ CellChangeTimes->{{3.601723638973835*^9, 3.601723646385694*^9}, {
+   3.6017242188091373`*^9, 3.6017242389653*^9}, 3.601724433235734*^9, 
+   3.601728563052926*^9}],
+
+Cell[TextData[{
+ "Define ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["P", "~"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " = ",
+ StyleBox["P",
+  FontSlant->"Italic"],
+ " with the exception that ",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ "(9,9) = 0"
+}], "Text",
+ CellChangeTimes->{{3.601723802470585*^9, 3.601723821509877*^9}, {
+  3.6017242455196753`*^9, 3.60172427324769*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["P", "~"], " ", "=", 
+  TagBox[
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"0", "0", "0.5`", "0.5`", "0"},
+      {"0.5`", "0", "0.5`", "0", "0"},
+      {"0.5`", "0", "0", "0.5`", "0"},
+      {"0", "0.5`", "0", "0", "0.5`"},
+      {"0", "0", "0", "0", "0"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+   Function[BoxForm`e$, 
+    MatrixForm[BoxForm`e$]]]}]], "Input",
+ CellChangeTimes->{{3.601723638973835*^9, 3.601723646385694*^9}, {
+   3.601723838462343*^9, 3.601723845675373*^9}, {3.601724065032336*^9, 
+   3.601724090153577*^9}, {3.60172419071315*^9, 3.6017242277358522`*^9}, 
+   3.601724432723116*^9, 3.601728564124187*^9}],
+
+Cell[TextData[{
+ "Define the hitting time vector ",
+ StyleBox["h",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.601724321721458*^9, 3.6017243671498823`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"h", "=", 
+  TagBox[
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"1"},
+      {"1"},
+      {"1"},
+      {"1"},
+      {"0"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+   Function[BoxForm`e$, 
+    MatrixForm[BoxForm`e$]]]}]], "Input",
+ CellChangeTimes->{{3.6017243750670023`*^9, 3.60172443078607*^9}, 
+   3.601728565130493*^9}],
+
+Cell["\<\
+Then computing the expected hitting time is equivalent to solving the matrix \
+equation \
+\>", "Text",
+ CellChangeTimes->{{3.601724279794931*^9, 3.601724314382403*^9}, {
+  3.6017244446048203`*^9, 3.6017244501886997`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"I", "-", 
+     OverscriptBox["P", "~"]}], ")"}], "\[Rho]"}], "=", "h"}]], "Input",
+ CellChangeTimes->{{3.6017244597225113`*^9, 3.601724482373591*^9}, {
+  3.601724545999177*^9, 3.601724552335265*^9}, {3.601726427371091*^9, 
+  3.601726432478084*^9}}],
+
+Cell[TextData[{
+ "for the unknown  \[Rho] = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["\[Rho]", "1"], ",", 
+      SubscriptBox["\[Rho]", "4"], ",", 
+      SubscriptBox["\[Rho]", "5"], ",", 
+      SubscriptBox["\[Rho]", "7"], ",", 
+      SubscriptBox["\[Rho]", "9"]}], ")"}], "T"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Rho]", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " is the hitting time for hitting state 9 from state i."
+}], "Text",
+ CellChangeTimes->{{3.601724559765594*^9, 3.601724664347468*^9}, 
+   3.6017257915728283`*^9, {3.601726407866466*^9, 3.6017264572956142`*^9}, {
+   3.6017265765993958`*^9, 3.601726740836462*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.601726662644711*^9, 3.601726666104547*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"IdentityMatrix", "[", "5", "]"}], "-", 
+       OverscriptBox["P", "~"]}], ")"}], ".", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["\[Rho]", "1"], ",", 
+       SubscriptBox["\[Rho]", "4"], ",", 
+       SubscriptBox["\[Rho]", "5"], ",", 
+       SubscriptBox["\[Rho]", "7"], ",", 
+       SubscriptBox["\[Rho]", "9"]}], "}"}]}], "\[Equal]", "h"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "1"], ",", 
+     SubscriptBox["\[Rho]", "4"], ",", 
+     SubscriptBox["\[Rho]", "5"], ",", 
+     SubscriptBox["\[Rho]", "7"], ",", 
+     SubscriptBox["\[Rho]", "9"]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.601724672409639*^9, 3.6017248163023167`*^9}, {
+  3.6017267497788363`*^9, 3.601726752476005*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[Rho]", "1"], "\[Rule]", "7"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "4"], "\[Rule]", "8"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "5"], "\[Rule]", "7"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "7"], "\[Rule]", "5"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "9"], "\[Rule]", "0"}]}], "}"}], "}"}]], "Input",
+ CellChangeTimes->{{3.601724819415269*^9, 3.601724861401775*^9}, 
+   3.6017267646011047`*^9}],
+
+Cell["\<\
+And so the expected hitting for hitting state 9 from state 1 is 7.\
+\>", "Text",
+ CellChangeTimes->{{3.601724865340115*^9, 3.60172489718956*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem b", "Section",
+ CellChangeTimes->{{3.601724971427875*^9, 3.601724983155263*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+What is the probability that a player who has reached the middle square will \
+complete the game without slipping back to square 1?\
+\>", "Subsection",
+ CellChangeTimes->{{3.601724993107625*^9, 3.601725025922161*^9}}],
+
+Cell["\<\
+The probability is equivalent to the probability of hitting the states {1,9} \
+with the further conditon that state 1 carries probability of zero of \
+\[OpenCurlyDoubleQuote]hitting 9 before 1\[CloseCurlyDoubleQuote] and state 9 \
+carries a probability of one of \[OpenCurlyDoubleQuote]hitting 9 before 1\
+\[CloseCurlyDoubleQuote] \
+\>", "Text",
+ CellChangeTimes->{{3.601725035842249*^9, 3.601725064833312*^9}, {
+  3.6017251326721287`*^9, 3.60172514587247*^9}, {3.60172519630389*^9, 
+  3.6017253226056433`*^9}, {3.601725423002874*^9, 3.6017255755925283`*^9}}],
+
+Cell[TextData[{
+ "Define ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["P", "~"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " = ",
+ StyleBox["P",
+  FontSlant->"Italic"],
+ " with the exception that ",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ "(9,9) = ",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ "(1, j) = 0"
+}], "Text",
+ CellChangeTimes->{{3.601723802470585*^9, 3.601723821509877*^9}, {
+  3.6017242455196753`*^9, 3.60172427324769*^9}, {3.6017256092081337`*^9, 
+  3.601725635495867*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["P", "~"], " ", "=", 
+  TagBox[
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"0", "0", "0", "0", "0"},
+      {"0.5`", "0", "0.5`", "0", "0"},
+      {"0.5`", "0", "0", "0.5`", "0"},
+      {"0", "0.5`", "0", "0", "0.5`"},
+      {"0", "0", "0", "0", "0"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+   Function[BoxForm`e$, 
+    MatrixForm[BoxForm`e$]]]}]], "Input",
+ CellChangeTimes->{{3.601723638973835*^9, 3.601723646385694*^9}, {
+   3.601723838462343*^9, 3.601723845675373*^9}, {3.601724065032336*^9, 
+   3.601724090153577*^9}, {3.60172419071315*^9, 3.6017242277358522`*^9}, 
+   3.601724432723116*^9, {3.6017256500791817`*^9, 3.601725651647109*^9}, 
+   3.601728569787951*^9}],
+
+Cell["\<\
+The state transition diagram is \
+\>", "Text",
+ CellChangeTimes->{{3.601724321721458*^9, 3.6017243671498823`*^9}, {
+  3.601725697206912*^9, 3.601725698582135*^9}, {3.601728581875589*^9, 
+  3.6017285852370863`*^9}}],
+
+Cell["\<\
+Then computing the expected hitting time is equivalent to solving the matrix \
+equation \
+\>", "Text",
+ CellChangeTimes->{{3.601724279794931*^9, 3.601724314382403*^9}, {
+  3.6017244446048203`*^9, 3.6017244501886997`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"I", "-", 
+     OverscriptBox["P", "~"]}], ")"}], "\[Rho]"}], "=", "h"}]], "Input",
+ CellChangeTimes->{{3.6017244597225113`*^9, 3.601724482373591*^9}, {
+   3.601724545999177*^9, 3.601724552335265*^9}, 3.601726777284539*^9}],
+
+Cell[TextData[{
+ "for the unknown  \[Rho] = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["\[Rho]", "1"], ",", 
+      SubscriptBox["\[Rho]", "4"], ",", 
+      SubscriptBox["\[Rho]", "5"], ",", 
+      SubscriptBox["\[Rho]", "7"], ",", 
+      SubscriptBox["\[Rho]", "9"]}], ")"}], "T"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Rho]", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " is the probability of hitting state 1 or 9.  It is ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ " that encodes the conditons ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Rho]", "1"], "=", "0"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Rho]", "9"], "=", "1"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.601724559765594*^9, 3.601724664347468*^9}, 
+   3.60172578965191*^9, {3.601726783620893*^9, 3.601726893313697*^9}, {
+   3.601726989408763*^9, 3.601727023695722*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"IdentityMatrix", "[", "5", "]"}], "-", 
+       OverscriptBox["P", "~"]}], ")"}], ".", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["\[Rho]", "1"], ",", 
+       SubscriptBox["\[Rho]", "4"], ",", 
+       SubscriptBox["\[Rho]", "5"], ",", 
+       SubscriptBox["\[Rho]", "7"], ",", 
+       SubscriptBox["\[Rho]", "9"]}], "}"}]}], "\[Equal]", "h"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "1"], ",", 
+     SubscriptBox["\[Rho]", "4"], ",", 
+     SubscriptBox["\[Rho]", "5"], ",", 
+     SubscriptBox["\[Rho]", "7"], ",", 
+     SubscriptBox["\[Rho]", "9"]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6017271369198847`*^9, 3.601727143283889*^9}, 
+   3.601727240372415*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[Rho]", "1"], "\[Rule]", "7"}], ",", 
+   RowBox[{
+    SubscriptBox["\[Rho]", "4"], "\[Rule]", "8"}], ",", 
+   RowBox[{
+    SubscriptBox["\[Rho]", "5"], "\[Rule]", "7"}], ",", 
+   RowBox[{
+    SubscriptBox["\[Rho]", "7"], "\[Rule]", "5"}], ",", 
+   RowBox[{
+    SubscriptBox["\[Rho]", "9"], "\[Rule]", "0"}]}], "}"}]], "Input"],
+
+Cell["So", "Text",
+ CellChangeTimes->{{3.601727341714192*^9, 3.601727346041814*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem b", "Section",
+ CellChangeTimes->{{3.601724971427875*^9, 3.601724983155263*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+What is the probability that a player who has reached the middle square will \
+complete the game without slipping back to square 1?\
+\>", "Subsection",
+ CellChangeTimes->{{3.601724993107625*^9, 3.601725025922161*^9}}],
+
+Cell["\<\
+The probability is equivalent to the probability of hitting the states {1,9} \
+with the further conditon that state 1 carries probability of zero of \
+\[OpenCurlyDoubleQuote]hitting 9 before 1\[CloseCurlyDoubleQuote] and state 9 \
+carries a probability of one of \[OpenCurlyDoubleQuote]hitting 9 before 1\
+\[CloseCurlyDoubleQuote] \
+\>", "Text",
+ CellChangeTimes->{{3.601725035842249*^9, 3.601725064833312*^9}, {
+  3.6017251326721287`*^9, 3.60172514587247*^9}, {3.60172519630389*^9, 
+  3.6017253226056433`*^9}, {3.601725423002874*^9, 3.6017255755925283`*^9}}],
+
+Cell[TextData[{
+ "Define ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["P", "~"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " = ",
+ StyleBox["P",
+  FontSlant->"Italic"],
+ " with the exception that ",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ "(9,9) = ",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ "(1, j) = 0"
+}], "Text",
+ CellChangeTimes->{{3.601723802470585*^9, 3.601723821509877*^9}, {
+  3.6017242455196753`*^9, 3.60172427324769*^9}, {3.6017256092081337`*^9, 
+  3.601725635495867*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   OverscriptBox["P", "~"], " ", "=", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", "0", "0", "0", "0"},
+       {"0.5`", "0", "0.5`", "0", "0"},
+       {"0.5`", "0", "0", "0.5`", "0"},
+       {"0", "0.5`", "0", "0", "0.5`"},
+       {"0", "0", "0", "0", "0"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}], ";"}]], "Input",
+ CellChangeTimes->{{3.601723638973835*^9, 3.601723646385694*^9}, {
+   3.601723838462343*^9, 3.601723845675373*^9}, {3.601724065032336*^9, 
+   3.601724090153577*^9}, {3.60172419071315*^9, 3.6017242277358522`*^9}, 
+   3.601724432723116*^9, {3.6017256500791817`*^9, 3.601725651647109*^9}}],
+
+Cell[TextData[{
+ "Define the hitting probability vector ",
+ StyleBox["h",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.601724321721458*^9, 3.6017243671498823`*^9}, {
+  3.601725697206912*^9, 3.601725698582135*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"h", "=", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0"},
+       {"0"},
+       {"0"},
+       {"0"},
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6017243750670023`*^9, 3.60172443078607*^9}, {
+  3.6017257024262457`*^9, 3.601725707450617*^9}}],
+
+Cell["\<\
+Then computing the expected hitting time is equivalent to solving the matrix \
+equation \
+\>", "Text",
+ CellChangeTimes->{{3.601724279794931*^9, 3.601724314382403*^9}, {
+  3.6017244446048203`*^9, 3.6017244501886997`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"I", "-", 
+     OverscriptBox["P", "~"]}], ")"}], "\[Rho]"}], "=", "h"}]], "Input",
+ CellChangeTimes->{{3.6017244597225113`*^9, 3.601724482373591*^9}, {
+   3.601724545999177*^9, 3.601724552335265*^9}, 3.601726777284539*^9}],
+
+Cell[TextData[{
+ "for the unknown  \[Rho] = ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["\[Rho]", "1"], ",", 
+      SubscriptBox["\[Rho]", "4"], ",", 
+      SubscriptBox["\[Rho]", "5"], ",", 
+      SubscriptBox["\[Rho]", "7"], ",", 
+      SubscriptBox["\[Rho]", "9"]}], ")"}], "T"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Rho]", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " is the probability of hitting state 1 or 9.  It is ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ " that encodes the conditons ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Rho]", "1"], "=", "0"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Rho]", "9"], "=", "1"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.601724559765594*^9, 3.601724664347468*^9}, 
+   3.60172578965191*^9, {3.601726783620893*^9, 3.601726893313697*^9}, {
+   3.601726989408763*^9, 3.601727023695722*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"IdentityMatrix", "[", "5", "]"}], "-", 
+       OverscriptBox["P", "~"]}], ")"}], ".", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["\[Rho]", "1"], ",", 
+       SubscriptBox["\[Rho]", "4"], ",", 
+       SubscriptBox["\[Rho]", "5"], ",", 
+       SubscriptBox["\[Rho]", "7"], ",", 
+       SubscriptBox["\[Rho]", "9"]}], "}"}]}], "\[Equal]", "h"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "1"], ",", 
+     SubscriptBox["\[Rho]", "4"], ",", 
+     SubscriptBox["\[Rho]", "5"], ",", 
+     SubscriptBox["\[Rho]", "7"], ",", 
+     SubscriptBox["\[Rho]", "9"]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6017271369198847`*^9, 3.601727143283889*^9}, 
+   3.601727240372415*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[Rho]", "1"], "\[Rule]", "0.`"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "4"], "\[Rule]", "0.14285714285714285`"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "5"], "\[Rule]", "0.2857142857142857`"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "7"], "\[Rule]", "0.5714285714285714`"}], ",", 
+    RowBox[{
+     SubscriptBox["\[Rho]", "9"], "\[Rule]", "1.`"}]}], "}"}], 
+  "}"}]], "DisplayFormula",
+ CellChangeTimes->{3.6017277799066267`*^9}],
+
+Cell[TextData[{
+ "So ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Rho]", "5"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " = 0.285714 is the probability that starting at state 5 you hit state 9 \
+without hitting state 1 first."
+}], "Text",
+ CellChangeTimes->{{3.601724279794931*^9, 3.601724314382403*^9}, {
+  3.6017244446048203`*^9, 3.6017244501886997`*^9}, {3.601727959891263*^9, 
+  3.601728074590404*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem c", "Section",
+ CellChangeTimes->{{3.601724971427875*^9, 3.601724983155263*^9}, 
+   3.601728084675871*^9}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Does this ",
+ StyleBox["new",
+  FontWeight->"Bold"],
+ " Markov chain have a unique stationary distribution? Why or why not? In the \
+long-run, in which square will we spend the most time, and what fraction of \
+the time will we be there?\n"
+}], "Subsection",
+ CellChangeTimes->{{3.601724993107625*^9, 3.601725025922161*^9}, {
+  3.6017307759754133`*^9, 3.601730784381454*^9}}],
+
+Cell["\<\
+The adjusted transition matrix is\
+\>", "Text",
+ CellChangeTimes->{{3.601725035842249*^9, 3.601725064833312*^9}, {
+  3.6017251326721287`*^9, 3.60172514587247*^9}, {3.60172519630389*^9, 
+  3.6017253226056433`*^9}, {3.601725423002874*^9, 3.6017255755925283`*^9}, {
+  3.601728108348054*^9, 3.601728108747733*^9}, {3.601728242393565*^9, 
+  3.601728246440727*^9}}],
+
+Cell[BoxData[{GridBox[{
+   {
+    RowBox[{"                   ", "1"}], 
+    RowBox[{"       ", "4"}], 
+    RowBox[{"      ", "5"}], 
+    RowBox[{"       ", "7"}], 
+    RowBox[{"      ", "9"}]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+    "RowsIndexed" -> {}},
+  GridBoxSpacings->{"Columns" -> {
+      Offset[0.27999999999999997`], {
+       Offset[0.7]}, 
+      Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+      Offset[0.2], {
+       Offset[0.4]}, 
+      Offset[0.2]}, "RowsIndexed" -> {}}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", " ", "=", 
+   RowBox[{GridBox[{
+      {"1"},
+      {"4"},
+      {"5"},
+      {"7"},
+      {"9"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.7]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}], " ", 
+    TagBox[
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"0", "0", "0.5`", "0.5`", "0"},
+        {"0.5`", "0", "0.5`", "0", "0"},
+        {"0.5`", "0", "0", "0.5`", "0"},
+        {"0", "0.5`", "0", "0", "0.5`"},
+        {"0.5", "0", "0", "0.5", "0"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+         "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.7]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+     Function[BoxForm`e$, 
+      MatrixForm[BoxForm`e$]]]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.601723638973835*^9, 3.601723646385694*^9}, {
+   3.6017242188091373`*^9, 3.6017242389653*^9}, 3.601724433235734*^9, {
+   3.6017283120281143`*^9, 3.601728322620117*^9}, 3.601730579354473*^9}],
+
+Cell["\<\
+The state transition diagram is \
+\>", "Text",
+ CellChangeTimes->{{3.601725035842249*^9, 3.601725064833312*^9}, {
+  3.6017251326721287`*^9, 3.60172514587247*^9}, {3.60172519630389*^9, 
+  3.6017253226056433`*^9}, {3.601725423002874*^9, 3.6017255755925283`*^9}, {
+  3.601728108348054*^9, 3.601728108747733*^9}, {3.601728242393565*^9, 
+  3.601728246440727*^9}, {3.601730155208873*^9, 3.601730157928236*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 2, 3, 4, 5}, {
+       SparseArray[
+       Automatic, {5, 5}, 0, {
+        1, {{0, 2, 4, 6, 8, 10}, {{3}, {4}, {1}, {3}, {1}, {4}, {2}, {5}, {
+          1}, {4}}}, Pattern}], Null}, {
+      EdgeLabels -> {
+        DirectedEdge[1, 4] -> Placed[0.5`2., Tooltip], DirectedEdge[5, 1] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[2, 1] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[4, 2] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[5, 4] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[2, 3] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[3, 4] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[3, 1] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[1, 3] -> 
+         Placed[0.5`2., Tooltip], DirectedEdge[4, 5] -> 
+         Placed[0.5`2., Tooltip]}, EdgeStyle -> {
+         Arrowheads[Medium]}, GraphLayout -> "SpringElectricalEmbedding", 
+       ImagePadding -> All, 
+       Properties -> {
+        DirectedEdge[2, 3] -> {"Probability" -> 0.5}, 
+         DirectedEdge[3, 4] -> {"Probability" -> 0.5}, 
+         DirectedEdge[3, 1] -> {"Probability" -> 0.5}, 
+         DirectedEdge[1, 4] -> {"Probability" -> 0.5}, 
+         DirectedEdge[4, 5] -> {"Probability" -> 0.5}, 
+         DirectedEdge[4, 2] -> {"Probability" -> 0.5}, 
+         DirectedEdge[1, 3] -> {"Probability" -> 0.5}, 
+         DirectedEdge[5, 1] -> {"Probability" -> 0.5}, 
+         DirectedEdge[5, 4] -> {"Probability" -> 0.5}, 
+         DirectedEdge[2, 1] -> {"Probability" -> 0.5}}, 
+       VertexLabels -> {
+        1 -> Placed["1", Center], 2 -> Placed["4", Center], 3 -> 
+         Placed["5", Center], 4 -> Placed["7", Center], 5 -> 
+         Placed["9", Center]}, 
+       VertexShapeFunction -> {
+        3 -> "Circle", 4 -> "Circle", 5 -> "Circle", 1 -> "Circle", 2 -> 
+         "Circle"}, VertexSize -> {0.27}, 
+       VertexStyle -> {
+        2 -> Hue[0.14, 1, 0.9], 1 -> Hue[0.14, 1, 0.9], 5 -> 
+         Hue[0.14, 1, 0.9], 4 -> Hue[0.14, 1, 0.9], 3 -> 
+         Hue[0.14, 1, 0.9]}}]], Typeset`boxes, Typeset`boxes$s2d = 
+    GraphicsGroupBox[{{
+       Arrowheads[0.03462871185418517], 
+       Directive[
+        Opacity[0.7], 
+        Hue[0.6, 0.7, 0.5]], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[
+            BezierCurveBox[{
+              DynamicLocation["VertexID$1", Automatic, Center], {
+              0.3203033552106243, 0.2794870464365304}, 
+              DynamicLocation["VertexID$3", Automatic, Center]}]], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$1"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[{
+             DynamicLocation["VertexID$1", Automatic, Center], 
+             DynamicLocation["VertexID$4", Automatic, Center]}], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$2"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[{
+             DynamicLocation["VertexID$2", Automatic, Center], 
+             DynamicLocation["VertexID$1", Automatic, Center]}], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$3"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[{
+             DynamicLocation["VertexID$2", Automatic, Center], 
+             DynamicLocation["VertexID$3", Automatic, Center]}], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$4"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[
+            BezierCurveBox[{
+              DynamicLocation["VertexID$3", Automatic, Center], {
+              0.5531950166926408, 0.5502441955484001}, 
+              DynamicLocation["VertexID$1", Automatic, Center]}]], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$5"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[{
+             DynamicLocation["VertexID$3", Automatic, Center], 
+             DynamicLocation["VertexID$4", Automatic, Center]}], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$6"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[{
+             DynamicLocation["VertexID$4", Automatic, Center], 
+             DynamicLocation["VertexID$2", Automatic, Center]}], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$7"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[
+            BezierCurveBox[{
+              DynamicLocation["VertexID$4", Automatic, Center], {
+              1.427308339694904, 0.7276277512003806}, 
+              DynamicLocation["VertexID$5", Automatic, Center]}]], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$8"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[{
+             DynamicLocation["VertexID$5", Automatic, Center], 
+             DynamicLocation["VertexID$1", Automatic, Center]}], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$9"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ], 
+       TagBox[
+        TooltipBox[
+         TagBox[
+          StyleBox[
+           ArrowBox[
+            BezierCurveBox[{
+              DynamicLocation["VertexID$5", Automatic, Center], {
+              1.3174156313336012`, 0.41647886105224324`}, 
+              DynamicLocation["VertexID$4", Automatic, Center]}]], 
+           Arrowheads[Medium], StripOnInput -> False], "DynamicName", BoxID -> 
+          "EdgeLabelID$10"], "0.5`2."], Annotation[#, 0.5`2., "Tooltip"]& ]}, {
+       Directive[
+        Hue[0.6, 0.2, 0.8], 
+        EdgeForm[
+         Directive[
+          GrayLevel[0], 
+          Opacity[0.7]]]], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           
+           DiskBox[{0.8726648129132498, 0.039912955985936305`}, {
+            0.09572409048420553, 0.09572409048420553}], 
+           Hue[0.14, 1, 0.9], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$1"], 
+         InsetBox[
+          FormBox["\"1\"", TraditionalForm], 
+          DynamicLocation["VertexID$1", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$1"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           DiskBox[{0., 0.}, {0.09572409048420553, 0.09572409048420553}], 
+           Hue[0.14, 1, 0.9], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$2"], 
+         InsetBox[
+          FormBox["\"4\"", TraditionalForm], 
+          DynamicLocation["VertexID$2", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$2"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           
+           DiskBox[{0.0008335589900152485, 0.7898182859989941}, {
+            0.09572409048420553, 0.09572409048420553}], 
+           Hue[0.14, 1, 0.9], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$3"], 
+         InsetBox[
+          FormBox["\"5\"", TraditionalForm], 
+          DynamicLocation["VertexID$3", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$3"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           
+           DiskBox[{0.8714161601787374, 0.7489791934794637}, {
+            0.09572409048420553, 0.09572409048420553}], 
+           Hue[0.14, 1, 0.9], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$4"], 
+         InsetBox[
+          FormBox["\"7\"", TraditionalForm], 
+          DynamicLocation["VertexID$4", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> "VertexLabelID$4"], 
+       TagBox[{
+         TagBox[
+          StyleBox[
+           
+           DiskBox[{1.8733078108497676`, 0.3951274187731598}, {
+            0.09572409048420553, 0.09572409048420553}], 
+           Hue[0.14, 1, 0.9], StripOnInput -> False], "DynamicName", BoxID -> 
+          "VertexID$5"], 
+         InsetBox[
+          FormBox["\"9\"", TraditionalForm], 
+          DynamicLocation["VertexID$5", None, Center], BaseStyle -> 
+          "Graphics"]}, "DynamicName", BoxID -> 
+        "VertexLabelID$5"]}}], $CellContext`flag}, 
+    TagBox[
+     DynamicBox[GraphComputation`NetworkGraphicsBox[
+      3, Typeset`graph, Typeset`boxes, $CellContext`flag], {
+      CachedValue :> Typeset`boxes, SingleEvaluation -> True, 
+       SynchronousUpdating -> False, TrackedSymbols :> {$CellContext`flag}},
+      ImageSizeCache->{{6.18, 352.8200000000001}, {-86.10719999999998, 
+       79.68148811410953}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False,
+    UnsavedVariables:>{$CellContext`flag}]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FrameTicks->None]], "Input",
+ CellChangeTimes->{{3.601730144122987*^9, 3.6017301625321703`*^9}}],
+
+Cell["\<\
+The system is irreducible and finite. Hence is has a stationary distribution. \
+Further it\[CloseCurlyQuote]s aperiodic because 1\[Rule]5\[Rule]1 and \
+1\[Rule]7\[Rule]4\[AliasDelimiter]->1. Hence it has a limiting distribution \
+and it is equal to the stationarity distribution.\
+\>", "Text",
+ CellChangeTimes->{{3.601724321721458*^9, 3.6017243671498823`*^9}, {
+  3.601725697206912*^9, 3.601725698582135*^9}, {3.6017302469987993`*^9, 
+  3.601730269478118*^9}, {3.6017304842904997`*^9, 3.601730556369445*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MatrixPower", "[", 
+   RowBox[{"P", ",", "100"}], "]"}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{3.601730582148862*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.238`", "0.143`", "0.19`", "0.286`", "0.143`"},
+     {"0.238`", "0.143`", "0.19`", "0.286`", "0.143`"},
+     {"0.238`", "0.143`", "0.19`", "0.286`", "0.143`"},
+     {"0.238`", "0.143`", "0.19`", "0.286`", "0.143`"},
+     {"0.238`", "0.143`", "0.19`", "0.286`", "0.143`"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Input"],
+
+Cell[TextData[{
+ "So in the long run position 7 will have the most visits and ",
+ Cell[BoxData[
+  FractionBox["143", "500"]], "Output",
+  CellChangeTimes->{3.601730729103245*^9}],
+ " of the time will be spent there."
+}], "Text",
+ CellChangeTimes->{{3.601724321721458*^9, 3.6017243671498823`*^9}, {
+  3.601725697206912*^9, 3.601725698582135*^9}, {3.6017302469987993`*^9, 
+  3.601730269478118*^9}, {3.6017304842904997`*^9, 3.601730556369445*^9}, {
+  3.601730685759367*^9, 3.601730747614357*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Problem d", "Section",
+ CellChangeTimes->{{3.601724971427875*^9, 3.601724983155263*^9}, 
+   3.601728084675871*^9, 3.60173075790222*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+What is expected return time to square 1? Why same/different as in a?\
+\>", "Subsection",
+ CellChangeTimes->{{3.601724993107625*^9, 3.601725025922161*^9}, {
+  3.601730795949561*^9, 3.601730810141322*^9}}],
+
+Cell[TextData[{
+ "Since the stationary distribution \[Pi] = (",
+ Cell[BoxData[GridBox[{
+    {
+     RowBox[{"0.238", ","}], 
+     RowBox[{"0.143", ","}], 
+     RowBox[{"0.19", ","}], 
+     RowBox[{"0.286", ","}], "0.143"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[0.7]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}]], "Input"],
+ ") by Thm 1.21 in Durrett the expected return time is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox["1", "0.238"], "=", 
+    FormBox["4.201680672268908`",
+     TraditionalForm], " "}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ". This is shorter than the 7 steps computing in ",
+ StyleBox["a ",
+  FontWeight->"Bold"],
+ "because you do not have to \[OpenCurlyDoubleQuote]cross\
+\[CloseCurlyDoubleQuote] state 9 before returning to state 1."
+}], "Text",
+ CellChangeTimes->{{3.601724321721458*^9, 3.6017243671498823`*^9}, {
+  3.601725697206912*^9, 3.601725698582135*^9}, {3.6017302469987993`*^9, 
+  3.601730269478118*^9}, {3.6017304842904997`*^9, 3.601730556369445*^9}, {
+  3.601730685759367*^9, 3.601730747614357*^9}, {3.601732250435997*^9, 
+  3.60173235883348*^9}, {3.601732410496479*^9, 3.601732441808526*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6017322389533787`*^9, 3.6017322453321743`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1053, 867},
+WindowMargins->{{535, Automatic}, {9, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 95, 1, 51, "Subtitle"],
+Cell[677, 25, 104, 1, 31, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[806, 30, 118, 2, 81, "Section"],
+Cell[CellGroupData[{
+Cell[949, 36, 159, 3, 45, "Subsection"],
+Cell[1111, 41, 269, 5, 31, "Text"],
+Cell[1383, 48, 2046, 58, 126, "Input"],
+Cell[3432, 108, 391, 15, 34, "Text"],
+Cell[3826, 125, 1065, 26, 97, "Input"],
+Cell[4894, 153, 169, 5, 31, "Text"],
+Cell[5066, 160, 745, 23, 97, "Input"],
+Cell[5814, 185, 231, 5, 31, "Text"],
+Cell[6048, 192, 313, 8, 41, "Input"],
+Cell[6364, 202, 777, 22, 33, "Text"],
+Cell[7144, 226, 92, 1, 32, "Input"],
+Cell[7239, 229, 855, 24, 42, "Input"],
+Cell[8097, 255, 525, 15, 32, InheritFromParent],
+Cell[8625, 272, 155, 3, 31, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8829, 281, 94, 1, 81, "Section"],
+Cell[CellGroupData[{
+Cell[8948, 286, 227, 4, 71, "Subsection"],
+Cell[9178, 292, 569, 9, 51, "Text"],
+Cell[9750, 303, 495, 19, 34, "Text"],
+Cell[10248, 324, 1111, 27, 97, "Input"],
+Cell[11362, 353, 224, 5, 31, "Text"],
+Cell[11589, 360, 231, 5, 31, "Text"],
+Cell[11823, 367, 287, 7, 41, "Input"],
+Cell[12113, 376, 1128, 37, 53, "Text"],
+Cell[13244, 415, 830, 24, 42, "Input"],
+Cell[14077, 441, 397, 12, 32, "Input"],
+Cell[14477, 455, 84, 1, 31, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14610, 462, 94, 1, 81, "Section"],
+Cell[CellGroupData[{
+Cell[14729, 467, 227, 4, 71, "Subsection"],
+Cell[14959, 473, 569, 9, 51, "Text"],
+Cell[15531, 484, 495, 19, 34, "Text"],
+Cell[16029, 505, 1124, 27, 97, "Input"],
+Cell[17156, 534, 225, 6, 31, "Text"],
+Cell[17384, 542, 808, 24, 97, "Input"],
+Cell[18195, 568, 231, 5, 31, "Text"],
+Cell[18429, 575, 287, 7, 41, "Input"],
+Cell[18719, 584, 1128, 37, 53, "Text"],
+Cell[19850, 623, 830, 24, 42, "Input"],
+Cell[20683, 649, 546, 15, 25, "DisplayFormula"],
+Cell[21232, 666, 422, 11, 31, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21703, 683, 120, 2, 81, "Section"],
+Cell[CellGroupData[{
+Cell[21848, 689, 393, 9, 123, "Subsection"],
+Cell[22244, 700, 369, 7, 31, "Text"],
+Cell[22616, 709, 2153, 59, 126, "Input"],
+Cell[24772, 770, 414, 7, 31, "Text"],
+Cell[25189, 779, 9730, 225, 194, "Input"],
+Cell[34922, 1006, 519, 8, 51, "Text"],
+Cell[35444, 1016, 165, 4, 32, "Input"],
+Cell[35612, 1022, 830, 20, 97, "Input"],
+Cell[36445, 1044, 493, 10, 39, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36987, 1060, 141, 2, 81, "Section"],
+Cell[CellGroupData[{
+Cell[37153, 1066, 214, 4, 45, "Subsection"],
+Cell[37370, 1072, 1461, 37, 85, "Text"],
+Cell[38834, 1111, 96, 1, 32, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
