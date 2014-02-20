@@ -1,0 +1,17 @@
+(load-file "~/.emacs.d/themes/monokai-theme.el")
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+(let ((default-directory "~/.emacs.d/elpa/"))
+
+(normal-top-level-add-to-load-path '("auto-complete" "popup")))
+ 
+(require 'auto-complete)
+(require 'popup)
+
+(delete-selection-mode 1)
+(global-linum-mode t)
+(global-auto-complete-mode t)
+;;(global-show-paren-mode t)
+
