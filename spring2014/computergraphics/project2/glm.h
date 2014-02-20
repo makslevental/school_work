@@ -46,7 +46,7 @@ typedef struct _GLMtriangle {
   GLuint nindices[3];           /* array of triangle normal indices */
   GLuint tindices[3];           /* array of triangle texcoord indices*/
   GLuint findex;                /* index of triangle facet normal */
-  GLuint material;       /* index to material for group */
+  GLuint material;              /* index to material for group triangle is in*/
 } GLMtriangle;
 
 /* GLMgroup: Structure that defines a group in a model.
