@@ -277,3 +277,57 @@ glmWeld(GLMmodel* model, GLfloat epsilon);
  */
 GLubyte*
 glmReadPPM(char* filename, int* width, int* height);
+
+/* glmDot: compute the dot product of two vectors
+ *
+ * u - array of 3 GLfloats (GLfloat u[3])
+ * v - array of 3 GLfloats (GLfloat v[3])
+ */
+
+/* glmDot: compute the dot product of two vectors
+ *
+ * u - array of 3 GLfloats (GLfloat u[3])
+ * v - array of 3 GLfloats (GLfloat v[3])
+ */
+static GLfloat
+glmDot(GLfloat* u, GLfloat* v)
+{
+    assert(u); assert(v);
+
+    return u[0]*v[0] + u[1]*v[1] + u[2]*v[2];
+}
+
+/* glmCross: compute the cross product of two vectors
+ *
+ * u - array of 3 GLfloats (GLfloat u[3])
+ * v - array of 3 GLfloats (GLfloat v[3])
+ * n - array of 3 GLfloats (GLfloat n[3]) to return the cross product in
+ */
+static GLvoid
+glmCross(GLfloat* u, GLfloat* v, GLfloat* n)
+{
+    assert(u); assert(v); assert(n);
+
+    n[0] = u[1]*v[2] - u[2]*v[1];
+    n[1] = u[2]*v[0] - u[0]*v[2];
+    n[2] = u[0]*v[1] - u[1]*v[0];
+}
+
+/* glmNormalize: normalize a vector
+ *
+ * v - array of 3 GLfloats (GLfloat v[3]) to be normalized
+ */
+static GLvoid
+glmNormalize(GLfloat* v)
+{
+    GLfloat l;
+
+    assert(v);
+
+    l = (GLfloat)sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+    if(l == 0)
+        return;
+    v[0] = v[0]/l;
+    v[1] = v[1]/l;
+    v[2] = v[2]/l;
+}
