@@ -90,101 +90,101 @@ static inline void loadbar(unsigned int x, unsigned int n, unsigned int w = 50)
 }
 
 
-//
-//float
-//elapsed(void)
-//{
-//    static long begin = 0;
-//    static long finish, difference;
-//
-//#if defined(_WIN32)
-//    static struct timeb tb;
-//    ftime(&tb);
-//    finish = tb.time*1000+tb.millitm;
-//#else
-//    static struct tms tb;
-//    finish = times(&tb);
-//#endif
-//
-//    difference = finish - begin;
-//    begin = finish;
-//
-//    return (float)difference/(float)1000;
-//}
-//
-//void
-//shadowtext(int x, int y, char* s)
-//{
-//    int lines;
-//    char* p;
-//
-//    glDisable(GL_DEPTH_TEST);
-//    glMatrixMode(GL_PROJECTION);
-//    glPushMatrix();
-//    glLoadIdentity();
-//    glOrtho(0, glutGet(GLUT_WINDOW_WIDTH),
-//        0, glutGet(GLUT_WINDOW_HEIGHT), -1, 1);
-//    glMatrixMode(GL_MODELVIEW);
-//    glPushMatrix();
-//    glLoadIdentity();
-//    glColor3ub(0, 0, 0);
-//    glRasterPos2i(x+1, y-1);
-//    for(p = s, lines = 0; *p; p++) {
-//        if (*p == '\n') {
-//            lines++;
-//            glRasterPos2i(x+1, y-1-(lines*18));
-//        }
-//        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p);
-//    }
-//    glColor3ub(0, 128, 255);
-//    glRasterPos2i(x, y);
-//    for(p = s, lines = 0; *p; p++) {
-//        if (*p == '\n') {
-//            lines++;
-//            glRasterPos2i(x, y-(lines*18));
-//        }
-//        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p);
-//    }
-//    glMatrixMode(GL_PROJECTION);
-//    glPopMatrix();
-//    glMatrixMode(GL_MODELVIEW);
-//    glPopMatrix();
-//    glEnable(GL_DEPTH_TEST);
-//}
+
+float
+elapsed(void)
+{
+    static long begin = 0;
+    static long finish, difference;
+
+#if defined(_WIN32)
+    static struct timeb tb;
+    ftime(&tb);
+    finish = tb.time*1000+tb.millitm;
+#else
+    static struct tms tb;
+    finish = times(&tb);
+#endif
+
+    difference = finish - begin;
+    begin = finish;
+
+    return (float)difference/(float)1000;
+}
+
+void
+shadowtext(int x, int y, char* s)
+{
+    int lines;
+    char* p;
+
+    glDisable(GL_DEPTH_TEST);
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glOrtho(0, glutGet(GLUT_WINDOW_WIDTH),
+        0, glutGet(GLUT_WINDOW_HEIGHT), -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    glColor3ub(0, 0, 0);
+    glRasterPos2i(x+1, y-1);
+    for(p = s, lines = 0; *p; p++) {
+        if (*p == '\n') {
+            lines++;
+            glRasterPos2i(x+1, y-1-(lines*18));
+        }
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p);
+    }
+    glColor3ub(0, 128, 255);
+    glRasterPos2i(x, y);
+    for(p = s, lines = 0; *p; p++) {
+        if (*p == '\n') {
+            lines++;
+            glRasterPos2i(x, y-(lines*18));
+        }
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p);
+    }
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glEnable(GL_DEPTH_TEST);
+}
 
 void
 lists(void)
 {
-//    GLfloat ambient[] = { 0.2, 0.2, 0.2, 1.0 };
-//    GLfloat diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
-//    GLfloat specular[] = { 0.0, 0.0, 0.0, 1.0 };
-//    GLfloat shininess = 65.0;
-//
-//    glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
-//    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-//    glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-//    glMaterialf(GL_FRONT, GL_SHININESS, shininess);
-//
-//    if (model_list)
-//        glDeleteLists(model_list, 1);
-//
-//    /* generate a list */
-//    if (material_mode == 0) {
-//        if (facet_normal)
-//            model_list = glmList(model, GLM_FLAT);
-//        else
-//            model_list = glmList(model, GLM_SMOOTH);
-//    } else if (material_mode == 1) {
-//        if (facet_normal)
-//            model_list = glmList(model, GLM_FLAT | GLM_COLOR);
-//        else
-//            model_list = glmList(model, GLM_SMOOTH | GLM_COLOR);
-//    } else if (material_mode == 2) {
-//        if (facet_normal)
-//            model_list = glmList(model, GLM_FLAT | GLM_MATERIAL);
-//        else
-//            model_list = glmList(model, GLM_SMOOTH | GLM_MATERIAL);
-//    }
+    GLfloat ambient[] = { 0.2, 0.2, 0.2, 1.0 };
+    GLfloat diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
+    GLfloat specular[] = { 0.0, 0.0, 0.0, 1.0 };
+    GLfloat shininess = 65.0;
+
+    glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+    glMaterialf(GL_FRONT, GL_SHININESS, shininess);
+
+    if (model_list)
+        glDeleteLists(model_list, 1);
+
+    /* generate a list */
+    if (material_mode == 0) {
+        if (facet_normal)
+            model_list = glmList(model, GLM_FLAT);
+        else
+            model_list = glmList(model, GLM_SMOOTH);
+    } else if (material_mode == 1) {
+        if (facet_normal)
+            model_list = glmList(model, GLM_FLAT | GLM_COLOR);
+        else
+            model_list = glmList(model, GLM_SMOOTH | GLM_COLOR);
+    } else if (material_mode == 2) {
+        if (facet_normal)
+            model_list = glmList(model, GLM_FLAT | GLM_MATERIAL);
+        else
+            model_list = glmList(model, GLM_SMOOTH | GLM_MATERIAL);
+    }
 }
 
 //inline dbl_vec cross_product(dbl_vec a, dbl_vec b){
@@ -242,7 +242,7 @@ void triangleCentroid(GLdouble vertices[3][3], GLfloat* centroid){
     centroid[0] = vertices[0][0] + .5*(vertices[1][0]+vertices[2][0]);
     centroid[1] = vertices[0][1] + .5*(vertices[1][1]+vertices[2][1]);
     centroid[2] = vertices[0][2] + .5*(vertices[1][2]+vertices[2][2]);
-    printf("");
+    //printf("");
 }
 
 void lineMidpoint(GLdouble vertices[2][3], GLfloat* midpoint){
@@ -296,7 +296,7 @@ void shader(GLfloat* color, GLfloat* normal, GLfloat* lookfrom, GLfloat* lightFr
 
     glmScalarMultiple(ILLUM*specular_lighting, (GLfloat*)specular_color);
     glmSum((GLfloat*)color, (GLfloat*)specular_color, (GLfloat*)color);
-    printf("color %f %f %f \n\n", color[0], color[1], color[2]);
+    //printf("color %f %f %f \n\n", color[0], color[1], color[2]);
 }
 
 void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* normalVertex1, GLfloat* normalVertex2, GLMmaterial* material){
@@ -339,7 +339,7 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
     shader(color2, normalVertex2, lookFrom2, lightFrom2, material);
 //    printf("vertnormal1 %f %f %f vertnormal2 %f %f %f\n", normalVertex1[0], normalVertex1[1], normalVertex1[2], normalVertex2[0], normalVertex2[1], normalVertex2[2]);
 //    printf("color1 %f %f %f color2 %f %f %f\n", color1[0], color1[1], color1[2], color2[0], color2[1], color2[2]);
-    std::cout << std::endl;
+    //std::cout << std::endl;
     while(true){
 
         alpha = distanceFromStart/totalDistance;
@@ -353,7 +353,7 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
         framebuffer[y][x][2] =double(color1[0]) + (double(color2[0]-color1[0])*beta);
         framebuffer[y][x][3] =double(color1[1]) + (double(color2[1]-color1[1])*beta);
         framebuffer[y][x][4] =double(color1[2]) + (double(color2[2]-color1[2])*beta);
-        printf("%f %f %f beta %f \n", framebuffer[y][x][2], framebuffer[y][x][3], framebuffer[y][x][4], beta);
+        //printf("%f %f %f beta %f \n", framebuffer[y][x][2], framebuffer[y][x][3], framebuffer[y][x][4], beta);
 
 
 
@@ -399,7 +399,7 @@ void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMma
     int miny = floor(std::min({vertices[0][1], vertices[1][1], vertices[2][1]}));
     int maxx = ceil(std::max({vertices[0][0], vertices[1][0], vertices[2][0]}));
     int maxy = ceil(std::max({vertices[0][1], vertices[1][1], vertices[2][1]}));
-    std::cout << "scalining" << std::endl;
+    //std::cout << "scalining" << std::endl;
     for(int y = miny-1; y < maxy+1; y++){
         int crossing = 0;
         int crossings[4][2];
@@ -531,23 +531,17 @@ void raster(){
 
         plotTriangleToFrameBuffer(triangle);
         swapImageAndFrameBuffer();
-
+        loadbar(i+1, model->numtriangles);
     }
-    glutPostRedisplay();
+
 }
 
 
 void
 init(void)
 {
+    gltbInit(GLUT_LEFT_BUTTON);
 
-    for(int i = 0; i < IMAGE_WIDTH; i++)
-        for(int j = 0; j < IMAGE_WIDTH; j++){
-            image[i][j][0] = 255;
-            image[i][j][1] = 255;
-            image[i][j][2] = 255;
-            zbuffer[i][j] = 10000;
-        }
 
     /* read in the model */
     model = glmReadOBJ(model_file);
@@ -559,13 +553,8 @@ init(void)
         material_mode = 2;
 
     /* create new display lists */
-    //lists();
+    lists();
     addMaterialToAllTriangles();
-
-
-
-
-
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -574,13 +563,13 @@ init(void)
     glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_CULL_FACE);
-    //raster();
+
 }
 
 void
 reshape(int width, int height)
 {
-//    gltbReshape(width, height);
+    gltbReshape(width, height);
 
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
@@ -591,23 +580,111 @@ reshape(int width, int height)
     glTranslatef(0.0, 0.0, -1*(translation+1)); //pushes the viewport back to z=2
 }
 
-
-
-
-
-
-
-
 #define NUM_FRAMES 5
 void
 display(void)
 {
+    static char s[256], t[32];
+    static char* p;
+    static int frames = 0;
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //glRasterPos2i(-1,-1);
 
+    glPushMatrix();
+
+    glTranslatef(pan_x, pan_y, 0.0);
+
+    gltbMatrix();
+
+#if 0   /* glmDraw() performance test */
+    if (material_mode == 0) {
+        if (facet_normal)
+            glmDraw(model, GLM_FLAT);
+        else
+            glmDraw(model, GLM_SMOOTH);
+    } else if (material_mode == 1) {
+        if (facet_normal)
+            glmDraw(model, GLM_FLAT | GLM_COLOR);
+        else
+            glmDraw(model, GLM_SMOOTH | GLM_COLOR);
+    } else if (material_mode == 2) {
+        if (facet_normal)
+            glmDraw(model, GLM_FLAT | GLM_MATERIAL);
+        else
+            glmDraw(model, GLM_SMOOTH | GLM_MATERIAL);
+    }
+#else
+    glCallList(model_list);
+#endif
+
+    glDisable(GL_LIGHTING);
+    if (bounding_box) {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glEnable(GL_CULL_FACE);
+        glColor4f(1.0, 0.0, 0.0, 0.25);
+        glutSolidCube(2.0);
+        glDisable(GL_BLEND);
+    }
+
+    glPopMatrix();
+
+    if (stats) {
+        /* XXX - this could be done a _whole lot_ faster... */
+        int height = glutGet(GLUT_WINDOW_HEIGHT);
+        glColor3ub(0, 0, 0);
+        sprintf(s, "%s\n%d vertices\n%d triangles\n%d normals\n"
+            "%d texcoords\n%d groups\n%d materials",
+            model->pathname, model->numvertices, model->numtriangles,
+            model->numnormals, model->numtexcoords, model->numgroups,
+            model->nummaterials);
+        shadowtext(5, height-(5+18*1), s);
+    }
+
+    /* spit out frame rate. */
+    frames++;
+    if (frames > NUM_FRAMES) {
+        sprintf(t, "%g fps", frames/elapsed());
+        frames = 0;
+    }
+    if (performance) {
+        shadowtext(5, 5, t);
+    }
+
+    glutSwapBuffers();
+    glEnable(GL_LIGHTING);
+    GLfloat position1[4];
+    glGetLightfv(GL_LIGHT0, GL_POSITION, position1);
+    //printf("light %f %f %f %f \n", position1[0], position1[1], position1[2], position1[3]);
+}
+
+
+
+
+
+
+void
+display1(void)
+{
+
+   for(int i = 0; i < IMAGE_WIDTH; i++)
+        for(int j = 0; j < IMAGE_WIDTH; j++){
+            image[i][j][0] = 255;
+            image[i][j][1] = 255;
+            image[i][j][2] = 255;
+            zbuffer[i][j] = 10000;
+        }
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glRasterPos2i(-1,-1);
+    glPushMatrix();
+
+    glTranslatef(pan_x, pan_y, 0.0);
+
+    gltbMatrix();
     //glPixelZoom(WINDOW_WIDTH/IMAGE_WIDTH, WINDOW_HEIGHT/IMAGE_HEIGHT);
+    raster();
     glDrawPixels(IMAGE_WIDTH, IMAGE_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, image);
     glutSwapBuffers();
 
@@ -682,14 +759,9 @@ keyboard(unsigned char key, int x, int y)
         lists();
         break;
 
-    case 'z':
-        //glutPostRedisplay();
-        break;
-
     case 'r':
-        raster();
-//        glmReverseWinding(model);
-//        lists();
+        glmReverseWinding(model);
+        lists();
         break;
 
     case 's':
@@ -735,23 +807,27 @@ keyboard(unsigned char key, int x, int y)
         glmScale(model, 1.0/scale);
         glmWriteOBJ(model, "out.obj", GLM_SMOOTH | GLM_MATERIAL);
         break;
-//
-//    case 'R':
-//        {
-//            GLuint i;
-//            GLfloat swap;
-//            for (i = 1; i <= model->numvertices; i++) {
-//                swap = model->vertices[3 * i + 1];
-//                model->vertices[3 * i + 1] = model->vertices[3 * i + 2];
-//                model->vertices[3 * i + 2] = -swap;
-//            }
-//            glmFacetNormals(model);
-//            lists();
-//            break;
-//        }
+
+    case 'R':
+        {
+            GLuint i;
+            GLfloat swap;
+            for (i = 1; i <= model->numvertices; i++) {
+                swap = model->vertices[3 * i + 1];
+                model->vertices[3 * i + 1] = model->vertices[3 * i + 2];
+                model->vertices[3 * i + 2] = -swap;
+            }
+            glmFacetNormals(model);
+            lists();
+            break;
+        }
 
     case 27:
         exit(0);
+        break;
+
+    case 'z':
+        glutDisplayFunc(display1);
         break;
     }
 
@@ -878,7 +954,7 @@ main(int argc, char** argv)
     }
 
     if (!model_file) {
-        model_file = "data/venus.obj";
+        model_file = "data/pawn.obj";
     }
 
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | buffering);
@@ -887,8 +963,8 @@ main(int argc, char** argv)
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
-    //glutMouseFunc(mouse);
-    //glutMotionFunc(motion);
+    glutMouseFunc(mouse);
+    glutMotionFunc(motion);
 
     models = glutCreateMenu(menu);
     dirp = opendir(DATA_DIR);
@@ -928,7 +1004,7 @@ main(int argc, char** argv)
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     init();
-    //raster();
+
     glutMainLoop();
     return 0;
 }
