@@ -29,10 +29,10 @@
 #pragma comment( linker, "/entry:\"mainCRTStartup\"" )  // set the entry point to be main()
 
 #define DATA_DIR "data/"
-#define IMAGE_WIDTH 1024
-#define IMAGE_HEIGHT 1024
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 1024
+#define IMAGE_WIDTH 512
+#define IMAGE_HEIGHT 512
+#define WINDOW_WIDTH 512
+#define WINDOW_HEIGHT 512
 #define T(x) (model->triangles[(x)])
 
 static GLubyte image[IMAGE_WIDTH][IMAGE_HEIGHT][3];
@@ -66,14 +66,12 @@ static int translation = 2.;
 static GLfloat light_src[3] = {-1.,0.,3.};
 static GLfloat eye_location[3] = {0.,0, translation};
 
-static GLfloat tempVecHolder[3];
-static GLfloat tempVecHolder2[3];
-static int start = 1;
+static int framess = 0;
 
 #define PHONG_EXP 5.0
-#define K_S .2
-#define K_D .5
-#define K_A .7
+#define K_S .3
+#define K_D .9
+#define K_A .9
 #define ILLUM .7
 
 static inline void loadbar(unsigned int x, unsigned int n, unsigned int w = 50)
@@ -88,8 +86,6 @@ static inline void loadbar(unsigned int x, unsigned int n, unsigned int w = 50)
     for (int x=c; x<w; x++) std::cout << " ";
     std::cout << "]\r" << std::flush;
 }
-
-
 
 float
 elapsed(void)
@@ -187,13 +183,6 @@ lists(void)
     }
 }
 
-//inline dbl_vec cross_product(dbl_vec a, dbl_vec b){
-//  dbl_vec V_r(3,std::vector<double>{a[1]*b[2]-a[2]*b[1],
-//	                            a[2]*b[0]-a[0]*b[2],
-//	                            a[0]*b[1]-a[1]*b[0]});
-//  return V_r;
-//}
-
 static GLvoid
 glmScalarMultiple(GLfloat u ,GLfloat* n)
 {
@@ -261,11 +250,11 @@ void shader(GLfloat* color, GLfloat* normal, GLfloat* lookfrom, GLfloat* lightFr
     glmSum(lightFrom, lookfrom, bisector);
 
     glmNormalize(bisector);
+
 //    printf("normal %f %f %f\n", normal[0], normal[1], normal[2]);
 //    printf("bisector %f %f %f\n", bisector[0], bisector[1], bisector[2]);
 //    printf("lookfrom %f %f %f\n", lookfrom[0], lookfrom[1], lookfrom[2]);
 //    printf("lightfrom %f %f %f\n", lightFrom[0], lightFrom[1], lightFrom[2]);
-    // static because perspective RAY direction (not perspective pixel itself) is the same globally
 
     GLfloat diffuse_color[3] = {material->diffuse[0]*255, material->diffuse[1]*255, material->diffuse[2]*255};
     GLfloat ambient_color[3] = {material->ambient[0]*255,material->ambient[1]*255,material->ambient[2]*255};
@@ -274,7 +263,7 @@ void shader(GLfloat* color, GLfloat* normal, GLfloat* lookfrom, GLfloat* lightFr
 //    printf("diffuse color %f %f %f \n", diffuse_color[0], diffuse_color[1], diffuse_color[2]);
 //    printf("ambient color %f %f %f \n", ambient_color[0], ambient_color[1], ambient_color[2]);
 //    printf("specular color %f %f %f \n", specular_color[0], specular_color[1], specular_color[2]);
-//    glmScalarMultiple(-1., normal);
+
     double norm_dot_light = glmDot(lightFrom,normal);
 
 //    std::cout << "norm_dot_light " << norm_dot_light << std::endl;
@@ -286,7 +275,6 @@ void shader(GLfloat* color, GLfloat* normal, GLfloat* lookfrom, GLfloat* lightFr
     specular_lighting = std::min(255., specular_lighting);
 
     double ambient_lighting = K_A;
-
 
     glmScalarMultiple(ILLUM*diffuse_lighting, (GLfloat*)diffuse_color);
     glmSum((GLfloat*)color, (GLfloat*)diffuse_color, (GLfloat*)color);
@@ -332,6 +320,7 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
     glmNormalize(lookFrom1);
     glmNormalize(lightFrom1);
     shader(color1, normalVertex1, lookFrom1, lightFrom1, material);
+
     GLfloat lookFrom2[3] = {eye_location[0] - realVertices[1][0], eye_location[1] - realVertices[1][1], eye_location[2] - realVertices[1][2]};
     GLfloat lightFrom2[3] = {light_src[0] - realVertices[1][0], light_src[1] - realVertices[1][1], light_src[2] - realVertices[1][2]};
     glmNormalize(lookFrom2);
@@ -339,7 +328,7 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
     shader(color2, normalVertex2, lookFrom2, lightFrom2, material);
 //    printf("vertnormal1 %f %f %f vertnormal2 %f %f %f\n", normalVertex1[0], normalVertex1[1], normalVertex1[2], normalVertex2[0], normalVertex2[1], normalVertex2[2]);
 //    printf("color1 %f %f %f color2 %f %f %f\n", color1[0], color1[1], color1[2], color2[0], color2[1], color2[2]);
-    //std::cout << std::endl;
+
     while(true){
 
         alpha = distanceFromStart/totalDistance;
@@ -348,19 +337,13 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
         //printf("scaled method %f \n", z0+calculateBeta(z0,z1,alpha)*(z1-z0));
         framebuffer[y][x][1] = z0+beta*(z1-z0);
         //printf("scaled framebuffer %f \n", framebuffer[y][x][1]);
-        double scaled = framebuffer[y][x][1];
-        //scaled = 1;
         framebuffer[y][x][2] =double(color1[0]) + (double(color2[0]-color1[0])*beta);
         framebuffer[y][x][3] =double(color1[1]) + (double(color2[1]-color1[1])*beta);
         framebuffer[y][x][4] =double(color1[2]) + (double(color2[2]-color1[2])*beta);
         //printf("%f %f %f beta %f \n", framebuffer[y][x][2], framebuffer[y][x][3], framebuffer[y][x][4], beta);
 
-
-
         e2 = 2*err;
         if(x==x1 && y==y1){
-                //printf("%d %d \n", x, y);
-                //std:: cout << "break" << std::endl;
                 break;
         }
         if(e2 > -dy){
@@ -381,7 +364,6 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
             framebuffer[y][x][3] =double(color1[1]) + (double(color2[1]-color1[1])*beta);
             framebuffer[y][x][4] =double(color1[2]) + (double(color2[2]-color1[2])*beta);
             //printf("alpha %f z0 %f z1 %f x %d  y %f %f %f scaled %f \n", alpha, z0, z1, x, y, framebuffer[y][x][2], framebuffer[y][x][3], framebuffer[y][x][4], scaled);
-
             break;
         }
         if(e2 < dx){
@@ -390,7 +372,6 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
             y += sy;
         }
     }
-    //std::cout << "love max" << std::endl;
 }
 
 
@@ -399,7 +380,7 @@ void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMma
     int miny = floor(std::min({vertices[0][1], vertices[1][1], vertices[2][1]}));
     int maxx = ceil(std::max({vertices[0][0], vertices[1][0], vertices[2][0]}));
     int maxy = ceil(std::max({vertices[0][1], vertices[1][1], vertices[2][1]}));
-    //std::cout << "scalining" << std::endl;
+
     for(int y = miny-1; y < maxy+1; y++){
         int crossing = 0;
         int crossings[4][2];
@@ -429,12 +410,9 @@ void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMma
                     beta = totalAlpha == 0 ? 0 : calculateBeta(zleft,zright,double(k-crossings[1][1])/totalAlpha);
                     scaled = zleft+beta*(zright-zleft);
                     framebuffer[y][k][1] = scaled;
-                    //scaled = 1;
                     framebuffer[y][k][2] =colorLeft[0] + (double(colorRight[0]-colorLeft[0])*beta);
                     framebuffer[y][k][3] =colorLeft[1] + (double(colorRight[1]-colorLeft[1])*beta);
                     framebuffer[y][k][4] =colorLeft[2] + (double(colorRight[2]-colorLeft[2])*beta);
-
-
 
                     //printf("scanline %d %d %d %d %d %f \n", y, k, framebuffer[y][k][2], framebuffer[y][k][3], framebuffer[y][k][4], scaled);
                 }
@@ -446,12 +424,10 @@ void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMma
 
 //model is global
 void plotTriangleToFrameBuffer(GLMtriangle* triangle){
-    //want to compute shading once per triangle so hence here. and then pass it to each bresanham and scanline
-    //get the matrices
+    //get the opengl matrices
     glGetDoublev( GL_MODELVIEW_MATRIX, modelview );
     glGetDoublev( GL_PROJECTION_MATRIX, projection );
     glGetIntegerv( GL_VIEWPORT, viewport );
-
 
     GLfloat normal[3] = {(GLfloat)model->facetnorms[3*triangle->findex],(GLfloat)model->facetnorms[3*triangle->findex+1],(GLfloat)model->facetnorms[3*triangle->findex+2]};
 
@@ -491,8 +467,6 @@ void plotTriangleToFrameBuffer(GLMtriangle* triangle){
 
 
 void swapImageAndFrameBuffer(){
-    //NOT THE LAST STEP. LAST STEP SHOULD SHADE. SO NEED ANOTHER BUFFER WHERE I COMPUTE SHADING AS A FUNCTION
-    //OF NORMAL. THEN THE SWAP DOESN'T SWAP BUT JUST WRITES TO GLubyte array.
     for(int y = 0; y < IMAGE_HEIGHT; y++)
         for(int x = 0; x < IMAGE_WIDTH; x++){
             //printf("zbuffer %f framebuffer %f \n", zbuffer[y][x], framebuffer[y][x][1]);
@@ -501,17 +475,12 @@ void swapImageAndFrameBuffer(){
                 image[y][x][0] = (GLubyte)framebuffer[y][x][2];
                 image[y][x][1] = (GLubyte)framebuffer[y][x][3];
                 image[y][x][2] = (GLubyte)framebuffer[y][x][4];
-
             }
         }
 }
 
 void raster(){
-
-
-    static int i = 0;
-    //get the matrices
-
+    addMaterialToAllTriangles();
     GLMtriangle* triangle;
     for(int i = 0; i < model->numtriangles; i++){
 //    int j = 8;
@@ -521,19 +490,14 @@ void raster(){
             for(int n = 0; n < IMAGE_WIDTH; n++){
                 framebuffer[m][n][1] = 10000;
             }
-
-
-
         //std::cout << "triangle " << i+1 << std::endl;
         //printf("triangle vertex indices %d %d %d \n", 3*model->triangles[i].vindices[0], 3*model->triangles[i].vindices[1], 3*model->triangles[i].vindices[2]);
 
         triangle = &model->triangles[i];
-
         plotTriangleToFrameBuffer(triangle);
         swapImageAndFrameBuffer();
-        loadbar(i+1, model->numtriangles);
+        loadbar(10*(i+1), 10*(model->numtriangles));
     }
-
 }
 
 
@@ -541,7 +505,6 @@ void
 init(void)
 {
     gltbInit(GLUT_LEFT_BUTTON);
-
 
     /* read in the model */
     model = glmReadOBJ(model_file);
@@ -554,7 +517,6 @@ init(void)
 
     /* create new display lists */
     lists();
-    addMaterialToAllTriangles();
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -659,35 +621,29 @@ display(void)
     //printf("light %f %f %f %f \n", position1[0], position1[1], position1[2], position1[3]);
 }
 
-
-
-
-
-
 void
 display1(void)
 {
 
-   for(int i = 0; i < IMAGE_WIDTH; i++)
-        for(int j = 0; j < IMAGE_WIDTH; j++){
-            image[i][j][0] = 255;
-            image[i][j][1] = 255;
-            image[i][j][2] = 255;
-            zbuffer[i][j] = 10000;
-        }
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //glRasterPos2i(-1,-1);
     glPushMatrix();
-
     glTranslatef(pan_x, pan_y, 0.0);
-
     gltbMatrix();
-    //glPixelZoom(WINDOW_WIDTH/IMAGE_WIDTH, WINDOW_HEIGHT/IMAGE_HEIGHT);
-    raster();
+    if(framess++ % NUM_FRAMES == 0 ){
+        for(int i = 0; i < IMAGE_WIDTH; i++)
+            for(int j = 0; j < IMAGE_WIDTH; j++){
+                image[i][j][0] = 255;
+                image[i][j][1] = 255;
+                image[i][j][2] = 255;
+                zbuffer[i][j] = 10000;
+            }
+        raster();
+        if(framess > 10000)
+            framess = 1;
+    }
     glDrawPixels(IMAGE_WIDTH, IMAGE_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, image);
     glutSwapBuffers();
-
 }
 
 void
@@ -826,7 +782,7 @@ keyboard(unsigned char key, int x, int y)
         exit(0);
         break;
 
-    case 'z':
+    case 'y':
         glutDisplayFunc(display1);
         break;
     }
@@ -954,7 +910,7 @@ main(int argc, char** argv)
     }
 
     if (!model_file) {
-        model_file = "data/pawn.obj";
+        model_file = "data/cube.obj";
     }
 
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | buffering);
