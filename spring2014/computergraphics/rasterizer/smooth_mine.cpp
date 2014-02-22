@@ -29,10 +29,10 @@
 #pragma comment( linker, "/entry:\"mainCRTStartup\"" )  // set the entry point to be main()
 
 #define DATA_DIR "data/"
-#define IMAGE_WIDTH 256
-#define IMAGE_HEIGHT 256
-#define WINDOW_WIDTH 256
-#define WINDOW_HEIGHT 256
+#define IMAGE_WIDTH 512
+#define IMAGE_HEIGHT 512
+#define WINDOW_WIDTH 512
+#define WINDOW_HEIGHT 512
 #define T(x) (model->triangles[(x)])
 
 char*      model_file = NULL;		/* name of the obect file */
@@ -64,7 +64,7 @@ GLdouble projection[16];
 GLint viewport[4];
 
 //moves the viewport back
-static int translation = 5.;
+static int translation = 2.;
 
 static GLfloat light_src[3] = {-1.,0.,3.};
 static GLfloat eye_location[3] = {0.,0, translation};
@@ -229,16 +229,6 @@ void addMaterialToAllTriangles(){
         }
         group = group->next;
     }
-}
-
-//used in flat shading. lookat vector is approximated by looking at the "centroid"
-//of the triangle
-void triangleCentroid(GLdouble vertices[3][3], GLfloat* centroid){
-
-    centroid[0] = vertices[0][0] + .5*(vertices[1][0]+vertices[2][0]);
-    centroid[1] = vertices[0][1] + .5*(vertices[1][1]+vertices[2][1]);
-    centroid[2] = vertices[0][2] + .5*(vertices[1][2]+vertices[2][2]);
-    //printf("");
 }
 
 //midpoint line through 2 vertices
@@ -487,7 +477,7 @@ void plotTriangleToFrameBuffer(GLMtriangle* triangle){
     GLMmaterial* triangleMaterial = &model->materials[triangle->material];
 
     //flat shading uses facet normal in both slots of bresenham so no interpolation is really done.
-    if(flat%2 ==0){
+    if(flat ==0){
         GLfloat normal[3] = {(GLfloat)model->facetnorms[3*triangle->findex],(GLfloat)model->facetnorms[3*triangle->findex+1],(GLfloat)model->facetnorms[3*triangle->findex+2]};
         bresenham(vertices[0][0],vertices[0][1], vertices[0][2], vertices[1][0], vertices[1][1], vertices[1][2], normal, normal, triangleMaterial);
         bresenham(vertices[1][0],vertices[1][1], vertices[1][2], vertices[2][0], vertices[2][1], vertices[2][2], normal, normal, triangleMaterial);
@@ -505,7 +495,7 @@ void swapImageAndFrameBuffer(){
     for(int y = 0; y < IMAGE_HEIGHT; y++)
         for(int x = 0; x < IMAGE_WIDTH; x++){
             //printf("zbuffer %f framebuffer %f \n", zbuffer[y][x], framebuffer[y][x][1]);
-            if( zbuffer[y][x] - framebuffer[y][x][1] > .01 ){
+            if( zbuffer[y][x] - framebuffer[y][x][1] > 0 ){
                 zbuffer[y][x] = framebuffer[y][x][1];
                 image[y][x][0] = (GLubyte)framebuffer[y][x][2];
                 image[y][x][1] = (GLubyte)framebuffer[y][x][3];
@@ -520,6 +510,7 @@ void raster(){
     for(int i = 0; i < model->numtriangles; i++){
 //    int j = 8;
 //    for(int i = j; i < j+1/*model->numtriangles*/; i++){
+
         memset(framebuffer, 0, sizeof(framebuffer));
         for(int m = 0; m < IMAGE_HEIGHT; m++)
             for(int n = 0; n < IMAGE_WIDTH; n++){
@@ -539,6 +530,13 @@ void raster(){
 void
 init(void)
 {
+    for(int i = 0; i < IMAGE_WIDTH; i++)
+        for(int j = 0; j < IMAGE_WIDTH; j++){
+            image[i][j][0] = 255;
+            image[i][j][1] = 255;
+            image[i][j][2] = 255;
+            zbuffer[i][j] = 10000;
+    }
     gltbInit(GLUT_LEFT_BUTTON);
 
     /* read in the model */
@@ -666,13 +664,6 @@ display1(void)
     glTranslatef(pan_x, pan_y, 0.0);
     gltbMatrix();
     if(framess++ % NUM_FRAMES == 0 ){
-        for(int i = 0; i < IMAGE_WIDTH; i++)
-            for(int j = 0; j < IMAGE_WIDTH; j++){
-                image[i][j][0] = 255;
-                image[i][j][1] = 255;
-                image[i][j][2] = 255;
-                zbuffer[i][j] = 10000;
-            }
         raster();
         if(framess > 10000)
             framess = 1;
