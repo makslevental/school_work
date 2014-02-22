@@ -29,16 +29,12 @@
 #pragma comment( linker, "/entry:\"mainCRTStartup\"" )  // set the entry point to be main()
 
 #define DATA_DIR "data/"
-#define IMAGE_WIDTH 512
-#define IMAGE_HEIGHT 512
-#define WINDOW_WIDTH 512
-#define WINDOW_HEIGHT 512
+#define IMAGE_WIDTH 256
+#define IMAGE_HEIGHT 256
+#define WINDOW_WIDTH 256
+#define WINDOW_HEIGHT 256
 #define T(x) (model->triangles[(x)])
 
-static GLubyte image[IMAGE_WIDTH][IMAGE_HEIGHT][3];
-//1 entry as a simple written/not written market, 1 entry for z-value, 3 for normal, 3 for local ambient, 3 for local diffuse, 3 for specular
-double framebuffer[IMAGE_WIDTH][IMAGE_HEIGHT][1+1+3+3+3+3+3];
-double zbuffer[IMAGE_WIDTH][IMAGE_HEIGHT];
 char*      model_file = NULL;		/* name of the obect file */
 GLuint     model_list = 0;		    /* display list for object */
 GLMmodel*  model;			        /* glm model data structure */
@@ -55,25 +51,42 @@ GLdouble   pan_x = 0.0;
 GLdouble   pan_y = 0.0;
 GLdouble   pan_z = 0.0;
 
-typedef boost::numeric::ublas::vector<double, std::vector<double> > dbl_vec;
-typedef boost::numeric::ublas::vector<int,std::vector<int> > GLubyte_vec;
-//GLubyte black[3] = {255,255,0}; //actually yellow or something
-//GLubyte white[3] = {255,255,255};
+//actual image buffer
+static GLubyte image[IMAGE_WIDTH][IMAGE_HEIGHT][3];
+
+//1 entry as a simple written/not written market, 1 entry for z-value, 3 for color values
+double framebuffer[IMAGE_WIDTH][IMAGE_HEIGHT][1+1+3];
+double zbuffer[IMAGE_WIDTH][IMAGE_HEIGHT];
+
+//globals for gluProject in raster
 GLdouble modelview[16];
 GLdouble projection[16];
 GLint viewport[4];
-static int translation = 2.;
+
+//moves the viewport back
+static int translation = 5.;
+
 static GLfloat light_src[3] = {-1.,0.,3.};
 static GLfloat eye_location[3] = {0.,0, translation};
 
+//frame counter so that raster doesn't redraw every singl time display is called
 static int framess = 0;
 
+//flag to choose robins or my code
+static int choice = 0;
+
+//flag for flat shading or not
+static int flat = 1;
+
+//shading coefficients
 #define PHONG_EXP 5.0
 #define K_S .3
-#define K_D .9
-#define K_A .9
+#define K_D .5
+#define K_A .5
 #define ILLUM .7
 
+
+//console loader bar
 static inline void loadbar(unsigned int x, unsigned int n, unsigned int w = 50)
 {
     if ( (x != n) && (x % (n/100) != 0) ) return;
@@ -203,16 +216,8 @@ glmSum(GLfloat* u, GLfloat* v, GLfloat* n)
     n[0] = u[0]+v[0];
 }
 
-static GLvoid
-glmDifference(GLfloat* u, GLfloat* v, GLfloat* n)
-{
-    assert(u); assert(v); assert(n);
-
-    n[1] = u[1]-v[1];
-    n[2] = u[2]-v[2];
-    n[0] = u[0]-v[0];
-}
-
+//adds material index ref to each triangle so that triangles can be rendered independent
+//of group and grouping
 void addMaterialToAllTriangles(){
     static GLuint i;
     static GLMgroup* group;
@@ -226,6 +231,8 @@ void addMaterialToAllTriangles(){
     }
 }
 
+//used in flat shading. lookat vector is approximated by looking at the "centroid"
+//of the triangle
 void triangleCentroid(GLdouble vertices[3][3], GLfloat* centroid){
 
     centroid[0] = vertices[0][0] + .5*(vertices[1][0]+vertices[2][0]);
@@ -234,16 +241,20 @@ void triangleCentroid(GLdouble vertices[3][3], GLfloat* centroid){
     //printf("");
 }
 
+//midpoint line through 2 vertices
 void lineMidpoint(GLdouble vertices[2][3], GLfloat* midpoint){
     midpoint[0] = vertices[0][0] + .5*(vertices[1][0]-vertices[0][0]);
     midpoint[1] = vertices[0][1] + .5*(vertices[1][1]-vertices[0][1]);
     midpoint[2] = vertices[0][2] + .5*(vertices[1][2]-vertices[0][2]);
 }
 
+//interpolation coefficient with perspective foreshortening taken into account
 double calculateBeta(double z0, double z1, double alpha){
     return alpha*z0/((alpha*z0)+(1-alpha)*z1);
 }
 
+//assigns color to "pixel". normal is assumed to be at pixel. lookfrom is the vector from eye to pixel
+//lightFrom is the vector from light source to pixel.
 void shader(GLfloat* color, GLfloat* normal, GLfloat* lookfrom, GLfloat* lightFrom, GLMmaterial* material){
 
     GLfloat bisector[3];
@@ -287,6 +298,8 @@ void shader(GLfloat* color, GLfloat* normal, GLfloat* lookfrom, GLfloat* lightFr
     //printf("color %f %f %f \n\n", color[0], color[1], color[2]);
 }
 
+//bresenham line plotting algorithm. decide at each point whether to go x+1, y+1 or both.
+//also does interpolation for depth attributes and color attributes
 void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* normalVertex1, GLfloat* normalVertex2, GLMmaterial* material){
     int dx = abs(x1-x0);
     int dy = abs(y1-y0);
@@ -300,39 +313,49 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
     double totalDistance = dx+dy;
     double alpha = 0;
     double beta = 0;
+
     //shading
     GLfloat color1[3] = {0,0,0};
     GLfloat color2[3] = {0,0,0};
     GLdouble realVertices[2][3];
     GLfloat midpoint[3];
-    //recover real vertices of line
+    //recover real vertices of line in order to compute vector from eye to line ends and light source ends
     int res=gluUnProject(x0,y0,z0,modelview,projection,viewport,&realVertices[0][0],&realVertices[0][1],&realVertices[0][2]);
     res=gluUnProject(x1,y1,z1,modelview,projection,viewport,&realVertices[1][0],&realVertices[1][1],&realVertices[1][2]);
     //realVertices now contains the vertices in 3 space of the line.
 
-    lineMidpoint(realVertices, midpoint);
+    //if doing flat shading then lightFrom and lookfrom should be computed from midpoint as an approximation
+    if(flat%2 == 0){
+        lineMidpoint(realVertices, midpoint);
+        GLfloat lookFrom[3] = {eye_location[0] - midpoint[0], eye_location[1] - midpoint[1], eye_location[2] - midpoint[2]};
+        GLfloat lightFrom[3] = {light_src[0] - midpoint[0], light_src[1] - midpoint[1], light_src[2] - midpoint[2]};
+        shader(color1, normalVertex1, lookFrom, lightFrom, material);
+        shader(color2, normalVertex1, lookFrom, lightFrom, material);
+    }
+    //if goraud shading then lookFrom and lightFrom are computed from the vertices
+    //calculate color at each vertex. if using flat shading then normal is simply the same at each vertex and color
+    //computation returns the same color for both vertices, so interpolation isn't done along the line.
+    else{
+        GLfloat lookFrom1[3] = {eye_location[0] - realVertices[0][0], eye_location[1] - realVertices[0][1], eye_location[2] - realVertices[0][2]};
+        GLfloat lightFrom1[3] = {light_src[0] - realVertices[0][0], light_src[1] - realVertices[0][1], light_src[2] - realVertices[0][2]};
+        glmNormalize(lookFrom1);
+        glmNormalize(lightFrom1);
+        shader(color1, normalVertex1, lookFrom1, lightFrom1, material);
 
-    //lookfrom vector, vector view screen to eye, which is the same vector as from the center of triangle to eye
-//    GLfloat lookFrom[3] = {eye_location[0] - midpoint[0], eye_location[1] - midpoint[1], eye_location[2] - midpoint[2]};
-//    GLfloat lightFrom[3] = {light_src[0] - midpoint[0], light_src[1] - midpoint[1], light_src[2] - midpoint[2]};
-    GLfloat lookFrom1[3] = {eye_location[0] - realVertices[0][0], eye_location[1] - realVertices[0][1], eye_location[2] - realVertices[0][2]};
-    GLfloat lightFrom1[3] = {light_src[0] - realVertices[0][0], light_src[1] - realVertices[0][1], light_src[2] - realVertices[0][2]};
-    glmNormalize(lookFrom1);
-    glmNormalize(lightFrom1);
-    shader(color1, normalVertex1, lookFrom1, lightFrom1, material);
-
-    GLfloat lookFrom2[3] = {eye_location[0] - realVertices[1][0], eye_location[1] - realVertices[1][1], eye_location[2] - realVertices[1][2]};
-    GLfloat lightFrom2[3] = {light_src[0] - realVertices[1][0], light_src[1] - realVertices[1][1], light_src[2] - realVertices[1][2]};
-    glmNormalize(lookFrom2);
-    glmNormalize(lightFrom2);
-    shader(color2, normalVertex2, lookFrom2, lightFrom2, material);
-//    printf("vertnormal1 %f %f %f vertnormal2 %f %f %f\n", normalVertex1[0], normalVertex1[1], normalVertex1[2], normalVertex2[0], normalVertex2[1], normalVertex2[2]);
-//    printf("color1 %f %f %f color2 %f %f %f\n", color1[0], color1[1], color1[2], color2[0], color2[1], color2[2]);
-
+        GLfloat lookFrom2[3] = {eye_location[0] - realVertices[1][0], eye_location[1] - realVertices[1][1], eye_location[2] - realVertices[1][2]};
+        GLfloat lightFrom2[3] = {light_src[0] - realVertices[1][0], light_src[1] - realVertices[1][1], light_src[2] - realVertices[1][2]};
+        glmNormalize(lookFrom2);
+        glmNormalize(lightFrom2);
+        shader(color2, normalVertex2, lookFrom2, lightFrom2, material);
+//        printf("vertnormal1 %f %f %f vertnormal2 %f %f %f\n", normalVertex1[0], normalVertex1[1], normalVertex1[2], normalVertex2[0], normalVertex2[1], normalVertex2[2]);
+//        printf("color1 %f %f %f color2 %f %f %f\n", color1[0], color1[1], color1[2], color2[0], color2[1], color2[2]);
+    }
     while(true){
 
+        //local interpolation parameter, distance along the curve
         alpha = distanceFromStart/totalDistance;
         beta = calculateBeta(z0,z1,alpha);
+        //record that pixel is "colored". used by scanline algorithm to see boundaries.
         framebuffer[y][x][0] = 1;
         //printf("scaled method %f \n", z0+calculateBeta(z0,z1,alpha)*(z1-z0));
         framebuffer[y][x][1] = z0+beta*(z1-z0);
@@ -374,8 +397,11 @@ void bresenham(int x0, int y0, double z0, int x1, int y1, double z1, GLfloat* no
     }
 }
 
+//scanline algorithm. uses a hack. runs left to right, records boundaries, and then runs again and colors
+//this is to eliminate cases where corners of triangles would lead to fill lines.
+void scanlineTriangleToFrameBuffer(double vertices[3][3], GLMmaterial* material){
 
-void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMmaterial* material){
+    //draw bounding box around triangle
     int minx = floor(std::min({vertices[0][0], vertices[1][0], vertices[2][0]}));
     int miny = floor(std::min({vertices[0][1], vertices[1][1], vertices[2][1]}));
     int maxx = ceil(std::max({vertices[0][0], vertices[1][0], vertices[2][0]}));
@@ -397,19 +423,20 @@ void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMma
                 break;
         }
         if(crossing == 4){
+                //interpolate depth and color between both edges of scanline so record colors and depths at the end
                 double zleft = framebuffer[y][crossings[1][0]][1];
                 double zright = framebuffer[y][crossings[2][1]][1];
                 double* colorLeft = &framebuffer[y][crossings[1][0]][2];
                 double* colorRight = &framebuffer[y][crossings[2][1]][2];
 //                printf("colorleft %f %f %f \n", colorLeft[0], colorLeft[1], colorLeft[2]);
 //                printf("colorRight %f %f %f \n", colorRight[0], colorRight[1], colorRight[2]);
+
+                //total distance across scanline
                 double totalAlpha = abs(crossings[1][1] - crossings[2][1]) - 1;
                 double beta = 0;
-                double scaled = 0;
                 for(int k = crossings[1][1]; k < crossings[2][1]; k++){
                     beta = totalAlpha == 0 ? 0 : calculateBeta(zleft,zright,double(k-crossings[1][1])/totalAlpha);
-                    scaled = zleft+beta*(zright-zleft);
-                    framebuffer[y][k][1] = scaled;
+                    framebuffer[y][k][1] = zleft+beta*(zright-zleft);
                     framebuffer[y][k][2] =colorLeft[0] + (double(colorRight[0]-colorLeft[0])*beta);
                     framebuffer[y][k][3] =colorLeft[1] + (double(colorRight[1]-colorLeft[1])*beta);
                     framebuffer[y][k][4] =colorLeft[2] + (double(colorRight[2]-colorLeft[2])*beta);
@@ -423,13 +450,13 @@ void scanlineTriangleToFrameBuffer(double vertices[3][3], GLfloat* normal, GLMma
 
 
 //model is global
+
+//just wrapper function that calls both bresenham and scanline
 void plotTriangleToFrameBuffer(GLMtriangle* triangle){
     //get the opengl matrices
     glGetDoublev( GL_MODELVIEW_MATRIX, modelview );
     glGetDoublev( GL_PROJECTION_MATRIX, projection );
     glGetIntegerv( GL_VIEWPORT, viewport );
-
-    GLfloat normal[3] = {(GLfloat)model->facetnorms[3*triangle->findex],(GLfloat)model->facetnorms[3*triangle->findex+1],(GLfloat)model->facetnorms[3*triangle->findex+2]};
 
     double vertices[3][3];
     GLfloat vertnormals[3][3];
@@ -459,10 +486,18 @@ void plotTriangleToFrameBuffer(GLMtriangle* triangle){
 
     GLMmaterial* triangleMaterial = &model->materials[triangle->material];
 
-    bresenham(vertices[0][0],vertices[0][1], vertices[0][2], vertices[1][0], vertices[1][1], vertices[1][2], vertnormals[0], vertnormals[1], triangleMaterial);
-    bresenham(vertices[1][0],vertices[1][1], vertices[1][2], vertices[2][0], vertices[2][1], vertices[2][2], vertnormals[1], vertnormals[2], triangleMaterial);
-    bresenham(vertices[2][0],vertices[2][1], vertices[2][2], vertices[0][0], vertices[0][1], vertices[0][2], vertnormals[2], vertnormals[0], triangleMaterial);
-    scanlineTriangleToFrameBuffer(vertices, normal, triangleMaterial);
+    //flat shading uses facet normal in both slots of bresenham so no interpolation is really done.
+    if(flat%2 ==0){
+        GLfloat normal[3] = {(GLfloat)model->facetnorms[3*triangle->findex],(GLfloat)model->facetnorms[3*triangle->findex+1],(GLfloat)model->facetnorms[3*triangle->findex+2]};
+        bresenham(vertices[0][0],vertices[0][1], vertices[0][2], vertices[1][0], vertices[1][1], vertices[1][2], normal, normal, triangleMaterial);
+        bresenham(vertices[1][0],vertices[1][1], vertices[1][2], vertices[2][0], vertices[2][1], vertices[2][2], normal, normal, triangleMaterial);
+        bresenham(vertices[2][0],vertices[2][1], vertices[2][2], vertices[0][0], vertices[0][1], vertices[0][2], normal, normal, triangleMaterial);
+    }else{//goraud shading using vertex normals
+        bresenham(vertices[0][0],vertices[0][1], vertices[0][2], vertices[1][0], vertices[1][1], vertices[1][2], vertnormals[0], vertnormals[1], triangleMaterial);
+        bresenham(vertices[1][0],vertices[1][1], vertices[1][2], vertices[2][0], vertices[2][1], vertices[2][2], vertnormals[1], vertnormals[2], triangleMaterial);
+        bresenham(vertices[2][0],vertices[2][1], vertices[2][2], vertices[0][0], vertices[0][1], vertices[0][2], vertnormals[2], vertnormals[0], triangleMaterial);
+    }
+    scanlineTriangleToFrameBuffer(vertices, triangleMaterial);
 }
 
 
@@ -758,7 +793,10 @@ keyboard(unsigned char key, int x, int y)
         glmVertexNormals(model, smoothing_angle);
         lists();
         break;
-
+//    turn flat shading on and off (versus goraud in my model)
+//    case 'f':
+//        flat=1;
+//        framess = 0;
     case 'W':
         glmScale(model, 1.0/scale);
         glmWriteOBJ(model, "out.obj", GLM_SMOOTH | GLM_MATERIAL);
@@ -783,7 +821,13 @@ keyboard(unsigned char key, int x, int y)
         break;
 
     case 'y':
-        glutDisplayFunc(display1);
+        if(choice++ == 0){
+            glutDisplayFunc(display1);
+        }
+        else{
+            glutDisplayFunc(display);
+            choice = 0;
+        }
         break;
     }
 
