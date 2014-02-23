@@ -12,10 +12,10 @@ LD = g++
 WINDRES = windres
 
 INC = -I\$\(\#freeglut.include\)
-CFLAGS = -Wall
+CFLAGS = -std=c++0x -w -fpermissive
 RESINC = 
 LIBDIR = -L\$\(\#freeglut.lib\)
-LIB = -lglut -lGL -lGLU -lXxf86vm
+LIB = -lglut -lGL -lGLU
 LDFLAGS = 
 
 INC_DEBUG = $(INC)
@@ -27,10 +27,10 @@ LIB_DEBUG = $(LIB)
 LDFLAGS_DEBUG = $(LDFLAGS)
 OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
-OUT_DEBUG = bin/Debug/project_3
+OUT_DEBUG = bin/Debug/rasterizer
 
-INC_RELEASE = $(INC) -I/home/max/Desktop/programming/spring 2014/computer graphics/project 2/project_3/
-CFLAGS_RELEASE = $(CFLAGS) -O2
+INC_RELEASE = $(INC) -I$(WORKDIR)
+CFLAGS_RELEASE = $(CFLAGS)
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
 LIBDIR_RELEASE = $(LIBDIR)
@@ -38,7 +38,7 @@ LIB_RELEASE = $(LIB)
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
-OUT_RELEASE = bin/Release/project_3
+OUT_RELEASE = bin/Release/rasterizer
 
 OBJ_DEBUG = $(OBJDIR_DEBUG)/glm.o $(OBJDIR_DEBUG)/gltb.o $(OBJDIR_DEBUG)/smooth.o
 
@@ -80,6 +80,7 @@ before_release:
 after_release: 
 
 release: before_release out_release after_release
+	cp -r data bin/Release/
 
 out_release: before_release $(OBJ_RELEASE) $(DEP_RELEASE)
 	$(LD) $(LIBDIR_RELEASE) -o $(OUT_RELEASE) $(OBJ_RELEASE)  $(LDFLAGS_RELEASE) $(LIB_RELEASE)
@@ -100,3 +101,5 @@ clean_release:
 
 .PHONY: before_debug after_debug clean_debug before_release after_release clean_release
 
+tarfile:
+	tar -cf maksim_levental_3186_7826.tar data smooth.cpp gltb.h gltb.cpp glm.h glm.cpp dirent32.h constants.h Report.doc Makefile

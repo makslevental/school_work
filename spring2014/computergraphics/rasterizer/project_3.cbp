@@ -12,6 +12,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="flat" />
 				<Compiler>
 					<Add option="-std=c++0x" />
 					<Add option="-g" />
@@ -19,12 +20,16 @@
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/project_3" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="/bin" />
+				<Option working_dir="bin/Release" />
 				<Option object_output="obj/Release/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++11" />
+					<Add option="-w" />
+					<Add option="-fpermissive" />
 					<Add directory="/home/max/Desktop/programming/spring 2014/computer graphics/project 2/project_3/" />
 				</Compiler>
 				<Linker>
@@ -48,7 +53,6 @@
 		<Unit filename="glm.h" />
 		<Unit filename="gltb.cpp" />
 		<Unit filename="smooth.cpp" />
-		<Unit filename="smooth_mine.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
