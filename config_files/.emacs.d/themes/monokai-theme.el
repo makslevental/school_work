@@ -47,7 +47,7 @@
    `(hl-line ((t (:background ,monokai-gray-darkest))))
    `(minibuffer-prompt ((t (:foreground ,monokai-yellow-dark))))
    `(modeline ((t (:background ,monokai-gray-lightest :foreground ,monokai-gray-light))))
-   `(region ((t (:background ,monokai-gray-darker))))
+   `(region ((t (:background ,monokai-yellow-dark))))
    `(show-paren-match-face ((t (:background ,monokai-gray-lightest))))
    ;; Main
    `(font-lock-builtin-face ((t (:foreground ,monokai-green))))
