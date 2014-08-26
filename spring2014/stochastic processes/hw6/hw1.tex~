@@ -1,0 +1,228 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{solution}
+  {\begin{proof}[Solution]\renewcommand{\qedsymbol}{}}
+  {\end{proof}}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Mathematica,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\begin{document}
+
+
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Homework 1}%replace X with the appropriate number
+\author{Maksim Levental\\ %replace with your name
+MAP 4102} %if necessary, replace with your course title
+ 
+\maketitle
+ 
+\begin{problem}{2.31(a)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+Let $T \sim Exp(\lambda)$. Compute $E(T|T<c)$.
+\end{problem}
+ 
+\begin{solution}\ \\
+
+\noindent By definition 
+
+$$
+E(T|T<c) = \int_0^c t \mathbb{P}(T=t|T<c)dt
+$$
+
+\noindent But $\mathbb{P}(T=t|T<c)$ is the truncated distribution whose probability density function $f_T$ is 
+
+$$
+f_T(t) = \frac{g_T(t)}{F_T(c)}
+$$
+
+\noindent where $g_T$ is the probability density function for $T$, $\lambda e^{-\lambda t}$
+, and $F_T$ is the cumulative distribution function for $T$, $1-\lambda e^{-\lambda t}$. Hence
+
+\begin{align*}
+E(T|T<c) &= \int_0^c t \mathbb{P}(T=t|T<c)dt =  \int_0^c t \frac{\lambda e^{-\lambda t}}{1-\lambda e^{-\lambda c}}dt\\
+&= \frac{1}{\lambda} + \frac{c}{1-e^{c\lambda}}
+\end{align*}
+
+
+\end{solution}
+
+\begin{problem}{2.31(b)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+Let $T \sim Exp(\lambda)$. Compute $E(T|T<c)$.
+\end{problem}
+\begin{solution}\ \\
+
+\noindent From $ET = \mathbb{P}(T<c)E(T|T<c) + \mathbb{P}(T>c)E(T|T>c)$ we have 
+
+$$
+E(T|T<c) = \frac{ET - \mathbb{P}(T>c)E(T|T>c)}{\mathbb{P}(T<c)}
+$$
+
+\noindent but 
+
+$$
+E(T|T>c) = \int_0^cdt + \int_c^{\infty}\mathbb{P}(T>t|T>c)dt = c+\int_c^{\infty} \mathbb{P}(T>t-c)dt
+$$
+
+\noindent by the tail formula for expectation and the memoryless property of the exponential distribution. Finally 
+
+$$\int_c^{\infty} \mathbb{P}(T>t-c)dt = \int_c^{\infty}e^{-\lambda(t-c)}dt = \frac{1}{\lambda} $$
+
+\noindent Hence 
+
+\begin{align*}
+E(T|T<c) &= \frac{\frac{1}{\lambda} - e^{-\lambda c}\big(\frac{1}{\lambda}+c\big)}{1-e^{-\lambda c}}\\
+&= \frac{1}{\lambda} - \frac{e^{-\lambda c}}{1-e^{\lambda c}}c = \frac{1}{\lambda} + \frac{c}{1-e^{\lambda c}}
+\end{align*}
+
+
+
+
+\end{solution}
+
+\begin{problem}{2.33} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+
+Suppose traffic on a road is accurately modeled by a Poisson process with rate parameter $\lambda\frac{cars}{minute}$ and a chicken needs $c$ minutes to cross the road. Show that the expected time for the chicken to cross, including wait, is $(e^{\lambda c}-1)/\lambda$. 
+\end{problem}
+ 
+\begin{solution}\ \\ 
+
+\noindent Let $t_i$ be times between passages of cars and $J = \text{min}\{j: t_j > c\}$. Then $t_i$ is exponentially distributed for all $i$, and $J$ is geometrically distributed with success probability $p =\mathbb{P}(T|T>c) = e^{-\lambda c}$ and failure probability $1-p=\mathbb{P}(T|T<c) = 1 - e^{-\lambda c}$. The expectation value of $J$ is 
+$$
+\frac{1}{1-p} = \frac{1}{e^{-\lambda c}} = K
+$$
+\noindent The expected passage time for each car that passes in less than $c$ minutes is $E(T|T<c)$ and by the previous problem
+$$
+E(T|T<c) = \frac{1}{\lambda} + \frac{c}{1-e^{\lambda c}}
+$$
+\noindent Hence total wait is that of waiting for $K-1$ cars to pass and then crossing:
+$$
+\bigg(\frac{1}{e^{-\lambda c}}-1\bigg)\bigg(\frac{1}{\lambda} + \frac{c}{1-e^{\lambda c}}\bigg)= \frac{e^{\lambda c}}{\lambda} - \frac{1 + c\lambda}{\lambda} + c = \frac{e^{\lambda c} - 1}{\lambda}
+$$
+\end{solution} 
+\begin{problem}{2.52(a)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+How often is the bulb replaced.
+
+\end{problem}
+
+\begin{solution}\ \\
+
+\noindent The janitor replacing the bulb according to when it breaks is a Poisson process with rate $\frac{1}{200}\frac{failures}{day}$. The superposition and the handyman-preventitive-maintenance Poisson process with rate $\frac{1}{100}\frac{replacements}{day}$ is again a Poisson process with rate $\frac{1}{200}+\frac{1}{100} = \frac{3}{200}$ which implies that the lightbulb is changed once every $\frac{200}{3} = 66\frac{2}{3}$ days. 
+\end{solution}
+
+\begin{problem}{2.52(b)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+In the long run what fraction of replacements is due to failure?
+
+\end{problem}
+
+\begin{solution}\ \\
+
+\noindent The rate of replacement due to failure is the relative rate $\frac{.005}{.005+.01} = \frac{1}{3}$.
+
+\end{solution}
+
+
+\begin{problem}{2.58(a)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+
+Compute $\mathbb{P}(N(2)=5)$.
+
+\end{problem}
+
+\begin{solution}\ \\
+$$\mathbb{P}(N(2)=5) = \mathbb{P}(N(0+2)-N(0)=5) = \frac{e^{-2\times 2}(2\times 2)^5}{5!} \sim 0.156$$
+
+\end{solution}
+
+\begin{problem}{2.58(b)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+
+Compute $\mathbb{P}(N(5)=8|N(2)=3)$.
+
+\end{problem}
+
+\begin{solution}\ \\
+$$\mathbb{P}(N(5)=8|N(2)=3) = \mathbb{P}(N(3)-N(0)=5)$$
+\noindent by the memoryless property of the Poisson distribution.
+$$ \mathbb{P}(N(0+3)-N(0)=5) =  \frac{e^{-2\times 3}(2\times 3)^5}{5!} \sim 0.161$$
+
+\end{solution}
+
+\begin{problem}{2.58(c)} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+
+Compute $\mathbb{P}(N(2)=3|N(5)=8)$.
+
+\end{problem}
+
+\begin{solution}\ 
+\begin{align*}
+\mathbb{P}(N(2)=3|N(5)=8) &= \binom{8}{3}\bigg(\frac{2}{5}\bigg)^{3} \bigg(1-\frac{2}{5}\bigg)^{8-3}\\
+&\sim 0.279
+\end{align*} 
+\end{solution}
+ 
+\end{document}
+\begin{align*}
+\sum_{i=1}^{k+1}i & = \left(\sum_{i=1}^{k}i\right) +(k+1)\\ 
+& = \frac{k(k+1)}{2}+k+1 & (\text{by inductive hypothesis})\\
+& = \frac{k(k+1)+2(k+1)}{2}\\
+& = \frac{(k+1)(k+2)}{2}\\
+& = \frac{(k+1)((k+1)+1)}{2}.
+\end{align*}

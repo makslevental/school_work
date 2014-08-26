@@ -1,0 +1,262 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{solution}
+  {\begin{proof}[Solution]\renewcommand{\qedsymbol}{}}
+  {\end{proof}}
+
+\usepackage{listings}
+\usepackage{color}
+\setlength\parindent{0pt}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Mathematica,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\begin{document}
+
+
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Homework 7}%replace X with the appropriate number
+\author{Maksim Levental\\ %replace with your name
+MAP 4102} %if necessary, replace with your course title
+ 
+\maketitle
+ 
+\begin{bf}Autocorrelation of a Stochastic Process \end{bf}
+
+\begin{problem}{1} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+Compute $\rho(n,n+1)$ for the i.i.d. model.
+\end{problem}
+ 
+\begin{solution}\ \\
+
+Since $X_i$ are i.i.d. for all $i$ then $E(X_n X_{n+1}) = E(X_n) E(X_{n+1})$. Hence 
+
+$$
+\rho(n,n+1) = E(X_n X_{n+1}) - E(X_n) E(X_{n+1}) = E(X_n) E(X_{n+1}) - E(X_n) E(X_{n+1}) = 0
+$$
+
+\end{solution}
+\begin{problem}{2} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+Compute 
+$$
+\hat \rho(1) = \lim_{N \to \infty} \frac{1}{N} \sum_{n=0}^{N-1} X_n X_{n+1} - \left(\frac{1}{N} \sum_{n=0}^{N-1} X_n\right) \left(\frac{1}{N} \sum_{n=1}^N X_n \right) 
+$$
+
+\noindent for the sequence of random variables $\{X_n\} = (1,5,5,1,5,5,1,5,5,1, \ldots)$.
+\end{problem}
+ 
+\begin{solution}\ \\
+
+We'll rewrite the terms in the sums and then take the limits. The terms in the first sum
+
+$$
+\sum_{n=0}^{N-1} X_n X_{n+1} 
+$$
+
+\noindent are of the form $1 \times 5$, $5 \times 5$, $5 \times 1$. For example
+
+\begin{align*}
+X_0 X_1 + X_3 X_4 + X_6 X_7 &= 1\times 5 + 1\times 5 + 1\times 5 \\
+X_1 X_2 + X_4 X_5 + X_7 X_8 &= 5\times 5 + 5\times 5 + 5\times 5 \\
+X_2 X_3 + X_5 X_6 + X_8 X_9 &= 5\times 1 + 5\times 1 + 5\times 1
+\end{align*} 
+
+So reordering the terms in the sums (taking sums along the columns above) we get 
+
+$$
+\frac{1}{N} \sum_{n=0}^{N-1} X_n X_{n+1} = \frac{1}{3(j+1)}\sum_{i=0}^j \bigg(X_{3i}X_{3i+1} + X_{3i+1}X_{3i+2} + X_{3i+2}X_{3i+3}\bigg)
+$$
+
+where $j = \lceil N/3 \rceil$. But each term in this sum is simply either 5 or 25. Hence 
+
+$$
+\frac{1}{3(j+1)}\sum_{i=0}^j \bigg(X_{3i}X_{3i+1} + X_{3i+1}X_{3i+2} + X_{3i+2}X_{3i+3}\bigg) = \frac{1}{3(j+1)}(j\cdot5+j\cdot25+j\cdot5) = \frac{35 j}{3(j+1)} 
+$$
+
+The second term in $\hat \rho(1)$, the product of sums, is simply the product of the means of a deterministic variable that is equal to $1$ for $N/3$ instances and equal to $5$ for $2N/3$ instances. Hence it, the product, is equal to $(\frac{1}{N}\frac{11\cdot N}{3})^2 = \frac{121}{9}$. Finally 
+
+$$
+\hat \rho(1) = \lim_{j \to \infty} \bigg( \frac{35 j}{3(j+1)} - \frac{121}{9}\bigg) = \frac{105}{9} - \frac{121}{9} = \frac{-16}{3} 
+$$
+
+\end{solution}
+\begin{problem}{3(a)}
+For what value of $p$ will $\{X_n\}$ satisfy the asymptotic frequencies given?
+\end{problem}
+\begin{solution}\ \\
+
+Solving 
+
+$$
+\begin{pmatrix}
+1/3 & 2/3\\
+\end{pmatrix} 
+\begin{pmatrix}
+.1 & .9 \\ 
+p & (1-p) 
+\end{pmatrix}=
+\begin{pmatrix}
+1/3 & 2/3\\
+\end{pmatrix}
+$$
+
+yields $p = .45$.
+\end{solution}
+
+\begin{problem}{3(b)}
+Compute the one-step autocovariance function for this process assuming that the initial condition is drawn from the stationary distribution.
+\end{problem}
+ 
+\begin{solution}\ \\ 
+
+Given that $X_0$ is initially drawn from $\{1,5\}$ with probabilities $\frac{1}{3}$ and $\frac{2}{3}$ respectively then $E(XY)$ is 
+
+$$
+\frac{1}{3}(.1 \cdot 1 \cdot 1 + .9 \cdot 1 \cdot 5) + \frac{2}{3}(.45 \cdot 5 \cdot 1 + .55 \cdot 5 \cdot 5) = 10.7
+$$
+
+By the ergodic theorem we can compute $E(X)$; $E(X) = \frac{1}{3}\cdot 1 + \frac{2}{3} \cdot 5$ and so $E(X_n X_{n+1}) - E(X)^2 = 10.7 - 13.\overline{44} = 2.7\overline{4}$
+
+
+\end{solution} 
+
+\begin{bf}The rest of the problems...\end{bf}
+
+\begin{problem}{2(a)} 
+Compute $\mathbb{E}[X \, | \, A]$
+\end{problem}
+\begin{solution}\ \\
+
+$$\mathbb{E}[X \, | \, A] = \frac{1/2}{1/2+1/3}\times 5 + \frac{1/3}{1/2+1/3}\times 2 = 3.8$$
+
+\end{solution}
+
+\begin{problem}{2(b)} 
+Compute $\mathbb{E}[X 1_{A}]$
+\end{problem}
+\begin{solution}\ \\
+
+$$\mathbb{E}[X \, | \, A] = \frac{1}{2}\times 5 + \frac{1}{3}\times 2 + 0 \times 1 = 3\frac{1}{6}$$
+
+\end{solution}
+
+\begin{problem}{2(c)} 
+Let $Y$ be distributed like $X$ and let $Z := X + Y$.  Compute $\mathbb{E}[Z \, | \, A]$.
+\end{problem}
+\begin{solution}\ \\
+
+\begin{align*}\mathbb{E}[Z \, | \, A] = &~\frac{(1/2)^2}{(1/2)^2 + (1/6)^2 + (1/2)(1/3)+(1/3)(1/2)}\times 10 ~+\\
+                           &~\frac{(1/3)^2}{(1/2)^2 + (1/6)^2 + (1/2)(1/3)+(1/3)(1/2)}\times 4 ~ + \\
+                           &~\frac{(1/2)(1/3)}{(1/2)^2 + (1/6)^2 + (1/2)(1/3)+(1/3)(1/2)}\times 7 ~+\\
+                           &~\frac{(1/3)(1/2)}{(1/2)^2 + (1/6)^2 + (1/2)(1/3)+(1/3)(1/2)}\times 7  \\
+                           = &~ 8. \overline{63}
+\end{align*}
+\end{solution}
+
+\begin{problem}{2(c)} 
+Compute $\mathbb{E}[Z \, | \, X]$.
+\end{problem}
+\begin{solution}\ \\
+
+\begin{align*}\mathbb{E}[Z \, | \, X] = &~\frac{1}{2}\bigg(\frac{1}{2}(5+5)+\frac{1}{3}(5+2)+\frac{1}{6}(5+1)\bigg) ~+\\
+                                        &~\frac{1}{3}\bigg(\frac{1}{2}(2+5)+\frac{1}{3}(2+2)+\frac{1}{6}(2+1)\bigg) ~+\\
+                                        &~\frac{1}{6}\bigg(\frac{1}{2}(1+5)+\frac{1}{3}(1+2)+\frac{1}{6}(1+1)\bigg) \\
+                                        =&~ 6 \frac{2}{3}
+\end{align*}
+\end{solution}
+
+\begin{problem}{3} 
+Show that $M_n$ is a martingale with respect to $\mathcal{F}_n$.
+\end{problem}
+\begin{solution}\ \\
+$$
+M_n = \frac{e^{sS_n}}{\mathbb{E}[e^{sX_1}]^n} = \frac{e^{s\sum_{i=1}^n X_i}}{\mathbb{E}[e^{sX_1}]^n}
+$$
+
+Hence 
+
+\begin{align*}
+\mathbb{E}[M_{n+1} \, | \, \mathcal{F}_n] &= \mathbb{E}\bigg[\frac{e^{s\sum_{i=1}^{n+1} X_i}}{\mathbb{E}[e^{sX_1}]^{n+1}} \, \bigg| \, \mathcal{F}_n\bigg] \\
+&= \mathbb{E}\bigg[\frac{e^{s X_{n+1}}}{\mathbb{E}[e^{sX_1}]} \frac{e^{s\sum_{i=1}^{n} X_i}}{\mathbb{E}[e^{sX_1}]^{n}} \, \bigg| \, \mathcal{F}_n\bigg] 
+\end{align*}
+
+But $X_{n+1}$ is independent of $\mathcal{F}_n$ (and hence so is $g(X_{n+1})$) and $X_n$ is $\mathcal{F}_n$ measurable (and hence so is $f(X_n)$ ) so 
+
+\begin{align*}
+\mathbb{E}[M_{n+1} \, | \, \mathcal{F}_n] &= \mathbb{E}\bigg[\frac{e^{s X_{n+1}}}{\mathbb{E}[e^{sX_1}]} \, \bigg| \, \mathcal{F}_n\bigg]\mathbb{E}\bigg[\frac{e^{s\sum_{i=1}^{n} X_i}}{\mathbb{E}[e^{sX_1}]^{n}} \, \bigg| \, \mathcal{F}_n\bigg] \\
+&= \mathbb{E}\bigg[\frac{e^{s X_{n+1}}}{\mathbb{E}[e^{sX_1}]} \, \bigg| \, \mathcal{F}_n\bigg] \frac{e^{s\sum_{i=1}^{n} X_i}}{\mathbb{E}[e^{sX_1}]^{n}} \\
+&= \frac{\mathbb{E}[e^{s X_{n+1}}]}{\mathbb{E}[e^{sX_1}]}  \frac{e^{s\sum_{i=1}^{n} X_i}}{\mathbb{E}[e^{sX_1}]^{n}}
+\end{align*}
+
+But $X_i$ are i.i.d so $\mathbb{E}[e^{s X_{n+1}}] = \mathbb{E}[e^{sX_1}]$ and hence finally
+
+$$ \mathbb{E}[M_{n+1} \, | \, \mathcal{F}_n] = 1 \times  \frac{e^{s\sum_{i=1}^{n} X_i}}{\mathbb{E}[e^{sX_1}]^{n}} = M_n $$
+
+
+\end{solution}
+
+
+\end{document}
+\begin{align*}
+\sum_{i=1}^{k+1}i & = \left(\sum_{i=1}^{k}i\right) +(k+1)\\ 
+& = \frac{k(k+1)}{2}+k+1 & (\text{by inductive hypothesis})\\
+& = \frac{k(k+1)+2(k+1)}{2}\\
+& = \frac{(k+1)(k+2)}{2}\\
+& = \frac{(k+1)((k+1)+1)}{2}.
+\end{align*}

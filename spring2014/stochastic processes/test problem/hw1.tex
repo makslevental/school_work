@@ -1,0 +1,132 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{solution}
+  {\begin{proof}[Solution]\renewcommand{\qedsymbol}{}}
+  {\end{proof}}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\begin{document}
+
+
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Test Problem}%replace X with the appropriate number
+\author{Maksim Levental\\ %replace with your name
+MAP 4102} %if necessary, replace with your course title
+ 
+\maketitle
+ 
+\begin{problem}{} %You can use theorem, exercise, problem, or question here.  Modify x.yz to be whatever number you are proving
+What is the expected time until the shuffler sees the Queen of Hearts on top of the deck when there are 52 cards?
+
+\end{problem}
+ 
+\begin{solution}
+
+The transition matrix is 
+
+$$ P = \begin{pmatrix} 
+\frac{1}{52} & \frac{1}{52} & \frac{1}{52} & \frac{1}{52} & \frac{1}{52} & \cdots & \frac{1}{52}& \frac{1}{52}& \frac{1}{52}\\ 
+\frac{51}{52} & \frac{1}{52} & 0 & 0 & 0 && 0 & 0 & 0 \\ 
+0& \frac{50}{52} & \frac{2}{52} & 0 & 0&  & 0& 0 & 0 \\ 
+0 & 0 & \frac{49}{52} & \frac{3}{52} & 0 & \cdots & 0& 0 & 0 \\ 
+0 & 0 & 0 & \frac{48}{52} & \frac{4}{52} & \ & 0& 0 & 0\\
+& \vdots & & & &\ddots & \\
+0& 0 & 0& 0  &0&&  \frac{2}{52} & \frac{50}{52}&0 \\
+0& 0 & 0& 0 &0 & \cdots&0& \frac{1}{52} & \frac{51}{52} \\
+\end{pmatrix}
+$$
+
+Observe that $\sum_x p(x,y) = \sum_y p(x,y) = 1$. So the chain is doubly stochastic and therefore has the unique stationary distribution that is the uniform distribution $ \pi(x) = \frac{1}{52} $ for all $1 \leqslant x \leqslant 52$. By Thm 1.22 $E_y T_y = \frac{1}{\pi_y} = 52$.
+
+
+
+\end{solution}
+
+\end{document}
+
+
+
+\begin{align*}
+\sum_{i=1}^{k+1}i & = \left(\sum_{i=1}^{k}i\right) +(k+1)\\ 
+& = \frac{k(k+1)}{2}+k+1 & (\text{by inductive hypothesis})\\
+& = \frac{k(k+1)+2(k+1)}{2}\\
+& = \frac{(k+1)(k+2)}{2}\\
+& = \frac{(k+1)((k+1)+1)}{2}.
+\end{align*}
+
+
+\end{solution}
+$$
+\begin{alignat*}{2}
+\rho_{AA} &= \rho_{BA} \cdot p(A,B) + \rho_{CA} \cdot p(A,C) = \rho_{BA} \cdot \frac{1}{2} + \rho_{CA} \cdot \frac{1}{2} & \\
+\rho_{CA} &= \rho_{AA'} \cdot p(C,A) + \rho_{BA} \cdot p(C,B) = 1 \cdot  \frac{1}{2} + \rho_{BA} \cdot \frac{1}{2} & \\
+\rho_{BA} &= \rho_{DA} \cdot p(B,D) = 0 \cdot 1 = 0
+\end{alignat*}
+Note that $\rho_{AA}$ and $\rho_{AA'}$ are different; $\rho_{AA}$ is the probability of hitting $A$ for some time $n\geq 1$ and $\rho_{AA'}$ is the probability of hitting $A$ for sometime $n \geq i$ given that $X_i = A$. Hence
+\begin{alignat*}{2}
+\rho_{CA} &= 1 \cdot \frac{1}{2} + 0 \cdot \frac{1}{2} = \frac{1}{2} \\
+\rho_{AA} &= 0 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} \\
+\end{alignat*}

@@ -1,0 +1,967 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+AMS 526 Homework 1 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+08/25/2014
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+All 4 bit sequences of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+s and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+s, where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+ represents tails and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+ represents heads, i.e.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+Omega=
+\backslash
+{
+\backslash
+omega_1,
+\backslash
+omega_2,
+\backslash
+omega_3,
+\backslash
+omega_4
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_i 
+\backslash
+in 
+\backslash
+{0,1
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+All 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ bit sequences of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+s and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+, where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+ represents undamaged and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+ represents damaged and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+is the number of leaves on the plant.
+\end_layout
+
+\begin_layout Enumerate
+All 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x 
+\backslash
+in (0,
+\backslash
+infty)$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+All 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x 
+\backslash
+in (0,k)$
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$k$
+\end_layout
+
+\end_inset
+
+is some reasonable maximum weight for a 10-day old rat (probably like 100
+ pounds).
+\end_layout
+
+\begin_layout Enumerate
+All 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x 
+\backslash
+in [0,1]$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.2]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A
+\backslash
+backslash (A 
+\backslash
+cap B)=A 
+\backslash
+cap (A
+\backslash
+cap B)^c = A
+\backslash
+cap (A^c 
+\backslash
+cup B^c)= (A
+\backslash
+cup A)
+\backslash
+cup (A
+\backslash
+cap B^c)= 
+\backslash
+emptyset 
+\backslash
+cup (A
+\backslash
+cap B^c) = A
+\backslash
+cap B^c$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(B
+\backslash
+cap A)
+\backslash
+cup(B
+\backslash
+cap A^c)=B
+\backslash
+cup(A
+\backslash
+cap A^c) = B
+\backslash
+cup 
+\backslash
+emptyset=B$.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$B
+\backslash
+backslash A = B
+\backslash
+cap A^c$
+\end_layout
+
+\end_inset
+
+ by definition.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A
+\backslash
+cup (B
+\backslash
+cap A^c) = (A
+\backslash
+cup B) 
+\backslash
+cap(A
+\backslash
+cup A^c) = (A
+\backslash
+cup B) 
+\backslash
+cap 
+\backslash
+Omega = A
+\backslash
+cup B$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.3]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Probability of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A 
+\backslash
+vee B 
+\backslash
+iff P(A
+\backslash
+cup B) = P(A)+P(B)-P(A
+\backslash
+cap B)$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Probability of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(A 
+\backslash
+vee B)
+\backslash
+wedge
+\backslash
+lnot(A
+\backslash
+wedge B) 
+\backslash
+iff P(A
+\backslash
+cup B) -P(A
+\backslash
+cap B)$ 
+\end_layout
+
+\begin_layout Plain Layout
+
+and
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+
+P(A
+\backslash
+cup B) -P(A
+\backslash
+cap B) &= P(A)+P(B)-P(A
+\backslash
+cap B)-P(A
+\backslash
+cap B)
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+&= P(A)+P(B)-2
+\backslash
+cdot P(A
+\backslash
+cap B)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{align*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Same as (a).
+\end_layout
+
+\begin_layout Enumerate
+Same as (b).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.7]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The area of the dart board is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+pi r^2$
+\end_layout
+
+\end_inset
+
+ and so the probability of hitting the board at all is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+pi r^2/A$
+\end_layout
+
+\end_inset
+
+ and so the probability of missing the board is then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P(
+\backslash
+text{scoring }0
+\backslash
+text{ points})=1-
+\backslash
+pi r^2/A$
+\end_layout
+
+\end_inset
+
+.
+ The rest of the values for the probability mass function are the same as
+ they are in 
+\series bold
+
+\begin_inset space ~
+\end_inset
+
+Ex 1.2.7 
+\series default
+except renormalized by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A$
+\end_layout
+
+\end_inset
+
+ instead of by the area of the dartboard, i.e.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$P(
+\backslash
+text{scoring }i
+\backslash
+text{ points}) = 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+left
+\backslash
+{ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+begin{array}{ll} 		
+\end_layout
+
+\begin_layout Plain Layout
+
+				 1-
+\backslash
+pi r^2/A & 
+\backslash
+mbox{if } i = 0 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				 
+\backslash
+frac{
+\backslash
+pi r^2}{A}
+\backslash
+frac{(6-i)^2 -(5-i)^2}{5^2} & 
+\backslash
+mbox{if } i = 1,2,3,4,5 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+end{array} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+right.
+\end_layout
+
+\begin_layout Plain Layout
+
+$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P(
+\backslash
+text{scoring }i
+\backslash
+text{ points}|
+\backslash
+text{board is hit})=
+\backslash
+frac{P(
+\backslash
+text{scoring }i
+\backslash
+text{ points }
+\backslash
+cap
+\backslash
+text{ board is hit})}{P(
+\backslash
+text{board is hit})} = 
+\backslash
+frac{P(
+\backslash
+text{scoring }i
+\backslash
+text{ points }
+\backslash
+cap
+\backslash
+text{ board is hit})}{
+\backslash
+pi r^2/A}$
+\end_layout
+
+\end_inset
+
+ but 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P(
+\backslash
+text{scoring }0
+\backslash
+text{ points }
+\backslash
+cap
+\backslash
+text{ board is hit})=P(
+\backslash
+emptyset)=0$
+\end_layout
+
+\end_inset
+
+ and if 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i=1,2,3,4,5$
+\end_layout
+
+\end_inset
+
+ then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P(
+\backslash
+text{scoring }i
+\backslash
+text{ points }
+\backslash
+cap
+\backslash
+text{ board is hit}) = P(
+\backslash
+text{scoring }i
+\backslash
+text{ points })$
+\end_layout
+
+\end_inset
+
+ hence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$P(
+\backslash
+text{scoring }i
+\backslash
+text{ points}|
+\backslash
+text{board is hit}) = 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+left
+\backslash
+{ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+begin{array}{ll} 		
+\end_layout
+
+\begin_layout Plain Layout
+
+				 0 & 
+\backslash
+mbox{if } i = 0 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				 
+\backslash
+begin{align*}
+\end_layout
+
+\begin_layout Plain Layout
+
+				 
+\backslash
+frac{P(
+\backslash
+text{scoring }i
+\backslash
+text{ points })}{
+\backslash
+pi r^2/A} &= 
+\backslash
+frac{
+\backslash
+pi r^2/A}{
+\backslash
+pi r^2/A}
+\backslash
+frac{(6-i)^2 -(5-i)^2}{5^2}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+					=
+\backslash
+frac{(6-i)^2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+-(5-i)^2}{5^2} & 
+\backslash
+mbox{if } i = 1,2,3,4,5 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+end{array} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+right.
+\end_layout
+
+\begin_layout Plain Layout
+
+$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
