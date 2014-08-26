@@ -76,7 +76,7 @@
 \begin_body
 
 \begin_layout Title
-AMS 526 Homework 1 Solutions
+STA 6326 Homework 1 Solutions
 \end_layout
 
 \begin_layout Author
@@ -846,6 +846,33 @@ text{ points })$
 
 \end_inset
 
+ since 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+{
+\backslash
+text{scoring }i
+\backslash
+text{ points}
+\backslash
+}
+\backslash
+subset
+\backslash
+{
+\backslash
+text{board is hit}
+\backslash
+}$
+\end_layout
+
+\end_inset
+
  hence 
 \begin_inset ERT
 status open
@@ -892,7 +919,7 @@ mbox{if } i = 0
 
 				 
 \backslash
-begin{align*}
+begin{array}{ll}
 \end_layout
 
 \begin_layout Plain Layout
@@ -922,18 +949,16 @@ frac{(6-i)^2 -(5-i)^2}{5^2}
 
 \begin_layout Plain Layout
 
-					=
+					&=
 \backslash
-frac{(6-i)^2
+frac{(6-i)^2-(5-i)^2}{5^2}
 \end_layout
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
--(5-i)^2}{5^2} & 
+				 
+\backslash
+end{array} & 
 \backslash
 mbox{if } i = 1,2,3,4,5 	
 \end_layout
