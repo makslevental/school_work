@@ -1,0 +1,46 @@
+;; Object general/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "general/"
+  :tables
+  (list
+    (semanticdb-table "clear.m"
+      :major-mode 'matlab-mode
+      :tags 
+        '( ("clear" function
+               (:builtin t
+                :documentation "Clear variables and functions from memory.")
+                nil [1 1]))          
+      :file "clear.m"
+      :pointmax 3207
+      :fsize 3206
+      :lastmodtime '(19736 858 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "clearvars.m"
+      :major-mode 'matlab-mode
+      :tags 
+        '( ("clearvars" function
+               (:documentation "Clear variables from memory."
+                :arguments ("varargin"))
+                nil [1 3577])
+            ("parseArgs" function
+               (:documentation "Parse input arguments, separating them into variables to be cleared,"
+                :return ("clearVarArgs" "exceptVarArgs" "flags")
+                :arguments ("argCell"))
+                nil [3578 6569])
+            ("issueFlagPositionWarning" function
+               (:documentation "Issue a warning about the positioning of the flag."
+                :arguments ("flagName" "argIdx"))
+                nil [6570 6754])
+            ("createPattern" function
+               (:documentation "Create regular expression depending on how many arguments were specified"
+                :return ("pattern")
+                :arguments ("variableArgs" "regexpFlagSpecified"))
+                nil [6755 7207]))          
+      :file "clearvars.m"
+      :pointmax 7207
+      :fsize 7206
+      :lastmodtime '(20636 45858 0 0)
+      :unmatched-syntax nil))
+  :file "!usr!local!MATLAB!MATLAB_Production_Server!R2013a!toolbox!matlab!general!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,731 @@
+;; Object lisp/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "lisp/"
+  :tables
+  (list
+    (semanticdb-table "simple.el.gz"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("declare-function" code nil nil [988 1050])
+            ("declare-function" code nil nil [1051 1091])
+            ("compilation-current-error" variable nil nil [1113 1147])
+            ("compilation-context-lines" variable nil nil [1148 1182])
+            ("idle-update-delay" variable (:default-value 0.5) nil [1184 1481])
+            ("killing" customgroup (:user-visible-flag t) nil [1483 1557])
+            ("paren-matching" customgroup (:user-visible-flag t) nil [1559 1661])
+            ("next-error" customgroup (:user-visible-flag t) nil [1698 1799])
+            ("next-error" variable
+               (:default-value (quote ((t (:inherit region))))
+                :type "face")
+                nil [1801 1932])
+            ("next-error-highlight" variable (:default-value 0.5) nil [1934 2689])
+            ("next-error-highlight-no-select" variable (:default-value 0.5) nil [2691 3384])
+            ("next-error-recenter" variable nil nil [3386 3748])
+            ("next-error-hook" variable nil nil [3750 3891])
+            ("next-error-highlight-timer" variable nil nil [3893 3932])
+            ("next-error-overlay-arrow-position" variable nil nil [3934 3980])
+            ("put" code nil nil [3981 4059])
+            ("add-to-list" code nil nil [4060 4137])
+            ("next-error-last-buffer" variable nil nil [4139 4366])
+            ("next-error-function" variable nil nil [4368 4826])
+            ("make-variable-buffer-local" code nil nil [4827 4876])
+            ("next-error-move-function" variable nil nil [4878 5191])
+            ("make-variable-buffer-local" code nil nil [5192 5246])
+            ("next-error-buffer-p" function (:arguments ("buffer" "avoid-current" "extra-test-inclusive" "extra-test-exclusive")) nil [5248 6291])
+            ("next-error-find-buffer" function (:arguments ("avoid-current" "extra-test-inclusive" "extra-test-exclusive")) nil [6293 8575])
+            ("next-error" function
+               (:user-visible-flag t
+                :arguments ("arg" "reset"))
+                nil [8577 10346])
+            ("next-error-internal" function nil nil [10348 10769])
+            ("defalias" code nil nil [10771 10810])
+            ("defalias" code nil nil [10811 10845])
+            ("previous-error" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [10847 11164])
+            ("first-error" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [11166 11434])
+            ("next-error-no-select" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [11436 11888])
+            ("previous-error-no-select" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [11890 12268])
+            ("next-error-follow-last-line" variable nil nil [12339 12379])
+            ("define-minor-mode" code nil nil [12381 13089])
+            ("next-error-follow-mode-post-command-hook" function nil nil [13205 13538])
+            ("fundamental-mode" function (:user-visible-flag t) nil [13547 13811])
+            ("special-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (suppress-keymap map) (define-key map "q" (quote quit-window)) (define-key map " " (quote scroll-up-command)) (define-key map "" (quote scroll-down-command)) (define-key map "?" (quote describe-mode)) (define-key map "h" (quote describe-mode)) (define-key map ">" (quote end-of-buffer)) (define-key map "<" (quote beginning-of-buffer)) (define-key map "g" (quote revert-buffer)) map)) nil [13889 14322])
+            ("put" code nil nil [14324 14364])
+            ("define-derived-mode" code nil nil [14365 14510])
+            ("prog-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map [134217745] (quote prog-indent-sexp)) map)) nil [14572 14728])
+            ("prog-indent-sexp" function (:user-visible-flag t) nil [14730 14928])
+            ("define-derived-mode" code nil nil [14930 15298])
+            ("hard-newline" variable (:default-value (propertize "
+" (quote hard) t (quote rear-nonsticky) (quote (hard)))) nil [15331 15464])
+            ("newline" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [15466 17714])
+            ("set-hard-newline-properties" function (:arguments ("from" "to")) nil [17716 18064])
+            ("open-line" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [18066 18778])
+            ("split-line" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [18780 19581])
+            ("delete-indentation" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [19583 20296])
+            ("defalias" code nil nil [20298 20340])
+            ("delete-blank-lines" function (:user-visible-flag t) nil [20359 21786])
+            ("delete-trailing-lines" variable (:default-value t) nil [21788 22074])
+            ("delete-trailing-whitespace" function
+               (:user-visible-flag t
+                :arguments ("start" "end"))
+                nil [22076 23882])
+            ("newline-and-indent" function (:user-visible-flag t) nil [23884 24311])
+            ("reindent-then-newline-and-indent" function (:user-visible-flag t) nil [24313 25539])
+            ("quoted-insert" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [25541 27454])
+            ("forward-to-indentation" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [27456 27649])
+            ("backward-to-indentation" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [27651 27850])
+            ("back-to-indentation" function (:user-visible-flag t) nil [27852 28142])
+            ("fixup-whitespace" function (:user-visible-flag t) nil [28144 28483])
+            ("delete-horizontal-space" function
+               (:user-visible-flag t
+                :arguments ("backward-only"))
+                nil [28485 28923])
+            ("just-one-space" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [28925 29553])
+            ("beginning-of-buffer" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [29556 30457])
+            ("end-of-buffer" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [30459 31626])
+            ("delete-active-region" variable (:default-value t) nil [31628 32165])
+            ("delete-backward-char" function
+               (:user-visible-flag t
+                :arguments ("n" "killflag"))
+                nil [32167 33565])
+            ("delete-forward-char" function
+               (:user-visible-flag t
+                :arguments ("n" "killflag"))
+                nil [33567 34475])
+            ("mark-whole-buffer" function (:user-visible-flag t) nil [34477 34881])
+            ("goto-line" function
+               (:user-visible-flag t
+                :arguments ("line" "buffer"))
+                nil [34925 37158])
+            ("count-words-region" function
+               (:user-visible-flag t
+                :arguments ("start" "end" "arg"))
+                nil [37160 37842])
+            ("count-words" function
+               (:user-visible-flag t
+                :arguments ("start" "end"))
+                nil [37844 38628])
+            ("count-words--buffer-message" function nil nil [38630 38783])
+            ("count-words--message" function (:arguments ("str" "start" "end")) nil [38785 39110])
+            ("define-obsolete-function-alias" code nil nil [39112 39191])
+            ("what-line" function (:user-visible-flag t) nil [39193 39544])
+            ("count-lines" function (:arguments ("start" "end")) nil [39546 40383])
+            ("line-number-at-pos" function (:arguments ("pos")) nil [40385 40845])
+            ("what-cursor-position" function
+               (:user-visible-flag t
+                :arguments ("detail"))
+                nil [40847 45184])
+            ("let" code nil nil [45249 45550])
+            ("minibuffer-completing-symbol" variable nil nil [45552 45655])
+            ("make-obsolete-variable" code nil nil [45656 45726])
+            ("minibuffer-default" variable nil nil [45728 45921])
+            ("eval-expression-print-level" variable (:default-value 4) nil [45923 46153])
+            ("eval-expression-print-length" variable (:default-value 12) nil [46155 46388])
+            ("eval-expression-debug-on-error" variable (:default-value t) nil [46390 46599])
+            ("eval-expression-print-format" function (:arguments ("value")) nil [46601 47415])
+            ("eval-expression" function
+               (:user-visible-flag t
+                :arguments ("eval-expression-arg" "eval-expression-insert-value"))
+                nil [47545 49427])
+            ("edit-and-eval-command" function (:arguments ("prompt" "command")) nil [49429 50356])
+            ("repeat-complex-command" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [50358 51936])
+            ("read-extended-command" function nil nil [51938 53462])
+            ("suggest-key-bindings" variable (:default-value t) nil [53464 53830])
+            ("execute-extended-command" function
+               (:user-visible-flag t
+                :arguments ("prefixarg" "command-name"))
+                nil [53832 56300])
+            ("minibuffer-history" variable nil nil [56303 56556])
+            ("minibuffer-history-sexp-flag" variable nil nil [56557 56872])
+            ("setq" code nil nil [56873 56927])
+            ("setq" code nil nil [56928 56966])
+            ("minibuffer-history-search-history" variable nil nil [56992 57038])
+            ("minibuffer-text-before-history" variable nil nil [57040 57240])
+            ("add-hook" code nil nil [57242 57306])
+            ("minibuffer-history-initialize" function nil nil [57308 57392])
+            ("minibuffer-avoid-prompt" function (:arguments ("_new" "_old")) nil [57394 57556])
+            ("minibuffer-history-case-insensitive-variables" variable nil nil [57558 57948])
+            ("previous-matching-history-element" function
+               (:user-visible-flag t
+                :arguments ("regexp" "n"))
+                nil [57950 60794])
+            ("next-matching-history-element" function
+               (:user-visible-flag t
+                :arguments ("regexp" "n"))
+                nil [60796 61850])
+            ("minibuffer-temporary-goal-position" variable nil nil [61852 61899])
+            ("minibuffer-default-add-function" variable (:default-value (quote minibuffer-default-add-completions)) nil [61901 62541])
+            ("minibuffer-default-add-done" variable nil nil [62543 62866])
+            ("make-variable-buffer-local" code nil nil [62868 62925])
+            ("minibuffer-default-add-completions" function nil nil [62927 63381])
+            ("goto-history-element" function
+               (:user-visible-flag t
+                :arguments ("nabs"))
+                nil [63383 65575])
+            ("next-history-element" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [65577 65828])
+            ("previous-history-element" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [65830 66088])
+            ("next-complete-history-element" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [66090 66746])
+            ("previous-complete-history-element" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [66748 67033])
+            ("minibuffer-prompt-width" function nil nil [67092 67381])
+            ("add-hook" code nil nil [67414 67481])
+            ("minibuffer-history-isearch-message-overlay" variable nil nil [67483 67534])
+            ("make-variable-buffer-local" code nil nil [67535 67607])
+            ("minibuffer-history-isearch-setup" function nil nil [67609 68249])
+            ("minibuffer-history-isearch-end" function nil nil [68251 68481])
+            ("minibuffer-history-isearch-search" function nil nil [68483 70388])
+            ("minibuffer-history-isearch-message" function (:arguments ("c-q-hack" "ellipsis")) nil [70390 71774])
+            ("minibuffer-history-isearch-wrap" function nil nil [71776 72393])
+            ("minibuffer-history-isearch-push-state" function nil nil [72395 72705])
+            ("minibuffer-history-isearch-pop-state" function (:arguments ("_cmd" "hist-pos")) nil [72707 72919])
+            ("define-obsolete-function-alias" code nil nil [72997 73059])
+            ("undo-equiv-table" variable
+               (:constant-flag t
+                :default-value (make-hash-table :test (quote eq) :weakness t))
+                nil [73061 73304])
+            ("undo-in-region" variable nil nil [73306 73410])
+            ("undo-no-redo" variable nil nil [73412 73487])
+            ("pending-undo-list" variable nil nil [73489 73640])
+            ("undo" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [73642 78050])
+            ("buffer-disable-undo" function
+               (:user-visible-flag t
+                :arguments ("buffer"))
+                nil [78052 78333])
+            ("undo-only" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [78335 78597])
+            ("undo-in-progress" variable nil nil [78599 78730])
+            ("undo-more" function (:arguments ("n")) nil [78732 79427])
+            ("undo-copy-list" function (:arguments ("list")) nil [79452 79550])
+            ("undo-copy-list-1" function (:arguments ("elt")) nil [79552 79661])
+            ("undo-start" function (:arguments ("beg" "end")) nil [79663 80251])
+            ("undo-adjusted-markers" variable nil nil [80253 80283])
+            ("undo-make-selective-list" function (:arguments ("start" "end")) nil [80285 83001])
+            ("undo-elt-in-region" function (:arguments ("undo-elt" "start" "end")) nil [83003 84176])
+            ("undo-elt-crosses-region" function (:arguments ("undo-elt" "start" "end")) nil [84178 84686])
+            ("undo-delta" function (:arguments ("undo-elt")) nil [84857 85190])
+            ("undo-ask-before-discard" variable nil nil [85192 85958])
+            ("undo-extra-outer-limit" variable nil nil [85960 86236])
+            ("make-variable-buffer-local" code nil nil [86237 86289])
+            ("setq" code nil nil [86574 86633])
+            ("undo-outer-limit-truncate" function (:arguments ("size")) nil [86634 88323])
+            ("shell-command-history" variable nil nil [88326 88516])
+            ("shell-command-switch" variable (:default-value (purecopy "-c")) nil [88518 88632])
+            ("shell-command-default-error-buffer" variable nil nil [88634 88949])
+            ("declare-function" code nil nil [88951 89017])
+            ("declare-function" code nil nil [89018 89104])
+            ("minibuffer-default-add-shell-commands" function (:user-visible-flag t) nil [89106 89810])
+            ("declare-function" code nil nil [89812 89863])
+            ("minibuffer-local-shell-command-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map minibuffer-local-map) (define-key map "	" (quote completion-at-point)) map)) nil [89865 90110])
+            ("read-shell-command" function (:arguments ("prompt" "initial-contents" "hist" "args")) nil [90112 90741])
+            ("async-shell-command-buffer" variable (:default-value (quote confirm-new-buffer)) nil [90743 91996])
+            ("async-shell-command" function
+               (:user-visible-flag t
+                :arguments ("command" "output-buffer" "error-buffer"))
+                nil [91998 92954])
+            ("shell-command" function
+               (:user-visible-flag t
+                :arguments ("command" "output-buffer" "error-buffer"))
+                nil [92956 100889])
+            ("display-message-or-buffer" function (:arguments ("message" "buffer-name" "not-this-window" "frame")) nil [100891 103314])
+            ("shell-command-sentinel" function (:arguments ("process" "signal")) nil [103410 103621])
+            ("shell-command-on-region" function
+               (:user-visible-flag t
+                :arguments ("start" "end" "command" "output-buffer" "replace" "error-buffer" "display-error-buffer"))
+                nil [103623 110810])
+            ("shell-command-to-string" function (:arguments ("command")) nil [110812 111072])
+            ("process-file" function (:arguments ("program" "infile" "buffer" "display" "args")) nil [111074 112524])
+            ("process-file-side-effects" variable (:default-value t) nil [112526 112952])
+            ("start-file-process" function (:arguments ("name" "buffer" "program" "program-args")) nil [112954 113839])
+            ("tabulated-list-format" variable nil nil [113861 113891])
+            ("tabulated-list-entries" variable nil nil [113892 113923])
+            ("tabulated-list-sort-key" variable nil nil [113924 113956])
+            ("declare-function" code nil nil [113957 114023])
+            ("declare-function" code nil nil [114024 114123])
+            ("process-menu-query-only" variable nil nil [114125 114161])
+            ("define-derived-mode" code nil nil [114163 114659])
+            ("list-processes--refresh" function nil nil [114661 116289])
+            ("process-menu-visit-buffer" function (:arguments ("button")) nil [116291 116388])
+            ("list-processes" function
+               (:user-visible-flag t
+                :arguments ("query-only" "buffer"))
+                nil [116390 117183])
+            ("universal-argument-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map [t] (quote universal-argument-other-key)) (define-key map (vector meta-prefix-char t) (quote universal-argument-other-key)) (define-key map [switch-frame] nil) (define-key map [21] (quote universal-argument-more)) (define-key map [45] (quote universal-argument-minus)) (define-key map [48] (quote digit-argument)) (define-key map [49] (quote digit-argument)) (define-key map [50] (quote digit-argument)) (define-key map [51] (quote digit-argument)) (define-key map [52] (quote digit-argument)) (define-key map [53] (quote digit-argument)) (define-key map [54] (quote digit-argument)) (define-key map [55] (quote digit-argument)) (define-key map [56] (quote digit-argument)) (define-key map [57] (quote digit-argument)) (define-key map [kp-0] (quote digit-argument)) (define-key map [kp-1] (quote digit-argument)) (define-key map [kp-2] (quote digit-argument)) (define-key map [kp-3] (quote digit-argument)) (define-key map [kp-4] (quote digit-argument)) (define-key map [kp-5] (quote digit-argument)) (define-key map [kp-6] (quote digit-argument)) (define-key map [kp-7] (quote digit-argument)) (define-key map [kp-8] (quote digit-argument)) (define-key map [kp-9] (quote digit-argument)) (define-key map [kp-subtract] (quote universal-argument-minus)) map)) nil [117186 118520])
+            ("universal-argument-num-events" variable nil nil [118522 118761])
+            ("saved-overriding-map" variable (:default-value t) nil [118763 118932])
+            ("save&set-overriding-map" function (:arguments ("map")) nil [118934 119163])
+            ("restore-overriding-map" function nil nil [119165 119354])
+            ("universal-argument" function (:user-visible-flag t) nil [119356 120155])
+            ("universal-argument-more" function (:arguments ("arg")) nil [120296 120596])
+            ("negative-argument" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [120598 121022])
+            ("digit-argument" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [121024 121740])
+            ("universal-argument-minus" function (:arguments ("arg")) nil [121860 122009])
+            ("universal-argument-other-key" function (:arguments ("arg")) nil [122109 122447])
+            ("filter-buffer-substring-functions" variable nil nil [122451 123536])
+            ("buffer-substring-filters" variable nil nil [123538 124189])
+            ("make-obsolete-variable" code nil nil [124190 124306])
+            ("filter-buffer-substring" function (:arguments ("beg" "end" "delete")) nil [124308 125529])
+            ("interprogram-cut-function" variable nil nil [125573 126110])
+            ("interprogram-paste-function" variable nil nil [126112 127533])
+            ("kill-ring" variable nil nil [127574 128029])
+            ("kill-ring-max" variable (:default-value 60) nil [128031 128166])
+            ("kill-ring-yank-pointer" variable nil nil [128168 128269])
+            ("save-interprogram-paste-before-kill" variable nil nil [128271 128773])
+            ("kill-do-not-save-duplicates" variable nil nil [128775 129004])
+            ("kill-new" function (:arguments ("string" "replace" "yank-handler")) nil [129006 131290])
+            ("set-advertised-calling-convention" code nil nil [131291 131372])
+            ("kill-append" function (:arguments ("string" "before-p" "yank-handler")) nil [131374 131840])
+            ("set-advertised-calling-convention" code nil nil [131841 131915])
+            ("yank-pop-change-selection" variable nil nil [131917 132265])
+            ("current-kill" function (:arguments ("n" "do-not-move")) nil [132267 133925])
+            ("kill-read-only-ok" variable nil nil [133976 134112])
+            ("kill-region" function
+               (:user-visible-flag t
+                :arguments ("beg" "end" "yank-handler"))
+                nil [134114 136579])
+            ("set-advertised-calling-convention" code nil nil [136580 136646])
+            ("copy-region-as-kill" function
+               (:user-visible-flag t
+                :arguments ("beg" "end"))
+                nil [136840 137346])
+            ("kill-ring-save" function
+               (:user-visible-flag t
+                :arguments ("beg" "end"))
+                nil [137348 138079])
+            ("indicate-copied-region" function (:arguments ("message-len")) nil [138081 139657])
+            ("append-next-kill" function
+               (:user-visible-flag t
+                :arguments ("interactive"))
+                nil [139659 140088])
+            ("yank-handled-properties" variable (:default-value (quote ((font-lock-face . yank-handle-font-lock-face-property) (category . yank-handle-category-property)))) nil [140104 140840])
+            ("yank-excluded-properties" variable (:default-value (quote (category field follow-link fontified font-lock-face help-echo intangible invisible keymap local-map mouse-face read-only yank-handler))) nil [140913 141376])
+            ("yank-window-start" variable nil nil [141378 141408])
+            ("yank-undo-function" variable nil nil [141409 141740])
+            ("yank-pop" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [141742 143472])
+            ("yank" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [143474 144921])
+            ("rotate-yank-pointer" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [144923 145113])
+            ("kill-forward-chars" function (:arguments ("arg")) nil [145178 145323])
+            ("kill-backward-chars" function (:arguments ("arg")) nil [145372 145518])
+            ("backward-delete-char-untabify-method" variable (:default-value (quote untabify)) nil [145520 145995])
+            ("backward-delete-char-untabify" function
+               (:user-visible-flag t
+                :arguments ("arg" "killp"))
+                nil [145997 147349])
+            ("zap-to-char" function
+               (:user-visible-flag t
+                :arguments ("arg" "char"))
+                nil [147351 147968])
+            ("kill-whole-line" variable nil nil [148005 148150])
+            ("kill-line" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [148152 150361])
+            ("kill-whole-line" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [150363 151993])
+            ("forward-visible-line" function (:arguments ("arg")) nil [151995 154485])
+            ("end-of-visible-line" function nil nil [154487 155253])
+            ("insert-buffer" function
+               (:user-visible-flag t
+                :arguments ("buffer"))
+                nil [155256 155917])
+            ("append-to-buffer" function
+               (:user-visible-flag t
+                :arguments ("buffer" "start" "end"))
+                nil [155919 156819])
+            ("prepend-to-buffer" function
+               (:user-visible-flag t
+                :arguments ("buffer" "start" "end"))
+                nil [156821 157363])
+            ("copy-to-buffer" function
+               (:user-visible-flag t
+                :arguments ("buffer" "start" "end"))
+                nil [157365 157934])
+            ("put" code nil nil [157937 157998])
+            ("put" code nil nil [157999 158074])
+            ("activate-mark-hook" variable nil nil [158076 158265])
+            ("deactivate-mark-hook" variable nil nil [158267 158345])
+            ("mark" function (:arguments ("force")) nil [158347 158971])
+            ("deactivate-mark" function (:arguments ("force")) nil [158973 160933])
+            ("activate-mark" function nil nil [160935 161099])
+            ("set-mark" function (:arguments ("pos")) nil [161101 162198])
+            ("use-empty-active-region" variable nil nil [162200 162696])
+            ("use-region-p" function nil nil [162698 163304])
+            ("region-active-p" function nil nil [163306 163674])
+            ("mark-ring" variable nil nil [163676 163769])
+            ("make-variable-buffer-local" code nil nil [163770 163809])
+            ("put" code nil nil [163810 163845])
+            ("mark-ring-max" variable (:default-value 16) nil [163847 163992])
+            ("global-mark-ring" variable nil nil [163994 164078])
+            ("global-mark-ring-max" variable (:default-value 16) nil [164080 164241])
+            ("pop-to-mark-command" function (:user-visible-flag t) nil [164243 164552])
+            ("push-mark-command" function
+               (:user-visible-flag t
+                :arguments ("arg" "nomsg"))
+                nil [164554 165023])
+            ("set-mark-command-repeat-pop" variable nil nil [165025 165484])
+            ("set-mark-default-inactive" variable nil nil [165486 165751])
+            ("make-obsolete-variable" code nil nil [165752 165814])
+            ("set-mark-command" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [165816 168217])
+            ("push-mark" function (:arguments ("location" "nomsg" "activate")) nil [168219 169773])
+            ("pop-mark" function nil nil [169775 170194])
+            ("define-obsolete-function-alias" code nil nil [170196 170285])
+            ("exchange-point-and-mark" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [170286 171245])
+            ("shift-select-mode" variable (:default-value t) nil [171247 171819])
+            ("handle-shift-selection" function nil nil [171821 172990])
+            ("define-minor-mode" code nil nil [172992 174312])
+            ("widen-automatically" variable (:default-value t) nil [174314 174648])
+            ("non-essential" variable nil nil [174650 175048])
+            ("pop-global-mark" function (:user-visible-flag t) nil [175050 175865])
+            ("next-line-add-newlines" variable nil nil [175868 176042])
+            ("next-line" function
+               (:user-visible-flag t
+                :arguments ("arg" "try-vscroll"))
+                nil [176044 178115])
+            ("previous-line" function
+               (:user-visible-flag t
+                :arguments ("arg" "try-vscroll"))
+                nil [178117 179666])
+            ("track-eol" variable nil nil [179668 179993])
+            ("goal-column" variable nil nil [179995 180249])
+            ("make-variable-buffer-local" code nil nil [180250 180291])
+            ("temporary-goal-column" variable nil nil [180293 180797])
+            ("line-move-ignore-invisible" variable (:default-value t) nil [180799 180983])
+            ("line-move-visual" variable (:default-value t) nil [180985 181561])
+            ("line-move-partial" function (:arguments ("arg" "noerror" "to-end")) nil [181608 183436])
+            ("line-move" function (:arguments ("arg" "noerror" "to-end" "try-vscroll")) nil [183760 184688])
+            ("line-move-visual" function (:arguments ("arg" "noerror")) nil [184836 186454])
+            ("line-move-1" function (:arguments ("arg" "noerror" "_to-end")) nil [186608 191281])
+            ("line-move-finish" function (:arguments ("column" "opoint" "forward")) nil [191283 194420])
+            ("line-move-to-column" function (:arguments ("col")) nil [194422 195801])
+            ("move-end-of-line" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [195803 197158])
+            ("move-beginning-of-line" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [197160 198682])
+            ("put" code nil nil [198812 198846])
+            ("set-goal-column" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [198848 199849])
+            ("end-of-visual-line" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [199917 200481])
+            ("beginning-of-visual-line" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [200483 201074])
+            ("kill-visual-line" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [201076 202491])
+            ("next-logical-line" function
+               (:user-visible-flag t
+                :arguments ("arg" "try-vscroll"))
+                nil [202493 202862])
+            ("previous-logical-line" function
+               (:user-visible-flag t
+                :arguments ("arg" "try-vscroll"))
+                nil [202864 203243])
+            ("visual-line" customgroup (:user-visible-flag t) nil [203245 203346])
+            ("visual-line-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map [remap kill-line] (quote kill-visual-line)) (define-key map [remap move-beginning-of-line] (quote beginning-of-visual-line)) (define-key map [remap move-end-of-line] (quote end-of-visual-line)) map)) nil [203348 203836])
+            ("visual-line-fringe-indicators" variable (:default-value (quote (nil nil))) nil [203838 205025])
+            ("visual-line--saved-state" variable nil nil [205027 205064])
+            ("define-minor-mode" code nil nil [205066 206707])
+            ("turn-on-visual-line-mode" function nil nil [206709 206767])
+            ("define-globalized-minor-mode" code nil nil [206769 206884])
+            ("transpose-chars" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [206888 207322])
+            ("transpose-words" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [207324 207768])
+            ("transpose-sexps" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [207770 209241])
+            ("transpose-lines" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [209243 209850])
+            ("transpose-subr" function (:arguments ("mover" "arg" "special")) nil [210001 211199])
+            ("transpose-subr-1" function (:arguments ("pos1" "pos2")) nil [211201 211952])
+            ("backward-word" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [211955 212151])
+            ("mark-word" function
+               (:user-visible-flag t
+                :arguments ("arg" "allow-extend"))
+                nil [212153 212905])
+            ("kill-word" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [212907 213119])
+            ("backward-kill-word" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [213121 213312])
+            ("current-word" function (:arguments ("strict" "really-word")) nil [213314 214794])
+            ("fill-prefix" variable nil nil [214797 214963])
+            ("make-variable-buffer-local" code nil nil [214964 215005])
+            ("put" code nil nil [215006 215063])
+            ("auto-fill-inhibit-regexp" variable nil nil [215065 215231])
+            ("do-auto-fill" function nil nil [215233 218533])
+            ("comment-line-break-function" variable (:default-value (quote comment-indent-new-line)) nil [218535 218861])
+            ("default-indent-new-line" function
+               (:user-visible-flag t
+                :arguments ("soft"))
+                nil [218863 219970])
+            ("normal-auto-fill-function" variable (:default-value (quote do-auto-fill)) nil [219972 220128])
+            ("put" code nil nil [220130 220192])
+            ("put" code nil nil [220366 220418])
+            ("define-minor-mode" code nil nil [220420 221165])
+            ("auto-fill-function" function nil nil [221232 221339])
+            ("turn-on-auto-fill" function nil nil [221341 221434])
+            ("turn-off-auto-fill" function nil nil [221436 221532])
+            ("custom-add-option" code nil nil [221534 221588])
+            ("set-fill-column" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [221590 222428])
+            ("set-selective-display" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [222431 223239])
+            ("defvaralias" code nil nil [223241 223299])
+            ("toggle-truncate-lines" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [223301 224081])
+            ("toggle-word-wrap" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [224083 224627])
+            ("overwrite-mode-textual" variable (:default-value (purecopy " Ovwrt")) nil [224629 224746])
+            ("overwrite-mode-binary" variable (:default-value (purecopy " Bin Ovwrt")) nil [224747 224874])
+            ("define-minor-mode" code nil nil [224876 225609])
+            ("define-minor-mode" code nil nil [225611 226539])
+            ("define-minor-mode" code nil nil [226541 227017])
+            ("define-minor-mode" code nil nil [227019 227323])
+            ("define-minor-mode" code nil nil [227325 227633])
+            ("define-minor-mode" code nil nil [227635 228631])
+            ("paren-blinking" customgroup (:user-visible-flag t) nil [228634 228765])
+            ("blink-matching-paren" variable (:default-value t) nil [228767 228916])
+            ("blink-matching-paren-on-screen" variable (:default-value t) nil [228918 229317])
+            ("blink-matching-paren-distance" variable (:default-value (* 100 1024)) nil [229319 229644])
+            ("blink-matching-delay" variable (:default-value 1) nil [229646 229782])
+            ("blink-matching-paren-dont-ignore-comments" variable nil nil [229784 230052])
+            ("blink-matching-check-mismatch" function (:arguments ("start" "end")) nil [230054 231039])
+            ("blink-matching-check-function" variable (:default-value (function blink-matching-check-mismatch)) nil [231041 231407])
+            ("blink-matching-open" function (:user-visible-flag t) nil [231409 235440])
+            ("blink-paren-function" variable (:default-value (quote blink-matching-open)) nil [235442 235631])
+            ("blink-paren-post-self-insert-function" function nil nil [235633 236160])
+            ("add-hook" code nil nil [236162 236459])
+            ("keyboard-quit" function (:user-visible-flag t) nil [236637 237130])
+            ("buffer-quit-function" variable nil nil [237132 237382])
+            ("keyboard-escape-quit" function (:user-visible-flag t) nil [237384 238210])
+            ("play-sound-file" function
+               (:user-visible-flag t
+                :arguments ("file" "volume" "device"))
+                nil [238212 238607])
+            ("read-mail-command" variable (:default-value (quote rmail)) nil [238611 239128])
+            ("mail-user-agent" variable (:default-value (quote message-user-agent)) nil [239130 240674])
+            ("compose-mail-user-agent-warnings" variable (:default-value t) nil [240676 241001])
+            ("rfc822-goto-eoh" function nil nil [241003 241407])
+            ("mail-encode-mml" variable nil nil [241449 241588])
+            ("compose-mail" function
+               (:user-visible-flag t
+                :arguments ("to" "subject" "other-headers" "continue" "switch-function" "yank-action" "send-actions" "return-action"))
+                nil [241590 244276])
+            ("compose-mail-other-window" function
+               (:user-visible-flag t
+                :arguments ("to" "subject" "other-headers" "continue" "yank-action" "send-actions" "return-action"))
+                nil [244278 244669])
+            ("compose-mail-other-frame" function
+               (:user-visible-flag t
+                :arguments ("to" "subject" "other-headers" "continue" "yank-action" "send-actions" "return-action"))
+                nil [244671 245059])
+            ("set-variable-value-history" variable nil nil [245063 245248])
+            ("set-variable" function
+               (:user-visible-flag t
+                :arguments ("variable" "value" "make-local"))
+                nil [245250 248000])
+            ("completion-list-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map [mouse-2] (quote mouse-choose-completion)) (define-key map [follow-link] (quote mouse-face)) (define-key map [down-mouse-2] nil) (define-key map "" (quote choose-completion)) (define-key map "" (quote delete-completion-window)) (define-key map [left] (quote previous-completion)) (define-key map [right] (quote next-completion)) (define-key map "q" (quote quit-window)) (define-key map "z" (quote kill-this-buffer)) map)) nil [248055 248598])
+            ("put" code nil nil [248666 248714])
+            ("completion-reference-buffer" variable nil nil [248716 248945])
+            ("completion-no-auto-exit" variable nil nil [248947 249128])
+            ("completion-base-position" variable nil nil [249130 249500])
+            ("completion-list-insert-choice-function" variable (:default-value (function completion--replace)) nil [249502 249801])
+            ("completion-base-size" variable nil nil [249803 250258])
+            ("make-obsolete-variable" code nil nil [250259 250338])
+            ("delete-completion-window" function (:user-visible-flag t) nil [250340 250754])
+            ("previous-completion" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [250756 250887])
+            ("next-completion" function
+               (:user-visible-flag t
+                :arguments ("n"))
+                nil [250889 252139])
+            ("choose-completion" function
+               (:user-visible-flag t
+                :arguments ("event"))
+                nil [252141 254033])
+            ("choose-completion-guess-base-position" function (:arguments ("string")) nil [254117 254955])
+            ("choose-completion-delete-max-match" function (:arguments ("string")) nil [254957 255149])
+            ("choose-completion-string-functions" variable nil nil [255151 255871])
+            ("choose-completion-string" function (:arguments ("choice" "buffer" "base-position" "insert-function")) nil [255873 259165])
+            ("define-derived-mode" code nil nil [259167 259592])
+            ("completion-list-mode-finish" function nil nil [259594 259790])
+            ("add-hook" code nil nil [259792 259854])
+            ("completion-show-help" variable (:default-value t) nil [259918 260069])
+            ("completion-setup-function" function nil nil [260200 261742])
+            ("add-hook" code nil nil [261744 261804])
+            ("define-key" code nil nil [261806 261881])
+            ("define-key" code nil nil [261882 261957])
+            ("switch-to-completions" function (:user-visible-flag t) nil [261959 262500])
+            ("event-apply-alt-modifier" function (:arguments ("_ignore-prompt")) nil [262662 262905])
+            ("event-apply-super-modifier" function (:arguments ("_ignore-prompt")) nil [262906 263159])
+            ("event-apply-hyper-modifier" function (:arguments ("_ignore-prompt")) nil [263160 263413])
+            ("event-apply-shift-modifier" function (:arguments ("_ignore-prompt")) nil [263414 263667])
+            ("event-apply-control-modifier" function (:arguments ("_ignore-prompt")) nil [263668 263925])
+            ("event-apply-meta-modifier" function (:arguments ("_ignore-prompt")) nil [263926 264174])
+            ("event-apply-modifier" function (:arguments ("event" "symbol" "lshiftby" "prefix")) nil [264176 265240])
+            ("define-key" code nil nil [265242 265313])
+            ("define-key" code nil nil [265314 265385])
+            ("define-key" code nil nil [265386 265456])
+            ("define-key" code nil nil [265457 265526])
+            ("define-key" code nil nil [265527 265598])
+            ("define-key" code nil nil [265599 265672])
+            ("mapc" code nil nil [265962 266712])
+            ("clone-buffer-hook" variable nil nil [266764 266865])
+            ("clone-indirect-buffer-hook" variable nil nil [266867 266986])
+            ("clone-process" function (:arguments ("process" "newname")) nil [266988 268497])
+            ("clone-buffer" function
+               (:user-visible-flag t
+                :arguments ("newname" "display-flag"))
+                nil [268600 271563])
+            ("clone-indirect-buffer" function
+               (:user-visible-flag t
+                :arguments ("newname" "display-flag" "norecord"))
+                nil [271566 273158])
+            ("clone-indirect-buffer-other-window" function
+               (:user-visible-flag t
+                :arguments ("newname" "display-flag" "norecord"))
+                nil [273161 273644])
+            ("normal-erase-is-backspace" variable (:default-value (quote maybe)) nil [273692 275232])
+            ("normal-erase-is-backspace-setup-frame" function (:arguments ("frame")) nil [275234 276309])
+            ("define-minor-mode" code nil nil [276311 279801])
+            ("vis-mode-saved-buffer-invisibility-spec" variable nil nil [279804 279927])
+            ("define-minor-mode" code nil nil [279929 281082])
+            ("define-minor-mode" code nil nil [281084 281854])
+            ("bad-packages-alist" variable
+               (:constant-flag t
+                :default-value (quote ((semantic semantic-version "\\`2\\.0pre[1-3]\\'" "The version of `semantic' loaded does not work in Emacs 22.
+It can cause constant high CPU load.
+Upgrade to at least Semantic 2.0pre4 (distributed with CEDET 1.0pre4).") (CUA-mode t nil "CUA-mode is now part of the standard GNU Emacs distribution,
+so you can now enable CUA via the Options menu or by customizing `cua-mode'.
+
+You have loaded an older version of CUA-mode which does not work
+correctly with this version of Emacs.  You should remove the old
+version and use the one distributed with Emacs."))))
+                nil [282812 284291])
+            ("bad-package-check" function (:arguments ("package")) nil [284293 284798])
+            ("mapc" code nil nil [284800 284918])
+            ("simple" package nil nil [284921 284938]))          
+      :file "simple.el.gz"
+      :pointmax 284964
+      :fsize 76862
+      :lastmodtime '(20832 15382 0 0)
+      :unmatched-syntax nil))
+  :file "!usr!share!emacs!24.3!lisp!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")
