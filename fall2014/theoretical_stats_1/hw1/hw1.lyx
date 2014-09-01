@@ -988,5 +988,525 @@ $$
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.13]
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A 
+\backslash
+cap B = 
+\backslash
+emptyset 
+\backslash
+implies A 
+\backslash
+subset B^c 
+\backslash
+implies P(A) 
+\backslash
+leq P(B^c) 
+\backslash
+implies 1/3 
+\backslash
+leq 1/4 $
+\end_layout
+
+\end_inset
+
+ which is a contradiction.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.14]
+\end_layout
+
+\end_inset
+
+Each subset involves making 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ binary choices, 1 per element in the set 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S$
+\end_layout
+
+\end_inset
+
+, of whether to include the element in the subset or exclude the element
+ from the subset.
+ Therefore by 
+\series bold
+Thm 1.2.14
+\series default
+ there are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+underbrace{2
+\backslash
+times2
+\backslash
+times
+\backslash
+cdots
+\backslash
+times 2}_
+\backslash
+text{n times} = 2^n$
+\end_layout
+
+\end_inset
+
+ different ways to pick which elements to have in a subset.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.16]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Choose 3 from 26 with replacement hence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$26^3=17576$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Note that the set of 2 letter 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.18]
+\end_layout
+
+\end_inset
+
+The 
+\begin_inset Quotes eld
+\end_inset
+
+experiment
+\begin_inset Quotes erd
+\end_inset
+
+ is assigning a ball to a cell with replacement of cells available.
+ There are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n^n$
+\end_layout
+
+\end_inset
+
+ different ways to assign the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ balls to the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ cells.
+ There are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+binom{n}{2}$
+\end_layout
+
+\end_inset
+
+ to choose 2 cells, without replacement and with order in choice being irrelevan
+t, that will remain empty.
+ Fix an assignment that is as such, has two empty cells, then thhere are
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n!$
+\end_layout
+
+\end_inset
+
+ different ways to permute the 
+\shape italic
+balls 
+\shape default
+amongst the cells that they have been assigned to.
+ Hence the number of different assignments of the balls to sets of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n-2$
+\end_layout
+
+\end_inset
+
+ cells is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+binom{n}{2}n!$
+\end_layout
+
+\end_inset
+
+ and this is a fraction 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+binom{n}{2}n!/n^n$
+\end_layout
+
+\end_inset
+
+ of the total number possible assignments.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.21]
+\end_layout
+
+\end_inset
+
+The 
+\begin_inset Quotes eld
+\end_inset
+
+experiment
+\begin_inset Quotes erd
+\end_inset
+
+ is choosing a shoe without replacement.
+ There are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+binom{2n}{2r}$
+\end_layout
+
+\end_inset
+
+ to choose 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2r$
+\end_layout
+
+\end_inset
+
+ shoes from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2n$
+\end_layout
+
+\end_inset
+
+ shoes, i.e.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ pairs of shoes.
+ There are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+binom{n}{2r}$
+\end_layout
+
+\end_inset
+
+ different ways to choose 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2r$
+\end_layout
+
+\end_inset
+
+ pairs of shoes from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ pairs of shoes.
+ Then finally there are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2^{2r}$
+\end_layout
+
+\end_inset
+
+ different ways to choose either the left shoe or right shoe for each pair
+ of previously chosen shoes.
+ Hence the fraction of choices of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2r$
+\end_layout
+
+\end_inset
+
+ shoes from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2n$
+\end_layout
+
+\end_inset
+
+ shoes is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+[
+\backslash
+frac{
+\backslash
+text{number of choices of 2r pairs} 
+\backslash
+times 
+\backslash
+text{number of ways of choosing either left or right}}{
+\backslash
+text{number of ways of choosing 2r shoes}}=
+\backslash
+frac{
+\backslash
+binom{n}{2r}2^{2r}} {
+\backslash
+binom{2n}{2r}}
+\backslash
+]
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.22]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The 
+\begin_inset Quotes eld
+\end_inset
+
+experiment
+\begin_inset Quotes erd
+\end_inset
+
+ is to draw days from the year.
+ There are 
+\begin_inset Formula $\binom{366}{180}$
+\end_inset
+
+ ways to draw 180 days from anywhere in the year for the 180 lottery tickets.
+ In order that the days be evenly distributed there must be 
+\begin_inset Formula $180/12=15$
+\end_inset
+
+ days chosen from each month.
+ Then there are 
+\begin_inset Formula $\underbrace{\binom{30}{15}^{4}\times\binom{31}{15}^{7}\times\binom{29}{15}}_{12}$
+\end_inset
+
+ ways to assign exactly 15 lottery tickets to each of the 12 months.
+ Hence the probability of having all 180 lottery tickets evenly distributed
+ is 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\frac{\binom{30}{15}^{12}}{\binom{366}{180}}=.167\times10^{-8}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The experiment is again to draws days from the year.
+ There are 
+\begin_inset Formula $\binom{336}{30}$
+\end_inset
+
+ ways to choose 30 days from all the days in the year that are not in September
+ 
+\begin_inset Formula $(366-30=336)$
+\end_inset
+
+ and 
+\begin_inset Formula $\binom{366}{30}$
+\end_inset
+
+ ways to choose 30 days from any of the days of the year.
+ Hence the probability of not selecting any days from September is 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\binom{336}{30}/\binom{366}{30}=0.0686905$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
