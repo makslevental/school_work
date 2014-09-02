@@ -370,18 +370,485 @@ status open
 
 \end_inset
 
+ Let 
+\begin_inset Formula $a=2^{c}$
+\end_inset
 
+ for some 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $n=\lg m$
+\end_inset
+
+ then by (3.10) in CLRS we have that 
 \begin_inset Formula 
-\begin{align*}
-A & ~B & O & o & \Omega & \omega & \Theta\\
-\text{lg}^{k}n & n^{\epsilon} & yes & yes & yes & yes & yes\\
-n^{k} & c^{n} & yes & yes & yes & yes & yes\\
-\sqrt{n} & n^{\text{sin}n} & yes & yes & yes & yes & yes\\
-2^{n} & 2^{n/2} & yes & yes & yes & yes & yes\\
-n^{\text{lg}c} & c^{\text{lg}n} & yes & yes & yes & yes & yes\\
-\text{lg}(n!) & \text{lg}(n^{n}) & yes & yes & yes & yes & yes
-\end{align*}
+\[
+0=\lim_{n\rightarrow\infty}\frac{n^{b}}{a^{n}}=\lim_{\lg m\rightarrow\infty}\frac{(\lg m)^{b}}{(2^{c})^{\lg m}}
+\]
 
+\end_inset
+
+and there for 
+\begin_inset Formula $(\lg n)^{b}=o(n^{a})$
+\end_inset
+
+ for any 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ And by the definitions of 
+\begin_inset Formula $O(g(n))$
+\end_inset
+
+ and 
+\begin_inset Formula $o(g(n))$
+\end_inset
+
+ we have that 
+\begin_inset Formula $O(g(n))\implies o(g(n))$
+\end_inset
+
+ and so 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $(\lg n)^{b}=O(n^{a})$
+\end_inset
+
+ .
+ By exercise 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+3.1-7
+\series default
+ we have that 
+\begin_inset Formula $(\lg n)^{b}\neq\omega(n^{a})$
+\end_inset
+
+ .
+ To prove 
+\series bold
+3.1-7 
+\series default
+let 
+\begin_inset Formula $f(n)=o(g(n))$
+\end_inset
+
+ .
+ Then for 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ there exists 
+\begin_inset Formula $k_{1}$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $n\geq k$
+\end_inset
+
+ it is the case that 
+\begin_inset Formula $f(n)\leq c_{1}g(n)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(n)$
+\end_inset
+
+ are non-negative it's then true that 
+\begin_inset Formula $f(n)\leq c_{1}g(n)<(c_{1}+1)g(n)$
+\end_inset
+
+ .
+ Then for 
+\begin_inset Formula $1/(c_{1}+1)$
+\end_inset
+
+ there is no 
+\begin_inset Formula $k_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(n)\leq\frac{1}{c_{1+1}}f(n)$
+\end_inset
+
+ and hence 
+\begin_inset Formula $g(n)\ne\omega(f(n))$
+\end_inset
+
+.
+ A similar argument shows that if there existed constants 
+\begin_inset Formula $c_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{3}$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(n)\leq c_{3}f(n)$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq k_{3}$
+\end_inset
+
+ then 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ would be equal to 
+\begin_inset Formula $o(g(n))$
+\end_inset
+
+ and so 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ can't be 
+\begin_inset Formula $\Omega(g(n))$
+\end_inset
+
+ and therefore neither 
+\begin_inset Formula $\Theta(g(n))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Again by (3.10) in CLRS we have that 
+\begin_inset Formula $n^{k}=o(c^{n})$
+\end_inset
+
+ and the rest follows similarly to part (a)
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $n^{\sin n}$
+\end_inset
+
+ oscillates 
+\begin_inset Formula $\frac{1}{n}\leq n^{\sin n}\leq n$
+\end_inset
+
+ it is none of 
+\begin_inset Formula $O,o,\Omega,\omega,\Theta$
+\end_inset
+
+ because for any fixed 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $k$
+\end_inset
+
+ there will be 
+\begin_inset Formula $n_{1},n_{2}\ge k$
+\end_inset
+
+ such that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $n_{1}^{\sin n_{1}}<\sqrt{n_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{n_{2}}<n_{2}^{\sin n_{2}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ .
+\end_layout
+
+\begin_layout Enumerate
+Taking the 
+\begin_inset Formula $\log_{2}$
+\end_inset
+
+ of both (
+\begin_inset Formula $\log$
+\end_inset
+
+ is monotonic increasing) we have the 
+\begin_inset Formula $A=n$
+\end_inset
+
+ and 
+\begin_inset Formula $B=n/2$
+\end_inset
+
+ .
+ Clearly then 
+\begin_inset Formula $2^{n}=O(2^{n/2})$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $2^{n}=\Omega(2^{n/2})$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $2^{n}=\Theta(2^{n/2})$
+\end_inset
+
+, but neither 
+\begin_inset Formula $2^{n}=o(2^{n/2})$
+\end_inset
+
+ nor 
+\begin_inset Formula $2^{n}=\omega(2^{n/2})$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Enumerate
+By (3.15) in CLRS we have 
+\begin_inset Formula $n^{\lg c}=c^{\lg n}$
+\end_inset
+
+ and so clearly then 
+\begin_inset Formula $n^{\lg c}=O(c^{\lg n})$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $n^{\lg c}=\Omega(c^{\lg n})$
+\end_inset
+
+ and therefore 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $n^{\lg c}=\Theta(c^{\lg n})$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, but neither 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $n^{\lg c}=o(c^{\lg n})$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ nor 
+\begin_inset Formula $n^{\lg c}=\omega(c^{\lg n})$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ .
+\end_layout
+
+\begin_layout Enumerate
+By exercise 
+\series bold
+3.2-3
+\series default
+ we have that 
+\begin_inset Formula $n!=o(n^{n})$
+\end_inset
+
+ and therefore 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $n!=O(n^{n})$
+\end_inset
+
+ and by problem 
+\begin_inset Formula $ $
+\end_inset
+
+
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+3.4-c 
+\series default
+we have that 
+\begin_inset Formula $\lg(n!)=O(\lg(n^{n}))$
+\end_inset
+
+.
+ In summary
+\begin_inset Formula 
+\[
+\begin{array}{ccccccc}
+A & B & O & o & \Omega & \omega & \Theta\\
+(\text{lg}n)^{k} & n^{\epsilon} & yes & yes & no & no & no\\
+n^{k} & c^{n} & yes & yes & no & no & no\\
+\sqrt{n} & n^{\text{sin}n} & no & no & no & no & no\\
+2^{n} & 2^{n/2} & yes & yes & yes & no & no\\
+n^{\text{lg}c} & c^{\text{lg}n} & yes & yes & yes & no & no\\
+\text{lg}(n!) & \text{lg}(n^{n}) & yes & ? & ? & ? & ?
+\end{array}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\begin{array}{ccccccc}
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\end{array}$
 \end_inset
 
 
