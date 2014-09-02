@@ -1428,5 +1428,387 @@ binom{2n}{2r}}
 .
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.22]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The 
+\begin_inset Quotes eld
+\end_inset
+
+experiment
+\begin_inset Quotes erd
+\end_inset
+
+ is to draw days from the year.
+ There are 
+\begin_inset Formula $\binom{366}{180}$
+\end_inset
+
+ ways to draw 180 days from anywhere in the year for the 180 lottery tickets.
+ In order that the days be evenly distributed there must be 
+\begin_inset Formula $180/12=15$
+\end_inset
+
+ days chosen from each month.
+ Then there are 
+\begin_inset Formula $\underbrace{\binom{30}{15}^{4}\times\binom{31}{15}^{7}\times\binom{29}{15}}_{12}$
+\end_inset
+
+ ways to assign exactly 15 lottery tickets to each of the 12 months.
+ Hence the probability of having all 180 lottery tickets evenly distributed
+ is 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\frac{\binom{30}{15}^{12}}{\binom{366}{180}}=.167\times10^{-8}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The experiment is again to draws days from the year.
+ There are 
+\begin_inset Formula $\binom{336}{30}$
+\end_inset
+
+ ways to choose 30 days from all the days in the year that are not in September
+ 
+\begin_inset Formula $(366-30=336)$
+\end_inset
+
+ and 
+\begin_inset Formula $\binom{366}{30}$
+\end_inset
+
+ ways to choose 30 days from any of the days of the year.
+ Hence the probability of not selecting any days from September is 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\binom{336}{30}/\binom{366}{30}=0.0686905$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.23]
+\end_layout
+
+\end_inset
+
+ Every 
+\begin_inset Quotes eld
+\end_inset
+
+draw
+\begin_inset Quotes erd
+\end_inset
+
+ has 4 possibilities: 
+\begin_inset Formula $\left\{ \text{HH},\text{HT},\text{TH},\text{TT}\right\} $
+\end_inset
+
+.
+ So there are 
+\begin_inset Formula $4^{n}$
+\end_inset
+
+ different outcomes of the 
+\begin_inset Formula $n$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+draws
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Then there are 
+\begin_inset Formula $\binom{n}{i}\binom{n}{i}$
+\end_inset
+
+ different each person could flip 
+\begin_inset Formula $i$
+\end_inset
+
+ heads, for 
+\begin_inset Formula $i=0,1,2,\cdots,n$
+\end_inset
+
+.
+ Hence the probability of each person flipping the same number of heads
+ is 
+\begin_inset Formula $\sum_{i=0}^{n}\binom{n}{i}^{2}/4^{n}$
+\end_inset
+
+.
+ To see that this equals 
+\begin_inset Formula $\binom{2n}{n}/4^{n}$
+\end_inset
+
+ we prove Vandermonde's identity, namely that
+\begin_inset Formula 
+\[
+\binom{m+n}{r}=\sum_{k=0}^{r}\binom{m}{k}\binom{n}{r-k}
+\]
+
+\end_inset
+
+To see that this is the case take 2 urns, one with 
+\begin_inset Formula $m$
+\end_inset
+
+ red balls and one with 
+\begin_inset Formula $n$
+\end_inset
+
+ green balls and consider how many collections of size 
+\begin_inset Formula $r$
+\end_inset
+
+ can be drawn from both urns.
+ Certainly it's 
+\begin_inset Formula $\binom{m+n}{r}$
+\end_inset
+
+.
+ But it's also the sum, for all 
+\begin_inset Formula $k$
+\end_inset
+
+, of the number of collections with 
+\begin_inset Formula $k$
+\end_inset
+
+ red balls and 
+\begin_inset Formula $n-k$
+\end_inset
+
+ green balls.
+ For fixed 
+\begin_inset Formula $k$
+\end_inset
+
+ this is and thence follows Vandermonde's identity.
+ Finally letting 
+\begin_inset Formula $m=r=n$
+\end_inset
+
+ and using the fact that 
+\begin_inset Formula $\binom{n}{n-i}=\binom{n}{i}$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+\frac{1}{4^{n}}\sum_{i=0}^{n}\binom{n}{i}\binom{n}{i}=\frac{1}{4^{n}}\sum_{i=0}^{n}\binom{n}{i}\binom{n}{n-i}=\frac{1}{4^{n}}\binom{n+n}{n}=\frac{1}{4^{n}}\binom{2n}{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.24]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Number of flips until heads is geometrically distributed, i.e.
+ the probability that the 
+\begin_inset Formula $k$
+\end_inset
+
+th flip is a head 
+\begin_inset Formula $P(X=k)=(1-p)^{k-1}p$
+\end_inset
+
+ with 
+\begin_inset Formula $p=1/2$
+\end_inset
+
+.
+ The probability that 
+\begin_inset Formula $A$
+\end_inset
+
+ wins is tantamount to the probability that 
+\begin_inset Formula $k$
+\end_inset
+
+ is odd (since 
+\begin_inset Formula $A$
+\end_inset
+
+ flips first).
+ Therefore
+\begin_inset Formula 
+\[
+P(\text{A wins})=P(X=k=2i-1|i=1,2,3,\cdots)=\sum_{i=1}^{\infty}(1-p)^{(2i-1)-1}p=-\frac{(p-1)^{2}}{(1-p)^{2}(p-2)}
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $p=1/2$
+\end_inset
+
+ this is 
+\begin_inset Formula $-\frac{(1/2-1)^{2}}{(1-1/2)^{2}(1/2-2)}=\frac{2}{3}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Simplifying the result from (a) we get that 
+\begin_inset Formula 
+\[
+P(\text{A wins})=-\frac{(p-1)^{2}}{(1-p)^{2}(p-2)}=-\frac{(1-p)^{2}}{(1-p)^{2}(p-2)}=\frac{1}{2-p}=\frac{p}{2p-p^{2}}\frac{p}{1-(1-2p+p^{2})}=\frac{p}{1-(1-p)^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $P(\text{A wins})=\frac{1}{2-p}$
+\end_inset
+
+ we see that if 
+\begin_inset Formula $0<p<1$
+\end_inset
+
+ then 
+\begin_inset Formula $\frac{1}{2}<P(\text{A wins})=\frac{1}{2-p}<1$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.26]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+Casts
+\begin_inset Quotes erd
+\end_inset
+
+ until a 6 appears is geometrically distributed with 
+\begin_inset Formula $p=1/6$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+P(X=k)=\bigg(1-\frac{1}{6}\bigg)^{k-1}\frac{1}{6}
+\]
+
+\end_inset
+
+Computing the probability that one has to cast more than 5 times is tantamount
+ to the complement of casting a 6 on either 1, 2, 3, 4, or 5 times.
+ Therefore 
+\begin_inset Formula 
+\[
+P(\text{casting more than 5 times)}=1-\sum_{k=1}^{5}\bigg(1-\frac{1}{6}\bigg)^{k-1}\frac{1}{6}=1-\bigg(\frac{1}{6}+\frac{5}{36}+\frac{25}{216}+\frac{125}{1296}+\frac{625}{7776}\bigg)=\frac{3125}{7776}=0.401878
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.27]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Using pascal's rule
+\begin_inset Formula 
+\[
+0=(1-1)^{n}=\sum_{k=0}^{n}\binom{n}{k}1^{n-k}(-1)^{k}=\sum_{k=0}^{n}(-1)^{k}\binom{n}{k}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
