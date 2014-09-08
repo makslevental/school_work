@@ -6,6 +6,7 @@
 \begin_preamble
 
 %
+\usepackage{mathdots}
 \usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \addtolength{\topmargin}{-.5in}
 \setlength{\textwidth}{6in}       
@@ -66,6 +67,7 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\listings_params "frame=single"
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -99,6 +101,799 @@ today
 
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.3-4]
+\end_layout
+
+\end_inset
+
+For this 
+\begin_inset Quotes eld
+\end_inset
+
+recursive
+\begin_inset Quotes erd
+\end_inset
+
+ implementation of insertion sort 
+\begin_inset Formula $T(n)=T(n-1)+O(n).$
+\end_inset
+
+ The inductive hypothesis is 
+\begin_inset Formula $T(m)\leq c_{1}m^{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $m<n$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+T(n) & =T(n-1)+c_{2}n\\
+ & \leq c_{1}(n-1)^{2}+c_{2}n\\
+ & =c_{1}n^{2}-2c_{1}n+2c_{1}+c_{2}n & \text{choose }c_{1}\text{ s.t. }2c_{1}n\geq c_{2}n+2c_{1}\\
+ & \leq c_{1}n^{2}\\
+T(n) & =O(n^{2})
+\end{align*}
+
+\end_inset
+
+Furthermore we choose the base case such that 
+\begin_inset Formula $2c_{1}n\geq c_{2}n+2c_{1}$
+\end_inset
+
+ is satisfied.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.3-5]
+\end_layout
+
+\end_inset
+
+The pseudo-code is
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Binary-Search(A,p,r,x)
+\end_layout
+
+\begin_layout Plain Layout
+
+  if p==r and A[p] != x
+\end_layout
+
+\begin_layout Plain Layout
+
+    return -1
+\end_layout
+
+\begin_layout Plain Layout
+
+  pivot = floor((p-r+1)/2)
+\end_layout
+
+\begin_layout Plain Layout
+
+  else if A[pivot] == x
+\end_layout
+
+\begin_layout Plain Layout
+
+    return pivot
+\end_layout
+
+\begin_layout Plain Layout
+
+  else if A[pivot] < x
+\end_layout
+
+\begin_layout Plain Layout
+
+    Binary-Search(A,pivot+1,r,x)
+\end_layout
+
+\begin_layout Plain Layout
+
+  else 
+\end_layout
+
+\begin_layout Plain Layout
+
+    Binary-Search(p,pivot-1,x) 
+\end_layout
+
+\begin_layout Plain Layout
+
+    //only if A[floor(A.length/2)] > x
+\end_layout
+
+\begin_layout Plain Layout
+
+    //since first branch checks ==
+\end_layout
+
+\begin_layout Plain Layout
+
+    //so no need to include element
+\end_layout
+
+\begin_layout Plain Layout
+
+    //A[0:floor(A.length/2)]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Binary-Search(A,x) returns the index of a match or -1 if the search fails.
+ The recursion relation for the running time is 
+\begin_inset Formula $T(n)=T(n/2)+O(1).$
+\end_inset
+
+ Since 
+\begin_inset Formula $f(n)=1=\Theta\bigg(n^{log_{2}1}\bigg)$
+\end_inset
+
+ the master theorem immediately yields 
+\begin_inset Formula $T(n)=\Theta(n^{log_{2}1}\lg n)=\Theta(n^{0}\lg n)=\Theta(\lg n)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.3-6]
+\end_layout
+
+\end_inset
+
+Reimagine the array in which all the elements are stored as linked-list
+ and rewrite Binary-Search to return a pointer to the last node recursed
+ to.
+ Then the value to be inserted by Insertion-Sort-Binary-Search(A) inserts
+ a node in the linked list whose child is the last node returned by Binary-Searc
+h and whose parent is the parent of the node return by Binary-Search-LL.
+ That is 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Binary-Search-LL(A,p,r,x)
+\end_layout
+
+\begin_layout Plain Layout
+
+  //linked-list overloads [] operator
+\end_layout
+
+\begin_layout Plain Layout
+
+  pivot = floor((p-r+1)/2)
+\end_layout
+
+\begin_layout Plain Layout
+
+  if p==r 
+\end_layout
+
+\begin_layout Plain Layout
+
+    return pivot
+\end_layout
+
+\begin_layout Plain Layout
+
+  else if A[pivot] == x
+\end_layout
+
+\begin_layout Plain Layout
+
+    return pivot
+\end_layout
+
+\begin_layout Plain Layout
+
+  else if A[pivot] < x
+\end_layout
+
+\begin_layout Plain Layout
+
+    Binary-Search(A,pivot+1,r,x)
+\end_layout
+
+\begin_layout Plain Layout
+
+  else 
+\end_layout
+
+\begin_layout Plain Layout
+
+    Binary-Search(p,pivot-1,x) 
+\end_layout
+
+\end_inset
+
+Then Insertion-Sort-Binary-Search(A) is
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Insertion-Sort-Binary-Search(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j=2..A.length
+\end_layout
+
+\begin_layout Plain Layout
+
+    key=A[j]
+\end_layout
+
+\begin_layout Plain Layout
+
+    pivot = Binary-Search-LL(A,0,j-1,key)
+\end_layout
+
+\begin_layout Plain Layout
+
+    A.insert(key,pivot-1) //insert key just "behind" 
+\end_layout
+
+\begin_layout Plain Layout
+
+                          //node returned by binary search  
+\end_layout
+
+\end_inset
+
+Then 
+\begin_inset Formula $T(n)=c_{1}n+c_{2}(n-1)+(n-1)\Theta(\lg n)+(n-1)g(n)$
+\end_inset
+
+.
+ So the question of whether Insert-Sort-Binary-Search(A) is 
+\begin_inset Formula $\Theta(n\lg n)$
+\end_inset
+
+ a matter of how long it takes to insert into 
+\begin_inset Formula $A$
+\end_inset
+
+ implemented as a linked-list.
+ From http://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html we
+ see that ListIterator.add(E element) inserts in 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ so 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+T(n) & =c_{1}n+c_{2}(n-1)+(n-1)\Theta(\lg n)+(n-1)g(n)\\
+ & =c_{1}n+c_{2}(n-1)+(n-1)\Theta(\lg n)+(n-1)O(1)\\
+ & =(n-1)\Theta(\lg n)\\
+ & =\Theta(n\lg n)
+\end{align*}
+
+\end_inset
+
+The problem with this analysis is that linked-list 
+\series bold
+doesn't actually overload
+\series default
+ 
+\begin_inset Formula $[\,]$
+\end_inset
+
+ and so Binary-Search-LL(A,p,r,x) isn't possible.
+ Therefore while the number 
+\series bold
+comparisons 
+\series default
+done by Insertion-Sort with a binary search finding the insertion point
+ would be 
+\begin_inset Formula $O(n\lg n)$
+\end_inset
+
+ the algorithm as a whole would still run in 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+ in the worst case because there would still be 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+ 
+\series bold
+swaps
+\series default
+ that would need to be done in order to actually insert.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3-1]
+\end_layout
+
+\end_inset
+
+Lemma: if 
+\begin_inset Formula $k,d\in\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $k\leq d$
+\end_inset
+
+ then 
+\begin_inset Formula $n^{k}\leq n^{d}.$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+Proof: 
+\begin_inset Formula $n^{k}/n^{d}=n^{k-d}=1/n^{d-k}\leq0$
+\end_inset
+
+ since 
+\begin_inset Formula $k-d\leq0$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Corollary: if 
+\begin_inset Formula $k,d\in\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $k>d$
+\end_inset
+
+ then 
+\begin_inset Formula $n^{k}>n^{d}.$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $c=\max\{a_{0},a_{1},\dots,a_{d}\}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $c\geq0$
+\end_inset
+
+ since otherwise all 
+\begin_inset Formula $a_{i}<0$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $p(n)<0$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $i\in\{0,1,\dots,d\}$
+\end_inset
+
+ and for 
+\begin_inset Formula $k\ge d$
+\end_inset
+
+ the lemma implies 
+\begin_inset Formula $cn^{k}\ge a_{i}n^{i}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\sum_{i=0}^{d}cn^{k}=c\dot{\cdot(d+1)\cdot n^{k}\ge\sum_{i=0}^{d}a_{i}n^{i}=p(n)}.$
+\end_inset
+
+
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $k$
+\end_inset
+
+ s.t.
+ 
+\begin_inset Formula $k\leq d$
+\end_inset
+
+ let 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+there exists 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ s.t.
+ for all 
+\begin_inset Formula $n\ge n_{k}\implies$
+\end_inset
+
+
+\begin_inset Formula $c_{k}a_{k}n^{d}\ge n^{k}$
+\end_inset
+
+.
+ For each such 
+\begin_inset Formula $k$
+\end_inset
+
+ let 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $b_{k}=1/c_{k}$
+\end_inset
+
+ then 
+\begin_inset Formula $b_{k}n^{k}\leq p(n)$
+\end_inset
+
+.
+ Hence for all 
+\begin_inset Formula $k\le d$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $p(n)=\Omega(n^{k})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ By part (a) 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+we have that for 
+\begin_inset Formula $k=d$
+\end_inset
+
+ there exist 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $p(n)\leq c_{1}n^{k}$
+\end_inset
+
+.
+ By part (b) we have that for 
+\begin_inset Formula $k=d$
+\end_inset
+
+ there exist 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $p(n)\geq c_{2}n^{k}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n_{2}=\max\{n_{0},n_{1}\}$
+\end_inset
+
+ then for all 
+\begin_inset Formula $n\geq n_{2}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $c_{2}n^{k}\leq p(n)\leq c_{1}n^{k}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $p(n)=\Theta(n^{k})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Part (a) guarantees there exist constants 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that for 
+\begin_inset Formula $n_{0}\geq n$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $p(n)\leq c_{1}n^{d}$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $k>d$
+\end_inset
+
+ and any constant 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ let 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ be be such that 
+\begin_inset Formula $n_{1}^{k-d}>c_{1}/c_{2}$
+\end_inset
+
+.
+ Such an 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ can be chosen since 
+\begin_inset Formula $k-d>0\implies\exists n_{j}\text{ s.t. }n_{j}^{k-d}>c$
+\end_inset
+
+ for any constant 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $c_{2}n_{1}^{k}-c_{1}n_{1}^{d}=n_{1}^{d}(c_{2}n_{1}^{k-d}-c_{1})>0$
+\end_inset
+
+.
+ Finally let 
+\begin_inset Formula $n_{3}=\max\{n_{0},n_{1}\}$
+\end_inset
+
+ and for all 
+\begin_inset Formula $n\geq n_{3}$
+\end_inset
+
+ we have 
+\begin_inset Formula $c_{2}n^{k}>c_{1}n^{d}\geq p(n)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+.
+ By part (d) we that have for each 
+\begin_inset Formula $k$
+\end_inset
+
+ s.t.
+ 
+\begin_inset Formula $k<d$
+\end_inset
+
+ and any 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+ there exists 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ s.t.
+ for all 
+\begin_inset Formula $n\ge n_{0}\implies$
+\end_inset
+
+
+\begin_inset Formula $c_{k}p(n)>n^{d}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -866,8 +1661,260 @@ status open
 \end{array}$
 \end_inset
 
-Monge Arrays
+
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Take the matrix 
+\begin_inset Formula $A=\begin{bmatrix}a & b & c\\
+d & e & f\\
+g & h & i
+\end{bmatrix}$
+\end_inset
+
+.
+ Assume 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $A[x,y]+A[x+1,y+1]\leq A[x,y+1]+A[x+1,y]$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq x\leq2$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq y\leq2$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula 
+\begin{eqnarray*}
+a+e & \leq & b+d\\
+d+h & \leq & e+g
+\end{eqnarray*}
+
+\end_inset
+
+and there fore 
+\begin_inset Formula $a+e+d+h\leq b+d+e+g$
+\end_inset
+
+ which of course implies 
+\begin_inset Formula $a+h\leq b+g$
+\end_inset
+
+.
+ Similarly 
+\begin_inset Formula $b+i\leq c+h$
+\end_inset
+
+.
+ Combining these two inequalities we have 
+\begin_inset Formula 
+\begin{eqnarray*}
+a+h+b+i & \leq & b+g+c+h\\
+a+i & \leq & c+g
+\end{eqnarray*}
+
+\end_inset
+
+This method readily generalizes to any size matrix (just 
+\begin_inset Quotes eld
+\end_inset
+
+crawl
+\begin_inset Quotes erd
+\end_inset
+
+ down a column and across a row).
+ To prove the converse simply set 
+\begin_inset Formula $k=i+1$
+\end_inset
+
+ and 
+\begin_inset Formula $l=j+1$
+\end_inset
+
+ in 
+\begin_inset Formula $A[i,j]+A[k,l]\leq A[i,l]+A[k.j]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\begin{bmatrix}37 & 23 & 22 & 32\\
+21 & 6 & 7 & 10\\
+53 & 34 & 30 & 31\\
+32 & 13 & 9 & 6\\
+43 & 21 & 15 & 8
+\end{bmatrix}\rightarrow\begin{bmatrix}37 & 23 & 22 & 32\\
+21 & 6 & \mathbf{5} & 10\\
+53 & 34 & 30 & 31\\
+32 & 13 & 9 & 6\\
+43 & 21 & 15 & 8
+\end{bmatrix}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Proof by contradiction: assume there exist 
+\begin_inset Formula $i,j$
+\end_inset
+
+ such that 
+\begin_inset Formula $i<j$
+\end_inset
+
+ but 
+\begin_inset Formula $f(j)<f(i).$
+\end_inset
+
+ We have this arrangment
+\begin_inset Formula 
+\[
+\begin{bmatrix}\ddots & \vdots & \vdots & \vdots & \iddots\\
+\dots & A[i,f(j)] & \dots & A[i,f(i)] & \dots\\
+\dots & \vdots & \ddots & \vdots & \dots\\
+\dots & A[j,f(j)] & \dots & A[j,f(i)] & \dots\\
+\iddots & \vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\]
+
+\end_inset
+
+Then since 
+\begin_inset Formula $f(i)$
+\end_inset
+
+ is the column index of the farthest-to-the-left minimum element we must
+ have 
+\begin_inset Formula $A[i,f(j)]>A[i,f(i)]$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $A[i,f(j)]+A[j,f(i)]>A[i,f(i)]+A[j,f(j)]$
+\end_inset
+
+, since 
+\begin_inset Formula $A[j,f(j)]$
+\end_inset
+
+ is defined to be less than or equal to 
+\begin_inset Formula $A[j,f(i)]$
+\end_inset
+
+.
+ But this of course violates the Monge principle.
+ 
+\end_layout
+
+\begin_layout Enumerate
+By part (c) in each row 
+\begin_inset Formula $j$
+\end_inset
+
+ we know that for the left-most-minimum element 
+\begin_inset Formula $A[j,f(j)]$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $f(j-1)\leq f(j)\leq f(j+1)$
+\end_inset
+
+.
+ Therefore in each in row 
+\begin_inset Formula $j$
+\end_inset
+
+ we need to inspect only 
+\begin_inset Formula $f(j+1)-f(j-1)+1$
+\end_inset
+
+ elements.
+ In total this is at most 
+\begin_inset Formula $n$
+\end_inset
+
+ elements.
+ But in the instance when for some odd row 
+\begin_inset Formula $j$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $f(j+1)=f(j+2)$
+\end_inset
+
+ then 
+\begin_inset Formula $A[j,f(j+2)]$
+\end_inset
+
+ will need to be checked even though 
+\begin_inset Formula $A[j+2,f(j+2)]$
+\end_inset
+
+ was inspected as well.
+ At most there will be 
+\begin_inset Formula $m/2$
+\end_inset
+
+ such repeated inspections of already inspected columns and so in total
+ there will be 
+\begin_inset Formula $O(m+n)$
+\end_inset
+
+ inspections.
+\end_layout
+
+\begin_layout Enumerate
+The recurrence relation is 
+\begin_inset Formula $T(m,n)=T(m/2,n)+O(m+n).$
+\end_inset
+
+ Assume the inductive hypothesis 
+\begin_inset Formula $T(k,j)=c_{1}(k+j\log k)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+T(m,n) & \leq c_{1}\bigg(\frac{m}{2}+n\log\bigg(\frac{m}{2}\bigg)\bigg)+O(m+n)\\
+ & \leq c_{1}(m+n\log(m)-n\log2)+O(m+n)\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

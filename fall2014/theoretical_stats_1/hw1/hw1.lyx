@@ -1975,19 +1975,31 @@ If
 \begin_inset Formula $P(B)=1$
 \end_inset
 
- then
-\begin_inset Formula 
-\[
-P(A|B)=\frac{P(A\cap B)}{P(B)}=P()=P(A\cap B)
-\]
-
+ then 
+\begin_inset Formula $P(A|B)=\frac{P(A\cap B)}{1}$
 \end_inset
 
  but 
-\begin_inset Formula $P(B)=1$
+\begin_inset Formula $P(A)=P(A\cap B)+P(A\cap B^{c})$
+\end_inset
+
+ and since 
+\begin_inset Formula $A\cap B^{c}\subset B^{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $P(A\cap B^{c})\leq P(B^{c})=1-P(B)=0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $P(A)=P(A\cap B)$
 \end_inset
 
  so 
+\begin_inset Formula $P(A|B)=P(A)$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper

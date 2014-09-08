@@ -1975,21 +1975,169 @@ If
 \begin_inset Formula $P(B)=1$
 \end_inset
 
- then
-\begin_inset Formula 
-\[
-P(A|B)=\frac{P(A\cap B)}{P(B)}=P()=P(A\cap B)
-\]
-
+ then 
+\begin_inset Formula $P(A|B)=\frac{P(A\cap B)}{1}$
 \end_inset
 
  but 
-\begin_inset Formula $P(B)=1$
+\begin_inset Formula $P(A)=P(A\cap B)+P(A\cap B^{c})$
+\end_inset
+
+ and since 
+\begin_inset Formula $A\cap B^{c}\subset B^{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $P(A\cap B^{c})\leq P(B^{c})=1-P(B)=0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $P(A)=P(A\cap B)$
 \end_inset
 
  so 
+\begin_inset Formula $P(A|B)=P(A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $P(B|A)=P(B\cap A)/P(A)$
+\end_inset
+
+ but the hypothesis 
+\begin_inset Formula $A\subset B$
+\end_inset
+
+ implies 
+\begin_inset Formula $B\cap A=A$
+\end_inset
+
+ so 
+\begin_inset Formula $P(B|A)=P(A)/P(A)=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $P(A|B)=P(B|A)P(A)/P(B)=P(A)/P(B)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+P(A|A\cup B)= & \frac{P\bigg(A\cap(A\cup B)\bigg)}{P(A\cup B)}\\
+ & \frac{P(A)}{P(A)+P(B)-P(A\cap B)} & \text{by }A\subset A\cup B\\
+ & \frac{P(A)}{P(A)+P(B)} & \text{by "mutually exclusive"}\iff A\cap B=\emptyset
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $P(A\cap B\cap C)=P(A|B\cap C)P(B\cap C)=P(A|B\cap C)P(B|C)P(C)$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.39]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P(A)>0$
+\end_inset
+
+ and
+\begin_inset Formula $P(B)>0$
+\end_inset
+
+ and
+\begin_inset Formula $P(A\cap B)=0$
+\end_inset
+
+ then obviously 
+\begin_inset Formula $P(A)\cdot P(B)\ne P(A\cap B)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P(A)>0$
+\end_inset
+
+ and
+\begin_inset Formula $P(B)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $P(A)P(B)=P(A\cap B)$
+\end_inset
+
+ then obviously 
+\begin_inset Formula $P(A\cap B)=P(A)P(B)>0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.46]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
