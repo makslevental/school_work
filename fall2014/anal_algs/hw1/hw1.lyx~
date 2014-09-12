@@ -7,6 +7,9 @@
 
 %
 \usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
 \usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \addtolength{\topmargin}{-.5in}
 \setlength{\textwidth}{6in}       
@@ -16,6 +19,12 @@
 \setlength{\textheight}{9in}
 \renewcommand{\baselinestretch}{1}
 \reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
 %
 %
 \end_preamble
@@ -450,385 +459,6 @@ status open
 
 \begin_layout Plain Layout
 
-[3-1]
-\end_layout
-
-\end_inset
-
-Lemma: if 
-\begin_inset Formula $k,d\in\mathbb{N}$
-\end_inset
-
- and 
-\begin_inset Formula $k\leq d$
-\end_inset
-
- then 
-\begin_inset Formula $n^{k}\leq n^{d}.$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
-Proof: 
-\begin_inset Formula $n^{k}/n^{d}=n^{k-d}=1/n^{d-k}\leq0$
-\end_inset
-
- since 
-\begin_inset Formula $k-d\leq0$
-\end_inset
-
-.
- 
-\begin_inset Newline newline
-\end_inset
-
-Corollary: if 
-\begin_inset Formula $k,d\in\mathbb{N}$
-\end_inset
-
- and 
-\begin_inset Formula $k>d$
-\end_inset
-
- then 
-\begin_inset Formula $n^{k}>n^{d}.$
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Let 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
-\end_inset
-
- and 
-\begin_inset Formula $c=\max\{a_{0},a_{1},\dots,a_{d}\}$
-\end_inset
-
-.
- Note that 
-\begin_inset Formula $c\geq0$
-\end_inset
-
- since otherwise all 
-\begin_inset Formula $a_{i}<0$
-\end_inset
-
- and therefore 
-\begin_inset Formula $p(n)<0$
-\end_inset
-
-.
- Then for all 
-\begin_inset Formula $i\in\{0,1,\dots,d\}$
-\end_inset
-
- and for 
-\begin_inset Formula $k\ge d$
-\end_inset
-
- the lemma implies 
-\begin_inset Formula $cn^{k}\ge a_{i}n^{i}$
-\end_inset
-
-.
- Therefore 
-\begin_inset Formula $\sum_{i=0}^{d}cn^{k}=c\dot{\cdot(d+1)\cdot n^{k}\ge\sum_{i=0}^{d}a_{i}n^{i}=p(n)}.$
-\end_inset
-
-
-\begin_inset Formula $ $
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Let 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
-\end_inset
-
-.
- For each 
-\begin_inset Formula $k$
-\end_inset
-
- s.t.
- 
-\begin_inset Formula $k\leq d$
-\end_inset
-
- by part (a) we there exists 
-\begin_inset Formula $c_{k}$
-\end_inset
-
- and 
-\begin_inset Formula $n_{0}$
-\end_inset
-
- s.t.
- for all 
-\begin_inset Formula $n\ge n_{0}\implies$
-\end_inset
-
-
-\begin_inset Formula $c_{k}p(n)\ge n^{k}$
-\end_inset
-
-.
- For each such 
-\begin_inset Formula $k$
-\end_inset
-
- let 
-\begin_inset Formula $ $
-\end_inset
-
-
-\begin_inset Formula $b_{k}=1/c_{k}$
-\end_inset
-
- then 
-\begin_inset Formula $b_{k}n^{k}\leq p(n)$
-\end_inset
-
-.
- Hence for all 
-\begin_inset Formula $k\le d$
-\end_inset
-
- it's the case that 
-\begin_inset Formula $p(n)=\Omega(n^{k})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Let 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
-\end_inset
-
-.
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- By part (a) 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-we have that for 
-\begin_inset Formula $k=d$
-\end_inset
-
- there exist 
-\begin_inset Formula $c_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $n_{0}$
-\end_inset
-
- such that 
-\begin_inset Formula $p(n)\leq c_{1}n^{k}$
-\end_inset
-
-.
- By part (b) we have that for 
-\begin_inset Formula $k=d$
-\end_inset
-
- there exist 
-\begin_inset Formula $c_{2}$
-\end_inset
-
- and 
-\begin_inset Formula $n_{1}$
-\end_inset
-
- such that 
-\begin_inset Formula $p(n)\geq c_{2}n^{k}$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $n_{2}=\max\{n_{0},n_{1}\}$
-\end_inset
-
- then for all 
-\begin_inset Formula $n\geq n_{2}$
-\end_inset
-
- we have that 
-\begin_inset Formula $c_{2}n^{k}\leq p(n)\leq c_{1}n^{k}$
-\end_inset
-
-.
- Therefore 
-\begin_inset Formula $p(n)=\Theta(n^{k})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Let 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
-\end_inset
-
-.
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- Part (a) guarantees there exist constants 
-\begin_inset Formula $c_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $n_{0}$
-\end_inset
-
- such that for 
-\begin_inset Formula $n_{0}\geq n$
-\end_inset
-
- it's the case that 
-\begin_inset Formula $p(n)\leq c_{1}n^{d}$
-\end_inset
-
-.
- Then for any constant 
-\begin_inset Formula $c_{2}$
-\end_inset
-
- let 
-\begin_inset Formula $n_{1}$
-\end_inset
-
- be be such that 
-\begin_inset Formula $n_{1}^{k-d}>c_{1}/c_{2}$
-\end_inset
-
-.
- Such an 
-\begin_inset Formula $n_{1}$
-\end_inset
-
- can be chosen since 
-\begin_inset Formula $k-d>0\implies\exists n_{j}\text{ s.t. }n_{j}^{k-d}>c$
-\end_inset
-
- for any constant 
-\begin_inset Formula $c$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $c_{2}n_{1}^{k}-c_{1}n_{1}^{d}=n_{1}^{d}(c_{2}n_{1}^{k-d}-c_{1})>0$
-\end_inset
-
-.
- Finally let 
-\begin_inset Formula $n_{3}=\max\{n_{0},n_{1}\}$
-\end_inset
-
- and for all 
-\begin_inset Formula $n\geq n_{3}$
-\end_inset
-
- we have 
-\begin_inset Formula $c_{2}n^{k}>c_{1}n^{d}\geq p(n)$
-\end_inset
-
-.
- 
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 [2.4]
 \end_layout
 
@@ -1065,6 +695,457 @@ left
 \end_inset
 
  array, and so the total is 16.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3-1]
+\end_layout
+
+\end_inset
+
+Lemma: if 
+\begin_inset Formula $k,d\in\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $k\leq d$
+\end_inset
+
+ then 
+\begin_inset Formula $n^{k}\leq n^{d}.$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+Proof: 
+\begin_inset Formula $n^{k}/n^{d}=n^{k-d}=1/n^{d-k}\leq0$
+\end_inset
+
+ since 
+\begin_inset Formula $k-d\leq0$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Corollary: if 
+\begin_inset Formula $k,d\in\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $k>d$
+\end_inset
+
+ then 
+\begin_inset Formula $n^{k}>n^{d}.$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $c=\max\{a_{0},a_{1},\dots,a_{d}\}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $c\geq0$
+\end_inset
+
+ since otherwise all 
+\begin_inset Formula $a_{i}<0$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $p(n)<0$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $i\in\{0,1,\dots,d\}$
+\end_inset
+
+ and for 
+\begin_inset Formula $k\ge d$
+\end_inset
+
+ the lemma implies 
+\begin_inset Formula $cn^{k}\ge a_{i}n^{i}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\sum_{i=0}^{d}cn^{k}=c\dot{\cdot(d+1)\cdot n^{k}\ge\sum_{i=0}^{d}a_{i}n^{i}=p(n)}.$
+\end_inset
+
+
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=a_{d}n^{d}+\sum_{i=0}^{d-1}a_{i}n^{i}$
+\end_inset
+
+.
+ Then by part (a) 
+
+\begin_inset Formula $\sum_{i=0}^{d-1}a_{i}n^{i}\in O(n^{d-1})$
+\end_inset
+
+ so there exists 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{i=0}^{d-1}a_{i}n^{i}\leq c_{1}n^{d-1}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $p(n)\ge a_{d}n^{d}-c_{1}n^{d-1}.$
+\end_inset
+
+ Fix any 
+\begin_inset Formula $\epsilon<a_{d}$
+\end_inset
+
+ and for 
+\begin_inset Formula $n>c_{1}/\epsilon$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+p(n) & \geq(a_{d}-\epsilon)n^{d}+\epsilon n^{d}-c_{1}n^{d-1}\\
+ & =(a_{d}-\epsilon)n^{d}+n^{d-1}(\epsilon n-c_{1})\\
+ & \geq(a_{d}-\epsilon)n^{d}\\
+ & \geq(a_{d}-\epsilon)n^{k} & \text{by the lemma}
+\end{align*}
+
+\end_inset
+
+Hence if 
+\begin_inset Formula $c_{2}=(a_{d}-\epsilon)$
+\end_inset
+
+ and 
+\begin_inset Formula $n>c_{1}/\epsilon$
+\end_inset
+
+ then 
+\begin_inset Formula $p(n)\geq c_{2}n^{k}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $p(n)=\Omega(n^{k})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ By part (a) 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+we have that for 
+\begin_inset Formula $k=d$
+\end_inset
+
+ there exist 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $p(n)\leq c_{1}n^{k}$
+\end_inset
+
+.
+ By part (b) we have that for 
+\begin_inset Formula $k=d$
+\end_inset
+
+ there exist 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $p(n)\geq c_{2}n^{k}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n_{2}=\max\{n_{0},n_{1}\}$
+\end_inset
+
+ then for all 
+\begin_inset Formula $n\geq n_{2}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $c_{2}n^{k}\leq p(n)\leq c_{1}n^{k}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $p(n)=\Theta(n^{k})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Part (a) guarantees there exist constants 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that for 
+\begin_inset Formula $n_{0}\geq n$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $p(n)\leq c_{1}n^{d}$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $k>d$
+\end_inset
+
+ and any constant 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ let 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ be be such that 
+\begin_inset Formula $n_{1}^{k-d}>c_{1}/c_{2}$
+\end_inset
+
+.
+ Such an 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ can be chosen since 
+\begin_inset Formula $k-d>0\implies\exists n_{j}\text{ s.t. }n_{j}^{k-d}>c$
+\end_inset
+
+ for any constant 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $c_{2}n_{1}^{k}-c_{1}n_{1}^{d}=n_{1}^{d}(c_{2}n_{1}^{k-d}-c_{1})>0$
+\end_inset
+
+.
+ Finally let 
+\begin_inset Formula $n_{3}=\max\{n_{0},n_{1}\}$
+\end_inset
+
+ and for all 
+\begin_inset Formula $n\geq n_{3}$
+\end_inset
+
+ we have 
+\begin_inset Formula $c_{2}n^{k}>c_{1}n^{d}\geq p(n)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The argument that worked for part (a) works here.
+ For any 
+\begin_inset Formula $c$
+\end_inset
+
+ let 
+\begin_inset Formula $\epsilon=|a_{d}-c|$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}>c_{1}/\epsilon$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $a_{d}>c$
+\end_inset
+
+ then there's no problem and the proof from part (b) works.
+ Otherwise let 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ be such that for 
+\begin_inset Formula $n\geq n_{1}\implies n>\sqrt[d-k]{c/(a_{d}-\epsilon)}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+n>\sqrt[d-k]{\frac{c}{a_{d}-\epsilon}}\implies n^{d-k}>\frac{c}{a_{d}-\epsilon}\implies n^{d}>\frac{c}{a_{d}-\epsilon}n^{k}\implies(a_{d}-\epsilon)n^{d}>cn^{k}
+\]
+
+\end_inset
+
+Therefore
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+p(n) & \geq(a_{d}-\epsilon)n^{d}+\epsilon n^{d}-c_{1}n^{d-1}\\
+ & =(a_{d}-\epsilon)n^{d}+n^{d-1}(\epsilon n-c_{1})\\
+ & \geq(a_{d}-\epsilon)n^{d}\\
+ & >cn^{k}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $p(n)=\omega(n^{k})$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
@@ -1573,6 +1654,20 @@ status open
 
 \begin_layout Plain Layout
 
+[4.5]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [4.7]
 \end_layout
 
@@ -1839,6 +1934,670 @@ T(m,n) & \leq c_{1}\bigg(\frac{m}{2}+n\log\bigg(\frac{m}{2}\bigg)\bigg)+O(m+n)\\
  & \leq c_{1}(m+n\log(m)-n\log2)+O(m+n)\\
 \end{align*}
 
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.6]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Call let 
+\begin_inset Formula $\text{points}[i][j]$
+\end_inset
+
+ be the 
+\begin_inset Formula $n\times2$
+\end_inset
+
+ array with 
+\begin_inset Formula $\text{points}[i][0]=a_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{points}[i][1]=b_{i}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+ be a function that computes intersections of subsets of intervals
+
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Find-Intersection(points,p,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+	j = random(p,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+	swap(points[p],points[j])
+\end_layout
+
+\begin_layout Plain Layout
+
+	a = points[p][0]
+\end_layout
+
+\begin_layout Plain Layout
+
+	b = points[p][1]
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i=p to s
+\end_layout
+
+\begin_layout Plain Layout
+
+		//           a|---------|b
+\end_layout
+
+\begin_layout Plain Layout
+
+		//  x|--------|y
+\end_layout
+
+\begin_layout Plain Layout
+
+		//           u|------|v
+\end_layout
+
+\begin_layout Plain Layout
+
+		// the only requirement for intersection is 
+\end_layout
+
+\begin_layout Plain Layout
+
+		// that both the left end point of interval 
+\end_layout
+
+\begin_layout Plain Layout
+
+		// being checked is <= b
+\end_layout
+
+\begin_layout Plain Layout
+
+		// and the right end point is >= a so
+\end_layout
+
+\begin_layout Plain Layout
+
+		if points[i][0] <= b and points[i][1] >= a
+\end_layout
+
+\begin_layout Plain Layout
+
+			// check if narrower on the left
+\end_layout
+
+\begin_layout Plain Layout
+
+			if points[i][0] > a
+\end_layout
+
+\begin_layout Plain Layout
+
+				a = points[i][0]
+\end_layout
+
+\begin_layout Plain Layout
+
+			// check if narrower on the right
+\end_layout
+
+\begin_layout Plain Layout
+
+			if points[i][1] < b
+\end_layout
+
+\begin_layout Plain Layout
+
+				b = points[i][1]
+\end_layout
+
+\begin_layout Plain Layout
+
+	// the intersection interval
+\end_layout
+
+\begin_layout Plain Layout
+
+	return (a,b)
+\end_layout
+
+\end_inset
+
+The call to is to improve expected running time.
+ If all intervals overlap then 
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+ the largest region of overlap.
+ Otherwise on average it returns the largest possible overlap of a subset
+ of intervals.
+ Then let 
+\begin_inset Formula $\text{Partition-Intervals}$
+\end_inset
+
+ be essentially the same as 
+\begin_inset Formula $\text{Partition}$
+\end_inset
+
+ from Quicksort except it takes a key to compare against, a flag to pick
+ whether to compare 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ or 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+, and a comparator 
+\begin_inset Formula $\{\leq,\ge,<,>\}$
+\end_inset
+
+.
+ 
+\lang english
+
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Partition-Intervals(points,p,r,flag,key,Comparator)
+\end_layout
+
+\begin_layout Plain Layout
+
+	i = p-1
+\end_layout
+
+\begin_layout Plain Layout
+
+	for j=p to s
+\end_layout
+
+\begin_layout Plain Layout
+
+		// compare a_i or b_i
+\end_layout
+
+\begin_layout Plain Layout
+
+		if points[j][flag] Comparator x
+\end_layout
+
+\begin_layout Plain Layout
+
+			i++
+\end_layout
+
+\begin_layout Plain Layout
+
+			// swap intervals in the array
+\end_layout
+
+\begin_layout Plain Layout
+
+			swap(points[i],points[j])
+\end_layout
+
+\begin_layout Plain Layout
+
+	return i	
+\end_layout
+
+\end_inset
+
+Finally 
+\begin_inset Formula $\text{Fuzzy-Quicksort}$
+\end_inset
+
+
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Fuzzy-Quicksort(points,x,y)
+\end_layout
+
+\begin_layout Plain Layout
+
+	if x<y
+\end_layout
+
+\begin_layout Plain Layout
+
+		(a,b) = Find-Intersection(points,x,y)
+\end_layout
+
+\begin_layout Plain Layout
+
+		// right
+\end_layout
+
+\begin_layout Plain Layout
+
+		r = Partition-Intervals(points,x,y,0,a,<=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		// left-middle
+\end_layout
+
+\begin_layout Plain Layout
+
+		q = Partition-Intervals(points,x,r,1,b,<)
+\end_layout
+
+\begin_layout Plain Layout
+
+		Fuzzy-Quicksort(points,x,q-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+		Fuzzy-Quicksort(points,r+1,y)
+\end_layout
+
+\end_inset
+
+The first call to 
+\begin_inset Formula $\text{Partition-Intervals}$
+\end_inset
+
+ sorts the intervals by their 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ (hence 
+\begin_inset Formula $\text{flag}=0$
+\end_inset
+
+) on 
+\begin_inset Formula $\leq$
+\end_inset
+
+ around the 
+\begin_inset Formula $a$
+\end_inset
+
+ returned by 
+
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+.
+
+\lang english
+ After this first call all intervals to the right of 
+\begin_inset Formula $r$
+\end_inset
+
+ are outside of the intersection.
+ Why? If there were an interval 
+\begin_inset Formula $[a_{i},b_{i}]$
+\end_inset
+
+ such that some portion of it overlapped the intersection and 
+\begin_inset Formula $a>a_{i}$
+\end_inset
+
+ then the it would have been considered in 
+
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+ on line 16.
+ Hence all intervals in 
+\begin_inset Formula $\text{points}[i]$
+\end_inset
+
+ with indices 
+\begin_inset Formula $i>r$
+\end_inset
+
+ are outside of the intersection.
+ Therefore all intervals in 
+\begin_inset Formula $\text{points}[i]$
+\end_inset
+
+ with indices 
+\begin_inset Formula $i<r$
+\end_inset
+
+ are either inside the intersection or outside the intersection but on the
+ left.
+ 
+\lang english
+The second call to 
+\begin_inset Formula $\text{Partition-Intervals}$
+\end_inset
+
+ sorts the intervals by their 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ (hence 
+\begin_inset Formula $\text{flag}=1$
+\end_inset
+
+) on 
+\begin_inset Formula $<$
+\end_inset
+
+ around the 
+\begin_inset Formula $b$
+\end_inset
+
+ returned by 
+
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+.
+ After this second call all intervals to the left of 
+\begin_inset Formula $q$
+\end_inset
+
+ are outside the intersection.
+ Why? If there are an interval 
+\begin_inset Formula $[a_{i},b_{i}]$
+\end_inset
+
+ such that some portion of it overlapped the intersection and 
+\begin_inset Formula $b\geq b_{i}$
+\end_inset
+
+ then it would have been considered by 
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+ on line 19.
+ Therefore all intervals in 
+\begin_inset Formula $\text{points}[i]$
+\end_inset
+
+ with indices 
+\begin_inset Formula $i<q$
+\end_inset
+
+ are outside the intersection but on the left.
+ Therefore all intervals in 
+\begin_inset Formula $\text{points}[i]$
+\end_inset
+
+ with 
+\begin_inset Formula $q\leq i\leq r$
+\end_inset
+
+ are in the intersection and their permutation is irelevant because we know
+ they intersect and therefore either 
+\begin_inset Formula $a$
+\end_inset
+
+ or 
+\begin_inset Formula $b$
+\end_inset
+
+ returned by 
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+ is a correct 
+\begin_inset Formula $c^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $[a_{j},b_{j}]\,\forall j\in\{[a_{q},b_{q}],\dots,[a_{r},b_{r}]\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The macroscopic structure of 
+\begin_inset Formula $\text{Fuzzy-Quicksort}$
+\end_inset
+
+ is almost the same as 
+\begin_inset Formula $\text{Randomized-Quicksort}$
+\end_inset
+
+ .
+ 
+\begin_inset Formula $\text{Find-Intersection}$
+\end_inset
+
+ is clearly 
+\begin_inset Formula $\Theta(n)$
+\end_inset
+
+ since it considers every interval.
+ 
+\begin_inset Formula $\text{Partition-Intervals}$
+\end_inset
+
+ is almost exactly the same as 
+\begin_inset Formula $\text{Quicksort}$
+\end_inset
+
+ 's 
+\begin_inset Formula $\text{Partition}$
+\end_inset
+
+ and so runs in 
+\begin_inset Formula $\Theta(n)$
+\end_inset
+
+ .
+ Therefore the recurrence relation for 
+\begin_inset Formula $\text{Fuzzy-Quicksort}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+T(n)=\underset{r,q\,:\,0\le r-q+1\le n}{\text{max}}(T(q)+T(n-r))+3\Theta(n)=\underset{0\le q\le n-1}{\max}(T(q)+T(n-q-1))+\Theta(n)
+\]
+
+\end_inset
+
+ asddfdfgdfgdfgdfgdfg
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.4]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Compare every red jug to every blue jug.
+ Exactly 
+\begin_inset Formula $n^{2}$
+\end_inset
+
+ units of time.
+ Hence 
+\begin_inset Formula $\Theta(n^{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Fix a permutation of the red jugs, call it 
+\begin_inset Formula $(r_{1},r_{2},\dots,r_{n})$
+\end_inset
+
+.
+ Note that it is not necessarily the case that 
+\begin_inset Formula $r_{i}\leq r_{j}$
+\end_inset
+
+ if 
+\begin_inset Formula $i<j$
+\end_inset
+
+ or anything like this.
+ Then the problem is tantamount to finding a permutation of blue jugs, 
+\begin_inset Formula $(b_{\pi(1)},b_{\pi(2)},\dots,b_{\pi(n)})$
+\end_inset
+
+ such that 
+\begin_inset Formula $b_{\pi(i)}=r_{i}$
+\end_inset
+
+.
+ Note there are 
+\begin_inset Formula $n!$
+\end_inset
+
+ such permutations.
+ Any comparison based algorithm must distinguish between 3 different cases
+ at each step: either 
+\begin_inset Formula $b_{\pi(i)}<r_{j}$
+\end_inset
+
+ or 
+\begin_inset Formula $b_{\pi(i)}>r_{j}$
+\end_inset
+
+ or 
+\begin_inset Formula $b_{\pi(i)}=r_{j}$
+\end_inset
+
+ and overall must distinguish between 
+\begin_inset Formula $n!$
+\end_inset
+
+ permutations of the 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+.
+ Thus the decision tree that a comparison based algorithm must traverse
+ is a 3-ary tree with minimum height 
+\begin_inset Formula $h\geq\log_{3}n!$
+\end_inset
+
+.
+ Then by 
+\series bold
+eqn.
+ 3.19
+\series default
+ in CLRS we have that 
+\begin_inset Formula $h\ge\Theta(n\lg n)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Pick a random blue jug, the 
+\begin_inset Quotes eld
+\end_inset
+
+blue pivot
+\begin_inset Quotes erd
+\end_inset
+
+, and use Randomized-partition to partition all the red jugs into bigger,
+ smaller, and equal.
+ Then use the red jug that's equal in size to the blue pivot, call it the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+red pivot
+\begin_inset Quotes erd
+\end_inset
+
+ to similarly partition all blue jugs.
+ Then recurse choosing a random new 
+\begin_inset Quotes eld
+\end_inset
+
+blue pivot
+\begin_inset Quotes erd
+\end_inset
+
+ in each of the 
+\begin_inset Quotes eld
+\end_inset
+
+smaller-than
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+bigger-than
+\begin_inset Quotes erd
+\end_inset
+
+ sets.
+ The recurrence relations is the same as for Randomized-quicksort except
+ the divide step uses Randomized-partition twice instead of once.
+ So absorbing the constant factor the recurrence relation is 
+\begin_inset Formula $T(n)=\underset{0\le q\le n-1}{\max}(T(q)+T(n-q-1))+2\Theta(n)=\underset{0\le q\le n-1}{\max}(T(q)+T(n-q-1))+\Theta(n)$
+\end_inset
+
+.
+ Hence by the analysis of Quicksort we have have expected running time of
+ 
+\begin_inset Formula $O(n\lg n)$
+\end_inset
+
+, with worst case running 
+\begin_inset Formula $\Theta(n^{2}).$
 \end_inset
 
 

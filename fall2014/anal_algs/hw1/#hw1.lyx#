@@ -2420,15 +2420,10 @@ The macroscopic structure of
 \begin_inset Formula $\text{Find-Intersection}$
 \end_inset
 
- has exactly the same effect as wrapper 
+ has exactly the same effect as 
 \begin_inset Formula $\text{Randomized-Partition}$
 \end_inset
 
- for 
-\begin_inset Formula $\text{Partition}$
-\end_inset
-
- on page 179 of CLRS.
  
 \begin_inset Formula $\text{Partition-Intervals}$
 \end_inset
@@ -2445,48 +2440,8 @@ The macroscopic structure of
 \begin_inset Formula $\Theta(n)$
 \end_inset
 
-.
- Therefore worst case is similarly 
-\begin_inset Formula $\Theta(n\lg n)$
-\end_inset
-
-.
- Best case is when all intervals intersect, in which case 
-\begin_inset Formula $\text{Find-Intersection}$
-\end_inset
-
- returns an intersection that's contained every interval and the first call
- to 
-\begin_inset Formula $\text{Partition-Intervals}$
-\end_inset
-
- returns index 
-\begin_inset Formula $y$
-\end_inset
-
- and the second call returns index 
-\begin_inset Formula $x$
-\end_inset
-
- and the two recursive calls return immediately since 
-\begin_inset Formula $x\nleq x-1$
-\end_inset
-
- and 
-\begin_inset Formula $y+1\nleq y$
-\end_inset
-
-.
- Therefore in this case, when all the intervals overlap the algorithm runs
- in 
-\begin_inset Formula $\Theta(n).$
-\end_inset
-
+ .
  
-\begin_inset Formula $ $
-\end_inset
-
-
 \end_layout
 
 \end_deeper
