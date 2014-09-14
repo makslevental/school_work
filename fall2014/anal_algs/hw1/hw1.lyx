@@ -10,6 +10,9 @@
 \usepackage{listings}
 \usepackage{tikz}
 \usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
 \usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \addtolength{\topmargin}{-.5in}
 \setlength{\textwidth}{6in}       
@@ -281,7 +284,9 @@ status open
 
 \end_inset
 
-Reimagine the array in which all the elements are stored as linked-list
+This in fact doesn't work but I didn't realize it until I finished the analysis.
+ Read the comment at the end.
+ Reimagine the array in which all the elements are stored as linked-list
  and rewrite Binary-Search to return a pointer to the last node recursed
  to.
  Then the value to be inserted by Insertion-Sort-Binary-Search(A) inserts
@@ -592,7 +597,7 @@ Call an inversion of type
 \end_layout
 
 \begin_layout Enumerate
-Modify merge sort such that when function returns from the two recursive
+Modify merge sort such that when the function returns from the two recursive
  calls, when the 
 \begin_inset Quotes eld
 \end_inset
@@ -630,7 +635,7 @@ left
  is by definition the number of elements in the original array that were
  greater than that chosen element and yet preceeded it.
  Furthermore there is no double counting because once a merge happens 2
- elements in the merge array are never compared again.
+ elements in the merged array are never compared again.
  Take for example the array 
 \begin_inset Formula $\mbox{\left[8,7,6,5,4,3,2,1\right]}$
 \end_inset
@@ -678,7 +683,7 @@ right
 \end_inset
 
 .
- Manifestly there are 4 inversion per element in the 
+ Manifestly there are 4 inversions per element in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -686,7 +691,7 @@ right
 \begin_inset Quotes erd
 \end_inset
 
- array - 1 for each element in the 
+ array, 1 for each element in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -797,7 +802,7 @@ Let
 \begin_inset Formula $k\ge d$
 \end_inset
 
- the lemma implies 
+ the lemma above implies 
 \begin_inset Formula $cn^{k}\ge a_{i}n^{i}$
 \end_inset
 
@@ -832,7 +837,6 @@ Let
 
 .
  Then by part (a) 
-
 \begin_inset Formula $\sum_{i=0}^{d-1}a_{i}n^{i}\in O(n^{d-1})$
 \end_inset
 
@@ -1662,6 +1666,159 @@ status open
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+\noindent
+\align block
+Let 
+\begin_inset Formula $n_{b}$
+\end_inset
+
+ be the number of bad chips and 
+\begin_inset Formula $n_{g}$
+\end_inset
+
+ be the number of good chips.
+ Without loss of generality assume there is only one good chip, 
+\begin_inset Formula $n_{g}=1$
+\end_inset
+
+.
+ Then picking there are 
+\begin_inset Formula $1+n_{b}$
+\end_inset
+
+ choices chip is in fact the good one, i.e.
+ any algorithm must distinguish between 
+\begin_inset Formula $1+n_{b}$
+\end_inset
+
+ different cases.
+ Suppose that all bad chips always report any other chip to be 
+\begin_inset Quotes eld
+\end_inset
+
+bad
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Then there is not information to distinguish between the 
+\begin_inset Formula $1+n_{b}$
+\end_inset
+
+ different cases since the good chip as well always report 
+\begin_inset Quotes eld
+\end_inset
+
+bad
+\begin_inset Quotes erd
+\end_inset
+
+ (so there is only one bit of information).
+\end_layout
+
+\begin_layout Enumerate
+Divide the set of chips into pairs.
+ If there is an odd number of chips set the odd one aside.
+ Perform the comparisons within each pair.
+ If both chips in a pair report the other chip 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ then keep either one, otherwise discard both.
+ Repeat the process.
+ Let 
+\begin_inset Formula $n_{b_{j}}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{g_{j}}$
+\end_inset
+
+ be the number of bad chips and good chips left after the 
+\begin_inset Formula $j$
+\end_inset
+
+th iteration of the algorithm.
+ At any step in the recursive process a majority of the remaining chips
+ will be good since the only way to discard a good chip is if it is paired
+ with a bad chip and therefore discarding both preserves 
+\begin_inset Formula $n_{g_{j}}/n_{b_{j}}>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The recursion bottoms out and the invariant is preserved so the last chip
+ left must be good.
+ The halves the problem size since half the chips are discarded at every
+ step.
+\end_layout
+
+\begin_layout Enumerate
+By part one we can find at least one good chip in 
+\begin_inset Formula $T(n)\approx T(n/2)+O(n)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ be such that 
+\begin_inset Formula $T(n)\leq T(n/2)+c_{1}n$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $c_{2}>2c_{1}$
+\end_inset
+
+.
+ Then the inductive hypothesis is 
+\begin_inset Formula $T(n)\leq c_{2}n$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula 
+\[
+T(n)\leq\frac{c_{2}n}{2}+c_{1}n=c_{2}n-n\bigg(\frac{c_{2}}{2}-a\bigg)\leq c_{2}n
+\]
+
+\end_inset
+
+Hence it takes 
+\begin_inset Formula $T(n)=O(n)$
+\end_inset
+
+ to find one good chip, which you can then use to sort the rest of 
+\begin_inset Formula $n-1$
+\end_inset
+
+ chips using 
+\begin_inset Formula $n-1$
+\end_inset
+
+ comparisons, stopping early if you've found all of the good chips.
+ Hence total time is 
+\begin_inset Formula $\Theta(n)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1951,12 +2108,13 @@ status open
 
 \end_inset
 
-
+This problem was solved with the help of http://alumni.media.mit.edu/~dlanman/cours
+es/cs157/HW3.pdf
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-Call let 
+Let 
 \begin_inset Formula $\text{points}[i][j]$
 \end_inset
 
@@ -1978,7 +2136,6 @@ Call let
 \end_inset
 
  be a function that computes intersections of subsets of intervals
-
 \begin_inset listings
 inline false
 status open
@@ -2095,12 +2252,16 @@ Find-Intersection(points,p,s)
 
 \end_inset
 
-The call to is to improve expected running time.
+The call to 
+\begin_inset Formula $\text{random}$
+\end_inset
+
+ on line 2 is inorder to improve expected running time.
  If all intervals overlap then 
 \begin_inset Formula $\text{Find-Intersection}$
 \end_inset
 
- the largest region of overlap.
+ returns the largest region of overlap.
  Otherwise on average it returns the largest possible overlap of a subset
  of intervals.
  Then let 
@@ -2126,8 +2287,6 @@ The call to is to improve expected running time.
 
 .
  
-\lang english
-
 \begin_inset listings
 inline false
 status open
@@ -2154,7 +2313,7 @@ Partition-Intervals(points,p,r,flag,key,Comparator)
 
 \begin_layout Plain Layout
 
-		if points[j][flag] Comparator x
+		if points[j][flag] Comparator key   
 \end_layout
 
 \begin_layout Plain Layout
@@ -2256,13 +2415,10 @@ The first call to
 \end_inset
 
  returned by 
-
 \begin_inset Formula $\text{Find-Intersection}$
 \end_inset
 
 .
-
-\lang english
  After this first call all intervals to the right of 
 \begin_inset Formula $r$
 \end_inset
@@ -2273,11 +2429,10 @@ The first call to
 \end_inset
 
  such that some portion of it overlapped the intersection and 
-\begin_inset Formula $a>a_{i}$
+\begin_inset Formula $a_{i}\leq a$
 \end_inset
 
  then the it would have been considered in 
-
 \begin_inset Formula $\text{Find-Intersection}$
 \end_inset
 
@@ -2301,9 +2456,7 @@ The first call to
 
  are either inside the intersection or outside the intersection but on the
  left.
- 
-\lang english
-The second call to 
+ The second call to 
 \begin_inset Formula $\text{Partition-Intervals}$
 \end_inset
 
@@ -2324,7 +2477,6 @@ The second call to
 \end_inset
 
  returned by 
-
 \begin_inset Formula $\text{Find-Intersection}$
 \end_inset
 
@@ -2334,12 +2486,12 @@ The second call to
 \end_inset
 
  are outside the intersection.
- Why? If there are an interval 
+ Why? If there were an interval 
 \begin_inset Formula $[a_{i},b_{i}]$
 \end_inset
 
  such that some portion of it overlapped the intersection and 
-\begin_inset Formula $b\geq b_{i}$
+\begin_inset Formula $b_{i}<b$
 \end_inset
 
  then it would have been considered by 
@@ -2415,7 +2567,7 @@ The macroscopic structure of
 \begin_inset Formula $\text{random}$
 \end_inset
 
- on line.
+ on line 2.
  Therefore in such an instance 
 \begin_inset Formula $\text{Find-Intersection}$
 \end_inset
@@ -2468,7 +2620,8 @@ The macroscopic structure of
 \begin_inset Formula $x$
 \end_inset
 
- and the two recursive calls return immediately since 
+.
+ Then the two recursive calls return immediately since 
 \begin_inset Formula $x\nleq x-1$
 \end_inset
 
