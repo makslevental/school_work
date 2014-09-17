@@ -86,7 +86,7 @@ Since $f(n)=1=\Theta\bigg(n^{log_{2}1}\bigg)$ the master theorem
 immediately yields $T(n)=\Theta(n^{log_{2}1}\lg n)=\Theta(n^{0}\lg n)=\Theta(\lg n)$. 
 \item [2.3-6]This in fact doesn't work but I didn't realize it until I
 finished the analysis. Read the comment at the end. Reimagine the
-array in which all the elements are stored as a linked-list and rewrite
+array in which all the elements are stored as linked-list and rewrite
 Binary-Search to return a pointer to the last node recursed to. Then
 the value to be inserted by Insertion-Sort-Binary-Search(A) inserts
 a node in the linked list whose child is the last node returned by
@@ -152,16 +152,16 @@ number of such inversions. Then $|(j,i)|$ is the number of swaps
 that will have to be performed on element $A[j]$ before it is in
 its proper position. To see that this is the case note that all $(j,i)$
 inversions persist through the sorting process, up until $A[j]$ is
-sorted, since for all $i<j$ the element $A[i]$ will be inserted into
+sorted, since for all $i<j$ element $A[i]$ will be inserted into
 the sorted portion of the array prior to $A[j].$ Therefore upon inserting
 $A[j]$ there will still be $|(j,i)|$ inversions and therefore $|(j,i)|$
-swaps. Consequently $\sum_{j}|(j,i)|$, the total number of inversions,
+swaps. Consequently $\sum_{j}|(j,i)|$ the total number of inversions
 in the array is the total number of swaps performed by insertion sort,
 i.e. directly proportional insertion sort's running time.
 \item Modify merge sort such that when the function returns from the two
 recursive calls, when the ``merging'' is done, it counts the number
 of elements in the ``left'' array each time an element is chosen
-from the front of the ``right'' array (after comparison between
+from the front of the ``right'' array ( after comparison between
 the leading elements of both arrays). The quantity of elements in
 the ``left'' array each time an element from the front of the right
 array is chosen is by definition the number of elements in the original
@@ -286,10 +286,10 @@ Hence $p(n)=\omega(n^{k})$.
 \begin{enumerate}
 \item \noindent Let $n_{b}$ be the number of bad chips and $n_{g}$ be
 the number of good chips. Without loss of generality assume there
-is only one good chip, $n_{g}=1$. Then when picking there are $1+n_{b}$
-choices for which chip is in fact the good one, i.e. any algorithm must distinguish
+is only one good chip, $n_{g}=1$. Then picking there are $1+n_{b}$
+choices chip is in fact the good one, i.e. any algorithm must distinguish
 between $1+n_{b}$ different cases. Suppose that all bad chips always
-report any other chip to be ``bad''. Then there is not enough information
+report any other chip to be ``bad''. Then there is not information
 to distinguish between the $1+n_{b}$ different cases since the good
 chip as well always report ``bad'' (so there is only one bit of
 information).
@@ -299,17 +299,18 @@ both chips in a pair report the other chip ``good'' then keep either
 one, otherwise discard both. Repeat the process. Let $n_{b_{j}}$
 and $n_{g_{j}}$ be the number of bad chips and good chips left after
 the $j$th iteration of the algorithm. At any step in the recursive
-process a majority of the remaining chips will be good since since at worst the same number of bad chips and good chips is removed; if a pair
-has two good chips or two bad chips (that both lie then), in both cases, only one good chip and one bad chip is removed, if a pair has a good and bad chip then both are removed (again one of each type is removed),
-and if a pair has two bad chips where one tells the truth and one lies (or they both tell the truth) then they're both removed (so two bad chips are removed). Hence if the proportion of good
-chips to bad chips starts at greater than one, it will remain greater than one. Furthermore the algorithm halves the problem size because at least half of the chips are discarded every recursion.
-
+process a majority of the remaining chips will be good since the only
+way to discard a good chip is if it is paired with a bad chip and
+therefore discarding both preserves $n_{g_{j}}/n_{b_{j}}>1$ for all
+$j$. The recursion bottoms out and the invariant is preserved so
+the last chip left must be good. The halves the problem size since
+half the chips are discarded at every step.
 \item By part one we can find at least one good chip in $T(n)\approx T(n/2)+O(n)$.
 Let $c_{1}$ be such that $T(n)\leq T(n/2)+c_{1}n$ and $c_{2}$ such
 that $c_{2}>2c_{1}$. Then the inductive hypothesis is $T(n)\leq c_{2}n$.
 Then we have 
 \[
-T(n)\leq\frac{c_{2}n}{2}+c_{1}n=c_{2}n-n\bigg(\frac{c_{2}}{2}-c_1\bigg)\leq c_{2}n
+T(n)\leq\frac{c_{2}n}{2}+c_{1}n=c_{2}n-n\bigg(\frac{c_{2}}{2}-a\bigg)\leq c_{2}n
 \]
 Hence it takes $T(n)=O(n)$ to find one good chip, which you can then
 use to sort the rest of $n-1$ chips using $n-1$ comparisons, stopping
@@ -417,7 +418,7 @@ Find-Intersection(points,p,s)
 	// the intersection interval
 	return (a,b)
 \end{lstlisting}
-The call to $\text{random}$ on line 2 is in order to improve expected
+The call to $\text{random}$ on line 2 is inorder to improve expected
 running time. If all intervals overlap then $\text{Find-Intersection}$
 returns the largest region of overlap. Otherwise on average it returns
 the largest possible overlap of a subset of intervals. Then let $\text{Partition-Intervals}$
@@ -452,7 +453,7 @@ by their $a_{i}$ (hence $\text{flag}=0$) on $\leq$ around the $a$
 returned by $\text{Find-Intersection}$. After this first call all
 intervals to the right of $r$ are outside of the intersection. Why?
 If there were an interval $[a_{i},b_{i}]$ such that some portion
-of it overlapped the intersection and $a_{i} > a$ then the it would
+of it overlapped the intersection and $a_{i}\leq a$ then the it would
 have been considered in $\text{Find-Intersection}$ on line 16. Hence
 all intervals in $\text{points}[i]$ with indices $i>r$ are outside
 of the intersection. Therefore all intervals in $\text{points}[i]$
@@ -462,7 +463,7 @@ sorts the intervals by their $b_{i}$ (hence $\text{flag}=1$) on
 $<$ around the $b$ returned by $\text{Find-Intersection}$. After
 this second call all intervals to the left of $q$ are outside the
 intersection. Why? If there were an interval $[a_{i},b_{i}]$ such
-that some portion of it overlapped the intersection and $b_{i}\geq b$
+that some portion of it overlapped the intersection and $b_{i}<b$
 then it would have been considered by $\text{Find-Intersection}$
 on line 19. Therefore all intervals in $\text{points}[i]$ with indices
 $i<q$ are outside the intersection but on the left. Therefore all
@@ -471,17 +472,17 @@ intersection and their permutation is irelevant because we know they
 intersect and therefore either $a$ or $b$ returned by $\text{Find-Intersection}$
 is a correct $c^{*}$ such that $[a_{j},b_{j}]\,\forall j\in\{[a_{q},b_{q}],\dots,[a_{r},b_{r}]\}$.
 \item The macroscopic structure of $\text{Fuzzy-Quicksort}$ is almost the
-same as Randomized-Quicksort. $\text{Find-Intersection}$
+same as $\text{Randomized-Quicksort}$ . $\text{Find-Intersection}$
 is clearly $\Theta(n)$ since it considers every interval. Note also
 that when all intervals are disjoint $\text{Find-Intersection}$ returns
 just the first interval, the one chosen by $\text{random}$ on line
 2. Therefore in such an instance $\text{Find-Intersection}$ has exactly
 the same effect as wrapper $\text{Randomized-Partition}$ for $\text{Partition}$
 on page 179 of CLRS. $\text{Partition-Intervals}$ is almost exactly
-the same as Quicksort's $\text{Partition}$ and so runs
+the same as $\text{Quicksort}$ 's $\text{Partition}$ and so runs
 in $\Theta(n)$. Therefore worst case is similarly $\Theta(n\lg n)$.
 Best case is when all intervals intersect, in which case $\text{Find-Intersection}$
-returns an intersection that's contained in every interval and the first
+returns an intersection that's contained every interval and the first
 call to $\text{Partition-Intervals}$ returns index $y$ and the second
 call returns index $x$. Then the two recursive calls return immediately
 since $x\nleq x-1$ and $y+1\nleq y$. Therefore in this case, when
@@ -502,7 +503,7 @@ cases at each step: either $b_{\pi(i)}<r_{j}$ or $b_{\pi(i)}>r_{j}$
 or $b_{\pi(i)}=r_{j}$ and overall must distinguish between $n!$
 permutations of the $b_{i}$. Thus the decision tree that a comparison
 based algorithm must traverse is a 3-ary tree with minimum height
-$h\geq\log_{3}n!$. Then by \textbf{Eqn. 3.19} in CLRS we have that
+$h\geq\log_{3}n!$. Then by \textbf{eqn. 3.19} in CLRS we have that
 $h\ge\Theta(n\lg n)$.
 \item Pick a random blue jug, the ``blue pivot'', and use Randomized-partition
 to partition all the red jugs into bigger, smaller, and equal. Then
