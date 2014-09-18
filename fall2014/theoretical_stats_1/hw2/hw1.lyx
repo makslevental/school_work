@@ -110,6 +110,400 @@ status open
 
 \begin_layout Plain Layout
 
+[1.35]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Q(A)=P(A|B)$
+\end_inset
+
+.
+ Firstly 
+\begin_inset Formula 
+\[
+Q(A)=P(A|B)=\frac{P(A\cap B)}{P(B)}\ge0
+\]
+
+\end_inset
+
+by the non-negativity of 
+\begin_inset Formula $P(\cdot)$
+\end_inset
+
+ and the hypothesis that 
+\begin_inset Formula $P(B)>0$
+\end_inset
+
+.
+ Secondly 
+\begin_inset Formula 
+\[
+Q(\Omega)=P(\Omega)=\frac{P(\Omega|B)}{P(B)}=\frac{P(B)}{P(B)}=1
+\]
+
+\end_inset
+
+Finally assume 
+\begin_inset Formula $A_{i},A_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+ are pairwise disjoint.
+ Then 
+\begin_inset Formula 
+\[
+Q\Bigg(\bigcup_{i=1}^{\infty}A_{i}\Bigg)=P\Bigg(\bigcup_{i=1}^{\infty}A_{i}\Bigg|B\Bigg)=\frac{P\Bigg(\bigg(\bigcup_{i=1}^{\infty}A_{i}\bigg)\cap B\Bigg)}{P(B)}=\frac{P\bigg(\bigcup_{i=1}^{\infty}(A_{i}\cap B)\bigg)}{P(B)}
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $A_{i},\, A_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+ are pairwise disjoint 
+\begin_inset Formula $(A_{i}\cap B),\,(A_{j}\cap B)$
+\end_inset
+
+ are also pairwise disjoint for all 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $i,j$
+\end_inset
+
+ and by the countable additivity of 
+\begin_inset Formula $P(\cdot)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{P\bigg(\bigcup_{i=1}^{\infty}(A_{i}\cap B)\bigg)}{P(B)}=\frac{\sum_{i=1}^{\infty}P(A_{i}\cap B)}{P(B)}=\sum_{i=1}^{\infty}\frac{P\bigg(A_{i}\cap B)\bigg)}{P(B)}=\sum_{i=1}^{\infty}P(A_{i}|B)=\sum_{i=1}^{\infty}Q(A_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.38]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P(B)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $P(A|B)=\frac{P(A\cap B)}{1}$
+\end_inset
+
+ but 
+\begin_inset Formula $P(A)=P(A\cap B)+P(A\cap B^{c})$
+\end_inset
+
+ and since 
+\begin_inset Formula $A\cap B^{c}\subset B^{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $P(A\cap B^{c})\leq P(B^{c})=1-P(B)=0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $P(A)=P(A\cap B)$
+\end_inset
+
+ so 
+\begin_inset Formula $P(A|B)=P(A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $P(B|A)=P(B\cap A)/P(A)$
+\end_inset
+
+ but the hypothesis 
+\begin_inset Formula $A\subset B$
+\end_inset
+
+ implies 
+\begin_inset Formula $B\cap A=A$
+\end_inset
+
+ so 
+\begin_inset Formula $P(B|A)=P(A)/P(A)=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $P(A|B)=P(B|A)P(A)/P(B)=P(A)/P(B)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+P(A|A\cup B)= & \frac{P\bigg(A\cap(A\cup B)\bigg)}{P(A\cup B)}\\
+ & \frac{P(A)}{P(A)+P(B)-P(A\cap B)} & \text{by }A\subset A\cup B\\
+ & \frac{P(A)}{P(A)+P(B)} & \text{by "mutually exclusive"}\iff A\cap B=\emptyset
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $P(A\cap B\cap C)=P(A|B\cap C)P(B\cap C)=P(A|B\cap C)P(B|C)P(C)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.39]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P(A)>0$
+\end_inset
+
+ and
+\begin_inset Formula $P(B)>0$
+\end_inset
+
+ and
+\begin_inset Formula $P(A\cap B)=0$
+\end_inset
+
+ then obviously 
+\begin_inset Formula $P(A)\cdot P(B)\ne P(A\cap B)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P(A)>0$
+\end_inset
+
+ and
+\begin_inset Formula $P(B)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $P(A)P(B)=P(A\cap B)$
+\end_inset
+
+ then obviously 
+\begin_inset Formula $P(A\cap B)=P(A)P(B)>0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.44]
+\end_layout
+
+\end_inset
+
+The number of correct answers is binomially distributed with 
+\begin_inset Formula $p=.25$
+\end_inset
+
+ and 
+\begin_inset Formula $1-p=.75$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P(X\ge10)=\sum_{k=10}^{20}\binom{20}{k}\bigg(\frac{1}{4}\bigg)^{k}\bigg(\frac{3}{4}\bigg)^{n-k}=.0138644
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.46]
+\end_layout
+
+\end_inset
+
+There 
+\begin_inset Formula $7^{7}=823,543$
+\end_inset
+
+ different ways to distribute the 7 balls into the 7 cells.
+ The maximum number of cells that could have 3 balls is 2 and clearly the
+ minimum is 0.
+ Hence 
+\begin_inset Formula $X_{3}\in\{0,1,2\}$
+\end_inset
+
+.
+ The only way for 
+\begin_inset Formula $X_{3}=2$
+\end_inset
+
+ would be 3 balls in a cell, 3 balls in another cell, and the last ball
+ in one cell.
+ There are 
+\begin_inset Formula $\binom{7}{2}$
+\end_inset
+
+ way to choose the 2 cells to have the 3 balls each, 
+\begin_inset Formula $\binom{7}{3}$
+\end_inset
+
+ ways tp choose the first set of 3 balls for the first cell, 
+\begin_inset Formula $\binom{4}{3}$
+\end_inset
+
+ to choose the second set of 3 balls for the second cell, then finally 
+\begin_inset Formula $\binom{5}{1}=5$
+\end_inset
+
+ different ways to choose cell will contain the last balls.
+ Therefore 
+\begin_inset Formula 
+\[
+P(X_{3}=2)=\frac{\binom{7}{2}\binom{7}{3}\binom{4}{3}5}{7^{7}}\approx.0178
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $X_{3}=1$
+\end_inset
+
+ there are 3 different configurations:
+\begin_inset Formula $\{3,1,1,1,1\},\{3,2,1,1\},\{3,2,2\}.$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \#\{3,1,1,1,1\} & =7\binom{7}{3}\times\binom{6}{4}\times4\times3\times2 & \text{ which cell contains 3 balls \times\ which 3 balls \times\ }\\
+ &  &  & \text{ which cells contain 1 balls \times\ permute the balls}\\
+ & \#\{3,2,1,1\} & =7\binom{7}{3}\times6\times\binom{4}{2}\times\binom{5}{2}\times2 & \text{ which cell contains 3 balls \times\ which 3 balls \times\ }\\
+ &  &  & \text{ which cell contains 2 balls, which 2 balls,}\\
+ &  &  & \text{ which cells contain 1 bach each, permute the balls}\\
+ & \#\{3,2,2\} & =7\binom{7}{3}\times\binom{6}{2}\times\binom{4}{2} & \text{ which cell contains 3 balls, which 3 balls,}\\
+ &  &  & \text{ which cells contain 2 balls, which two balls in the first 2 ball cell}\\
+ &  &  & \text{ which cell contains second set of 2 balls, permute the balls}\\
+ & \#\{3,4\} & =7\binom{7}{3}\times6 & \text{ which cell contains 3 balls, which 3 balls,}\\
+ &  &  & \text{ which cell contains 4 balls}\\
+ &  & 288,120
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $P(X_{3}=1)=1-288,120/7^{7}\approx.650146$
+\end_inset
+
+.
+ Finally 
+\begin_inset Formula $P(X_{3}=0)=1-P(X_{3}=1)+P(X_{3}=2)=1-0.178-0.650\approx.33$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [1.47]
 \end_layout
 
@@ -490,6 +884,41 @@ Assume
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.50]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $S=\sum_{i=1}^{n}t^{k-1}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+S(1-t)=S-St=\sum_{i=1}^{n}t^{k-1}-\sum_{i=1}^{n}t^{k}=\sum_{i=1}^{n}(t^{k}-t^{k-1})
+\]
+
+\end_inset
+
+But this last sum is telescoping hence 
+\begin_inset Formula 
+\[
+S(1-t)=1-t^{k-1}\implies S=\frac{1-t^{k-1}}{1-t}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
