@@ -119,9 +119,269 @@ status open
 
 \begin_layout Plain Layout
 
+[4.2-3]
+\end_layout
+
+\end_inset
+
+Pad with zeroes until you get matrices of size which is a power of 2 then
+ truncate all non-zero entries in the resultant matrix.
+ Let 
+\begin_inset Formula $k=2^{\lceil\lg n\rceil}$
+\end_inset
+
+ and pad the 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices out to 
+\begin_inset Formula $k\times k$
+\end_inset
+
+.
+ Complexity is 
+\begin_inset Formula $O(k^{\lg7})=O\Bigg(\bigg(2^{\lceil\lg n\rceil}\bigg)^{\lg7}\Bigg)=O\Bigg(\bigg(2^{\lg n}\bigg)^{\lg7}\Bigg)=O\Bigg(\bigg(n^{\lg2}\bigg)^{\lg7}\Bigg)=O\bigg(n{}^{\lg7}\bigg)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.2-4]
+\end_layout
+
+\end_inset
+
+If the reduction is from one multiplication to 
+\begin_inset Formula $k$
+\end_inset
+
+ multiplications of matrices size 
+\begin_inset Formula $n/3$
+\end_inset
+
+ then the recurrence relation is 
+\begin_inset Formula $T(n)=kT(n/3)+\Theta(n^{2})$
+\end_inset
+
+ because each smaller multiplcation, presumably, still takes 
+\begin_inset Formula $\Theta(n^{2})$
+\end_inset
+
+ time.
+ Where 
+\begin_inset Formula $\log_{3}k$
+\end_inset
+
+ falls in relation to 
+\begin_inset Formula $2$
+\end_inset
+
+ determines whether 
+\begin_inset Formula $T(n)=O(n^{\lg7}).$
+\end_inset
+
+ If 
+\begin_inset Formula $\log_{3}k>2$
+\end_inset
+
+ then case 1 of the master theorem applies and 
+\begin_inset Formula $T(n)=\Theta(n^{\log_{3}k})$
+\end_inset
+
+ and 
+\begin_inset Formula $\log_{3}k<\lg7$
+\end_inset
+
+ when 
+\begin_inset Formula $k<3^{\lg7}\approx21.8$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\log_{3}k=2$
+\end_inset
+
+ and 
+\begin_inset Formula $k=9$
+\end_inset
+
+ then case 2 of the master theorem applies and 
+\begin_inset Formula $T(n)=\Theta(n^{2}\lg n)=O(n^{\lg7})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\log_{3}k<2$
+\end_inset
+
+ and 
+\begin_inset Formula $k<9$
+\end_inset
+
+ then case 3 of the master theorem applies and 
+\begin_inset Formula $T(n)=\Theta(n^{2})=O(n^{\lg7})$
+\end_inset
+
+.
+ So the maximum number is 21 by way of case 1.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.2-6]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the 
+\begin_inset Formula $kn\times n$
+\end_inset
+
+ matrix and 
+\begin_inset Formula $B$
+\end_inset
+
+ be the 
+\begin_inset Formula $n\times kn$
+\end_inset
+
+ matrix.
+ We can look at 
+\begin_inset Formula $A$
+\end_inset
+
+ as a 
+\begin_inset Formula $k$
+\end_inset
+
+-row column vector of 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices and 
+\begin_inset Formula $B$
+\end_inset
+
+ as a 
+\begin_inset Formula $k$
+\end_inset
+
+-column row vector of 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices.
+ I.e 
+\begin_inset Formula 
+\begin{align*}
+A=\left(\begin{array}{c}
+A_{1}\\
+A_{2}\\
+\vdots\\
+A_{k}
+\end{array}\right) & \text{ }B=\left(B_{1},B_{2},\dots,B_{k}\right)
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $A\cdot B$
+\end_inset
+
+ is the outerproduct of the column and row vector and therefore
+\begin_inset Formula 
+\[
+A\cdot B=\left(\begin{array}{cccc}
+A_{1}\cdot B_{1} & A_{1}\cdot B_{2} & \cdots & A_{1}\cdot B_{k}\\
+A_{2}\cdot B_{1} & A_{2}\cdot B_{2} & \cdots & A_{2}B_{k}\\
+\vdots & \vdots & \ddots & \vdots\\
+A_{k}\cdot B_{1} & A_{k}\cdot B_{2} & \cdots & A_{k}\cdot B_{k}
+\end{array}\right)
+\]
+
+\end_inset
+
+where every 
+\begin_inset Formula $A_{i}\cdot B_{j}$
+\end_inset
+
+ is an 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix product that can be computed using Strassen's algorithm.
+ Therefore the total running time is 
+\begin_inset Formula $k^{2}O(n^{\lg7})=O(k^{2}n^{\lg7}).$
+\end_inset
+
+ If the input matrices are reversed then 
+\begin_inset Formula $B\cdot A$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+dot product
+\begin_inset Quotes erd
+\end_inset
+
+ and therefore 
+\begin_inset Formula 
+\[
+A\cdot B=A_{1}\cdot B_{1}+A_{2}\cdot B_{2}+\cdots+A_{k}\cdot B_{k}
+\]
+
+\end_inset
+
+where every 
+\begin_inset Formula $A_{i}\cdot B_{j}$
+\end_inset
+
+ is an 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix product that can be computed using Strassen's algorithm.
+ Therefore the total running time is 
+\begin_inset Formula $kO(n^{\lg7})=O(kn^{\lg7}).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [6-3]
 \end_layout
 
+\end_inset
+
+ 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -354,7 +614,7 @@ If
 \end_inset
 
 .
- Hence by induction/recursion all of the entries in the tableaux are 
+ Hence by induction/recursion all of the entries in the tableau are 
 \begin_inset Formula $\infty$
 \end_inset
 
@@ -456,11 +716,11 @@ The minimum element is at
 \end_inset
 
  with the 
-\begin_inset Formula $\min\{\text{Extract-Min(}Y_{1+1,1}),\text{Extract-Min(}Y_{1,1+1})\}$
+\begin_inset Formula $\min\{Y_{1+1,1},Y_{1,1+1}\}$
 \end_inset
 
 .
- This is correct because it does not violate the Young-Tableaux property
+ This is correct because it does not violate the Young-tableau property
  
 \begin_inset Formula $Y$
 \end_inset
@@ -471,7 +731,11 @@ The minimum element is at
 
 .
  The algorithm terminates when 
-\begin_inset Formula $\infty=\min\{\text{Extract-Min(}Y_{i+1,j}),\text{Extract-Min(}Y_{i,j+1})\}$
+\begin_inset Formula 
+\[
+\infty=\min\{Y_{i+1,j},Y_{i,j+1}\}
+\]
+
 \end_inset
 
  or 
@@ -508,11 +772,11 @@ Whose solution is clearly
 \begin_inset Formula $O(p)=O(m+n)$
 \end_inset
 
-.
+ since the sub-problem is 1 smaller.
 \end_layout
 
 \begin_layout Enumerate
-By symmetry the maximum element in a Young-Tableaux is in the bottom-right
+By symmetry the maximum element in a Young-tableau is in the bottom-right
  entry.
  To insert replace the maximum element of 
 \begin_inset Formula $Y$
@@ -522,12 +786,12 @@ By symmetry the maximum element in a Young-Tableaux is in the bottom-right
 \begin_inset Formula $\infty$
 \end_inset
 
-).
- After extracting the maximum 
-\begin_inset Formula $Y[m,n]$
+ if 
+\begin_inset Formula $Y$
 \end_inset
 
- and replacing it with the entry to be inserted compute the maximum of 
+ isn't full).
+ Then compute the maximum of 
 \begin_inset Formula $Y[i-1,j]$
 \end_inset
 
@@ -586,7 +850,7 @@ By symmetry the maximum element in a Young-Tableaux is in the bottom-right
 \noun default
 \color inherit
 Then repeat.
- This is correct because since you're picking the maximum of 
+ This is correct because you're picking the maximum of 
 \begin_inset Formula $\{Y[m-1,n],Y[m,n-1]\}$
 \end_inset
 
@@ -604,7 +868,7 @@ Then repeat.
 \end_inset
 
 .
- The algorithm terminates when the entry 
+ The algorithm terminates when the entry to be inserted is 
 \begin_inset Formula $\geq\text{max}\{Y[m-1,n],Y[m,n-1]\}$
 \end_inset
 
@@ -617,8 +881,8 @@ Then repeat.
 \end_inset
 
 .
- Since at work the algorithm has to make comparisons with every entry in
- the last columns and every entry in the first row minus 1 the running time
+ Since at most the algorithm has to make comparisons with every entry in
+ the last column and every entry in the first row minus 1 the running time
  is 
 \begin_inset Formula $O(m+n).$
 \end_inset
@@ -731,7 +995,7 @@ Just implement the worst case linear time algorithm Select but replace steps
  1-3 with your linear time median algorithm.
  Another way to look at it is to implement Randomized-Select but forget
  the randomization and change partition to accept a pivot.
- The partition on whatever value Linear-Med returns
+ Then partition on whatever value Linear-Med returns
 \begin_inset listings
 inline false
 status open
@@ -851,19 +1115,23 @@ th statistic instead of the value.
 \end_inset
 
 .
- Use Select or Select-Index to find the median 
+ Use Select to find the median 
 \begin_inset Formula $m$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
 \end_inset
 
  in 
 \begin_inset Formula $O(n)$
 \end_inset
 
- time of 
-\begin_inset Formula $A$
+ time then in 
+\begin_inset Formula $O(n)$
 \end_inset
 
- then in linear time subtract 
+ time subtract 
 \begin_inset Formula $m$
 \end_inset
 
@@ -871,13 +1139,17 @@ th statistic instead of the value.
 \begin_inset Formula $A$
 \end_inset
 
- and compute their absolute value.
+ and compute their absolute value and store them in 
+\begin_inset Formula $A$
+\end_inset
+
+.
  The 
 \begin_inset Formula $k$
 \end_inset
 
- smallest elements then correspond to the closest to the median from the
- original array (which are stored in 
+ smallest elements in this adjusted array then correspond to the closest
+ to the median from the original array (
 \begin_inset Formula $B$
 \end_inset
 
@@ -887,7 +1159,7 @@ th statistic instead of the value.
 \end_inset
 
 th order statistic of this new array.
- Then use a modified version of Partition to Double-Pivot-Partition that
+ Then use a modified version of Partition, Double-Pivot-Partition, that
  partitions 
 \begin_inset Formula $A$
 \end_inset
@@ -896,7 +1168,7 @@ th order statistic of this new array.
 \begin_inset Formula $B$
 \end_inset
 
- which stores the original elements, i.e.
+, i.e.
  partitions 
 \begin_inset Formula $B$
 \end_inset
@@ -906,7 +1178,6 @@ th order statistic of this new array.
 \end_inset
 
 .
- which was median centered.
  Then the first 
 \begin_inset Formula $k$
 \end_inset
@@ -920,6 +1191,9 @@ th order statistic of this new array.
 \end_inset
 
  closest to the median.
+\begin_inset Newline newline
+\end_inset
+
  
 \begin_inset listings
 inline false
@@ -1140,8 +1414,9 @@ Lemma:
 \begin_inset Formula $a_{b}\leq m\leq b_{m}$
 \end_inset
 
-, that in the final arrangement of elements the median of both arrays is
- between (or equal to one or the other other both of) the medians of 
+, that is in the final arrangement of elements the median of both arrays
+ is between (or equal to one or the other other both of) the medians of
+ 
 \begin_inset Formula $A$
 \end_inset
 
@@ -1166,7 +1441,7 @@ If
 \begin_inset Formula $a_{m}=b_{m}$
 \end_inset
 
- then return then clearly the median of 
+ then clearly the median of 
 \begin_inset Formula $A\cup B=a_{m}=b_{m}$
 \end_inset
 
@@ -1227,7 +1502,15 @@ If
 \end_inset
 
  such that 
-\begin_inset Formula $c_{i}\ge a_{m}$
+\begin_inset Formula $a_{m}\leq c_{i}$
+\end_inset
+
+ (
+\begin_inset Formula $a_{m}=c_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{m}=c_{i+1})$
 \end_inset
 
  and similarly at most 
@@ -1251,7 +1534,7 @@ If
 \begin_inset Formula $\lceil A\cup B.\text{size}/2\rceil-1=\lceil A.\text{size}/2\rceil+\lceil B.\text{size}/2\rceil+1$
 \end_inset
 
- greater than it.
+ greater than it, which is a contradiction.
  Therefore 
 \begin_inset Formula $a_{m}\leq m\leq b_{m}$
 \end_inset
@@ -1281,7 +1564,7 @@ To compute the median of
 \begin_inset Formula $b_{m}=B[\lceil B.\text{size}/2\rceil]$
 \end_inset
 
- the medians of each array in constant time.
+, the medians of each array, in constant time.
  If 
 \begin_inset Formula $a_{m}=b_{m}$
 \end_inset
@@ -1296,66 +1579,20 @@ To compute the median of
 \end_inset
 
 .
- Then compute the rank 
-\begin_inset Formula $r_{a}$
-\end_inset
-
- of 
-\begin_inset Formula $a_{m}$
-\end_inset
-
- in 
-\begin_inset Formula $B$
-\end_inset
-
- by performing a binary search for 
-\begin_inset Formula $a_{m}$
-\end_inset
-
- and returning the index of the last element checked plus one (if 
-\begin_inset Formula $a_{m}\in B$
-\end_inset
-
- this ranks 
-\begin_inset Formula $a_{m}$
-\end_inset
-
- ahead of its repetitions).
- Similarly compute the rank 
-\begin_inset Formula $r_{b}$
-\end_inset
-
- of 
-\begin_inset Formula $b_{m}\in A$
-\end_inset
-
-.
- Then let all 
-\begin_inset Formula $S_{b}$
+ Then let 
+\begin_inset Formula $S_{a}$
 \end_inset
 
  be all of the elements between 
-\begin_inset Formula $r_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $b_{m}$
-\end_inset
-
- in 
-\begin_inset Formula $B$
-\end_inset
-
- are a subset the of elements that appear between 
 \begin_inset Formula $a_{m}$
 \end_inset
 
- in 
-\begin_inset Formula $b_{m}$
+ and 
+\begin_inset Formula $A[n]$
 \end_inset
 
  in 
-\begin_inset Formula $A\cup B$
+\begin_inset Formula $A$
 \end_inset
 
  and likewise for 
@@ -1363,15 +1600,15 @@ To compute the median of
 \end_inset
 
  all of the elements between 
-\begin_inset Formula $r_{b}$
+\begin_inset Formula $b_{m}$
 \end_inset
 
  and 
-\begin_inset Formula $a_{m}$
+\begin_inset Formula $B[n]$
 \end_inset
 
  in 
-\begin_inset Formula $A$
+\begin_inset Formula $B$
 \end_inset
 
 .
@@ -1388,6 +1625,24 @@ and
 \end_inset
 
  are already sorted we can recurse into them.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+At each recursion medians of each sub-array are computed in constant time,
+ and since we're truncating around the medians of the subarray half of the
+ entries are truncated and so we have the recursion relation 
+\begin_inset Formula $T(n)\approx T(n/2)+O(1)$
+\end_inset
+
+ whose solution is 
+\begin_inset Formula $O(\lg n)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -2782,7 +3037,7 @@ Tree-Delete(T,z)
 
 \end_inset
 
- Tree-Delete has the same structure as Tree-Delete from CLRS and hence is
+Tree-Delete has the same structure as Tree-Delete from CLRS and hence is
  correct and runs in at most 
 \begin_inset Formula $O(\lg n)$
 \end_inset
