@@ -439,11 +439,11 @@ There
 \begin_inset Formula $\binom{7}{2}$
 \end_inset
 
- way to choose the 2 cells to have the 3 balls each, 
+ ways to choose the 2 cells to have the 3 balls each, 
 \begin_inset Formula $\binom{7}{3}$
 \end_inset
 
- ways tp choose the first set of 3 balls for the first cell, 
+ ways to choose the first set of 3 balls for the first cell, 
 \begin_inset Formula $\binom{4}{3}$
 \end_inset
 
@@ -451,7 +451,7 @@ There
 \begin_inset Formula $\binom{5}{1}=5$
 \end_inset
 
- different ways to choose cell will contain the last balls.
+ different ways to choose which cell will contain the last balls.
  Therefore 
 \begin_inset Formula 
 \[
@@ -464,20 +464,20 @@ For
 \begin_inset Formula $X_{3}=1$
 \end_inset
 
- there are 3 different configurations:
+ there are 3 different configurations possible:
 \begin_inset Formula $\{3,1,1,1,1\},\{3,2,1,1\},\{3,2,2\}.$
 \end_inset
 
  
 \begin_inset Formula 
 \begin{align*}
- & \#\{3,1,1,1,1\} & =7\binom{7}{3}\times\binom{6}{4}\times4\times3\times2 & \text{ which cell contains 3 balls, which 3 balls,  }\\
- &  &  & \text{ which cells contain 1 balls,permute the balls}\\
- & \#\{3,2,1,1\} & =7\binom{7}{3}\times6\times\binom{4}{2}\times\binom{5}{2}\times2 & \text{ which cell contains 3 balls, which 3 balls, }\\
+ & \#\{3,1,1,1,1\} & =7\binom{7}{3}\times\binom{6}{4}\times4\times3\times2 & \text{ which cell contains 3 balls \times\ which 3 balls \times\ }\\
+ &  &  & \text{ which cells contain 1 ball \times\ permute the balls}\\
+ & \#\{3,2,1,1\} & =7\binom{7}{3}\times6\times\binom{4}{2}\times\binom{5}{2}\times2 & \text{ which cell contains 3 balls \times\ which 3 balls \times\ }\\
  &  &  & \text{ which cell contains 2 balls, which 2 balls,}\\
- &  &  & \text{ which cells contain 1 bach each, permute the balls}\\
+ &  &  & \text{ which cells contain 1 ball each, permute the balls}\\
  & \#\{3,2,2\} & =7\binom{7}{3}\times\binom{6}{2}\times\binom{4}{2} & \text{ which cell contains 3 balls, which 3 balls,}\\
- &  &  & \text{ which cells contain 2 balls, which two balls in the first 2 ball cell}\\
+ &  &  & \text{ which cells contain 2 balls, which two balls in the first 2-ball cell}\\
  &  &  & \text{ which cell contains second set of 2 balls, permute the balls}\\
  & \#\{3,4\} & =7\binom{7}{3}\times6 & \text{ which cell contains 3 balls, which 3 balls,}\\
  &  &  & \text{ which cell contains 4 balls}\\
@@ -491,7 +491,16 @@ Hence
 \end_inset
 
 .
- Finally 
+ For 
+\begin_inset Formula $X_{3}=0$
+\end_inset
+
+ there are very many configurations but we can compute by computing as the
+ complement of 
+\begin_inset Formula $P(X_{3}=1):$
+\end_inset
+
+ 
 \begin_inset Formula $P(X_{3}=0)=1-P(X_{3}=1)+P(X_{3}=2)=1-0.178-0.650\approx.33$
 \end_inset
 
@@ -554,7 +563,7 @@ Continuous and hence right-continuous.
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\arctan(x)$
+\begin_inset Formula $\arctan(x)'=\frac{1}{1+x^{2}}>0$
 \end_inset
 
  is non-decreasing (monotonically increasing) and hence 
@@ -867,7 +876,11 @@ Assume
 
 .
  Then 
-\begin_inset Formula $1-P(X>t)\leq1-P(Y>t)$
+\begin_inset Formula 
+\[
+1-P(X>t)\leq1-P(Y>t)
+\]
+
 \end_inset
 
  and so 
@@ -1302,7 +1315,7 @@ end{tikzpicture}
 
 
 \backslash
-caption{$F_X$ for problem 1.51}
+caption{$F_X$ for problem 1.51 (note at $F_X(4)$ there is overlap) }
 \backslash
 label{fig:M1}
 \end_layout
@@ -1455,7 +1468,11 @@ status open
 
 \end_inset
 
-C is a normalization constant.
+Let 
+\begin_inset Formula $c$
+\end_inset
+
+ be a normalization constant.
 \end_layout
 
 \begin_deeper
@@ -1464,7 +1481,7 @@ C is a normalization constant.
 \end_inset
 
  hence 
-\begin_inset Formula $c=1\implies\int_{0}^{\pi/2}f(x)=1$
+\begin_inset Formula $c=1\implies\int_{0}^{\pi/2}cf(x)=1$
 \end_inset
 
 .

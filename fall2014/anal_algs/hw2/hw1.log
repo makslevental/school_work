@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.29)  13 SEP 2014 15:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.29)  23 SEP 2014 07:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -128,6 +128,12 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/wasysym/wasysym.sty
+Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
+\symwasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
+)
 (/usr/share/texlive/texmf-dist/tex/generic/mathdots/mathdots.sty
 Package: mathdots 2006/03/16 v0.8 Improve and add various macros for dots in ma
 th.
@@ -466,18 +472,18 @@ Package: nopageno 1989/01/01 no page numbers (DPC)
 ) (./hw1.aux)
 \openout1 = `hw1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
 \c@lstlisting=\count131
 
 ABD: EveryShipout initializing macros
@@ -542,91 +548,162 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 52.
+LaTeX Font Info:    Try loading font information for U+msa on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 52.
+LaTeX Font Info:    Try loading font information for U+msb on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 74.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 58.
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+(/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
+File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 74.
-
-Underfull \hbox (badness 10000) in paragraph at lines 87--99
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--99
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 87--99
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 87--99
+Underfull \hbox (badness 10000) in paragraph at lines 113--125
 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Overfull \hbox (50.38103pt too wide) in paragraph at lines 391--392
-[]\OT1/cmr/m/n/10 This prob-lem was solved with the help of http://alumni.media
-.mit.edu/~dlanman/courses/cs157/HW3.pdf 
- []
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 206.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 404.
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 404.
- [4]
-Overfull \hbox (4.24178pt too wide) in paragraph at lines 474--490
-[]\OT1/cmr/m/n/10 The macro-scopic struc-ture of $[]$ is al-most the same as $[
-]$
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 206.
+
+Underfull \hbox (badness 10000) in paragraph at lines 212--225
+
  []
 
-[5] [6] (./hw1.aux) ) 
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 259--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 259--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 259--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 259--299
+
+ []
+
+
+Overfull \hbox (5.07304pt too wide) in paragraph at lines 303--303
+[]\OT1/cmr/m/n/10 unsorted,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+\OT1/cmr/m/n/10 singly
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+[]\OT1/cmr/m/n/10 sorted,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+\OT1/cmr/m/n/10 singly
+ []
+
+
+Overfull \hbox (5.07304pt too wide) in paragraph at lines 303--303
+[]\OT1/cmr/m/n/10 unsorted,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
+\OT1/cmr/m/n/10 dou-bly
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--304
+[]\OT1/cmr/m/n/10 sorted,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--304
+\OT1/cmr/m/n/10 dou-bly
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 299--314
+
+ []
+
+Missing character: There is no ] in font nullfont!
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--410
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 327--410
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 411--426
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--426
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 447--454
+
+ []
+
+[5] [6] [7] (./hw1.aux) ) 
 Here is how much of TeX's memory you used:
- 12629 strings out of 493304
- 222939 string characters out of 6139871
- 288536 words of memory out of 5000000
- 15810 multiletter control sequences out of 15000+600000
- 10591 words of font info for 42 fonts, out of 8000000 for 9000
+ 13164 strings out of 493304
+ 231275 string characters out of 6139871
+ 308990 words of memory out of 5000000
+ 16336 multiletter control sequences out of 15000+600000
+ 11873 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,10n,55p,409b,1599s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/m
-sbm10.pfb>
-Output written on hw1.pdf (6 pages, 164698 bytes).
+ 56i,18n,66p,409b,1601s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+wasy/wasy10.pfb>
+Output written on hw1.pdf (7 pages, 148000 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
