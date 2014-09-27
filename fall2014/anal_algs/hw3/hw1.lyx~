@@ -927,34 +927,34 @@ Let
  items.
  The problem exhibits optimal substructure: consider the most valuable load
  that weighs 
-\begin_inset Formula $W$
+\begin_inset Formula $j$
 \end_inset
 
  pounds.
  If we remove one of the items from this load, say 
-\begin_inset Formula $a_{j}$
+\begin_inset Formula $a_{i}$
 \end_inset
 
  for some 
-\begin_inset Formula $j\in\{1,\dots,n\}$
+\begin_inset Formula $i\in\{1,\dots,n\}$
 \end_inset
 
  the remaining load must be the most valuable load weighing at most 
-\begin_inset Formula $W-\omega_{j}$
+\begin_inset Formula $j-\omega_{i}$
 \end_inset
 
  that the thief can take from 
-\begin_inset Formula $\{\dots,a_{j-1},a_{j+1},\dots,a_{n}\}$
+\begin_inset Formula $\{\dots,a_{i-1},a_{i+1},\dots,a_{n}\}$
 \end_inset
 
 .
  Then the most valuable knapsack that can be constructed using items up
  to 
-\begin_inset Formula $A_{1,j}=\{a_{1},a_{2},\dots,a_{j}\}$
+\begin_inset Formula $A_{i}=\{a_{1},a_{2},\dots,a_{j}\}$
 \end_inset
 
- having total weight 
-\begin_inset Formula $W$
+ and having total weight 
+\begin_inset Formula $j$
 \end_inset
 
  is 
@@ -965,7 +965,7 @@ status open
 
 
 \backslash
-[m(A_{1,j},W) = 
+[m(A_{1,i},j) = 
 \backslash
 left
 \backslash
@@ -985,17 +985,17 @@ begin{array}{lr}
 \backslash
 text{max} 
 \backslash
-{m(A_{1,j-1},W),m(A_{1,j-1},W-
+{m(A_{i-1},j),m(A_{i-1},j-
 \backslash
-omega_j)+p_j)
+omega_i)+p_i)
 \backslash
 } & 
 \backslash
 text{if } 
 \backslash
-omega_j 
+omega_i 
 \backslash
-leq W
+leq j
 \backslash
 
 \backslash
@@ -1004,11 +1004,11 @@ leq W
 
 \begin_layout Plain Layout
 
-			m(A_{1,j-1},W) & 
+			m(A_{i-1},j) & 
 \backslash
 text{if } 
 \backslash
-omega_j >W 
+omega_i >j 
 \backslash
 
 \backslash
@@ -1019,11 +1019,11 @@ omega_j >W
 
 			0 & 
 \backslash
-text{if } A_{i,j} = 
+text{if } A_{i} = 
 \backslash
 emptyset 
 \backslash
-text{or } W = 0
+text{ or } j = 0
 \end_layout
 
 \begin_layout Plain Layout
@@ -1050,12 +1050,88 @@ right.
 
 \end_inset
 
+To compute the solution for 
+\begin_inset Formula $m(A_{n},W)$
+\end_inset
 
+ we construct a table 
+\begin_inset Formula $m[i,j]=m(A_{i},j)$
+\end_inset
+
+ with 
+\begin_inset Formula $i\in\{1,\dots,n\}$
+\end_inset
+
+ and 
+\begin_inset Formula $j\in\{1,\dots,W\}$
+\end_inset
+
+ in row major order.
+ Knapsack takes the array 
+\begin_inset Formula $A[]$
+\end_inset
+
+ where 
+\begin_inset Formula $A[i].w=\omega_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $A[i].p=p_{i}$
+\end_inset
+
+.
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Knapsack(A,W)
 \end_layout
 
-\begin_layout Enumerate
-W-w_i and the set of items chosen, which wasn't the entire set to begin
- with, is now 1 item smaller, need to index the indices i_1 for example
+\begin_layout Plain Layout
+
+  let m[i,j] = 0 for all i,j
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j = 1 to W
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i = 1 to n
+\end_layout
+
+\begin_layout Plain Layout
+
+	  if A[i] > j
+\end_layout
+
+\begin_layout Plain Layout
+
+		m[i,j] = m[i-1,j]
+\end_layout
+
+\begin_layout Plain Layout
+
+	  else
+\end_layout
+
+\begin_layout Plain Layout
+
+		m[i,j] = max(m[i-1,j], m[i-1,j-A[i].w]+A[i].p)
+\end_layout
+
+\end_inset
+
+Then we back track from 
+\begin_inset Formula $m[n,W]$
+\end_inset
+
+ to find the actual list of items.
 \end_layout
 
 \end_body

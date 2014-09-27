@@ -374,7 +374,6 @@ and therefore
 \begin{align*}
 E(Y) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}ye^{-y^{2}/2}dy\\
  & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}e^{-(y^{2}/2)}d\left(y^{2}/2\right)\\
- & =\frac{2}{\sqrt{2\pi}}\left(e^{-0}-e^{-\infty})\\
  & =\frac{2}{\sqrt{2\pi}}
 \end{align*}
 
@@ -433,7 +432,7 @@ Hence
 and therefore
 \begin_inset Formula 
 \[
-f_{Y}(y)=\frac{2}{\pi}\frac{1}{1+(y/d)^{2}}\frac{1}{d}=
+f_{Y}(y)=\frac{2}{\pi}\frac{1}{1+(y/d)^{2}}\frac{1}{d}
 \]
 
 \end_inset

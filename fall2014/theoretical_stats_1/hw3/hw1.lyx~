@@ -405,5 +405,49 @@ Hence
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset Formula $Y=g(X)=d\tan(X)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $g(X)$
+\end_inset
+
+ is increasing for 
+\begin_inset Formula $0<x<\pi/2$
+\end_inset
+
+ and 
+\begin_inset Formula $g^{-1}(Y)=\arctan(Y).$
+\end_inset
+
+ Hence
+\begin_inset Formula 
+\[
+\left|\left(\arctan(Y/d)\right)^{'}\right|=\frac{1}{1+(Y/d)^{2}}\frac{1}{d}
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\[
+f_{Y}(y)=\frac{2}{\pi}\frac{1}{1+(y/d)^{2}}\frac{1}{d}=
+\]
+
+\end_inset
+
+with support 
+\begin_inset Formula $y\in(0,\infty).$
+\end_inset
+
+ This is the Cauchy distribution hence 
+\begin_inset Formula $E(Y)=\infty$
+\end_inset
+
+.
+\end_layout
+
 \end_body
 \end_document
