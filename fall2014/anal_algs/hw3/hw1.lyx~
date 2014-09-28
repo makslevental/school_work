@@ -1132,7 +1132,458 @@ Then we back track from
 \end_inset
 
  to find the actual list of items.
+ Since the table 
+\begin_inset Formula $m[i,j]$
+\end_inset
+
+ has dimensions 
+\begin_inset Formula $n\times W$
+\end_inset
+
+ and at each entry we have to perform 
+\begin_inset Formula $\Theta(1)$
+\end_inset
+
+ work, and the backtrack algorithm takes 
+\begin_inset Formula $O(n+W)$
+\end_inset
+
+ time, the whole algorithm runs in 
+\begin_inset Formula $O(nW)$
+\end_inset
+
+ time.
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[16.2-4]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ denote the distance from Grand Forks, along U.S.
+ 2, of every location that the professor can purchase water and let 
+\begin_inset Formula $s_{i}=w_{i}+2$
+\end_inset
+
+ miles.
+ Then the problem is to find the minimum spanning set of intervals of the
+ form 
+\begin_inset Formula $a_{i}=[w_{i},s_{i}]$
+\end_inset
+
+ for the distance from Grand Forks to Williston.
+ Denote by 
+\begin_inset Formula $S_{ij}$
+\end_inset
+
+ the set of intervals 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+to 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+, which span 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+, and suppose we want to find the minimum set of overlapping intervals 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+in 
+\begin_inset Formula $S_{ij}$
+\end_inset
+
+, which also span 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+.
+ Suppose further that such a minimum set contains an interval 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+ By including 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ in an optimal solution we are left with two sub-problems: finding minimum
+ set of overlapping intervals in 
+\begin_inset Formula $S_{ik}$
+\end_inset
+
+, which span 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{k}$
+\end_inset
+
+, and in 
+\begin_inset Formula $S_{kj}$
+\end_inset
+
+, which span 
+\begin_inset Formula $w_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A_{ik}=A_{ij}\cap S_{ik}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{kj}=A_{ij}\cap S_{kj}$
+\end_inset
+
+.
+ Note both sets include 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+ Thus we have that 
+\begin_inset Formula $A_{ij}=A_{ik}\cup\left(A_{kj}\setminus\{a_{k}\}\right)$
+\end_inset
+
+and so the minimum-size set 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+of spanning intervals of 
+\begin_inset Formula $S_{ij}$
+\end_inset
+
+ consists of 
+\begin_inset Formula $\left|A_{ij}\right|=\left|A_{ik}\right|+\left|A_{kj}\right|-1$
+\end_inset
+
+ intervals.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+If we could find a set of intervals 
+\begin_inset Formula $A_{kj}^{'}$
+\end_inset
+
+or 
+\begin_inset Formula $A_{ik}^{'}$
+\end_inset
+
+where 
+\begin_inset Formula $\left|A_{kj}^{'}\right|<\left|A_{kj}\right|$
+\end_inset
+
+or 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left|A_{ik}^{'}\right|<\left|A_{ik}\right|$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+then we would have found a set of intervals such that 
+\begin_inset Formula 
+\[
+\left|A_{ij}\right|=\left|A_{ik}\right|+\left|A_{kj}\right|-1>\left|A_{kj}^{'}\right|+\left|A_{ik}\right|-1
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\left|A_{ij}\right|=\left|A_{ik}\right|+\left|A_{kj}\right|-1>\left|A_{ij}^{'}\right|+\left|A_{kj}\right|-1
+\]
+
+\end_inset
+
+contradicting the optimality of 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+We make the greedy choice: choose the first interval and then choose the
+ last interval 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $S_{ij}\setminus\{a_{1}\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{i}\leq s_{1}$
+\end_inset
+
+, i.e.
+ the last possible stop before the professor runs out of water.
+ Then repeat for 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+.
+ Let 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Water-Stops(S)
+\end_layout
+
+\begin_layout Plain Layout
+
+	//prof starts with 2 miles of water
+\end_layout
+
+\begin_layout Plain Layout
+
+	A.append((0,2))
+\end_layout
+
+\begin_layout Plain Layout
+
+	j = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i = 1 to n
+\end_layout
+
+\begin_layout Plain Layout
+
+		while S[j].w <= A[i].s
+\end_layout
+
+\begin_layout Plain Layout
+
+			j++
+\end_layout
+
+\begin_layout Plain Layout
+
+		A.append(S[j-1])
+\end_layout
+
+\end_inset
+
+The greedy choice is optimal: let 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ be the solutions the stop that the optimal solution would generate.
+ Then the first stop 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+is either equal to 
+\begin_inset Formula $A[1].w$
+\end_inset
+
+ or before it (since our greedy solution chose the last possible stop).
+ The distance between 
+\begin_inset Formula $g_{2}$
+\end_inset
+
+and 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+is less than 2 miles and by the previous sentence 
+\begin_inset Formula $g_{1}<A[1].w<g_{2}$
+\end_inset
+
+ therefore we can replace 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+in the optimal solution by 
+\begin_inset Formula $A[1].w$
+\end_inset
+
+ and not violate optimality, since we replaced one stop in the optimal solution
+ with one stop in our greedy solution.
+ But in this way we can inductively replace all solutions 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+in the optimal solution with 
+\begin_inset Formula $A[i].w$
+\end_inset
+
+ stop.
+ Therefore greedy solution is optimal.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The algorithm inspects each interval once and therefore runs in 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ time.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[16-1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $k$
+\end_inset
+
+ be the amount of money that needs changing.
+ Provide 
+\begin_inset Formula $\lfloor n/25\rfloor$
+\end_inset
+
+ quarters, then 
+\begin_inset Formula $\lfloor(n\text{mod}25)/10\rfloor$
+\end_inset
+
+ dimes, then 
+\begin_inset Formula $\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor$
+\end_inset
+
+ nickles, then 
+\begin_inset Formula $((n\text{mod}25)\text{mod}10)\text{mod}5$
+\end_inset
+
+ pennies.
+ Then
+\begin_inset Formula 
+\[
+k=\lfloor n/25\rfloor+\lfloor(n\text{mod}25)/10\rfloor+\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor+((n\text{mod}25)\text{mod}10)\text{mod}5
+\]
+
+\end_inset
+
+by Euclid's algorithm.
+ Suppose there's a solution which uses fewer coins.
+ Then it must use either fewer quarters, or dimes, or nickles, or pennies.
+ For every one fewer quarter it uses, it must use either 3 coins in dimes
+ and nickles, or 5 coins in nickles, or coins
+\begin_inset Formula $\{9,13,17,21\}$
+\end_inset
+
+in nickles and pennies, or 25 coins in pennies.
+ For ever one fewer dime it uses, it must use 2 coins in nickles, or 9 coins
+ in nickles and pennies, or 10 coins in pennies.
+ For every one fewer nickle it uses it must 5 pennies.
+ It cannot use fewer pennies.
+ Hence the greedy solution is optimal, since any substitution grows the
+ number of coins (substantially).
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x$
+\end_inset
+
+ be the amount to change.
+ By uniqueness of base representation there is only one set of 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+such that 
+\begin_inset Formula $x=\sum_{i=0}^{k}a_{i}c^{i}$
+\end_inset
+
+.
+ Since each 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+is computed using successive modulo operations this corresponds to the greedy
+ algorithm.
+ Therefore the greedy solution must produce the optimal solution since it
+ produces the base 
+\begin_inset Formula $c$
+\end_inset
+
+ representation of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
