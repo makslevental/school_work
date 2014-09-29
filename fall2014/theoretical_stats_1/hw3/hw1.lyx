@@ -405,6 +405,17 @@ Hence
 
 \end_deeper
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.12]
+\end_layout
+
+\end_inset
+
+
 \begin_inset Formula $Y=g(X)=d\tan(X)$
 \end_inset
 
@@ -448,5 +459,581 @@ with support
 .
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.13]
+\end_layout
+
+\end_inset
+
+The probability that there are 
+\begin_inset Formula $k$
+\end_inset
+
+ heads, given the first flip lands heads, is geometrically distributed 
+\begin_inset Quotes eld
+\end_inset
+
+flips until first tail
+\begin_inset Quotes erd
+\end_inset
+
+: 
+\begin_inset Formula $P_{H}(X=k)=p^{k}(1-p)$
+\end_inset
+
+ but restricted to 
+\begin_inset Formula $k=1,2,3,\dots$
+\end_inset
+
+ and the probability that there are 
+\begin_inset Formula $k$
+\end_inset
+
+ tails, given the first flip lands tails, is also geometrically distributed
+ 
+\begin_inset Quotes eld
+\end_inset
+
+flips until first head
+\begin_inset Quotes erd
+\end_inset
+
+: 
+\begin_inset Formula $P_{T}(X=k)=(1-p)^{k}p$
+\end_inset
+
+, but also restricted to 
+\begin_inset Formula $k=1,2,3,\dots$
+\end_inset
+
+.
+ Therefore the probability that there's either a run of 
+\begin_inset Formula $k$
+\end_inset
+
+ heads or tails is 
+\begin_inset Formula 
+\[
+P_{H\vee T}(X=k)=P_{H}+P_{T}=p^{k}(1-p)+(1-p)^{k}p
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =\sum_{k=1}^{\infty}k\left(p^{k}(1-p)+(1-p)^{k}p\right)\\
+ & =\sum_{k=1}^{\infty}kp^{k}(1-p)+\sum_{k=1}^{\infty}k(1-p)^{k}p\\
+ & =E\left(H\right)-(1-p)+E\left(T\right)-p\\
+ & =\frac{1-(1-p)}{1-p}+\frac{1-p}{p}\\
+ & =\frac{1}{p}+\frac{1}{1-p}-2
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.14]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =\int_{0}^{\infty}x\cdot f_{X}(x)dx\text{ let }u=F_{X}(x)\mbox{ and since }F_{X}\mbox{ strictly monotonic}\\
+ & =\int_{0}^{1}F_{X}^{-1}(u)du\\
+ & =\int_{0}^{\infty}\left(1-F_{X}(x)\right)dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+First note that 
+\begin_inset Formula $x=\sum_{k=1}^{x}1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =\sum_{x=0}^{\infty}x\cdot f_{X}(x)\\
+ & =\sum_{x=1}^{\infty}x\cdot f_{X}(x)\\
+ & =\sum_{x=1}^{\infty}\sum_{k=1}^{x}f_{X}(x)\\
+ & =\sum_{k=1}^{\infty}\sum_{x=k}^{\infty}f_{X}(x)\text{ since }0<k<x\text{ and }0<x<\infty\iff k<x<\infty\mbox{ and }0<k<\infty\\
+ & =\sum_{k=1}^{\infty}\left(1-F_{X}(k)\right)\\
+ & =\sum_{k=0}^{\infty}\left(1-F_{X}(k)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.17]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $m$
+\end_inset
+
+ is such that 
+\begin_inset Formula $m=F_{X}^{-1}(1/2)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $3\int_{0}^{m}x^{2}dx=m^{3}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $m=\sqrt[3]{1/2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{2} & =\frac{1}{\pi}\int_{-\infty}^{m}\frac{1}{1+x^{2}}\\
+ & =\frac{1}{\pi}\left(\arctan(m)-\arctan(-\infty)\right)\\
+ & =\frac{1}{\pi}\left(\arctan(m)+\frac{\pi}{2}\right)
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $m=\tan\left(0\right)=0$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.20]
+\end_layout
+
+\end_inset
+
+Number of children is distributed Geometrically 
+\begin_inset Formula $P(X=k)=(1-p)^{k-1}p$
+\end_inset
+
+, number of trials until first success, including first success, with 
+\begin_inset Formula $p=1/2.$
+\end_inset
+
+ The mean 
+\begin_inset Formula $\mu=1/p=2$
+\end_inset
+
+.
+ Therefore the couple, on average, should have two children.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.22]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Note that 
+\begin_inset Formula $\int_{0}^{\infty}e^{-\alpha x^{2}}dx=\frac{1}{2}\sqrt{\frac{\pi}{a}}$
+\end_inset
+
+ .
+ Let 
+\begin_inset Formula $\alpha=1/\beta^{2}$
+\end_inset
+
+ under the integral, then 
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{\infty}f_{X}(x)dx & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{2}e^{-x^{2}/\beta^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial}{\partial\alpha}e^{-\alpha x^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\int_{0}^{\infty}e^{-\alpha x^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{d}{d\alpha}\alpha^{-1/2}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{-1}{2}\alpha^{-3/2}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{-1}{2}\left(\frac{1}{\beta^{2}}\right)^{-3/2}\\
+ & =\frac{1}{\beta^{3}}\frac{1}{\left(\frac{1}{\beta^{2}}\right)^{3/2}}=\frac{1}{\beta^{3}}\frac{\beta^{3}}{1}=1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Note that 
+\begin_inset Formula $\int_{0}^{\infty}xe^{-\alpha x^{2}}=\frac{1}{2\alpha}$
+\end_inset
+
+ (
+\begin_inset Formula $u$
+\end_inset
+
+ substitution).
+ Let 
+\begin_inset Formula $\alpha=1/\beta^{2}$
+\end_inset
+
+ under the integral, then 
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{3}e^{-x^{2}/\beta^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial}{\partial\alpha}\left(xe^{-\alpha x^{2}}\right)dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\int_{0}^{\infty}xe^{-\alpha x^{2}}dx\\
+ & = \frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\frac{1}{2}\alpha^{-1}\\
+ & =\frac{2}{\beta^{3}\sqrt{\pi}}\alpha^{-2}=\frac{2\beta^{4}}{\beta^{3}\sqrt{\pi}}=\frac{2\beta}{\sqrt{\pi}}
+\end{align*}
+
+\end_inset
+
+The second moment is 
+\begin_inset Formula 
+\begin{align*}
+E\left(X^{2}\right) & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{4}e^{-x^{2}/\beta^{2}}dx\\
+ & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial^{2}}{\partial\alpha^{2}}\left(e^{-\alpha x^{2}}\right)dx\\
+ & =\frac{4}{\beta^{3}\sqrt{\pi}}\frac{d^{2}}{d\alpha^{2}}\int_{0}^{\infty}e^{-\alpha x^{2}}dx\\
+ & = \frac{4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{d^{2}}{d\alpha^{2}}\alpha^{-1/2}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\frac{d}{d\alpha}\alpha^{-3/2}=\frac{6}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\frac{d}{d\alpha}\alpha^{-5/2}\\
+ & =\frac{6}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\left(\frac{1}{\beta^{2}}\right)^{-5/2}=\frac{3}{2}\beta^{2}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\text{Var}(X)=\frac{3}{2}\beta^{2}-\left(\frac{2\beta}{\sqrt{\pi}}\right)^{2}=\beta^{2}\left(\frac{3}{2}-\frac{4}{\pi}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.23]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $f_{Y}(y)=\frac{1}{2\sqrt{y}}\left(f_{X}\left(\sqrt{y}\right)+f_{X}\left(-\sqrt{y}\right)\right)=\frac{1}{4\sqrt{y}}\left(1+\sqrt{y}+1-\sqrt{y}\right)=\frac{1}{2\sqrt{y}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left(Y\right)=\frac{1}{2}\int_{0}^{1}\frac{y}{\sqrt{y}}dy=\frac{1}{2}\int_{0}^{1}\sqrt{y}dy=\frac{1}{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $E\left(Y^{2}\right)=\frac{1}{2}\int_{0}^{1}y^{3/2}dy=\frac{1}{5}$
+\end_inset
+
+ therefore 
+\begin_inset Formula $\text{Var}(X)=\frac{1}{5}-\frac{1}{9}=\frac{4}{45}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.24]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $E\left(X\right)=a\int_{0}^{1}x^{a}dx=\frac{a}{a+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E\left(X^{2}\right)=a\int_{0}^{1}x^{a+1}dx=\frac{a}{a+2}$
+\end_inset
+
+ therefore 
+\begin_inset Formula $\text{Var}(X)=E\left(X^{2}\right)-\left(E(X)\right)^{2}=\frac{a}{a+2}-\frac{a^{2}}{a^{2}+2a+1}=\frac{a}{(a^{2}+1)(a+2)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left(X\right)=\frac{1}{n}\sum_{k=1}^{n}k=\frac{1}{n}\frac{n(n+1)}{2}=\frac{1}{2}(n+1)$
+\end_inset
+
+ and 
+\begin_inset Formula $E\left(X^{2}\right)=\frac{1}{n}\sum_{k=1}^{n}k^{2}$
+\end_inset
+
+ but 
+\begin_inset Formula 
+\[
+k^{3}-\left(k-1\right)^{3}=k^{3}-\left(k^{3}-3k^{2}+3k+1\right)=3k^{2}-3k-1
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{n}\sum_{k=1}^{n}k^{2} & =\frac{1}{3n}\sum_{k=1}^{n}k^{3}-\left(k-1\right)^{3}+3k-1\\
+ & =\frac{1}{3n}\left(\sum_{k=1}^{n}\left(k^{3}-\left(k-1\right)^{3}\right)+\sum_{k=1}^{n}3k-1\right)\\
+ & =\frac{1}{3n}\left(\sum_{k=1}^{n}\left(k^{3}-\left(k-1\right)^{3}\right)+\frac{3}{2}n(n+1)-n\right)\\
+ & =\frac{1}{3n}\left(n^{3}+\frac{3}{2}n(n+1)-n\right)\\
+ & =\frac{1}{6}(2n+1)(n+1)
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}(X) & =\frac{1}{6}(2n+1)(n+1)-\frac{1}{4}(n+1)(n+1)\\
+ & =\frac{1}{2}(n+1)\left(\frac{1}{3}(2n+1)-\frac{1}{2}(n+1)\right)\\
+ & =\frac{1}{12}(n+1)\left(n-1\right)\\
+ & =\frac{n^{2}-1}{12}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+TODO
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.25]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g(X)=-X$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}(Y)=-Y$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|\left(-Y\right)^{'}\right|=1$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $Y\sim f_{X}(-y)\left|\left(-Y\right)^{'}\right|=f_{X}(y)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E\left(e^{-tX}\right)=\int_{-\epsilon}^{\epsilon}e^{-tx}f_{X}(x)dx=\int_{-\epsilon}^{\epsilon}e^{t(-x)}f_{X}(x)dx=\int_{-\epsilon}^{\epsilon}e^{t(-x)}f_{X}(-x)dx
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=-X.$
+\end_inset
+
+ Then by part (a) 
+\begin_inset Formula 
+\[
+\int_{-\epsilon}^{\epsilon}e^{t(-x)}f_{X}(-x)dx=-\int_{\epsilon}^{-\epsilon}e^{t(y)}f_{X}(y)dy=\int_{-\epsilon}^{\epsilon}e^{t(y)}f_{X}(y)dy=\int_{-\epsilon}^{\epsilon}e^{tx}f_{X}(x)dx=E\left(e^{tX}\right)
+\]
+
+\end_inset
+
+Hence 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $E\left(e^{-tX}\right)=E\left(e^{tX}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.26]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{N}(0,1)$
+\end_inset
+
+, Standard Cauchy, Student's t.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+1 & =\underset{\epsilon\rightarrow\infty}{\lim}\int_{a-\epsilon}^{a+\epsilon}f_{X}(x)dx\\
+ & =\underset{\epsilon\rightarrow\infty}{\lim}\left(\int_{a-\epsilon}^{a}f_{X}(x)dx+\int_{a}^{a+\epsilon}f_{X}(x)dx\right)\\
+ & =\underset{\epsilon\rightarrow\infty}{\lim}\left(\int_{a-\epsilon}^{a}f_{X}(x)dx+\int_{a-\epsilon}^{a}f_{X}(x-\epsilon)d(x-\epsilon)\right)\\
+ & =\underset{\epsilon\rightarrow\infty}{\lim}\left(\int_{a-\epsilon}^{a}f_{X}(x)dx+\int_{a-\epsilon}^{a}f_{X}((x-\epsilon)+\epsilon)d(x-\epsilon)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
