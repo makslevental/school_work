@@ -129,7 +129,7 @@ The longest running time for converting an arbitrary
 \end_inset
 
 -node binary tree into a right going chain is if it is a left going binary
- tree (if all of the nodes have only a left subtree).
+ tree (if all of the nodes have only a left child).
  In that case it obviously takes 
 \begin_inset Formula $n-1$
 \end_inset
@@ -139,7 +139,7 @@ The longest running time for converting an arbitrary
 \begin_inset Formula $O(n)$
 \end_inset
 
- right rotations to convert and binary tree to a right going binary tree.
+ right rotations to convert any binary tree to a right going binary tree.
  Conversely by performing left rotations it takes at most 
 \begin_inset Formula $O(n)$
 \end_inset
@@ -170,8 +170,15 @@ status open
 
 The only case in RB-Insert where an inserted node's color changes from red
  to black is case 2.
- In any other case we have that the most recently inserted node is red.
- Otherwise case 2 be the case and let 
+ In any other case we have that the most recently inserted node is red,
+ and therefore the number of of red nodes 
+\begin_inset Formula $>1$
+\end_inset
+
+.
+ Hence suppose the most recent insertion has been of the form of case 2
+ (the inserted node's uncle is black and the inserted node is the right
+ child of its parent) be the case and let 
 \begin_inset Formula $z$
 \end_inset
 
@@ -212,8 +219,12 @@ The only case in RB-Insert where an inserted node's color changes from red
 \end_inset
 
 's left child, its original parent is still red.
- And so the number of red nodes is 
-\begin_inset Formula $n>1$
+ Therefore the number of red nodes includes at least 
+\begin_inset Formula $z$
+\end_inset
+
+'s original parent and hence is 
+\begin_inset Formula $>1$
 \end_inset
 
 .
@@ -232,8 +243,8 @@ status open
 \end_inset
 
 No.
- Consider the RB tree with elements 2,4,6 with 4 as the black root and red
- children.
+ Consider the RB tree with elements 2,4,6 with 4 as the black root and both
+ children being red.
  Then insert 3.
  This will force 2 and 6 to become colored black (and 4 to be colored red
  and then black again during fixup).
@@ -268,8 +279,8 @@ Let
 \begin_inset Formula $h$
 \end_inset
 
- - we will derive an upper on the height by deriving a lower bound on the
- number of nodes in 
+ - we will derive an upper bound on the height by deriving a lower bound
+ on the number of nodes in 
 \begin_inset Formula $T$
 \end_inset
 
@@ -282,7 +293,7 @@ Let
 \begin_inset Formula $T_{R}$
 \end_inset
 
- be the subtrees root at 
+ be the subtrees rooted at 
 \begin_inset Formula $T.root$
 \end_inset
 
@@ -317,10 +328,7 @@ Let
 \begin_inset Formula $T$
 \end_inset
 
- to be the sparsest possible AVL tree of height 
-\begin_inset Formula $h$
-\end_inset
-
+ to be the sparsest possible AVL tree of height h it must be the case that
  
 \begin_inset Formula $T_{L}$
 \end_inset
@@ -329,7 +337,7 @@ Let
 \begin_inset Formula $T_{R}$
 \end_inset
 
- must each be the sparsest possible AVL trees of height 
+ each be the sparsest possible AVL trees of height 
 \begin_inset Formula $h-1$
 \end_inset
 
@@ -359,11 +367,19 @@ Let
 \begin_inset Formula $(|T|+1)=(|T_{L}|+1)+(|T_{R}|+1)$
 \end_inset
 
- and so the number of nodes in tree of height 
+ and so the number of nodes in 
+\series bold
+sparsest
+\series default
+ tree of height 
 \begin_inset Formula $h$
 \end_inset
 
- is a function of the number of nodes in trees of heights 
+ is a function of the number of nodes in trees of 
+\series bold
+sparsest 
+\series default
+trees of heights 
 \begin_inset Formula $h-1$
 \end_inset
 
@@ -372,11 +388,31 @@ Let
 \end_inset
 
 .
- This recurrence relation is the Fibonacci sequence whose approximate solution
+ That is let 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+ be the number of nodes in the sparsest AVL tree of height 
+\begin_inset Formula $j$
+\end_inset
+
+, and note that 
+\begin_inset Formula $N_{h}=\left|T\right|$
+\end_inset
+
+, then we have the recurrence relation 
+\begin_inset Formula 
+\[
+N_{h}+1=\left(N_{h+1}+1\right)+\left(N_{h+2}+1\right)
+\]
+
+\end_inset
+
+This recurrence relation is the Fibonacci sequence whose approximate solution
  is 
 \begin_inset Formula 
 \[
-|T|+1\approx\frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^{h+3}\implies h\approx1.44\log|T|
+N_{h}+1\approx\frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^{h+3}\implies h\approx1.44\log N_{h}
 \]
 
 \end_inset
@@ -433,11 +469,7 @@ If
 \end_inset
 
  to be right leaning.
- This is the case because rotation around 
-\begin_inset Formula $y$
-\end_inset
-
- because 
+ This will transform the subtree to be that of case 2: 
 \begin_inset Formula $y.right-y.left=1$
 \end_inset
 
@@ -457,13 +489,21 @@ If
 \end_inset
 
 .
- The height of the left subtree of is not affected and so no other rotations
- need to be made, hence the algorithm is correct.
+ The 
+\series bold
+height
+\series default
+ of the left subtree of is not affected and so no other rotations need to
+ be made, hence the algorithm is correct.
 \end_layout
 
 \begin_layout Enumerate
-Insert the node as usual then travel up from the insertion point checking
- balance and restoring it where it has been disrupted.
+Insert the node as usual then travel 
+\series bold
+up
+\series default
+ from the insertion point checking balance and restoring it where it has
+ been disrupted.
  The insertion operation in part (b) does not affect balance at any other
  point in the tree so it's possible to fix balance issues locally.
  
@@ -615,15 +655,16 @@ Keep a RB tree where the nodes are the endpoints of the intervals, i.e.
 \begin_inset Formula $j$
 \end_inset
 
- then you would have the amount of overlap at endpoints 
+th node, then you would have the amount of overlap at endpoints 
 \begin_inset Formula $j$
 \end_inset
 
- (since the nodes will be sorted adding a 1 corresponds to a left endpoint
- which is greater than all of the previous endpoints and subtracting 1 (-1)
- corresponds to reaching the right endpoint of one of the intervals we've
- already encountered that can no longer contribute to the totally number
- of overlapping intervals).
+.
+ This is since the nodes will be sorted, hence adding a 1 corresponds to
+ a left endpoint which is greater than all of the previous endpoints and
+ adding -1 corresponds to reaching the right endpoint of one of the intervals
+ we've already encountered that can no longer contribute to the total number
+ of overlapping intervals.
  Hence we keep extra information in the nodes that enables us to compute
  the value which maximizes this sum in 
 \begin_inset Formula $O(1)$
@@ -642,8 +683,8 @@ At each node keep track of the cumulative sum of
 \begin_inset Formula $x$
 \end_inset
 
- for all nodes, called 
-\begin_inset Formula $sum(j)$
+ for all nodes, called Sum
+\begin_inset Formula $(j)$
 \end_inset
 
 , in 
@@ -652,11 +693,11 @@ At each node keep track of the cumulative sum of
 
 's subtree.
  
-\begin_inset Formula $sum(j)=sum(j.left)+j.x+sum(j.right).$
+\begin_inset Formula $\text{Sum}(j)=\text{Sum}(j.left)+j.x+\text{Sum}(j.right).$
 \end_inset
 
  We also keep track of the maximum cumulative sum 
-\begin_inset Formula $max(j).$
+\begin_inset Formula $\text{Max}(j).$
 \end_inset
 
  The maximum can either be in the left subtree of 
@@ -672,29 +713,43 @@ At each node keep track of the cumulative sum of
 \end_inset
 
 's right subtree.
- If it is in the left subtree then it is 
-\begin_inset Formula $max(j.left)$
+ If it is in the left subtree then it's simply 
+\begin_inset Formula $\text{Max}(j.left)$
 \end_inset
 
-, if it as at 
+.
+ If it at 
 \begin_inset Formula $j$
 \end_inset
 
- itself it is 
-\begin_inset Formula $sum(j.left)+j.x,$
+ itself then it is 
+\begin_inset Formula $\text{Sum}(j.left)+j.x$
 \end_inset
 
- and if it in the right subtree then it includes overlap from the left subtree
- and hence it is 
-\begin_inset Formula $sum(j.left)+j.x+max(j.right).$
+.
+ Finally if it's in the right subtree then it includes overlap from the
+ left subtree and hence it is 
+\begin_inset Formula $\text{Sum}(j.left)+j.x+\text{Max}(j.right).$
 \end_inset
 
- Therefore the maximum at any node is 
-\begin_inset Formula 
-\[
-\max\{max(j.left),sum(j.left)+j.x,sum(j.left)+j.x+max(j.right)\}
-\]
+ Therefore the maximum, of the Maxs at any node is 
+\begin_inset Newline newline
+\end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 Then the point of maximum overlap is actually the argument that maximizes
@@ -704,11 +759,23 @@ Then the point of maximum overlap is actually the argument that maximizes
 \end_inset
 
  if 
-\begin_inset Formula 
-\[
-\max\{max(j.left),sum(j.left)+j.x,sum(j.left)+j.x+max(j.right)\}=max(j.left)
-\]
+\begin_inset Newline newline
+\end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}=\text{Max}(j.left)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -716,11 +783,23 @@ Then the point of maximum overlap is actually the argument that maximizes
 \end_inset
 
  if 
-\begin_inset Formula 
-\[
-\max\{max(j.left),sum(j.left)+j.x,sum(j.left)+j.x+max(j.right)\}=sum(j.left)+j.x
-\]
+\begin_inset Newline newline
+\end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}=\text{Sum}(j.left)+j.x$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 and 
@@ -728,15 +807,27 @@ and
 \end_inset
 
  if 
-\begin_inset Formula 
-\[
-\max\{max(j.left),sum(j.left)+j.x,sum(j.left)+j.x+max(j.right)\}=sum(j.left)+j.x+max(j.right)
-\]
+\begin_inset Newline newline
+\end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}=\text{Sum}(j.left)+j.x+\text{Max}(j.right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 Hence we just call query 
-\begin_inset Formula $max$
+\begin_inset Formula $\text{Max}$
 \end_inset
 
  at the root and note which node maximizes it.
@@ -763,11 +854,11 @@ The problem exhibits the optimal substructure property.
 \begin_inset Formula $A_{i,j}=(a_{i},\cdots,a_{j}).$
 \end_inset
 
- Note that maximum length palindrome substring in 
+ Note that the maximum length palindrome substring in 
 \begin_inset Formula $A_{i,j}$
 \end_inset
 
- either includes the endpoints 
+ includes the endpoints 
 \begin_inset Formula $a_{i}$
 \end_inset
 
@@ -926,7 +1017,7 @@ Let
 
  items.
  The problem exhibits optimal substructure: consider the most valuable load
- that weighs 
+ that has weight limit 
 \begin_inset Formula $j$
 \end_inset
 
@@ -939,12 +1030,13 @@ Let
 \begin_inset Formula $i\in\{1,\dots,n\}$
 \end_inset
 
- the remaining load must be the most valuable load weighing at most 
+ the remaining load must be the most valuable load weighing with weight
+ limit 
 \begin_inset Formula $j-\omega_{i}$
 \end_inset
 
  that the thief can take from 
-\begin_inset Formula $\{\dots,a_{i-1},a_{i+1},\dots,a_{n}\}$
+\begin_inset Formula $\{a_{1},\dots,a_{i-1},a_{i+1},\dots,a_{n}\}$
 \end_inset
 
 .
@@ -953,7 +1045,7 @@ Let
 \begin_inset Formula $A_{i}=\{a_{1},a_{2},\dots,a_{j}\}$
 \end_inset
 
- and having total weight 
+ and having weight limit 
 \begin_inset Formula $j$
 \end_inset
 
@@ -965,7 +1057,7 @@ status open
 
 
 \backslash
-[m(A_{1,i},j) = 
+[m(A_{i},j) = 
 \backslash
 left
 \backslash
@@ -1210,7 +1302,7 @@ in
 \begin_inset Formula $S_{ij}$
 \end_inset
 
-, which also span 
+ which also span 
 \begin_inset Formula $w_{i}$
 \end_inset
 
@@ -1293,7 +1385,7 @@ of spanning intervals of
 \begin_inset Newline newline
 \end_inset
 
-If we could find a set of intervals 
+Furthermore if we could find a set of intervals 
 \begin_inset Formula $A_{kj}^{'}$
 \end_inset
 
@@ -1357,27 +1449,39 @@ contradicting the optimality of
 \begin_inset Newline newline
 \end_inset
 
-We make the greedy choice: choose the first interval and then choose the
+We make the greedy choice: choose 
+\begin_inset Formula $a_{i_{1}}$
+\end_inset
+
+ as the last possible interval such that 
+\begin_inset Formula $w_{i_{1}}<2$
+\end_inset
+
+, since the professor starts out with 2 miles of water, Then choose the
  last interval 
-\begin_inset Formula $a_{i}$
+\begin_inset Formula $a_{i_{j}}$
 \end_inset
 
  in 
-\begin_inset Formula $S_{ij}\setminus\{a_{1}\}$
+\begin_inset Formula $S_{i_{1}n}\setminus\{a_{i_{1}}\}$
 \end_inset
 
  such that 
-\begin_inset Formula $w_{i}\leq s_{1}$
+\begin_inset Formula $w_{i_{j}}\leq s_{i_{1}}$
 \end_inset
 
 , i.e.
  the last possible stop before the professor runs out of water.
  Then repeat for 
-\begin_inset Formula $a_{i}$
+\begin_inset Formula $a_{i_{j}}$
+\end_inset
+
+with 
+\begin_inset Formula $S_{i_{j}n}\setminus\{a_{i_{j}}\}$
 \end_inset
 
 .
- Let 
+ Therfore 
 \begin_inset listings
 inline false
 status open
@@ -1428,7 +1532,7 @@ The greedy choice is optimal: let
 \begin_inset Formula $g_{i}$
 \end_inset
 
- be the solutions the stop that the optimal solution would generate.
+ be the stops that the optimal solution would generate.
  Then the first stop 
 \begin_inset Formula $g_{1}$
 \end_inset
@@ -1438,7 +1542,7 @@ is either equal to
 \end_inset
 
  or before it (since our greedy solution chose the last possible stop).
- The distance between 
+ Then the distance between 
 \begin_inset Formula $g_{2}$
 \end_inset
 
@@ -1447,10 +1551,10 @@ and
 \end_inset
 
 is less than 2 miles and by the previous sentence 
-\begin_inset Formula $g_{1}<A[1].w<g_{2}$
+\begin_inset Formula $g_{1}\leq A[1].w\leq g_{2}$
 \end_inset
 
- therefore we can replace 
+ and therefore we can replace 
 \begin_inset Formula $g_{1}$
 \end_inset
 
@@ -1459,16 +1563,16 @@ in the optimal solution by
 \end_inset
 
  and not violate optimality, since we replaced one stop in the optimal solution
- with one stop in our greedy solution.
- But in this way we can inductively replace all solutions 
+ with one stop from our greedy solution.
+ But in this way we can iteratively replace all solutions 
 \begin_inset Formula $g_{i}$
 \end_inset
 
-in the optimal solution with 
+in the optimal solution with our 
 \begin_inset Formula $A[i].w$
 \end_inset
 
- stop.
+ stops .
  Therefore greedy solution is optimal.
 \begin_inset Newline newline
 \end_inset
@@ -1501,7 +1605,7 @@ status open
 \begin_deeper
 \begin_layout Enumerate
 Let 
-\begin_inset Formula $k$
+\begin_inset Formula $n$
 \end_inset
 
  be the amount of money that needs changing.
@@ -1517,7 +1621,7 @@ Let
 \begin_inset Formula $\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor$
 \end_inset
 
- nickles, then 
+ nickels, then 
 \begin_inset Formula $((n\text{mod}25)\text{mod}10)\text{mod}5$
 \end_inset
 
@@ -1525,23 +1629,31 @@ Let
  Then
 \begin_inset Formula 
 \[
-k=\lfloor n/25\rfloor+\lfloor(n\text{mod}25)/10\rfloor+\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor+((n\text{mod}25)\text{mod}10)\text{mod}5
+n=\lfloor n/25\rfloor+\lfloor(n\text{mod}25)/10\rfloor+\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor+((n\text{mod}25)\text{mod}10)\text{mod}5
 \]
 
 \end_inset
 
 by Euclid's algorithm.
- Suppose there's a solution which uses fewer coins.
- Then it must use either fewer quarters, or dimes, or nickles, or pennies.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Suppose there's a solution which uses fewer coins.
+ Then it must use either fewer quarters, or dimes, or nickels, or pennies.
  For every one fewer quarter it uses, it must use either 3 coins in dimes
- and nickles, or 5 coins in nickles, or coins
+ and nickels (2 dimes and 1 nickel), or 5 coins in nickels, or 
 \begin_inset Formula $\{9,13,17,21\}$
 \end_inset
 
-in nickles and pennies, or 25 coins in pennies.
- For ever one fewer dime it uses, it must use 2 coins in nickles, or 9 coins
- in nickles and pennies, or 10 coins in pennies.
- For every one fewer nickle it uses it must 5 pennies.
+coins in nickels and pennies, or 25 coins in pennies.
+ For ever one fewer dime it uses, it must use 2 coins in nickels, or 9 coins
+ in nickels and pennies, or 10 coins in pennies.
+ For every one fewer nickel it uses it must 5 pennies.
  It cannot use fewer pennies.
  Hence the greedy solution is optimal, since any substitution grows the
  number of coins (substantially).
@@ -1585,19 +1697,109 @@ is computed using successive modulo operations this corresponds to the greedy
 \end_layout
 
 \begin_layout Enumerate
-Use the greedy method: order the coins from greatest to least 
-\begin_inset Formula $K=\{c_{k},c_{k-1},\dots,1\}$
+Let 
+\begin_inset Formula $C=\{c_{1},\dots,c_{k}\}$
 \end_inset
 
- then 
-\begin_inset Formula 
-\[
-n=\left\lfloor n\text{/}c_{k}\right\rfloor c_{k}+\left\lfloor \left(\left\lfloor n\text{/}c_{k}\right\rfloor \text{mod}c_{k}\right)\text{/}c_{k-1}\right\rfloor +\cdots+\left(\left(\left(n\text{mod}c_{k}\right)\text{mod}c_{k-1}\right)\cdots\right)\text{mod}c_{2}
-\]
+ be the coin denominations and 
+\begin_inset Formula $n$
+\end_inset
+
+ the amount of money to change and 
+\begin_inset Formula $m[n]$
+\end_inset
+
+ be the number of coins needed to make change.
+ Then this problem exhibits optimal sub-structure: the minimum number of
+ coins needed to change 
+\begin_inset Formula $n$
+\end_inset
+
+ amount of money, 
+\begin_inset Formula $m[n]$
+\end_inset
+
+ depends on the minimum number of coins needed to change 
+\begin_inset Formula $n-c_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, since the minimum number of coins to change 
+\begin_inset Formula $n-c_{i}$
+\end_inset
+
+ plus one is the the number of coins needed to change 
+\begin_inset Formula $n$
+\end_inset
+
+ if 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ is used.
+ Finally the minimum such combination, such that 
+\begin_inset Formula $m[n-c_{i}]+1$
+\end_inset
+
+ is minimum, the number of coins needed to change 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Therefore 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Min-Coin(n,C)
+\end_layout
+
+\begin_layout Plain Layout
+
+  let m[i] = inf for i = 1...n
+\end_layout
+
+\begin_layout Plain Layout
+
+  for i = 1 to n
+\end_layout
+
+\begin_layout Plain Layout
+
+	for j = 1 to k
+\end_layout
+
+\begin_layout Plain Layout
+
+	  temp = m[n-C[j]] + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+        if temp < m[i]
+\end_layout
+
+\begin_layout Plain Layout
+
+		  m = temp
+\end_layout
 
 \end_inset
 
+The algorithm runs in 
+\begin_inset Formula $O(nk)$
+\end_inset
 
+ time since it tests every denominations for every 
+\begin_inset Formula $n$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
