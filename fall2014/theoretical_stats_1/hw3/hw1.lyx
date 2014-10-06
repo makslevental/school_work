@@ -761,7 +761,7 @@ Note that
 E\left(X\right) & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{3}e^{-x^{2}/\beta^{2}}dx\\
  & =\frac{-4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial}{\partial\alpha}\left(xe^{-\alpha x^{2}}\right)dx\\
  & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\int_{0}^{\infty}xe^{-\alpha x^{2}}dx\\
- & = \frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\frac{1}{2}\alpha^{-1}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\frac{1}{2}\alpha^{-1}\\
  & =\frac{2}{\beta^{3}\sqrt{\pi}}\alpha^{-2}=\frac{2\beta^{4}}{\beta^{3}\sqrt{\pi}}=\frac{2\beta}{\sqrt{\pi}}
 \end{align*}
 
@@ -773,7 +773,7 @@ The second moment is
 E\left(X^{2}\right) & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{4}e^{-x^{2}/\beta^{2}}dx\\
  & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial^{2}}{\partial\alpha^{2}}\left(e^{-\alpha x^{2}}\right)dx\\
  & =\frac{4}{\beta^{3}\sqrt{\pi}}\frac{d^{2}}{d\alpha^{2}}\int_{0}^{\infty}e^{-\alpha x^{2}}dx\\
- & = \frac{4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{d^{2}}{d\alpha^{2}}\alpha^{-1/2}\\
+ & =\frac{4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{d^{2}}{d\alpha^{2}}\alpha^{-1/2}\\
  & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\frac{d}{d\alpha}\alpha^{-3/2}=\frac{6}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\frac{d}{d\alpha}\alpha^{-5/2}\\
  & =\frac{6}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\left(\frac{1}{\beta^{2}}\right)^{-5/2}=\frac{3}{2}\beta^{2}
 \end{align*}
@@ -1466,6 +1466,118 @@ status open
 
 \begin_layout Plain Layout
 
+[3.14]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $f_{X}>0$
+\end_inset
+
+ since 
+\begin_inset Formula $p<1$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\log(p)<0$
+\end_inset
+
+.
+ Furthermore 
+\begin_inset Formula 
+\begin{align*}
+\sum_{x=1}^{\infty}\frac{-(1-p)^{x}}{x\log(p)} & =\frac{1}{\log(p)}\sum_{x=1}^{\infty}\frac{-(1-p)^{x}}{x}\\
+ & =\frac{1}{\log(p)}\log(1-(1-p))\\
+ & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E(X) & =\frac{1}{\log(p)}\sum_{x=1}^{\infty}x\frac{-(1-p)^{x}}{x}\\
+ & =\frac{-1}{\log(p)}\sum_{x=1}^{\infty}(1-p)^{x}\\
+ & =\frac{-1}{\log(p)}\frac{1-p}{1-(1-p)}\\
+ & =\frac{p-1}{p\log(p)}
+\end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\frac{1}{\log(p)}\sum_{x=1}^{\infty}x^{2}\frac{-(1-p)^{x}}{x}\\
+ & =\frac{-1}{\log(p)}\sum_{x=1}^{\infty}x(1-p)^{x}
+\end{align*}
+
+\end_inset
+
+Now since 
+\begin_inset Formula $\sum(1-p)^{x}$
+\end_inset
+
+ absolutely converges to 
+\begin_inset Formula $(1-p)/p$
+\end_inset
+
+ we can differentiate under the sum
+\begin_inset Formula 
+\begin{align*}
+\frac{d}{dp}\frac{1-p}{p} & =\frac{\partial}{\partial p}\sum_{x=1}^{\infty}(1-p)^{x}\\
+\frac{p-1}{p^{2}}-\frac{1}{p} & =\sum_{x=1}^{\infty}\frac{\partial}{\partial p}(1-p)^{x}\\
+ & =\sum_{x=1}^{\infty}x(1-p)^{x-1}\\
+ & =\frac{1}{1-p}\sum_{x=1}^{\infty}x(1-p)^{x}\implies\\
+\frac{(1-p)(p-1)}{p^{2}}-\frac{1-p}{p} & =\sum_{x=1}^{\infty}x(1-p)^{x}
+\end{align*}
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\frac{-1}{\log(p)}\left(\frac{(1-p)(p-1)}{p^{2}}-\frac{1-p}{p}\right)\\
+ & =\frac{1-p}{p^{2}\log(p)}
+\end{align*}
+
+\end_inset
+
+and finally 
+\begin_inset Formula 
+\[
+\text{Var}(X)=\frac{1-p}{p^{2}\log(p)}-\left(\frac{p-1}{p\log(p)}\right)^{2}=\frac{\log(1-p)-(p-1)^{2}}{p^{2}\log^{2}(p)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [3.19]
 \end_layout
 
@@ -1503,6 +1615,140 @@ status open
 
 \begin_layout Plain Layout
 
+[3.20]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $f_{X}(x)=\frac{2}{\sqrt{2\pi}}e^{-x^{2}/2}$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{align*}
+E(X) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}xe^{-x^{2}/2}dx\\
+ & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}e^{-\left(x^{2}/2\right)}d\left(x^{2}/2\right)\\
+ & =\frac{-2}{\sqrt{2\pi}}(0-1)=\frac{2}{\sqrt{2\pi}}
+\end{align*}
+
+\end_inset
+
+and by 
+\series bold
+2.22(a)
+\series default
+
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}x^{2}e^{-x^{2}/2}dx\\
+ & =\frac{2}{\sqrt{2\pi}}\frac{\sqrt{\pi}}{2}=\frac{1}{2}
+\end{align*}
+
+\end_inset
+
+Hence
+\begin_inset Formula 
+\[
+\text{Var}(X)=\frac{1}{2}-\frac{2}{\pi}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g(X)=X^{2}$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}(Y)=\sqrt{y}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=y^{1/2-1}
+\]
+
+\end_inset
+
+and then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(\sqrt{y}\right)y^{1/2-1}\\
+ & =\frac{1}{\sqrt{2\pi}}y^{1/2-1}e^{-y/2}\\
+ & =\frac{y^{1/2-1}}{\sqrt{\pi}2^{1/2}}e^{-y/2}\\
+ & =\frac{y^{1/2-1}}{\Gamma(1/2)2^{1/2}}e^{-y/\beta}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $Y\sim\text{Gamma}(1/2,2)$
+\end_inset
+
+ .
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3.23]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $f_{X}=\beta\alpha^{\beta}/x^{\beta+1}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $0<\alpha<x<\infty$
+\end_inset
+
+ implies 
+\begin_inset Formula $x^{\beta+1}>0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $f_{X}>0.$
+\end_inset
+
+ Furthermore
+\begin_inset Formula 
+\begin{align*}
+\int_{\alpha}^{\infty}f_{X}(x)dx & =\int_{\alpha}^{\infty}f_{X}(x)dx\\
+ & =\int_{\alpha}^{\infty}\frac{\beta\alpha^{\beta}}{x^{\beta+1}}dx\\
+ & =\frac{\beta\alpha^{\beta}}{-\beta}\left(\left.\frac{1}{x^{\beta}}\right|_{\alpha}^{\infty}\right)\\
+ & =-\alpha^{\beta}\left(0-\frac{1}{\alpha^{\beta}}\right)=1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1510,215 +1756,478 @@ status open
 
 \begin_inset Formula 
 \begin{align*}
-f(N) & =A_{1}+M_{1}\cdot f\left(M_{2}\frac{N}{D_{1}}-S_{1}\right)+M_{3}f\left(M_{4}\frac{N}{D_{2}}-S_{2}\right)
+E(X) & =\int_{\alpha}^{\infty}x\frac{\beta\alpha^{\beta}}{x^{\beta+1}}dx\\
+ & =\beta\alpha^{\beta}\int_{\alpha}^{\infty}\frac{1}{x^{\beta}}dx\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+1)}\left(\left.\frac{1}{x^{\beta-1}}\right|_{\alpha}^{\infty}\right)\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+1)}\left(0-\frac{1}{\alpha^{\beta-1}}\right)=\frac{\beta\alpha}{(\beta+1)}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\int_{\alpha}^{\infty}x^{2}\frac{\beta\alpha^{\beta}}{x^{\beta+1}}dx\\
+ & =\beta\alpha^{\beta}\int_{\alpha}^{\infty}\frac{1}{x^{\beta-1}}dx\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+2)}\left(\left.\frac{1}{x^{\beta-2}}\right|_{\alpha}^{\infty}\right)\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+2)}\left(0-\frac{1}{\alpha^{\beta-2}}\right)=\frac{\beta\alpha^{2}}{(\beta+2)}
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\[
+\text{Var}(X)=\frac{\beta\alpha^{2}}{(\beta+2)}-\left(\frac{\beta\alpha}{(\beta+1)}\right)^{2}=\alpha^{2}\left(\frac{\beta}{(\beta+2)}-\frac{\beta^{2}}{(\beta+1)}\right)=\alpha^{2}\beta\left(\frac{1}{(\beta+2)}+\frac{1}{(\beta+1)}-1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3.24]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g(X)=X^{1/\gamma}$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}(Y)=y^{\gamma}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=\gamma y^{\gamma-1}
+\]
+
+\end_inset
+
+and then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(y^{\gamma}\right)\gamma y^{\gamma-1}\\
+ & =\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}
+\end{align*}
+
+\end_inset
+
+which is positive on 
+\begin_inset Formula $0<y<\infty$
+\end_inset
+
+ and
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{\infty}f_{Y}(y) & =\int_{0}^{\infty}f_{X}\left(y^{\gamma}\right)\gamma y^{\gamma-1}dy\\
+ & =\int_{0}^{\infty}\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}dy\\
+ & =\int_{0}^{\infty}e^{-\left(\beta y^{\gamma}\right)}d\left(\beta y^{\gamma}\right)\\
+ & =-\left(\left.e^{-\beta y^{\gamma}}\right|_{0}^{\infty}\right)\\
+ & =-(0-1)=1
+\end{align*}
+
+\end_inset
+
+Furthermore
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+E(Y) & =\int_{0}^{\infty}y\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}dy\\
+ & =\int_{0}^{\infty}\beta y^{\gamma}e^{-\beta y^{\gamma}}dy\\
+ & u=\beta y^{\gamma}\implies\frac{1}{\gamma\beta}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}du=dy\\
+ & =\int_{0}^{\infty}\frac{\gamma}{\gamma\beta}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}ue^{-u}dy\\
+ & =\int_{0}^{\infty}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}\frac{u}{\beta}e^{-u}dy\\
+ & =\beta^{-1/\gamma}\int_{0}^{\infty}u^{\frac{1}{\gamma}}e^{-u}dy\\
+ & =\beta^{-1/\gamma}\Gamma\left(1+\frac{1}{\gamma}\right)
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+E(Y^{2}) & =\int_{0}^{\infty}y^{2}\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}dy\\
+ & =\int_{0}^{\infty}\beta y^{\gamma+1}e^{-\beta y^{\gamma}}dy\\
+ & u=\beta y^{\gamma}\implies\frac{1}{\gamma\beta}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}du=dy\\
+ & =\int_{0}^{\infty}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}\left(\frac{u}{\beta}\right)^{1+\frac{1}{\gamma}}e^{-u}dy\\
+ & =\int_{0}^{\infty}\left(\frac{u}{\beta}\right)^{\frac{2}{\gamma}}e^{-u}dy\\
+ & =\beta^{-2/\gamma}\int_{0}^{\infty}u^{\frac{2}{\gamma}}e^{-u}dy\\
+ & =\beta^{-2/\gamma}\Gamma\left(1+\frac{2}{\gamma}\right)
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\[
+\text{Var}(Y)=\beta^{-2/\gamma}\Gamma\left(1+\frac{2}{\gamma}\right)-\left(\beta^{-1/\gamma}\Gamma\left(1+\frac{1}{\gamma}\right)\right)^{2}=\beta^{-2/\gamma}\left(\Gamma\left(1+\frac{2}{\gamma}\right)-\Gamma^{2}\left(1+\frac{1}{\gamma}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X\sim\text{Exp(\beta)}$
+\end_inset
+
+ and 
+\begin_inset Formula $W=X^{1/2}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y=g(W)=2^{1/2}W/\beta^{1/2}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $W\sim\text{Weibull}(2,\beta)$
+\end_inset
+
+ and 
+\begin_inset Formula $g^{-1}(Y)=\beta^{1/2}W/2^{1/2}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=\beta^{1/2}/2^{1/2}
+\]
+
+\end_inset
+
+and then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{W}\left(\sqrt{\frac{\beta}{2}}y\right)\sqrt{\frac{\beta}{2}}\\
+ & =2\beta\left(\sqrt{\frac{\beta}{2}}y\right)e^{-\beta\left(\sqrt{\frac{\beta}{2}}y\right)^{2}}\sqrt{\frac{\beta}{2}}\\
+ & =2\left(\frac{\beta^{2}}{2}y\right)e^{-\frac{\beta^{2}}{2}y^{2}}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $Y\sim\text{Weibull}(2,\frac{\beta^{2}}{2})$
+\end_inset
+
+.
+ Therefore immediately
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\int_{0}^{\infty}f_{Y}(y)dy=1$
+\end_inset
+
+.
+ Furthermore
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+E(Y)=\left(\frac{\beta^{2}}{2}\right)^{-1/2}\Gamma\left(1+\frac{1}{2}\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\text{Var}(Y)=\frac{2}{\beta^{2}}\left(\Gamma\left(2\right)-\Gamma^{2}\left(1+\frac{1}{2}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g(X)=X^{-1}$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}(Y)=y^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=\frac{1}{y^{2}}
+\]
+
+\end_inset
+
+and then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =\frac{f_{X}\left(y^{-1}\right)}{y^{2}}\\
+ & =\frac{\left(y^{-1}\right)^{\alpha-1}e^{-y^{-1}/\beta}}{y^{2}\beta^{\alpha}\Gamma(\alpha)}\\
+ & =\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}
+\end{align*}
+
+\end_inset
+
+which is positive on 
+\begin_inset Formula $0<y<\infty$
+\end_inset
+
+ and
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{\infty}f_{Y}(y) & =\int_{0}^{\infty}\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}dy\\
+ & u=\frac{1}{y\beta}\implies du=-\frac{dy}{\beta y^{2}}\\
+ & =\int_{\infty}^{0}\frac{-\left(u\beta\right)^{\alpha-1}}{\beta^{\alpha-1}\Gamma(\alpha)}e^{-u}du\\
+ & =\int_{0}^{\infty}\frac{u^{\alpha-1}}{\Gamma(\alpha)}e^{-u}dy\\
+ & =\frac{\Gamma(\alpha)}{\Gamma(\alpha)}=1
+\end{align*}
+
+\end_inset
+
+Furthermore
+\begin_inset Formula 
+\begin{align*}
+E(X) & =\int_{0}^{\infty}y\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}dy\\
+ & =\frac{\Gamma(\alpha-1)}{\beta\Gamma(\alpha)}\int_{0}^{\infty}\frac{y^{-1-(\alpha-)}}{\beta^{\alpha-1}\Gamma(\alpha-1)}e^{-y^{-1}/\beta}dy\\
+ & \text{integrand is kernel of IG(\alpha-1,\beta)}\\
+ & =\frac{\Gamma(\alpha-1)}{\beta\Gamma(\alpha)}
 \end{align*}
 
 \end_inset
 
 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-#include <stdio.h> 
-\end_layout
-
-\begin_layout Plain Layout
-
-#include <stdlib.h>
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-int N1, C1, A1, M1, M2, M3, M4, D1, D2, S1, S2
-\end_layout
-
-\begin_layout Plain Layout
-
-char Op;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-int f(int N){
-\end_layout
-
-\begin_layout Plain Layout
-
-  if(N < N1)
-\end_layout
-
-\begin_layout Plain Layout
-
-	return 0;
-\end_layout
-
-\begin_layout Plain Layout
-
-  else if(N == N1)
-\end_layout
-
-\begin_layout Plain Layout
-
-	return C1;
-\end_layout
-
-\begin_layout Plain Layout
-
-  else
-\end_layout
-
-\begin_layout Plain Layout
-
-    switch(Op) {
-\end_layout
-
-\begin_layout Plain Layout
-
-      case '+'
-\end_layout
-
-\begin_layout Plain Layout
-
-	    return(A1 + M1*f(M2*N/D1 - S1) + M3*f(M4*N/D2 - S2));
-\end_layout
-
-\begin_layout Plain Layout
-
-      case '-'
-\end_layout
-
-\begin_layout Plain Layout
-
-        return(A1 + M1*f(M2*N/D1 - S1) + M3*f(M4*N/D2 - S2));
-\end_layout
-
-\begin_layout Plain Layout
-
-  }
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-int main(int argc char **argv) {
-\end_layout
-
-\begin_layout Plain Layout
-
-  int Arg;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-  N1 = atoi(argv[1]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  C1 = atoi(argv[2]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  A1 = atoi(argv[3]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  M1 = atoi(argv[4]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  M2 = atoi(argv[5]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  M3 = atoi(argv[6]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  M4 = atoi(argv[7]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  D1 = atoi(argv[8]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  D2 = atoi(argv[9]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  S1 = atoi(argv[10]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  S2 = atoi(argv[11]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  Arg = atoi(argv[12]);
-\end_layout
-
-\begin_layout Plain Layout
-
-  Op = argv[13];
-\end_layout
-
-\begin_layout Plain Layout
-
-  
-\end_layout
-
-\begin_layout Plain Layout
-
-  return 0;
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
+and
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\int_{0}^{\infty}y^{2}\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}dy\\
+ & =\frac{\Gamma(\alpha-2)}{\beta^{2}\Gamma(\alpha)}\int_{0}^{\infty}\frac{y^{-1-(\alpha-2)}}{\beta^{\alpha-2}\Gamma(\alpha-2)}e^{-y^{-1}/\beta}dy\\
+ & \text{integrand is kernel of IG(\alpha-2,\beta)}\\
+ & =\frac{\Gamma(\alpha-2)}{\beta^{2}\Gamma(\alpha)}
+\end{align*}
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Therefore
+\begin_inset Formula 
+\[
+\text{Var}(Y)=\frac{\Gamma(\alpha-2)}{\beta^{2}\Gamma(\alpha)}-\left(\frac{\Gamma(\alpha-1)}{\beta\Gamma(\alpha)}\right)^{2}=\frac{1}{\beta^{2}}\left(\frac{\Gamma(\alpha-2)}{\Gamma(\alpha)}-\frac{\Gamma^{2}(\alpha-1)}{\Gamma^{2}(\alpha)}\right)
+\]
 
 \end_inset
 
 
 \end_layout
 
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g(X)=(X/\beta)^{1/2}$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}(Y)=\beta y^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|g^{-1}(y)^{'}\right|=2\beta y
+\]
+
+\end_inset
+
+and then 
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(\beta y^{2}\right)2\beta y\\
+ & =\frac{\left(\beta y^{2}\right)^{\frac{3}{2}-1}e^{-\beta y^{2}/\beta}}{\beta^{3/2}\Gamma(3/2)}\\
+ & =\frac{ye^{-y^{2}}}{\beta\Gamma(3/2)}
+\end{align*}
+
+\end_inset
+
+which is positive on 
+\begin_inset Formula $0<y<\infty$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{\infty}f_{Y}(y)dy & =\int_{0}^{\infty}\frac{ye^{-y^{2}}}{\beta\Gamma(3/2)}dy\\
+ & =\frac{1}{\beta\Gamma(3/2)}\int_{0}^{\infty}ye^{-y^{2}}dy\\
+ & =\frac{1}{2\beta\Gamma(3/2)}\int_{0}^{\infty}e^{-y^{2}}d\left(y^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g(X)=\alpha-\gamma\log(X)$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}(Y)=e^{(\alpha-y)/\gamma}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\left|g^{-1}(y)^{'}\right|=\frac{1}{\gamma}e^{(\alpha-y)/\gamma}
+\]
+
+\end_inset
+
+and then 
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(e^{(\alpha-y)/\gamma}\right)\frac{1}{\gamma}e^{(\alpha-y)/\gamma}\\
+ & =\frac{e^{e^{-(\alpha-y)/\gamma}+(\alpha-y)/\gamma}}{\gamma}
+\end{align*}
+
+\end_inset
+
+When 
+\begin_inset Formula $x\rightarrow0$
+\end_inset
+
+ then 
+\begin_inset Formula $y\rightarrow\infty$
+\end_inset
+
+ and when 
+\begin_inset Formula $x=e^{\alpha/\gamma}$
+\end_inset
+
+ 
+\begin_inset Formula $y=0$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula 
+\begin{align*}
+\int_{\infty}^{0}f_{Y}(y)dy & =\int_{0}^{\infty}\frac{e^{e^{(\alpha-y)/\gamma}+(\alpha-y)/\gamma}}{\gamma}dy\\
+ & =\frac{1}{\beta\Gamma(3/2)}\int_{0}^{\infty}ye^{-y^{2}}dy\\
+ & =\frac{1}{2\beta\Gamma(3/2)}\int_{0}^{\infty}e^{-y^{2}}d\left(y^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
