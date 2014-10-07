@@ -616,6 +616,31 @@ status open
 
 \begin_layout Plain Layout
 
+[2.16]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =\int_{0}^{\infty}\left(1-F_{X}(t)\right)dt\\
+ & =\int_{0}^{\infty}P(T>t)dt\\
+ & =\int_{0}^{\infty}\left(ae^{-\lambda t}+(1-a)e^{-\mu t}\right)dt\\
+ & =\frac{a}{\lambda}+\frac{\lambda-a}{\mu}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [2.17]
 \end_layout
 
@@ -899,7 +924,29 @@ Hence
 \end_layout
 
 \begin_layout Enumerate
-TODO
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $E(X)=\frac{3}{2}\int_{0}^{2}x(x-1)^{2}dx=1$
+\end_inset
+
+ and 
+\begin_inset Formula $E(X^{2})=\frac{3}{2}\int_{0}^{2}x^{2}(x-1)^{2}dx=\frac{8}{5}$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $\text{\text{Var}}(x)=1-64/35=-6/7$
+\end_inset
+
+ 
 \end_layout
 
 \end_deeper
@@ -1037,6 +1084,137 @@ status open
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.30]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\int_{0}^{c}\frac{1}{c}e^{tx}dx\\
+ & =\frac{1}{tc}\left(e^{tc}-1\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\int_{0}^{c}\frac{2x}{c^{2}}e^{tx}dx\\
+ & =\frac{2}{c^{2}}\int_{0}^{c}xe^{tx}dx\\
+ & =\frac{2}{c^{2}}\left(\left.\frac{x}{t}e^{tx}\right|_{0}^{c}-\int_{0}^{c}e^{tx}dx\right)\\
+ & =\frac{2}{c^{2}}\left(\frac{c}{t}e^{tc}-\frac{1}{tc}\left(e^{tc}-1\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\int_{0}^{c}\frac{2x}{c^{2}}e^{tx}dx\\
+ & =\frac{2}{c^{2}}\int_{0}^{c}xe^{tx}dx\\
+ & =\frac{2}{c^{2}}\left(\left.\frac{x}{t}e^{tx}\right|_{0}^{c}-\int_{0}^{c}e^{tx}dx\right)\\
+ & =\frac{2}{c^{2}}\left(\frac{c}{t}e^{tc}-\frac{1}{tc}\left(e^{tc}-1\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.31]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.33]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.38]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1600,8 +1778,13 @@ status open
  & =1-\frac{1}{\Gamma(\alpha)}\int_{0}^{x}\sum_{k=0}^{\infty}\frac{(-1)^{k}z^{k+\alpha-1}}{k!}dz\\
  & \text{ and since }\sum_{k=0}^{\infty}\frac{(-1)^{k}z^{k+\alpha-1}}{k!}\text{ converges uniformly and }z\text{ is continuous for all }k\\
  & =1-\frac{1}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!}\int_{0}^{x}z^{k+\alpha-1}dz\\
- & =1-\frac{1}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!(k+\alpha)}x^{k+\alpha}\\
- & =1-\frac{x^{\alpha}}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-x)^{k}}{k!}\frac{1}{(k+\alpha)}
+ & =1-\frac{1}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!}\frac{x^{k+\alpha}}{(k+\alpha)}\\
+ & =1-\frac{x^{\alpha}}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-x)^{k}}{k!}\frac{1}{(k+\alpha)}\\
+ & \text{let }y=k+\alpha\\
+ & =1-\frac{x^{\alpha}}{\Gamma(\alpha)}\sum_{y=\alpha}^{\infty}\frac{(-x)^{y-\alpha}}{(y-\alpha)!}\frac{1}{y}\\
+ & =1-x^{\alpha}\sum_{y=\alpha}^{\infty}\frac{(-x)^{y-\alpha}}{(y-\alpha)!(\alpha-1)!}\frac{1}{y}\\
+ & =1-\frac{(-1)^{-\alpha}}{\Gamma(\alpha)}\sum_{y=\alpha}^{\infty}\frac{(-x)^{y}}{(y-\alpha)!}\frac{1}{y}\\
+ & =1-e^{-x}\sum_{y=\alpha}^{\infty}\frac{x^{y}}{y!}
 \end{align*}
 
 \end_inset
@@ -2149,8 +2332,8 @@ and then
 \begin_inset Formula 
 \begin{align*}
 f_{Y}(y) & =f_{X}\left(\beta y^{2}\right)2\beta y\\
- & =\frac{\left(\beta y^{2}\right)^{\frac{3}{2}-1}e^{-\beta y^{2}/\beta}}{\beta^{3/2}\Gamma(3/2)}\\
- & =\frac{ye^{-y^{2}}}{\beta\Gamma(3/2)}
+ & =\frac{\left(\beta y^{2}\right)^{\frac{3}{2}-1}e^{-\beta y^{2}/\beta}}{\beta^{3/2}\Gamma(3/2)}2\beta y\\
+ & =\frac{2y^{2}e^{-y^{2}}}{\Gamma(3/2)}
 \end{align*}
 
 \end_inset
@@ -2162,10 +2345,40 @@ which is positive on
  and
 \begin_inset Formula 
 \begin{align*}
-\int_{0}^{\infty}f_{Y}(y)dy & =\int_{0}^{\infty}\frac{ye^{-y^{2}}}{\beta\Gamma(3/2)}dy\\
- & =\frac{1}{\beta\Gamma(3/2)}\int_{0}^{\infty}ye^{-y^{2}}dy\\
- & =\frac{1}{2\beta\Gamma(3/2)}\int_{0}^{\infty}e^{-y^{2}}d\left(y^{2}\right)
+\int_{0}^{\infty}f_{Y}(y)dy & =\int_{0}^{\infty}\frac{2y^{2}e^{-y^{2}}}{\Gamma(3/2)}dy\\
+ & =\frac{2}{\Gamma(3/2)}\int_{0}^{\infty}y^{2}e^{-y^{2}}dy\\
+ & =\frac{2}{\Gamma(3/2)}\frac{\sqrt{\pi}}{4}=1
 \end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+E(X) & =\int_{0}^{\infty}\frac{2y^{3}e^{-y^{2}}}{\Gamma(3/2)}dy\\
+ & =\frac{2}{\Gamma(3/2)}\int_{0}^{\infty}y^{3}e^{-y^{2}}dy\\
+ & \text{using the trick from \textbf{2.22(a)}}\\
+ & =\frac{2}{\Gamma(3/2)}\frac{1}{2}=\frac{2}{\sqrt{\pi}}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\int_{0}^{\infty}\frac{2y^{4}e^{-y^{2}}}{\Gamma(3/2)}dy\\
+ & =\frac{2}{\Gamma(3/2)}\int_{0}^{\infty}y^{4}e^{-y^{2}}dy\\
+ & \text{using the trick from \textbf{2.22(a)}}\\
+ & =\frac{2}{\Gamma(3/2)}\frac{3\sqrt{\pi}}{8}=\frac{3}{4}
+\end{align*}
+
+\end_inset
+
+Finally
+\begin_inset Formula 
+\[
+\text{Var}(X)=\frac{3}{4}-\frac{4}{\pi}
+\]
 
 \end_inset
 
@@ -2174,17 +2387,17 @@ which is positive on
 
 \begin_layout Enumerate
 Let 
-\begin_inset Formula $Y=g(X)=\alpha-\gamma\log(X)$
+\begin_inset Formula $Y=g(X)=\alpha-\xi\log(X)$
 \end_inset
 
  then 
-\begin_inset Formula $g^{-1}(Y)=e^{(\alpha-y)/\gamma}$
+\begin_inset Formula $g^{-1}(Y)=e^{(\alpha-y)/\xi}$
 \end_inset
 
  and
 \begin_inset Formula 
 \[
-\left|g^{-1}(y)^{'}\right|=\frac{1}{\gamma}e^{(\alpha-y)/\gamma}
+\left|g^{-1}(y)^{'}\right|=\frac{1}{\xi}e^{(\alpha-y)/\xi}
 \]
 
 \end_inset
@@ -2192,8 +2405,8 @@ Let
 and then 
 \begin_inset Formula 
 \begin{align*}
-f_{Y}(y) & =f_{X}\left(e^{(\alpha-y)/\gamma}\right)\frac{1}{\gamma}e^{(\alpha-y)/\gamma}\\
- & =\frac{e^{e^{-(\alpha-y)/\gamma}+(\alpha-y)/\gamma}}{\gamma}
+f_{Y}(y) & =f_{X}\left(e^{(\alpha-y)/\xi}\right)\frac{1}{\xi}e^{(\alpha-y)/\xi}\\
+ & =e^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}
 \end{align*}
 
 \end_inset
@@ -2207,21 +2420,63 @@ When
 \end_inset
 
  and when 
-\begin_inset Formula $x=e^{\alpha/\gamma}$
+\begin_inset Formula $x\rightarrow\infty$
 \end_inset
 
- 
-\begin_inset Formula $y=0$
+ then 
+\begin_inset Formula $y\rightarrow-\infty$
 \end_inset
 
 .
  Hence 
 \begin_inset Formula 
 \begin{align*}
-\int_{\infty}^{0}f_{Y}(y)dy & =\int_{0}^{\infty}\frac{e^{e^{(\alpha-y)/\gamma}+(\alpha-y)/\gamma}}{\gamma}dy\\
- & =\frac{1}{\beta\Gamma(3/2)}\int_{0}^{\infty}ye^{-y^{2}}dy\\
- & =\frac{1}{2\beta\Gamma(3/2)}\int_{0}^{\infty}e^{-y^{2}}d\left(y^{2}\right)
+\int_{-\infty}^{\infty}f_{Y}(y)dy & =\int_{-\infty}^{\infty}e^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}dy\\
+ & =\int_{\infty}^{0}e^{-\left(e^{(\alpha-y)/\xi}\right)}d\left(e^{(\alpha-y)/\xi}\right)\\
+ & =-\int_{0}^{\infty}e^{-\left(e^{(\alpha-y)/\xi}\right)}d\left(e^{(\alpha-y)/\xi}\right)\\
+ & =-\left(\left.e^{-u}\right|_{0}^{\infty}\right)=-(0-1)=1
 \end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+E(X) & =\int_{-\infty}^{\infty}ye^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}dy\\
+ & \text{let }u=e^{(\alpha-y)/\xi}\\
+ & =\int_{0}^{\infty}\left(\alpha-\xi\log(u)\right)e^{-u}du\\
+ & =\int_{0}^{\infty}\alpha e^{-u}du+\xi\int_{0}^{\infty}\log(u)e^{-u}du\\
+ & =-\alpha-\xi\gamma
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the Euler-Mascheroni constant and 
+\begin_inset Formula $\gamma\approx0.57721$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+E(X^{2}) & =\int_{-\infty}^{\infty}y^{2}e^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}dy\\
+ & \text{let }u=e^{(\alpha-y)/\xi}\\
+ & =\int_{0}^{\infty}\left(\alpha-\xi\log(u)\right)^{2}e^{-u}du\\
+ & =\int_{0}^{\infty}\alpha^{2}e^{-u}du-2\alpha\xi\int_{0}^{\infty}\log(u)e^{-u}du+\xi^{2}\int_{0}^{\infty}\log^{2}(u)e^{-u}du\\
+ & =-\alpha^{2}-2\alpha\xi\gamma+\xi^{2}\left(\gamma^{2}+\frac{\pi^{2}}{6}\right)
+\end{align*}
+
+\end_inset
+
+Finally
+\begin_inset Formula 
+\[
+\text{Var}(X)=-\alpha^{2}-2\alpha\xi\gamma+\xi^{2}\left(\gamma^{2}+\frac{\pi^{2}}{6}\right)-\alpha^{2}-\xi^{2}\gamma^{2}+2\alpha\xi\gamma=\xi^{2}\left(\frac{\pi^{2}}{6}\right)-2\alpha^{2}
+\]
 
 \end_inset
 
