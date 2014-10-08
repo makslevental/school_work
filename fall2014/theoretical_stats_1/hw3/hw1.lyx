@@ -924,16 +924,6 @@ Hence
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Formula $E(X)=\frac{3}{2}\int_{0}^{2}x(x-1)^{2}dx=1$
 \end_inset
 
@@ -1100,13 +1090,8 @@ status open
 
 \begin_deeper
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
+For 
+\begin_inset Formula $t\in\mathbb{R}$
 \end_inset
 
 
@@ -1123,13 +1108,8 @@ M_{X}(t) & =E(e^{tX})\\
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
+For 
+\begin_inset Formula $t\in\mathbb{R}$
 \end_inset
 
 
@@ -1148,23 +1128,58 @@ M_{X}(t) & =E(e^{tX})\\
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
+For 
+\begin_inset Formula $\left|t\right|<1/\beta$
 \end_inset
 
 
 \begin_inset Formula 
 \begin{align*}
 M_{X}(t) & =E(e^{tX})\\
- & =\int_{0}^{c}\frac{2x}{c^{2}}e^{tx}dx\\
- & =\frac{2}{c^{2}}\int_{0}^{c}xe^{tx}dx\\
- & =\frac{2}{c^{2}}\left(\left.\frac{x}{t}e^{tx}\right|_{0}^{c}-\int_{0}^{c}e^{tx}dx\right)\\
- & =\frac{2}{c^{2}}\left(\frac{c}{t}e^{tc}-\frac{1}{tc}\left(e^{tc}-1\right)\right)
+ & =\frac{1}{2\beta}\int e^{-\left|x-\alpha\right|/\beta}e^{tx}dx\\
+ & =\frac{1}{2\beta}\left(\int_{\alpha}^{\infty}e^{-(x-\alpha)/\beta}e^{tx}dx+\int_{-\infty}^{\alpha}e^{-(\alpha-x)/\beta}e^{tx}dx\right)\\
+ & =\frac{1}{2\beta}\left(e^{\alpha/\beta}\int_{\alpha}^{\infty}e^{x\left(t-1/\beta\right)}dx+e^{-\alpha/\beta}\int_{-\infty}^{\alpha}e^{x\left(t+1/\beta\right)}dx\right)\\
+ & t<1/\beta\implies(t-1/\beta)<0\implies\\
+ & =\frac{1}{2\beta}\left(\frac{e^{\alpha/\beta}}{t-1/\beta}\left(0-e^{\alpha\left(t-1/\beta\right)}\right)+\frac{e^{-\alpha/\beta}}{t+1/\beta}\left(e^{\alpha\left(t+1/\beta\right)}-0\right)\right)\\
+ & =\frac{1}{2\beta}\left(\frac{e^{\alpha/\beta}}{t-1/\beta}\left(0-e^{\alpha\left(t-1/\beta\right)}\right)+\frac{e^{-\alpha/\beta}}{t+1/\beta}\left(e^{\alpha\left(t+1/\beta\right)}-0\right)\right)\\
+ & =\frac{e^{\alpha t}}{1-\left(\beta t\right)^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $e^{t}(1-p)<1\iff\left|t\right|<-\log(1-p)$
+\end_inset
+
+
+\begin_inset Formula $ $
+\end_inset
+
+ (permitted since 
+\begin_inset Formula $p<1\implies\log(1-p)>0$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\sum_{x=0}^{\infty}e^{tx}\binom{r+x-1}{x}p^{r}(1-p)^{x}\\
+ & =\sum_{x=0}^{\infty}\binom{r+x-1}{x}p^{r}\left(e^{t}(1-p)\right)^{x}\\
+ & e^{t}(1-p)<1\therefore\text{ let }1-p'=e^{t}(1-p)\\
+ & =\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(1-\frac{1-p'}{e^{t}}\right)^{r}\left(1-p'\right)^{x}\\
+ & =e^{-tr}\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(\left(e^{t}-1\right)+p'\right)^{r}\left(1-p'\right)^{x}\\
+ & =e^{-tr}\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(\sum_{k=0}^{r}\binom{r}{k}\left(p'\right)^{r-k}\left(e^{t}-1\right)^{k}\right)\left(1-p'\right)^{x}\\
+ & =e^{-tr}\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(p'\right)^{r}\left(\sum_{k=0}^{r}\binom{r}{k}\left(\frac{e^{t}-1}{p'}\right)^{k}\right)\left(1-p'\right)^{x}\\
+ & =e^{-tr}\left(\sum_{k=0}^{r}\binom{r}{k}\left(\frac{e^{t}-1}{p'}\right)^{k}\right)\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(p'\right)^{r}\left(1-p'\right)^{x}\\
+ & \text{since }P(X)\text{ is a pdf}\\
+ & =e^{-tr}\sum_{k=0}^{r}\binom{r}{k}\left(\frac{e^{t}-1}{p'}\right)^{k}\\
+ & =e^{-tr}\sum_{k=0}^{r}\binom{r}{k}1^{r-k}\left(\frac{e^{t}-1}{p'}\right)^{k}\\
+ & =e^{-tr}\left(1+\frac{e^{t}-1}{p'}\right)^{r}\\
+ & =\left(e^{-t}+\frac{1-e^{-t}}{1-e^{t}(1-p)}\right)^{r}=\frac{p^{r}}{1+e^{t}(p-1)}
 \end{align*}
 
 \end_inset
@@ -1185,6 +1200,18 @@ status open
 \end_inset
 
 
+\begin_inset Formula $t/(1-t)$
+\end_inset
+
+ cannot be a moment generating function for any probability distribution:
+\begin_inset Formula 
+\[
+\frac{0}{1-0}=0=M_{X}(0)=E(1)=\int_{\Omega}f_{X}d\omega=1
+\]
+
+\end_inset
+
+which is a contradiction.
 \end_layout
 
 \begin_layout Enumerate
@@ -1195,6 +1222,37 @@ status open
 
 [2.33]
 \end_layout
+
+\end_inset
+
+
+\begin_inset Formula $S(t)=\log\left(M_{X}(t)\right)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left.\frac{d}{dt}S(t)\right|_{t=0} & =\left.\frac{d}{dt}\log\left(M_{X}(t)\right)\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\frac{d}{dt}M_{X}(t)\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\frac{d}{dt}\int_{\Omega}e^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\int_{\Omega}\frac{\partial}{\partial t}e^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\int_{\Omega}xe^{tx}f_{X}\right|_{t=0}\\
+ & =\frac{1}{M_{X}(0)}\int_{\Omega}xe^{0x}f_{X}=\int_{\Omega}xf_{X}=E(X)
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\left.\frac{d^{2}}{dt^{2}}S(t)\right|_{t=0} & =\left.\frac{d}{dt}\frac{1}{M_{X}(t)}\int_{\Omega}xe^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\frac{d}{dt}\frac{1}{M_{X}(t)}\int_{\Omega}xe^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\left[\frac{-1}{M_{X}^{2}(t)}\left(\int_{\Omega}xe^{tx}f_{X}\right)^{2}+\frac{1}{M_{X}(t)}\int_{\Omega}\frac{\partial}{dt}xe^{tx}f_{X}\right]\right|_{t=0}\\
+ & =\left.\left[\frac{-1}{M_{X}^{2}(t)}\left(\int_{\Omega}xe^{tx}f_{X}\right)^{2}+\frac{1}{M_{X}(t)}\int_{\Omega}x^{2}e^{tx}f_{X}\right]\right|_{t=0}\\
+ & =\left.\left[\frac{-1}{M_{X}^{2}(0)}\left(\int_{\Omega}xe^{0x}f_{X}\right)^{2}+\frac{1}{M_{X}(0)}\int_{\Omega}x^{2}e^{0x}f_{X}\right]\right|_{t=0}\\
+ & =-\left(\int_{\Omega}xf_{X}\right)^{2}+\int_{\Omega}x^{2}f_{X}=-\left(E(X)\right)+E\left(X^{2}\right)=\text{Var}(x)
+\end{align*}
 
 \end_inset
 
@@ -1215,6 +1273,59 @@ status open
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+From 
+\series bold
+2.30(d)
+\begin_inset Formula 
+\[
+M_{X}(t)=\frac{p^{r}}{1+e^{t}(p-1)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+M_{Y}(t)=M_{X}(2pt)=\left(\frac{p}{1+e^{2pt}(p-1)}\right)^{r}
+\]
+
+\end_inset
+
+Then L'Hospitale's rule implies
+\begin_inset Formula 
+\begin{align*}
+\underset{p\downarrow0}{\lim}\frac{p}{1+e^{2pt}(p-1)} & =\underset{p\downarrow0}{\lim}\frac{1}{e^{2pt}+2te^{2pt}(p-1)}=\frac{1}{1-2t}
+\end{align*}
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\[
+\underset{p\downarrow0}{\lim}M_{Y}(t)=\left(\frac{1}{1-2t}\right)^{r}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1239,7 +1350,7 @@ The probability that 0 items in
 \begin_inset Formula $6$
 \end_inset
 
- are defective in 100 i
+ are defective in 100 is
 \begin_inset Formula 
 \begin{align*}
 P(X=0) & =\frac{\binom{6}{0}\binom{94}{k}}{\binom{100}{k}}\\
@@ -1253,14 +1364,14 @@ Then solving
 \begin_inset Formula $P(X=0)\leq.10$
 \end_inset
 
- numerically yield 
+ numerically yields 
 \begin_inset Formula $k\geq32$
 \end_inset
 
 .
- So To detect 6 defectives in a batch of 100 you need at least 32 draws,
+ So to detect 6 defectives in a batch of 100 you need at least 32 draws,
  but as the number of defectives goes up this number will decrease hence
- you need at most draws.
+ you need at most 32 draws.
 \end_layout
 
 \begin_layout Enumerate
@@ -1462,7 +1573,7 @@ The probability of choosing 4 packets of cocaine out all 496 packets is
 
 \end_inset
 
-The probability of choosing 2 noncocaine packets out all the rest is 
+The probability of choosing 2 non-cocaine packets out all the rest is 
 \begin_inset Formula 
 \[
 \frac{\binom{M}{2}}{\binom{N+M-4}{2}}
@@ -1471,7 +1582,7 @@ The probability of choosing 2 noncocaine packets out all the rest is
 \end_inset
 
 Therefore, by independence, the probability of choosing 4 packets of cocaine
- and then 2 packets of noncocaine is
+ and then 2 packets of non-cocaine is
 \begin_inset Formula 
 \[
 \frac{\binom{N}{4}}{\binom{N+M}{4}}\frac{\binom{M}{2}}{\binom{N+M-4}{2}}
@@ -1761,11 +1872,7 @@ status open
 
 \end_inset
 
-
-\begin_inset Formula $e^{-z}=\sum_{k=0}^{\infty}(-z)^{k}/k!$
-\end_inset
-
- and 
+ 
 \begin_inset Formula $Z\sim\Gamma(\alpha,1)\implies P(Z=z)=\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}$
 \end_inset
 
@@ -1773,19 +1880,33 @@ status open
  Therefore
 \begin_inset Formula 
 \begin{align*}
-\int_{x}^{\infty}\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}dz & =1-\int_{0}^{x}\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}dz\\
- & =1-\frac{1}{\Gamma(\alpha)}\int_{0}^{x}z^{\alpha-1}\sum_{k=0}^{\infty}\frac{(-z)^{k}}{k!}dz\\
- & =1-\frac{1}{\Gamma(\alpha)}\int_{0}^{x}\sum_{k=0}^{\infty}\frac{(-1)^{k}z^{k+\alpha-1}}{k!}dz\\
- & \text{ and since }\sum_{k=0}^{\infty}\frac{(-1)^{k}z^{k+\alpha-1}}{k!}\text{ converges uniformly and }z\text{ is continuous for all }k\\
- & =1-\frac{1}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!}\int_{0}^{x}z^{k+\alpha-1}dz\\
- & =1-\frac{1}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-1)^{k}}{k!}\frac{x^{k+\alpha}}{(k+\alpha)}\\
- & =1-\frac{x^{\alpha}}{\Gamma(\alpha)}\sum_{k=0}^{\infty}\frac{(-x)^{k}}{k!}\frac{1}{(k+\alpha)}\\
- & \text{let }y=k+\alpha\\
- & =1-\frac{x^{\alpha}}{\Gamma(\alpha)}\sum_{y=\alpha}^{\infty}\frac{(-x)^{y-\alpha}}{(y-\alpha)!}\frac{1}{y}\\
- & =1-x^{\alpha}\sum_{y=\alpha}^{\infty}\frac{(-x)^{y-\alpha}}{(y-\alpha)!(\alpha-1)!}\frac{1}{y}\\
- & =1-\frac{(-1)^{-\alpha}}{\Gamma(\alpha)}\sum_{y=\alpha}^{\infty}\frac{(-x)^{y}}{(y-\alpha)!}\frac{1}{y}\\
- & =1-e^{-x}\sum_{y=\alpha}^{\infty}\frac{x^{y}}{y!}
+\int_{x}^{\infty}\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}dz & =\frac{1}{\Gamma(\alpha)}\int_{x}^{\infty}z^{\alpha-1}e^{-z}dz\\
+ & =\frac{1}{\Gamma(\alpha)}\left(-\left.\left(z^{\alpha-1}e^{-z}\right)\right|_{x}^{\infty}-(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}\left(-e^{-z}\right)dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(-\left(0-x^{\alpha-1}e^{-x}\right)+(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\left(-\left.\left(z^{\alpha-2}e^{-z}\right)\right|_{x}^{\infty}-(\alpha-2)\int_{x}^{\infty}z^{\alpha-3}\left(-e^{-z}\right)dx\right)\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\left(x^{\alpha-2}e^{-x}+(\alpha-2)\int_{x}^{\infty}z^{\alpha-3}e^{-z}dx\right)\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)x^{\alpha-2}e^{-x}+(\alpha-1)(\alpha-2)\int_{x}^{\infty}z^{\alpha-3}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)x^{\alpha-2}e^{-x}+(\alpha-1)(\alpha-2)x^{\alpha-3}e^{-x}+\cdots+(\alpha-1)!\int_{x}^{\infty}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)x^{\alpha-2}e^{-x}+(\alpha-1)(\alpha-2)x^{\alpha-3}e^{-x}+\cdots+(\alpha-1)!e^{-x}\right)\\
+ & \text{but }\Gamma(\alpha)=(\alpha-1)!\\
+ & =\frac{x^{\alpha-1}e^{-x}}{(\alpha-1)!}+\frac{(\alpha-1)x^{\alpha-2}e^{-x}}{(\alpha-1)!}+\frac{(\alpha-1)(\alpha-2)x^{\alpha-3}e^{-x}}{(\alpha-1)!}+\cdots+\frac{(\alpha-1)!e^{-x}}{(\alpha-1)!}\\
+ & =\frac{x^{\alpha-1}e^{-x}}{(\alpha-1)!}+\frac{x^{\alpha-2}e^{-x}}{(\alpha-2)!}+\frac{x^{\alpha-3}e^{-x}}{(\alpha-3)!}+\cdots+e^{-x}\\
+ & =\sum_{y=0}^{\alpha-1}\frac{x^{y}e^{-x}}{y!}
 \end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $X\sim Poisson(1)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\int_{x}^{\infty}\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}dz=P(Z>x)=P(X<\alpha)=\sum_{y=0}^{\alpha-1}\frac{x^{y}e^{-x}}{y!}
+\]
 
 \end_inset
 

@@ -33,7 +33,7 @@
 
 \begin{document}
 
-\title{STA 6326 Homework 2 Solutions}
+\title{STA 6326 Homework 3 Solutions}
 
 
 \author{Maksim Levental}
@@ -41,328 +41,816 @@
 
 \date{\today}
 \maketitle
-\begin{enumerate}
-\item [1.35]Let $Q(A)=P(A|B)$. Firstly 
-\[
-Q(A)=P(A|B)=\frac{P(A\cap B)}{P(B)}\ge0
-\]
-by the non-negativity of $P(\cdot)$ and the hypothesis that $P(B)>0$.
-Secondly 
-\[
-Q(\Omega)=P(\Omega)=\frac{P(\Omega|B)}{P(B)}=\frac{P(B)}{P(B)}=1
-\]
-Finally assume $A_{i},A_{j}$ for all $i,j$ are pairwise disjoint.
-Then 
-\[
-Q\Bigg(\bigcup_{i=1}^{\infty}A_{i}\Bigg)=P\Bigg(\bigcup_{i=1}^{\infty}A_{i}\Bigg|B\Bigg)=\frac{P\Bigg(\bigg(\bigcup_{i=1}^{\infty}A_{i}\bigg)\cap B\Bigg)}{P(B)}=\frac{P\bigg(\bigcup_{i=1}^{\infty}(A_{i}\cap B)\bigg)}{P(B)}
-\]
-and since $A_{i},\, A_{j}$ for all $i,j$ are pairwise disjoint $(A_{i}\cap B),\,(A_{j}\cap B)$
-are also pairwise disjoint for all $i,j$ and by the countable additivity
-of $P(\cdot)$
-\[
-\frac{P\bigg(\bigcup_{i=1}^{\infty}(A_{i}\cap B)\bigg)}{P(B)}=\frac{\sum_{i=1}^{\infty}P(A_{i}\cap B)}{P(B)}=\sum_{i=1}^{\infty}\frac{P\bigg(A_{i}\cap B)\bigg)}{P(B)}=\sum_{i=1}^{\infty}P(A_{i}|B)=\sum_{i=1}^{\infty}Q(A_{i})
-\]
+% \begin{enumerate}
+% \item [2.6]
 
-\item [1.38]
+% \begin{enumerate}
+% \item If $-\infty<x<0$ then $Y=g(X)=|X|^{3}=(-X)^{3}$ and hence $g^{-1}(Y)=-\sqrt[3]{Y}$
+% and 
+% \[
+% \left|\left(-\sqrt[3]{Y}\right)^{'}\right|=\left|\frac{-1}{3\left(\sqrt[3]{Y}\right)^{2}}\right|=\frac{1}{3\left(\sqrt[3]{Y}\right)^{2}}
+% \]
+% and if $0\leq x<\infty$ then $Y=g(X)=|X|^{3}=X^{3}$ and hence $g^{-1}(Y)=\sqrt[3]{Y}$
+% and 
+% \[
+% \left|\left(\sqrt[3]{Y}\right)^{'}\right|=\left|\frac{1}{3\left(\sqrt[3]{Y}\right)^{2}}\right|=\frac{1}{3\left(\sqrt[3]{Y}\right)^{2}}
+% \]
+% therefore for $0\leq y<\infty$ 
+% \[
+% f_{Y}(y)=\frac{e^{-\left|-\sqrt[3]{y}\right|}}{6\left(\sqrt[3]{y}\right)^{2}}+\frac{e^{-\left|\sqrt[3]{y}\right|}}{6\left(\sqrt[3]{y}\right)^{2}}=\frac{e^{-\sqrt[3]{y}}}{3\left(\sqrt[3]{y}\right)^{2}}
+% \]
+% Let $u=\sqrt[3]{y}$ then 
+% \[
+% \int_{0}^{\infty}f_{Y}(y)dy=\int_{0}^{\infty}\frac{e^{-\sqrt[3]{y}}}{3\left(\sqrt[3]{y}\right)^{2}}dy=\frac{3}{3}\int_{0}^{\infty}e^{-\sqrt[3]{y}}d\left(\sqrt[3]{y}\right)=1
+% \]
+
+% \item $Y=g(X)=1-X^{2}\implies g^{-1}(Y)=-\sqrt{1-Y}$ for $-1<x<0$ and
+% \[
+% \left|\left(-\sqrt{1-Y}\right)^{'}\right|=\frac{1}{2\sqrt{1-Y}}
+% \]
+% and $g^{-1}(Y)=\sqrt{1-Y}$ for $0\leq x<1$ and 
+% \[
+% \left|\left(\sqrt{1-Y}\right)^{'}\right|=\frac{1}{2\sqrt{1-Y}}
+% \]
+% and therefore for $0\leq y<1$
+% \[
+% f_{Y}(y)=\frac{3\left(-\sqrt{1-y}+1\right)^{2}}{16\sqrt{1-y}}+\frac{3\left(\sqrt{1-y}+1\right)^{2}}{16\sqrt{1-y}}=-\frac{3}{8}\left(\frac{y-2}{\sqrt{1-y}}\right)
+% \]
+% Let $u=\sqrt{1-y}$ then $u^{2}=1-y\implies y=1-u^{2}\implies dy=-2udu$
+% (which is of course just going back to $X$ space). Hence 
+% \begin{align*}
+% \int_{0}^{1}f_{Y}(y)dy & =\int_{0}^{1}-\frac{3}{8}\left(\frac{y-2}{\sqrt{1-y}}\right)dy\\
+%  & =-\frac{3}{8}(-2)(-1)\int_{1}^{0}\left(1+u^{2}\right)du\\
+%  & =-\frac{3}{4}\left(0-\left(1+\frac{1}{3}\right)\right)=-\frac{3}{4}\left(\frac{-4}{3}\right)=1
+% \end{align*}
+
+% \end{enumerate}
+\begin{enumerate}
+\item [2.11]$X\sim\frac{1}{\sqrt{2\pi}}e^{-x^{2}/2}$
 
 \begin{enumerate}
-\item If $P(B)=1$ then $P(A|B)=\frac{P(A\cap B)}{1}$ but $P(A)=P(A\cap B)+P(A\cap B^{c})$
-and since $A\cap B^{c}\subset B^{c}$ and $P(A\cap B^{c})\leq P(B^{c})=1-P(B)=0$
-it's the case that $P(A)=P(A\cap B)$ so $P(A|B)=P(A)$.
-\item $P(B|A)=P(B\cap A)/P(A)$ but the hypothesis $A\subset B$ implies
-$B\cap A=A$ so $P(B|A)=P(A)/P(A)=1$. Then $P(A|B)=P(B|A)P(A)/P(B)=P(A)/P(B)$.
 \item 
 \begin{align*}
-P(A|A\cup B)= & \frac{P\bigg(A\cap(A\cup B)\bigg)}{P(A\cup B)}\\
- & \frac{P(A)}{P(A)+P(B)-P(A\cap B)} & \text{by }A\subset A\cup B\\
- & \frac{P(A)}{P(A)+P(B)} & \text{by "mutually exclusive"}\iff A\cap B=\emptyset
+E\left(X^{2}\right) & =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}x^{2}e^{-x^{2}/2}dx\\
+ & =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}x\cdot x\cdot e^{-x^{2}/2}dx\\
+ & =\frac{1}{\sqrt{2\pi}}\left(\left.\left(x\int x\cdot e^{-x^{2}/2}dx\right)\right|_{-\infty}^{\infty}-\int_{-\infty}^{\infty}\left(\int x\cdot e^{-y^{2}/2}dy\right)dx\right)\\
+ & =\frac{1}{\sqrt{2\pi}}\left(\left.x\left(-e^{-x^{2}/2}\right)\right|_{-\infty}^{\infty}+\int_{-\infty}^{\infty}e^{-x^{2}/2}dx\right)\\
+ & =\frac{1}{\sqrt{2\pi}}\left(0+\int_{-\infty}^{\infty}e^{-x^{2}/2}dx\right)\\
+ & =1
 \end{align*}
-
-\item $P(A\cap B\cap C)=P(A|B\cap C)P(B\cap C)=P(A|B\cap C)P(B|C)P(C)$.
-\end{enumerate}
-\item [1.39]
-
-\begin{enumerate}
-\item If $P(A)>0$ and$P(B)>0$ and$P(A\cap B)=0$ then obviously $P(A)\cdot P(B)\ne P(A\cap B)$.
-\item If $P(A)>0$ and$P(B)>0$ and $P(A)P(B)=P(A\cap B)$ then obviously
-$P(A\cap B)=P(A)P(B)>0$.
-\end{enumerate}
-\item [1.44]The number of correct answers is binomially distributed with
-$p=.25$ and $1-p=.75$. Then 
+By example 2.1.7 
 \[
-P(X\ge10)=\sum_{k=10}^{20}\binom{20}{k}\bigg(\frac{1}{4}\bigg)^{k}\bigg(\frac{3}{4}\bigg)^{n-k}=.0138644
+f_{Y}(y)=\frac{1}{2\sqrt{2\pi y}}\left(e^{-y/2}+e^{-y/2}\right)=\frac{1}{\sqrt{2\pi y}}e^{-y/2}
 \]
-
-\item [1.46]There $7^{7}=823,543$ different ways to distribute the 7 balls
-into the 7 cells. The maximum number of cells that could have 3 balls
-is 2 and clearly the minimum is 0. Hence $X_{3}\in\{0,1,2\}$. The
-only way for $X_{3}=2$ would be 3 balls in a cell, 3 balls in another
-cell, and the last ball in one cell. There are $\binom{7}{2}$ ways
-to choose the 2 cells to have the 3 balls each, $\binom{7}{3}$ ways
-to choose the first set of 3 balls for the first cell, $\binom{4}{3}$
-to choose the second set of 3 balls for the second cell, then finally
-$\binom{5}{1}=5$ different ways to choose which cell will contain
-the last balls. Therefore 
-\[
-P(X_{3}=2)=\frac{\binom{7}{2}\binom{7}{3}\binom{4}{3}5}{7^{7}}\approx.0178
-\]
-For $X_{3}=1$ there are 3 different configurations possible:$\{3,1,1,1,1\},\{3,2,1,1\},\{3,2,2\}.$
+and since $0<y<\infty$ 
 \begin{align*}
- & \#\{3,1,1,1,1\} & =7\binom{7}{3}\times\binom{6}{4}\times4\times3\times2 & \text{ which cell contains 3 balls \ensuremath{\times}\ which 3 balls \ensuremath{\times}\ }\\
- &  &  & \text{ which cells contain 1 ball \ensuremath{\times}\ permute the balls}\\
- & \#\{3,2,1,1\} & =7\binom{7}{3}\times6\times\binom{4}{2}\times\binom{5}{2}\times2 & \text{ which cell contains 3 balls \ensuremath{\times}\ which 3 balls \ensuremath{\times}\ }\\
- &  &  & \text{ which cell contains 2 balls, which 2 balls,}\\
- &  &  & \text{ which cells contain 1 ball each, permute the balls}\\
- & \#\{3,2,2\} & =7\binom{7}{3}\times\binom{6}{2}\times\binom{4}{2} & \text{ which cell contains 3 balls, which 3 balls,}\\
- &  &  & \text{ which cells contain 2 balls, which two balls in the first 2-ball cell}\\
- &  &  & \text{ which cell contains second set of 2 balls, permute the balls}\\
- & \#\{3,4\} & =7\binom{7}{3}\times6 & \text{ which cell contains 3 balls, which 3 balls,}\\
- &  &  & \text{ which cell contains 4 balls}\\
- & +\\
- \hline
- &  & 288,120
+E\left(Y\right) & =\int_{0}^{\infty}yf_{Y}(y)dy\\
+ & =\frac{1}{\sqrt{2\pi}}\int_{0}^{\infty}\frac{e^{-y/2}}{\sqrt{y}}dy\\
+ & =\frac{1}{\sqrt{2\pi}}\frac{1}{2}\int_{-\infty}^{\infty}2e^{-\left(\sqrt{y}\right)^{2}/2}d\left(\sqrt{y}\right)\\
+ & =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-\left(\sqrt{y}\right)^{2}/2}d\left(\sqrt{y}\right)\\
+ & =\frac{1}{\sqrt{2\pi}}\sqrt{2\pi}\\
+ & =1
 \end{align*}
-Hence $P(X_{3}=1)=1-288,120/7^{7}\approx.650146$. For $X_{3}=0$
-there are very many configurations but we can compute by computing
-as the complement of $P(X_{3}=1):$ $P(X_{3}=0)=1-P(X_{3}=1)+P(X_{3}=2)=1-0.178-0.650\approx.33$.
-\item [1.47]Requirements for being a CDF: (i) right continuous (ii) $\lim_{x\rightarrow-\infty}F(x)=0$
-and $\lim_{x\rightarrow\infty}F(x)=1$ (iii) non-decreasing.
 
-\begin{enumerate}
-\item $\frac{1}{2}+\frac{1}{\pi}\arctan(x)$
-
-\begin{enumerate}
-\item Continuous and hence right-continuous.
-\item $\lim_{x\rightarrow-\pi/2}\tan(x)=-\infty$ hence $\lim_{x\rightarrow-\infty}\frac{1}{2}+\frac{1}{\pi}\arctan(x)=\frac{1}{2}+\frac{1}{\pi}\frac{-\pi}{2}=\frac{1}{2}-\frac{1}{2}=0$.
-$\lim_{x\rightarrow\pi/2}\tan(x)=\infty$ hence $\lim_{x\rightarrow\infty}\frac{1}{2}+\frac{1}{\pi}\arctan(x)=\frac{1}{2}+\frac{1}{\pi}\frac{\pi}{2}=\frac{1}{2}+\frac{1}{2}=1$.
-\item $\arctan(x)'=\frac{1}{1+x^{2}}>0$ is non-decreasing (monotonically
-increasing) and hence $\frac{1}{2}+\frac{1}{\pi}\arctan(x)$ is non-decreasing.
-\end{enumerate}
-\item $(1+e^{-x})^{-1}$
-
-\begin{enumerate}
-\item Continuous and hence right-continuous.
-\item $\lim_{x\rightarrow-\infty}e^{-x}=\infty$ hence $\lim_{x\rightarrow-\infty}(1+e^{-x})^{-1}=1/\infty=0$.
-$\lim_{x\rightarrow\infty}e^{-x}=0$ hence $\lim_{x\rightarrow-\infty}(1+e^{-x})^{-1}=1/1=1$.
-\item $\bigg((1+e^{-x})^{-1}\bigg)^{'}=-1(1+e^{-x})^{-2}(-1)e^{-x}=(1+e^{-x})e^{-x}>0$
-hence non-decreasing.
-\end{enumerate}
-\item $\exp(-e^{-x})$
-
-\begin{enumerate}
-\item Continuous and hence right-continuous.
-\item $\lim_{x\rightarrow-\infty}e^{-x}=\infty$ hence $\lim_{x\rightarrow-\infty}\exp(-e^{-x})=0$.
-$\lim_{x\rightarrow\infty}e^{-x}=0$ hence $\lim_{x\rightarrow-\infty}\exp(-e^{-x})=1$.
-\item $\bigg(\exp(-e^{-x})\bigg)^{'}=\exp(-e^{-x})\bigg(-e^{-x}\bigg)(-1)=\exp(-e^{-x})e^{-x}>0$
-hence non-decreasing.
-\end{enumerate}
-\item $1-e^{-x}$
-
-\begin{enumerate}
-\item Continuous and hence right-continuous.
-\item $e^{-0}=1$ hence $\lim_{x\rightarrow0}1-e^{-x}=1-1=0$. $\lim_{x\rightarrow\infty}e^{-x}=0$
-hence $\lim_{x\rightarrow\infty}1-e^{-x}=1$. 
-\item $\bigg(1-e^{-x}\bigg)^{'}=1+e^{-x}>0$ hence non-decreasing.
-\end{enumerate}
-\item If $0<\epsilon<1$ then $F_Y(y) = \left\{      
-			\begin{array}{lr}        
-			\frac{1-\epsilon}{1+e^{-y}} & \text{if } y < 0 \\        
-			\epsilon + \frac{1-\epsilon}{1+e^{-y}} & \text{if } y \geq 0      
-			\end{array}    
-		\right. 
-$ 
-
-\begin{enumerate}
-\item Since each piece of the piecewise definition of $F_{Y}$ is continuous
-and the domain is defined with equality from the right ($y\geq0)$
-$F_{Y}$ is right-continuous. 
-\item $\lim_{y\rightarrow-\infty}\frac{1-\epsilon}{1+e^{-y}}=0$ similarly
-to (b.ii) and $\lim_{y\rightarrow\infty}\frac{1-\epsilon}{1+e^{-y}}=1-\epsilon$
-hence $\lim_{y\rightarrow\infty}\epsilon+\frac{1-\epsilon}{1+e^{-y}}=\epsilon+1-\epsilon=1$.
-\item $\frac{1-\epsilon}{1+e^{-y}}$ and $\epsilon+\frac{1-\epsilon}{1+e^{-y}}$
-are non-decreasing by (b.ii) and $\lim_{y\uparrow0}F_{Y}(y)=(1-\epsilon)/2<\epsilon+(1-\epsilon)/2=\lim_{y\downarrow0}F_{Y}(y)$
-hence non-decreasing.
-\end{enumerate}
-\end{enumerate}
-\item [1.49]Assume $F_{X}(t)\leq F_{Y}(t)$ for all $t$ and $F_{X}(t)<F_{Y}(t)$
-for some $t_{0}$. By definition $F_{X}(t)=P(X\leq t)=1-P(X>t)$.
-Similarly $F_{Y}(t)=P(Y\leq t)=1-P(Y>t)$. Then 
+\item The support of $Y$ is $0<y<\infty$. If $-\infty<x<0$ then $Y=-X$
+and $g(Y)^{-1}=-Y$, else if $0\leq x<\infty$ then $Y=X$ and $g(Y)^{-1}=Y$.
+Then 
 \[
-1-P(X>t)\leq1-P(Y>t)
+f_{Y}(y)=\frac{1}{\sqrt{2\pi}}\left(e^{-(-y)^{2}/2}\left|-1\right|+e^{-y^{2}/2}\left|1\right|\right)=\frac{2e^{-y^{2}/2}}{\sqrt{2\pi}}
 \]
- and so $P(X>t)\geq P(Y>t)$. Similarly for $t_{0}$ it's the case
-$P(X>t_{0})>P(Y>t_{0})$.
-\item [1.50]Let $S=\sum_{i=1}^{n}t^{k-1}$. Then
-\[
-S(1-t)=S-St=\sum_{i=1}^{n}t^{k-1}-\sum_{i=1}^{n}t^{k}=\sum_{i=1}^{n}(t^{k}-t^{k-1})
-\]
-But this last sum is telescoping hence 
-\[
-S(1-t)=1-t^{k-1}\implies S=\frac{1-t^{k-1}}{1-t}
-\]
+and therefore 
+\begin{align*}
+E(Y) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}ye^{-y^{2}/2}dy\\
+ & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}e^{-(y^{2}/2)}d\left(y^{2}/2\right)\\
+ & =\frac{2}{\sqrt{2\pi}}
+\end{align*}
 
-\item [1.51]$X$ is distributed Hypergeometrically, i.e. there are $\binom{30}{4}$
-ways to draw a sample of 4 from 30, $\binom{5}{x}$ ways to draw $x$
-microwaves from the subset of microwaves that is defective, and then
-finally per draw from the defective subset there are $\binom{25}{4-x}$
-to draw the remainder from the subset of functional microwaves. Hence
-for $x=0,1,2,3,4$
-\[
-P(X=x)=\frac{\binom{5}{x}\binom{25}{4-x}}{\binom{30}{4}}
-\]
-So \[P(X=x) = \left\{      
-			\begin{array}{lr}        
-			\frac{2530}{5481} & \text{for } x=0 \\        
-			\frac{2300}{5481} & \text{for } x=1 \\
-			\frac{600}{5481} &  \text{for } x=2 \\
-			\frac{50}{5481} &  \text{for } x=3 \\
-			\frac{1}{5481} & \text{for } x=4 \\
-			\end{array}    
-		\right. 
-\] Then \[F_X(x) = \left\{      
-			\begin{array}{lr}        
-			\frac{2530}{5481} & \text{for } x=0 \\        
-			\frac{4830}{5481} & \text{for } x=1 \\
-			\frac{5430}{5481} &  \text{for } x=2 \\
-			\frac{5480}{5481} &  \text{for } x=3 \\
-			\frac{5481}{5481} & \text{for } x=4 \\
-			\end{array}    
-		\right. 
-\] The plot of the CDF is Figure \ref{fig:M1}.\begin{figure}
-\centering
-\begin{tikzpicture}
-\begin{axis} 
-\addplot[domain=0:1,blue] {0.461595}; 
-\addplot[domain=1:2,blue] {0.881226}; 
-\addplot[domain=2:3,blue] {0.990695};
-\addplot[domain=3:4,blue] {0.999818};
-\addplot[domain=4:5,blue] {1}; 
-\addplot[holdot] coordinates{(1,0.461595)(2,0.881226)(3,0.990695)(4,0.999818)(5,1)}; 
-\addplot[soldot] coordinates{(0,0.461595)(1,0.881226)(2,0.990695)(3,0.999818)(4,1)};
-\end{axis}
-\end{tikzpicture}
-\caption{$F_X$ for problem 1.51 (note at $F_X(4)$ there is overlap) }\label{fig:M1}
-\end{figure}
-\item [1.52]Let $f(x)$ be a pdf with cdf $F(x)$, $F(x_{0})<1$, and \[g(x) = \left\{      
-			\begin{array}{lr}        
-			f(x)/(1-F(x_0)) & \text{if } x\geq x_0 \\        
-			0 & \text{if } x < x_0      
-			\end{array}    
-		\right. 
-\] Then since $f(x)\geq0$ and $1>F(x_{0})$ (and since $F$ is a cdf
-$F(x_{0})\geq0$) it's the case that $g(x)\geq0$ for all $x$. Finally
-\[
-\int_{-\infty}^{\infty}g(x)=\int_{-\infty}^{x_{0}}g(x)+\int_{x_{0}}^{\infty}\frac{f(x)}{1-F(x_{0})}dx=0+\frac{1}{1-F(x_{0})}\int_{x_{0}}^{\infty}f(x)dx=\frac{1-\int_{_{-\infty}}^{x_{0}}f(x)}{1-F(x_{0})}=\frac{1-F(x_{0})}{1-F(x_{0})}=1
-\]
-
-\item [1.54]Let $c$ be a normalization constant.
-
-\begin{enumerate}
-\item $\int_{0}^{\pi/2}\sin(x)dx=1$ hence $c=1\implies\int_{0}^{\pi/2}cf(x)=1$.
-\item $\int_{-\infty}^{\infty}e^{-|x|}dx=2$ hence $c=1/2\implies\int_{-\infty}^{\infty}ce^{-|x|}dx=1$. 
+\item $\text{Var}(Y)=E\left(Y^{2}\right)-\left(E\left(Y\right)\right)^{2}$
+\begin{align*}
+E\left(Y^{2}\right) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}y^{2}e^{-y^{2}/2}dy\\
+ & =2\frac{1}{2}\int_{-\infty}^{\infty}y^{2}\frac{e^{-y^{2}/2}}{\sqrt{2\pi}}dy\\
+ & =1\text{ by part (a)}
+\end{align*}
+Hence $\text{Var}\left(Y\right)=1-\frac{2}{\pi}$.
 \end{enumerate}
-\item [2.1]
-
-\begin{enumerate}
-\item If $Y=g(X)=X^{3}$ then $g^{-1}(Y)=\sqrt[3]{Y}$ and $\bigg(g^{-1}(Y)\bigg)^{'}=\frac{1}{3}y^{-2/3}$
+\item [2.12]$Y=g(X)=d\tan(X)$. $g(X)$ is increasing for $0<x<\pi/2$
+and $g^{-1}(Y)=\arctan(Y).$ Hence
+\[
+\left|\left(\arctan(Y/d)\right)^{'}\right|=\frac{1}{1+(Y/d)^{2}}\frac{1}{d}
+\]
+and therefore
+\[
+f_{Y}(y)=\frac{2}{\pi}\frac{1}{1+(y/d)^{2}}\frac{1}{d}
+\]
+with support $y\in(0,\infty).$ This is the Cauchy distribution hence
+$E(Y)=\infty$.
+\item [2.13]The probability that there are $k$ heads, given the first
+flip lands heads, is geometrically distributed ``flips until first
+tail'': $P_{H}(X=k)=p^{k}(1-p)$ but restricted to $k=1,2,3,\dots$
+and the probability that there are $k$ tails, given the first flip
+lands tails, is also geometrically distributed ``flips until first
+head'': $P_{T}(X=k)=(1-p)^{k}p$, but also restricted to $k=1,2,3,\dots$.
+Therefore the probability that there's either a run of $k$ heads
+or tails is 
+\[
+P_{H\vee T}(X=k)=P_{H}+P_{T}=p^{k}(1-p)+(1-p)^{k}p
+\]
 and 
-\[
-f_{Y}(y)=42(\sqrt[3]{y})^{5}(1-\sqrt[3]{y})\bigg|\frac{1}{3}y^{-2/3}\bigg|=14(\sqrt[3]{y}-1)y
-\]
-Hence 
-\[
-\int_{0}^{1}f_{Y}(y)dy=14\int_{0}^{1}y(\sqrt[3]{y}-1)dy=14\frac{1}{14}=1
-\]
+\begin{align*}
+E\left(X\right) & =\sum_{k=1}^{\infty}k\left(p^{k}(1-p)+(1-p)^{k}p\right)\\
+ & =\sum_{k=1}^{\infty}kp^{k}(1-p)+\sum_{k=1}^{\infty}k(1-p)^{k}p\\
+ & =E\left(H\right)-(1-p)+E\left(T\right)-p\\
+ & =\frac{1-(1-p)}{1-p}+\frac{1-p}{p}\\
+ & =\frac{1}{p}+\frac{1}{1-p}-2
+\end{align*}
 
-\item If $Y=g(X)=4X+3$ then $g^{-1}(Y)=(Y-3)/4$ and $\bigg(g^{-1}(Y)\bigg)^{'}=\frac{1}{4}$
-and
-\[
-f_{Y}(y)=7e^{-\frac{7}{4}(y-3)}\bigg|\frac{1}{4}\bigg|
-\]
-Hence, since $g(0)=4(0)+3<Y<\infty$
-\[
-\int_{0}^{\infty}f_{Y}(y)dy=\frac{7}{4}e^{\frac{21}{4}}\int_{3}^{\infty}e^{\frac{-7y}{4}}dy=e^{\frac{21}{4}}e^{-\frac{7\cdot3}{4}}=1
-\]
-
-\item If $Y=g(X)=X^{2}$ then $g(Y)^{-1}=\pm\sqrt{Y}$ and $\Bigg|\bigg(g^{-1}(Y)\bigg)^{'}\Bigg|=1/2\sqrt{Y}$
-and
-\[
-f_{Y}(y)=\frac{30}{4}y^{2}\bigg(1-\frac{1}{2\sqrt{y}}\bigg)
-\]
-Hence
-\[
-\int_{0}^{1}f_{Y}(y)dy=\frac{30}{4}\int_{0}^{1}y^{2}\bigg(1-\frac{1}{2\sqrt{y}}\bigg)dy=\frac{30}{4}\frac{4}{30}=1
-\]
-
-\end{enumerate}
-\item [2.2]
+\item [2.14]
 
 \begin{enumerate}
-\item If $Y=g(X)=X^{2}$ then $g(Y)^{-1}=\pm\sqrt{Y}$ and $\Bigg|\bigg(g^{-1}(Y)\bigg)^{'}\Bigg|=1/2\sqrt{Y}$
-and
-\[
-f_{Y}(y)=1\cdot\frac{1}{2\sqrt{y}}
-\]
+\item 
+\begin{align*}
+E\left(X\right) & =\int_{0}^{\infty}x\cdot f_{X}(x)dx\text{ let }u=F_{X}(x)\mbox{ and since }F_{X}\mbox{ strictly monotonic}\\
+ & =\int_{0}^{1}F_{X}^{-1}(u)du\\
+ & =\int_{0}^{\infty}\left(1-F_{X}(x)\right)dx
+\end{align*}
 
-\item If $Y=g(X)=-\log(X)$ then $g^{-1}(Y)=e^{-Y}$ and $\Bigg|\bigg(g^{-1}(Y)\bigg)\Bigg|^{'}=e^{-Y}$
-and
-\[
-f_{Y}(y)=\binom{n+m+1}{n,m,1}e^{-ny}(1-e^{-y})^{m}e^{-y}
-\]
-With domain $-\log(1)=0<y<-\log(0)=\infty$.
-\item If $Y=g(X)=e^{X}$ then $g(Y)^{-1}=\log Y$ and $\Bigg|\bigg(g^{-1}(Y)\bigg)^{'}\Bigg|=1/Y$
-and
-\[
-f_{Y}(y)=\frac{1}{\sigma^{2}}\frac{1}{y^{2}}e^{-(1/y\sigma)^{2}/2}=\frac{1}{(\sigma y)^{2}}e^{-(1/y\sigma)^{2}/2}
-\]
+\item First note that $x=\sum_{k=1}^{x}1$ 
+\begin{align*}
+E\left(X\right) & =\sum_{x=0}^{\infty}x\cdot f_{X}(x)\\
+ & =\sum_{x=1}^{\infty}x\cdot f_{X}(x)\\
+ & =\sum_{x=1}^{\infty}\sum_{k=1}^{x}f_{X}(x)\\
+ & =\sum_{k=1}^{\infty}\sum_{x=k}^{\infty}f_{X}(x)\text{ since }0<k<x\text{ and }0<x<\infty\iff k<x<\infty\mbox{ and }0<k<\infty\\
+ & =\sum_{k=1}^{\infty}\left(1-F_{X}(k)\right)\\
+ & =\sum_{k=0}^{\infty}\left(1-F_{X}(k)\right)
+\end{align*}
 
 \end{enumerate}
-\item [2.3]If $Y=g(X)=X/(X+1)$ then $g(Y)^{-1}=1/(1-Y)$ and $\Bigg|\bigg(\frac{1}{1-y}\bigg)^{'}\Bigg|=\frac{1}{(1-y)^{2}}$
-Hence for $y=0,\frac{1}{2},\frac{2}{3},\frac{3}{4},...$ 
-\[
-f_{Y}(y)=\frac{1}{3}\bigg(\frac{2}{3}\bigg)^{\frac{1}{1-y}}\frac{1}{(1-y)^{2}}
-\]
-\\
-\\
-\\
+\item [2.16]
+\begin{align*}
+E\left(X\right) & =\int_{0}^{\infty}\left(1-F_{X}(t)\right)dt\\
+ & =\int_{0}^{\infty}P(T>t)dt\\
+ & =\int_{0}^{\infty}\left(ae^{-\lambda t}+(1-a)e^{-\mu t}\right)dt\\
+ & =\frac{a}{\lambda}+\frac{\lambda-a}{\mu}
+\end{align*}
 
-\item [2.4]$f(x) = \left\{      
-			\begin{array}{lr}        
-			\frac{1}{2}\lambda e^{-\lambda x} & \text{if } x \geq 0 \\        
-			\frac{1}{2}\lambda e^{\lambda x} & \text{if } x < 0      
-			\end{array}    
-		\right. 
-$ 
+\item [2.17]$m$ is such that $m=F_{X}^{-1}(1/2)$
 
 \begin{enumerate}
-\item $e^{\lambda x}>0$ for all $x\in(-\infty,\infty)$ hence $f(x)\geq0$.
-Furthermore 
+\item $3\int_{0}^{m}x^{2}dx=m^{3}$ and therefore $m=\sqrt[3]{1/2}$.
+\item 
+\begin{align*}
+\frac{1}{2} & =\frac{1}{\pi}\int_{-\infty}^{m}\frac{1}{1+x^{2}}\\
+ & =\frac{1}{\pi}\left(\arctan(m)-\arctan(-\infty)\right)\\
+ & =\frac{1}{\pi}\left(\arctan(m)+\frac{\pi}{2}\right)
+\end{align*}
+Therefore $m=\tan\left(0\right)=0$
+\end{enumerate}
+% \item [2.20]Number of children is distributed Geometrically $P(X=k)=(1-p)^{k-1}p$,
+% number of trials until first success, including first success, with
+% $p=1/2.$ The mean $\mu=1/p=2$. Therefore the couple, on average,
+% should have two children.
+\item [2.22]
+
+\begin{enumerate}
+\item Note that $\int_{0}^{\infty}e^{-\alpha x^{2}}dx=\frac{1}{2}\sqrt{\frac{\pi}{a}}$
+. Let $\alpha=1/\beta^{2}$ under the integral, then 
+\begin{align*}
+\int_{0}^{\infty}f_{X}(x)dx & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{2}e^{-x^{2}/\beta^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial}{\partial\alpha}e^{-\alpha x^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\int_{0}^{\infty}e^{-\alpha x^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{d}{d\alpha}\alpha^{-1/2}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{-1}{2}\alpha^{-3/2}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{-1}{2}\left(\frac{1}{\beta^{2}}\right)^{-3/2}\\
+ & =\frac{1}{\beta^{3}}\frac{1}{\left(\frac{1}{\beta^{2}}\right)^{3/2}}=\frac{1}{\beta^{3}}\frac{\beta^{3}}{1}=1
+\end{align*}
+
+\item Note that $\int_{0}^{\infty}xe^{-\alpha x^{2}}=\frac{1}{2\alpha}$
+($u$ substitution). Let $\alpha=1/\beta^{2}$ under the integral,
+then 
+\begin{align*}
+E\left(X\right) & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{3}e^{-x^{2}/\beta^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial}{\partial\alpha}\left(xe^{-\alpha x^{2}}\right)dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\int_{0}^{\infty}xe^{-\alpha x^{2}}dx\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{d}{d\alpha}\frac{1}{2}\alpha^{-1}\\
+ & =\frac{2}{\beta^{3}\sqrt{\pi}}\alpha^{-2}=\frac{2\beta^{4}}{\beta^{3}\sqrt{\pi}}=\frac{2\beta}{\sqrt{\pi}}
+\end{align*}
+The second moment is 
+\begin{align*}
+E\left(X^{2}\right) & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}x^{4}e^{-x^{2}/\beta^{2}}dx\\
+ & =\frac{4}{\beta^{3}\sqrt{\pi}}\int_{0}^{\infty}\frac{\partial^{2}}{\partial\alpha^{2}}\left(e^{-\alpha x^{2}}\right)dx\\
+ & =\frac{4}{\beta^{3}\sqrt{\pi}}\frac{d^{2}}{d\alpha^{2}}\int_{0}^{\infty}e^{-\alpha x^{2}}dx\\
+ & =\frac{4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{2}\frac{d^{2}}{d\alpha^{2}}\alpha^{-1/2}\\
+ & =\frac{-4}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\frac{d}{d\alpha}\alpha^{-3/2}=\frac{6}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\frac{d}{d\alpha}\alpha^{-5/2}\\
+ & =\frac{6}{\beta^{3}\sqrt{\pi}}\frac{\sqrt{\pi}}{4}\left(\frac{1}{\beta^{2}}\right)^{-5/2}=\frac{3}{2}\beta^{2}
+\end{align*}
+Hence $\text{Var}(X)=\frac{3}{2}\beta^{2}-\left(\frac{2\beta}{\sqrt{\pi}}\right)^{2}=\beta^{2}\left(\frac{3}{2}-\frac{4}{\pi}\right)$.
+\end{enumerate}
+\item [2.23]
+
+\begin{enumerate}
+\item $f_{Y}(y)=\frac{1}{2\sqrt{y}}\left(f_{X}\left(\sqrt{y}\right)+f_{X}\left(-\sqrt{y}\right)\right)=\frac{1}{4\sqrt{y}}\left(1+\sqrt{y}+1-\sqrt{y}\right)=\frac{1}{2\sqrt{y}}$.
+\item $E\left(Y\right)=\frac{1}{2}\int_{0}^{1}\frac{y}{\sqrt{y}}dy=\frac{1}{2}\int_{0}^{1}\sqrt{y}dy=\frac{1}{3}$
+and $E\left(Y^{2}\right)=\frac{1}{2}\int_{0}^{1}y^{3/2}dy=\frac{1}{5}$
+therefore $\text{Var}(X)=\frac{1}{5}-\frac{1}{9}=\frac{4}{45}$.
+\end{enumerate}
+% \item [2.24]
+
+% \begin{enumerate}
+% \item $E\left(X\right)=a\int_{0}^{1}x^{a}dx=\frac{a}{a+1}$ and $E\left(X^{2}\right)=a\int_{0}^{1}x^{a+1}dx=\frac{a}{a+2}$
+% therefore $\text{Var}(X)=E\left(X^{2}\right)-\left(E(X)\right)^{2}=\frac{a}{a+2}-\frac{a^{2}}{a^{2}+2a+1}=\frac{a}{(a^{2}+1)(a+2)}$
+% \item $E\left(X\right)=\frac{1}{n}\sum_{k=1}^{n}k=\frac{1}{n}\frac{n(n+1)}{2}=\frac{1}{2}(n+1)$
+% and $E\left(X^{2}\right)=\frac{1}{n}\sum_{k=1}^{n}k^{2}$ but 
+% \[
+% k^{3}-\left(k-1\right)^{3}=k^{3}-\left(k^{3}-3k^{2}+3k+1\right)=3k^{2}-3k-1
+% \]
+% and therefore
+% \begin{align*}
+% \frac{1}{n}\sum_{k=1}^{n}k^{2} & =\frac{1}{3n}\sum_{k=1}^{n}k^{3}-\left(k-1\right)^{3}+3k-1\\
+%  & =\frac{1}{3n}\left(\sum_{k=1}^{n}\left(k^{3}-\left(k-1\right)^{3}\right)+\sum_{k=1}^{n}3k-1\right)\\
+%  & =\frac{1}{3n}\left(\sum_{k=1}^{n}\left(k^{3}-\left(k-1\right)^{3}\right)+\frac{3}{2}n(n+1)-n\right)\\
+%  & =\frac{1}{3n}\left(n^{3}+\frac{3}{2}n(n+1)-n\right)\\
+%  & =\frac{1}{6}(2n+1)(n+1)
+% \end{align*}
+% Hence 
+% \begin{align*}
+% \text{Var}(X) & =\frac{1}{6}(2n+1)(n+1)-\frac{1}{4}(n+1)(n+1)\\
+%  & =\frac{1}{2}(n+1)\left(\frac{1}{3}(2n+1)-\frac{1}{2}(n+1)\right)\\
+%  & =\frac{1}{12}(n+1)\left(n-1\right)\\
+%  & =\frac{n^{2}-1}{12}
+% \end{align*}
+
+% \item $E(X)=\frac{3}{2}\int_{0}^{2}x(x-1)^{2}dx=1$ and $E(X^{2})=\frac{3}{2}\int_{0}^{2}x^{2}(x-1)^{2}dx=\frac{8}{5}$.
+% Hence $\text{\text{Var}}(x)=1-64/35=-6/7$ 
+% \end{enumerate}
+% \item [2.25]
+
+% \begin{enumerate}
+% \item Let $Y=g(X)=-X$ then $g^{-1}(Y)=-Y$ and $\left|\left(-Y\right)^{'}\right|=1$.
+% Hence $Y\sim f_{X}(-y)\left|\left(-Y\right)^{'}\right|=f_{X}(y)$. 
+% \item 
+% \[
+% E\left(e^{-tX}\right)=\int_{-\epsilon}^{\epsilon}e^{-tx}f_{X}(x)dx=\int_{-\epsilon}^{\epsilon}e^{t(-x)}f_{X}(x)dx=\int_{-\epsilon}^{\epsilon}e^{t(-x)}f_{X}(-x)dx
+% \]
+% Let $Y=-X.$ Then by part (a) 
+% \[
+% \int_{-\epsilon}^{\epsilon}e^{t(-x)}f_{X}(-x)dx=-\int_{\epsilon}^{-\epsilon}e^{t(y)}f_{X}(y)dy=\int_{-\epsilon}^{\epsilon}e^{t(y)}f_{X}(y)dy=\int_{-\epsilon}^{\epsilon}e^{tx}f_{X}(x)dx=E\left(e^{tX}\right)
+% \]
+% Hence $E\left(e^{-tX}\right)=E\left(e^{tX}\right)$.
+% \end{enumerate}
+\item [2.26]
+
+\begin{enumerate}
+\item $\mathcal{N}(0,1)$, Standard Cauchy, Student's t.
+\item 
+\begin{align*}
+1 & =\underset{\epsilon\rightarrow\infty}{\lim}\int_{a-\epsilon}^{a+\epsilon}f_{X}(x)dx\\
+ & =\underset{\epsilon\rightarrow\infty}{\lim}\left(\int_{a-\epsilon}^{a}f_{X}(x)dx+\int_{a}^{a+\epsilon}f_{X}(x)dx\right)\\
+ & =\underset{\epsilon\rightarrow\infty}{\lim}\left(\int_{a-\epsilon}^{a}f_{X}(x)dx+\int_{a-\epsilon}^{a}f_{X}(x-\epsilon)d(x-\epsilon)\right)\\
+ & =\underset{\epsilon\rightarrow\infty}{\lim}\left(\int_{a-\epsilon}^{a}f_{X}(x)dx+\int_{a-\epsilon}^{a}f_{X}((x-\epsilon)+\epsilon)d(x-\epsilon)\right)
+\end{align*}
+
+\end{enumerate}
+\item [2.30]
+
+\begin{enumerate}
+\item For $t\in\mathbb{R}$
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\int_{0}^{c}\frac{1}{c}e^{tx}dx\\
+ & =\frac{1}{tc}\left(e^{tc}-1\right)
+\end{align*}
+
+\item For $t\in\mathbb{R}$
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\int_{0}^{c}\frac{2x}{c^{2}}e^{tx}dx\\
+ & =\frac{2}{c^{2}}\int_{0}^{c}xe^{tx}dx\\
+ & =\frac{2}{c^{2}}\left(\left.\frac{x}{t}e^{tx}\right|_{0}^{c}-\int_{0}^{c}e^{tx}dx\right)\\
+ & =\frac{2}{c^{2}}\left(\frac{c}{t}e^{tc}-\frac{1}{tc}\left(e^{tc}-1\right)\right)
+\end{align*}
+
+\item For $\left|t\right|<1/\beta$
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\frac{1}{2\beta}\int e^{-\left|x-\alpha\right|/\beta}e^{tx}dx\\
+ & =\frac{1}{2\beta}\left(\int_{\alpha}^{\infty}e^{-(x-\alpha)/\beta}e^{tx}dx+\int_{-\infty}^{\alpha}e^{-(\alpha-x)/\beta}e^{tx}dx\right)\\
+ & =\frac{1}{2\beta}\left(e^{\alpha/\beta}\int_{\alpha}^{\infty}e^{x\left(t-1/\beta\right)}dx+e^{-\alpha/\beta}\int_{-\infty}^{\alpha}e^{x\left(t+1/\beta\right)}dx\right)\\
+ & t<1/\beta\implies(t-1/\beta)<0\implies\\
+ & =\frac{1}{2\beta}\left(\frac{e^{\alpha/\beta}}{t-1/\beta}\left(0-e^{\alpha\left(t-1/\beta\right)}\right)+\frac{e^{-\alpha/\beta}}{t+1/\beta}\left(e^{\alpha\left(t+1/\beta\right)}-0\right)\right)\\
+ & =\frac{1}{2\beta}\left(\frac{e^{\alpha/\beta}}{t-1/\beta}\left(0-e^{\alpha\left(t-1/\beta\right)}\right)+\frac{e^{-\alpha/\beta}}{t+1/\beta}\left(e^{\alpha\left(t+1/\beta\right)}-0\right)\right)\\
+ & =\frac{e^{\alpha t}}{1-\left(\beta t\right)^{2}}
+\end{align*}
+
+\item For $e^{t}(1-p)<1\iff\left|t\right|<-\log(1-p)$$ $ (permitted since
+$p<1\implies\log(1-p)>0$)
+\begin{align*}
+M_{X}(t) & =E(e^{tX})\\
+ & =\sum_{x=0}^{\infty}e^{tx}\binom{r+x-1}{x}p^{r}(1-p)^{x}\\
+ & =\sum_{x=0}^{\infty}\binom{r+x-1}{x}p^{r}\left(e^{t}(1-p)\right)^{x}\\
+ & e^{t}(1-p)<1\therefore\text{ let }1-p'=e^{t}(1-p)\\
+ & =\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(1-\frac{1-p'}{e^{t}}\right)^{r}\left(1-p'\right)^{x}\\
+ & =e^{-tr}\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(\left(e^{t}-1\right)+p'\right)^{r}\left(1-p'\right)^{x}\\
+ & =e^{-tr}\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(\sum_{k=0}^{r}\binom{r}{k}\left(p'\right)^{r-k}\left(e^{t}-1\right)^{k}\right)\left(1-p'\right)^{x}\\
+ & =e^{-tr}\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(p'\right)^{r}\left(\sum_{k=0}^{r}\binom{r}{k}\left(\frac{e^{t}-1}{p'}\right)^{k}\right)\left(1-p'\right)^{x}\\
+ & =e^{-tr}\left(\sum_{k=0}^{r}\binom{r}{k}\left(\frac{e^{t}-1}{p'}\right)^{k}\right)\sum_{x=0}^{\infty}\binom{r+x-1}{x}\left(p'\right)^{r}\left(1-p'\right)^{x}\\
+ & \text{since }P(X)\text{ is a pdf}\\
+ & =e^{-tr}\sum_{k=0}^{r}\binom{r}{k}\left(\frac{e^{t}-1}{p'}\right)^{k}\\
+ & =e^{-tr}\sum_{k=0}^{r}\binom{r}{k}1^{r-k}\left(\frac{e^{t}-1}{p'}\right)^{k}\\
+ & =e^{-tr}\left(1+\frac{e^{t}-1}{p'}\right)^{r}\\
+ & =\left(e^{-t}+\frac{1-e^{-t}}{1-e^{t}(1-p)}\right)^{r}=\frac{p^{r}}{1+e^{t}(p-1)}
+\end{align*}
+
+\end{enumerate}
+\item [2.31]$t/(1-t)$ cannot be a moment generating function for any probability
+distribution:
 \[
-\int_{-\infty}^{\infty}f(x)dx=\frac{\lambda}{2}\int_{-\infty}^{0}e^{\lambda x}dx+\frac{\lambda}{2}\int_{0}^{\infty}e^{-\lambda x}dx
+\frac{0}{1-0}=0=M_{X}(0)=E(1)=\int_{\Omega}f_{X}d\omega=1
 \]
-Then by $-u=x$ 
+which is a contradiction.
+\item [2.33]$S(t)=\log\left(M_{X}(t)\right)$. Then
+\begin{align*}
+\left.\frac{d}{dt}S(t)\right|_{t=0} & =\left.\frac{d}{dt}\log\left(M_{X}(t)\right)\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\frac{d}{dt}M_{X}(t)\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\frac{d}{dt}\int_{\Omega}e^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\int_{\Omega}\frac{\partial}{\partial t}e^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\frac{1}{M_{X}(t)}\int_{\Omega}xe^{tx}f_{X}\right|_{t=0}\\
+ & =\frac{1}{M_{X}(0)}\int_{\Omega}xe^{0x}f_{X}=\int_{\Omega}xf_{X}=E(X)
+\end{align*}
+and
+\begin{align*}
+\left.\frac{d^{2}}{dt^{2}}S(t)\right|_{t=0} & =\left.\frac{d}{dt}\frac{1}{M_{X}(t)}\int_{\Omega}xe^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\frac{d}{dt}\frac{1}{M_{X}(t)}\int_{\Omega}xe^{tx}f_{X}\right|_{t=0}\\
+ & =\left.\left[\frac{-1}{M_{X}^{2}(t)}\left(\int_{\Omega}xe^{tx}f_{X}\right)^{2}+\frac{1}{M_{X}(t)}\int_{\Omega}\frac{\partial}{dt}xe^{tx}f_{X}\right]\right|_{t=0}\\
+ & =\left.\left[\frac{-1}{M_{X}^{2}(t)}\left(\int_{\Omega}xe^{tx}f_{X}\right)^{2}+\frac{1}{M_{X}(t)}\int_{\Omega}x^{2}e^{tx}f_{X}\right]\right|_{t=0}\\
+ & =\left.\left[\frac{-1}{M_{X}^{2}(0)}\left(\int_{\Omega}xe^{0x}f_{X}\right)^{2}+\frac{1}{M_{X}(0)}\int_{\Omega}x^{2}e^{0x}f_{X}\right]\right|_{t=0}\\
+ & =-\left(\int_{\Omega}xf_{X}\right)^{2}+\int_{\Omega}x^{2}f_{X}=-\left(E(X)\right)+E\left(X^{2}\right)=\text{Var}(x)
+\end{align*}
+
+\item [2.38]
+
+\begin{enumerate}
+\item From \textbf{2.30(d)
 \[
-\frac{\lambda}{2}\int_{-\infty}^{0}e^{\lambda x}dx=\frac{\lambda}{2}\int_{\infty}^{0}e^{-\lambda u}d(-u)=(-1)(-1)\frac{\lambda}{2}\int_{0}^{\infty}e^{-\lambda u}du=\frac{\lambda}{2}\int_{0}^{\infty}e^{-\lambda x}dx
+M_{X}(t)=\frac{p^{r}}{1+e^{t}(p-1)}
 \]
+}
+\item 
+\[
+M_{Y}(t)=M_{X}(2pt)=\left(\frac{p}{1+e^{2pt}(p-1)}\right)^{r}
+\]
+Then L'Hospitale's rule implies
+\begin{align*}
+\underset{p\downarrow0}{\lim}\frac{p}{1+e^{2pt}(p-1)} & =\underset{p\downarrow0}{\lim}\frac{1}{e^{2pt}+2te^{2pt}(p-1)}=\frac{1}{1-2t}
+\end{align*}
 and hence
 \[
-\int_{-\infty}^{\infty}f(x)dx=2\frac{\lambda}{2}\int_{0}^{\infty}e^{-\lambda x}dx=\lambda\frac{1}{\lambda}(1-0)=1.
+\underset{p\downarrow0}{\lim}M_{Y}(t)=\left(\frac{1}{1-2t}\right)^{r}
 \]
 
-\item If $x<0$ then
+\end{enumerate}
+\item [3.2]
+
+\begin{enumerate}
+\item The probability that 0 items in $k$ draws are defective if $6$ are
+defective in 100 is
+\begin{align*}
+P(X=0) & =\frac{\binom{6}{0}\binom{94}{k}}{\binom{100}{k}}\\
+ & =\frac{\frac{94!}{k!(94-k)!}}{\frac{100!}{k!(100-k)!}}\\
+ & =\frac{(100-k)(99-k)(98-k)(97-k)(96-k)(95-k)}{100\cdot99\cdot98\cdot96\cdot95}\leq.10
+\end{align*}
+Then solving $P(X=0)\leq.10$ numerically yields $k\geq32$. So to
+detect 6 defectives in a batch of 100 you need at least 32 draws,
+but as the number of defectives goes up this number will decrease
+hence you need at most 32 draws.
+\item 
+\begin{align*}
+P(X=0) & =\frac{\binom{1}{0}\binom{99}{k}}{\binom{100}{k}}\\
+ & =\frac{\frac{99!}{k!(99-k)!}}{\frac{100!}{k!(100-k)!}}\\
+ & =\frac{(100-k)}{100}\leq.10
+\end{align*}
+Therefore $k\geq90$.
+\end{enumerate}
+\item [3.4]
+
+\begin{enumerate}
+\item The number of ``flips'' until success (finding the right key) is
+geometrically distributed with success probability $1/n$ and failure
+probability $(n-1)/n$. Therefore the mean number of trials is 
 \[
-F_{X}(x)=\frac{\lambda}{2}\int_{-\infty}^{x}e^{\lambda x}dx=\frac{\lambda}{2}\frac{1}{\lambda}e^{\lambda x}=\frac{1}{2}e^{\lambda x}
-\]
-If $x\geq0$ then 
-\[
-F_{X}(x)=\frac{\lambda}{2}\int_{-\infty}^{0}e^{\lambda x}dx+\frac{\lambda}{2}\int_{0}^{x}e^{-\lambda x}dx=\frac{1}{2}+\bigg(\frac{1}{2}-\frac{1}{2}e^{-\lambda x}\bigg)
+\frac{1}{1/n}=n
 \]
 
-\item $P(|X|<t)=\int_{-t}^{t}f(x)dx.$ Arguments from part (a) imply 
+\item There are $n!$ permutations of the keys (assuming they're all distinct)
+and $n$ different positions in any permutation that the correct key
+could be in. There are $\binom{n-1}{k-1}(k-1)!$ different permutations
+of keys that could precede the correct key and $ $$\binom{n-k}{n-k}(n-k)!$
+permutations of keys that could succeed the correct key. Therefore
+the probability the correct key is in the $k$th position is 
 \[
-\int_{-t}^{t}f(x)dx=2\frac{\lambda}{2}\int_{0}^{t}e^{-\lambda x}dx=2\bigg(\frac{1}{2}-\frac{1}{2}e^{-\lambda t}\bigg)
+P(X=k)=\frac{\binom{n-1}{k-1}(k-1)!\binom{n-k}{n-k}(n-k)!}{n!}=\frac{1}{n}
 \]
- \end{enumerate}
+and then $E\left(X\right)=n+1/2$, i.e. in the middle, as you'd expect.
+\end{enumerate}
+\item [3.7]$P(X=k)=e^{-\lambda}\lambda^{k}/k!$ implies
+\begin{align*}
+P(X\geq2) & =e^{-\lambda}\sum_{k=2}^{\infty}\frac{\lambda^{k}}{k!}\\
+ & =e^{-\lambda}\left(\sum_{k=0}^{\infty}\frac{\lambda^{k}}{k!}-\lambda-1\right)\\
+ & =e^{-\lambda}\left(e^{\lambda}-\lambda-1\right)\\
+ & =1-e^{-\lambda}\lambda-e^{-\lambda}
+\end{align*}
+Therefore $P(X\geq2)\geq.99\iff1-e^{-\lambda}\lambda-e^{-\lambda}\geq.99\iff\lambda\approx6.63835$
+\item [3.10]
+
+\begin{enumerate}
+\item The probability of choosing 4 packets of cocaine out all 496 packets
+is 
+\[
+\frac{\binom{N}{4}}{\binom{N+M}{4}}
+\]
+The probability of choosing 2 non-cocaine packets out all the rest
+is 
+\[
+\frac{\binom{M}{2}}{\binom{N+M-4}{2}}
+\]
+Therefore, by independence, the probability of choosing 4 packets
+of cocaine and then 2 packets of non-cocaine is
+\[
+\frac{\binom{N}{4}}{\binom{N+M}{4}}\frac{\binom{M}{2}}{\binom{N+M-4}{2}}
+\]
+
+\item 
+\begin{align*}
+\frac{\binom{N}{4}}{\binom{N+M}{4}}\frac{\binom{M}{2}}{\binom{N+M-4}{2}} & =\frac{m(m-1)n(n-1)(n-2)(n-3)}{(m+n)(m+n-1)(m+n-2)(m+n-3)(m+n-4)(m+n-5)}
+\end{align*}
+
+\end{enumerate}
+\item [3.13]
+
+\begin{enumerate}
+\item $P(X>0)=\sum_{k=1}^{\infty}e^{-\lambda}\lambda^{k}/k!=\sum_{k=0}^{\infty}e^{-\lambda}\lambda^{k}/k!-e^{-\lambda}=1-e^{-\lambda}$
+hence 
+\[
+P(X_{T}=k)=\frac{e^{-\lambda}}{1-e^{-\lambda}}\frac{\lambda^{k}}{k!}I_{\{1,2,\dots\}}
+\]
+Then 
+\begin{align*}
+E(X_{T}) & =\frac{e^{-\lambda}}{1-e^{-\lambda}}\sum_{k=1}^{\infty}k\frac{\lambda^{k}}{k!}\\
+ & =\frac{e^{-\lambda}}{1-e^{-\lambda}}\left(\sum_{k=0}^{\infty}k\frac{\lambda^{k}}{k!}-0\right)\\
+ & =\frac{e^{-\lambda}}{1-e^{-\lambda}}\lambda
+\end{align*}
+and
+\begin{align*}
+E(X_{T}^{2}) & =\frac{e^{-\lambda}}{1-e^{-\lambda}}\sum_{k=1}^{\infty}k^{2}\frac{\lambda^{k}}{k!}\\
+ & =\frac{e^{-\lambda}}{1-e^{-\lambda}}\left(\left.\frac{\partial^{2}}{\partial t^{2}}MGF(X)\right|_{t=0}-0\right)\\
+ & =\frac{e^{-\lambda}}{1-e^{-\lambda}}\left(\left.\frac{\partial^{2}}{\partial t^{2}}e^{\lambda e^{t}-1}\right|_{t=0}\right)\\
+ & =\frac{\lambda e^{-\lambda-1}}{1-e^{-\lambda}}\left(\left.\frac{\partial}{\partial t}e^{t}e^{\lambda e^{t}}\right|_{t=0}\right)\\
+ & =\frac{\lambda e^{-\lambda-1}}{1-e^{-\lambda}}\left(\left.e^{t}e^{\lambda e^{t}}+\lambda e^{2t}e^{\lambda e^{t}}\right|_{t=0}\right)\\
+ & =\frac{\lambda e^{-\lambda-1}}{1-e^{-\lambda}}\left(e^{\lambda}+\lambda e^{\lambda}\right)\\
+ & =\frac{\lambda\left(1+\lambda\right)}{e\left(1-e^{-\lambda}\right)}
+\end{align*}
+and finally 
+\[
+\text{Var}(X_{T})=E(X_{T}^{2})-\left(E(X_{T})\right)^{2}=\frac{\lambda\left(1+\lambda\right)}{e\left(1-e^{-\lambda}\right)}-\frac{\lambda e^{-\lambda}}{1-e^{-\lambda}}=\frac{\lambda}{1-e^{-\lambda}}\left(\frac{\left(1+\lambda\right)}{e}-e^{-\lambda}\right)
+\]
+
+\item $P(X=k)=\binom{k+r-1}{k}(1-p)^{k}(p)^{r}$. Note this definition is
+obverse from the book - $p=1-p'$. Firstly
+\begin{align*}
+P(X>k) & =\sum_{i=1}^{\infty}\binom{k+r-1}{k}(1-p)^{k}(p)^{r}\\
+ & =\sum_{i=0}^{\infty}\binom{k+r-1}{k}(1-p)^{k}(p)^{r}-\binom{0+r-1}{0}(1-p)^{0}(p)^{r}\\
+ & =1-p^{r}
+\end{align*}
+Then $P(X=k)=\frac{1}{p^{r}}\binom{k+r-1}{k}(1-p)^{k}(p)^{r}I_{\{1,2,\dots\}}$
+and
+\begin{align*}
+E(X_{T}) & =\frac{1}{p^{r}}\sum_{k=1}^{\infty}k\binom{k+r-1}{k}p^{k}(1-p)^{r}\\
+ & =\frac{1}{p^{r}}\sum_{k=0}^{\infty}k\binom{k+r-1}{k}p^{k}(1-p)^{r}\\
+ & =\frac{r(1-p)}{p^{r+1}}
+\end{align*}
+and
+\begin{align*}
+E(X_{T}^{2}) & =E(X_{T}(X_{T}-1))+E(X_{T})\\
+ & =\frac{1}{p^{r}}\sum_{k=1}^{\infty}k(k-1)\binom{k+r-1}{k}p^{k}(1-p)^{r}+E(X_{T})\\
+ & =\frac{1}{p^{r}}\sum_{k=0}^{\infty}\frac{(k+r-1)!}{(k-2)!(r-1)!}p^{k}(1-p)^{r}+E(X_{T})\\
+ & =\frac{1}{p^{r}}\sum_{k=0}^{\infty}\frac{((k-2)+(r+2)-1)!}{(k-2)!((r+2)-2-1)!}p^{k}(1-p)^{r}+E(X_{T})\\
+ & =\frac{p^{2}p^{-2}}{p^{r}((r+2)-3)((r+2)-2)}\sum_{k=0}^{\infty}\frac{((k-2)+(r+2)-1)!}{(k-2)!((r+2)-1)!}p^{k-2}(1-p)^{r+2}+E(X_{T})\\
+ & =\frac{1}{p^{r}(r-1)r}\sum_{k=0}^{\infty}\binom{(k-2)+(r+2)-1}{k-2}p^{k-2}(1-p)^{r+2}+E(X_{T})\\
+ & =\frac{1}{p^{r}(r-1)r}+\frac{r(1-p)}{p^{r+1}}=\frac{1+p^{r-1}r(1-p)(r-1)}{p^{r}(r-1)r}
+\end{align*}
+Finally
+\[
+\text{Var}(X_{T})=\frac{1+p^{r-1}r(1-p)(r-1)}{p^{r}(r-1)r}-\left(\frac{r(1-p)}{p^{r+1}}\right)^{2}=1-(p-1)p-\frac{\left(r(p-1)\right)^{2}}{p^{2(r+1)}}
+\]
+
+\end{enumerate}
+\item [3.14]
+
+\begin{enumerate}
+\item $f_{X}>0$ since $p<1$ and therefore $\log(p)<0$. Furthermore 
+\begin{align*}
+\sum_{x=1}^{\infty}\frac{-(1-p)^{x}}{x\log(p)} & =\frac{1}{\log(p)}\sum_{x=1}^{\infty}\frac{-(1-p)^{x}}{x}\\
+ & =\frac{1}{\log(p)}\log(1-(1-p))\\
+ & =1
+\end{align*}
+
+\item 
+\begin{align*}
+E(X) & =\frac{1}{\log(p)}\sum_{x=1}^{\infty}x\frac{-(1-p)^{x}}{x}\\
+ & =\frac{-1}{\log(p)}\sum_{x=1}^{\infty}(1-p)^{x}\\
+ & =\frac{-1}{\log(p)}\frac{1-p}{1-(1-p)}\\
+ & =\frac{p-1}{p\log(p)}
+\end{align*}
+Then
+\begin{align*}
+E(X^{2}) & =\frac{1}{\log(p)}\sum_{x=1}^{\infty}x^{2}\frac{-(1-p)^{x}}{x}\\
+ & =\frac{-1}{\log(p)}\sum_{x=1}^{\infty}x(1-p)^{x}
+\end{align*}
+Now since $\sum(1-p)^{x}$ absolutely converges to $(1-p)/p$ we can
+differentiate under the sum
+\begin{align*}
+\frac{d}{dp}\frac{1-p}{p} & =\frac{\partial}{\partial p}\sum_{x=1}^{\infty}(1-p)^{x}\\
+\frac{p-1}{p^{2}}-\frac{1}{p} & =\sum_{x=1}^{\infty}\frac{\partial}{\partial p}(1-p)^{x}\\
+ & =\sum_{x=1}^{\infty}x(1-p)^{x-1}\\
+ & =\frac{1}{1-p}\sum_{x=1}^{\infty}x(1-p)^{x}\implies\\
+\frac{(1-p)(p-1)}{p^{2}}-\frac{1-p}{p} & =\sum_{x=1}^{\infty}x(1-p)^{x}
+\end{align*}
+and therefore
+\begin{align*}
+E(X^{2}) & =\frac{-1}{\log(p)}\left(\frac{(1-p)(p-1)}{p^{2}}-\frac{1-p}{p}\right)\\
+ & =\frac{1-p}{p^{2}\log(p)}
+\end{align*}
+and finally 
+\[
+\text{Var}(X)=\frac{1-p}{p^{2}\log(p)}-\left(\frac{p-1}{p\log(p)}\right)^{2}=\frac{\log(1-p)-(p-1)^{2}}{p^{2}\log^{2}(p)}
+\]
+
+\end{enumerate}
+\item [3.19] $Z\sim\Gamma(\alpha,1)\implies P(Z=z)=\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}$.
+Therefore
+\begin{align*}
+\int_{x}^{\infty}\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}dz & =\frac{1}{\Gamma(\alpha)}\int_{x}^{\infty}z^{\alpha-1}e^{-z}dz\\
+ & =\frac{1}{\Gamma(\alpha)}\left(-\left.\left(z^{\alpha-1}e^{-z}\right)\right|_{x}^{\infty}-(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}\left(-e^{-z}\right)dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(-\left(0-x^{\alpha-1}e^{-x}\right)+(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\int_{x}^{\infty}z^{\alpha-2}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\left(-\left.\left(z^{\alpha-2}e^{-z}\right)\right|_{x}^{\infty}-(\alpha-2)\int_{x}^{\infty}z^{\alpha-3}\left(-e^{-z}\right)dx\right)\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)\left(x^{\alpha-2}e^{-x}+(\alpha-2)\int_{x}^{\infty}z^{\alpha-3}e^{-z}dx\right)\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)x^{\alpha-2}e^{-x}+(\alpha-1)(\alpha-2)\int_{x}^{\infty}z^{\alpha-3}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)x^{\alpha-2}e^{-x}+(\alpha-1)(\alpha-2)x^{\alpha-3}e^{-x}+\cdots+(\alpha-1)!\int_{x}^{\infty}e^{-z}dx\right)\\
+ & =\frac{1}{\Gamma(\alpha)}\left(x^{\alpha-1}e^{-x}+(\alpha-1)x^{\alpha-2}e^{-x}+(\alpha-1)(\alpha-2)x^{\alpha-3}e^{-x}+\cdots+(\alpha-1)!e^{-x}\right)\\
+ & \text{but }\Gamma(\alpha)=(\alpha-1)!\\
+ & =\frac{x^{\alpha-1}e^{-x}}{(\alpha-1)!}+\frac{(\alpha-1)x^{\alpha-2}e^{-x}}{(\alpha-1)!}+\frac{(\alpha-1)(\alpha-2)x^{\alpha-3}e^{-x}}{(\alpha-1)!}+\cdots+\frac{(\alpha-1)!e^{-x}}{(\alpha-1)!}\\
+ & =\frac{x^{\alpha-1}e^{-x}}{(\alpha-1)!}+\frac{x^{\alpha-2}e^{-x}}{(\alpha-2)!}+\frac{x^{\alpha-3}e^{-x}}{(\alpha-3)!}+\cdots+e^{-x}\\
+ & =\sum_{y=0}^{\alpha-1}\frac{x^{y}e^{-x}}{y!}
+\end{align*}
+If $X\sim Poisson(1)$
+\[
+\int_{x}^{\infty}\frac{1}{\Gamma(\alpha)}z^{\alpha-1}e^{-z}dz=P(Z>x)=P(X<\alpha)=\sum_{y=0}^{\alpha-1}\frac{x^{y}e^{-x}}{y!}
+\]
+
+\item [3.20]
+
+\begin{enumerate}
+\item $f_{X}(x)=\frac{2}{\sqrt{2\pi}}e^{-x^{2}/2}$ implies
+\begin{align*}
+E(X) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}xe^{-x^{2}/2}dx\\
+ & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}e^{-\left(x^{2}/2\right)}d\left(x^{2}/2\right)\\
+ & =\frac{-2}{\sqrt{2\pi}}(0-1)=\frac{2}{\sqrt{2\pi}}
+\end{align*}
+and by \textbf{2.22(a)}
+\begin{align*}
+E(X^{2}) & =\frac{2}{\sqrt{2\pi}}\int_{0}^{\infty}x^{2}e^{-x^{2}/2}dx\\
+ & =\frac{2}{\sqrt{2\pi}}\frac{\sqrt{\pi}}{2}=\frac{1}{2}
+\end{align*}
+Hence
+\[
+\text{Var}(X)=\frac{1}{2}-\frac{2}{\pi}
+\]
+
+\item Let $Y=g(X)=X^{2}$ then $g^{-1}(Y)=\sqrt{y}$ and 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=y^{1/2-1}
+\]
+and then
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(\sqrt{y}\right)y^{1/2-1}\\
+ & =\frac{1}{\sqrt{2\pi}}y^{1/2-1}e^{-y/2}\\
+ & =\frac{y^{1/2-1}}{\sqrt{\pi}2^{1/2}}e^{-y/2}\\
+ & =\frac{y^{1/2-1}}{\Gamma(1/2)2^{1/2}}e^{-y/\beta}
+\end{align*}
+Hence $Y\sim\text{Gamma}(1/2,2)$ .
+\end{enumerate}
+\item [3.23]$f_{X}=\beta\alpha^{\beta}/x^{\beta+1}$
+
+\begin{enumerate}
+\item $0<\alpha<x<\infty$ implies $x^{\beta+1}>0$ and hence $f_{X}>0.$
+Furthermore
+\begin{align*}
+\int_{\alpha}^{\infty}f_{X}(x)dx & =\int_{\alpha}^{\infty}f_{X}(x)dx\\
+ & =\int_{\alpha}^{\infty}\frac{\beta\alpha^{\beta}}{x^{\beta+1}}dx\\
+ & =\frac{\beta\alpha^{\beta}}{-\beta}\left(\left.\frac{1}{x^{\beta}}\right|_{\alpha}^{\infty}\right)\\
+ & =-\alpha^{\beta}\left(0-\frac{1}{\alpha^{\beta}}\right)=1
+\end{align*}
+
+\item 
+\begin{align*}
+E(X) & =\int_{\alpha}^{\infty}x\frac{\beta\alpha^{\beta}}{x^{\beta+1}}dx\\
+ & =\beta\alpha^{\beta}\int_{\alpha}^{\infty}\frac{1}{x^{\beta}}dx\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+1)}\left(\left.\frac{1}{x^{\beta-1}}\right|_{\alpha}^{\infty}\right)\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+1)}\left(0-\frac{1}{\alpha^{\beta-1}}\right)=\frac{\beta\alpha}{(\beta+1)}
+\end{align*}
+and
+\begin{align*}
+E(X^{2}) & =\int_{\alpha}^{\infty}x^{2}\frac{\beta\alpha^{\beta}}{x^{\beta+1}}dx\\
+ & =\beta\alpha^{\beta}\int_{\alpha}^{\infty}\frac{1}{x^{\beta-1}}dx\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+2)}\left(\left.\frac{1}{x^{\beta-2}}\right|_{\alpha}^{\infty}\right)\\
+ & =\frac{\beta\alpha^{\beta}}{-(\beta+2)}\left(0-\frac{1}{\alpha^{\beta-2}}\right)=\frac{\beta\alpha^{2}}{(\beta+2)}
+\end{align*}
+Therefore
+\[
+\text{Var}(X)=\frac{\beta\alpha^{2}}{(\beta+2)}-\left(\frac{\beta\alpha}{(\beta+1)}\right)^{2}=\alpha^{2}\left(\frac{\beta}{(\beta+2)}-\frac{\beta^{2}}{(\beta+1)}\right)=\alpha^{2}\beta\left(\frac{1}{(\beta+2)}+\frac{1}{(\beta+1)}-1\right)
+\]
+
+\end{enumerate}
+\item [3.24]
+
+\begin{enumerate}
+\item Let $Y=g(X)=X^{1/\gamma}$ then $g^{-1}(Y)=y^{\gamma}$ and 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=\gamma y^{\gamma-1}
+\]
+and then
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(y^{\gamma}\right)\gamma y^{\gamma-1}\\
+ & =\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}
+\end{align*}
+which is positive on $0<y<\infty$ and
+\begin{align*}
+\int_{0}^{\infty}f_{Y}(y) & =\int_{0}^{\infty}f_{X}\left(y^{\gamma}\right)\gamma y^{\gamma-1}dy\\
+ & =\int_{0}^{\infty}\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}dy\\
+ & =\int_{0}^{\infty}e^{-\left(\beta y^{\gamma}\right)}d\left(\beta y^{\gamma}\right)\\
+ & =-\left(\left.e^{-\beta y^{\gamma}}\right|_{0}^{\infty}\right)\\
+ & =-(0-1)=1
+\end{align*}
+Furthermore
+\begin{align*}
+E(Y) & =\int_{0}^{\infty}y\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}dy\\
+ & =\int_{0}^{\infty}\beta y^{\gamma}e^{-\beta y^{\gamma}}dy\\
+ & u=\beta y^{\gamma}\implies\frac{1}{\gamma\beta}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}du=dy\\
+ & =\int_{0}^{\infty}\frac{\gamma}{\gamma\beta}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}ue^{-u}dy\\
+ & =\int_{0}^{\infty}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}\frac{u}{\beta}e^{-u}dy\\
+ & =\beta^{-1/\gamma}\int_{0}^{\infty}u^{\frac{1}{\gamma}}e^{-u}dy\\
+ & =\beta^{-1/\gamma}\Gamma\left(1+\frac{1}{\gamma}\right)
+\end{align*}
+and
+\begin{align*}
+E(Y^{2}) & =\int_{0}^{\infty}y^{2}\gamma\beta y^{\gamma-1}e^{-\beta y^{\gamma}}dy\\
+ & =\int_{0}^{\infty}\beta y^{\gamma+1}e^{-\beta y^{\gamma}}dy\\
+ & u=\beta y^{\gamma}\implies\frac{1}{\gamma\beta}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}du=dy\\
+ & =\int_{0}^{\infty}\left(\frac{u}{\beta}\right)^{\frac{1}{\gamma}-1}\left(\frac{u}{\beta}\right)^{1+\frac{1}{\gamma}}e^{-u}dy\\
+ & =\int_{0}^{\infty}\left(\frac{u}{\beta}\right)^{\frac{2}{\gamma}}e^{-u}dy\\
+ & =\beta^{-2/\gamma}\int_{0}^{\infty}u^{\frac{2}{\gamma}}e^{-u}dy\\
+ & =\beta^{-2/\gamma}\Gamma\left(1+\frac{2}{\gamma}\right)
+\end{align*}
+Therefore
+\[
+\text{Var}(Y)=\beta^{-2/\gamma}\Gamma\left(1+\frac{2}{\gamma}\right)-\left(\beta^{-1/\gamma}\Gamma\left(1+\frac{1}{\gamma}\right)\right)^{2}=\beta^{-2/\gamma}\left(\Gamma\left(1+\frac{2}{\gamma}\right)-\Gamma^{2}\left(1+\frac{1}{\gamma}\right)\right)
+\]
+
+\item Let $X\sim\text{Exp(\ensuremath{\beta})}$ and $W=X^{1/2}$ and $Y=g(W)=2^{1/2}W/\beta^{1/2}$.
+Then $W\sim\text{Weibull}(2,\beta)$ and $g^{-1}(Y)=\beta^{1/2}W/2^{1/2}$
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=\beta^{1/2}/2^{1/2}
+\]
+and then
+\begin{align*}
+f_{Y}(y) & =f_{W}\left(\sqrt{\frac{\beta}{2}}y\right)\sqrt{\frac{\beta}{2}}\\
+ & =2\beta\left(\sqrt{\frac{\beta}{2}}y\right)e^{-\beta\left(\sqrt{\frac{\beta}{2}}y\right)^{2}}\sqrt{\frac{\beta}{2}}\\
+ & =2\left(\frac{\beta^{2}}{2}y\right)e^{-\frac{\beta^{2}}{2}y^{2}}
+\end{align*}
+Hence $Y\sim\text{Weibull}(2,\frac{\beta^{2}}{2})$. Therefore immediately
+$\int_{0}^{\infty}f_{Y}(y)dy=1$. Furthermore
+\[
+E(Y)=\left(\frac{\beta^{2}}{2}\right)^{-1/2}\Gamma\left(1+\frac{1}{2}\right)
+\]
+and
+\[
+\text{Var}(Y)=\frac{2}{\beta^{2}}\left(\Gamma\left(2\right)-\Gamma^{2}\left(1+\frac{1}{2}\right)\right)
+\]
+
+\item Let $Y=g(X)=X^{-1}$ then $g^{-1}(Y)=y^{-1}$ and 
+\[
+\left|g^{-1}\left(y\right)^{'}\right|=\frac{1}{y^{2}}
+\]
+and then
+\begin{align*}
+f_{Y}(y) & =\frac{f_{X}\left(y^{-1}\right)}{y^{2}}\\
+ & =\frac{\left(y^{-1}\right)^{\alpha-1}e^{-y^{-1}/\beta}}{y^{2}\beta^{\alpha}\Gamma(\alpha)}\\
+ & =\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}
+\end{align*}
+which is positive on $0<y<\infty$ and
+\begin{align*}
+\int_{0}^{\infty}f_{Y}(y) & =\int_{0}^{\infty}\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}dy\\
+ & u=\frac{1}{y\beta}\implies du=-\frac{dy}{\beta y^{2}}\\
+ & =\int_{\infty}^{0}\frac{-\left(u\beta\right)^{\alpha-1}}{\beta^{\alpha-1}\Gamma(\alpha)}e^{-u}du\\
+ & =\int_{0}^{\infty}\frac{u^{\alpha-1}}{\Gamma(\alpha)}e^{-u}dy\\
+ & =\frac{\Gamma(\alpha)}{\Gamma(\alpha)}=1
+\end{align*}
+Furthermore
+\begin{align*}
+E(X) & =\int_{0}^{\infty}y\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}dy\\
+ & =\frac{\Gamma(\alpha-1)}{\beta\Gamma(\alpha)}\int_{0}^{\infty}\frac{y^{-1-(\alpha-)}}{\beta^{\alpha-1}\Gamma(\alpha-1)}e^{-y^{-1}/\beta}dy\\
+ & \text{integrand is kernel of IG(\ensuremath{\alpha}-1,\ensuremath{\beta})}\\
+ & =\frac{\Gamma(\alpha-1)}{\beta\Gamma(\alpha)}
+\end{align*}
+\\
+and
+\begin{align*}
+E(X^{2}) & =\int_{0}^{\infty}y^{2}\frac{y^{-1-\alpha}}{\beta^{\alpha}\Gamma(\alpha)}e^{-y^{-1}/\beta}dy\\
+ & =\frac{\Gamma(\alpha-2)}{\beta^{2}\Gamma(\alpha)}\int_{0}^{\infty}\frac{y^{-1-(\alpha-2)}}{\beta^{\alpha-2}\Gamma(\alpha-2)}e^{-y^{-1}/\beta}dy\\
+ & \text{integrand is kernel of IG(\ensuremath{\alpha}-2,\ensuremath{\beta})}\\
+ & =\frac{\Gamma(\alpha-2)}{\beta^{2}\Gamma(\alpha)}
+\end{align*}
+Therefore
+\[
+\text{Var}(Y)=\frac{\Gamma(\alpha-2)}{\beta^{2}\Gamma(\alpha)}-\left(\frac{\Gamma(\alpha-1)}{\beta\Gamma(\alpha)}\right)^{2}=\frac{1}{\beta^{2}}\left(\frac{\Gamma(\alpha-2)}{\Gamma(\alpha)}-\frac{\Gamma^{2}(\alpha-1)}{\Gamma^{2}(\alpha)}\right)
+\]
+
+\item Let $Y=g(X)=(X/\beta)^{1/2}$ then $g^{-1}(Y)=\beta y^{2}$ and 
+\[
+\left|g^{-1}(y)^{'}\right|=2\beta y
+\]
+and then 
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(\beta y^{2}\right)2\beta y\\
+ & =\frac{\left(\beta y^{2}\right)^{\frac{3}{2}-1}e^{-\beta y^{2}/\beta}}{\beta^{3/2}\Gamma(3/2)}2\beta y\\
+ & =\frac{2y^{2}e^{-y^{2}}}{\Gamma(3/2)}
+\end{align*}
+which is positive on $0<y<\infty$ and
+\begin{align*}
+\int_{0}^{\infty}f_{Y}(y)dy & =\int_{0}^{\infty}\frac{2y^{2}e^{-y^{2}}}{\Gamma(3/2)}dy\\
+ & =\frac{2}{\Gamma(3/2)}\int_{0}^{\infty}y^{2}e^{-y^{2}}dy\\
+ & =\frac{2}{\Gamma(3/2)}\frac{\sqrt{\pi}}{4}=1
+\end{align*}
+Then
+\begin{align*}
+E(X) & =\int_{0}^{\infty}\frac{2y^{3}e^{-y^{2}}}{\Gamma(3/2)}dy\\
+ & =\frac{2}{\Gamma(3/2)}\int_{0}^{\infty}y^{3}e^{-y^{2}}dy\\
+ & \text{using the trick from \textbf{2.22(a)}}\\
+ & =\frac{2}{\Gamma(3/2)}\frac{1}{2}=\frac{2}{\sqrt{\pi}}
+\end{align*}
+and
+\begin{align*}
+E(X^{2}) & =\int_{0}^{\infty}\frac{2y^{4}e^{-y^{2}}}{\Gamma(3/2)}dy\\
+ & =\frac{2}{\Gamma(3/2)}\int_{0}^{\infty}y^{4}e^{-y^{2}}dy\\
+ & \text{using the trick from \textbf{2.22(a)}}\\
+ & =\frac{2}{\Gamma(3/2)}\frac{3\sqrt{\pi}}{8}=\frac{3}{4}
+\end{align*}
+Finally
+\[
+\text{Var}(X)=\frac{3}{4}-\frac{4}{\pi}
+\]
+
+\item Let $Y=g(X)=\alpha-\xi\log(X)$ then $g^{-1}(Y)=e^{(\alpha-y)/\xi}$
+and
+\[
+\left|g^{-1}(y)^{'}\right|=\frac{1}{\xi}e^{(\alpha-y)/\xi}
+\]
+and then 
+\begin{align*}
+f_{Y}(y) & =f_{X}\left(e^{(\alpha-y)/\xi}\right)\frac{1}{\xi}e^{(\alpha-y)/\xi}\\
+ & =e^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}
+\end{align*}
+When $x\rightarrow0$ then $y\rightarrow\infty$ and when $x\rightarrow\infty$
+then $y\rightarrow-\infty$. Hence 
+\begin{align*}
+\int_{-\infty}^{\infty}f_{Y}(y)dy & =\int_{-\infty}^{\infty}e^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}dy\\
+ & =\int_{\infty}^{0}e^{-\left(e^{(\alpha-y)/\xi}\right)}d\left(e^{(\alpha-y)/\xi}\right)\\
+ & =-\int_{0}^{\infty}e^{-\left(e^{(\alpha-y)/\xi}\right)}d\left(e^{(\alpha-y)/\xi}\right)\\
+ & =-\left(\left.e^{-u}\right|_{0}^{\infty}\right)=-(0-1)=1
+\end{align*}
+Then
+\begin{align*}
+E(X) & =\int_{-\infty}^{\infty}ye^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}dy\\
+ & \text{let }u=e^{(\alpha-y)/\xi}\\
+ & =\int_{0}^{\infty}\left(\alpha-\xi\log(u)\right)e^{-u}du\\
+ & =\int_{0}^{\infty}\alpha e^{-u}du+\xi\int_{0}^{\infty}\log(u)e^{-u}du\\
+ & =-\alpha-\xi\gamma
+\end{align*}
+where $\gamma$ is the Euler-Mascheroni constant and $\gamma\approx0.57721$.
+Then
+\begin{align*}
+E(X^{2}) & =\int_{-\infty}^{\infty}y^{2}e^{-e^{(\alpha-y)/\xi}}\frac{1}{\xi}e^{(\alpha-y)/\xi}dy\\
+ & \text{let }u=e^{(\alpha-y)/\xi}\\
+ & =\int_{0}^{\infty}\left(\alpha-\xi\log(u)\right)^{2}e^{-u}du\\
+ & =\int_{0}^{\infty}\alpha^{2}e^{-u}du-2\alpha\xi\int_{0}^{\infty}\log(u)e^{-u}du+\xi^{2}\int_{0}^{\infty}\log^{2}(u)e^{-u}du\\
+ & =-\alpha^{2}-2\alpha\xi\gamma+\xi^{2}\left(\gamma^{2}+\frac{\pi^{2}}{6}\right)
+\end{align*}
+Finally
+\[
+\text{Var}(X)=-\alpha^{2}-2\alpha\xi\gamma+\xi^{2}\left(\gamma^{2}+\frac{\pi^{2}}{6}\right)-\alpha^{2}-\xi^{2}\gamma^{2}+2\alpha\xi\gamma=\xi^{2}\left(\frac{\pi^{2}}{6}\right)-2\alpha^{2}
+\]
+\end{enumerate}
 \end{enumerate}
 
 \end{document}
