@@ -1,0 +1,521 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+\usepackage[latin9]{inputenc}
+\usepackage{listings}
+\lstset{frame=single}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+%
+\usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
+%
+%
+
+\makeatother
+
+\begin{document}
+
+\title{COT5405 Homework 1 Solutions}
+
+
+\author{Maksim Levental}
+
+
+\date{\today}
+\maketitle
+\begin{enumerate}
+\item [2.3-4]For this ``recursive'' implementation of insertion sort
+$T(n)=T(n-1)+O(n).$ The inductive hypothesis is $T(m)\leq c_{1}m^{2}$
+for all $m<n$. Then
+\begin{align*}
+T(n) & =T(n-1)+c_{2}n\\
+ & \leq c_{1}(n-1)^{2}+c_{2}n\\
+ & =c_{1}n^{2}-2c_{1}n+2c_{1}+c_{2}n & \text{choose }c_{1}\text{ s.t. }2c_{1}n\geq c_{2}n+2c_{1}\\
+ & \leq c_{1}n^{2}\\
+T(n) & =O(n^{2})
+\end{align*}
+Furthermore we choose the base case such that $2c_{1}n\geq c_{2}n+2c_{1}$
+is satisfied.
+\item [2.3-5]The pseudo-code is
+\begin{lstlisting}
+Binary-Search(A,p,r,x)
+  if p==r and A[p] != x
+    return -1
+  pivot = floor((p-r+1)/2)
+  else if A[pivot] == x
+    return pivot
+  else if A[pivot] < x
+    Binary-Search(A,pivot+1,r,x)
+  else 
+    Binary-Search(p,pivot-1,x) 
+    //only if A[floor(A.length/2)] > x
+    //since first branch checks ==
+    //so no need to include element
+    //A[0:floor(A.length/2)]
+\end{lstlisting}
+Binary-Search(A,x) returns the index of a match or -1 if the search
+fails. The recursion relation for the running time is $T(n)=T(n/2)+O(1).$
+Since $f(n)=1=\Theta\bigg(n^{log_{2}1}\bigg)$ the master theorem
+immediately yields $T(n)=\Theta(n^{log_{2}1}\lg n)=\Theta(n^{0}\lg n)=\Theta(\lg n)$. 
+\item [2.3-6]This in fact doesn't work but I didn't realize it until I
+finished the analysis. Read the comment at the end. Reimagine the
+array in which all the elements are stored as linked-list and rewrite
+Binary-Search to return a pointer to the last node recursed to. Then
+the value to be inserted by Insertion-Sort-Binary-Search(A) inserts
+a node in the linked list whose child is the last node returned by
+Binary-Search and whose parent is the parent of the node return by
+Binary-Search-LL. That is 
+\\
+\\
+\\
+\\
+\begin{lstlisting}
+Binary-Search-LL(A,p,r,x)
+  //linked-list overloads [] operator
+  pivot = floor((p-r+1)/2)
+  if p==r 
+    return pivot
+  else if A[pivot] == x
+    return pivot
+  else if A[pivot] < x
+    Binary-Search(A,pivot+1,r,x)
+  else 
+    Binary-Search(p,pivot-1,x) 
+\end{lstlisting}
+Then Insertion-Sort-Binary-Search(A) is
+\begin{lstlisting}
+Insertion-Sort-Binary-Search(A)
+  for j=2..A.length
+    key=A[j]
+    pivot = Binary-Search-LL(A,0,j-1,key)
+    A.insert(key,pivot-1) //insert key just "behind" 
+                          //node returned by binary search  
+\end{lstlisting}
+Then $T(n)=c_{1}n+c_{2}(n-1)+(n-1)\Theta(\lg n)+(n-1)g(n)$. So the
+question of whether Insert-Sort-Binary-Search(A) is $\Theta(n\lg n)$
+a matter of how long it takes to insert into $A$ implemented as a
+linked-list. From http://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html
+we see that ListIterator.add(E element) inserts in $O(1)$ so $ $
+\begin{align*}
+T(n) & =c_{1}n+c_{2}(n-1)+(n-1)\Theta(\lg n)+(n-1)g(n)\\
+ & =c_{1}n+c_{2}(n-1)+(n-1)\Theta(\lg n)+(n-1)O(1)\\
+ & =(n-1)\Theta(\lg n)\\
+ & =\Theta(n\lg n)
+\end{align*}
+The problem with this analysis is that linked-list \textbf{doesn't
+actually overload} $[\,]$ and so Binary-Search-LL(A,p,r,x) isn't
+possible. Therefore while the number \textbf{comparisons }done by
+Insertion-Sort with a binary search finding the insertion point would
+be $O(n\lg n)$ the algorithm as a whole would still run in $O(n^{2})$
+in the worst case because there would still be $O(n^{2})$ \textbf{swaps}
+that would need to be done in order to actually insert.
+\item [2.4]
+
+\begin{enumerate}
+\item (2,1), (3,1), (8,1), (6,1), (8,6)
+\item Reverse sorted, i.e. $\left\{ n,n-1,\cdots,1\right\} $. The number
+of inversions is $n-1$ for 1 because there are $n-1$ elements in
+the array which are larger than 1 but preceed it in the array, $n-2$
+for 2 because there $n-2$ elements which are larger than 2 (exceptions
+are 2 and 1) but preceed it, and so on. So for $i=1,2,\cdots,n$ the
+number of inversions induced is $n-i$ . In sum $\sum_{i=1}^{n}n-i=n\sum_{i=1}^{n}1-\sum_{i=1}^{n}i=n^{2}-\frac{{n(n+1)}}{2}=n^{2}-\frac{{(n^{2}+n)}}{2}=\frac{{n(n-1)}}{2}$
+\item Call an inversion of type $(j,i)$ induced by an element $A[j]$ if
+$j$ is such that $A[j]<A[i]$ and $i<j$ and let $|(j,i)|$ be the
+number of such inversions. Then $|(j,i)|$ is the number of swaps
+that will have to be performed on element $A[j]$ before it is in
+its proper position. To see that this is the case note that all $(j,i)$
+inversions persist through the sorting process, up until $A[j]$ is
+sorted, since for all $i<j$ element $A[i]$ will be inserted into
+the sorted portion of the array prior to $A[j].$ Therefore upon inserting
+$A[j]$ there will still be $|(j,i)|$ inversions and therefore $|(j,i)|$
+swaps. Consequently $\sum_{j}|(j,i)|$ the total number of inversions
+in the array is the total number of swaps performed by insertion sort,
+i.e. directly proportional insertion sort's running time.
+\item Modify merge sort such that when the function returns from the two
+recursive calls, when the ``merging'' is done, it counts the number
+of elements in the ``left'' array each time an element is chosen
+from the front of the ``right'' array ( after comparison between
+the leading elements of both arrays). The quantity of elements in
+the ``left'' array each time an element from the front of the right
+array is chosen is by definition the number of elements in the original
+array that were greater than that chosen element and yet preceeded
+it. Furthermore there is no double counting because once a merge happens
+2 elements in the merged array are never compared again. Take for
+example the array $\mbox{\ensuremath{\left[8,7,6,5,4,3,2,1\right]}}$
+and suppose the recursion bottoms out at 4 elements. Then the first
+recursion returns $\left[5,6,7,8\right]$ and $\left[1,2,3,4\right]$.
+The merging then selects each of the four elements from the ``right''
+array $\left[1,2,3,4\right]$ since each of the elements in the ``left''
+array $\left[5,6,7,8\right]$ is greater than each in the ``right''.
+Manifestly there are 4 inversions per element in the ``right'' array,
+1 for each element in the ``left'' array, and so the total is 16.
+\end{enumerate}
+\item [3-1]Lemma: if $k,d\in\mathbb{N}$ and $k\leq d$ then $n^{k}\leq n^{d}.$
+\\
+Proof: $n^{k}/n^{d}=n^{k-d}=1/n^{d-k}\leq0$ since $k-d\leq0$. \\
+Corollary: if $k,d\in\mathbb{N}$ and $k>d$ then $n^{k}>n^{d}.$
+
+\begin{enumerate}
+\item Let $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$ and $c=\max\{a_{0},a_{1},\dots,a_{d}\}$.
+Note that $c\geq0$ since otherwise all $a_{i}<0$ and therefore $p(n)<0$.
+Then for all $i\in\{0,1,\dots,d\}$ and for $k\ge d$ the lemma above
+implies $cn^{k}\ge a_{i}n^{i}$. Therefore $\sum_{i=0}^{d}cn^{k}=c\dot{\cdot(d+1)\cdot n^{k}\ge\sum_{i=0}^{d}a_{i}n^{i}=p(n)}.$$ $
+\item Let $p(n)=a_{d}n^{d}+\sum_{i=0}^{d-1}a_{i}n^{i}$. Then by part (a)
+$\sum_{i=0}^{d-1}a_{i}n^{i}\in O(n^{d-1})$ so there exists $c_{1}$
+such that $\sum_{i=0}^{d-1}a_{i}n^{i}\leq c_{1}n^{d-1}$. Therefore
+$p(n)\ge a_{d}n^{d}-c_{1}n^{d-1}.$ Fix any $\epsilon<a_{d}$ and
+for $n>c_{1}/\epsilon$ 
+\begin{align*}
+p(n) & \geq(a_{d}-\epsilon)n^{d}+\epsilon n^{d}-c_{1}n^{d-1}\\
+ & =(a_{d}-\epsilon)n^{d}+n^{d-1}(\epsilon n-c_{1})\\
+ & \geq(a_{d}-\epsilon)n^{d}\\
+ & \geq(a_{d}-\epsilon)n^{k} & \text{by the lemma}
+\end{align*}
+Hence if $c_{2}=(a_{d}-\epsilon)$ and $n>c_{1}/\epsilon$ then $p(n)\geq c_{2}n^{k}$
+and therefore $p(n)=\Omega(n^{k})$. 
+\item Let $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$. By part (a) we have that for
+$k=d$ there exist $c_{1}$ and $n_{0}$ such that $p(n)\leq c_{1}n^{k}$.
+By part (b) we have that for $k=d$ there exist $c_{2}$ and $n_{1}$
+such that $p(n)\geq c_{2}n^{k}$. Let $n_{2}=\max\{n_{0},n_{1}\}$
+then for all $n\geq n_{2}$ we have that $c_{2}n^{k}\leq p(n)\leq c_{1}n^{k}$.
+Therefore $p(n)=\Theta(n^{k})$.
+\item Let $p(n)=\sum_{i=0}^{d}a_{i}n^{i}$. Part (a) guarantees there exist
+constants $c_{1}$ and $n_{0}$ such that for $n_{0}\geq n$ it's
+the case that $p(n)\leq c_{1}n^{d}$. Then for $k>d$ and any constant
+$c_{2}$ let $n_{1}$ be be such that $n_{1}^{k-d}>c_{1}/c_{2}$.
+Such an $n_{1}$ can be chosen since $k-d>0\implies\exists n_{j}\text{ s.t. }n_{j}^{k-d}>c$
+for any constant $c$. Then $c_{2}n_{1}^{k}-c_{1}n_{1}^{d}=n_{1}^{d}(c_{2}n_{1}^{k-d}-c_{1})>0$.
+Finally let $n_{3}=\max\{n_{0},n_{1}\}$ and for all $n\geq n_{3}$
+we have $c_{2}n^{k}>c_{1}n^{d}\geq p(n)$. 
+\item The argument that worked for part (a) works here. For any $c$ let
+$\epsilon=|a_{d}-c|$ and $n_{0}>c_{1}/\epsilon$. If $a_{d}>c$ then
+there's no problem and the proof from part (b) works. Otherwise let
+$n_{1}$ be such that for $n\geq n_{1}\implies n>\sqrt[d-k]{c/(a_{d}-\epsilon)}$
+then 
+\[
+n>\sqrt[d-k]{\frac{c}{a_{d}-\epsilon}}\implies n^{d-k}>\frac{c}{a_{d}-\epsilon}\implies n^{d}>\frac{c}{a_{d}-\epsilon}n^{k}\implies(a_{d}-\epsilon)n^{d}>cn^{k}
+\]
+Therefore
+\begin{align*}
+p(n) & \geq(a_{d}-\epsilon)n^{d}+\epsilon n^{d}-c_{1}n^{d-1}\\
+ & =(a_{d}-\epsilon)n^{d}+n^{d-1}(\epsilon n-c_{1})\\
+ & \geq(a_{d}-\epsilon)n^{d}\\
+ & >cn^{k}
+\end{align*}
+Hence $p(n)=\omega(n^{k})$.
+\end{enumerate}
+% \item [3.2]
+
+% \begin{enumerate}
+% \item [] Let $a=2^{c}$ for some $c$ and $n=\lg m$ then by (3.10) in
+% CLRS we have that 
+% \[
+% 0=\lim_{n\rightarrow\infty}\frac{n^{b}}{a^{n}}=\lim_{\lg m\rightarrow\infty}\frac{(\lg m)^{b}}{(2^{c})^{\lg m}}
+% \]
+% and there for $(\lg n)^{b}=o(n^{a})$ for any $a$. And by the definitions
+% of $O(g(n))$ and $o(g(n))$ we have that $O(g(n))\implies o(g(n))$
+% and so $(\lg n)^{b}=O(n^{a})$ . By exercise \textbf{3.1-7} we have
+% that $(\lg n)^{b}\neq\omega(n^{a})$ . To prove \textbf{3.1-7 }let
+% $f(n)=o(g(n))$ . Then for $c_{1}$ there exists $k_{1}$ such that
+% for all $n\geq k$ it is the case that $f(n)\leq c_{1}g(n)$. Since
+% $f(n)$ and $g(n)$ are non-negative it's then true that $f(n)\leq c_{1}g(n)<(c_{1}+1)g(n)$
+% . Then for $1/(c_{1}+1)$ there is no $k_{2}$ such that $g(n)\leq\frac{1}{c_{1+1}}f(n)$
+% and hence $g(n)\ne\omega(f(n))$. A similar argument shows that if
+% there existed constants $c_{3}$ and $k_{3}$ such that $g(n)\leq c_{3}f(n)$
+% for all $n\geq k_{3}$ then $f(n)$ would be equal to $o(g(n))$ and
+% so $f(n)$ can't be $\Omega(g(n))$ and therefore neither $\Theta(g(n))$.
+% \item Again by (3.10) in CLRS we have that $n^{k}=o(c^{n})$ and the rest
+% follows similarly to part (a)
+% \item Since $n^{\sin n}$ oscillates $\frac{1}{n}\leq n^{\sin n}\leq n$
+% it is none of $O,o,\Omega,\omega,\Theta$ because for any fixed $c$
+% and $k$ there will be $n_{1},n_{2}\ge k$ such that $n_{1}^{\sin n_{1}}<\sqrt{n_{1}}$
+% and $\sqrt{n_{2}}<n_{2}^{\sin n_{2}}$ .
+% \item Taking the $\log_{2}$ of both ($\log$ is monotonic increasing) we
+% have the $A=n$ and $B=n/2$ . Clearly then $2^{n}=O(2^{n/2})$ and
+% $2^{n}=\Omega(2^{n/2})$ and therefore $2^{n}=\Theta(2^{n/2})$, but
+% neither $2^{n}=o(2^{n/2})$ nor $2^{n}=\omega(2^{n/2})$ 
+% \item By (3.15) in CLRS we have $n^{\lg c}=c^{\lg n}$ and so clearly then
+% $n^{\lg c}=O(c^{\lg n})$ and $n^{\lg c}=\Omega(c^{\lg n})$ and therefore
+% $n^{\lg c}=\Theta(c^{\lg n})$, but neither $n^{\lg c}=o(c^{\lg n})$
+% nor $n^{\lg c}=\omega(c^{\lg n})$ .
+% \item By exercise \textbf{3.2-3} we have that $n!=o(n^{n})$ and therefore
+% $n!=O(n^{n})$ and by problem $ $\textbf{3.4-c }we have that $\lg(n!)=O(\lg(n^{n}))$.
+% In summary
+% \[
+% \begin{array}{ccccccc}
+% A & B & O & o & \Omega & \omega & \Theta\\
+% (\text{lg}n)^{k} & n^{\epsilon} & yes & yes & no & no & no\\
+% n^{k} & c^{n} & yes & yes & no & no & no\\
+% \sqrt{n} & n^{\text{sin}n} & no & no & no & no & no\\
+% 2^{n} & 2^{n/2} & yes & yes & yes & no & no\\
+% n^{\text{lg}c} & c^{\text{lg}n} & yes & yes & yes & no & no\\
+% \text{lg}(n!) & \text{lg}(n^{n}) & yes & ? & ? & ? & ?
+% \end{array}
+% \]
+
+% \end{enumerate}
+\item [4.5]
+
+\begin{enumerate}
+\item \noindent Let $n_{b}$ be the number of bad chips and $n_{g}$ be
+the number of good chips. Without loss of generality assume there
+is only one good chip, $n_{g}=1$. Then picking there are $1+n_{b}$
+choices chip is in fact the good one, i.e. any algorithm must distinguish
+between $1+n_{b}$ different cases. Suppose that all bad chips always
+report any other chip to be ``bad''. Then there is not information
+to distinguish between the $1+n_{b}$ different cases since the good
+chip as well always report ``bad'' (so there is only one bit of
+information).
+\item Divide the set of chips into pairs. If there is an odd number of chips
+set the odd one aside. Perform the comparisons within each pair. If
+both chips in a pair report the other chip ``good'' then keep either
+one, otherwise discard both. Repeat the process. Let $n_{b_{j}}$
+and $n_{g_{j}}$ be the number of bad chips and good chips left after
+the $j$th iteration of the algorithm. At any step in the recursive
+process a majority of the remaining chips will be good since the only
+way to discard a good chip is if it is paired with a bad chip and
+therefore discarding both preserves $n_{g_{j}}/n_{b_{j}}>1$ for all
+$j$. The recursion bottoms out and the invariant is preserved so
+the last chip left must be good. The halves the problem size since
+half the chips are discarded at every step.
+\item By part one we can find at least one good chip in $T(n)\approx T(n/2)+O(n)$.
+Let $c_{1}$ be such that $T(n)\leq T(n/2)+c_{1}n$ and $c_{2}$ such
+that $c_{2}>2c_{1}$. Then the inductive hypothesis is $T(n)\leq c_{2}n$.
+Then we have 
+\[
+T(n)\leq\frac{c_{2}n}{2}+c_{1}n=c_{2}n-n\bigg(\frac{c_{2}}{2}-a\bigg)\leq c_{2}n
+\]
+Hence it takes $T(n)=O(n)$ to find one good chip, which you can then
+use to sort the rest of $n-1$ chips using $n-1$ comparisons, stopping
+early if you've found all of the good chips. Hence total time is $\Theta(n)$.
+\end{enumerate}
+% \item [4.7]$\begin{array}{ccccccc}
+% \\
+% \\
+% \\
+% \\
+% \\
+% \\
+% \\
+% \end{array}$
+
+% \begin{enumerate}
+% \item Take the matrix $A=\begin{bmatrix}a & b & c\\
+% d & e & f\\
+% g & h & i
+% \end{bmatrix}$. Assume $A[x,y]+A[x+1,y+1]\leq A[x,y+1]+A[x+1,y]$ for $1\leq x\leq2$
+% and $1\leq y\leq2$. Then we have 
+% \begin{eqnarray*}
+% a+e & \leq & b+d\\
+% d+h & \leq & e+g
+% \end{eqnarray*}
+% and there fore $a+e+d+h\leq b+d+e+g$ which of course implies $a+h\leq b+g$.
+% Similarly $b+i\leq c+h$. Combining these two inequalities we have
+% \begin{eqnarray*}
+% a+h+b+i & \leq & b+g+c+h\\
+% a+i & \leq & c+g
+% \end{eqnarray*}
+% This method readily generalizes to any size matrix (just ``crawl''
+% down a column and across a row). To prove the converse simply set
+% $k=i+1$ and $l=j+1$ in $A[i,j]+A[k,l]\leq A[i,l]+A[k.j]$.
+% \item $\begin{bmatrix}37 & 23 & 22 & 32\\
+% 21 & 6 & 7 & 10\\
+% 53 & 34 & 30 & 31\\
+% 32 & 13 & 9 & 6\\
+% 43 & 21 & 15 & 8
+% \end{bmatrix}\rightarrow\begin{bmatrix}37 & 23 & 22 & 32\\
+% 21 & 6 & \mathbf{5} & 10\\
+% 53 & 34 & 30 & 31\\
+% 32 & 13 & 9 & 6\\
+% 43 & 21 & 15 & 8
+% \end{bmatrix}$
+% \item Proof by contradiction: assume there exist $i,j$ such that $i<j$
+% but $f(j)<f(i).$ We have this arrangment
+% \[
+% \begin{bmatrix}\ddots & \vdots & \vdots & \vdots & \iddots\\
+% \dots & A[i,f(j)] & \dots & A[i,f(i)] & \dots\\
+% \dots & \vdots & \ddots & \vdots & \dots\\
+% \dots & A[j,f(j)] & \dots & A[j,f(i)] & \dots\\
+% \iddots & \vdots & \vdots & \vdots & \ddots
+% \end{bmatrix}
+% \]
+% Then since $f(i)$ is the column index of the farthest-to-the-left
+% minimum element we must have $A[i,f(j)]>A[i,f(i)]$ and therefore
+% $A[i,f(j)]+A[j,f(i)]>A[i,f(i)]+A[j,f(j)]$, since $A[j,f(j)]$ is
+% defined to be less than or equal to $A[j,f(i)]$. But this of course
+% violates the Monge principle. 
+% \item By part (c) in each row $j$ we know that for the left-most-minimum
+% element $A[j,f(j)]$ it's the case that $f(j-1)\leq f(j)\leq f(j+1)$.
+% Therefore in each in row $j$ we need to inspect only $f(j+1)-f(j-1)+1$
+% elements. In total this is at most $n$ elements. But in the instance
+% when for some odd row $j$ it's the case that $f(j+1)=f(j+2)$ then
+% $A[j,f(j+2)]$ will need to be checked even though $A[j+2,f(j+2)]$
+% was inspected as well. At most there will be $m/2$ such repeated
+% inspections of already inspected columns and so in total there will
+% be $O(m+n)$ inspections.
+% \item The recurrence relation is $T(m,n)=T(m/2,n)+O(m+n).$ Assume the inductive
+% hypothesis $T(k,j)=c_{1}(k+j\log k)$. Then
+% \begin{align*}
+% T(m,n) & \leq c_{1}\bigg(\frac{m}{2}+n\log\bigg(\frac{m}{2}\bigg)\bigg)+O(m+n)\\
+%  & \leq c_{1}(m+n\log(m)-n\log2)+O(m+n)\\
+% \end{align*}
+
+% \end{enumerate}
+\item [7.6]This problem was solved with the help of http://alumni.media.mit.edu/\textasciitilde{}dlanman/courses/cs157/HW3.pdf
+
+\begin{enumerate}
+\item Let $\text{points}[i][j]$ be the $n\times2$ array with $\text{points}[i][0]=a_{i}$
+and $\text{points}[i][1]=b_{i}$. Let $\text{Find-Intersection}$
+be a function that computes intersections of subsets of intervals
+\begin{lstlisting}
+Find-Intersection(points,p,s)
+	j = random(p,s)
+	swap(points[p],points[j])
+	a = points[p][0]
+	b = points[p][1]
+	for i=p to s
+		//           a|---------|b
+		//  x|--------|y
+		//           u|------|v
+		// the only requirement for intersection is 
+		// that both the left end point of interval 
+		// being checked is <= b
+		// and the right end point is >= a so
+		if points[i][0] <= b and points[i][1] >= a
+			// check if narrower on the left
+			if points[i][0] > a
+				a = points[i][0]
+			// check if narrower on the right
+			if points[i][1] < b
+				b = points[i][1]
+	// the intersection interval
+	return (a,b)
+\end{lstlisting}
+The call to $\text{random}$ on line 2 is inorder to improve expected
+running time. If all intervals overlap then $\text{Find-Intersection}$
+returns the largest region of overlap. Otherwise on average it returns
+the largest possible overlap of a subset of intervals. Then let $\text{Partition-Intervals}$
+be essentially the same as $\text{Partition}$ from Quicksort except
+it takes a key to compare against, a flag to pick whether to compare
+$a_{i}$ or $b_{i}$, and a comparator $\{\leq,\ge,<,>\}$. 
+\begin{lstlisting}
+Partition-Intervals(points,p,r,flag,key,Comparator)
+	i = p-1
+	for j=p to s
+		// compare a_i or b_i
+		if points[j][flag] Comparator key   
+			i++
+			// swap intervals in the array
+			swap(points[i],points[j])
+	return i	
+\end{lstlisting}
+Finally $\text{Fuzzy-Quicksort}$
+\begin{lstlisting}
+Fuzzy-Quicksort(points,x,y)
+	if x<y
+		(a,b) = Find-Intersection(points,x,y)
+		// right
+		r = Partition-Intervals(points,x,y,0,a,<=)
+		// left-middle
+		q = Partition-Intervals(points,x,r,1,b,<)
+		Fuzzy-Quicksort(points,x,q-1)
+		Fuzzy-Quicksort(points,r+1,y)
+\end{lstlisting}
+The first call to $\text{Partition-Intervals}$ sorts the intervals
+by their $a_{i}$ (hence $\text{flag}=0$) on $\leq$ around the $a$
+returned by $\text{Find-Intersection}$. After this first call all
+intervals to the right of $r$ are outside of the intersection. Why?
+If there were an interval $[a_{i},b_{i}]$ such that some portion
+of it overlapped the intersection and $a_{i}\leq a$ then the it would
+have been considered in $\text{Find-Intersection}$ on line 16. Hence
+all intervals in $\text{points}[i]$ with indices $i>r$ are outside
+of the intersection. Therefore all intervals in $\text{points}[i]$
+with indices $i<r$ are either inside the intersection or outside
+the intersection but on the left. The second call to $\text{Partition-Intervals}$
+sorts the intervals by their $b_{i}$ (hence $\text{flag}=1$) on
+$<$ around the $b$ returned by $\text{Find-Intersection}$. After
+this second call all intervals to the left of $q$ are outside the
+intersection. Why? If there were an interval $[a_{i},b_{i}]$ such
+that some portion of it overlapped the intersection and $b_{i}<b$
+then it would have been considered by $\text{Find-Intersection}$
+on line 19. Therefore all intervals in $\text{points}[i]$ with indices
+$i<q$ are outside the intersection but on the left. Therefore all
+intervals in $\text{points}[i]$ with $q\leq i\leq r$ are in the
+intersection and their permutation is irelevant because we know they
+intersect and therefore either $a$ or $b$ returned by $\text{Find-Intersection}$
+is a correct $c^{*}$ such that $[a_{j},b_{j}]\,\forall j\in\{[a_{q},b_{q}],\dots,[a_{r},b_{r}]\}$.
+\item The macroscopic structure of $\text{Fuzzy-Quicksort}$ is almost the
+same as $\text{Randomized-Quicksort}$ . $\text{Find-Intersection}$
+is clearly $\Theta(n)$ since it considers every interval. Note also
+that when all intervals are disjoint $\text{Find-Intersection}$ returns
+just the first interval, the one chosen by $\text{random}$ on line
+2. Therefore in such an instance $\text{Find-Intersection}$ has exactly
+the same effect as wrapper $\text{Randomized-Partition}$ for $\text{Partition}$
+on page 179 of CLRS. $\text{Partition-Intervals}$ is almost exactly
+the same as $\text{Quicksort}$ 's $\text{Partition}$ and so runs
+in $\Theta(n)$. Therefore worst case is similarly $\Theta(n\lg n)$.
+Best case is when all intervals intersect, in which case $\text{Find-Intersection}$
+returns an intersection that's contained every interval and the first
+call to $\text{Partition-Intervals}$ returns index $y$ and the second
+call returns index $x$. Then the two recursive calls return immediately
+since $x\nleq x-1$ and $y+1\nleq y$. Therefore in this case, when
+all the intervals overlap the algorithm runs in $\Theta(n).$ $ $
+\end{enumerate}
+\item [8.4]
+
+\begin{enumerate}
+\item Compare every red jug to every blue jug. Exactly $n^{2}$ units of
+time. Hence $\Theta(n^{2})$.
+\item Fix a permutation of the red jugs, call it $(r_{1},r_{2},\dots,r_{n})$.
+Note that it is not necessarily the case that $r_{i}\leq r_{j}$ if
+$i<j$ or anything like this. Then the problem is tantamount to finding
+a permutation of blue jugs, $(b_{\pi(1)},b_{\pi(2)},\dots,b_{\pi(n)})$
+such that $b_{\pi(i)}=r_{i}$. Note there are $n!$ such permutations.
+Any comparison based algorithm must distinguish between 3 different
+cases at each step: either $b_{\pi(i)}<r_{j}$ or $b_{\pi(i)}>r_{j}$
+or $b_{\pi(i)}=r_{j}$ and overall must distinguish between $n!$
+permutations of the $b_{i}$. Thus the decision tree that a comparison
+based algorithm must traverse is a 3-ary tree with minimum height
+$h\geq\log_{3}n!$. Then by \textbf{eqn. 3.19} in CLRS we have that
+$h\ge\Theta(n\lg n)$.
+\item Pick a random blue jug, the ``blue pivot'', and use Randomized-partition
+to partition all the red jugs into bigger, smaller, and equal. Then
+use the red jug that's equal in size to the blue pivot, call it the
+``red pivot'' to similarly partition all blue jugs. Then recurse
+choosing a random new ``blue pivot'' in each of the ``smaller-than''
+and ``bigger-than'' sets. The recurrence relations is the same as
+for Randomized-quicksort except the divide step uses Randomized-partition
+twice instead of once. So absorbing the constant factor the recurrence
+relation is $T(n)=\underset{0\le q\le n-1}{\max}(T(q)+T(n-q-1))+2\Theta(n)=\underset{0\le q\le n-1}{\max}(T(q)+T(n-q-1))+\Theta(n)$.
+Hence by the analysis of Quicksort we have have expected running time
+of $O(n\lg n)$, with worst case running $\Theta(n^{2}).$\end{enumerate}
+\end{enumerate}
+
+\end{document}

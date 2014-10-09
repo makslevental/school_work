@@ -1,0 +1,1807 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "frame=single"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+COT5405 Homework 4 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13.2-4]
+\end_layout
+
+\end_inset
+
+The longest running time for converting an arbitrary 
+\begin_inset Formula $n$
+\end_inset
+
+-node binary tree into a right going chain is if it is a left going binary
+ tree (if all of the nodes have only a left child).
+ In that case it obviously takes 
+\begin_inset Formula $n-1$
+\end_inset
+
+ rotations at the root to convert it to a right going chain.
+ Therefore it takes at most 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ right rotations to convert any binary tree to a right going binary tree.
+ Conversely by performing left rotations it takes at most 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ left rotations to convert an 
+\begin_inset Formula $n$
+\end_inset
+
+ node right going binary tree into any binary tree.
+ Hence it takes at most 
+\begin_inset Formula $2O(n)=O(n)$
+\end_inset
+
+ left and right rotations to transform any binary tree into any other binary
+ tree.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13.3-5]
+\end_layout
+
+\end_inset
+
+The only case in RB-Insert where an inserted node's color changes from red
+ to black is case 2.
+ In any other case we have that the most recently inserted node is red,
+ and therefore the number of of red nodes 
+\begin_inset Formula $>1$
+\end_inset
+
+.
+ Hence suppose the most recent insertion has been of the form of case 2
+ (the inserted node's uncle is black and the inserted node is the right
+ child of its parent) be the case and let 
+\begin_inset Formula $z$
+\end_inset
+
+ be the inserted node.
+ Then 
+\begin_inset Formula $z$
+\end_inset
+
+ is the red right child of a red node and 
+\begin_inset Formula $z$
+\end_inset
+
+'s uncle is black.
+ A left rotation is performed around 
+\begin_inset Formula $z.p$
+\end_inset
+
+ and 
+\begin_inset Formula $z.p$
+\end_inset
+
+ becomes 
+\begin_inset Formula $z$
+\end_inset
+
+'s left child and is still red.
+ Then a right rotation is done around 
+\begin_inset Formula $z$
+\end_inset
+
+'s original grandparent but current parent and only then does 
+\begin_inset Formula $z$
+\end_inset
+
+'s color change from red to black, and no other nodes change colors.
+ But then 
+\begin_inset Formula $z$
+\end_inset
+
+'s left child, its original parent is still red.
+ Therefore the number of red nodes includes at least 
+\begin_inset Formula $z$
+\end_inset
+
+'s original parent and hence is 
+\begin_inset Formula $>1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13.4-7]
+\end_layout
+
+\end_inset
+
+No.
+ Consider the RB tree with elements 2,4,6 with 4 as the black root and both
+ children being red.
+ Then insert 3.
+ This will force 2 and 6 to become colored black (and 4 to be colored red
+ and then black again during fixup).
+ Then deleting 3 leaves an all black tree, different from the beginning.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13-3]
+\end_layout
+
+\end_inset
+
+Citation: http://en.wikipedia.org/wiki/AVL_tree
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be the sparsest possible AVL tree 
+\begin_inset Formula $T$
+\end_inset
+
+ of height 
+\begin_inset Formula $h$
+\end_inset
+
+ - we will derive an upper bound on the height by deriving a lower bound
+ on the number of nodes in 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $T_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{R}$
+\end_inset
+
+ be the subtrees rooted at 
+\begin_inset Formula $T.root$
+\end_inset
+
+.
+ By the AVL property their heights can only differ by 1 and hence one of
+ them must have height 
+\begin_inset Formula $h-1$
+\end_inset
+
+ and the other 
+\begin_inset Formula $h-2$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $T_{L}$
+\end_inset
+
+ has height 
+\begin_inset Formula $h-1$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{R}$
+\end_inset
+
+ has height 
+\begin_inset Formula $h-2.$
+\end_inset
+
+ But for 
+\begin_inset Formula $T$
+\end_inset
+
+ to be the sparsest possible AVL tree of height h it must be the case that
+ 
+\begin_inset Formula $T_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{R}$
+\end_inset
+
+ each be the sparsest possible AVL trees of height 
+\begin_inset Formula $h-1$
+\end_inset
+
+ and 
+\begin_inset Formula $h-2$
+\end_inset
+
+ respectively (otherwise 
+\begin_inset Formula $T$
+\end_inset
+
+ could be made sparser).
+ Let 
+\begin_inset Formula $|T|$
+\end_inset
+
+ be the number of nodes in 
+\begin_inset Formula $T.$
+\end_inset
+
+ Clearly 
+\begin_inset Formula $|T|=|T_{L}|+|T_{R}|+1$
+\end_inset
+
+.
+ But then 
+\begin_inset Formula $(|T|+1)=(|T_{L}|+1)+(|T_{R}|+1)$
+\end_inset
+
+ and so the number of nodes in 
+\series bold
+sparsest
+\series default
+ tree of height 
+\begin_inset Formula $h$
+\end_inset
+
+ is a function of the number of nodes in trees of 
+\series bold
+sparsest 
+\series default
+trees of heights 
+\begin_inset Formula $h-1$
+\end_inset
+
+ and 
+\begin_inset Formula $h-2$
+\end_inset
+
+.
+ That is let 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+ be the number of nodes in the sparsest AVL tree of height 
+\begin_inset Formula $j$
+\end_inset
+
+, and note that 
+\begin_inset Formula $N_{h}=\left|T\right|$
+\end_inset
+
+, then we have the recurrence relation 
+\begin_inset Formula 
+\[
+N_{h}+1=\left(N_{h+1}+1\right)+\left(N_{h+2}+1\right)
+\]
+
+\end_inset
+
+This recurrence relation is the Fibonacci sequence whose approximate solution
+ is 
+\begin_inset Formula 
+\[
+N_{h}+1\approx\frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^{h+3}\implies h\approx1.44\log N_{h}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $|x.right.h-x.left.h|<2$
+\end_inset
+
+ then no rebalancing needs to be done.
+ Assume 
+\begin_inset Formula $x.right.h-x.left.h=2$
+\end_inset
+
+ and call 
+\begin_inset Formula $y=x.right$
+\end_inset
+
+ and 
+\begin_inset Formula $z=x.left$
+\end_inset
+
+.
+ There are two cases (symmetrical with the case 
+\begin_inset Formula $x.right.h-x.left.h==-2$
+\end_inset
+
+): 
+\begin_inset Formula $y.right-y.left=-1$
+\end_inset
+
+ or 
+\begin_inset Formula $y.right-y.left=1$
+\end_inset
+
+, that is either 
+\begin_inset Formula $x$
+\end_inset
+
+'s right subtree is left leaning or 
+\begin_inset Formula $x$
+\end_inset
+
+'s right subtree is right leaning.
+ For case one, we first perform a rotation around 
+\begin_inset Formula $y$
+\end_inset
+
+ to turn the tree rooted at 
+\begin_inset Formula $y$
+\end_inset
+
+ to be right leaning.
+ This will transform the subtree to be that of case 2: 
+\begin_inset Formula $y.right-y.left=1$
+\end_inset
+
+.
+ Then we do a left rotation around 
+\begin_inset Formula $x$
+\end_inset
+
+ and the tree rooted at 
+\begin_inset Formula $x$
+\end_inset
+
+ becomes balanced.
+ Case two is simply a right leaning right subtree and we just do a left
+ rotation around 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The 
+\series bold
+height
+\series default
+ of the left subtree of is not affected and so no other rotations need to
+ be made, hence the algorithm is correct.
+\end_layout
+
+\begin_layout Enumerate
+Insert the node as usual then travel 
+\series bold
+up
+\series default
+ from the insertion point checking balance and restoring it where it has
+ been disrupted.
+ The insertion operation in part (b) does not affect balance at any other
+ point in the tree so it's possible to fix balance issues locally.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The restoration of balance is done from the insertion point all the way
+ up to (potentially) the root, i.e.
+ it is performed 
+\begin_inset Formula $O(h)$
+\end_inset
+
+ times where 
+\begin_inset Formula $h$
+\end_inset
+
+ is the height of the tree.
+ By part (a) 
+\begin_inset Formula $h=O(\lg n)$
+\end_inset
+
+.
+ And at most 2 rotations have to be performed at each node to restore balance
+ to a tree rooted at that node, hence each balancing operation takes 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ time.
+ Therefore in total AVL-Insert takes 
+\begin_inset Formula $O(\lg n)$
+\end_inset
+
+ time.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[14-1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ be the interval 
+\begin_inset Formula $[a_{1},b_{1}]$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ be the interval 
+\begin_inset Formula $[a_{2},b_{2}]$
+\end_inset
+
+ and assume that 
+\begin_inset Formula $A_{1}\cap A_{2}\neq\emptyset,$
+\end_inset
+
+ i.e.
+ they do intersect.
+ Then either 
+\begin_inset Formula $a_{1}\leq a_{2}\leq b_{1}\leq b_{2}$
+\end_inset
+
+ or 
+\begin_inset Formula $a_{2}\leq a_{1}\leq b_{2}\leq b_{1}$
+\end_inset
+
+ since there is no other way for two intervals to intersect.
+ In the first case either 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ or 
+\begin_inset Formula $b_{1}$
+\end_inset
+
+ are an endpoint in the intersection and in the second case either 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $b_{2}$
+\end_inset
+
+.
+ For more than two intervals it follows by induction: simply let 
+\begin_inset Formula $C_{i}=A_{1}\cap\cdots\cap A_{i}$
+\end_inset
+
+ and repeat the argument for 
+\begin_inset Formula $C_{i}\cap A_{i+1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Keep a RB tree where the nodes are the endpoints of the intervals, i.e.
+ for interval 
+\begin_inset Formula $A_{i}=[a_{i},b_{i}]$
+\end_inset
+
+ each of 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ go into a separate node.
+ Then at each node store an extra field 
+\begin_inset Formula $x$
+\end_inset
+
+ which equals 1 if the endpoint is the beginning of the interval and -1
+ if the end of the interval, i.e.
+ 
+\begin_inset Formula $a_{i}.x=1$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{i}.x=-1$
+\end_inset
+
+.
+ If you use the RB tree to sort all of the endpoints (by inorder traversal)
+ and then sum the 
+\begin_inset Formula $x$
+\end_inset
+
+ value of all for all nodes up to some 
+\begin_inset Formula $j$
+\end_inset
+
+th node, then you would have the amount of overlap at endpoints 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ This is since the nodes will be sorted, hence adding a 1 corresponds to
+ a left endpoint which is greater than all of the previous endpoints and
+ adding -1 corresponds to reaching the right endpoint of one of the intervals
+ we've already encountered that can no longer contribute to the total number
+ of overlapping intervals.
+ Hence we keep extra information in the nodes that enables us to compute
+ the value which maximizes this sum in 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ time.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+At each node keep track of the cumulative sum of 
+\begin_inset Formula $x$
+\end_inset
+
+ for all nodes, called Sum
+\begin_inset Formula $(j)$
+\end_inset
+
+, in 
+\begin_inset Formula $j$
+\end_inset
+
+'s subtree.
+ 
+\begin_inset Formula $\text{Sum}(j)=\text{Sum}(j.left)+j.x+\text{Sum}(j.right).$
+\end_inset
+
+ We also keep track of the maximum cumulative sum 
+\begin_inset Formula $\text{Max}(j).$
+\end_inset
+
+ The maximum can either be in the left subtree of 
+\begin_inset Formula $j$
+\end_inset
+
+, at 
+\begin_inset Formula $j$
+\end_inset
+
+ itself, or in 
+\begin_inset Formula $j$
+\end_inset
+
+'s right subtree.
+ If it is in the left subtree then it's simply 
+\begin_inset Formula $\text{Max}(j.left)$
+\end_inset
+
+.
+ If it at 
+\begin_inset Formula $j$
+\end_inset
+
+ itself then it is 
+\begin_inset Formula $\text{Sum}(j.left)+j.x$
+\end_inset
+
+.
+ Finally if it's in the right subtree then it includes overlap from the
+ left subtree and hence it is 
+\begin_inset Formula $\text{Sum}(j.left)+j.x+\text{Max}(j.right).$
+\end_inset
+
+ Therefore the maximum, of the Maxs at any node is 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Then the point of maximum overlap is actually the argument that maximizes
+ the max above, i.e.
+ 
+\begin_inset Formula $j.left$
+\end_inset
+
+ if 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}=\text{Max}(j.left)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $j$
+\end_inset
+
+ if 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}=\text{Sum}(j.left)+j.x$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+and 
+\begin_inset Formula $j.right$
+\end_inset
+
+ if 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\max\{\text{Max}(j.left),\text{Sum}(j.left)+j.x,\text{Sum}(j.left)+j.x+\text{Max}(j.right)\}=\text{Sum}(j.left)+j.x+\text{Max}(j.right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Hence we just call query 
+\begin_inset Formula $\text{Max}$
+\end_inset
+
+ at the root and note which node maximizes it.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[15-2]
+\end_layout
+
+\end_inset
+
+The problem exhibits the optimal substructure property.
+ Let 
+\begin_inset Formula $A=(a_{1},a_{2},\cdots,a_{n})$
+\end_inset
+
+ be the string and 
+\begin_inset Formula $A_{i,j}=(a_{i},\cdots,a_{j}).$
+\end_inset
+
+ Note that the maximum length palindrome substring in 
+\begin_inset Formula $A_{i,j}$
+\end_inset
+
+ includes the endpoints 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $a_{i}=a_{j}$
+\end_inset
+
+ or it includes the maximum length palindrome substring of 
+\begin_inset Formula $A_{i+1,j}$
+\end_inset
+
+ or 
+\begin_inset Formula $A_{i,j-1}$
+\end_inset
+
+.
+ Therefore, noting that any single character is a palindrome we have that
+ Maximum-Length-Palindrome (MLP) is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+[MLP = 
+\backslash
+left
+\backslash
+{      
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+begin{array}{lr}        
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+text{max}
+\backslash
+{MLP(A_{i+1,j}),MLP(A_{i,j-1})
+\backslash
+} & 
+\backslash
+text{if } a_i 
+\backslash
+neq a_j 
+\backslash
+
+\backslash
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+			2 + MLP(A_{i+1,j-1}) & 
+\backslash
+text{if } a_i = a_j 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			1 &
+\backslash
+text{if } i = j
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+end{array}    
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+right.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+] 
+\end_layout
+
+\end_inset
+
+Therefore we can compute all the lengths bottom up, in row major or column
+ major order, and then backtrack, at every point inspecting which of 
+\begin_inset Formula $A_{i-1,j-1},A_{i,j-1},A_{i-1,j}$
+\end_inset
+
+ contributed to the maximum length.
+ Each entry in the bottom-up table is computed in 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ time and all 
+\begin_inset Formula $n^{2}$
+\end_inset
+
+ entries have to be computed so total time is 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[16.2-2]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $A=\{a_{1},a_{2},\dots,a_{n}\}$
+\end_inset
+
+ be the items available for thieving, 
+\begin_inset Formula $\omega=\{\omega_{1},\omega_{2},\cdots,\omega_{n}\}$
+\end_inset
+
+ the set of weights for the 
+\begin_inset Formula $n$
+\end_inset
+
+ items and 
+\begin_inset Formula $p=\{p_{1},p_{2},\cdots,p_{n}\}$
+\end_inset
+
+ be the set of prices for the 
+\begin_inset Formula $n$
+\end_inset
+
+ items.
+ The problem exhibits optimal substructure: consider the most valuable load
+ that has weight limit 
+\begin_inset Formula $j$
+\end_inset
+
+ pounds.
+ If we remove one of the items from this load, say 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $i\in\{1,\dots,n\}$
+\end_inset
+
+ the remaining load must be the most valuable load weighing with weight
+ limit 
+\begin_inset Formula $j-\omega_{i}$
+\end_inset
+
+ that the thief can take from 
+\begin_inset Formula $\{a_{1},\dots,a_{i-1},a_{i+1},\dots,a_{n}\}$
+\end_inset
+
+.
+ Then the most valuable knapsack that can be constructed using items up
+ to 
+\begin_inset Formula $A_{i}=\{a_{1},a_{2},\dots,a_{j}\}$
+\end_inset
+
+ and having weight limit 
+\begin_inset Formula $j$
+\end_inset
+
+ is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+[m(A_{i},j) = 
+\backslash
+left
+\backslash
+{      
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+begin{array}{lr}        
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+text{max} 
+\backslash
+{m(A_{i-1},j),m(A_{i-1},j-
+\backslash
+omega_i)+p_i)
+\backslash
+} & 
+\backslash
+text{if } 
+\backslash
+omega_i 
+\backslash
+leq j
+\backslash
+
+\backslash
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+			m(A_{i-1},j) & 
+\backslash
+text{if } 
+\backslash
+omega_i >j 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			0 & 
+\backslash
+text{if } A_{i} = 
+\backslash
+emptyset 
+\backslash
+text{ or } j = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\backslash
+end{array}    
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+right.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+] 
+\end_layout
+
+\end_inset
+
+To compute the solution for 
+\begin_inset Formula $m(A_{n},W)$
+\end_inset
+
+ we construct a table 
+\begin_inset Formula $m[i,j]=m(A_{i},j)$
+\end_inset
+
+ with 
+\begin_inset Formula $i\in\{1,\dots,n\}$
+\end_inset
+
+ and 
+\begin_inset Formula $j\in\{1,\dots,W\}$
+\end_inset
+
+ in row major order.
+ Knapsack takes the array 
+\begin_inset Formula $A[]$
+\end_inset
+
+ where 
+\begin_inset Formula $A[i].w=\omega_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $A[i].p=p_{i}$
+\end_inset
+
+.
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Knapsack(A,W)
+\end_layout
+
+\begin_layout Plain Layout
+
+  let m[i,j] = 0 for all i,j
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j = 1 to W
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i = 1 to n
+\end_layout
+
+\begin_layout Plain Layout
+
+	  if A[i] > j
+\end_layout
+
+\begin_layout Plain Layout
+
+		m[i,j] = m[i-1,j]
+\end_layout
+
+\begin_layout Plain Layout
+
+	  else
+\end_layout
+
+\begin_layout Plain Layout
+
+		m[i,j] = max(m[i-1,j], m[i-1,j-A[i].w]+A[i].p)
+\end_layout
+
+\end_inset
+
+Then we back track from 
+\begin_inset Formula $m[n,W]$
+\end_inset
+
+ to find the actual list of items.
+ Since the table 
+\begin_inset Formula $m[i,j]$
+\end_inset
+
+ has dimensions 
+\begin_inset Formula $n\times W$
+\end_inset
+
+ and at each entry we have to perform 
+\begin_inset Formula $\Theta(1)$
+\end_inset
+
+ work, and the backtrack algorithm takes 
+\begin_inset Formula $O(n+W)$
+\end_inset
+
+ time, the whole algorithm runs in 
+\begin_inset Formula $O(nW)$
+\end_inset
+
+ time.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[16.2-4]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ denote the distance from Grand Forks, along U.S.
+ 2, of every location that the professor can purchase water and let 
+\begin_inset Formula $s_{i}=w_{i}+2$
+\end_inset
+
+ miles.
+ Then the problem is to find the minimum spanning set of intervals of the
+ form 
+\begin_inset Formula $a_{i}=[w_{i},s_{i}]$
+\end_inset
+
+ for the distance from Grand Forks to Williston.
+ Denote by 
+\begin_inset Formula $S_{ij}$
+\end_inset
+
+ the set of intervals 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+to 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+, which span 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+, and suppose we want to find the minimum set of overlapping intervals 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+in 
+\begin_inset Formula $S_{ij}$
+\end_inset
+
+ which also span 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+.
+ Suppose further that such a minimum set contains an interval 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+ By including 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ in an optimal solution we are left with two sub-problems: finding minimum
+ set of overlapping intervals in 
+\begin_inset Formula $S_{ik}$
+\end_inset
+
+, which span 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{k}$
+\end_inset
+
+, and in 
+\begin_inset Formula $S_{kj}$
+\end_inset
+
+, which span 
+\begin_inset Formula $w_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A_{ik}=A_{ij}\cap S_{ik}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{kj}=A_{ij}\cap S_{kj}$
+\end_inset
+
+.
+ Note both sets include 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+ Thus we have that 
+\begin_inset Formula $A_{ij}=A_{ik}\cup\left(A_{kj}\setminus\{a_{k}\}\right)$
+\end_inset
+
+and so the minimum-size set 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+of spanning intervals of 
+\begin_inset Formula $S_{ij}$
+\end_inset
+
+ consists of 
+\begin_inset Formula $\left|A_{ij}\right|=\left|A_{ik}\right|+\left|A_{kj}\right|-1$
+\end_inset
+
+ intervals.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Furthermore if we could find a set of intervals 
+\begin_inset Formula $A_{kj}^{'}$
+\end_inset
+
+or 
+\begin_inset Formula $A_{ik}^{'}$
+\end_inset
+
+where 
+\begin_inset Formula $\left|A_{kj}^{'}\right|<\left|A_{kj}\right|$
+\end_inset
+
+or 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left|A_{ik}^{'}\right|<\left|A_{ik}\right|$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+then we would have found a set of intervals such that 
+\begin_inset Formula 
+\[
+\left|A_{ij}\right|=\left|A_{ik}\right|+\left|A_{kj}\right|-1>\left|A_{kj}^{'}\right|+\left|A_{ik}\right|-1
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\left|A_{ij}\right|=\left|A_{ik}\right|+\left|A_{kj}\right|-1>\left|A_{ij}^{'}\right|+\left|A_{kj}\right|-1
+\]
+
+\end_inset
+
+contradicting the optimality of 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+We make the greedy choice: choose 
+\begin_inset Formula $a_{i_{1}}$
+\end_inset
+
+ as the last possible interval such that 
+\begin_inset Formula $w_{i_{1}}<2$
+\end_inset
+
+, since the professor starts out with 2 miles of water, Then choose the
+ last interval 
+\begin_inset Formula $a_{i_{j}}$
+\end_inset
+
+ in 
+\begin_inset Formula $S_{i_{1}n}\setminus\{a_{i_{1}}\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{i_{j}}\leq s_{i_{1}}$
+\end_inset
+
+, i.e.
+ the last possible stop before the professor runs out of water.
+ Then repeat for 
+\begin_inset Formula $a_{i_{j}}$
+\end_inset
+
+with 
+\begin_inset Formula $S_{i_{j}n}\setminus\{a_{i_{j}}\}$
+\end_inset
+
+.
+ Therfore 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Water-Stops(S)
+\end_layout
+
+\begin_layout Plain Layout
+
+	//prof starts with 2 miles of water
+\end_layout
+
+\begin_layout Plain Layout
+
+	A.append((0,2))
+\end_layout
+
+\begin_layout Plain Layout
+
+	j = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i = 1 to n
+\end_layout
+
+\begin_layout Plain Layout
+
+		while S[j].w <= A[i].s
+\end_layout
+
+\begin_layout Plain Layout
+
+			j++
+\end_layout
+
+\begin_layout Plain Layout
+
+		A.append(S[j-1])
+\end_layout
+
+\end_inset
+
+The greedy choice is optimal: let 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ be the stops that the optimal solution would generate.
+ Then the first stop 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+is either equal to 
+\begin_inset Formula $A[1].w$
+\end_inset
+
+ or before it (since our greedy solution chose the last possible stop).
+ Then the distance between 
+\begin_inset Formula $g_{2}$
+\end_inset
+
+and 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+is less than 2 miles and by the previous sentence 
+\begin_inset Formula $g_{1}\leq A[1].w\leq g_{2}$
+\end_inset
+
+ and therefore we can replace 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+in the optimal solution by 
+\begin_inset Formula $A[1].w$
+\end_inset
+
+ and not violate optimality, since we replaced one stop in the optimal solution
+ with one stop from our greedy solution.
+ But in this way we can iteratively replace all solutions 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+in the optimal solution with our 
+\begin_inset Formula $A[i].w$
+\end_inset
+
+ stops .
+ Therefore greedy solution is optimal.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The algorithm inspects each interval once and therefore runs in 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ time.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[16-1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $n$
+\end_inset
+
+ be the amount of money that needs changing.
+ Provide 
+\begin_inset Formula $\lfloor n/25\rfloor$
+\end_inset
+
+ quarters, then 
+\begin_inset Formula $\lfloor(n\text{mod}25)/10\rfloor$
+\end_inset
+
+ dimes, then 
+\begin_inset Formula $\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor$
+\end_inset
+
+ nickels, then 
+\begin_inset Formula $((n\text{mod}25)\text{mod}10)\text{mod}5$
+\end_inset
+
+ pennies.
+ Then
+\begin_inset Formula 
+\[
+n=\lfloor n/25\rfloor+\lfloor(n\text{mod}25)/10\rfloor+\lfloor((n\text{mod}25)\text{mod}10)/5\rfloor+((n\text{mod}25)\text{mod}10)\text{mod}5
+\]
+
+\end_inset
+
+by Euclid's algorithm.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Suppose there's a solution which uses fewer coins.
+ Then it must use either fewer quarters, or dimes, or nickels, or pennies.
+ For every one fewer quarter it uses, it must use either 3 coins in dimes
+ and nickels (2 dimes and 1 nickel), or 5 coins in nickels, or 
+\begin_inset Formula $\{9,13,17,21\}$
+\end_inset
+
+coins in nickels and pennies, or 25 coins in pennies.
+ For ever one fewer dime it uses, it must use 2 coins in nickels, or 9 coins
+ in nickels and pennies, or 10 coins in pennies.
+ For every one fewer nickel it uses it must 5 pennies.
+ It cannot use fewer pennies.
+ Hence the greedy solution is optimal, since any substitution grows the
+ number of coins (substantially).
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x$
+\end_inset
+
+ be the amount to change.
+ By uniqueness of base representation there is only one set of 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+such that 
+\begin_inset Formula $x=\sum_{i=0}^{k}a_{i}c^{i}$
+\end_inset
+
+.
+ Since each 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+is computed using successive modulo operations this corresponds to the greedy
+ algorithm.
+ Therefore the greedy solution must produce the optimal solution since it
+ produces the base 
+\begin_inset Formula $c$
+\end_inset
+
+ representation of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+1,3,4 to change 6.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $C=\{c_{1},\dots,c_{k}\}$
+\end_inset
+
+ be the coin denominations and 
+\begin_inset Formula $n$
+\end_inset
+
+ the amount of money to change and 
+\begin_inset Formula $m[n]$
+\end_inset
+
+ be the number of coins needed to make change.
+ Then this problem exhibits optimal sub-structure: the minimum number of
+ coins needed to change 
+\begin_inset Formula $n$
+\end_inset
+
+ amount of money, 
+\begin_inset Formula $m[n]$
+\end_inset
+
+ depends on the minimum number of coins needed to change 
+\begin_inset Formula $n-c_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, since the minimum number of coins to change 
+\begin_inset Formula $n-c_{i}$
+\end_inset
+
+ plus one is the the number of coins needed to change 
+\begin_inset Formula $n$
+\end_inset
+
+ if 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ is used.
+ Finally the minimum such combination, such that 
+\begin_inset Formula $m[n-c_{i}]+1$
+\end_inset
+
+ is minimum, the number of coins needed to change 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Therefore 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Min-Coin(n,C)
+\end_layout
+
+\begin_layout Plain Layout
+
+  let m[i] = inf for i = 1...n
+\end_layout
+
+\begin_layout Plain Layout
+
+  for i = 1 to n
+\end_layout
+
+\begin_layout Plain Layout
+
+	for j = 1 to k
+\end_layout
+
+\begin_layout Plain Layout
+
+	  temp = m[n-C[j]] + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+        if temp < m[i]
+\end_layout
+
+\begin_layout Plain Layout
+
+		  m = temp
+\end_layout
+
+\end_inset
+
+The algorithm runs in 
+\begin_inset Formula $O(nk)$
+\end_inset
+
+ time since it tests every denominations for every 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
