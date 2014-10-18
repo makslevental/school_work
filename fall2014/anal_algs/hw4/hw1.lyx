@@ -114,7 +114,176 @@ today
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+[17.3-3]
+\end_layout
+
+\end_inset
+
+Assign to each element in the heap a weight 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+ which equals its height in the tree.
+ Then let 
+\begin_inset Formula 
+\[
+\Phi(D_{i})=\sum_{j\in H}cw_{j}
+\]
+
+\end_inset
+
+Where 
+\begin_inset Formula $c=\max\{c_{1},c_{2}\}$
+\end_inset
+
+ where 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ is the constant in 
+\begin_inset Formula $O(\log(n))$
+\end_inset
+
+ for insertion and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ is the constant in 
+\begin_inset Formula $O(\log(n))$
+\end_inset
+
+ for Extract-Min.
+ When the tree is empty 
+\begin_inset Formula $\Phi(D_{0})=0$
+\end_inset
+
+ and otherwise 
+\begin_inset Formula $\Phi(D_{i})\ge0$
+\end_inset
+
+, hence the amortized cost 
+\begin_inset Formula 
+\[
+\hat{c}_{i}=c_{i}+\Delta\Phi=c_{i}+\left(\Phi(D_{i})-\Phi(D_{i-1}\right)
+\]
+
+\end_inset
+
+is an upper-bound on the actual cost.
+ Then an insert operation has amortized cost at most 
+\begin_inset Formula $2c\log n$
+\end_inset
+
+ since the element could heap down all the way to the last position in the
+ heap and therefore a potential increment equal to 
+\begin_inset Formula $cw_{i}=c\log n$
+\end_inset
+
+ would be added to the potential energy.
+ That is to say that 
+\begin_inset Formula 
+\[
+\hat{c}_{i}\leq c\log(n)+c\log(n)=2c\log(n)
+\]
+
+\end_inset
+
+But for Extract-Min the amortized cost is 0 since while removing the root
+ doesn't change the potential, the potential decreases by 
+\begin_inset Formula $c\log(n)$
+\end_inset
+
+ since it's as if one element goes from the deepest depth to depth 0.
+ Therefore
+\begin_inset Formula 
+\[
+\hat{c}_{i}\leq c\log(n)-c\log(n)=0
+\]
+
+\end_inset
+
+Hence Extract-Min is 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ amortized cost.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[17.3-6]
+\end_layout
+
+\end_inset
+
+Keep two stacks 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Let stack 
+\begin_inset Formula $a$
+\end_inset
+
+ be the actual queue and stack 
+\begin_inset Formula $b$
+\end_inset
+
+ be the auxiliary stack.
+ To Enqueue just push to stack 
+\begin_inset Formula $a$
+\end_inset
+
+, which has amortized cost 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ by CLRS.
+ To dequeue multipop all of the elements in stack 
+\begin_inset Formula $a$
+\end_inset
+
+ and push them to stack 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ This operation is 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ by the analysis in CLRS as well.
+ Then to actually fetch the item at the front of the 
+\begin_inset Quotes eld
+\end_inset
+
+queue
+\begin_inset Quotes erd
+\end_inset
+
+ pop stack 
+\begin_inset Formula $b$
+\end_inset
+
+ which is 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \end_body

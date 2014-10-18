@@ -682,7 +682,7 @@ A DHT is a distributed hash table and it's used in P2P networks so that
 When peer 5 leaves peer 4 is alerted of this by the fact that its consistent
  pings on peer 5 are no longer answered.
  So it updates its successor to what used to be its second successor and
- then queries its successor for that peers succcessor.
+ then queries its successor for that peers successor.
  It then alerts peer 3, which updates its second successor to be peer 4's
  successor, peer 8.
  So peer 3's successor is peer 4 and second successor is peer 8.

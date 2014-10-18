@@ -1,0 +1,648 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "frame=single"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+CNT5106C Homework 2 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If the sender sends only infrequently then exactly what you want is an ACK
+ based protocol since it's optimal exactly for the usage pattern of the
+ user - there will not be many ACKs since the sender doesn't send often.
+ A NAK-only protocol would suffer from the problem that the receiver will
+ always be uncertain about whether a packet was lost or whether the sender
+ is simply idle.
+ So the receiver would have to keep very long timers, since the sender takes
+ very long between sending packets, and it's unknown whether a packet has
+ taken too long to arrive or whether the sender hasn't sent anything.
+\end_layout
+
+\begin_layout Enumerate
+In this case a NAK-only protocol would be preferable because the sender
+ isn't often idle and so a long gap between received packet immediately
+ implies that packets were lost in transmission from sender to receiver.
+ So the timers that the receiver could keep wouldn't need to be long, since
+ the sender isn't idle often.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Graph
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename Chapter3-helmy-F14-1.jpg
+	scale 66
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Congestion collapse happens at about the second green dot and it happens
+ because utilization of the network goes above 80%.
+ So wait time in queues increases exponentially and so ACK timers time out
+ and sender retransmit, which only cyclically causes the buffers to become
+ even more loaded, and then timers to run even longer, etc.
+\end_layout
+
+\begin_layout Enumerate
+TCP tries to operate in between the two green dots.
+ First TCP initializes the slow start mechanism which sets the congestion
+ window to 1 and then increases the width of congestion window by 1 for
+ each ACK received from the receiver.
+ Then when timeout occurs a threshold is recorded called 'ssthresh' which
+ is the width of the congestion window divided by two, and the window is
+ again set to have a width of 1.
+ Then the slow start mechanism is repeated until 'ssthresh' is reached at
+ which point the window width is increased linearly by 1 per round trip
+ time.
+ If 3 duplicate ACKs are received then TCP goes into fast recovery mode,
+ wherein it again records 'ssthresh' to be the congestion window divided
+ by 2.
+ It then retransmit the dropped segments and sets the congestion window
+ to be 'ssthresh' plus 3 and then again starts growing the congestion window
+ by 1 per duplicate ACK.
+ Finally after getting a cumulative ACK it sets the congestion window back
+ to 'ssthresh' and then continues to grow linearly for every RTT.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The 'ssthresh' variable is set to the current congestion windows divided
+ by 2 because in order to probe the capacity of the network using a sawtooth
+ like pattern, in a sense a binary search of what the right congestion window
+ size should be.
+ It certainly couldn't be something like CongWin-20 since that might be
+ negative when the network is under heavy load (CongWin<20).
+\end_layout
+
+\begin_layout Enumerate
+In order to quickly back off from the current sending rate, in order to
+ vigorously avoid congestion in the network.
+\end_layout
+
+\begin_layout Enumerate
+To compensate for the 3 out of order packets that the 3 ACKs acknowledge
+ receiving.
+\end_layout
+
+\begin_layout Enumerate
+No since you will only receive duplicate ACKs for out of order packets received
+ before the retransmitted packet arrives, and then as soon a non-duplicate
+ ACK arrives growth becomes linear again.
+\end_layout
+
+\begin_layout Enumerate
+Since the sender receives 3 duplicate ACKs this gives it implicit knowledge
+ that the network is not too heavily congested (there was enough capacity
+ that the receiver was able to send through 3 duplicate ACKs) and this is
+ why CongWin=ssthresh upon exit of fast recovery.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If there are several long lived TCP flows then UDP would get an unfair share
+ the bandwidth in cases of congestion.
+ This is because each of the TCP flows will experience congestion control
+ (most often being in the congestion avoidance phase) while UDP will not
+ meter its flow whatsoever.
+ In these instances it is probably the case that the TCP packets will be
+ lost more often because of the interference from UDP.
+\end_layout
+
+\begin_layout Enumerate
+Obviously you would inject traffic on the smallest pipe, between nodes C
+ and B, in the direction of receiver to sender.
+ This is in order to get the ACKs coming from the receiver to be dropped
+ and therefore trick the TCP connection into believing that there's very
+ heavy congestion in the network, thereby causing it to go into congestion
+ avoidance.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The optimal place to inject traffic would be between node D and the receiver.
+ This is as to maximize the probability of receiving ACKs quickly from the
+ receiver and maximize the slow start growth of each of the short lived
+ connections.
+ This would then overwhelm the receiver and give the long lived flow from
+ the sender the impression that the network was very congested.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+TCP's performance degrades over wireless links because of signal strength
+ and bit-error rates thereby contribute more to RTTs than congestion does.
+ So a wireless network might not be very congested and yet TCP estimates
+ that it is, because the links are weak, and then all of the hosts spend
+ all of their time unnecessarily in congestion avoidance.
+ If the network provides explicit congestion signaling I would propose that
+ TCP uses those indicators instead of RTT of packets.
+ The improvement would obviously be that hosts would not be in congestion
+ avoidance unnecessarily but the drawbacks would be that on wired networks
+ there would be unnecessary overhead since RTTs are an effective implicit
+ measure of congestion already, and can be calculated without sending out-of-ban
+d signals (which cause the overhead).
+\end_layout
+
+\begin_layout Enumerate
+Graph
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename atmplot.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\text{Rate}_{new}=\text{Rate}_{old}-\text{Rate}_{old}\times RDF=\text{Rate}_{old}\left(1-RDF\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\text{Rate}_{t=0}$
+\end_inset
+
+ be the initial rate.
+ Then
+\begin_inset Formula 
+\[
+\text{Rate}_{t=k}=\text{Rate}_{t=k-1}\times(1-RDF)=\text{Rate}_{t=k-2}\times(1-RDF)^{2}=\cdots=\text{Rate}_{t=0}\times(1-RDF)^{k}
+\]
+
+\end_inset
+
+Therefore for any RDF the rate will decrease exponentially quickly, for
+ example even if 
+\begin_inset Formula $\text{RDF}=\frac{1}{10}$
+\end_inset
+
+ after 5 CI bits
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\text{Rate}_{t=5}=\text{Rate}_{t=0}\times\left(1-\frac{1}{10}\right)^{5}=\text{Rate}_{t=0}\times\left(\frac{9}{10}\right)^{5}\approx.59\text{\times Rate}_{t=0}
+\]
+
+\end_inset
+
+For a more aggressive RDF, such as 
+\begin_inset Formula $1/4$
+\end_inset
+
+ we have even greater reduction 
+\begin_inset Formula 
+\[
+\text{Rate}_{t=5}=\text{Rate}_{t=0}\times\left(1-\frac{1}{4}\right)^{5}=\text{Rate}_{t=0}\times\left(\frac{3}{4}\right)^{5}\approx.23\times\text{Rate}_{t=0}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\text{Rate}_{new}=\text{Rate}_{old}\times\beta$
+\end_inset
+
+ is equivalent to 
+\begin_inset Formula $\text{Rate}_{new}=\text{Rate}_{old}-\text{Rate}_{old}\times RDF=\text{Rate}_{old}\left(1-RDF\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\beta=\left(1-RDF\right)$
+\end_inset
+
+.
+ So for appropriate choices of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ the responses will be exactly the same.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Packets can be lost in many ways other than outright network failure.
+ For example if link utilization exceeds 80% then queues will fill completely
+ and packets will simply be dropped from queue tails.
+ So congestion can be a cause of packet loss that's not explicit network
+ failure.
+ Furthermore packets can be lost in the sense that they incur bit-errors
+ from sender to receiver, for example over wireless links.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Assume exponentially distributed times between arrivals for each circuit.
+ Then for virtual circuit one a probability for 1 arrival in 1 unit of time
+ (1 time slot) of .1 implies
+\begin_inset Formula 
+\[
+\int_{0}^{1}\lambda_{1}e^{-\lambda_{1}x}dx=.1\implies\lambda_{1}\approx.105
+\]
+
+\end_inset
+
+and for virtual circuit 2
+\begin_inset Formula 
+\[
+\int_{0}^{1}\lambda_{1}e^{-\lambda_{2}x}dx=.2\implies\lambda_{2}\approx.223
+\]
+
+\end_inset
+
+and for virtual circuit 3
+\begin_inset Formula 
+\[
+\int_{0}^{1}\lambda_{3}e^{-\lambda_{3}x}dx=.3\implies\lambda_{3}\approx.357
+\]
+
+\end_inset
+
+Then the condition for constant queuing delay, namely that
+\begin_inset Formula 
+\[
+\frac{\lambda_{1}}{f_{1}}=\frac{\lambda_{2}}{f_{2}}=\frac{\lambda_{3}}{f_{3}}=k
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ is the portion of flow allocated to virtual circuit 
+\begin_inset Formula $i$
+\end_inset
+
+, implies that 
+\begin_inset Formula $f_{1}=\frac{\lambda_{1}}{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=\frac{\lambda_{2}}{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}=\frac{\lambda_{3}}{k}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $k$
+\end_inset
+
+ is proportional to the utilization for each flow, and we want to stay below
+ total server utilization 
+\begin_inset Formula $\rho=.8$
+\end_inset
+
+ choose 
+\begin_inset Formula $k=.75$
+\end_inset
+
+ and then 
+\begin_inset Formula $f_{1}=\frac{.105}{.75}\approx.14$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=\frac{.223}{.75}\approx.297$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}=\frac{.357}{.75}\approx.476$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Assume exponentially distributed times between arrivals for each circuit.
+ Then for virtual circuit one a probability for 1 arrival in 1 unit of time
+ (1 time slot) of .1 implies
+\begin_inset Formula 
+\[
+\int_{0}^{1}\lambda_{1}e^{-\lambda_{1}x}dx=.05\implies\lambda_{1}\approx.0513
+\]
+
+\end_inset
+
+and for virtual circuit 2
+\begin_inset Formula 
+\[
+\int_{0}^{1}\lambda_{1}e^{-\lambda_{2}x}dx=.05\implies\lambda_{2}\approx.0513
+\]
+
+\end_inset
+
+and for virtual circuit 3
+\begin_inset Formula 
+\[
+\int_{0}^{1}\lambda_{3}e^{-\lambda_{3}x}dx=.5\implies\lambda_{3}\approx.693
+\]
+
+\end_inset
+
+Then the condition for constant queuing delay, namely that
+\begin_inset Formula 
+\[
+\frac{\lambda_{1}}{f_{1}}=\frac{\lambda_{2}}{f_{2}}=\frac{\lambda_{3}}{f_{3}}=k
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ is the portion of flow allocated to virtual circuit 
+\begin_inset Formula $i$
+\end_inset
+
+, implies that 
+\begin_inset Formula $f_{1}=\frac{\lambda_{1}}{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=\frac{\lambda_{2}}{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}=\frac{\lambda_{3}}{k}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $k$
+\end_inset
+
+ is proportional to the utilization for each flow, and we want to stay below
+ total server utilization 
+\begin_inset Formula $\rho=.8$
+\end_inset
+
+ choose 
+\begin_inset Formula $k=.75$
+\end_inset
+
+ and then 
+\begin_inset Formula $f_{1}=\frac{.0513}{.75}\approx.0684$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=\frac{.0513}{.75}\approx.0684$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}=\frac{..693}{.75}\approx.924$
+\end_inset
+
+.
+ Therefore at ulitilzation 
+\begin_inset Formula $k=.75$
+\end_inset
+
+ these 3 flows are unsustainable.
+ Ramping up to 
+\begin_inset Formula $k=.9$
+\end_inset
+
+ then 
+\begin_inset Formula $f_{1}=\frac{.0513}{.9}\approx.0580$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=\frac{.0513}{.9}\approx.0580$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}=\frac{..693}{.9}\approx.770$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
