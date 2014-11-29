@@ -1,0 +1,1694 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "frame=single"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+COT5405 Homework 5 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Run Jarvis' march over and over again, each time pruning the convex hull
+ 
+\begin_inset Quotes eld
+\end_inset
+
+layer
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ the last convex hull discovered.
+ Each iteration of Jarvis' march in 
+\begin_inset Formula $O\left(n\cdot h\right)$
+\end_inset
+
+ time where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of points and 
+\begin_inset Formula $h$
+\end_inset
+
+ is the number of points on the convex hull.
+ Let 
+\begin_inset Formula $O\left(n\cdot h_{i}\right)$
+\end_inset
+
+ be the running time to find the 
+\begin_inset Formula $i$
+\end_inset
+
+th hull.
+ So the total running time is 
+\begin_inset Formula 
+\[
+O\left(n\cdot h_{1}+n\cdot h_{2}+\cdots+n\cdot h_{k}\right)
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the total number of layers.
+ But since on every iteration we remove 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ points it's obvious that 
+\begin_inset Formula 
+\[
+h_{1}+h_{2}+\cdots+h_{k}=\sum_{i=1}^{k}h_{i}=n
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\[
+O\left(n\cdot h_{1}+n\cdot h_{2}+\cdots+n\cdot h_{k}\right)=O\left(n\sum_{i=1}^{k}h_{i}\right)=O\left(n\cdot n\right)=O\left(n^{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Claim
+\series default
+: If there exists an algorithm that runs in 
+\begin_inset Formula $O(m)$
+\end_inset
+
+ that transforms sorting 
+\begin_inset Formula $m$
+\end_inset
+
+ numbers into finding the convex layers of 
+\begin_inset Formula $m$
+\end_inset
+
+ points in 
+\begin_inset Formula $o\left(m\log m\right)$
+\end_inset
+
+ time then it would be possible to sort the 
+\begin_inset Formula $m$
+\end_inset
+
+ points in 
+\begin_inset Formula $o\left(m\log m\right)$
+\end_inset
+
+ time.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof
+\series default
+: Let 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ be running time of sorting, 
+\begin_inset Formula $g\left(n\right)=o\left(n\log n\right)$
+\end_inset
+
+ be the running time of finding the convex layers of 
+\begin_inset Formula $m$
+\end_inset
+
+ points, and 
+\begin_inset Formula $h\left(n\right)=O\left(n\right)$
+\end_inset
+
+ by the running time of the transformation.
+ Then by definition there exists 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $n>N$
+\end_inset
+
+ implies 
+\begin_inset Formula $g\left(n\right)\leq c_{2}n\log n$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ such that for 
+\begin_inset Formula $N=1$
+\end_inset
+
+ such that for 
+\begin_inset Formula $n>N$
+\end_inset
+
+ implies 
+\begin_inset Formula $h\left(n\right)\le c_{1}n$
+\end_inset
+
+.
+ Then 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f\left(n\right)=g\left(n\right)+h\left(n\right)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ and let 
+\begin_inset Formula $c=\max\left\{ c_{1},c_{2}\right\} $
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $n>N=1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+f\left(n\right) & =g\left(n\right)+h\left(n\right)\\
+ & \leq c_{2}n\log n+c_{1}n\\
+ & \leq cn\log n+cn\\
+ & =cn\left(\log n+1\right)\\
+ & \leq\left(c\cdot2\cdot\log_{e}2\right)n\log n\text{ since }1\leq2\cdot\log_{e}2
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The reduction goes like this: Let 
+\begin_inset Formula $X=\left\{ x_{1},x_{2},\dots,x_{m}\right\} $
+\end_inset
+
+ be the unsorted array and create equilateral triangles with size proportional
+ to the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, that is associate with each 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ the 3 points 
+\begin_inset Formula $\left(0,0\right),\left(i,0\right),\left(0,x_{i}\right)$
+\end_inset
+
+.
+ Then the set 
+\begin_inset Formula $Q=\cup_{i=1}^{m}\left\{ \left(0,0\right),\left(i,0\right),\left(0,x_{i}\right)\right\} $
+\end_inset
+
+ has 
+\begin_inset Formula $m$
+\end_inset
+
+ convex layers.
+ Clearly this is a linear time reduction and computing these layers is tantamoun
+t to reverse sorting 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Therefore finding convex layers is 
+\begin_inset Formula $\Omega\left(n\log n\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33-4]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If we project the pile of sticks onto the x-y plane we can immediately identify
+ which sticks are 
+\begin_inset Quotes eld
+\end_inset
+
+unrelated
+\begin_inset Quotes erd
+\end_inset
+
+ by whether they intersect in the projection.
+ Then for 2 sticks that are 
+\begin_inset Quotes eld
+\end_inset
+
+related
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ intersect in the projection, we can compare the z coordinates of the sticks
+ at the point of intersection on each stick.
+ So we map the point of intersection back to the sticks in the x-y-z coordinate
+ system and then compare those z-coordinates.
+ Obviously whichever one has the larger z-coordinate is the one that is
+ 
+\begin_inset Quotes eld
+\end_inset
+
+above
+\begin_inset Quotes erd
+\end_inset
+
+ the other.
+\end_layout
+
+\begin_layout Enumerate
+Compare every pair 
+\begin_inset Formula $s_{i},s_{j}$
+\end_inset
+
+ of sticks using the algorithm discussed above and order the set of sticks
+ 
+\begin_inset Formula $\left\{ s_{1},s_{2},\dots,s_{n}\right\} $
+\end_inset
+
+ by 
+\begin_inset Formula $s_{i}<s_{j}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ is above 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+ If the set becomes totally ordered under this ordering relation then there
+ is a way to pick up the sticks 1 by 1.
+ If not, if there's an instance where 
+\begin_inset Formula $s_{i}<s_{j}<s_{k}<s_{i}$
+\end_inset
+
+ then there's no way to pick up any of 
+\begin_inset Formula $s_{i},s_{j},s_{k}$
+\end_inset
+
+ without disturbing one of the others.
+ In general construct a directed graph with the vertex set comprised of
+ the sticks and edge between 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ if 
+\begin_inset Formula $s_{i}<s_{j}$
+\end_inset
+
+.
+ The condition that 
+\begin_inset Formula $s_{i}<s_{j}<s_{k}<s_{i}$
+\end_inset
+
+ corresponds to a cycle in the graph so running breadth first search to
+ check to see if there are any cycles.
+ If there are no cycles in the graph then a topological sort of the vertices
+ is the order in which the sticks should be picked up.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[34-2]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+This is solvable in polynomial time.
+ Let 
+\begin_inset Formula $m$
+\end_inset
+
+ be the number of coins worth 
+\begin_inset Formula $x$
+\end_inset
+
+ dollars and 
+\begin_inset Formula $n-m$
+\end_inset
+
+ be the number of coins worth 
+\begin_inset Formula $y$
+\end_inset
+
+ dollars.
+ Then first check whether 
+\begin_inset Formula $S=m\cdot x+\left(n-m\right)\cdot y$
+\end_inset
+
+ is even.
+ If it's not then there's no hope whatsoever.
+ If it is even ,i.e.
+ 
+\begin_inset Formula $S/2\mod2=0$
+\end_inset
+
+ then let 
+\begin_inset Formula $p=m$
+\end_inset
+
+ and 
+\begin_inset Formula $q=n-m$
+\end_inset
+
+ and solve 
+\begin_inset Formula $a\cdot p+b\cdot q=S/2$
+\end_inset
+
+ over the natural numbers.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim
+\series default
+: The diophantine equation 
+\begin_inset Formula $a\cdot p+b\cdot q=S/2$
+\end_inset
+
+ has solutions iff 
+\begin_inset Formula $\gcd\left(p,q\right)$
+\end_inset
+
+ divides 
+\begin_inset Formula $S/2$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof
+\series default
+: 
+\begin_inset Formula $\gcd\left(p,q\right)|p$
+\end_inset
+
+ and 
+\begin_inset Formula $\gcd\left(p,q\right)|q$
+\end_inset
+
+ implies 
+\begin_inset Formula $\gcd\left(p,q\right)|\left(a\cdotp p+b\cdotp q\right)$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\gcd\left(p,q\right)|S/2$
+\end_inset
+
+.
+ On the other hand given that given that 
+\begin_inset Formula $\gcd\left(p,q\right)$
+\end_inset
+
+ divides 
+\begin_inset Formula $S/2$
+\end_inset
+
+ it's the case that there exists 
+\begin_inset Formula $z\in\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula $S/2=\gcd\left(p,q\right)\cdot z$
+\end_inset
+
+ and simultaneously 
+\begin_inset Formula $\gcd\left(p,q\right)=a_{1}p+b_{1}q$
+\end_inset
+
+.
+ Multiplying this by 
+\begin_inset Formula $z$
+\end_inset
+
+ we get 
+\begin_inset Formula $S/2=z\cdot\gcd\left(p,q\right)=z\cdot a_{1}p+z\cdot b_{1}q$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+A particular solution is computed using Euclid's extended algorithm for
+ computing gcd and then multiplying the coefficients that the algorithm
+ produces by 
+\begin_inset Formula $S/2$
+\end_inset
+
+.
+ All solutions are produced from such a particular solution.
+ That is if 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\left(a_{1},b_{1}\right)$
+\end_inset
+
+ is the solution produced by Euclid then all solutions are of the form
+\begin_inset Formula 
+\[
+a=a_{1}+\frac{qk}{\gcd\left(p,q\right)},b=b_{1}-\frac{pk}{\gcd\left(p,q\right)},k\in\mathbb{Z}
+\]
+
+\end_inset
+
+Expressing 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $\frac{x\cdot S}{2\gcd\left(p,q\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $\frac{y\cdot S}{2\gcd\left(p,q\right)}$
+\end_inset
+
+ a general solution is of the form
+\begin_inset Formula 
+\[
+a=\frac{x\cdot S/2}{\gcd\left(p,q\right)}+\frac{qk}{\gcd\left(p,q\right)},b=\frac{y\cdot S/2}{\gcd\left(p,q\right)}-\frac{pk}{\gcd\left(p,q\right)},k\in\mathbb{Z}
+\]
+
+\end_inset
+
+All positive solutions are those for which 
+\begin_inset Formula 
+\[
+\frac{-x\cdot S/2}{\left|q\right|}<k<\frac{y\cdot S/2}{\left|p\right|}
+\]
+
+\end_inset
+
+Therefore we can compute whether the money can be split evenly in polynomial
+ time, since Euclid's algorithm runs in polynomial time, by solving 
+\begin_inset Formula $a\cdot p+b\cdot q=S/2$
+\end_inset
+
+, by computing 
+\begin_inset Formula $\gcd\left(n,n-m\right)$
+\end_inset
+
+, and then checking which 
+\begin_inset Formula $k$
+\end_inset
+
+ meet 
+\begin_inset Formula 
+\[
+\frac{-x\cdot S/2}{\left|q\right|}<k<\frac{y\cdot S/2}{\left|p\right|}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+This is solvable in polynomial time.
+ Since each coin denomination can be changed into some number of smaller
+ denomination coins, i.e.
+ 
+\begin_inset Formula 
+\[
+2^{b}=2^{b-1}+2^{b-1}=2^{b-2}+2^{b-2}+2^{b-2}+2^{b-2}=\cdots
+\]
+
+\end_inset
+
+any difference in any two quantities of coins can be compensated for with
+ smaller denomination coins, if there are enough in the bag.
+ So we can simply take turns giving Bonnie and Clyde coins, and if there
+ is enough money to make up the different then the money can be divided
+ up equally.
+ That is to say that we sort the coins in 
+\begin_inset Formula $O\left(n\log n\right)$
+\end_inset
+
+ time, give Bonnie the largest coin and then give Clyde the next largest
+ coins until he has as much money as Bonnie.
+ Then repeat.
+ Obviously this only fails if the available denominations are convenient
+ (there are too many large denomination coins).
+\end_layout
+
+\begin_layout Enumerate
+This is NP-Complete.
+ The reduction is from the SET-PARTITION problem (CLRS 34.5-5).
+ First we show that SET-PARTITION is NP-Complete.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim
+\series default
+: SET-PARTITION is in NP.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof
+\series default
+: Clearly if someone presents a solution (a set of numbers 
+\begin_inset Formula $S$
+\end_inset
+
+ partitioned into two sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{A}=S-A$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{x\in A}x=\sum_{x\in\bar{A}}x$
+\end_inset
+
+) then we can simply verify each member of 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{A}$
+\end_inset
+
+ are in fact in 
+\begin_inset Formula $S$
+\end_inset
+
+ in 
+\begin_inset Formula $O\left(\left|A\right|\right)+O\left(\left|\bar{A}\right|\right)$
+\end_inset
+
+ time and compute each of the sums 
+\begin_inset Formula $\sum_{x\in A}x$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{x\in\bar{A}}x$
+\end_inset
+
+ in 
+\begin_inset Formula $O\left(\left|A\right|\right)+O\left(\left|\bar{A}\right|\right)$
+\end_inset
+
+ time.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim
+\series default
+: SET-PARTITION is NP-Complete.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof
+\series default
+: We reduce from SUBSET-SUM.
+ For any set 
+\begin_inset Formula $S$
+\end_inset
+
+ with total sum 
+\begin_inset Formula $s$
+\end_inset
+
+ and target sum 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $S'$
+\end_inset
+
+, the which we pass to SET-PARTITION, be 
+\begin_inset Formula $S'=S\cup\left\{ s+t,2s-t\right\} $
+\end_inset
+
+.
+ If there is a subset 
+\begin_inset Formula $A$
+\end_inset
+
+ of 
+\begin_inset Formula $S$
+\end_inset
+
+ that sums to 
+\begin_inset Formula $t$
+\end_inset
+
+ then 
+\begin_inset Formula $S'=A\cup\left\{ 2s-t\right\} \sqcup\left(\left(S-A\right)\cup\left\{ s+t\right\} \right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\sqcup$
+\end_inset
+
+ means disjoint union (clearly 
+\begin_inset Formula $A\cup\left\{ 2s-t\right\} $
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(\left(S-A\right)\cup\left\{ s+t\right\} \right)$
+\end_inset
+
+ are disjoint and their union equals 
+\begin_inset Formula $S'$
+\end_inset
+
+) and 
+\begin_inset Formula 
+\begin{align*}
+2s & =t+\left(2s-t\right)\\
+ & =\sum_{x\in A}A+\left(2s-t\right)\\
+ & =\sum_{x\in A}\left(A\cup\left\{ 2s-t\right\} \right)\\
+ & =\sum_{x\in A}\left(\left(S-A\right)\cup\left\{ s+t\right\} \right)\\
+ & =\sum_{x\in A}\left(S-A\right)+\left(s+t\right)\\
+ & =\left(s-t\right)+\left(s+t\right)=2s
+\end{align*}
+
+\end_inset
+
+Conversely if 
+\begin_inset Formula $S'$
+\end_inset
+
+ can be partitioned
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ into two sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{A}=S'-A$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{x\in A}x=\sum_{x\in\bar{A}}x$
+\end_inset
+
+ then since 
+\begin_inset Formula $\left(2s-t\right)+\left(s+t\right)=3s$
+\end_inset
+
+, and each of 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{A}$
+\end_inset
+
+ can sum to at most 
+\begin_inset Formula $2s$
+\end_inset
+
+, it must be the case that the elements 
+\begin_inset Formula $\left(s+t\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(2s-t\right)$
+\end_inset
+
+ are in distinct sets.
+ Finally for whichever set 
+\begin_inset Formula $\left(2s-t\right)$
+\end_inset
+
+ is in, the rest of the elements in that set sum to 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim
+\series default
+: The 
+\begin_inset Formula $n$
+\end_inset
+
+ checks problem is NP-Complete
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof
+\series default
+: Multiply all checks by 100 so that there are no cents, i.e.
+ the value of each check is an integer.
+ The problem is now exactly set partition.
+\end_layout
+
+\begin_layout Enumerate
+This is NP-Complete.
+ The solution is the same for part (c) except divide by 1000 and round.
+ This shifts out any numbers in the values of checks in the $10s, $1s, $.1,
+ $.01 digits and so differences below 100$ won't matter.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[34-3]
+\end_layout
+
+\end_inset
+
+Hints from https://engineering.purdue.edu/~ee608/handouts/hw12-2007-sol.pdf
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Do a breadth search coloring nodes alternating colors, i.e.
+ keep track of the recursion depth of the search and color nodes at even
+ depths black and at odd depths red.
+ Also check to see if a node is already colored.
+ If a node is colored and has color opposite the color which you intended
+ to color it, i.e.
+ you're at a node and there exists a back edge to a node that's already
+ been colored the same color as the node you're at, then a 2-coloring is
+ not possible.
+ Running time is 
+\begin_inset Formula $O\left(\left|V\right|+\left|E\right|\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The decision problem is the one that poses exactly the question we're interested
+ in: can the graph be colored using 
+\begin_inset Formula $k$
+\end_inset
+
+ colors.
+ Clearly if the graph can be colored in polynomial time than the decision
+ problem can be solved in polynomial time (simply output yes or no).
+ If the decision problem can be solved we transform the answer into a solution
+ to the graph coloring problem in polynomial time as such: let 
+\begin_inset Formula $k'$
+\end_inset
+
+ be the number of colors we'd like to color the graph.
+ Start with 
+\begin_inset Formula $k=1$
+\end_inset
+
+ (not 
+\begin_inset Formula $k'$
+\end_inset
+
+) and an empty set of vertices and start adding vertices one by one, asking
+ the decision algorithm whether the graph is still 
+\begin_inset Formula $k=1$
+\end_inset
+
+ colorable after each addition.
+ As soon as the decision algorithm returns a 'no' remove the vertex added
+ and color all the vertices a fixed color (blue) and increment 
+\begin_inset Formula $k=2$
+\end_inset
+
+ and again start adding vertices while asking the decision algorithm if
+ the graph is 
+\begin_inset Formula $k=2$
+\end_inset
+
+ colorable.
+ As soon as the algorithm returns a 'no', remove the last vertex added and
+ color all the 
+\series bold
+uncolored
+\series default
+ vertices a second fixed color (red).
+ Repeat until 
+\begin_inset Formula $k=k'$
+\end_inset
+
+.
+ Since the 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ is the maximum number of colors any graph can be colored the transformation
+ of decision problem solution to the color problem solution is polynomial
+ time.
+\end_layout
+
+\begin_layout Enumerate
+Since the transformation to the decision problem in part (b) works for any
+ 
+\begin_inset Formula $k$
+\end_inset
+
+ it certain works 
+\begin_inset Formula $k=3$
+\end_inset
+
+.
+ Therefore since any 3-COLOR instance can be transformed in polynomial time
+ in the decision problem from part (b), if 3-COLOR were NPC and yet 3-COLOR-DECI
+SION weren't NPC that would be a contradiction.
+\end_layout
+
+\begin_layout Enumerate
+Since each literal, its negation, and RED are connected together in a 
+\begin_inset Formula $K_{3}$
+\end_inset
+
+ graph
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename 1024px-Complete_graph_K3.svg.png
+	scale 15
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+if it were the case that both 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\sim x$
+\end_inset
+
+ were color the same color, either 
+\begin_inset Formula $c\left(True\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $c(False)$
+\end_inset
+
+ or Red then the 
+\begin_inset Formula $K_{3}$
+\end_inset
+
+ subgraph would clearly not be 3-colored.
+ Therefore we know that in the corresponding truth assignment for a given
+ formula 
+\begin_inset Formula $\phi$
+\end_inset
+
+ there are no logical contradictions, i.e.
+ no cases of 
+\begin_inset Formula $x\wedge\sim x$
+\end_inset
+
+ .
+ Conversely from any truth assignment for a given formula 
+\begin_inset Formula $\phi$
+\end_inset
+
+ we can construct a 3-colored graph by assigning the variable 
+\begin_inset Formula $x$
+\end_inset
+
+ the color corresponding to its truth value (
+\begin_inset Formula $c(True)$
+\end_inset
+
+ if it is true or 
+\begin_inset Formula $c(False)$
+\end_inset
+
+ if it is false) and the opposite color to its negation 
+\begin_inset Formula $\sim x$
+\end_inset
+
+ (
+\begin_inset Formula $c(False)$
+\end_inset
+
+ if 
+\begin_inset Formula $x$
+\end_inset
+
+ is true or 
+\begin_inset Formula $c(True)$
+\end_inset
+
+ if 
+\begin_inset Formula $x$
+\end_inset
+
+ is false).
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Proof by contradiction.
+ Consider the picture
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename pw1.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Assume that all of 
+\begin_inset Formula $x,y,z$
+\end_inset
+
+ are colored 
+\begin_inset Formula $c\left(False\right)$
+\end_inset
+
+.
+ Then since E has a 
+\begin_inset Formula $c\left(False\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $c\left(True\right)$
+\end_inset
+
+ neighbor it must be red.
+ Similarly vertex D must be 
+\begin_inset Formula $c\left(False\right)$
+\end_inset
+
+.
+ Then vertices A and B can be either 
+\begin_inset Formula $c\left(True\right)$
+\end_inset
+
+ or red, but not both.
+ Without loss of generality assume that vertex A is red and vertex B is
+ 
+\begin_inset Formula $c\left(True\right)$
+\end_inset
+
+.
+ Then clearly vertex C must 
+\begin_inset Formula $c\left(False\right)$
+\end_inset
+
+, a contradiction since D is 
+\begin_inset Formula $c\left(False\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+By part (d) any 3 coloring corresponds to a legitimate truth assignment.
+ Furthermore the argument from part (e) can be repeated for each clause
+ in the formula 
+\begin_inset Formula $\phi$
+\end_inset
+
+.
+ Therefore 3-CNF-SAT 
+\begin_inset Formula $\le_{P}$
+\end_inset
+
+ 3-COLOR.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[35-1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The reduction from SUBSET-SUM proceeds similarly to that in part (c) of
+ 35-1.
+ Let 
+\begin_inset Formula $\left(S,t\right)$
+\end_inset
+
+ be an instance of SUBSET-SUM and let 
+\begin_inset Formula $\sum_{x\in S}x=s$
+\end_inset
+
+, the sum of all of the elements in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Then there are two cases for how to perform the reduction.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Case 1: If 
+\begin_inset Formula $t<s/2$
+\end_inset
+
+ let 
+\begin_inset Formula $S'=S\cup\left\{ s-2t\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $S''=S'/\left(s-t\right)$
+\end_inset
+
+, i.e.
+ each element in 
+\begin_inset Formula $S'$
+\end_inset
+
+ normalized by 
+\begin_inset Formula $\left(s-t\right)$
+\end_inset
+
+.
+ If there's a subset 
+\begin_inset Formula $\bar{A}$
+\end_inset
+
+ of 
+\begin_inset Formula $S$
+\end_inset
+
+ that sums to 
+\begin_inset Formula $t$
+\end_inset
+
+ then BIN-PACKING
+\begin_inset Formula $\left(S'',2\right)$
+\end_inset
+
+, the decision problem that computes whether 
+\begin_inset Formula $S''$
+\end_inset
+
+ fits into exactly 2 bins, will return YES since 
+\begin_inset Formula 
+\begin{align*}
+\sum_{x\in S''}x & =\sum_{x\in S\cup\left\{ s-2t\right\} }\frac{x}{s-t}\\
+ & =\frac{1}{s-t}\left(\sum_{x\in A}x+\sum_{x\in S-A}x\right)+\frac{s-2t}{t}\\
+ & =\frac{1}{s-t}\left(t+s-t\right)+\frac{s-2t}{t}\\
+ & =\frac{\left(t+s-t\right)+s-2t}{s-t}=\frac{2s-2t}{s-t}=2
+\end{align*}
+
+\end_inset
+
+And if 
+\begin_inset Formula $S''$
+\end_inset
+
+ can be packed into exactly 2 bins then since 
+\begin_inset Formula $\sum_{x\in S'}x=s+\left(s-2t\right)=2s-2t$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $S'$
+\end_inset
+
+ must have a subset 
+\begin_inset Formula $\bar{A}$
+\end_inset
+
+ that sums to 
+\begin_inset Formula $s-t$
+\end_inset
+
+ and therefore by
+\begin_inset Formula 
+\begin{align*}
+\sum_{x\in S'-\bar{A}-\left\{ s-2t\right\} }x & =\sum_{x\in S'}x-\sum_{x\in\bar{A}}x-\left(s-2t\right)\\
+ & =\sum_{x\in S\cup\left\{ s-2t\right\} }x-\left(s-t\right)-\left(s-2t\right)\\
+ & =\sum_{x\in S}x+\left(s-2t\right)-\left(s-t\right)-\left(s-2t\right)\\
+ & =s-\left(s-t\right)=t
+\end{align*}
+
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $S'-\bar{A}-\left\{ s-2t\right\} $
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is subset of 
+\begin_inset Formula $S$
+\end_inset
+
+ that sums to 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Case 2: If 
+\begin_inset Formula $t>s/2$
+\end_inset
+
+ let 
+\begin_inset Formula $S'=S\cup\left\{ 2t-s\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $S''=S'/t$
+\end_inset
+
+, i.e.
+ each element in 
+\begin_inset Formula $S'$
+\end_inset
+
+ normalized by 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ If there's a subset 
+\begin_inset Formula $\bar{A}$
+\end_inset
+
+ of 
+\begin_inset Formula $S$
+\end_inset
+
+ that sums to 
+\begin_inset Formula $t$
+\end_inset
+
+ then BIN-PACKING
+\begin_inset Formula $\left(S'',2\right)$
+\end_inset
+
+, the decision problem that computes whether 
+\begin_inset Formula $S''$
+\end_inset
+
+ fits into exactly 2 bins, will return YES since 
+\begin_inset Formula 
+\begin{align*}
+\sum_{x\in S''}x & =\sum_{x\in S\cup\left\{ 2t-s\right\} }\frac{x}{t}\\
+ & =\frac{1}{t}\left(\sum_{x\in A}x+\sum_{x\in S-A}x\right)+\frac{2t-s}{t}\\
+ & =\frac{1}{t}\left(t+s-t\right)+\frac{2t-s}{t}\\
+ & =\frac{\left(t+s-t\right)+2t-s}{t}=\frac{2t}{t}=2
+\end{align*}
+
+\end_inset
+
+And if 
+\begin_inset Formula $S''$
+\end_inset
+
+ can be packed into exactly 2 bins then since 
+\begin_inset Formula $\sum_{x\in S'}x=s+\left(2t-s\right)=2t$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $S'$
+\end_inset
+
+ must have two subsets sum to 
+\begin_inset Formula $t$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $S$
+\end_inset
+
+ has a subset that sums to 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Obviously the number of bins can't be less than 
+\begin_inset Formula $S$
+\end_inset
+
+ and since you can't use bins of size small than 1 it must be that the minimum
+ number of bins is at least 
+\begin_inset Formula $\left\lceil S\right\rceil $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+By contradiction: suppose there are two bins 
+\begin_inset Formula $A=\left\{ a_{1},\dots,a_{n}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $B=\left\{ b_{1},\dots,b_{n}\right\} $
+\end_inset
+
+, where without loss of generality 
+\begin_inset Formula $B$
+\end_inset
+
+ was filled after 
+\begin_inset Formula $A$
+\end_inset
+
+, that are less than half full.
+ Then the heuristic dictates that all of the items in 
+\begin_inset Formula $B$
+\end_inset
+
+ would have been placed in bin 
+\begin_inset Formula $A$
+\end_inset
+
+ since bin 
+\begin_inset Formula $A$
+\end_inset
+
+ has enough room (since it is less than half full and 
+\begin_inset Formula $B$
+\end_inset
+
+ has objects that fill less than half the space of a bin).
+\end_layout
+
+\begin_layout Enumerate
+Suppose the number of bins exceeds 
+\begin_inset Formula $\left\lceil 2S\right\rceil $
+\end_inset
+
+.
+ Then at least two bins are less than half full (since if all were over
+ half full the total size 
+\begin_inset Formula $T$
+\end_inset
+
+ of the all of the items in the bins would be 
+\begin_inset Formula $T>\left\lceil 2S\right\rceil \cdot\frac{1}{2}>S$
+\end_inset
+
+, which is a contradiction since 
+\begin_inset Formula $S$
+\end_inset
+
+ is defined to be the total size of the load.
+ And this is also a contradiction by part (c).
+\end_layout
+
+\begin_layout Enumerate
+Follows from (b) and (d) since number of bins 
+\begin_inset Formula $n$
+\end_inset
+
+ is 
+\begin_inset Formula $\left\lceil S\right\rceil <n<\left\lceil 2S\right\rceil $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document

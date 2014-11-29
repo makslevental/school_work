@@ -1,0 +1,132 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+\usepackage[latin9]{inputenc}
+\usepackage{listings}
+\lstset{frame=single}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+%
+\usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
+%
+%
+
+\makeatother
+
+\begin{document}
+
+\title{COT5405 Homework 1 Solutions}
+
+
+\author{Maksim Levental}
+
+
+\date{\today}
+\maketitle
+
+
+
+
+
+
+I'm not good at Algebra. Supposedly there are two camps in math, the geometers and the algebraists, and never the twain shall meet. 
+I'm loathe to affirm such a pseudo-scientific hypothesis but I simply cannot reason about purely algebraic ideas as well as I can about 
+even slightly geometric forms. Case in point: I do not have an intuitive understanding of the Euclidean Algorithm for computing the GCD 
+of two numbers. Sure I understand the proof perfectly well and it's short enough that I can hold it all in short term memory when I'm 
+reading it, but I have trouble recreating it because there's no kernel that's manifestly commonsensical to me. Juxtapose that idea with, 
+for example, Gram-Schmidt orthonormalization. If I never do math again I'd still be able to construct an orthonormal basis for a vector 
+space on my death bed, with my eyes closed, and just after having my hands amputated. 
+Euclidean algorithm to the rescue (or maybe Euclid to the rescue). Look at this image of a rectangle that's 24 by 60 units. 
+ The idea is that finding the GCD of 24 and 60, from here on denoted by $\text{gcd}(24,60)$,
+ corresponds to tiling the rectangle with the largest squares of uniform area possible, i.e. some number that all have the same area, 
+ with the characteristic dimension of the tiling square being that GCD. Why is this the case? Well firstly, for such a tiling is the 
+ characteristic dimension of the tiling square even a common divisor at all? Sure. Any row of the tiling evenly divides the width 
+ dimension of the rectangle and any column of the tiling divides the height dimension of the rectangle. In this instance
+ (in the above image) it's a little confusing but the tiling squares are the ones with embossed edges - the tiling is 2x4
+ with squares of characteristic dimension 12. So $24 \div 2 = 12$ and $60 \div 4 = 12$ and so 12 is a common divisor. Why 
+ is this common divisor the <strong>greatest</strong> common divisor? That takes a little more work, and admittedly requires
+ a fact that's not so geometric, but simple enough to prove that I'm comfortable with it anyway.  The deal is that the tiling 
+ above was, presumably (or potentially), derived using the full Euclidean algorithm for computing greatest common divisors. 
+ Here's an illustration of the geometric representation of said algorithm (albeit on a rectangle with dimension 462x1071): 
+ What's happening here? The tiling proceeds by attempting to tile the rectangle by the largest possible square that's possibly a
+ divisor of both 462 and 1071, namely a square with characteristic dimension 462. Clearly it falls short - there's a remainder of
+ $1071-2\cdot 462=147$. Why then does the tiling proceed with the blue squares (then on down to the red ones)? Here's the part 
+ that's purely algebraic (at least as far as I can tell) and justification for iteration with smaller squares: I claim that
+
+ $\text{gcd}(a,b) = \text{gcd}(a,b-at)$ for any $t \in \mathbb{Z}$
+ 
+ Proof:  Let $d=gcd(a,b)$. Then $d$ divides $a$ and $b$, and then $d$ divides $at $ (you get at least one factor of $d$ from $a$).
+ So $d$ divides $b-at$ ($d$ "factors" out) and therefore $d \leq \text{gcd}(a,b-at)$. Let $d'=\text{gcd}(a,b-at)$. Then $d'$ divides
+ $a$ and $b-at$ and so $d'$ divides $(b-at)+at$, i.e. $d'$ divides $b$. Therefore $d' \leq \text{gcd}(a,b)$. Finally $d=d'$.
+ Bringing it back - what does this small fact do for us? Look at the gif. If tiling the larger rectangle, suppose without having 
+ to resort to iterations, by largest area possible squares is equivalent to computing the GCD of the dimensions of the rectangle,
+ then tiling the remainder with largest possible squares (recursing) computes the GCD of the dimensions of the remainder, by the 
+ above fact, therefore the larger rectangle. To see this let's compute the characteristic dimensions of all the different color 
+ squares in the gif (the rectangle has dimensions 462 x 1071 as mentioned before): 
+ $\text{orange} = 462$, $\text{blue}= 1071-2\cdot \text{orange} = 147$, $\text{red} = \text{orange}-3\cdot \text{blue} = 462-3\cdot 147 = 21$. 
+ Then the fact about "recursive" GCDs enables:
+ \begin{align*} \text{gcd}(462,1071) = \text{gcd}(\text{orange},1071)\\ =\text{gcd}(\text{blue},\text{orange})\\ =\text{gcd}(\text{red},
+ \text{blue})\\ =\text{gcd}(0,\text{red})\\ =\text{red}\\ = 21 \end{align*}
+ The way that Euclid himself describes it is finding a common "measure" of two lengths (i.e. greatest common integer length) by 
+ successively measuring by remainders.  Notice that you can represent $\text{gcd}(462,1071)$ as a linear combination of $462$ 
+ and $1071$:  \begin{align*} 147 &=1071-2\cdot 462 & && 21&= 462-3(1071-2\cdot 462) \\ 21 &=462-3\cdot 147 & \implies && &= 462 -3\cdot 1071 + 6\cdot 462 \\ 0 &= 147-7 \cdot 21 & && &= 7\cdot 462 -3\cdot 1071 \end{align*} 
+ This is true in general and called Bézout's identity (in fact smallest such linear combination is another characterization
+ of $\text{gcd}(a,b)~$ ). It'll be useful in a future post for computing inverses of elements in $\mathbb{Z}_p^*$ for $p$ prime.
+ How fast does Euclid's algorithm run? Interestingly enough, but maybe not surprisingly, it's related to the Fibonacci sequence .
+ I think this is because of the "measuring common lengths" thing and that the Fibonacci sequence is related to partitioning a length 
+ such that the ratio of the two partitions is optimal, in some sense.  Lamé's Theorem:
+ For any integer $k \geq 1$, if $a &gt; b \geq 1$ and $b &lt; F_{k+1}$, where $F_i$ is the ith Fibonacci number, Euclid's 
+ algorithm computes $\text{gcd}(a,b)$ in fewer than $k$ recursive calls to itself.
+ The implication, since $b &lt; F_{k_1} \approx \phi^k / \sqrt{5}$, is that $k = O(\lg b)$.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

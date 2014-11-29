@@ -1,0 +1,1342 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{pst-plot} 
+\pgfplotsset{compat=1.6}
+
+\pgfplotsset{soldot/.style={color=blue,only marks,mark=*}} \pgfplotsset{holdot/.style={color=blue,fill=white,only marks,mark=*}}
+
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\psset{algebraic}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+STA 6326 Homework 5 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3]
+\end_layout
+
+\end_inset
+
+Each 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ is Bernoulli distributed with 
+\begin_inset Formula $P\left(Y_{i}=1\right)=P\left(X_{i}>\mu\right)=F_{X}\left(\mu\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(Y_{i}=0\right)=P\left(X_{i}\leq\mu\right)=1-F_{X}\left(\mu\right)$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $Z=\sum_{i=1}^{n}Y_{i}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+P\left(Z=t\right) & =P\left(\sum_{i=1}^{n}Y_{i}=t\right)\\
+ & =\binom{n}{t}\left(F_{X}\left(\mu\right)\right)^{t}\left(1-F_{X}\left(\mu\right)\right)^{n-t}
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula $\sum_{i=1}^{n}Y_{i}\sim\text{Binomial}\left(n,F_{X}\left(\mu\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=\sum_{i=1}^{n}X_{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $f_{Y}\left(y\right)=f_{X_{1}+\cdots+X_{n}}\left(y\right)$
+\end_inset
+
+ and let 
+\begin_inset Formula $\bar{X}=\frac{1}{n}Y=\frac{1}{n}\sum_{i=1}^{n}X_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $n\bar{x}=y$
+\end_inset
+
+ and 
+\begin_inset Formula $y'=n$
+\end_inset
+
+, where 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is notation for a realization of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+.
+ Then by Thm 2.1.3 
+\begin_inset Formula $f_{\bar{X}}\left(\bar{x}\right)=f_{Y}\left(n\bar{x}\right)\cdot n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $Z=X-Y$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $W=X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left|J\right|=1$
+\end_inset
+
+ and 
+\begin_inset Formula $y=w-z$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\[
+f_{Z}\left(z\right)=\int_{\mathbb{R}}f_{Z,W}\left(z,w\right)dw=\int_{\mathbb{R}}f_{X,Y}\left(w,w-z\right)dw=\int_{\mathbb{R}}f_{X}\left(w\right)f_{Y}\left(w-z\right)dw
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Z=XY$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X=W$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Y=Z/W$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|J\right|=\left|\begin{pmatrix}1 & 0\\
+\text{who cares} & 1/w
+\end{pmatrix}\right|=\left|\frac{1}{w}-0\cdot\left(\text{who cares}\right)\right|=\left|\frac{1}{w}\right|
+\]
+
+\end_inset
+
+ and if 
+\begin_inset Formula $w$
+\end_inset
+
+ is fixed then 
+\begin_inset Formula $z$
+\end_inset
+
+ can still be anything, hence
+\begin_inset Formula 
+\[
+f_{Z}\left(z\right)=\int_{\mathbb{R}}f_{Z,W}\left(z,w\right)dw=\int_{\mathbb{R}}f_{X,Y}\left(w,z/w\right)\left|\frac{1}{w}\right|dw=\int_{\mathbb{R}}f_{X}\left(w\right)f_{Y}\left(z/w\right)\left|\frac{1}{w}\right|dw
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Z=X/Y$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X=W$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Y=W/Z$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|J\right|=\left|\begin{pmatrix}1 & 0\\
+\text{who cares} & -w/z^{2}
+\end{pmatrix}\right|=\left|-\frac{w}{z^{2}}-0\cdot\left(\text{who cares}\right)\right|=\left|\frac{w}{z^{2}}\right|
+\]
+
+\end_inset
+
+ and if 
+\begin_inset Formula $w$
+\end_inset
+
+ is fixed then 
+\begin_inset Formula $z$
+\end_inset
+
+ can still be anything, hence
+\begin_inset Formula 
+\[
+f_{Z}\left(z\right)=\int_{\mathbb{R}}f_{Z,W}\left(z,w\right)dw=\int_{\mathbb{R}}f_{X,Y}\left(w,w/z\right)\left|\frac{w}{z^{2}}\right|dw=\int_{\mathbb{R}}f_{X}\left(w\right)f_{Y}\left(w/z\right)\left|\frac{w}{z^{2}}\right|dw
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[10]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\theta_{1}=E\left(X_{i}\right)=\mu$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta_{2}=E\left(\left(X_{i}-\mu\right)^{2}\right)=\sigma^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta_{3}=0$
+\end_inset
+
+ since if 
+\begin_inset Formula $Y_{i}=X_{i}-\mu$
+\end_inset
+
+ then 
+\begin_inset Formula $Y_{i}\sim\mathcal{N}\left(0,\sigma^{2}\right)$
+\end_inset
+
+ all odd moments of a centered Normal are zero (because odd function integrated
+ against even kernel).
+ Then.
+ Again 
+\begin_inset Formula $Y_{i}\sim\mathcal{N}\left(0,\sigma^{2}\right)$
+\end_inset
+
+ so 
+\begin_inset Formula $\theta_{4}=E\left(Y_{i}^{4}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{align*}
+\theta_{4} & =\frac{1}{\sqrt{2\pi}\sigma}\int_{\mathbb{R}}y^{4}e^{\frac{-y^{2}}{2\sigma^{2}}}dy\\
+ & =\frac{1}{\sqrt{2\pi}\sigma}\int_{\mathbb{R}}y^{4}e^{\frac{-y^{2}}{2\sigma^{2}}}dy\\
+ & =3\sigma^{4}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+By 5.8 
+\begin_inset Formula $\text{Var}\left(S^{2}\right)=\frac{1}{n}\left(\theta_{4}-\frac{n-3}{n-1}\theta_{2}^{2}\right)$
+\end_inset
+
+ hence
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(S^{2}\right) & =\frac{1}{n}\left(\theta_{4}-\frac{n-3}{n-1}\theta_{2}^{2}\right)\\
+ & =\frac{1}{n}\left(3\sigma^{4}-\frac{n-3}{n-1}\left(\sigma^{2}\right)^{4}\right)\\
+ & =\frac{1}{n}\left(3\sigma^{4}-\frac{n-3}{n-1}\sigma^{4}\right)=\frac{1}{n}\frac{3\sigma^{4}\left(n-1\right)-\left(n-3\right)\sigma^{4}}{n-1}\\
+ & =\frac{2\sigma^{4}}{n-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X\sim\chi_{n-1}^{2}$
+\end_inset
+
+.
+ By 
+\begin_inset Formula $\text{Var}\left(aX\right)=a^{2}\text{Var}\left(X\right)$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(S^{2}\right) & =\left(\frac{\sigma^{2}}{n-1}\right)^{2}\text{Var}\left(X\right)\\
+ & =\left(\frac{\sigma^{2}}{n-1}\right)^{2}\left(2n-2\right)\\
+ & =\frac{2\sigma^{4}}{n-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=\sqrt{\left(n-1\right)S^{2}/\sigma^{2}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\left(n-1\right)S^{2}/\sigma^{2}\sim\chi_{n-1}^{2}$
+\end_inset
+
+ and then 
+\begin_inset Formula $Y\sim\chi_{n-1}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+EY=\sqrt{2}\frac{\Gamma\left(\frac{1+1}{2}\right)}{\Gamma\left(1/2\right)}=\frac{1}{\sqrt{2\pi}}
+\]
+
+\end_inset
+
+so if 
+\begin_inset Formula $g\left(S^{2}\right)=\sqrt{2\pi\left(n-1\right)}\sqrt{S^{2}}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+E\left(g\left(S^{2}\right)\right) & =E\left(\sqrt{2\pi\left(n-1\right)}\sqrt{S^{2}}\right)\\
+ & =\sqrt{2\pi}\sigma E\left(\sqrt{\frac{n-1}{\sigma^{2}}S^{2}}\right)\\
+ & =\sqrt{2\pi}\sigma\frac{1}{\sqrt{2\pi}}\\
+ & =\sigma
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[15]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left(n+1\right)\bar{X}_{n+1} & =\sum_{i=1}^{n+1}X_{i}\\
+ & =\frac{n}{n}\sum_{i=1}^{n}X_{i}+X_{n+1}\\
+ & =n\bar{X}_{n}+X_{n+1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+nS_{n+1}^{2} & =\sum_{i=1}^{n+1}\left(X_{i}+\bar{X}_{n+1}\right)^{2}\\
+ & =\sum_{i=1}^{n+1}\left(X_{i}+\frac{n\bar{X}_{n}+X_{n+1}}{n+1}\right)^{2}\\
+ & =\sum_{i=1}^{n+1}\left(X_{i}+\frac{n\bar{X}_{n}+X_{n+1}}{n+1}\right)^{2}
+\end{align*}
+
+\end_inset
+
+No clue...
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[17]
+\end_layout
+
+\end_inset
+
+Snedecor's F
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $U\sim\chi_{p}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $V\sim\chi_{q}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $E=V/q$
+\end_inset
+
+ and 
+\begin_inset Formula $F=\left(U/p\right)/(V/q)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $V=qE$
+\end_inset
+
+ and 
+\begin_inset Formula $U=pEF$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|J\right|=\left|\begin{pmatrix}pf & pe\\
+q & 0
+\end{pmatrix}\right|=\left|-epq\right|=epq
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula 
+\begin{align*}
+f_{F}\left(f\right)=\int_{0}^{\infty}f_{E,F}\left(e,f\right)de & =\int_{0}^{\infty}f_{U,V}\left(pef,qe\right)epq\cdot de\\
+ & =\int_{0}^{\infty}\frac{\left(pef\right)^{\frac{p}{2}-1}}{\Gamma\left(p/2\right)2^{p/2}}\frac{\left(qe\right)^{\frac{q}{2}-1}}{\Gamma\left(q/2\right)2^{q/2}}e^{-\frac{pef}{2}}e^{-\frac{qe}{2}}epq\cdot de\\
+ & =\int_{0}^{\infty}\frac{\left(pef\right)^{\frac{p}{2}-1}}{\Gamma\left(p/2\right)2^{p/2}}\frac{\left(qe\right)^{\frac{q}{2}-1}}{\Gamma\left(q/2\right)2^{q/2}}e^{-\frac{pef}{2}}e^{-\frac{qe}{2}}epq\cdot de\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}p^{p/2}q^{q/2}f^{\frac{p}{2}-1}\left(fp+q\right)^{-\frac{p+q}{2}}\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}p^{p/2}q^{q/2}\frac{f^{\frac{p}{2}-1}}{q^{\frac{p+q}{2}}\left(\frac{p}{q}f+1\right)^{\frac{p+q}{2}}}\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\frac{f^{\frac{p}{2}-1}}{\left(\frac{p}{q}f+1\right)^{\frac{p+q}{2}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left(F\right) & =\int_{0}^{\infty}f\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\frac{f^{\frac{p}{2}-1}}{\left(\frac{p}{q}f+1\right)^{\frac{p+q}{2}}}df\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\int_{0}^{\infty}\frac{f^{\frac{p}{2}}}{\left(\frac{p}{q}f+1\right)^{\frac{p+q}{2}}}df\\
+ & =\frac{q}{q-2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X\sim F_{p,q}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y=g\left(X\right)=1/X$
+\end_inset
+
+ and then 
+\begin_inset Formula $x=g^{-1}\left(y\right)=1/y$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\left|\left(g^{-1}\left(y\right)\right)^{'}\right|=\frac{1}{y^{2}}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y\right) & =f_{X}\left(\frac{1}{y}\right)\left(\frac{1}{y^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\frac{\left(\frac{1}{y}\right)^{\frac{p}{2}-1}}{\left(\frac{p}{q}\left(\frac{1}{y}\right)+1\right)^{\frac{p+q}{2}}}\left(\frac{1}{y^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\frac{\left(\frac{1}{y}\right)^{\frac{p}{2}-1}}{\left(\frac{p}{qy}\right)^{\frac{p+q}{2}}\left(1+y\frac{q}{p}\right)^{\frac{p+q}{2}}}\left(\frac{1}{y^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\left(\frac{q}{p}\right)^{\frac{p+q}{2}}\frac{y^{\frac{p+q}{2}}\left(\frac{1}{y}\right)^{\frac{p}{2}-1}}{\left(1+y\frac{q}{p}\right)^{\frac{p+q}{2}}}\left(\frac{1}{y^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{q}{p}\right)^{\frac{q}{2}}\frac{y^{\frac{q}{2}+1}}{\left(1+y\frac{q}{p}\right)^{\frac{p+q}{2}}}\left(\frac{1}{y^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{q}{p}\right)^{\frac{q}{2}}\frac{y^{\frac{q}{2}-1}}{\left(1+y\frac{q}{p}\right)^{\frac{p+q}{2}}}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $Y\sim Fq,p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=g\left(X\right)=\frac{\frac{p}{q}X}{1+\frac{p}{q}X}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x=g^{-1}\left(y\right)=\frac{qy}{p\left(1-y\right)}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\left|\left(g^{-1}\left(y\right)\right)^{'}\right|=\frac{q}{p}\frac{1}{\left(y-1\right)^{2}}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y\right) & =f_{X}\left(\frac{qy}{p\left(1-y\right)}\right)\left(\frac{q}{p}\frac{1}{\left(y-1\right)^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{p}{q}\right)^{p/2}\frac{\left(\frac{qy}{p\left(1-y\right)}\right)^{\frac{p}{2}-1}}{\left(\frac{p}{q}\left(\frac{qy}{p\left(1-y\right)}\right)+1\right)^{\frac{p+q}{2}}}\left(\frac{q}{p}\frac{1}{\left(y-1\right)^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\frac{\left(\frac{y}{1-y}\right)^{\frac{p}{2}-1}}{\left(\frac{y}{1-y}+1\right)^{\frac{p+q}{2}}}\left(\frac{1}{\left(y-1\right)^{2}}\right)\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}\left(\frac{y}{1-y}\right)^{\frac{p}{2}-1}\left(\frac{1}{1-y}\right)^{2-\frac{p+q}{2}}\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}y^{\frac{p}{2}-1}\left(\frac{1}{1-y}\right)^{1-\frac{q}{2}}\\
+ & =\frac{\Gamma\left(\frac{p+q}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{q}{2}\right)}y^{\frac{p}{2}-1}\left(1-y\right)^{\frac{q}{2}-1}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $Y\sim\text{B}\left(\frac{p}{2},\frac{q}{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[18]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X\sim T_{p}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[b]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=X^{2}$
+\end_inset
+
+ then by Example 2.17 in Casella 
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y\right) & =\frac{1}{2\sqrt{y}}\left(f_{X}\left(\sqrt{y}\right)+f_{X}\left(-\sqrt{y}\right)\right)\\
+ & =\frac{1}{\sqrt{y}}\frac{\Gamma\left(\frac{p+1}{2}\right)}{\sqrt{p\pi}\Gamma\left(\frac{p}{2}\right)}\left(1+\frac{y}{p}\right)^{-\frac{p+1}{2}}\\
+ & =\frac{\Gamma\left(\frac{p+1}{2}\right)}{\Gamma\left(\frac{p}{2}\right)\Gamma\left(\frac{1}{2}\right)}\left(\frac{1}{p}\right)^{1/2}\frac{y^{\frac{1}{2}-1}}{\left(1+\left(\frac{1}{p}\right)y\right)^{\frac{p+1}{2}}}\\
+ & =F_{1,p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[a]
+\end_layout
+
+\end_inset
+
+First the mean
+\begin_inset Formula 
+\[
+E\left(X\right)=\int_{-\infty}^{\infty}x\frac{\Gamma\left(\frac{p+1}{2}\right)}{\sqrt{p\pi}\Gamma\left(\frac{p}{2}\right)}\left(1+\frac{x^{2}}{p}\right)^{-\frac{p+1}{2}}dx
+\]
+
+\end_inset
+
+The integrand is odd in 
+\begin_inset Formula $x$
+\end_inset
+
+ and the domain of integration is symmetric about 0 so 
+\begin_inset Formula $E\left(X\right)=0$
+\end_inset
+
+.
+ Now by part (b) 
+\begin_inset Formula $E\left(X^{2}\right)=E\left(F_{1,p}\right)=\frac{p}{p-2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Stirling's Formula is the fact that 
+\begin_inset Formula 
+\[
+\Gamma\left(n+1\right)\approx\sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+\underset{p\rightarrow\infty}{\lim}f\left(x|p\right) & =\underset{p\rightarrow\infty}{\lim}\left(\frac{\Gamma\left(\frac{p+1}{2}\right)}{\sqrt{p\pi}\Gamma\left(\frac{p}{2}\right)}\left(1+\frac{x^{2}}{p}\right)^{-\frac{p+1}{2}}\right)\\
+ & =\underset{p\rightarrow\infty}{\lim}\left(\frac{\Gamma\left(\frac{p+1}{2}\right)}{\sqrt{p\pi}\Gamma\left(\frac{p}{2}\right)}\right)\underset{p\rightarrow\infty}{\lim}\left(\left(1+\frac{x^{2}}{p}\right)^{-\frac{p+1}{2}}\right)\\
+ & =\frac{e^{-x^{2}}}{\sqrt{\pi}}\underset{p\rightarrow\infty}{\lim}\left(\frac{\sqrt{2\pi\left(\frac{p-1}{2}\right)}\left(\frac{\left(\frac{p-1}{2}\right)}{e}\right)^{\left(\frac{p-1}{2}\right)}}{\sqrt{p}\sqrt{2\pi\left(\frac{p-2}{2}\right)}\left(\frac{\left(\frac{p-2}{2}\right)}{e}\right)^{\left(\frac{p-2}{2}\right)}}\right)\\
+ & =\frac{e^{-x^{2}}}{\sqrt{\pi}}\underset{p\rightarrow\infty}{\lim}\left(\frac{\left(p-2\right)^{-\frac{p-1}{2}}\left(p-1\right)^{\frac{p}{2}}}{\sqrt{2ep}}\right)\\
+ & =\frac{e^{-x^{2}}}{\sqrt{2\pi}}\underset{p\rightarrow\infty}{\lim}\left(\frac{1}{\sqrt{e}}\left(\frac{p-2}{p}\right)^{\frac{1}{2}}\left(\frac{p-1}{p-2}\right)^{\frac{p}{2}}\right)\\
+ & =\frac{e^{-x^{2}}}{\sqrt{2\pi}}\underset{p\rightarrow\infty}{\lim}\left(\frac{1}{\sqrt{e}}\left(\frac{p-2}{p}\right)^{\frac{1}{2}}\left(1+\frac{1}{p-2}\right)^{\frac{p}{2}}\right)\\
+ & =\frac{e^{-x^{2}}}{\sqrt{2\pi}}\underset{p\rightarrow\infty}{\lim}\left(\frac{p-2}{p}\right)^{\frac{1}{2}}\underset{p\rightarrow\infty}{\lim}\frac{1}{\sqrt{e}}\left(1+\frac{1}{p-2}\right)^{\frac{p}{2}}\\
+ & =\frac{e^{-x^{2}}}{\sqrt{2\pi}}\cdot1\cdot1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+By part (c) 
+\begin_inset Formula $T_{p}\xrightarrow{d}\mathcal{N}\left(0,1\right)$
+\end_inset
+
+ so by continuity of 
+\begin_inset Formula $\left(\cdot\right)^{2}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left(T_{p}\right)^{2}\xrightarrow{d}\chi_{1}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\sim F_{q,p}$
+\end_inset
+
+ then 
+\begin_inset Formula $Y=qF_{q,p}=\sum_{i=1}^{q}F_{q,p}$
+\end_inset
+
+ TODO
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[21]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $F_{X}\left(x\right)$
+\end_inset
+
+ be the distribution function for the population.
+ Then the median is 
+\begin_inset Formula $x'$
+\end_inset
+
+ such that 
+\begin_inset Formula $F_{X}\left(x'\right)=1/2$
+\end_inset
+
+.
+ The cdf of the 
+\begin_inset Quotes eld
+\end_inset
+
+max
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $X_{\left(n\right)}$
+\end_inset
+
+ of a random sample of size 
+\begin_inset Formula $n$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+F_{X_{\left(n\right)}}\left(x\right) & =\sum_{k=n}^{n}\left(F_{X}\left(x\right)\right)^{k}\left(1-F_{X}\left(x\right)\right)^{n-k}\\
+ & =\left(F_{X}\left(x\right)\right)^{n}
+\end{align*}
+
+\end_inset
+
+and so the probability that 
+\begin_inset Formula $X_{\left(n\right)}$
+\end_inset
+
+ is above the median is 
+\begin_inset Formula 
+\[
+P\left(X_{\left(n\right)}\geq x'\right)=F_{X_{\left(n\right)}}\left(x'\right)=\left(F_{X}\left(x'\right)\right)^{n}=\left(\frac{1}{2}\right)^{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[22]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X\sim Y\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Z\sim\min\left\{ X,Y\right\} $
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+P\left(Z\leq z\right) & =P\left(\min\left\{ X,Y\right\} \leq z\right)\\
+ & =1-P\left(\min\left\{ X,Y\right\} \geq z\right)\\
+ & =1-P\left(X\geq z\right)P\left(Y\geq z\right)\\
+ & =1-\left(1-F_{X}\left(z\right)\right)\left(1-F_{Y}\left(z\right)\right)
+\end{align*}
+
+\end_inset
+
+Now since 
+\begin_inset Formula $X\sim Y\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+P\left(Z\leq z\right) & =1-\left(1-F_{X}\left(z\right)\right)^{2}
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+P\left(Z^{2}\leq z\right) & =P\left(Z\leq\sqrt{z}\right)-P\left(Z\leq-\sqrt{z}\right)\\
+ & =\left(1-\left(1-F_{X}\left(\sqrt{z}\right)\right)^{2}\right)-\left(1-\left(1-F_{X}\left(-\sqrt{z}\right)\right)^{2}\right)\\
+ & =\left(1-F_{X}\left(-\sqrt{z}\right)\right)^{2}-\left(1-F_{X}\left(\sqrt{z}\right)\right)^{2}
+\end{align*}
+
+\end_inset
+
+Then differentiating 
+\begin_inset Formula 
+\begin{align*}
+f_{Z}\left(z\right) & =\frac{d}{dz}\left(\left(1-F_{X}\left(-\sqrt{z}\right)\right)^{2}-\left(1-F_{X}\left(\sqrt{z}\right)\right)^{2}\right)\\
+ & =2\left(1-F_{X}\left(-\sqrt{z}\right)\right)\left(f_{X}\left(-\sqrt{z}\right)\frac{1}{2\sqrt{z}}\right)+2\left(1-F_{X}\left(\sqrt{z}\right)\right)\left(f_{X}\left(\sqrt{z}\right)\frac{1}{2\sqrt{z}}\right)\\
+ & =\left(1-F_{X}\left(-\sqrt{z}\right)\right)\left(f_{X}\left(-\sqrt{z}\right)\frac{1}{\sqrt{z}}\right)+\left(1-F_{X}\left(\sqrt{z}\right)\right)\left(f_{X}\left(\sqrt{z}\right)\frac{1}{\sqrt{z}}\right)\text{ and }f_{X}\left(-x\right)=f_{X}\left(x\right)\\
+ & =\left(f_{X}\left(\sqrt{z}\right)\frac{1}{\sqrt{z}}\right)\left(2-\left(F_{X}\left(-\sqrt{z}\right)+F_{X}\left(\sqrt{z}\right)\right)\right)\\
+ & =\left(f_{X}\left(\sqrt{z}\right)\frac{1}{\sqrt{z}}\right)\left(2-\left(1-F_{X}\left(\sqrt{z}\right)+F_{X}\left(\sqrt{z}\right)\right)\right)\\
+ & =f_{X}\left(\sqrt{z}\right)\frac{1}{\sqrt{z}}=\frac{z^{\frac{1}{2}-1}}{\sqrt{2\pi}}e^{-z/2}=\frac{z^{\frac{1}{2}-1}}{2^{\frac{1}{2}}\Gamma\left(\frac{1}{2}\right)}e^{-z/2}
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $Z^{2}\sim\chi_{1}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[25]
+\end_layout
+
+\end_inset
+
+In general for a sample from 
+\begin_inset Quotes eld
+\end_inset
+
+continuous
+\begin_inset Quotes erd
+\end_inset
+
+ population 
+\begin_inset Formula 
+\[
+f_{X_{\left(1\right)},\dots,X_{\left(n\right)}}\left(x_{1},\dots,x_{n}\right)=n!f_{X}\left(x_{1}\right)\cdot\cdots\cdot f_{X}\left(x_{n}\right)
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $y_{i}=x_{\left(i\right)}/x_{\left(i+1\right)}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,\dots,n-1$
+\end_inset
+
+ with 
+\begin_inset Formula $y_{\left(n\right)}=x_{\left(n\right)}$
+\end_inset
+
+.
+ All 
+\begin_inset Formula $Y_{i}>0$
+\end_inset
+
+ since all 
+\begin_inset Formula $X_{i}>0$
+\end_inset
+
+.Then 
+\begin_inset Formula $x_{\left(j\right)}=\prod_{i=j}^{n}y_{i}$
+\end_inset
+
+ and the Jacobian
+\begin_inset Formula 
+\[
+\left|J\right|=\begin{pmatrix}\prod_{\underset{i\neq1}{i=1}}^{n}y_{i} & \prod_{\underset{i\neq2}{i=1}}^{n}y_{i} & \cdots & \prod_{\underset{i\neq n-1}{i=1}}^{n}y_{i} & \prod_{i=1}^{n-1}y_{i}\\
+0 & \prod_{\underset{i\neq2}{i=2}}^{n}y_{i} & \cdots & \prod_{\underset{i\neq n-1}{i=2}}^{n}y_{i} & \prod_{i=2}^{n-1}y_{i}\\
+0 & 0 & \vdots & \ddots & \vdots\\
+\vdots & \vdots & \vdots & \cdots & \vdots\\
+0 & 0 & 0 & 0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+For example for 
+\begin_inset Formula $n=5$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|J\right|=\begin{pmatrix}y_{2}y_{3}y_{4}y_{5} & y_{1}y_{3}y_{4}y_{5} & y_{1}y_{2}y_{4}y_{5} & y_{1}y_{2}y_{3}y_{5} & y_{1}y_{2}y_{3}y_{4}\\
+0 & y_{3}y_{4}y_{5} & y_{2}y_{4}y_{5} & y_{2}y_{3}y_{5} & y_{2}y_{3}y_{4}\\
+0 & 0 & y_{4}y_{5} & y_{3}y_{5} & y_{3}y_{4}\\
+0 & 0 & 0 & y_{5} & y_{4}\\
+0 & 0 & 0 & 0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+and since the determinant of an upper-triangular matrix is a the product
+ of its diagonal entries we have that 
+\begin_inset Formula $\left|J\right|=\prod_{i=1}^{n}y_{i}^{i-1}$
+\end_inset
+
+, for example in the case of 
+\begin_inset Formula $n=5$
+\end_inset
+
+ 
+\begin_inset Formula $\left|J\right|=y_{2}y_{3}^{2}y_{4}^{3}y_{5}^{4}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+f_{Y_{1},\dots,Y_{n}}\left(y_{1},\dots,y_{n}\right) & =f_{X_{\left(1\right)},\dots,X_{\left(n\right)}}\left(\prod_{i=1}^{n}y_{i},\prod_{i=2}^{n}y_{i},\dots,y_{n}\right)\prod_{i=1}^{n}y_{i}^{i-1}\\
+ & =n!f_{X}\left(\prod_{i=1}^{n}y_{i}\right)f_{X}\left(\prod_{i=2}^{n}y_{i}\right)\cdot\cdots\cdot f_{X}\left(y_{n}\right)\prod_{i=1}^{n}y_{i}^{i-1}
+\end{align*}
+
+\end_inset
+
+Then for 
+\begin_inset Formula $f_{X}=\frac{a}{\theta^{a}}x^{a-1}I_{\left(0,\theta\right)}$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+f_{Y_{1},\dots,Y_{n}}\left(y_{1},\dots,y_{n}\right) & =f_{X_{\left(1\right)},\dots,X_{\left(n\right)}}\left(\prod_{i=1}^{n}y_{i},\prod_{i=2}^{n}y_{i},\dots,y_{n}\right)\prod_{i=1}^{n}y_{i}^{i-1}\\
+ & =n!\left(\frac{a}{\theta^{a}}\right)^{n}\left(\prod_{i=1}^{n}y_{i}\right)^{a-1}\left(\prod_{i=2}^{n}y_{i}\right)^{a-1}\cdot\cdots\cdot y_{n}^{a-1}\prod_{i=1}^{n}y_{i}^{i-1}\\
+ & =n!\left(\frac{a}{\theta^{a}}\right)^{n}\prod_{i=1}^{n}y_{i}^{i\left(a-1\right)}\prod_{i=1}^{n}y_{i}^{i-1}\\
+ & =n!\left(\frac{a}{\theta^{a}}\right)^{n}\prod_{i=1}^{n}y_{i}^{i\cdot a-1}\\
+ & =\prod_{i=1}^{n}\frac{ia}{\theta^{a}}y_{i}^{i\cdot a-1}
+\end{align*}
+
+\end_inset
+
+For example for 
+\begin_inset Formula $n=5$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+f_{Y_{1},Y_{2},Y_{3},Y_{4},Y_{5}}\left(y_{1},y_{2},y_{3},y_{4},y_{5}\right) & =5!\left(\frac{a}{\theta^{a}}\right)^{5}\left(\prod_{i=1}^{5}y_{i}\right)^{a-1}\left(\prod_{i=2}^{5}y_{i}\right)^{a-1}\left(\prod_{i=3}^{5}y_{i}\right)^{a-1}\times\\
+ & \left(\prod_{i=4}^{5}y_{i}\right)^{a-1}y_{5}^{a-1}\prod_{i=1}^{5}y_{i}^{i-1}\\
+ & =5!\left(\frac{a}{\theta^{a}}\right)^{5}\left(y_{1}y_{2}y_{3}y_{4}y_{5}\right)^{a-1}\left(y_{2}y_{3}y_{4}y_{5}\right)^{a-1}\times\\
+ & \left(y_{3}y_{4}y_{5}\right)^{a-1}\left(y_{4}y_{5}\right)^{a-1}y_{5}^{a-1}y_{2}y_{3}^{2}y_{4}^{3}y_{5}^{4}\\
+ & =5!\left(\frac{a}{\theta^{a}}\right)^{5}\left(y_{1}\right)^{a-1}\left(y_{2}\right)^{2\left(a-1\right)}\left(y_{3}\right)^{3\left(a-1\right)}\left(y_{4}\right)^{4\left(a-1\right)}y_{5}^{5\left(a-1\right)}y_{2}y_{3}^{2}y_{4}^{3}y_{5}^{4}\\
+ & =5!\left(\frac{a}{\theta^{a}}\right)^{5}\left(y_{1}\right)^{a-1}\left(y_{2}\right)^{2\left(a-1\right)+1}\left(y_{3}\right)^{3\left(a-1\right)+2}\left(y_{4}\right)^{4\left(a-1\right)+3}y_{5}^{5\left(a-1\right)+4}\\
+ & =5!\left(\frac{a}{\theta^{a}}\right)^{5}\left(y_{1}\right)^{a-1}\left(y_{2}\right)^{2a-1}\left(y_{3}\right)^{3a-1}\left(y_{4}\right)^{4a-1}y_{5}^{5a-1}
+\end{align*}
+
+\end_inset
+
+So since the joint density of 
+\begin_inset Formula $f_{Y_{1},\dots,Y_{n}}$
+\end_inset
+
+ factors 
+\begin_inset Formula $Y_{i}=X_{\left(i\right)}/X_{\left(i+1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{\left(n\right)}$
+\end_inset
+
+ are all mutually independent random variables.
+ By Theorem 5.4.4 
+\begin_inset Formula 
+\[
+f_{Y_{\left(n\right)}}\left(y\right)=\frac{na}{\theta^{a}}y^{a-1}\left(\int_{0}^{y}\frac{a}{\theta^{a}}x^{a-1}dx\right)^{n-1}=\frac{na}{\theta^{a}}y^{a-1}\left(\frac{y^{a}}{\theta^{a}}\right)^{n-1}=\frac{na}{\theta^{na}}y^{na-1}
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\begin{align*}
+f_{Y_{1},\dots,Y_{n}}\left(y_{1},\dots,y_{n}\right) & =\prod_{i=1}^{n}\frac{ia}{\theta^{a}}y_{i}^{i\cdot a-1}\\
+ & =\left(\prod_{i=1}^{n-1}iay_{i}^{i\cdot a-1}\right)\frac{na}{\theta^{na}}y^{na-1}
+\end{align*}
+
+\end_inset
+
+implies that 
+\begin_inset Formula $f_{Y_{1}}\left(y\right)=iay_{i}^{i\cdot a-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[30]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[32]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[34]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[35]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{Exponential}\left(1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{n}=\frac{\sqrt{n}}{\sigma}\left(\bar{X}-E\left(X_{i}\right)\right)=\sqrt{n}\left(\bar{X}-1\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Then by the Central Limit theorem
+\begin_inset Formula 
+\[
+\underset{n\rightarrow\infty}{\lim}P\left(G_{n}\leq x\right)=\underset{n\rightarrow\infty}{\lim}P\left(\frac{\left(\bar{X}-1\right)}{1/\sqrt{n}}\leq x\right)=P\left(Z\leq x\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $Z\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $P\left(\frac{\left(\bar{X}-1\right)}{1/\sqrt{n}}\leq x\right)=P\left(\bar{X}\leq\frac{x}{\sqrt{n}}+1\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\bar{X}\sim\frac{1}{n}Y$
+\end_inset
+
+ where 
+\begin_inset Formula $Y\sim\Gamma\left(n,1\right)$
+\end_inset
+
+.
+ So then 
+\begin_inset Formula 
+\[
+f_{\bar{X}}\left(x\right)=\frac{n}{}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[36]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[39]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[42]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

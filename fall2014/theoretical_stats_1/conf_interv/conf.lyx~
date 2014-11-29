@@ -1,0 +1,1246 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{cancel}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+\series bold
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Confidence intervals.
+
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Suppose 
+\begin_inset Formula $x_{1},x_{2},\dots,x_{n}$
+\end_inset
+
+ are all quantities drawn, without replacement, a 
+\begin_inset Quotes eld
+\end_inset
+
+random
+\begin_inset Quotes erd
+\end_inset
+
+ sample, from some population, the same population, which itself has an
+ 
+\begin_inset Formula $\mathcal{N}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+ distribution.
+ If the population size is large enough it's safe to make the approximation
+ that each draw does not affect the population distribution (despite non-replace
+ment) and so effectively each of the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is a draw from an 
+\begin_inset Formula $\mathcal{N}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+ distribution, i.e.
+ each 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is actually the random variable 
+\begin_inset Formula $X_{i}\sim\mathcal{N}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+.
+ What can we say about the distribution of the random variable 
+\begin_inset Formula $\bar{X}\equiv\frac{1}{n}\sum_{i=1}^{n}X_{i}$
+\end_inset
+
+, i.e.
+ the distribution of the 
+\begin_inset Quotes eld
+\end_inset
+
+sample mean
+\begin_inset Quotes erd
+\end_inset
+
+? Furthermore what can we say about the distribution of the sample variance
+ 
+\begin_inset Formula $S^{2}\equiv\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}$
+\end_inset
+
+?
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Theorem 1.
+ 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+I.
+ 
+\begin_inset Formula $\bar{X}\sim\mathcal{N}\left(\mu,\sigma^{2}/n\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+II.
+ 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ are independent.
+ 
+\begin_inset Newline newline
+\end_inset
+
+III.
+ 
+\begin_inset Formula $\frac{\left(n-1\right)}{\sigma^{2}}S^{2}\sim\chi_{n-1}^{2}$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+What does this really say? It says that 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is distributed with the same distribution and the 
+\series bold
+same mean as the population
+\series default
+ 
+\series bold
+you drew from
+\series default
+ and that its variance is inversely proportional to the variance of the
+ population by a factor equal to the sample size.
+ That is to say, if we could somehow figure out the mean of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+, we would then immediately know the mean of the population.
+ Of course we can't (philosophically speaking) but we'll do something else
+ involving the mean that'll be almost as useful.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof I.
+ 
+\series default
+First we prove that the 
+\begin_inset Formula $\bar{X}\sim\mathcal{N}\left(\mu,\sigma^{2}/n\right)$
+\end_inset
+
+: the MGF of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+MGF_{X_{I}}(t)=e^{\mu t+\frac{1}{2}\sigma^{2}t^{2}}
+\]
+
+\end_inset
+
+and therefore by the convolution theorem 
+\begin_inset Formula 
+\[
+MGF_{X_{1}+\cdots+X_{n}}(t)=\left(e^{\mu t+\frac{1}{2}\sigma^{2}t^{2}}\right)^{n}=e^{\left(\mu n\right)t+\frac{1}{2}\left(\sqrt{n}\sigma\right)^{2}t^{2}}
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\sum X_{i}\sim\mathcal{N}\left(n\mu,n\sigma^{2}\right)$
+\end_inset
+
+.
+ Then since the normal distribution is a scale family 
+\begin_inset Formula $(1/n)\sum X_{i}\sim\mathcal{N}\left(\frac{1}{n}n\mu,\left(\frac{1}{n}\right)^{2}n\sigma^{2}\right)\sim\mathcal{N}\left(\mu,\sigma^{2}/n\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Let's stop here for a moment see what just this alone buys us.
+ Suppose you had some population for which you knew the variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ but you didn't know the mean (absurd but suspend disbelief): could you
+ make a guess of the mean and then qualify your guess? Well since we know
+ that 
+\begin_inset Formula $\bar{X}\sim\mathcal{N}\left(\mu,\sigma^{2}/n\right)$
+\end_inset
+
+ we know, by 
+\begin_inset Quotes eld
+\end_inset
+
+standardizing
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+, that 
+\begin_inset Formula 
+\[
+P\left(-1.96<\frac{\bar{X}-\mu}{\grave{\sqrt{\sigma^{2}/n}}}<1.96\right)\geq.95
+\]
+
+\end_inset
+
+After a little algebra (and flipping two inequalities) we have that 
+\begin_inset Formula 
+\[
+P\left(\bar{X}-1.96\sqrt{\frac{\sigma^{2}}{n}}<\mu<\bar{X}+1.96\sqrt{\frac{\sigma^{2}}{n}}\right)\geq.95
+\]
+
+\end_inset
+
+So with probability .95 if we measure 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ the interval
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\[
+\left(\bar{X}-1.96\sqrt{\frac{\sigma^{2}}{n}},\bar{X}+1.96\sqrt{\frac{\sigma^{2}}{n}}\right)
+\]
+
+\end_inset
+
+will cover the true mean of the population (remember we said we somehow
+ knew 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ is just the sample size).
+ For this reason this is called a 95% confidence interval for 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ This is also called computing a 
+\begin_inset Quotes eld
+\end_inset
+
+z test statistic
+\begin_inset Quotes erd
+\end_inset
+
+ since a standard normal random variable is typically represented by a 
+\begin_inset Formula $Z$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Back to the proof of theorem.
+\series bold
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Proof II.
+
+\series default
+ Note that by location-scale it suffices to prove 
+\begin_inset Formula $\bar{X}\sim\mathcal{N}\left(\mu,\sigma^{2}/n\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma^{2}=0$
+\end_inset
+
+.
+ To prove independence of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ we show that they're functions of independent random vectors.
+ First we write 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $n-1$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+deviations
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+S^{2} & =\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\\
+ & =\frac{1}{n-1}\left(\left(X_{1}-\bar{X}\right)^{2}+\sum_{i=2}^{n}\left(X_{i}-\bar{X}\right)^{2}\right)\\
+ & =\frac{1}{n-1}\left(\left[\sum_{i=2}^{n}\left(X_{i}-\bar{X}\right)\right]^{2}+\sum_{i=2}^{n}\left(X_{i}-\bar{X}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Now solve for the quantity
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\left(X_{1}-\bar{X}\right)$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ using
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)=0$
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and factor out a
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $-1$
+\end_inset
+
+ (which gets killed in the 
+\begin_inset Formula $\left[\right]^{2}$
+\end_inset
+
+).
+\begin_inset Formula 
+\[
+S^{2}=\frac{1}{n-1}\left(\left[\sum_{i=2}^{n}\left(X_{i}-\bar{X}\right)\right]^{2}+\sum_{i=2}^{n}\left(X_{i}-\bar{X}\right)^{2}\right)
+\]
+
+\end_inset
+
+So 
+\begin_inset Formula $S^{2}=g\left(\left(X_{2}-\bar{X},X_{3}-\bar{X},\dots,X_{n}-\bar{X}\right)\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $g$
+\end_inset
+
+ is clearly continuous.
+ Now we show that the random vector 
+\begin_inset Formula $\left(X_{2}-\bar{X},X_{3}-\bar{X},\dots,X_{n}-\bar{X}\right)$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+, and by continuity 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ will be independent of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+.
+ The joint pdf of 
+\begin_inset Formula $\left(X_{1},X_{2},\dots,X_{n}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x_{1},\dots,x_{n}\right) & =\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x_{i}^{2}}\\
+ & =\left(\frac{1}{\sqrt{2\pi}}\right)^{n}e^{-\frac{1}{2}\sum_{i=1}^{n}x_{i}^{2}}
+\end{align*}
+
+\end_inset
+
+Now let
+\begin_inset Formula 
+\[
+\begin{pmatrix}1/n & 1/n & \cdots & 1/n\\
+-1/n & 1-1/n & -1/n & -1/n\\
+\vdots & -1/n & \ddots & -1/n\\
+-1/n & -1/n & -1/n & 1-1/n
+\end{pmatrix}\begin{pmatrix}x_{1}\\
+x_{2}\\
+\vdots\\
+x_{n}
+\end{pmatrix}=\begin{pmatrix}y_{1}\\
+y_{2}\\
+\vdots\\
+y_{n}
+\end{pmatrix}
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula 
+\begin{align*}
+y_{1} & =\bar{x}=\frac{1}{n}x_{1}+\frac{1}{n}x_{2}+\cdots+\frac{1}{n}x_{n}\\
+y_{2} & =x_{2}-\bar{x}\\
+\vdots & \vdots\\
+y_{n} & =x_{n}-\bar{x}
+\end{align*}
+
+\end_inset
+
+and therefore solve the first equation for 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in terms of the 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ by substituting in 
+\begin_inset Formula $x_{2},x_{3},\dots,x_{n}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & -1 & \cdots & -1\\
+1 & 1 & 0 & 0\\
+\vdots & 0 & \ddots & 0\\
+1 & 0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}y_{1}\\
+y_{2}\\
+\vdots\\
+y_{n}
+\end{pmatrix}=\begin{pmatrix}x_{1}\\
+x_{2}\\
+\vdots\\
+x_{n}
+\end{pmatrix}
+\]
+
+\end_inset
+
+Then the Jacobian of the transformation 
+\begin_inset Formula 
+\[
+\left|J\right|=\left|\begin{pmatrix}1 & -1 & \cdots & -1\\
+1 & 1 & 0 & 0\\
+\vdots & 0 & \ddots & 0\\
+1 & 0 & 0 & 1
+\end{pmatrix}\right|=\left|\begin{pmatrix}n & 0 & \cdots & 0\\
+1 & 1 & 0 & 0\\
+\vdots & 0 & \ddots & 0\\
+1 & 0 & 0 & 1
+\end{pmatrix}\right|=n
+\]
+
+\end_inset
+
+using the invariance of the determinant under linear combinations of rows.
+ Hence 
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y_{1},\dots,y_{n}\right) & =f_{X}\left(y_{1}-\sum_{i=2}^{n}y_{i},y_{1}+y_{2}\dots,y_{1}+y_{n}\right)n\\
+ & =\left(\frac{1}{\sqrt{2\pi}}\right)^{n}e^{-\frac{1}{2}\left(\left(y_{1}-\sum_{i=2}^{n}y_{i}\right)^{2}+\sum_{i=2}^{n}\left(y_{1}+y_{i}\right)^{2}\right)}\\
+ & =\left(\frac{1}{\sqrt{2\pi}}\right)^{n}e^{-\frac{1}{2}\left(y_{1}^{2}-2y_{1}\sum_{i=2}^{n}y_{i}+\left(\sum_{i=2}^{n}y_{i}\right)^{2}+\sum_{i=2}^{n}y_{1}^{2}+2y_{1}\sum_{i=2}^{n}y_{i}+\sum_{i=2}^{n}y_{i}^{2}\right)}\\
+ & =\left(\frac{1}{\sqrt{2\pi}}\right)^{n}e^{-\frac{1}{2}\left(y_{1}^{2}+\sum_{i=2}^{n}y_{1}^{2}+\sum_{i=2}^{n}y_{i}^{2}+\left(\sum_{i=2}^{n}y_{i}\right)^{2}\right)}\\
+ & =\left(\left(\frac{1}{\sqrt{2\pi}}\right)^{n}e^{-\frac{1}{2}ny_{1}^{2}}\right)\left(e^{-\frac{1}{2}\left(\sum_{i=2}^{n}y_{i}^{2}+\left(\sum_{i=2}^{n}y_{i}\right)^{2}\right)}\right)
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula $Y_{1}\equiv\bar{X}$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $\left(Y_{2},Y_{3},\dots,Y_{n}\right)\equiv\left(X_{2}-\bar{X},X_{3}-\bar{X},\dots,X_{n}-\bar{X}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $S^{2}=g\left(\left(X_{2}-\bar{X},X_{3}-\bar{X},\dots,X_{n}-\bar{X}\right)\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+This is kind of amazing in and of itself, that 
+\begin_inset Formula $S^{2}=h\left(\bar{X}\right)$
+\end_inset
+
+ is statistically speaking independent of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ but it's also useful and why will be apparent after the completion of the
+ proof, i.e.
+ establishing that 
+\begin_inset Formula $\frac{\left(n-1\right)}{\sigma^{2}}S^{2}\sim\chi_{n-1}^{2}$
+\end_inset
+
+.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Proof III.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+There are two ways to do this.
+ First
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{n}\left(X_{i}\right)^{2} & =\sum_{i=1}^{n}\left(\left(X_{i}-\bar{X}\right)+\bar{X}\right)^{2}\\
+ & =\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}+2\left(\bar{X}\right)^{2}\cancelto{0}{\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)}+\sum_{i=1}^{n}\left(\bar{X}\right)^{2}\\
+ & =\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}+\sum_{i=1}^{n}\left(\bar{X}\right)^{2}\\
+ & =\left(n-1\right)S^{2}+n\left(\bar{X}\right)^{2}
+\end{align*}
+
+\end_inset
+
+and by almost exactly the same manipulation (the 
+\begin_inset Quotes eld
+\end_inset
+
+cross
+\begin_inset Quotes erd
+\end_inset
+
+ term will be a little different but it's irrelevant since it goes to 0)
+ 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{n}\left(X_{i}-\mu\right)^{2}=\left(n-1\right)S^{2}+n\left(\bar{X}-\mu\right)^{2}
+\]
+
+\end_inset
+
+but then (
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+if you're allowed to do this????
+\series default
+)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{n}\left(\frac{X_{i}-\mu}{\sigma}\right)^{2} & =\frac{1}{\sigma^{2}}\left(\left(n-1\right)S^{2}+n\left(\bar{X}-\mu\right)^{2}\right)\\
+ & =\frac{\left(n-1\right)}{\sigma^{2}}S^{2}+\left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Now again by convolution theorem and independence of 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+MGF_{\sum_{i=1}^{n}\left(\frac{X_{i}-\mu}{\sigma}\right)^{2}} & =MGF_{\frac{\left(n-1\right)}{\sigma^{2}}S^{2}}MGF_{\left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^{2}}
+\end{align*}
+
+\end_inset
+
+But 
+\begin_inset Formula $\sum_{i=1}^{n}\left(\frac{X_{i}-\mu}{\sigma}\right)^{2}\sim\chi_{n-1}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^{2}\sim\chi_{1}^{2}$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+\left(\frac{1}{1-2t}\right)^{n/2} & =MGF_{\frac{\left(n-1\right)}{\sigma^{2}}S^{2}}\left(\frac{1}{1-2t}\right)^{1/2}
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+MGF_{\frac{\left(n-1\right)}{\sigma^{2}}S^{2}} & =\left(\frac{1}{1-2t}\right)^{n/2}\Bigg/\left(\frac{1}{1-2t}\right)^{1/2}\\
+ & =\left(\frac{1}{1-2t}\right)^{\frac{n-1}{2}}
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $\frac{\left(n-1\right)}{\sigma^{2}}S^{2}\sim\chi_{n-1}^{2}$
+\end_inset
+
+.
+ But doesn't this directly imply that 
+\begin_inset Formula $\sum_{i=1}^{n}\left(\frac{X_{i}-\mu}{\sigma}\right)^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $n\left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^{2}$
+\end_inset
+
+ doesn't it? 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\left(n-1\right)}{\sigma^{2}}S^{2} & =\frac{1}{\sigma^{2}}\left(\sum_{i=1}^{n}\left(\frac{X_{i}-\mu}{\sigma}\right)^{2}-\left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^{2}\right)\\
+ & =\sum_{i=1}^{n}\left(\frac{X_{i}-\mu}{\sigma}\right)^{2}-n\left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^{2}
+\end{align*}
+
+\end_inset
+
+The second way is to use induction with 
+\begin_inset Formula $\bar{X_{k}}$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{k}^{2}$
+\end_inset
+
+ being the sample mean and variance for a sample of size 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ The base case
+\begin_inset Formula 
+\begin{align*}
+S_{2}^{2} & =\frac{1}{2-1}\left(\left(X_{1}-\frac{1}{2}\left(X_{1}+X_{2}\right)\right)^{2}+\left(X_{2}-\frac{1}{2}\left(X_{1}+X_{2}\right)\right)^{2}\right)\\
+ & =\frac{1}{2}\left(X_{1}-X_{2}\right)^{2}
+\end{align*}
+
+\end_inset
+
+and if 
+\begin_inset Formula $X_{1}\sim X_{2}\sim\mathcal{N}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $X_{1}-X_{2}\sim\mathcal{N}\left(0,2\sigma^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{1}-X_{2}/\left(\sqrt{2}\sigma\right)\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+\frac{\left(2-1\right)}{\sigma^{2}}S_{2}^{2} & =\frac{1}{2\sigma^{2}}\left(X_{1}-X_{2}\right)^{2}\\
+ & =\left(\frac{X_{1}-X_{2}}{\sqrt{2}\sigma}\right)^{2}
+\end{align*}
+
+\end_inset
+
+hence 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{\left(2-1\right)}{\sigma^{2}}S^{2}\sim\chi_{2}^{2}$
+\end_inset
+
+.
+ To finish the induction we have to prove that 
+\begin_inset Formula $\frac{\left(n-1\right)}{\sigma^{2}}S_{n}^{2}\sim\chi_{n-1}^{2}$
+\end_inset
+
+ if 
+\begin_inset Formula $\frac{\left(n-2\right)}{\sigma^{2}}S_{n-1}^{2}\sim\chi_{n-2}^{2}$
+\end_inset
+
+ (remember the subscript on the 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ is the subscript necessary for induction).
+ Now the induction step requires
+\begin_inset Formula 
+\[
+\frac{\left(n-1\right)}{\sigma^{2}}S_{n}^{2}=\frac{\left(n-2\right)}{\sigma^{2}}S_{n-1}^{2}+\left(\frac{n-1}{\sigma^{2}n}\right)\left(X_{n}-\bar{X}_{n-1}\right)^{2}
+\]
+
+\end_inset
+
+which is true because of a very length algebraic manipulation.
+ Now observe that the random vector 
+\begin_inset Formula $\left(X_{n},\bar{X}_{n-1}\right)$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $S_{n-1}^{2}$
+\end_inset
+
+ since as before 
+\begin_inset Formula $\bar{X}_{n-1}$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $S_{n-1}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+ is definitely independent of 
+\begin_inset Formula $S_{n-1}^{2}$
+\end_inset
+
+ since 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+in the future
+\begin_inset Quotes erd
+\end_inset
+
+.
+ And finally since 
+\begin_inset Formula $X_{n}-\bar{X}_{n-1}\sim\mathcal{N}\left(0,n\sigma^{2}/\left(n-1\right)\right)$
+\end_inset
+
+ and by the induction hypothesis
+\begin_inset Formula 
+\[
+\frac{\left(n-1\right)}{\sigma^{2}}S_{n}^{2}=\chi_{n-2}^{2}+\chi_{1}^{2}=\chi_{n-1}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Now what does 
+\family default
+\series default
+\shape italic
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+this 
+\shape default
+buy us? Well as mentioned, in general you have no idea what 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ for a population is so computing 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+P\left(\bar{X}-1.96\sqrt{\frac{\sigma^{2}}{n}}<\mu<\bar{X}+1.96\sqrt{\frac{\sigma^{2}}{n}}\right)
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula 
+\[
+P\left(-1.96<\frac{\bar{X}-\mu}{\grave{\sqrt{\sigma^{2}/n}}}<1.96\right)
+\]
+
+\end_inset
+
+is impossible.
+ But what about 
+\begin_inset Formula 
+\[
+P\left(a<\frac{\bar{X}-\mu}{\grave{\sqrt{S^{2}/n}}}<b\right)
+\]
+
+\end_inset
+
+Well
+\begin_inset Formula 
+\begin{align*}
+T=\frac{\bar{X}-\mu}{\grave{\sqrt{S^{2}/n}}} & =\frac{\left(\bar{X}-\mu\right)\frac{\sqrt{n}}{\sigma}}{\sqrt{\frac{\left(n-1\right)S^{2}/\sigma^{2}}{\left(n-1\right)}}}=\frac{Z}{\sqrt{V/v}}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $v=n-1$
+\end_inset
+
+, 
+\begin_inset Formula $Z\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+, and 
+\begin_inset Formula $V\sim\chi_{n-1}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $Z$
+\end_inset
+
+ since yet again 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+.
+ This is the exact form of a Student's t distribution with 
+\begin_inset Formula $v=n-1$
+\end_inset
+
+ degrees of freedom, i.e.
+ 
+\begin_inset Formula $T\sim T\left(v\right)\sim T\left(n-1\right)$
+\end_inset
+
+.
+ The density is
+\begin_inset Formula 
+\[
+f_{T}\left(t\right)=\frac{\Gamma\left(\frac{v+1}{2}\right)}{\sqrt{v\pi}\Gamma\left(\frac{v}{2}\right)}\left(1+\frac{t^{2}}{v}\right)^{-\frac{v+1}{2}}
+\]
+
+\end_inset
+
+and so now we can compute 
+\begin_inset Quotes eld
+\end_inset
+
+t test statistics
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $a$
+\end_inset
+
+ be such that 
+\begin_inset Formula $P\left(-a<T<a\right)=.90$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+P\left(-a<\frac{\bar{X}-\mu}{\grave{\sqrt{S^{2}/n}}}<a\right) & =P\left(\bar{X}-a\sqrt{\frac{S^{2}}{n}}<\mu<\bar{X}-a\sqrt{\frac{S^{2}}{n}}\right)=.90
+\end{align*}
+
+\end_inset
+
+and so if we draw from our population the interval 
+\begin_inset Formula $\left(\bar{X}-a\sqrt{\frac{S^{2}}{n}},\bar{X}+a\sqrt{\frac{S^{2}}{n}}\right)$
+\end_inset
+
+ will 
+\begin_inset Quotes eld
+\end_inset
+
+cover
+\begin_inset Quotes erd
+\end_inset
+
+ the true mean with probability .9, i.e.
+ it is a 90% confidence interval for 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ Quoting wikipedia: 
+\end_layout
+
+\begin_layout Quotation
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Quotes eld
+\end_inset
+
+Therefore, if we find the mean of a set of observations that we can reasonably
+ expect to have a normal distribution, we can use the t-distribution to
+ examine whether the confidence limits on that mean include some theoretically
+ predicted value – such as the value predicted on a null hypothesis.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Strong Law of Large Numbers
+\end_layout
+
+\end_body
+\end_document

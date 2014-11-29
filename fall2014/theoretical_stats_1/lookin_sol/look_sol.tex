@@ -1,0 +1,54 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{babel}
+\begin{document}
+With $A\sim B\sim C\sim\text{uniform}\left(0,1\right)$ (i.e. each
+distributed uniformly on $\left(0,1\right)$) what is the probability
+that the polynomial equation $Ax^{2}+Bx+C=0$ has real roots? The
+discriminant should be positive: 
+\[
+B^{2}-4AC\geq0\iff B^{2}\geq4AC
+\]
+Taking the log of both sides preserves the inequality since log is
+strictly increasing. Then 
+\[
+2\log\left(B\right)\geq\log\left(4\right)+\log\left(A\right)+\log\left(C\right).
+\]
+Multiplying everything by a negative sign flips the inequality 
+\[
+-2\log\left(B\right)\leq-\log\left(4\right)-\log\left(A\right)-\log\left(C\right)
+\]
+But 
+\[
+-\log\left(A\right)\sim-\log\left(C\right)\sim\text{exponential\ensuremath{\left(1\right)}}
+\]
+and 
+\[
+-2\log\left(B\right)\sim\text{exponential}\left(2\right)
+\]
+and 
+\[
+-\log\left(A\right)+-\log\left(C\right)\sim\text{Gamma}\left(2,1\right)
+\]
+Let $X\sim\text{exponential}\left(2\right)$ and $Y\sim\text{Gamma}\left(2,1\right)$
+then question becomes what is $P\left(X<Y+\log\left(1/4\right)\right)$.
+By the fact that $P\left(A\right)=E\left(1_{A}\right)=E\left(E\left(1_{A}|X\right)\right)$
+and $P\left(A|X\right)=E\left(1_{A}|X\right)$ and then $P\left(A\right)=E\left(P\left(A|X\right)\right)$
+it's the case that 
+\begin{align*}
+P\left(X<Y+\log\left(1/4\right)\right) & =E_{X}\left(P\left(X-\log\left(1/4\right)<Y|X\right)\right)\\
+ & =\int_{\log\left(4\right)}^{\infty}P\left(x-\log\left(1/4\right)<Y\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\int_{0}^{\infty}\left(\int_{x-\log\left(4\right)}^{\infty}\frac{y}{\Gamma\left(2\right)}e^{-y}dy\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\int_{0}^{\infty}\left(\frac{1}{4}e^{-x}\left(1+x+\log\left(4\right)\right)\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\frac{1}{36}\left(5+\log\left(64\right)\right)\approx.254413
+\end{align*}
+This extends to cubics $Ax^{3}+Bx^{2}+Cx+D$ where the discriminant
+is $\Delta=\, B^{2}C^{2}-4AC^{3}-4B^{3}D-27A^{2}D^{2}+18ABCD$ and
+other distributions for the coefficients should in principle make
+for a tractable problem as well.
+\end{document}

@@ -1,0 +1,176 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+With 
+\begin_inset Formula $A\sim B\sim C\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+ (i.e.
+ each distributed uniformly on 
+\begin_inset Formula $\left(0,1\right)$
+\end_inset
+
+) what is the probability that the polynomial equation 
+\begin_inset Formula $Ax^{2}+Bx+C=0$
+\end_inset
+
+ has real roots? The discriminant should be positive: 
+\begin_inset Formula 
+\[
+B^{2}-4AC\geq0\iff B^{2}\geq4AC
+\]
+
+\end_inset
+
+Taking the log of both sides preserves the inequality since log is strictly
+ increasing.
+ Then 
+\begin_inset Formula 
+\[
+2\log\left(B\right)\geq\log\left(4\right)+\log\left(A\right)+\log\left(C\right).
+\]
+
+\end_inset
+
+Multiplying everything by a negative sign flips the inequality 
+\begin_inset Formula 
+\[
+-2\log\left(B\right)\leq-\log\left(4\right)-\log\left(A\right)-\log\left(C\right)
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula 
+\[
+-\log\left(A\right)\sim-\log\left(C\right)\sim\text{exponential\left(1\right)}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+-2\log\left(B\right)\sim\text{exponential}\left(2\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+-\log\left(A\right)+-\log\left(C\right)\sim\text{Gamma}\left(2,1\right)
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $X\sim\text{exponential}\left(2\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y\sim\text{Gamma}\left(2,1\right)$
+\end_inset
+
+ then question becomes what is 
+\begin_inset Formula $P\left(X<Y+\log\left(1/4\right)\right)$
+\end_inset
+
+.
+ By the fact that 
+\begin_inset Formula $P\left(A\right)=E\left(1_{A}\right)=E\left(E\left(1_{A}|X\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(A|X\right)=E\left(1_{A}|X\right)$
+\end_inset
+
+ and then 
+\begin_inset Formula $P\left(A\right)=E\left(P\left(A|X\right)\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\begin{align*}
+P\left(X<Y+\log\left(1/4\right)\right) & =E_{X}\left(P\left(X-\log\left(1/4\right)<Y|X\right)\right)\\
+ & =\int_{\log\left(4\right)}^{\infty}P\left(x-\log\left(1/4\right)<Y\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\int_{0}^{\infty}\left(\int_{x-\log\left(4\right)}^{\infty}\frac{y}{\Gamma\left(2\right)}e^{-y}dy\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\int_{0}^{\infty}\left(\frac{1}{4}e^{-x}\left(1+x+\log\left(4\right)\right)\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\frac{1}{36}\left(5+\log\left(64\right)\right)\approx.254413
+\end{align*}
+
+\end_inset
+
+This extends to cubics 
+\begin_inset Formula $Ax^{3}+Bx^{2}+Cx+D$
+\end_inset
+
+ where the discriminant is 
+\begin_inset Formula $\Delta=\, B^{2}C^{2}-4AC^{3}-4B^{3}D-27A^{2}D^{2}+18ABCD$
+\end_inset
+
+ and other distributions for the coefficients should in principle make for
+ a tractable problem as well.
+\end_layout
+
+\end_body
+\end_document

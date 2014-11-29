@@ -1,0 +1,271 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{mathdots}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz-qtree}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+
+\lstset{
+numbers=left
+}
+
+
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "frame=single"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+COT5405 Homework 5 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-1]
+\end_layout
+
+\end_inset
+
+Definition of cross-product, i.e let 
+\begin_inset Formula $p_{1}=\left(a_{1},b_{1}\right)$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $p_{2}=\left(a_{2},b_{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-2]
+\end_layout
+
+\end_inset
+
+Fails if one line segment is flat.
+ Then the point could be outside the line segment but still have the same
+ y coordinate.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-3]
+\end_layout
+
+\end_inset
+
+Just implement a comparator that compares using cross-product
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-4]
+\end_layout
+
+\end_inset
+
+Fix a point p.
+ determine polar angles wrt this point of all other points, in sorted order,
+ in nlgn time.
+ then go through the array and see if any 2 are the same.
+ they will be neighbors.
+ if you hadn't sorted you would have to search in the array for each n-1
+ entry to see if it matches any other entry.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-5]
+\end_layout
+
+\end_inset
+
+How do you handle the case when a series of 3 points is a flat face of a
+ polygon? How do you distinguish between just a straight line and a flat
+ face? Also what about spirally points that self intersect? Eliminating
+ straight lines is easy - if all cross products are zero then it's a straight
+ line.
+ Eliminating spirals is harder.
+ Sumer of the interior angles of a polygon is 180(n-2).
+ So compute all interior angles.
+ If they exceed 180(n-2) then not a polygon and therefore can't be a convex
+ polygon.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-6]
+\end_layout
+
+\end_inset
+
+The vector in the direction of the right ray length adequate enough to intersect
+ with any segment is 2*norm(p1p2)*((x0,y0)-(x0+1,y0)).
+ Then test the intersection.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-7]
+\end_layout
+
+\end_inset
+
+Check for an odd or 0 number of intersections withe polygon.
+ If the ray intersects in a vertex, then second out a left ray.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[33.1-8]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

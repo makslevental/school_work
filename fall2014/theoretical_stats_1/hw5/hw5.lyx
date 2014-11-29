@@ -1,0 +1,1544 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{pst-plot} 
+\pgfplotsset{compat=1.6}
+
+\pgfplotsset{soldot/.style={color=blue,only marks,mark=*}} \pgfplotsset{holdot/.style={color=blue,fill=white,only marks,mark=*}}
+
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\psset{algebraic}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+STA 6326 Homework 5 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.33]
+\end_layout
+
+\end_inset
+
+The MGF of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+E\left(e^{tX_{i}}\right) & =\sum_{x_{i}=1}^{\infty}e^{tx_{i}}\frac{-1}{\log\left(p\right)}\frac{\left(1-p\right)^{x_{i}}}{x_{i}}\\
+ & =\frac{-1}{\log\left(p\right)}\sum_{x_{i}=1}^{\infty}e^{tx_{i}}\frac{\left(1-p\right)^{x_{i}}}{x_{i}}\\
+ & =\frac{-1}{\log\left(p\right)}\sum_{x_{i}=1}^{\infty}\frac{\left(e^{t}\left(1-p\right)\right)^{x_{i}}}{x_{i}}\\
+ & \text{and by}\left(-\log\left(x\right)\right)=\int_{0}^{x}\frac{da}{1-a}=\int_{0}^{x}\left(1+a+a^{2}+a^{3}\cdots\right)da\\
+ & \implies-\log\left(1-x\right)=x+\frac{x^{2}}{2}+\frac{x^{3}}{3}\text{ and }\therefore\\
+ & =\frac{-1}{\log\left(p\right)}\left(-\log\left(1-e^{t}\left(1-p\right)\right)\right)
+\end{align*}
+
+\end_inset
+
+Then the MGF of 
+\begin_inset Formula $H$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+E\left(e^{tH}\right) & =E\left(E\left(e^{tH}\bigg|N\right)\right)\\
+ & =E\left(E\left(e^{t\sum_{i=1}^{N}X_{i}}\bigg|N\right)\right)\\
+ & =E\left(\prod_{i=1}^{N}E\left(e^{tX_{i}}\bigg|N\right)\right)\\
+ & \text{and by i.i.d}\\
+ & =E\left(\left(E\left(e^{tX_{i}}\bigg|N\right)\right)^{N}\right)
+\end{align*}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+But
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $E\left(e^{tX_{i}}\bigg|N\right)=E\left(e^{tX_{i}}\right)=\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ since 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ are independent of 
+\begin_inset Formula $N$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+E\left(e^{tH}\right) & =E_{N}\left(\left(\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}\right)^{N}\right)\\
+ & =\sum_{n=0}^{\infty}\left(\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}\right)^{n}\frac{e^{-\lambda}\lambda^{n}}{n!}\\
+ & =e^{-\lambda}e^{\lambda\left(\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}\right)}\sum_{n=0}^{\infty}\frac{e^{-\lambda\left(\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}\right)}\left(\lambda\left(\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}\right)\right)^{n}}{n!}\\
+ & =e^{-\lambda}e^{\lambda\left(\frac{\log\left(1-e^{t}\left(1-p\right)\right)}{\log\left(p\right)}\right)}=e^{-\lambda}\left(e^{\log\left(1-e^{t}\left(1-p\right)\right)}\right)^{\frac{\lambda}{\log\left(p\right)}}\\
+ & =\left(e^{\log\left(p\right)}\right)^{-\lambda/\log\left(p\right)}\left(1-e^{t}\left(1-p\right)\right)^{\frac{\lambda}{\log\left(p\right)}}=\left(p\right)^{-\lambda/\log\left(p\right)}\left(\frac{1}{1-e^{t}\left(1-p\right)}\right)^{\frac{-\lambda}{\log\left(p\right)}}\\
+ & =\left(\frac{p}{1-e^{t}\left(1-p\right)}\right)^{\frac{-\lambda}{\log\left(p\right)}}\\
+\\
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $H\sim\text{NB}\left(\frac{-\lambda}{\log\left(p\right)},p\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.35]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $X|P\sim\text{binomial}\left(n,P\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $P\sim\text{beta}\left(\alpha,\beta\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =E\left(E\left(X|P\right)\right)\\
+ & =E\left(nP\right)\\
+ & =\frac{n\alpha}{\alpha+\beta}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(X\right) & =\text{Var}\left(E\left(X|P\right)\right)+E\left(\text{Var}\left(X|P\right)\right)\\
+ & =\text{Var}\left(nP\right)+E\left(nP\left(1-P\right)\right)\\
+ & =\text{Var}\left(nP\right)+n\left(E\left(P\right)-E\left(P\right)^{2}-\text{Var}\left(P\right)\right)\\
+ & =n^{2}\text{Var}\left(P\right)-n\text{Var}\left(P\right)+nE\left(P\right)\left(1-E\left(P\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $Y|\Lambda\sim\text{Poisson}\left(\Lambda\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda\sim\Gamma\left(\alpha,\beta\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+E\left(Y\right) & =E\left(E\left(Y|\Lambda\right)\right)\\
+ & =E\left(\Lambda\right)\\
+ & =\alpha\beta
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Y\right) & =\text{Var}\left(E\left(Y|\Lambda\right)\right)+E\left(\text{Var}\left(Y|\Lambda\right)\right)\\
+ & =\text{Var}\left(\Lambda\right)+E\left(\Lambda\right)=\alpha\beta^{2}+\alpha\beta=\frac{\left(\alpha\beta\right)^{2}}{\alpha}+\alpha\beta
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.36]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\big|P_{i}\sim\text{Bernoulli}\left(P_{i}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{i}\sim\text{beta}\left(\alpha,\beta\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+E\left(Y\right) & =E\left(E\left(Y\bigg|\mathbf{P}\right)\right)\\
+ & =E\left(E\left(X_{1}+X_{2}+\cdots+X_{n}\big|\mathbf{P}\right)\right)\\
+ & =E\left(\sum_{i=1}^{n}E\left(X_{i}|P_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}E\left(E\left(X_{i}|P_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}E\left(P_{i}\right)\\
+ & =\sum_{i=1}^{n}\frac{\alpha}{\alpha+\beta}\\
+ & =\frac{n\alpha}{\alpha+\beta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The variance is
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Y\right) & =\text{Var}\left(E\left(Y|\mathbf{P}\right)\right)+E\left(\text{Var}\left(Y|\mathbf{P}\right)\right)\\
+ & =\text{Var}\left(\sum_{i=1}^{n}E\left(X_{i}|P_{i}\right)\right)+E\left(\text{Var}\left(\sum_{i=1}^{n}X_{i}|P_{i}\right)\right)\\
+ & =\text{Var}\left(\sum_{i=1}^{n}E\left(X_{i}|P_{i}\right)\right)+E\left(\sum_{i=1}^{n}\text{Var}\left(X_{i}|P_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}\text{Var}\left(E\left(X_{i}|P_{i}\right)\right)+\sum_{i=1}^{n}E\left(\text{Var}\left(X_{i}|P_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}\text{Var}\left(P_{i}\right)+\sum_{i=1}^{n}E\left(P_{i}\left(1-P_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}\text{Var}\left(P_{i}\right)+\sum_{i=1}^{n}\left(E\left(P_{i}\right)-E\left(P_{i}\right)^{2}-\text{Var}\left(P_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}\left(E\left(P_{i}\right)-E\left(P_{i}\right)^{2}\right)\\
+ & =\sum_{i=1}^{n}\left(\frac{\alpha}{\alpha+\beta}-\left(\frac{\alpha}{\alpha+\beta}\right)^{2}\right)\\
+ & =n\left(\frac{\alpha}{\alpha+\beta}-\left(\frac{\alpha}{\alpha+\beta}\right)^{2}\right)=\frac{n\alpha\beta}{\left(\alpha+\beta\right)^{2}}
+\end{align*}
+
+\end_inset
+
+Using MGFs
+\begin_inset Formula 
+\begin{align*}
+E\left(e^{tY}\right) & =E\left(E\left(e^{tY}\bigg|\mathbf{P}\right)\right)\\
+ & =E\left(E\left(e^{t\sum_{i=1}^{n}X_{i}}\bigg|\mathbf{P}\right)\right)\\
+ & =E\left(\prod_{i=1}^{n}E\left(e^{tX_{i}}\bigg|P_{i}\right)\right)\\
+ & =E\left(\prod_{i=1}^{n}\left(\left(1-P_{i}\right)+P_{i}e^{t}\right)\right)\\
+ & \text{by independence of }P_{i}\\
+ & =\prod_{i=1}^{n}E\left(\left(1-P_{i}\right)+P_{i}e^{t}\right)\\
+ & =\prod_{i=1}^{n}\left(\left(1-\frac{\alpha}{\alpha+\beta}\right)+\frac{\alpha}{\alpha+\beta}e^{t}\right)\\
+ & =\left(\left(1-\frac{\alpha}{\alpha+\beta}\right)+\frac{\alpha}{\alpha+\beta}e^{t}\right)^{n}\\
+ & =\left(\left(1-\frac{\alpha}{\alpha+\beta}\right)+\frac{\alpha}{\alpha+\beta}e^{t}\right)^{n}
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $Y\sim\text{Binomial}\left(n,\frac{\alpha}{\alpha+\beta}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\big|P_{i}\sim\text{Binomial}\left(n_{i},P_{i}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{i}\sim\text{beta}\left(\alpha,\beta\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+E\left(Y\right) & =E\left(E\left(Y\bigg|\mathbf{n,P}\right)\right)\\
+ & =E\left(E\left(X_{1}+X_{2}+\cdots+X_{k}\big|\mathbf{n,P}\right)\right)\\
+ & =E\left(\sum_{i=1}^{k}E\left(X_{i}|n_{i},P_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}E\left(E\left(X_{i}|n_{i},P_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}E\left(n_{i}P_{i}\right)\\
+ & =\sum_{i=1}^{k}n_{i}\frac{\alpha}{\alpha+\beta}\\
+ & =\frac{\alpha}{\alpha+\beta}\sum_{i=1}^{k}n_{i}
+\end{align*}
+
+\end_inset
+
+and the variance is
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Y\right) & =\text{Var}\left(E\left(Y\bigg|\mathbf{n,P}\right)\right)+E\left(\text{Var}\left(Y\bigg|\mathbf{n,P}\right)\right)\\
+ & =\text{Var}\left(\sum_{i=1}^{k}E\left(X_{i}|n_{i},P_{i}\right)\right)+E\left(\text{Var}\left(\sum_{i=1}^{k}X_{i}|n_{i},P_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}\text{Var}\left(E\left(X_{i}|n_{i},P_{i}\right)\right)+E\left(\sum_{i=1}^{k}\text{Var}\left(X_{i}|n_{i},P_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}\text{Var}\left(n_{i}P_{i}\right)+\sum_{i=1}^{k}E\left(n_{i}P_{i}\left(1-P_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}n_{i}^{2}\text{Var}\left(P_{i}\right)+\sum_{i=1}^{k}n_{i}\left(E\left(P_{i}\right)-E\left(P_{i}\right)^{2}\text{-Var}\left(n_{i}P_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}n_{i}\left(E\left(P_{i}\right)-E\left(P_{i}\right)^{2}\right)=\sum_{i=1}^{k}n_{i}\left(P_{i}-P_{i}^{2}\right)\\
+ & =\sum_{i=1}^{k}n_{i}P_{i}\left(1-P_{i}\right)=\sum_{i=1}^{k}\text{Var}\left(X_{i}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.39]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{X}=\left(X_{1},\dots,X_{n}\right)\sim\text{Multi}\left(p_{1},\dots,p_{n}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{1}=x_{1},\cdots,X_{n}=x_{n}\right) & =\binom{m}{x_{1},\dots,x_{n}}\prod_{i=1}^{n}p_{i}^{x_{i}}
+\end{align*}
+
+\end_inset
+
+WLOG let 
+\begin_inset Formula $X_{i}=X_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{j}=X_{2}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{1}=a|X_{2}=b\right) & =\frac{P\left(X_{1}=a,X_{2}=b\right)}{P\left(X_{2}=b\right)}
+\end{align*}
+
+\end_inset
+
+Piece by piece:
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{1}=a,X_{2}=b\right) & =\sum_{\begin{array}{c}
+\left(x_{3},\dots,x_{n}\right)\\
+\sum_{j=3}^{n}x_{j}=m-a-b
+\end{array}}\binom{m}{a,b,x_{3}\dots,x_{n}}p_{1}^{a}p_{2}^{b}\prod_{i=3}^{n}p_{i}^{x_{i}}\\
+ & =p_{1}^{a}p_{2}^{b}\left(1-p_{1}-p_{2}\right)^{m-a-b}\sum_{\begin{array}{c}
+\mathbf{x}=\left(x_{3},\dots,x_{n}\right)\\
+\left|\mathbf{x}\right|=m-a-b
+\end{array}}\frac{m!}{a!b!x_{3}!\cdots x_{n}!}\frac{1}{\left(1-p_{1}-p_{2}\right)^{m-a-b}}\prod_{i=3}^{n}p_{i}^{x_{i}}\\
+ & =\frac{p_{1}^{a}p_{2}^{b}}{a!b!}\left(1-p_{1}-p_{2}\right)^{m-a-b}\sum_{\begin{array}{c}
+\mathbf{x}=\left(x_{3},\dots,x_{n}\right)\\
+\left|\mathbf{x}\right|=m-a-b
+\end{array}}\frac{m!\left(m-a-b\right)!}{\left(m-a-b\right)!x_{3}!\cdots x_{n}!}\prod_{i=3}^{n}\left(\frac{p_{i}}{1-p_{1}-p_{2}}\right)^{x_{i}}\\
+ & =\frac{m!}{\left(m-a-b\right)!}\frac{p_{1}^{a}p_{2}^{b}}{a!b!}\left(1-p_{1}-p_{2}\right)^{m-a-b}\sum_{\begin{array}{c}
+\mathbf{x}=\left(x_{3},\dots,x_{n}\right)\\
+\left|\mathbf{x}\right|=m-a-b
+\end{array}}\frac{\left(m-a-b\right)!}{x_{3}!\cdots x_{n}!}\prod_{i=3}^{n}p_{i}^{x_{i}}\\
+ & =\frac{m!}{\left(m-a-b\right)!}\frac{p_{1}^{a}p_{2}^{b}}{a!b!}\left(1-p_{1}-p_{2}\right)^{m-a-b}=\binom{m}{a,b,m-a-b}p_{1}^{a}p_{2}^{b}\left(1-p_{1}-p_{2}\right)^{m-a-b}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{2}=b\right) & =\sum_{\begin{array}{c}
+\mathbf{x}=\left(x_{1},x_{3},\dots,x_{n}\right)\\
+\left|\mathbf{x}\right|=m-b
+\end{array}}\binom{m}{x_{1},b,x_{3}\dots,x_{n}}p_{1}^{x_{1}}p_{2}^{b}\prod_{i=3}^{n}p_{i}^{x_{i}}\\
+ & =\sum_{\begin{array}{c}
+\mathbf{x}=\left(x_{1},x_{3},\dots,x_{n}\right)\\
+\left|\mathbf{x}\right|=m-b
+\end{array}}\frac{m!}{x_{1}!x_{3}!\cdots x_{n}!}p_{1}^{x_{1}}\prod_{i=3}^{n}p_{i}^{x_{i}}\\
+ & =\frac{m!}{\left(m-b\right)!}\frac{p_{2}^{b}}{b!}\left(1-p_{2}\right)^{m-b}\sum_{\begin{array}{c}
+\mathbf{x}=\left(x_{1},x_{3},\dots,x_{n}\right)\\
+\left|\mathbf{x}\right|=m-b
+\end{array}}\frac{\left(m-b\right)!}{x_{1}!x_{3}!\cdots x_{n}!}\left(\frac{p_{1}}{1-p_{2}}\right)^{x_{1}}\prod_{i=3}^{n}\left(\frac{p_{i}}{1-p_{2}}\right)^{x_{i}}\\
+ & =\frac{m!}{\left(m-b\right)!}\frac{p_{2}^{b}}{b!}=\binom{m}{b}p_{2}^{b}\left(1-p_{2}\right)^{m-b}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $X_{2}\sim\text{Binomial}\left(m,p_{2}\right)$
+\end_inset
+
+ and by
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{1}=a|X_{2}=b\right) & =\frac{\binom{m}{a,b,m-a-b}p_{1}^{a}p_{2}^{b}\left(1-p_{1}-p_{2}\right)^{m-a-b}}{\binom{m}{b}p_{2}^{b}\left(1-p_{2}\right)^{m-b}}\\
+ & =\frac{\frac{m!}{a!b!\left(m-a-b\right)!}p_{1}^{a}\left(1-p_{1}-p_{2}\right)^{m-a-b}}{\frac{m!}{b!\left(m-b\right)!}\left(1-p_{2}\right)^{m-b}}\\
+ & =\binom{m-b}{a}\left(\frac{p_{1}}{1-p_{2}}\right)^{a}\frac{\left(1-p_{1}-p_{2}\right)^{m-b-a}}{\left(1-p_{2}\right)^{m-b-a}}\\
+ & =\binom{m-b}{a}\left(\frac{p_{1}}{1-p_{2}}\right)^{a}\left(1-\frac{p_{1}}{1-p_{2}}\right)^{m-b-a}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $X_{1}|X_{2}\sim\text{Binomial}\left(m-b,\frac{p_{1}}{1-p_{2}}\right)$
+\end_inset
+
+.
+ Then the covariance 
+\begin_inset Formula 
+\begin{align*}
+\text{Cov}\left(X_{i},X_{j}\right) & =E\left(X_{i}X_{j}\right)-E\left(X_{i}\right)E\left(X_{j}\right)\\
+ & =E\left(E\left(X_{i}X_{j}|X_{j}\right)\right)-mp_{i}mp_{j}\\
+ & =E\left(X_{j}E\left(X_{i}|X_{j}\right)\right)-mp_{i}mp_{j}\\
+ & =E\left(X_{j}\left(m-X_{j}\right)\left(\frac{p_{i}}{1-p_{j}}\right)\right)-mp_{i}mp_{j}\\
+ & =\left(\frac{p_{i}}{1-p_{j}}\right)E\left(X_{j}\left(m-X_{j}\right)\right)-mp_{i}mp_{j}\\
+ & =\left(\frac{p_{i}}{1-p_{j}}\right)\left(mE\left(X_{j}\right)-\left(E\left(X_{j}\right)\right)^{2}-\text{Var}\left(X_{j}\right)\right)-mp_{i}mp_{j}\\
+ & =\left(\frac{p_{i}}{1-p_{j}}\right)\left(mm\left(p_{j}\right)-\left(mp_{j}\right)^{2}-mp_{j}\left(1-p_{j}\right)\right)-mp_{i}mp_{j}\\
+ & =-mp_{i}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.40]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $f_{X,Y}\left(x,y\right)=Cx^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}$
+\end_inset
+
+ on 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+,
+\begin_inset Formula $0<y<1$
+\end_inset
+
+,
+\begin_inset Formula $0<y<1-x<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By 
+\begin_inset Formula $\frac{1-x-y}{1-y}=1-\frac{x}{1-y}$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+1= & \int_{0}^{1}\int_{0}^{1-y}\left(Cx^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}\right)dxdy\\
+ & =C\int_{0}^{1}\int_{0}^{1-y}\left(x^{a-1}y^{b-1}\left(1-y\right)^{c-1}\left(\frac{1-x-y}{1-y}\right)^{c-1}\right)dxdy\\
+ & =C\int_{0}^{1}\int_{0}^{1-y}\left(x^{a-1}y^{b-1}\left(1-y\right)^{c-1}\left(1-\frac{x}{1-y}\right)^{c-1}\right)dxdy\\
+ & \text{let }u=\frac{x}{1-y},x=u\left(1-y\right),dx=\left(1-y\right)du\\
+ & =C\int_{0}^{1}\int_{0}^{1}\left(\left(u\left(1-y\right)\right)^{a-1}y^{b-1}\left(1-y\right)^{c-1}\left(1-u\right)^{c-1}\right)\left(1-y\right)dudy\\
+ & =C\int_{0}^{1}\left(\left(1-y\right)^{a+c-1}y^{b-1}\int_{0}^{1}\left(u^{a-1}\left(1-u\right)^{c-1}\right)du\right)dy\\
+ & =C\int_{0}^{1}\left(\left(1-y\right)^{a+c-1}y^{b-1}\frac{\Gamma\left(a\right)\Gamma\left(c\right)}{\Gamma\left(a+c\right)}\right)dy\\
+ & =C\frac{\Gamma\left(a\right)\Gamma\left(c\right)}{\Gamma\left(a+c\right)}\int_{0}^{1}\left(y^{b-1}\left(1-y\right)^{a+c-1}\right)dy\\
+ & =C\frac{\Gamma\left(a\right)\Gamma\left(c\right)}{\Gamma\left(a+c\right)}\frac{\Gamma\left(b\right)\Gamma\left(a+c\right)}{\Gamma\left(a+b+c\right)}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $C=\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(a\right)\Gamma\left(b\right)\Gamma\left(c\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Doing essentially the same integration again:
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y\right) & =\int_{0}^{1-y}\left(Cx^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}\right)dx\\
+ & =\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(b\right)\Gamma\left(a+c\right)}\left(1-y\right)^{a+c-1}y^{b-1}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x\right) & =\int_{0}^{1-x}\left(Cx^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}\right)dy\\
+ & \text{let }u=\frac{y}{1-x},y=u\left(1-x\right),dy=\left(1-x\right)du\\
+ & =Cx^{a-1}\left(1-x\right)^{b+c-1}\int_{0}^{1}\left(u^{b-1}\left(1-u\right)^{c-1}\right)du\\
+ & =\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(a\right)\Gamma\left(b+c\right)}x^{a-1}\left(1-x\right)^{b+c-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+f_{Y|X}\left(y|x\right) & =\frac{\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(a\right)\Gamma\left(b\right)\Gamma\left(c\right)}}{\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(a\right)\Gamma\left(b+c\right)}}\frac{x^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}}{x^{a-1}\left(1-x\right)^{b+c-1}}\\
+ & =\frac{\Gamma\left(b+c\right)}{\Gamma\left(b\right)\Gamma\left(c\right)}\left(1-x\right)\frac{y^{b-1}}{\left(1-x\right)^{b-1}}\left(1-\frac{y}{1-x}\right)^{c-1}\\
+ & =\left(1-x\right)\frac{\Gamma\left(b+c\right)}{\Gamma\left(b\right)\Gamma\left(c\right)}\left(\frac{y}{1-x}\right)^{b-1}\left(1-\frac{y}{1-x}\right)^{c-1}
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $Y/\left(1-x\right)\sim\text{Beta}\left(b,c\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The expectation
+\begin_inset Formula 
+\begin{align*}
+E\left(XY\right) & =\int_{0}^{1}\int_{0}^{1-y}xy\left(Cx^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}\right)dxdy\\
+ & =C\int_{0}^{1}\int_{0}^{1-y}\left(x^{\left(a+1\right)-1}y^{\left(b+1\right)-1}\left(1-x-y\right)^{c-1}\right)dxdy\\
+ & =\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(a\right)\Gamma\left(b\right)\Gamma\left(c\right)}\frac{\Gamma\left(a+1\right)\Gamma\left(b+1\right)\Gamma\left(c\right)}{\Gamma\left(a+b+c+2\right)}\\
+ & =\frac{ab}{\left(a+b+c+1\right)\left(a+b+c\right)\Gamma\left(a+b+c\right)}
+\end{align*}
+
+\end_inset
+
+and variance
+\begin_inset Formula 
+\[
+\text{Var}\left(XY\right)=E\left(\left(XY\right)^{2}\right)-\left(E\left(XY\right)\right)^{2}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{align*}
+E\left(X^{2}Y^{2}\right) & =\int_{0}^{1}\int_{0}^{1-y}x^{2}y^{2}\left(Cx^{a-1}y^{b-1}\left(1-x-y\right)^{c-1}\right)dxdy\\
+ & =C\int_{0}^{1}\int_{0}^{1-y}\left(x^{\left(a+2\right)-1}y^{\left(b+2\right)-1}\left(1-x-y\right)^{c-1}\right)dxdy\\
+ & =\frac{\Gamma\left(a+b+c\right)}{\Gamma\left(a\right)\Gamma\left(b\right)\Gamma\left(c\right)}\frac{\Gamma\left(a+2\right)\Gamma\left(b+2\right)\Gamma\left(c\right)}{\Gamma\left(a+b+c+4\right)}\\
+ & =\frac{ab\left(a+1\right)\left(b+1\right)}{\left(a+b+c+3\right)\left(a+b+c+2\right)\left(a+b+c+1\right)\Gamma\left(a+b+c\right)}
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(XY\right) & =\frac{ab\left(a+1\right)\left(b+1\right)}{\left(a+b+c+3\right)\left(a+b+c+2\right)\left(a+b+c+1\right)\Gamma\left(a+b+c\right)}\\
+ & -\left(\frac{ab}{\left(a+b+c+1\right)\left(a+b+c\right)\Gamma\left(a+b+c\right)}\right)^{2}\\
+\end{align*}
+
+\end_inset
+
+The covariance is 
+\begin_inset Formula 
+\[
+\text{Cov}\left(X,Y\right)=\frac{ab}{\left(a+b+c+1\right)\left(a+b+c\right)\Gamma\left(a+b+c\right)}-\left(a\left(b+c\right)\right)\left(b\left(a+c\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.41]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\text{Cov}\left(X,k\right)=E\left(Xk\right)-E\left(X\right)E\left(k\right)=kE\left(X\right)-E\left(X\right)k=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.44]
+\end_layout
+
+\end_inset
+
+By induction - the base case is Thm 4.5.6.
+ Assume that for 
+\begin_inset Formula $k<n$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\text{Var}\left(\sum_{i=1}^{k}X_{i}\right)=\sum_{i=1}^{k}\text{Var}\left(X_{i}\right)+2\sum_{1\leq i<j\leq k}\text{Cov}\left(X_{i},X_{j}\right)
+\]
+
+\end_inset
+
+Then let 
+\begin_inset Formula $Y=\sum_{i=1}^{n-1}X_{i}$
+\end_inset
+
+.
+ By thm 4.5.6 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Y+X_{n}\right) & =\text{Var}\left(Y\right)\text{+Var}\left(X_{n}\right)+2\text{Cov}\left(Y,X_{n}\right)
+\end{align*}
+
+\end_inset
+
+then by the induction hypothesis 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Y\right) & =\sum_{i=1}^{n-1}\text{Var}\left(X_{i}\right)+2\sum_{1\leq i<j\leq k}\text{Cov}\left(X_{i},X_{j}\right)
+\end{align*}
+
+\end_inset
+
+and by linearity of covariance
+\begin_inset Formula 
+\[
+\text{Cov}\left(Y,X_{n}\right)=\sum_{i=1}^{n-1}\text{Cov}\left(X_{i},X_{n}\right)
+\]
+
+\end_inset
+
+hence
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Y+X_{n}\right) & =\sum_{i=1}^{n-1}\text{Var}\left(X_{i}\right)+2\sum_{1\leq i<j\leq k}\text{Cov}\left(X_{i},X_{j}\right)\\
+ & \text{+Var}\left(X_{n}\right)+2\left(\sum_{i=1}^{n-1}\text{Cov}\left(X_{i},X_{n}\right)\right)\\
+ & =\sum_{i=1}^{n}\text{Var}\left(X_{i}\right)+2\sum_{1\leq i<j\leq n}\text{Cov}\left(X_{i},X_{j}\right)
+\end{align*}
+
+\end_inset
+
+since for 
+\begin_inset Formula $1<j<n-1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $j<n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.45]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\left(X,Y\right)=\mathbf{V}\sim\mathcal{N}\left(\boldsymbol{\mu},\boldsymbol{\Sigma}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+f_{\mathbf{V}}\left(\mathbf{v}\right)=\frac{1}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}e^{-\frac{1}{2}\left(\mathbf{v}-\boldsymbol{\mu}\right)^{T}\boldsymbol{\Sigma}^{-1}\left(\mathbf{v}-\boldsymbol{\mu}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\mu}$
+\end_inset
+
+ is the mean vector, i.e.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\boldsymbol{\mu}=\left(\mu_{x},\mu_{y}\right)^{T}$
+\end_inset
+
+,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\boldsymbol{\Sigma}$
+\end_inset
+
+ is the covariance matrix and in this instance 
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{\Sigma} & =\begin{pmatrix}\sigma_{x}^{2} & \rho_{x,y}\sigma_{x}\sigma_{y}\\
+\rho_{y,x}\sigma_{y}\sigma_{x} & \sigma_{y}^{2}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $\left|\boldsymbol{\Sigma}\right|=\sigma_{x}^{2}\sigma_{y}^{2}-\sigma_{x}^{2}\sigma_{y}^{2}\left(\rho_{y,x}+\rho_{x,y}\right)=\sigma_{x}^{2}\sigma_{y}^{2}\left(1-\rho_{y,x}^{2}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x\right) & =\int_{-\infty}^{\infty}f_{\mathbf{V}}\left(\mathbf{v}\right)dy\\
+ & =\int_{-\infty}^{\infty}\left(\frac{1}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}e^{-\frac{1}{2}\left(\mathbf{v}-\boldsymbol{\mu}\right)^{T}\boldsymbol{\Sigma}^{-1}\left(\mathbf{v}-\boldsymbol{\mu}\right)}\right)dy
+\end{align*}
+
+\end_inset
+
+First of all
+\begin_inset Formula 
+\begin{align*}
+\left(\mathbf{v}-\boldsymbol{\mu}\right)^{T}\boldsymbol{\Sigma}^{-1}\left(\mathbf{v}-\boldsymbol{\mu}\right) & =\left(x-\mu_{x},y-\mu_{y}\right)\begin{pmatrix}\sigma_{x}^{2} & \rho_{x,y}\sigma_{x}\sigma_{y}\\
+\rho_{y,x}\sigma_{y}\sigma_{x} & \sigma_{y}^{2}
+\end{pmatrix}^{-1}\begin{pmatrix}x-\mu_{x}\\
+y-\mu_{y}
+\end{pmatrix}\\
+ & =\left(x-\mu_{x},y-\mu_{y}\right)\begin{pmatrix}\sigma_{y}^{2} & -\rho_{x,y}\sigma_{x}\sigma_{y}\\
+-\rho_{y,x}\sigma_{y}\sigma_{x} & \sigma_{x}^{2}
+\end{pmatrix}^{-1}\begin{pmatrix}x-\mu_{x}\\
+y-\mu_{y}
+\end{pmatrix}\\
+ & =\frac{1}{1-\rho_{x,y}^{2}}\left(\frac{\left(x-\mu_{x}\right)^{2}}{\sigma_{x}^{2}}+\frac{\left(y-\mu_{y}\right)^{2}}{\sigma_{y}^{2}}-2\rho_{x,y}\frac{\left(x-\mu_{x}\right)\left(y-\mu_{y}\right)}{\sigma_{x}\sigma_{y}}\right)
+\end{align*}
+
+\end_inset
+
+so
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x\right) & =\int_{-\infty}^{\infty}f_{\mathbf{V}}\left(\mathbf{v}\right)dy\\
+ & =\frac{1}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}\int_{-\infty}^{\infty}\left(e^{-\frac{1}{2}\frac{1}{1-\rho_{x,y}^{2}}\left(\frac{\left(x-\mu_{x}\right)^{2}}{\sigma_{x}^{2}}+\frac{\left(y-\mu_{y}\right)^{2}}{\sigma_{y}^{2}}-2\rho_{x,y}\frac{\left(x-\mu_{x}\right)\left(y-\mu_{y}\right)}{\sigma_{x}\sigma_{y}}\right)}\right)dy\\
+ & \text{let }a=\left(\frac{x-\mu_{x}}{\sigma_{x}}\right),b=\left(\frac{y-\mu_{y}}{\sigma_{y}}\right),\sigma_{y}db=dy\\
+ & =\frac{\sigma_{y}}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}\int_{-\infty}^{\infty}\left(e^{-\frac{1}{2}\frac{1}{1-\rho_{x,y}^{2}}\left(a^{2}+b^{2}-2\rho_{x,y}ab\right)}\right)db\\
+ & =\frac{\sigma_{y}e^{-\frac{1}{2}\frac{a^{2}}{1-\rho_{x,y}^{2}}}}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}\int_{-\infty}^{\infty}\left(e^{-\frac{1}{2}\frac{1}{1-\rho_{x,y}^{2}}\left(b^{2}-2\rho_{x,y}ab\right)}\right)db\\
+ & \text{then }\left(b^{2}-2\rho_{x,y}ab+\rho_{x,y}^{2}a^{2}\right)-\rho_{x,y}^{2}a^{2}=\left(b-\rho_{x,y}a\right)^{2}-\rho_{x,y}^{2}a^{2}\\
+ & =\frac{\sigma_{y}e^{-\frac{1}{2}\left(\frac{a^{2}}{1-\rho_{x,y}^{2}}-\frac{\rho_{x,y}^{2}a^{2}}{1-\rho_{x,y}^{2}}\right)}}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}\int_{-\infty}^{\infty}\left(e^{-\frac{1}{2}\frac{\left(b-\rho_{x,y}a\right)^{2}}{1-\rho_{x,y}^{2}}}\right)db\\
+ & \text{the integrand is the kernel of }\mathcal{N}\left(\rho_{x,y}a,1-\rho_{x,y}^{2}\right)\\
+ & \text{and }-\frac{1}{2}\left(\frac{a^{2}}{1-\rho_{x,y}^{2}}-\frac{\rho_{x,y}^{2}a^{2}}{1-\rho_{x,y}^{2}}\right)=-\frac{a^{2}}{2}\\
+ & =\frac{\sigma_{y}e^{-\frac{a^{2}}{2}}}{\sqrt{\left(2\pi\right)^{2}\left|\boldsymbol{\Sigma}\right|}}\sqrt{2\pi}\sqrt{1-\rho_{x,y}^{2}}\\
+ & =\frac{\sigma_{y}e^{-\frac{a^{2}}{2}}}{\sqrt{\left(2\pi\right)^{2}\left(\sigma_{x}^{2}\sigma_{y}^{2}\left(1-\rho_{y,x}^{2}\right)\right)}}\sqrt{2\pi}\sqrt{1-\rho_{x,y}^{2}}\\
+ & =\frac{e^{-\frac{a^{2}}{2}}}{\sigma_{x}\sqrt{\left(2\pi\right)}}=\frac{e^{-\frac{1}{2}\left(\frac{x-\mu_{x}}{\sigma_{x}}\right)^{2}}}{\sigma_{x}\sqrt{\left(2\pi\right)}}
+\end{align*}
+
+\end_inset
+
+and by symmetry 
+\begin_inset Formula $f_{Y}\left(y\right)=\frac{e^{-\frac{1}{2}\left(\frac{y-\mu_{y}}{\sigma_{y}}\right)^{2}}}{\sigma_{y}\sqrt{\left(2\pi\right)}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{X,Y}\left(x,y\right)=\frac{1}{\sqrt{\left(2\pi\right)^{2}\left(\sigma_{x}^{2}\sigma_{y}^{2}\left(1-\rho_{y,x}^{2}\right)\right)}}e^{-\frac{1}{2}\frac{1}{1-\rho_{x,y}^{2}}\left(\frac{\left(x-\mu_{x}\right)^{2}}{\sigma_{x}^{2}}+\frac{\left(y-\mu_{y}\right)^{2}}{\sigma_{y}^{2}}-2\rho_{x,y}\frac{\left(x-\mu_{x}\right)\left(y-\mu_{y}\right)}{\sigma_{x}\sigma_{y}}\right)}
+\]
+
+\end_inset
+
+hence
+\begin_inset Formula 
+\begin{align*}
+f_{Y|X}\left(y|x\right) & =\frac{1}{\sqrt{\left(2\pi\right)^{2}\left(\sigma_{x}^{2}\sigma_{y}^{2}\left(1-\rho_{y,x}^{2}\right)\right)}}\frac{e^{-\frac{1}{2}\frac{1}{1-\rho_{x,y}^{2}}\left(\frac{\left(x-\mu_{x}\right)^{2}}{\sigma_{x}^{2}}+\frac{\left(y-\mu_{y}\right)^{2}}{\sigma_{y}^{2}}-2\rho_{x,y}\frac{\left(x-\mu_{x}\right)\left(y-\mu_{y}\right)}{\sigma_{x}\sigma_{y}}\right)}}{\frac{e^{-\frac{1}{2}\left(\frac{x-\mu_{x}}{\sigma_{x}}\right)^{2}}}{\sigma_{x}\sqrt{\left(2\pi\right)}}}\\
+ & =\frac{1}{\sqrt{\left(2\pi\right)\left(\sigma_{y}^{2}\left(1-\rho_{y,x}^{2}\right)\right)}}\times\\
+ & e^{-\frac{1}{2}\frac{1}{1-\rho_{x,y}^{2}}\left(\frac{\left(x-\mu_{x}\right)^{2}\left(1-\left(1-\rho_{x,y}^{2}\right)\right)}{\sigma_{x}^{2}}+\frac{\left(y-\mu_{y}\right)^{2}}{\sigma_{y}^{2}}-2\rho_{x,y}\frac{\left(x-\mu_{x}\right)\left(y-\mu_{y}\right)}{\sigma_{x}\sigma_{y}}\right)}\\
+ & \text{let }d_{x}=x-\mu_{x}\text{ and }d_{y}=y-\mu_{y}\text{ and }\rho=\left(1-\rho_{y,x}^{2}\right)\\
+ & =\frac{1}{\sqrt{\left(2\pi\right)\left(\sigma_{y}^{2}\rho\right)}}e^{-\frac{1}{2}\frac{1}{\sigma_{y}^{2}\rho}\left(\frac{d_{y}^{2}\sigma_{x}^{2}-2d_{x}d_{y}\rho_{y,x}\sigma_{x}\sigma_{y}+d_{x}^{2}\left(1-\rho\right)\sigma_{y}^{2}}{\sigma_{x}^{2}}\right)}\\
+ & \text{but}\\
+\left(y-\left(\mu_{y}+\rho_{x,y}\frac{\sigma_{y}}{\sigma_{x}}\left(x-\mu_{x}\right)\right)\right)^{2} & =\left(y-\left(y-d_{y}+\rho_{x,y}\frac{\sigma_{y}}{\sigma_{x}}d_{x}\right)\right)\\
+ & =\left(\frac{d_{y}\sigma_{x}-d_{x}\rho_{x,y}\sigma_{y}}{\sigma_{x}}\right)^{2}\\
+ & =\frac{d_{y}^{2}\sigma_{x}^{2}-2d_{x}d_{y}\rho_{x,y}\sigma_{x}\sigma_{y}+d_{x}^{2}\left(1-\rho\right)\sigma_{y}^{2}}{\sigma_{x}^{2}}
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $Y|X\sim\mathcal{N}\left(\mu_{y}+\rho_{x,y}\left(\frac{\sigma_{y}}{\sigma_{x}}\right)\left(x-\mu_{x}\right),\sigma_{y}^{2}\left(1-\rho_{x,y}^{2}\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Using the MGF of the bivariate normal: if 
+\begin_inset Formula $Z\sim\mathcal{N}\left(\boldsymbol{\mu}_{Z},\boldsymbol{\Sigma}_{Z}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $Z=(X,Y)$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{\mu}_{Z}=\left(\mu_{X},\mu_{Y}\right)$
+\end_inset
+
+ 
+\begin_inset Formula $\boldsymbol{\Sigma}_{Z}=\begin{pmatrix}\sigma_{X}^{2} & \rho_{X,Y}\sigma_{X}\sigma_{Y}\\
+\rho_{Y,X}\sigma_{Y}\sigma_{X} & \sigma_{Y}^{2}
+\end{pmatrix}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\text{MGF}_{Z}\left(\boldsymbol{t}\right)=e^{\left(\boldsymbol{\mu}_{Z}\cdot\boldsymbol{t}^{T}+\frac{1}{2}\boldsymbol{t}\boldsymbol{\Sigma}_{Z}\boldsymbol{t}^{T}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{t}=\left(t_{1},t_{2}\right)$
+\end_inset
+
+.
+ Then if 
+\begin_inset Formula $F=\mathbf{x}\cdot Z^{T}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{x}=\left(a,b\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{MGF}_{F}\left(t\right) & =E\left(e^{t\cdot F}\right)\\
+ & =E\left(e^{t\left(\mathbf{x}\cdot Z^{T}\right)}\right)\\
+ & =E\left(e^{\left(t\mathbf{x}\right)\cdot Z^{T}}\right)\\
+ & \text{so }\mathbf{s}=\left(t\mathbf{x}\right)\\
+ & =E\left(e^{\mathbf{s}\cdot Z^{T}}\right)\\
+ & \text{which is MGF}_{Z}\left(\mathbf{s}\right)\\
+ & =e^{\left(\boldsymbol{\mu}_{Z}\cdot\mathbf{s}^{T}+\frac{1}{2}\mathbf{s}\cdot\boldsymbol{\Sigma}_{Z}\mathbf{s}^{T}\right)}\\
+ & =e^{\left(\boldsymbol{\mu}_{Z}\cdot\left(t\mathbf{x}\right)^{T}+\frac{1}{2}\left(t\mathbf{x}\right)\cdot\boldsymbol{\Sigma}_{Z}\left(t\mathbf{x}\right)^{T}\right)}\\
+ & =e^{\left(\boldsymbol{\mu}_{Z}\cdot\mathbf{x}^{T}t+\frac{1}{2}t\mathbf{x}\cdot\boldsymbol{\Sigma}_{Z}\cdot\mathbf{x}^{T}t\right)}\\
+ & =e^{\left(\left(\boldsymbol{\mu}_{Z}\cdot\mathbf{x}^{T}\right)t+\frac{1}{2}\left(\mathbf{x}\cdot\boldsymbol{\Sigma}_{Z}\cdot\mathbf{x}^{T}\right)\cdot t^{2}\right)}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $F\sim\mathcal{N}\left(\mu_{F},\sigma_{F}^{2}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\mu_{F}=\boldsymbol{\mu}_{Z}\cdot\mathbf{x}^{T}=\left(a\mu_{X}+b\mu_{Y}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+\sigma_{F}^{2} & =\left(\mathbf{x}\cdot\boldsymbol{\Sigma}_{Z}\cdot\mathbf{x}^{T}\right)\\
+ & =\left(a\sigma_{X}^{2}+b\rho_{X,Y}\sigma_{X}\sigma_{Y},a\rho_{X,Y}\sigma_{X}\sigma_{Y}+b\sigma_{Y}^{2}\right)\cdot\left(a,b\right)^{T}\\
+ & =\left(a^{2}\sigma_{X}^{2}+ab\rho_{X,Y}\sigma_{X}\sigma_{X}\right)+\left(ab\rho_{X,Y}\sigma_{X}\sigma_{Y}+b^{2}\sigma_{Y}^{2}\right)\\
+ & =a^{2}\sigma_{X}^{2}+b^{2}\sigma_{Y}^{2}+2ab\rho_{X,Y}\sigma_{X}\sigma_{Y}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.47]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X\sim Y\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $XY>0$
+\end_inset
+
+ in the first and third quadrant of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $XY<0$
+\end_inset
+
+ in the second and fourth quadrant of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+f_{Z}\left(z\right) & =P\left(XY>0\right)f_{X}\left(z\right)\left|\frac{d}{dz}z\right|+P\left(XY<0\right)f_{X}\left(-z\right)\left|\frac{d}{dz}\left(-z\right)\right|\\
+ & =P\left(XY>0\right)f_{X}\left(z\right)+P\left(XY<0\right)f_{X}\left(-z\right)\\
+ & \text{but }f_{X}\left(x\right)\text{ is symmetric so}\\
+ & =\left(P\left(XY>0\right)+P\left(XY<0\right)\right)f_{X}\left(z\right)\\
+ & =\Bigg(\bigg(P\left(X>0,Y>0\right)+P\left(X<0,Y<0\right)\bigg)+\bigg(P\left(X<0,Y>0\right)+P\left(X<0,Y>0\right)\bigg)\Bigg)f_{X}\left(z\right)\\
+ & \text{but }X\text{ and }Y\text{ are i.i.d. so}\\
+ & =\Bigg(\bigg(P\left(X>0\right)P\left(Y>0\right)+P\left(X<0\right)P\left(Y<0\right)\bigg)+\\
+ & \bigg(P\left(X<0\right)P\left(Y>0\right)+P\left(X<0\right)P\left(Y>0\right)\bigg)\Bigg)f_{X}\left(z\right)\\
+ & =\Bigg(\left(\frac{1}{2}\frac{1}{2}+\frac{1}{2}\frac{1}{2}\right)+\bigg(\frac{1}{2}\frac{1}{2}+\frac{1}{2}\frac{1}{2}\bigg)\Bigg)f_{X}\left(z\right)\\
+ & =f_{X}\left(z\right)=\frac{e^{-\frac{1}{2}\left(\frac{z-\mu_{x}}{\sigma_{x}}\right)^{2}}}{\sigma_{x}\sqrt{\left(2\pi\right)}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $Y>0$
+\end_inset
+
+ then if 
+\begin_inset Formula $X>0$
+\end_inset
+
+ immediately 
+\begin_inset Formula $Z=X>0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $Y>0$
+\end_inset
+
+ then if 
+\begin_inset Formula $X<0$
+\end_inset
+
+ immediately 
+\begin_inset Formula $Z=-X>0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $Y<0$
+\end_inset
+
+ then if 
+\begin_inset Formula $X<0$
+\end_inset
+
+ immediately 
+\begin_inset Formula $Z=X<0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $Y<0$
+\end_inset
+
+ then if 
+\begin_inset Formula $X>0$
+\end_inset
+
+ immediately 
+\begin_inset Formula $Z=-X<0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\left(Z,Y\right)$
+\end_inset
+
+ can't be bivariate normal because otherwise their joint distribution wouldn't
+ be zero in the 2nd and 4th quadrant.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.51]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+First
+\begin_inset Formula 
+\begin{align*}
+P\left(\frac{X}{Y}\leq t\right) & =\begin{cases}
+P\left(X\leq tY\right) & \text{if }t\leq1\\
+P\left(X/t\leq Y\right) & \text{if }t>1
+\end{cases}=\begin{cases}
+\int_{0}^{1}\int_{0}^{ty}dxdy & \text{if }t\leq1\\
+\int_{0}^{1}\int_{x/t}^{1}dydx & \text{if }t>1
+\end{cases}=\begin{cases}
+\frac{1}{2}t & \text{if }t\leq1\\
+1-\frac{1}{2t} & \text{if }t>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Then if 
+\begin_inset Formula $t>1$
+\end_inset
+
+ 
+\begin_inset Formula $P\left(XY\leq t\right)=1$
+\end_inset
+
+ and otherwise 
+\begin_inset Formula 
+\begin{align*}
+P\left(XY\leq t\right) & =P\left(Y\leq\frac{t}{X}\right)\\
+ & =1-\int_{t}^{1}\left(\int_{t/x}^{1}dy\right)dx\\
+ & =1-\left(\left(1-t\right)-t\left(0-\log\left(t\right)\right)\right)\\
+ & =1-\left(1-t+t\log\left(t\right)\right)=t-\log\left(t\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $P\left(XY/Z\leq t\right)=E\left(1_{\{XY/Z\leq t\}}\right)=E\left(E\left(1_{XY/Z\leq t}\bigg|Z\right)\right)=E\left(P\left(XY/Z\leq t|Z\right)\right)$
+\end_inset
+
+ since in general 
+\begin_inset Formula $P\left(A\right)=E\left(1_{A}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(A|X\right)=E\left(1_{A}|X\right)$
+\end_inset
+
+.
+ Also 
+\begin_inset Formula $P\left(XY/Z\leq t\right)=E\left(1_{\{XY/Z\leq t\}}\right)=E\left(E\left(1_{XY/Z\leq t}\bigg|X\right)\right)=E\left(P\left(XY/Z\leq t|X\right)\right)$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\begin{align*}
+P\left(\frac{XY}{Z}\leq t\right) & =\begin{cases}
+\int_{0}^{1}P\left(XY\leq zt\right)dz & \text{if }t\leq1\\
+\int_{0}^{1}P\left(\frac{Y}{Z}\leq\frac{t}{x}\right)dx & \text{if }t>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Then for 
+\begin_inset Formula $t\leq1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $Zt\leq1$
+\end_inset
+
+ so by part (a.ii)
+\begin_inset Formula 
+\begin{align*}
+P\left(\frac{XY}{Z}\leq t\right) & =\int_{0}^{1}P\left(XY\leq zt\right)dz\\
+ & =\int_{0}^{1}\left(zt-\log\left(zt\right)\right)dz\\
+ & =\frac{1}{4}t\left(3-2\log\left(t\right)\right)
+\end{align*}
+
+\end_inset
+
+and for 
+\begin_inset Formula $t>1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $t/X>1$
+\end_inset
+
+ and since 
+\begin_inset Formula $Z\sim X$
+\end_inset
+
+, so by part (a.i)
+\begin_inset Formula 
+\begin{align*}
+P\left(\frac{XY}{Z}\leq t\right) & =\int_{0}^{1}P\left(\frac{Y}{Z}\leq\frac{t}{x}\right)dx\\
+ & =\int_{0}^{1}\left(1-\frac{1}{2(t/x)}\right)dx\\
+ & =\int_{0}^{1}\left(1-\frac{x}{2t}\right)dx\\
+ & =1-\frac{1}{4t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.53]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $B^{2}-4AC\geq0\iff B^{2}\geq4AC$
+\end_inset
+
+ then 
+\begin_inset Formula $Ax^{2}+Bx+C=0$
+\end_inset
+
+ has real roots.
+ Taking the log of both sides preserves the inequality since log is strictly
+ increasing.
+ Then 
+\begin_inset Formula $2\log\left(B\right)\geq\log\left(4\right)+\log\left(A\right)+\log\left(C\right).$
+\end_inset
+
+ Multiplying everything by a negative sign flips the inequality 
+\begin_inset Formula $-2\log\left(B\right)\leq-\log\left(4\right)-\log\left(A\right)-\log\left(C\right).$
+\end_inset
+
+ But 
+\begin_inset Formula $-\log\left(A\right)\sim-\log\left(C\right)\sim\text{exponential\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $-2\log\left(B\right)\sim\text{exponential}\left(2\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $-\log\left(A\right)+-\log\left(C\right)\sim\text{Gamma}\left(2,1\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X\sim\text{exponential}\left(2\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y\sim\text{Gamma}\left(2,1\right)$
+\end_inset
+
+ then question is 
+\begin_inset Formula $P\left(X<Y+\log\left(1/4\right)\right)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+P\left(X<Y+\log\left(1/4\right)\right) & =E\left(P\left(X-\log\left(1/4\right)<Y|X\right)\right)\\
+ & =\int_{\log\left(4\right)}^{\infty}P\left(x-\log\left(1/4\right)<Y\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\int_{0}^{\infty}\left(\int_{x-\log\left(4\right)}^{\infty}\frac{y}{\Gamma\left(2\right)}e^{-y}dy\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\int_{0}^{\infty}\left(\frac{1}{4}e^{-x}\left(1+x+\log\left(4\right)\right)\right)\left(\frac{1}{2}e^{-x/2}\right)dx\\
+ & =\frac{1}{36}\left(5+\log\left(64\right)\right)\approx.254413
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.55]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=\max\left\{ X_{1},X_{2},X_{3}\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $X_{i}\sim\text{exponential\left(\lambda\right)}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $P\left(Y\leq y\right)=P\left(X_{1}\leq y,X_{2}\leq y,X_{3}\leq y\right)$
+\end_inset
+
+ since if some measurement of 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ of 
+\begin_inset Formula $Y$
+\end_inset
+
+ is taken it indicates that none of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ exceeded lifespan 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+.
+ But all 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ are independent so 
+\begin_inset Formula 
+\begin{align*}
+F_{Y}\left(y\right)=P\left(Y\leq y\right) & =\prod_{i=1}^{3}P\left(X_{i}\leq y\right)\\
+ & =\prod_{i=1}^{3}\left(1-e^{-\lambda y}\right)
+\end{align*}
+
+\end_inset
+
+and therefore the distribution 
+\begin_inset Formula 
+\[
+f_{Y}=\frac{d}{dy}F_{Y}\left(y\right)=3\left(1-e^{-\lambda y}\right)^{2}\left(\lambda e^{-\lambda y}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.64]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If both 
+\begin_inset Formula $a>0$
+\end_inset
+
+ and 
+\begin_inset Formula $b>0$
+\end_inset
+
+ or both 
+\begin_inset Formula $a<0$
+\end_inset
+
+ and 
+\begin_inset Formula $b<0$
+\end_inset
+
+ then obviously 
+\begin_inset Formula $\left|a+b\right|\leq\left|a\right|+\left|b\right|$
+\end_inset
+
+.
+ Without loss of generality assume 
+\begin_inset Formula $a<0$
+\end_inset
+
+ and 
+\begin_inset Formula $b>0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\left|a\right|<b$
+\end_inset
+
+ then 
+\begin_inset Formula $\left|a+b\right|\leq b\leq\left|b\right|+\left|a\right|$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\left|a\right|>b$
+\end_inset
+
+ then 
+\begin_inset Formula $\left|a+b\right|\leq\left|a\right|\leq\left|a\right|+\left|b\right|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left(\left|X+Y\right|\right)\leq E\left(\left|X\right|+\left|Y\right|\right)$
+\end_inset
+
+ since expectation if a nondecreasing function.
+ Then by linearity 
+\begin_inset Formula $E\left(\left|X+Y\right|\right)\leq E\left(\left|X\right|+\left|Y\right|\right)\leq E\left(\left|X\right|\right)+E\left(\left|Y\right|\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
