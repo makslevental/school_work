@@ -263,22 +263,9 @@ status open
 
 \end_inset
 
-
+Ha! No way! Too much work!
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-\begin_inset Formula $X\sim\mathcal{N}\left(\mu,\sigma^{2}\right)$
-\end_inset
-
- then 
-\begin_inset Formula $f_{X}(x)=$
-\end_inset
-
-
-\end_layout
-
-\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -908,9 +895,142 @@ status open
 
 \end_inset
 
-Duh
+
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left(ag_{1}\left(X,Y\right)+bg_{2}\left(X,Y\right)+c\right) & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\left(ag_{1}\left(x,y\right)+bg_{2}\left(x,y\right)+c\right)f_{X,Y}(x,y)dxdy\\
+ & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}ag_{1}\left(x,y\right)f_{X,Y}(x,y)dxdy+\\
+ & \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}bg_{2}\left(x,y\right)f_{X,Y}(x,y)dxdy+\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}cf_{X,Y}(x,y)dxdy\\
+ & =a\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g_{1}\left(x,y\right)f_{X,Y}(x,y)dxdy\\
+ & +b\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g_{2}\left(x,y\right)f_{X,Y}(x,y)dxdy+c\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}(x,y)dxdy\\
+ & =aE\left(g_{1}\left(X,Y\right)\right)+bE\left(g_{2}\left(X,Y\right)\right)+c\cdot1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left(g\left(X,Y\right)\right) & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g\left(x,y\right)f_{X,Y}(x,y)dxdy
+\end{align*}
+
+\end_inset
+
+Now since by assumption 
+\begin_inset Formula $g(x,y)\geq0$
+\end_inset
+
+ and by definition 
+\begin_inset Formula $f_{X,Y}(x,y)\geq0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $g(x,y)\cdot f_{X,Y}(x,y)\geq0$
+\end_inset
+
+ and therefore
+\begin_inset Formula 
+\[
+E\left(g(x,y)\right)\geq\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\left(0\right)dxdy=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $g_{1}\left(X,Y\right)\geq g_{2}\left(X,Y\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $g_{1}\left(X,Y\right)-g_{2}\left(X,Y\right)\geq0$
+\end_inset
+
+ and by part (a) and (b) 
+\begin_inset Formula 
+\[
+0\leq E\left(g_{1}\left(X,Y\right)-g_{2}\left(X,Y\right)\right)=E\left(g_{1}\left(X,Y\right)\right)-E\left(g_{2}\left(X,Y\right)\right)
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $E\left(g_{1}\left(X,Y\right)\right)\geq E\left(g_{2}\left(X,Y\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $a\leq g\left(X,Y\right)\leq b$
+\end_inset
+
+ implies 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $a\leq g\left(X,Y\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(X,Y\right)\leq b$
+\end_inset
+
+.
+ Then part (a) and (c) implies 
+\begin_inset Formula $a=E\left(a\right)\leq E\left(g\left(X,Y\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $E\left(g\left(X,Y\right)\right)\leq E\left(b\right)=b$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1273,20 +1393,6 @@ status open
 
 \begin_layout Plain Layout
 
-[4.12]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 [4.13]
 \end_layout
 
@@ -1322,7 +1428,7 @@ E[Y|X] & =g(X)
 The fact that 
 \begin_inset Formula 
 \[
-\underset{b}{min}E\left[\left(Y-b\right)^{2}\right]=E\left[\left(Y-E(X)\right)^{2}\right]
+\min_{b}E\left[\left(Y-b\right)^{2}\right]=E\left[\left(Y-E(X)\right)^{2}\right]
 \]
 
 \end_inset
@@ -1466,6 +1572,11 @@ status open
 
 \end_inset
 
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
 Let 
 \begin_inset Formula $Z=X+Y$
 \end_inset
@@ -1494,7 +1605,6 @@ Hence
 .
 \end_layout
 
-\begin_deeper
 \begin_layout Enumerate
 By symmetry 
 \begin_inset Formula $Y|\left(X+Y\right)\sim Binomial\left(X+Y,\frac{\lambda}{\theta+\lambda}\right)$
@@ -1743,7 +1853,7 @@ with
 \begin_inset Formula $-\infty<x,y<\infty$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -1821,32 +1931,35 @@ f_{X,Y}(x,y)=\frac{\Gamma\left(\alpha+\beta\right)}{\Gamma\left(\alpha\right)\Ga
 and therefore
 \begin_inset Formula 
 \begin{align*}
-f_{U,V}(u,v) & =\frac{\Gamma\left(\alpha+\beta\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}\frac{\left(\frac{u}{v}\right)^{\alpha-1}}{\left(1-\frac{u}{v}\right)^{1-\beta}}\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha+\beta\right)\Gamma\left(\gamma\right)}\frac{v^{\alpha+\beta-1}}{\left(1-v\right)^{1-\gamma}}\frac{1}{v}I_{\{0<u<v<1\}}(u,v)\\
- & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\frac{v^{\alpha+\beta-1}}{\left(1-v\right)^{1-\gamma}}\frac{\left(\frac{u}{v}\right)^{\alpha-1}}{\left(1-\frac{u}{v}\right)^{1-\beta}}\frac{1}{v}I_{\{0<u<v<1\}}(u,v)
+f_{U,V}(u,v) & =\frac{\Gamma\left(\alpha+\beta\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}\left(\frac{u}{v}\right)^{\alpha-1}\left(1-\frac{u}{v}\right)^{\beta-1}\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha+\beta\right)\Gamma\left(\gamma\right)}v^{\alpha+\beta-1}\left(1-v\right)^{\gamma-1}\frac{1}{v}I_{\{0<u<v<1\}}(u,v)\\
+ & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\left(\frac{u}{v}\right)^{\alpha-1}\left(1-\frac{u}{v}\right)^{\beta-1}v^{\alpha+\beta-1}\left(1-v\right)^{\gamma-1}\frac{1}{v}I_{\{0<u<v<1\}}(u,v)\\
+ & \text{let }\Gamma=\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\\
+ & =\Gamma\left(\frac{u}{v}\right)^{\alpha-1}\left(1-\frac{u}{v}\right)^{\beta-1}v^{\alpha+\beta-1}\left(1-v\right)^{\gamma-1}\frac{1}{v}I_{\{0<u<v<1\}}(u,v)\\
+ & =\Gamma u^{\alpha-1}\left(1-\frac{u}{v}\right)^{\beta-1}v^{\beta}\left(1-v\right)^{\gamma-1}\frac{1}{v}I_{\{0<u<v<1\}}(u,v)\\
+ & =\Gamma u^{\alpha-1}\left(v-u\right)^{\beta-1}\left(1-v\right)^{\gamma-1}I_{\{0<u<v<1\}}(u,v)
 \end{align*}
 
 \end_inset
 
-Then by
+Then 
 \begin_inset Formula 
 \begin{align*}
-v^{\alpha+\beta-1}\left(1-v\right)^{\gamma-1}\left(\frac{u}{v}\right)^{\alpha-1}\left(1-\frac{u}{v}\right)^{\beta-1}\frac{1}{v} & =v^{\alpha}\left(1-v\right)^{\gamma-1}\left(\frac{u}{v}\right)^{\alpha-1}\left(v-u\right)^{\beta-1}\frac{1}{v}\\
- & =v^{\alpha-1}\left(1-v\right)^{\gamma-1}\left(\frac{u}{v}\right)^{\alpha-1}\left(v-u\right)^{\beta-1}\\
- & =\left(1-v\right)^{\gamma-1}u^{\alpha-1}\left(v-u\right)^{\beta-1}
+f_{U}(u) & =\Gamma u^{\alpha-1}\int_{u}^{1}\left(v-u\right)^{\beta-1}\left(1-v\right)^{\gamma-1}dv\\
+ & \text{let }y=\frac{v-u}{1-u}\text{ then }1-y=\frac{1-v}{1-u}\text{ and }dy=\frac{dv}{1-u}\\
+ & =\Gamma u^{\alpha-1}\left(1-u\right)^{\left(\beta-1\right)+\left(\gamma-1\right)+1}\int_{u}^{1}\left(\frac{v-u}{1-u}\right)^{\beta-1}\left(\frac{1-v}{1-u}\right)^{\gamma-1}\frac{dv}{1-u}\\
+ & =\Gamma u^{\alpha-1}\left(1-u\right)^{\left(\beta-1\right)+\left(\gamma-1\right)+1}\int_{0}^{1}y^{\beta-1}\left(1-y\right)^{\gamma-1}dy\\
+ & =\Gamma u^{\alpha-1}\left(1-u\right)^{\beta+\gamma-1}\frac{\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}{\Gamma\left(\beta+\gamma\right)}\\
+ & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}u^{\alpha-1}\left(1-u\right)^{\beta+\gamma-1}\frac{\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}{\Gamma\left(\beta+\gamma\right)}\\
+ & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta+\gamma\right)}u^{\alpha-1}\left(1-u\right)^{\beta+\gamma-1}
 \end{align*}
 
 \end_inset
 
-
-\begin_inset Formula 
-\begin{align*}
-f_{U}(u) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}u^{\alpha-1}\int_{u}^{1}(v-u)^{\beta-1}(1-v)^{\gamma-1}dv\\
- & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma(\beta+\gamma)}u^{\alpha-1}(1-u)^{\beta+\gamma-1}
-\end{align*}
-
+Therefore 
+\begin_inset Formula $U\sim\text{beta}(\alpha,\beta+\gamma)$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -1866,18 +1979,27 @@ f_{U}(u) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\rig
 \end_inset
 
  and 
-\begin_inset Formula $0<v<\infty$
-\end_inset
-
- and 
-\begin_inset Formula $0<u<v$
-\end_inset
-
- since 
-\begin_inset Formula $U=VY^{2}$
+\begin_inset Formula $0<u<1$
 \end_inset
 
  .
+ Since 
+\begin_inset Formula $U=VY^{2}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $u<v$
+\end_inset
+
+ and since 
+\begin_inset Formula $X^{2}/U=V$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $v<1/u$
+\end_inset
+
+.
  
 \begin_inset Formula 
 \[
@@ -1892,7 +2014,9 @@ f_{U}(u) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\rig
 and therefore
 \begin_inset Formula 
 \begin{align*}
-f_{U,V}(u,v) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\frac{\left(\sqrt{u}\sqrt{v}\right)^{\alpha-1}}{\left(1-\sqrt{u}\sqrt{v}\right)^{1-\beta}}\frac{\left(\frac{\sqrt{u}}{\sqrt{v}}\right)^{\alpha+\beta-1}}{\left(1-\frac{\sqrt{u}}{\sqrt{v}}\right)^{1-\gamma}}\frac{1}{2v}I_{\{0<u<v<\infty\}}(u,v)
+f_{U,V}(u,v) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\left(\sqrt{u}\sqrt{v}\right)^{\alpha-1}\left(1-\sqrt{u}\sqrt{v}\right)^{\beta-1}\left(\frac{\sqrt{u}}{\sqrt{v}}\right)^{\alpha+\beta-1}\left(1-\frac{\sqrt{u}}{\sqrt{v}}\right)^{\gamma-1}\frac{1}{2v}I_{\{0<u<v<\infty\}}(u,v)\\
+ & \text{let }\Gamma=\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\\
+ & =\Gamma\frac{\left(\sqrt{u}\sqrt{v}\right)^{\alpha-1}}{\left(1-\sqrt{u}\sqrt{v}\right)^{1-\beta}}\frac{\left(\frac{\sqrt{u}}{\sqrt{v}}\right)^{\alpha+\beta-1}}{\left(1-\frac{\sqrt{u}}{\sqrt{v}}\right)^{1-\gamma}}\frac{1}{2v}I_{\{0<u<v<\infty\}}(u,v)
 \end{align*}
 
 \end_inset
@@ -1900,12 +2024,13 @@ f_{U,V}(u,v) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha
 Then by
 \begin_inset Formula 
 \begin{align*}
-f_{U}(u) & =\frac{\Gamma\left(\alpha+\beta+\gamma\right)}{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)\Gamma\left(\gamma\right)}\int_{u}^{\infty}\frac{\left(\sqrt{u}\sqrt{v}\right)^{\alpha-1}}{\left(1-\sqrt{u}\sqrt{v}\right)^{1-\beta}}\frac{\left(\frac{\sqrt{u}}{\sqrt{v}}\right)^{\alpha+\beta-1}}{\left(1-\frac{\sqrt{u}}{\sqrt{v}}\right)^{1-\gamma}}\frac{1}{2v}dv
+f_{U}(u) & =\Gamma\int_{u}^{1/u}\frac{\left(\sqrt{u}\sqrt{v}\right)^{\alpha-1}}{\left(1-\sqrt{u}\sqrt{v}\right)^{1-\beta}}\frac{\left(\frac{\sqrt{u}}{\sqrt{v}}\right)^{\alpha+\beta-1}}{\left(1-\frac{\sqrt{u}}{\sqrt{v}}\right)^{1-\gamma}}\frac{1}{2v}dv
 \end{align*}
 
 \end_inset
 
-
+Then...
+ no clue :)
 \end_layout
 
 \end_deeper
@@ -1983,7 +2108,7 @@ where
 \begin_inset Formula $Z_{2}\sim\text{B}(r,s)$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -1997,34 +2122,150 @@ status open
 
 \end_inset
 
-By definition
-\begin_inset Formula 
-\[
-f_{Z,W}(z,w)=P(Z=z,W=w)=P\left(\left(X,Y\right)\in A_{zw}\right)=\sum_{(x,y)\in A_{zw}}f_{X,Y}(x,y)
-\]
 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The joint CDF of 
+\begin_inset Formula $Z$
 \end_inset
 
-So
-\begin_inset Formula 
-\[
-f_{Z,W}(z,0)=P(Z=z,W=0)=P\left(\left(X,Y\right)\in A_{z0}\right)=\sum_{(x,y)\in A_{z0}}f_{X,Y}(x,y)
-\]
-
-\end_inset
-
-Then
+ is 
 \begin_inset Formula 
 \begin{align*}
-P\left(Y=y,Y<X\right) & =\mu e^{-\mu y}\int_{y}^{\infty}\lambda e^{-\lambda x}dx\\
- & =\mu e^{-\left(\lambda+\mu\right)y}
+F_{Z,W}(z,w) & =P\left(Z\leq z,W=w\right)\\
+\\
+ & =\sum_{w\in\mathcal{W}}P\left(Z\leq\zeta,W=w\right)\\
+ & =P\left(Z\leq z,W=0\right)+P\left(Z\leq z,W=1\right)\\
+ & =P\left(Y\leq z,Y<X\right)+P\left(X\leq z,X<Y\right)\\
+ & =\int_{0}^{z}\mu e^{-\mu y}\int_{y}^{\infty}\lambda e^{-\lambda x}dxdy+\int_{0}^{z}\lambda e^{-\lambda x}\int_{x}^{\infty}\mu e^{-\mu y}dydx\\
+ & =\frac{1}{\mu+\lambda}\left(\mu\left(1-e^{-\left(\mu+\lambda\right)z}\right)+\lambda\left(1-e^{-\left(\mu+\lambda\right)z}\right)\right)\\
+ & =1-e^{-\left(\mu+\lambda\right)z}
 \end{align*}
+
+\end_inset
+
+but 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $P\left(Z\leq z,W=w\right)=\begin{cases}
+P\left(Z\leq z,W=0\right) & \text{if }w=0\\
+P\left(Z\leq z,W=1\right) & \text{if }w=1
+\end{cases}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ where 
+\begin_inset Formula 
+\begin{align*}
+P\left(Z\leq z,W=0\right) & =P\left(Y\leq z,Y<X\right)\\
+ & =\int_{0}^{z}\mu e^{-\mu y}\int_{y}^{\infty}\lambda e^{-\lambda x}dxdy\\
+ & =\frac{\mu}{\mu+\lambda}\left(1-e^{-\left(\mu+\lambda\right)z}\right)
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+P\left(Z\leq z,W=1\right) & =P\left(X\leq z,X<Y\right)\\
+ & =\int_{0}^{z}\lambda e^{-\lambda x}\int_{x}^{\infty}\mu e^{-\mu y}dydx\\
+ & =\frac{\lambda}{\mu+\lambda}\left(1-e^{-\left(\mu+\lambda\right)z}\right)
+\end{align*}
+
+\end_inset
+
+Hence
+\begin_inset Formula 
+\[
+F_{Z,W}(z,w)=\begin{cases}
+\frac{\mu}{\mu+\lambda}\left(1-e^{-\left(\mu+\lambda\right)z}\right) & \text{if }w=0\\
+\frac{\lambda}{\mu+\lambda}\left(1-e^{-\left(\mu+\lambda\right)z}\right) & \text{if }w=1
+\end{cases}
+\]
+
+\end_inset
+
+and therefore the joint PDF is 
+\begin_inset Formula 
+\[
+f_{Z,W}(z,w)=\begin{cases}
+\mu e^{-\left(\mu+\lambda\right)z} & \text{if }w=0\\
+\lambda e^{-\left(\mu+\lambda\right)z} & \text{if }w=1
+\end{cases}
+\]
 
 \end_inset
 
 
 \end_layout
 
+\begin_layout Enumerate
+The marginal PDF of 
+\begin_inset Formula $W$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{W}(w)=\int_{0}^{\infty}f_{Z,W}(z,w)dz=\begin{cases}
+\int_{0}^{\infty}\mu e^{-\left(\mu+\lambda\right)z}dz=\frac{\mu}{\mu+\lambda} & \text{if }w=0\\
+\int_{0}^{\infty}\lambda e^{-\left(\mu+\lambda\right)z}dz=\frac{\lambda}{\mu+\lambda} & \text{if }w=1
+\end{cases}
+\]
+
+\end_inset
+
+The marginal PDF of 
+\begin_inset Formula $Z$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{Z}(z)=\sum_{w\in\mathcal{W}}f_{Z,W}(z,w)=\mu e^{-\left(\mu+\lambda\right)z}+\lambda e^{-\left(\mu+\lambda\right)z}=\left(\mu+\lambda\right)e^{-\left(\mu+\lambda\right)z}
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $Z$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+ are independent since 
+\begin_inset Formula $f_{Z,W}(z,w)=f_{Z}(z)f_{W}(w)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -2036,19 +2277,15 @@ status open
 
 \end_inset
 
-
-\begin_inset Formula $\frac{f_{X,Y}(x,y)}{f_{X}(x)}=f_{Y|X}(y|x)=\frac{1}{x\sqrt{2\pi}}e^{-\left(y-x\right)^{2}/2x^{2}}$
+ 
+\begin_inset Formula $\text{Var}(X)=E\left(\text{Var}\left(X|Y\right)\right)+\text{Var}\left(E\left(X|Y\right)\right)$
 \end_inset
 
- implies 
-\begin_inset Formula 
-\[
-f_{X,Y}(x,y)=\frac{1}{x\sqrt{2\pi}}e^{-\left(y-x\right)^{2}/2x^{2}}\frac{1}{1-0}=\frac{1}{x\sqrt{2\pi}}e^{-\left(y-x\right)^{2}/2x^{2}}
-\]
-
+ and 
+\begin_inset Formula $E\left(X\right)=E\left(E\left(X|Y\right)\right)$
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_deeper
@@ -2056,22 +2293,90 @@ f_{X,Y}(x,y)=\frac{1}{x\sqrt{2\pi}}e^{-\left(y-x\right)^{2}/2x^{2}}\frac{1}{1-0}
 Hence
 \begin_inset Formula 
 \begin{align*}
-f_{Y}(y) & =\int_{0}^{1}\frac{1}{x\sqrt{2\pi}}e^{-\left(y-x\right)^{2}/2x^{2}}dx\\
- & =\int_{0}^{1}\frac{1}{x\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{y}{x}\right)^{2}}dx\\
- & =\frac{1}{\sqrt{2\pi}}\int_{\infty}^{y}e^{-\frac{1}{2}\left(\frac{y}{x}\right)^{2}}d\left(\frac{y}{x}\right)
+E\left(Y\right) & =E\left(E\left(Y|X\right)\right)\\
+ & =E\left(X\right)\\
+ & =\frac{1}{2}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\text{Var}(Y) & =E\left(\text{Var}\left(Y|X\right)\right)+\text{Var}\left(E\left(Y|X\right)\right)\\
+ & =E\left(X^{2}\right)+\text{Var}\left(X\right)\\
+ & =\frac{1^{2}+1\cdot0+0^{2}}{3}+\frac{1}{12}(1-0)^{2}\\
+ & =\frac{5}{12}
+\end{align*}
+
+\end_inset
+
+and since 
+\begin_inset Formula $E\left(XY\right)=E\left(E\left(XY|X\right)\right)=E\left(X\cdot E\left(Y|X\right)\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{Cov}(X,Y) & =E\left(XY\right)-\mu_{X}\mu_{Y}\\
+ & =E\left(X\cdot E\left(Y|X\right)\right)-\frac{1}{2}\cdot\frac{1}{2}\\
+ & =E\left(X\cdot X\right)-\frac{1}{2}\cdot\frac{1}{2}\\
+ & =\frac{1}{3}-\frac{1}{4}=\frac{1}{12}
 \end{align*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $U=Y/X$
+\end_inset
+
+ then 
+\begin_inset Formula $-\infty<u<\infty$
+\end_inset
+
+ and then 
+\begin_inset Formula $V=X$
+\end_inset
+
+ and 
+\begin_inset Formula $0<v<1$
+\end_inset
+
+ implies
 \begin_inset Formula 
 \[
-e^{-\left(y-x\right)^{2}/2x^{2}}=e^{-\frac{1}{2}\left(\frac{y}{x}-1\right)^{2}=-\frac{1}{2}\left(\frac{y}{x}\right)^{2}+\frac{y}{x}-\frac{1}{2}}=e^{-\frac{1}{2}\left(\frac{y}{x}\right)^{2}+\frac{y}{x}-\frac{1}{2}}
+\left\Vert J\right\Vert =\left\Vert \left|\left(\begin{array}{cc}
+0 & 1\\
+v & u
+\end{array}\right)\right|\right\Vert =\left\Vert 0-v\right\Vert =v
 \]
 
 \end_inset
 
+hence
+\begin_inset Formula 
+\begin{align*}
+f_{U,V}\left(u,v\right) & =f_{Y,X}(uv,v)\cdot u\\
+ & =f_{Y|X}(uv|v)f_{X}(v)\\
+ & =\frac{1}{v\sqrt{2\pi}}e^{-\frac{\left(uv-v\right)^{2}}{2v^{2}}}\frac{1}{1-0}v\\
+ & =\frac{1}{\sqrt{2\pi}}e^{-\frac{v^{2}\left(u-1\right)^{2}}{2v^{2}}}\\
+ & =\frac{1}{\sqrt{2\pi}}e^{-\frac{\left(z-1\right)^{2}}{2}}
+\end{align*}
 
+\end_inset
+
+Therefore 
+\begin_inset Formula $Y/X\sim\mathcal{N}(1,1)$
+\end_inset
+
+ and 
+\begin_inset Formula $X\sim\text{uniform}(0,1)$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper

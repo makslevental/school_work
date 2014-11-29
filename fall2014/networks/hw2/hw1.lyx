@@ -161,6 +161,46 @@ status open
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+If there is a one-to-one relationship between the transport layer and the
+ network layer connection then the dynamic window of the transport layer
+ should keep pace with the leading edge of the sliding window of the network
+ layer.
+ This is because otherwise the sliding window in the network layer will
+ have idle slots which are 
+\begin_inset Quotes eld
+\end_inset
+
+ahead
+\begin_inset Quotes erd
+\end_inset
+
+ of possible frames which can be sent by the transport layer.
+ The tail of the window in the transport layer should also not be ahead
+ of the tail of the window in the network layer because otherwise packets
+ dropped in the network layer will not be recoverable.
+\end_layout
+
+\begin_layout Enumerate
+If there are multiple network layer connections then it is not so critical
+ that the head of the of the transport layer's dynamic window should keep
+ pace, or be ahead, of the head of the network layer's window, since there
+ are many network connections and idleness of some doesn't incur such a
+ high overall cost.
+\end_layout
+
+\begin_layout Enumerate
+If there are multiple transport layer connections multiplexed into one network
+ layer connection then it's important that there is room in the sliding
+ window of the network layer to encompass all of the windows of each transport
+ layer dynamic window, so that packets dropped in the network layer can
+ be recovered by the transport layer.
+ Therefore transport layer window sizes should be coordinated.
+ 
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -195,7 +235,7 @@ Congestion collapse happens at about the second green dot and it happens
  because utilization of the network goes above 80%.
  So wait time in queues increases exponentially and so ACK timers time out
  and sender retransmit, which only cyclically causes the buffers to become
- even more loaded, and then timers to run even longer, etc.
+ even more loaded, and then timers run even longer, etc.
 \end_layout
 
 \begin_layout Enumerate
@@ -212,9 +252,13 @@ TCP tries to operate in between the two green dots.
  If 3 duplicate ACKs are received then TCP goes into fast recovery mode,
  wherein it again records 'ssthresh' to be the congestion window divided
  by 2.
- It then retransmit the dropped segments and sets the congestion window
+ It then retransmits the dropped segments and sets the congestion window
  to be 'ssthresh' plus 3 and then again starts growing the congestion window
- by 1 per duplicate ACK.
+ by 1 per 
+\series bold
+duplicate
+\series default
+ ACK.
  Finally after getting a cumulative ACK it sets the congestion window back
  to 'ssthresh' and then continues to grow linearly for every RTT.
 \end_layout
@@ -236,8 +280,8 @@ status open
 \begin_deeper
 \begin_layout Enumerate
 The 'ssthresh' variable is set to the current congestion windows divided
- by 2 because in order to probe the capacity of the network using a sawtooth
- like pattern, in a sense a binary search of what the right congestion window
+ by 2 in order to probe the capacity of the network using a sawtooth like
+ pattern, in a sense a binary search of what the right congestion window
  size should be.
  It certainly couldn't be something like CongWin-20 since that might be
  negative when the network is under heavy load (CongWin<20).
@@ -245,7 +289,7 @@ The 'ssthresh' variable is set to the current congestion windows divided
 
 \begin_layout Enumerate
 In order to quickly back off from the current sending rate, in order to
- vigorously avoid congestion in the network.
+ aggresively avoid congestion in the network.
 \end_layout
 
 \begin_layout Enumerate
@@ -284,7 +328,7 @@ status open
 \begin_layout Enumerate
 If there are several long lived TCP flows then UDP would get an unfair share
  the bandwidth in cases of congestion.
- This is because each of the TCP flows will experience congestion control
+ This is because each of the TCP flow will be in the congestion control
  (most often being in the congestion avoidance phase) while UDP will not
  meter its flow whatsoever.
  In these instances it is probably the case that the TCP packets will be
@@ -303,7 +347,7 @@ Obviously you would inject traffic on the smallest pipe, between nodes C
 
 \begin_layout Enumerate
 The optimal place to inject traffic would be between node D and the receiver.
- This is as to maximize the probability of receiving ACKs quickly from the
+ This is so to maximize the probability of receiving ACKs quickly from the
  receiver and maximize the slow start growth of each of the short lived
  connections.
  This would then overwhelm the receiver and give the long lived flow from
@@ -313,7 +357,7 @@ The optimal place to inject traffic would be between node D and the receiver.
 \end_deeper
 \begin_layout Enumerate
 TCP's performance degrades over wireless links because of signal strength
- and bit-error rates thereby contribute more to RTTs than congestion does.
+ and bit-error rates which contribute more to RTTs than congestion does.
  So a wireless network might not be very congested and yet TCP estimates
  that it is, because the links are weak, and then all of the hosts spend
  all of their time unnecessarily in congestion avoidance.
@@ -322,8 +366,8 @@ TCP's performance degrades over wireless links because of signal strength
  The improvement would obviously be that hosts would not be in congestion
  avoidance unnecessarily but the drawbacks would be that on wired networks
  there would be unnecessary overhead since RTTs are an effective implicit
- measure of congestion already, and can be calculated without sending out-of-ban
-d signals (which cause the overhead).
+ measure of congestion already, and can be calculated without sending the
+ extra explicit information (which cause the overhead).
 \end_layout
 
 \begin_layout Enumerate
@@ -453,12 +497,12 @@ status open
 
 \begin_deeper
 \begin_layout Enumerate
-Assume exponentially distributed times between arrivals for each circuit.
+Assume Poisson process arrivals for each circuit.
  Then for virtual circuit one a probability for 1 arrival in 1 unit of time
  (1 time slot) of .1 implies
 \begin_inset Formula 
 \[
-\int_{0}^{1}\lambda_{1}e^{-\lambda_{1}x}dx=.1\implies\lambda_{1}\approx.105
+e^{-\lambda_{1}}\frac{\lambda_{1}^{1}}{1!}=.1\implies\lambda_{1}\approx.112
 \]
 
 \end_inset
@@ -466,7 +510,7 @@ Assume exponentially distributed times between arrivals for each circuit.
 and for virtual circuit 2
 \begin_inset Formula 
 \[
-\int_{0}^{1}\lambda_{1}e^{-\lambda_{2}x}dx=.2\implies\lambda_{2}\approx.223
+e^{-\lambda_{2}}\frac{\lambda_{2}^{1}}{1!}=.2\implies\lambda_{2}\approx.259
 \]
 
 \end_inset
@@ -474,7 +518,7 @@ and for virtual circuit 2
 and for virtual circuit 3
 \begin_inset Formula 
 \[
-\int_{0}^{1}\lambda_{3}e^{-\lambda_{3}x}dx=.3\implies\lambda_{3}\approx.357
+e^{-\lambda_{3}}\frac{\lambda_{3}^{1}}{1!}=.3\implies\lambda_{3}\approx.489
 \]
 
 \end_inset
@@ -522,15 +566,15 @@ Then the condition for constant queuing delay, namely that
 \end_inset
 
  and then 
-\begin_inset Formula $f_{1}=\frac{.105}{.75}\approx.14$
+\begin_inset Formula $f_{1}=\frac{.112}{.75}\approx.14$
 \end_inset
 
  and 
-\begin_inset Formula $f_{2}=\frac{.223}{.75}\approx.297$
+\begin_inset Formula $f_{2}=\frac{.259}{.75}\approx.346$
 \end_inset
 
  and 
-\begin_inset Formula $f_{3}=\frac{.357}{.75}\approx.476$
+\begin_inset Formula $f_{3}=\frac{.489}{.75}\approx.652$
 \end_inset
 
 .
@@ -538,12 +582,12 @@ Then the condition for constant queuing delay, namely that
 \end_layout
 
 \begin_layout Enumerate
-Assume exponentially distributed times between arrivals for each circuit.
+Assume Poisson process arrivals for each circuit.
  Then for virtual circuit one a probability for 1 arrival in 1 unit of time
  (1 time slot) of .1 implies
 \begin_inset Formula 
 \[
-\int_{0}^{1}\lambda_{1}e^{-\lambda_{1}x}dx=.05\implies\lambda_{1}\approx.0513
+e^{-\lambda_{1}}\frac{\lambda_{1}^{1}}{1!}=.05\implies\lambda_{1}\approx.053
 \]
 
 \end_inset
@@ -551,96 +595,689 @@ Assume exponentially distributed times between arrivals for each circuit.
 and for virtual circuit 2
 \begin_inset Formula 
 \[
-\int_{0}^{1}\lambda_{1}e^{-\lambda_{2}x}dx=.05\implies\lambda_{2}\approx.0513
+e^{-\lambda_{2}}\frac{\lambda_{2}^{1}}{1!}=.05\implies\lambda_{1}\approx.053
 \]
 
 \end_inset
 
-and for virtual circuit 3
+but for virtual circuit 3
 \begin_inset Formula 
 \[
-\int_{0}^{1}\lambda_{3}e^{-\lambda_{3}x}dx=.5\implies\lambda_{3}\approx.693
+e^{-\lambda_{3}}\frac{\lambda_{3}^{1}}{1!}=.5\implies\lambda_{3}\approx0.794024-0.770112i
 \]
 
 \end_inset
 
-Then the condition for constant queuing delay, namely that
-\begin_inset Formula 
-\[
-\frac{\lambda_{1}}{f_{1}}=\frac{\lambda_{2}}{f_{2}}=\frac{\lambda_{3}}{f_{3}}=k
-\]
+and so a Poisson arrival model is inappropriate for this network flow.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
 
 \end_inset
 
- where 
-\begin_inset Formula $f_{i}$
+
+\series bold
+Wireshark Lab 1
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1]
+\end_layout
+
 \end_inset
 
- is the portion of flow allocated to virtual circuit 
-\begin_inset Formula $i$
+TCP, TLSv1.2, DB-LSP-DISC
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2]
+\end_layout
+
 \end_inset
 
-, implies that 
-\begin_inset Formula $f_{1}=\frac{\lambda_{1}}{k}$
+2.189115000-2.122551000=0.066564 seconds
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3]
+\end_layout
+
 \end_inset
 
- and 
-\begin_inset Formula $f_{2}=\frac{\lambda_{2}}{k}$
+The IP address of gaia.cs.umass.edu is 128.119.245.12.
+ My local network address is 192.168.1.103 and my wide area network (WAN) address
+ is 98.180.54.7
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4]
+\end_layout
+
 \end_inset
 
- and 
-\begin_inset Formula $f_{3}=\frac{\lambda_{3}}{k}$
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+GET:
+\series default
+ No.
+ Time Source Destination Protocol Length Info 21 2.122551000 192.168.1.103 128.119.245.
+12 HTTP 525 GET /wireshark-labs/INTRO-wireshark-file1.html HTTP/1.1 Frame
+ 21: 525 bytes on wire (4200 bits), 525 bytes captured (4200 bits) on interface
+ 0 Ethernet II, Src: IntelCor_1b:ac:33 (68:5d:43:1b:ac:33), Dst: D-LinkIn_d5:95:
+67 (1c:af:f7:d5:95:67) Internet Protocol Version 4, Src: 192.168.1.103 (192.168.1.103)
+, Dst: 128.119.245.12 (128.119.245.12) Transmission Control Protocol, Src Port:
+ 37695 (37695), Dst Port: http (80), Seq: 1, Ack: 1, Len: 459 Hypertext
+ Transfer Protocol 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+OK: 
+\series default
+No.
+ Time Source Destination Protocol Length Info 23 2.189115000 128.119.245.12
+ 192.168.1.103 HTTP 446 HTTP/1.1 200 OK (text/html) Frame 23: 446 bytes on wire
+ (3568 bits), 446 bytes captured (3568 bits) on interface 0 Ethernet II,
+ Src: D-LinkIn_d5:95:67 (1c:af:f7:d5:95:67), Dst: IntelCor_1b:ac:33 (68:5d:43:1b
+:ac:33) Internet Protocol Version 4, Src: 128.119.245.12 (128.119.245.12), Dst:
+ 192.168.1.103 (192.168.1.103) Transmission Control Protocol, Src Port: http (80),
+ Dst Port: 37695 (37695), Seq: 1, Ack: 460, Len: 380 Hypertext Transfer
+ Protocol Line-based text data: text/html 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
 \end_inset
 
+
+\series bold
+Wireshark Lab 2
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Q11]
+\end_layout
+
+\end_inset
+
+
+\series bold
+HTTP GET:
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+GET /wireshark-labs/INTRO-wireshark-file1.html 
+\begin_inset Newline newline
+\end_inset
+
+HTTP/1.1 
+\begin_inset Newline newline
+\end_inset
+
+Host: gaia.cs.umass.edu 
+\begin_inset Newline newline
+\end_inset
+
+Connection: keep-alive 
+\begin_inset Newline newline
+\end_inset
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+ 
+\begin_inset Newline newline
+\end_inset
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like
+ Gecko) Chrome/38.0.2125.101 Safari/537.36 
+\begin_inset Newline newline
+\end_inset
+
+Referer: http://www.cise.ufl.edu/~helmy/F14/Wireshark_Intro_v6.0.pdf 
+\begin_inset Newline newline
+\end_inset
+
+Accept-Encoding: gzip,deflate,sdch 
+\begin_inset Newline newline
+\end_inset
+
+Accept-Language: en-US,en;q=0.8,ru;q=0.6
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+HTTP OK: 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+HTTP/1.1 200 OK 
+\begin_inset Newline newline
+\end_inset
+
+Date: Tue, 21 Oct 2014 17:52:10 GMT 
+\begin_inset Newline newline
+\end_inset
+
+Server: Apache/2.2.3 (CentOS) 
+\begin_inset Newline newline
+\end_inset
+
+Last-Modified: Tue, 21 Oct 2014 17:52:01 GMT 
+\begin_inset Newline newline
+\end_inset
+
+ETg 8734b-51-7d011240 
+\begin_inset Newline newline
+\end_inset
+
+Accept-Ranges: bytes 
+\begin_inset Newline newline
+\end_inset
+
+Content-Length: 81 
+\begin_inset Newline newline
+\end_inset
+
+Keep-Alive: timeout=10, max=100 
+\begin_inset Newline newline
+\end_inset
+
+Connection: Keep-Alive 
+\begin_inset Newline newline
+\end_inset
+
+Content-Type: text/html; charset=UTF-8
+\begin_inset Newline newline
+\end_inset
+
+<html> Congratulations! You've downloaded the first Wireshark lab file!
+ </html>
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1]
+\end_layout
+
+\end_inset
+
+Both my browser and the server are running HTTP/1.1 as indicated in the second
+ line of the 
+\series bold
+GET
+\series default
+ packet and the first line of the 
+\series bold
+OK 
+\series default
+packet.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2]
+\end_layout
+
+\end_inset
+
+My browser indicates 
+\series bold
+Accept-Language: en-US,en;q=0.8,ru;q=0.6 
+\series default
+so it accepts en-US,en, and ru.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3]
+\end_layout
+
+\end_inset
+
+The IP address of gaia.cs.umass.edu is 128.119.245.12.
+ My local network address is 192.168.1.103 and my wide area network (WAN) address
+ is 98.180.54.7 as shown in the packets from 
+\series bold
+Wireshark Lab 1
+\series default
 .
- Since 
-\begin_inset Formula $k$
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4]
+\end_layout
+
 \end_inset
 
- is proportional to the utilization for each flow, and we want to stay below
- total server utilization 
-\begin_inset Formula $\rho=.8$
+The server returns HTTP/1.1 200 OK so the status code is 200.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5]
+\end_layout
+
 \end_inset
 
- choose 
-\begin_inset Formula $k=.75$
+Last-Modified: Tue, 21 Oct 2014 17:52:01 GMT
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6]
+\end_layout
+
 \end_inset
 
- and then 
-\begin_inset Formula $f_{1}=\frac{.0513}{.75}\approx.0684$
+Content-Length: 81
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7]
+\end_layout
+
 \end_inset
 
- and 
-\begin_inset Formula $f_{2}=\frac{.0513}{.75}\approx.0684$
+I see a TCP header, IP header, and an Ethernet header.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Q12]
+\end_layout
+
 \end_inset
 
- and 
-\begin_inset Formula $f_{3}=\frac{..693}{.75}\approx.924$
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8]
+\end_layout
+
 \end_inset
 
-.
- Therefore at utilization 
-\begin_inset Formula $k=.75$
+No I don't see an IF-MODIFIED-SINCE header.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9]
+\end_layout
+
 \end_inset
 
- these 3 flows are unsustainable.
- Ramping up to 
-\begin_inset Formula $k=.9$
+The server did explicitly return a response, an HTTP/1.1 200 OK response
+ with 
+\begin_inset Quotes eld
 \end_inset
 
- then 
-\begin_inset Formula $f_{1}=\frac{.0513}{.9}\approx.0580$
+Line-based text data: text/html
+\begin_inset Quotes erd
 \end_inset
 
- and 
-\begin_inset Formula $f_{2}=\frac{.0513}{.9}\approx.0580$
+ <html>
+\begin_inset Newline newline
 \end_inset
 
- and 
-\begin_inset Formula $f_{3}=\frac{..693}{.9}\approx.770$
+Congratulations again! Now you've downloaded the file lab2-2.html.
+ <br> This file's last modification date will not change.
+ <p> Thus if you download this multiple times on your browser, a complete
+ copy <br> will only be sent once by the server due to the inclusion of
+ the IN-MODIFIED-SINCE<br> field in your browser's HTTP GET request to the
+ server.
+\begin_inset Newline newline
 \end_inset
 
-.
+</html>.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[10]
+\end_layout
+
+\end_inset
+
+I see 
+\begin_inset Quotes eld
+\end_inset
+
+If-Modified-Since: Tue, 21 Oct 2014 18:54:01 GMT
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[11]
+\end_layout
+
+\end_inset
+
+The status code is HTTP/1.1 304 Not Modified and no more html was returned.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Q13]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename longfile.jpg
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[12]
+\end_layout
+
+\end_inset
+
+My browser sent one GET request and in my packet list it was number 4.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13]
+\end_layout
+
+\end_inset
+
+In my packet list the response is packet 12.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[14]
+\end_layout
+
+\end_inset
+
+The status code is 200 OK
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[15]
+\end_layout
+
+\end_inset
+
+It's not visible in the graphic but in the packet inspection window for
+ packet 12, the response, it states the packet is 4 reassembled TCP segments
+ totaling 4803 bytes: #6(1448), #8(1448), #10(1448), #12(459)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Q14]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename longfile2.jpg
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[16]
+\end_layout
+
+\end_inset
+
+The browser sent 4 messages, packets 20,42,72,98.
+ The IP addresses were 128.119.245.12, 165.193.140.12, 128.119.240.90, and 128.119.240.90
+ again.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[17]
+\end_layout
+
+\end_inset
+
+It looks like they were downloaded serially since first the first GET was
+ issued, then the first image was downloaded, then the second GET was issued,
+ then the second image was downloaded.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Q15]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[18]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pw.jpg
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[18]
+\end_layout
+
+\end_inset
+
+The server's response is HTTP/1.1 401 Authorization required.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[19]
+\end_layout
+
+\end_inset
+
+The new field is Authorization: Basic d2lyZXNoYXJrLXN0dWRlbnRzOm5ldHdvcms=
+ , the encoded login and password.
 \end_layout
 
 \end_deeper

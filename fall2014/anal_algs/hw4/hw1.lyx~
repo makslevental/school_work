@@ -214,5 +214,1828 @@ Hence Extract-Min is
  amortized cost.
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[17.3-6]
+\end_layout
+
+\end_inset
+
+Keep two stacks, the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack and the 
+\begin_inset Quotes eld
+\end_inset
+
+dequeuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack.
+ To enqueue into the queue push to the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack.
+ To dequeue from the queue pop from the dequeuing stack.
+ If the dequeuing stack is empty then one-by-one pop everything from the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack and push to the the 
+\begin_inset Quotes eld
+\end_inset
+
+dequeuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack, and then finally pop the top element from the 
+\begin_inset Quotes eld
+\end_inset
+
+dequeuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack.
+ Claim: amortized cost is 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ for both enqueuing and dequeuing.
+ Let 
+\begin_inset Formula $\Phi\left(D_{i}\right)$
+\end_inset
+
+ be twice the number of items in the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The amortized cost of an enqueue operation into a queue for which the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack has 
+\begin_inset Formula $s$
+\end_inset
+
+ elements is 
+\begin_inset Formula 
+\begin{align*}
+\hat{c}_{i} & =c_{i}+\Delta\Phi_{i}\\
+ & =1+\left(2\left(s+1\right)-2s\right)\\
+ & =3
+\end{align*}
+
+\end_inset
+
+The amortized cost of a dequeue operation into a queue for which the 
+\begin_inset Quotes eld
+\end_inset
+
+dequeuing
+\begin_inset Quotes erd
+\end_inset
+
+ is non-empty and the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack has 
+\begin_inset Formula $s$
+\end_inset
+
+ elements is
+\begin_inset Formula 
+\begin{align*}
+\hat{c}_{i} & =c_{i}+\Delta\Phi_{i}\\
+ & =1+\left(2s-2s\right)\\
+ & =1
+\end{align*}
+
+\end_inset
+
+The amortized cost of a dequeue operation into a queue for which the 
+\begin_inset Quotes eld
+\end_inset
+
+dequeuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack is empty and the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack has 
+\begin_inset Formula $s$
+\end_inset
+
+ elements is
+\begin_inset Formula 
+\begin{align*}
+\hat{c}_{i} & =c_{i}+\Delta\Phi_{i}\\
+ & =s+s+1+\left(0-2s\right)\\
+ & =1
+\end{align*}
+
+\end_inset
+
+where the actual cost for the dequeuing operation includes 
+\begin_inset Formula $s$
+\end_inset
+
+ pops from the 
+\begin_inset Quotes eld
+\end_inset
+
+enqueuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack and 
+\begin_inset Formula $s$
+\end_inset
+
+ pushes into the 
+\begin_inset Quotes eld
+\end_inset
+
+dequeuing
+\begin_inset Quotes erd
+\end_inset
+
+ stack.
+ There each operation has at most amortized cost equal to 3.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[17.4-3]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\Phi\left(T\right)=\left|2\cdot T.num-T.size\right|$
+\end_inset
+
+.
+ Then on deletion 
+\begin_inset Formula $num_{i}=num_{i-1}-1$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+If 
+\begin_inset Formula $\alpha<1/2$
+\end_inset
+
+ then we must consider whether the delete operation cause the table to contract.
+ If it does not, then 
+\begin_inset Formula $size_{i}=size_{i-1}$
+\end_inset
+
+ and the amortized cost of the delete operation
+\begin_inset Formula 
+\begin{align*}
+\hat{c}_{i} & =c_{i}+\Delta\Phi\\
+ & \text{since }\alpha<1/2\text{ then }2\cdot T.num<T.size\\
+ & =1+\left(size_{i}-2\cdot num_{i}\right)-\left(size_{i-1}-2\cdot num_{i-1}\right)\\
+ & =1+\left(size_{i-1}-2\left(num_{i-1}-1\right)\right)-\left(size_{i-1}-2\cdot num_{i-1}\right)\\
+ & =1+2=3
+\end{align*}
+
+\end_inset
+
+If it causes the table to contract, then the cost of the delete operation
+ 
+\begin_inset Formula $c_{i}=num_{i}+1$
+\end_inset
+
+, 
+\begin_inset Formula $size_{i}=\left(2/3\right)size_{i-1}=2\cdot num_{i-1}=2\cdot\left(num_{i}+1\right)$
+\end_inset
+
+.
+ Then amortized cost
+\begin_inset Formula 
+\begin{align*}
+\hat{c}_{i} & =c_{i}+\Delta\Phi\\
+ & \text{since }\alpha<1/2\text{ then }2\cdot T.num<T.size\\
+ & =\left(num_{i}+1\right)+\left(size_{i}-2\cdot num_{i}\right)-\left(size_{i-1}-2\cdot num_{i-1}\right)\\
+ & =\left(num_{i}+1\right)+\left(2\cdot\left(num_{i}+1\right)-2\cdot num_{i}\right)-\left(\frac{3}{2}\left(2\cdot\left(num_{i}+1\right)\right)-2\cdot\left(num_{i}+1\right)\right)\\
+ & =\left(num_{i}+1\right)+\left(2\right)-\left(3\cdot\left(num_{i}+1\right)-2\cdot\left(num_{i}+1\right)\right)\\
+ & =\left(num_{i}+1\right)+\left(2\right)-\left(num_{i}+1\right)\\
+ & =2
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+If 
+\begin_inset Formula $\alpha\geq1/2$
+\end_inset
+
+ then the table cannot contract except for in the cases where the table
+ has 
+\begin_inset Formula $num=1$
+\end_inset
+
+ and 
+\begin_inset Formula $size=2$
+\end_inset
+
+ and 
+\begin_inset Formula $num=2$
+\end_inset
+
+ and 
+\begin_inset Formula $size=4$
+\end_inset
+
+.
+ So otherwise 
+\begin_inset Formula $size_{i}=size_{i-1}$
+\end_inset
+
+ and the amortized cost of the delete operation
+\begin_inset Formula 
+\begin{align*}
+\hat{c}_{i} & =c_{i}+\Delta\Phi\\
+ & \text{since }\alpha\geq1/2\text{ then }2\cdot T.num\geq T.size\\
+ & =1+\left|\left(2\cdot num_{i}-size_{i}\right)\right|-\left|\left(2\cdot num_{i-1}-size_{i-1}\right)\right|\\
+ & \leq1+\left|\left(2\left(num_{i-1}-1\right)-size_{i-1}\right)-\left(2\cdot num_{i-1}-size_{i-1}\right)\right|\\
+ & =1+\left|-2\right|=3
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[22.1-6]
+\end_layout
+
+\end_inset
+
+Start at position 
+\begin_inset Formula $a_{12}$
+\end_inset
+
+ of the adjacency matrix 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Go right until you get to 
+\begin_inset Formula $a_{1j}$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{1j}=1$
+\end_inset
+
+.
+ If no ones are found then node 1 is the sink.
+ Otherwise all of the nodes that correspond to zeros on the first row cannot
+ be the universal sink (because otherwise node 1 would have had an edge
+ to them, the unique one that could have been the universal sink) nor can
+ node 1 since it has a forward edge.
+ Proceed to the row 
+\begin_inset Formula $j$
+\end_inset
+
+ and column 
+\begin_inset Formula $j+1$
+\end_inset
+
+, that is inspect 
+\begin_inset Formula $a_{j,j+1}$
+\end_inset
+
+.
+ None of the other columns 
+\begin_inset Formula $i<j+1$
+\end_inset
+
+ on row 
+\begin_inset Formula $j$
+\end_inset
+
+ need to be checked because they've been eliminated in contention for the
+ sink on row 1.
+ Proceed like this until you reach a row that either has all zeros (which
+ is then the universal sink) or you reach 
+\begin_inset Formula $a_{n-1,n}$
+\end_inset
+
+, in which case node 
+\begin_inset Formula $n$
+\end_inset
+
+ is the universal sink.
+ The procedure always terminates because all nodes have an edge to the universal
+ sink and therefore some row will have a 1 in the appropriate column.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[22.2-7]
+\end_layout
+
+\end_inset
+
+Create a graph of all of the wrestlers and their rivalries using the adjacency
+ list representation then use breadth-first search to color 2-color the
+ graph.
+ That is to say for each node have another attribute called 
+\begin_inset Quotes eld
+\end_inset
+
+shade
+\begin_inset Quotes erd
+\end_inset
+
+ and keep a global counter.
+ Then in the for loop set 
+\begin_inset Formula $v.shade=1$
+\end_inset
+
+ for babyface if the counter is odd and 
+\begin_inset Formula $v.shade=0$
+\end_inset
+
+ for heel if the counter is even, and increment the counter after the for
+ loop ends.
+ Initialize the counter to 0 and set 
+\begin_inset Formula $s.shade=babyface$
+\end_inset
+
+.
+ The scheme only fails if there's an odd length cycle so check to see whether
+ 
+\begin_inset Formula $v.shade$
+\end_inset
+
+ has been set to a different color than it's time to set and then return
+ false if so.
+ Do this for every tree in the forest.
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+2-Color(G,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+  for u in G.V-s
+\end_layout
+
+\begin_layout Plain Layout
+
+    u.color=white
+\end_layout
+
+\begin_layout Plain Layout
+
+    u.shade = -1
+\end_layout
+
+\begin_layout Plain Layout
+
+  s.color = gray
+\end_layout
+
+\begin_layout Plain Layout
+
+  s.shade = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+  counter = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+  Q = empty
+\end_layout
+
+\begin_layout Plain Layout
+
+  Enqueue(Q,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+  while Q not empty
+\end_layout
+
+\begin_layout Plain Layout
+
+    u = Dequeue(Q)
+\end_layout
+
+\begin_layout Plain Layout
+
+    for v in G.Adj[u]
+\end_layout
+
+\begin_layout Plain Layout
+
+	  if v.shade != -1 && v.shade != counter%2
+\end_layout
+
+\begin_layout Plain Layout
+
+	    return "error: odd cycle"
+\end_layout
+
+\begin_layout Plain Layout
+
+	  else if v.color == white
+\end_layout
+
+\begin_layout Plain Layout
+
+	    v.color = gray
+\end_layout
+
+\begin_layout Plain Layout
+
+	    v.shade = counter%2
+\end_layout
+
+\begin_layout Plain Layout
+
+    counter++
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[23-4]
+\end_layout
+
+\end_inset
+
+Alternative minimum spanning tree algorithms
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Correctness
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Maybe-MST-A(G,w) removes the heaviest edge each iteration of the inner for-loop.
+ Let 
+\begin_inset Formula $T_{i+1}=T_{i}-\{e_{i}\}$
+\end_inset
+
+ where 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ is the edge chosen on the 
+\begin_inset Formula $i$
+\end_inset
+
+th iteration of the for-loop.
+ The loop invariant preserved by this for-loop is that 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+ is always a connected graph.
+ Therefore upon termination after 
+\begin_inset Formula $k$
+\end_inset
+
+ iterations 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is also a connected graph.
+ 
+\series bold
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Claim
+\series default
+: 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a spanning tree for 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ 
+\series bold
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Proof
+\series default
+: All that needs to be true for 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ to be a spanning tree is that all vertices from the original graph 
+\begin_inset Formula $G$
+\end_inset
+
+ must be in the vertex set of 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ and it must be a tree, i.e.
+ contain no cycles.
+ It clearly contains all vertices because at no point are vertices removed
+ from the vertex set and the loop invariant prevents the creation of a forest
+ (does not disconnect graph as already mentioned).
+ Assume there exists some cycle 
+\begin_inset Formula $c$
+\end_inset
+
+ in 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ and let 
+\begin_inset Formula $e'$
+\end_inset
+
+ be a maximum weight edge on that cycle.
+ The for-loop in Maybe-MST-A(G,w) would have considered 
+\begin_inset Formula $e'$
+\end_inset
+
+ on some iteration 
+\begin_inset Formula $j$
+\end_inset
+
+ prior to all other edges in 
+\begin_inset Formula $c$
+\end_inset
+
+ and removed it from the edge set of 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+ since 
+\begin_inset Formula $e'$
+\end_inset
+
+ is part of a cycle removing it would meet the condition that 
+\begin_inset Formula $T_{j}-\{e'\}$
+\end_inset
+
+ is a connected graph.
+ This is a contradiction since we assumed that 
+\begin_inset Formula $e'$
+\end_inset
+
+ is an edge on an extant cycle 
+\begin_inset Formula $c$
+\end_inset
+
+ in 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $e'$
+\end_inset
+
+ cannot be in 
+\begin_inset Formula $c$
+\end_inset
+
+ and repeating the argument for all supposed cycles in 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ shows that 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ cannot have any cycles.
+ Hence 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a spanning tree.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim: 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ 
+\series default
+is a minimum spanning tree.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+Assume there exists some spanning tree 
+\begin_inset Formula $T'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{e\in T'.E}w(e)<\sum_{e\in T_{k}.E}w(e)$
+\end_inset
+
+.
+ Then there exists at least one edge 
+\begin_inset Formula $e'\in T'.E$
+\end_inset
+
+ such that 
+\begin_inset Formula $w(e')<w(e)$
+\end_inset
+
+ for all 
+\begin_inset Formula $e\in T_{k}.E$
+\end_inset
+
+.
+ Add 
+\begin_inset Formula $e'$
+\end_inset
+
+ to 
+\begin_inset Formula $T_{k}.E$
+\end_inset
+
+.
+ This creates a cycle 
+\begin_inset Formula $c$
+\end_inset
+
+ in 
+\begin_inset Formula $T_{k}.E$
+\end_inset
+
+, since 
+\begin_inset Formula $T_{k}.E$
+\end_inset
+
+ is a tree, that would have been present in 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+, as well, for some iteration 
+\begin_inset Formula $j$
+\end_inset
+
+ of Maybe-MST-A(G,w).
+ Then for every edge 
+\begin_inset Formula $e\in c$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $w(e')<w(e)$
+\end_inset
+
+ and therefore Maybe-MST-A(G,w) would have removed any such edge prior to
+ removing 
+\begin_inset Formula $e'$
+\end_inset
+
+ since Maybe-MST-A(G,w) considers edges in order of decreasing weight and
+ removal would have preserved connectedness.
+ This contradicts that there exists such 
+\begin_inset Formula $e'$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a minimum spanning tree.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Implementation
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Sort the edges by weight in 
+\begin_inset Formula $O(E\log E)$
+\end_inset
+
+ time.
+ Then in the for loop run a depth search on the graph using the adjacency
+ list representation to check to see whether removing an edge disconnects
+ the graph.
+ Running time is 
+\begin_inset Formula $O\left(E\left(V+E\right)+E\log E\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Correctness:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Suppose this was the graph
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[auto,node distance=3cm,   thick,main node/.style={circle,fill=
+blue!20,draw,font=
+\backslash
+sffamily
+\backslash
+Large
+\backslash
+bfseries}]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node[main node] (1) {1};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node[main node] (2) [below left of=1] {2};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node[main node] (3) [below right of=2] {3};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node[main node] (4) [below right of=1] {4};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+path[every node/.style={font=
+\backslash
+sffamily
+\backslash
+small}]
+\end_layout
+
+\begin_layout Plain Layout
+
+    (1) edge node [right] {0.6} (4)
+\end_layout
+
+\begin_layout Plain Layout
+
+        edge node [left] {0.3} (2)
+\end_layout
+
+\begin_layout Plain Layout
+
+    (2) edge node [left] {0.1} (3)
+\end_layout
+
+\begin_layout Plain Layout
+
+    (4) edge node [right] {0.2} (3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Then it's conceivable that the algorithm could add edges 
+\begin_inset Formula $(1,4),(4,3),(1,2)$
+\end_inset
+
+ since it adds edges in arbitrary order, only with the proviso that they
+ don't create cycles.
+ But clearly this is not a minimum spanning tree.
+ Therefore this algorithm does not always produce a minimum spanning tree.
+\end_layout
+
+\begin_layout Enumerate
+Implementation:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Take the edge list as is, then using the adjacency list representation run
+ a breadth first search in every loop iteration to see whether adding the
+ edge produces a cycle.
+ Running time is 
+\begin_inset Formula $O(E\left(V+E)\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Correctness:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The inner for-loop of Maybe-MST-C(G,w) maintains the invariant that 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+ is a tree on the 
+\begin_inset Formula $j$
+\end_inset
+
+th iteration of the for-loop, i.e.
+ that it has no cycles.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim:
+\series default
+ Upon termination after 
+\begin_inset Formula $k$
+\end_inset
+
+ iterations 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a spanning tree for 
+\begin_inset Formula $G$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+On each iteration of the for loop an edge to a new vertex is added.
+ If no edges are ever removed then by the loop invariant, since every edge
+ in the 
+\begin_inset Formula $G.E$
+\end_inset
+
+ is considered and therefore edges to all vertices are considered, 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a spanning tree.
+ If on any iteration, for example 
+\begin_inset Formula $j$
+\end_inset
+
+, an edge added induces a cycle in the graph then some edge is removed.
+ Let the edge removed be 
+\begin_inset Formula $(u,v).$
+\end_inset
+
+ But removal of edge 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ does not disconnect vertex 
+\begin_inset Formula $u$
+\end_inset
+
+ nor vertex 
+\begin_inset Formula $v$
+\end_inset
+
+ from the rest of 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+ since edge 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ was on a cycle.
+ Therefore 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a spanning tree.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Claim: 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ 
+\series default
+is a minimum spanning tree.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+Assume there exists some spanning tree 
+\begin_inset Formula $T'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{e\in T'.E}w(e)<\sum_{e\in T_{k}.E}w(e)$
+\end_inset
+
+.
+ Then there exists at least one edge 
+\begin_inset Formula $e'\in T'.E$
+\end_inset
+
+ such that 
+\begin_inset Formula $w(e')<w(e)$
+\end_inset
+
+ for all 
+\begin_inset Formula $e\in T_{k}.E$
+\end_inset
+
+.
+ Add 
+\begin_inset Formula $e'$
+\end_inset
+
+ to 
+\begin_inset Formula $T_{k}.E$
+\end_inset
+
+.
+ Consider the iteration 
+\begin_inset Formula $j$
+\end_inset
+
+ of Maybe-MST-C(G,w) where 
+\begin_inset Formula $e'$
+\end_inset
+
+ was considered for addition to 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+.
+ If adding 
+\begin_inset Formula $e'$
+\end_inset
+
+ generated a cycle 
+\begin_inset Formula $c$
+\end_inset
+
+ in 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+ then for all edges 
+\begin_inset Formula $e\in c$
+\end_inset
+
+ it would have been the case that 
+\begin_inset Formula $w(e')<w(e)$
+\end_inset
+
+ and therefore some other edge would have been removed from 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $e'$
+\end_inset
+
+ was certainly added to 
+\begin_inset Formula $T_{j}$
+\end_inset
+
+.
+ Now if on any later iteration 
+\begin_inset Formula $j'>j$
+\end_inset
+
+ the addition of some edge 
+\begin_inset Formula $e''$
+\end_inset
+
+ created a cycle 
+\begin_inset Formula $c'$
+\end_inset
+
+ that included 
+\begin_inset Formula $e'$
+\end_inset
+
+ then yet again for all edges 
+\begin_inset Formula $e\in c'$
+\end_inset
+
+ it would have been the case that 
+\begin_inset Formula $w(e')<w(e)$
+\end_inset
+
+ and therefore some other edge would have been removed from 
+\begin_inset Formula $T_{j'}$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $e'$
+\end_inset
+
+ could never have been removed and therefore 
+\begin_inset Formula $e'\in T_{k}$
+\end_inset
+
+, which is a contradiction.
+ Therefore 
+\begin_inset Formula $T_{k}$
+\end_inset
+
+ is a minimum spanning tree.
+\end_layout
+
+\begin_layout Enumerate
+Implementation:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Use breadth first search to detect cycles for every iteration of the for-loop.
+ If a cycle is detected you can follow the parent pointers back from the
+ vertex that detects the cycle and keep a list of all edges on the cycle.
+ Then sort the edges on the cycle and remove the heaviest one.
+ Running time for breadth first search at worst 
+\begin_inset Formula $O(E\left(V+E)\right)$
+\end_inset
+
+ and then at most 
+\begin_inset Formula $O\left(E\left(E\log E\right)\right)$
+\end_inset
+
+ for sorting each time a cycle is found.
+ Therefore total time is 
+\begin_inset Formula $O\left(V+E+E\left(E\log E\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[24-2]
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Take 3 
+\begin_inset Formula $d$
+\end_inset
+
+-dimensional boxes 
+\begin_inset Formula $\left(x_{1},x_{2},\dots,x_{d}\right),\left(y_{1},y_{2},\dots,y_{d}\right),\left(z_{1},z_{2},\dots,z_{d}\right)$
+\end_inset
+
+ and that there exist permutations 
+\begin_inset Formula $\pi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+x_{\pi_{1}(1)}<y_{1},x_{\pi_{1}(2)}<y_{2},\dots,x_{\pi_{1}(d)}<y_{d}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+y_{\pi_{2}(1)}<z_{1},y_{\pi_{2}(2)}<z_{2},\dots,y_{\pi_{2}(d)}<z_{d}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+x_{\pi_{1}(\pi_{2}(1))}<y_{\pi_{2}(1)}<z_{1},x_{\pi_{1}(\pi_{2}(2))}<y_{\pi_{2}(2)}<z_{2},\dots,x_{\pi_{1}(\pi_{2}(d))}<y_{\pi_{2}(d)}<z_{d}
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $\pi_{3}=\pi_{1}\circ\pi_{2}$
+\end_inset
+
+ is a permutation such that 
+\begin_inset Formula 
+\[
+x_{\pi_{3}(1)}<z_{1},x_{\pi_{3}(2)}<z_{2},\dots,x_{\pi_{3}(d)}<z_{d}
+\]
+
+\end_inset
+
+and hence 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(z_{1},z_{2},\dots,z_{d}\right)$
+\end_inset
+
+ nests in 
+\begin_inset Formula $\left(x_{1},x_{2},\dots,x_{d}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let the two boxes be 
+\begin_inset Formula $\left(x_{1},x_{2},\dots,x_{d}\right),\left(y_{1},y_{2},\dots,y_{d}\right)$
+\end_inset
+
+ Form the matrix 
+\begin_inset Formula $d\times d$
+\end_inset
+
+ matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ where 
+\begin_inset Formula $a_{ij}=1$
+\end_inset
+
+ if 
+\begin_inset Formula $y_{j}-x_{i}\ge0$
+\end_inset
+
+ and 0 otherwise.
+ Then we are looking to see whether there is at least one 1 for each column,
+ i.e.
+ there exists at least one 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $y_{j}-x_{i}\ge0$
+\end_inset
+
+ for any fixed 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ So calculate the sums down each column and if for any columns the sum is
+ 
+\begin_inset Formula $<1$
+\end_inset
+
+ then no nesting is possible.
+ Total running time is 
+\begin_inset Formula $O\left(d^{2}\right)$
+\end_inset
+
+ to calculate 
+\begin_inset Formula $y_{j}-x_{i}$
+\end_inset
+
+ for each 
+\begin_inset Formula $a_{ij}$
+\end_inset
+
+ and then another 
+\begin_inset Formula $O\left(d^{2}\right)$
+\end_inset
+
+ to do the sums down the columns, so total 
+\begin_inset Formula $O\left(d^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For every pair of boxes 
+\begin_inset Formula $B_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{j}$
+\end_inset
+
+ compute whether there is a nesting relationship.
+ Create a graph with 1 vertex per box and edges with weight 1 between vertices
+ 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+ if box 
+\begin_inset Formula $B_{i}$
+\end_inset
+
+ nests in box 
+\begin_inset Formula $B_{j}$
+\end_inset
+
+.
+ This graph is a acyclic because a box cannot nest within itself (a cycle
+ would imply by transitivity that each box on the cycle nests in itself).
+ A longest path on this graph corresponds to a longest sequence of nesting
+ boxes.
+ Adjoin a source vertex 
+\begin_inset Formula $S$
+\end_inset
+
+ and sink vertex 
+\begin_inset Formula $K$
+\end_inset
+
+ such that each is connected to every other vertex by a 0 weight edge.
+ (except the sink and the source, respectively).
+ Then the longest path from 
+\begin_inset Formula $S$
+\end_inset
+
+ to 
+\begin_inset Formula $D$
+\end_inset
+
+ is a longest path in the original graph and can be computed using a modified
+ Bellman-Ford: topologically sort the vertices (running time 
+\begin_inset Formula $O\left(n+n^{2}\right)$
+\end_inset
+
+ since there are 
+\begin_inset Formula $n$
+\end_inset
+
+ boxes and 
+\begin_inset Formula $O\left(n^{2}\right)$
+\end_inset
+
+ edges indicating nesting relations) then traverse all of the vertices in
+ topological order incrementing the distance to the edge if the parent vertex
+ is farther from the source than the vertex.
+ I.e.
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+if d[v] < d[u] + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+  d[v] = d[u] + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+  v.p = u
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+This takes 
+\begin_inset Formula $O\left(n^{2}\right)$
+\end_inset
+
+ time since there are 
+\begin_inset Formula $n$
+\end_inset
+
+ boxes.
+ After this is done find the farthest vertex from the source in 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ time and follow the parent pointers back.
+ Total running time is 
+\begin_inset Formula $O\left(n^{2}d^{2}\right)$
+\end_inset
+
+ to check nesting relation for all pairs, 
+\begin_inset Formula $O\left(n+n^{2}\right)$
+\end_inset
+
+ to topologically sort, 
+\begin_inset Formula $O\left(n^{2}\right)$
+\end_inset
+
+ to increment all edges, and 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ to find the farthest box and follow it back to the source.
+ Hence totaly running time is 
+\begin_inset Formula $O\left(n^{2}d^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[25-1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $a_{ij}$
+\end_inset
+
+ be an entry in the matrix representation 
+\begin_inset Formula $A$
+\end_inset
+
+ of the transitive closure of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Assume that the transitive closure has 1s on the diagonal to indicate that
+ any vertex can reach itself.
+ When an edge 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ is added to 
+\begin_inset Formula $G.E$
+\end_inset
+
+ take row 
+\begin_inset Formula $j$
+\end_inset
+
+ and entrywise-OR it with every row for which row 
+\begin_inset Formula $i$
+\end_inset
+
+ has a non-zero column entry, i.e.
+ for every row 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{ik}=1$
+\end_inset
+
+.
+ This updates the closure graph to indicate that all vertices which were
+ connected to vertex 
+\begin_inset Formula $i$
+\end_inset
+
+ are now connected to all vertices which were connected to vertex 
+\begin_inset Formula $j$
+\end_inset
+
+ (including 
+\begin_inset Formula $j$
+\end_inset
+
+ itself).
+ Similarly take row 
+\begin_inset Formula $i$
+\end_inset
+
+ and entrywise-OR it with every row for which row 
+\begin_inset Formula $j$
+\end_inset
+
+ has a non-zero column entry, i.e.
+ for every row 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{jk}=1$
+\end_inset
+
+.
+ For both vertices of the edge 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ the run is 
+\begin_inset Formula $O\mbox{\ensuremath{\left(V^{2}\right)}}$
+\end_inset
+
+ therefore total runtime is 
+\begin_inset Formula $O\left(V^{2}\right)+O\left(V^{2}\right)=O\left(V^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Any graph where the edge connects two strongly connected and equal size
+ but as of yet disconnected trees.
+\end_layout
+
+\begin_layout Enumerate
+Run the same algorithm from part (a) but before doing the entrywise-OR operation
+ of row 
+\begin_inset Formula $j$
+\end_inset
+
+ against every of the row 
+\begin_inset Formula $k$
+\end_inset
+
+ for which row 
+\begin_inset Formula $i$
+\end_inset
+
+ has a non-zero column entry, check to see whether row 
+\begin_inset Formula $k$
+\end_inset
+
+ already has a non-zero entry in column 
+\begin_inset Formula $j$
+\end_inset
+
+, i.e.
+ that 
+\begin_inset Formula $a_{kj}=1$
+\end_inset
+
+ already.
+ This indicates that vertex 
+\begin_inset Formula $k$
+\end_inset
+
+ was already connected to vertex 
+\begin_inset Formula $j$
+\end_inset
+
+ and no updates need to be made.
+ Therefore each of the 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ vertices will have its correspondent row updated a maximum of 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ times, each operation consisting of exactly 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ entrywise-ORs.
+ Hence total running time is 
+\begin_inset Formula $O\left(V^{3}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[26-4]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If before the increase in capacity along edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ the same edge had no residual capacity then the increase created an edge
+ 
+\begin_inset Formula $\left(v,u\right)$
+\end_inset
+
+ in the residual network and running BFS on the source reveals whether the
+ addition of the edge 
+\begin_inset Formula $\left(v,u\right)$
+\end_inset
+
+ is an shortest path between source and sink.
+ If so then augment the flow network with the path that includes the added
+ edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+.
+ If edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ already had some residual capacity then running BFS will still reveal whether
+ edge 
+\begin_inset Formula $\left(v,u\right)$
+\end_inset
+
+ now is on a shortest path.
+ BFS runs in 
+\begin_inset Formula $O\left(V+E\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Same as above.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
