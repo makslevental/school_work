@@ -208,14 +208,14 @@ For release after transmission the utilization obviously goes up as the
 \end_inset
 
  increases.
- For release after reception the utilization does not change as a function
+ For the release after reception the utilization does not change as a function
  of number of nodes.
  For Ethernet the constant coefficient 
 \begin_inset Formula $5$
 \end_inset
 
- increases because propagation delay increases as the number of collisions
- increases, which is a function of the number of nodes.
+ increases because propagation delay increased as the number of collisions
+ increase, which is a function of the number of nodes.
 \end_layout
 
 \end_deeper
@@ -279,7 +279,7 @@ Supposing that propagation delay,
 \begin_inset Formula $k\ll5\cdot10\cdot t_{prop}$
 \end_inset
 
- then 
+ 
 \begin_inset Formula $u_{1}\approx10u_{2}$
 \end_inset
 
@@ -363,16 +363,16 @@ Switches allow multiple simultaneous transmissions and the switch does selective
  MAC address of recipient and interface that that recipient is connected
  to.
  Initially this correspondence is not established and so the first time
- a switch receives a packet for a host on an unknown link it floods all
- the links and waits for a response from the host.
+ a switch receives a packet for a host on unknown link it floods all the
+ links and waits for a response from the host.
  From then on it only sends across that link and so there are no collisions
- - each link is its own collision domain and links are full-duplex so no
- collisions occur.
+ - each link is its own collision domain links are full-duplex so no collisions
+ occur.
  Therefore simultaneous transmission from all hosts is possible.
 \end_layout
 
 \begin_layout Enumerate
-CSMA/CD is not needed in current implementations of Switched Ethernet because
+CSMA/CD is not need in current implementations of Switched Ethernet because
  every host is on its own collision domain.
  It is still supported for backwards compatibility and for half-duplex connectio
 ns, where the switch needs to know when the host is sending so that its
@@ -432,12 +432,12 @@ Rate adaption is the selection of the appropriate encoding scheme in order
  That is to say that as the signal to noise ratio decreases it behooves
  the protocol to select a lower and lower encoding/transmission rate in
  order to space out the data, in order to reduce the bit error rate, so
- that the receiver has more time to detect/decode it.
+ that the receiver has more time to detect it.
 \end_layout
 
 \begin_layout Enumerate
 Since TCP depends on round trip time estimates in order to gauge the congestion
- in the network it will not respond appropriately at times when the encoding
+ in the network it will not respond appropriately at time when the encoding
  rates on wifi are switched (because this will appear to be congestion but
  in fact will simply be lower signal to noise ratio).
 \end_layout
@@ -554,7 +554,7 @@ Partial Packet Discard: The ATM header identifies the end of a datagram
 \begin_layout Enumerate
 Early Packet Discard: Monitor queues and preemptively drop all cells associated
  with a datagram when queue length exceeds some threshold.
- The problem with this is fairness.
+ The problem with this is that fairness.
  The shorter the datagram the more likely it is to be dropped because the
  algorithm simply scans through the queue and looks for the next ATM header
  with type bit set to 1, indicating the end of a datagram, and drops that
@@ -575,7 +575,7 @@ where
 \begin_inset Formula $n/v$
 \end_inset
 
- is the average number of queue slots occupied per flow and 
+ is the number of queue slots occupied per flows and 
 \begin_inset Formula $n\left(i\right)$
 \end_inset
 
@@ -642,9 +642,9 @@ useless cells being transmitted
 \begin_inset Quotes erd
 \end_inset
 
- would be an insoluble problem.
- If CRC were not offered bit error rates would be much higher and re-transmissio
-n would happen much more often.
+ would be insoluble.
+ If CRC were not offered it would bit error rates would be much higher and
+ re-transmission would happen much more often.
 \end_layout
 
 \end_deeper
@@ -666,8 +666,8 @@ status open
 Mobile IP attempts to provide support for host mobility while maintaining
  transparency.
  The point is so that the correspondent node doesn't need to know the location
- of the mobile node and that the connection already established should be
- maintained during movement.
+ of the mobile node and that the connection already established should maintaine
+d during movement.
  It solves the problem using registration with home agent, indirect routing
  of datagrams, agent discovery.
  When a mobile node moves to a foreign network it obtains a care-of-address
@@ -686,9 +686,9 @@ The main problem is the problem inherent in triangle routing, namely that
 
 \begin_layout Enumerate
 To solve the triangular routing problem use route optimization to perform
- a binding update to the bind new address to correspondent node after the
- first time the mobile node gets packets from it, so that the packets don't
- have to go through the home agent from then on.
+ a binding update to bind new address to correspondent node after the first
+ time the mobile node gets packets from it, so that the packets don't have
+ to go through the home agent from then on.
  The correspondent also changes the destination address the packets to go
  to mobile node's new address.
  To solve the micromobility problem use the hierarchical approach: during
@@ -771,19 +771,13 @@ Sure.
  sinks (like streaming television) and just regular point to point communication
  a unicast protocol like TCP is best.
  With multicast any transmissions will be rate capped to the lowest common
- denominator (rate control algorithm in order to sync) but with unicast,
+ denominator (rate control algorithm in order to sync) but with unicast
  transmitters will abide by the TCP congestion control algorithms and transmit
  at peak possible throughput (subject to packet loss from interference and
  fading).
- Lun et al in 
-\begin_inset Quotes eld
-\end_inset
-
-Network coding for efficient wireless unicast.
-\begin_inset Quotes erd
-\end_inset
-
- Communications, 2006 International Zurich Seminar on.
+ Lun, Desmond S., Muriel Médard, and Ralf Koetter.
+ "Network coding for efficient wireless unicast." Communications, 2006 Internatio
+nal Zurich Seminar on.
  IEEE, 2006.
  claim that with 
 \begin_inset Quotes eld
@@ -793,17 +787,7 @@ full coding
 \begin_inset Quotes erd
 \end_inset
 
- retransmissions can be as few as 1-2 per packet.
-\end_layout
 
-\begin_layout Enumerate
-I would suggest a store and forward protocol where nodes on the horizon
- of the partitioned network (i.e.
- those that were previously in close proximity to the nodes which have been
- disconnected) do the storing and forwarding.
- An optimization, in order to keep these store and forward buffers from
- growing beyond bound would be a FIFO with a timer, where packets get dropped
- from the queues regularly.
 \end_layout
 
 \end_body

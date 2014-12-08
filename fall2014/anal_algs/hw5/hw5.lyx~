@@ -140,7 +140,7 @@ layer
 
 , i.e.
  the last convex hull discovered.
- Each iteration of Jarvis' march in 
+ Each iteration of Jarvis' march is 
 \begin_inset Formula $O\left(n\cdot h\right)$
 \end_inset
 
@@ -204,7 +204,7 @@ O\left(n\cdot h_{1}+n\cdot h_{2}+\cdots+n\cdot h_{k}\right)=O\left(n\sum_{i=1}^{
 Claim
 \series default
 : If there exists an algorithm that runs in 
-\begin_inset Formula $O(m)$
+\begin_inset Formula $O(n)$
 \end_inset
 
  that transforms sorting 
@@ -212,19 +212,19 @@ Claim
 \end_inset
 
  numbers into finding the convex layers of 
-\begin_inset Formula $m$
+\begin_inset Formula $n$
 \end_inset
 
  points in 
-\begin_inset Formula $o\left(m\log m\right)$
+\begin_inset Formula $o\left(n\log n\right)$
 \end_inset
 
  time then it would be possible to sort the 
-\begin_inset Formula $m$
+\begin_inset Formula $n$
 \end_inset
 
  points in 
-\begin_inset Formula $o\left(m\log m\right)$
+\begin_inset Formula $o\left(n\log n\right)$
 \end_inset
 
  time.
@@ -248,7 +248,7 @@ Proof
 \end_inset
 
  be the running time of finding the convex layers of 
-\begin_inset Formula $m$
+\begin_inset Formula $n$
 \end_inset
 
  points, and 
@@ -359,7 +359,7 @@ The reduction goes like this: Let
 \begin_inset Formula $x_{i}$
 \end_inset
 
-, that is associate with each 
+, that associates with each 
 \begin_inset Formula $x_{i}$
 \end_inset
 
@@ -466,8 +466,9 @@ Compare every pair
 
 .
  If the set becomes totally ordered under this ordering relation then there
- is a way to pick up the sticks 1 by 1.
- If not, if there's an instance where 
+ is a way to pick up the sticks one by one.
+ If not, i.e.
+ if there's an instance where 
 \begin_inset Formula $s_{i}<s_{j}<s_{k}<s_{i}$
 \end_inset
 
@@ -477,7 +478,7 @@ Compare every pair
 
  without disturbing one of the others.
  In general construct a directed graph with the vertex set comprised of
- the sticks and edge between 
+ the sticks and an edge between 
 \begin_inset Formula $s_{i}$
 \end_inset
 
@@ -494,8 +495,8 @@ Compare every pair
 \begin_inset Formula $s_{i}<s_{j}<s_{k}<s_{i}$
 \end_inset
 
- corresponds to a cycle in the graph so running breadth first search to
- check to see if there are any cycles.
+ corresponds to a cycle in the graph so run breadth first search to check
+ to see if there are any cycles.
  If there are no cycles in the graph then a topological sort of the vertices
  is the order in which the sticks should be picked up.
 \end_layout
@@ -541,9 +542,9 @@ This is solvable in polynomial time.
 
  is even.
  If it's not then there's no hope whatsoever.
- If it is even ,i.e.
+ If it is even, i.e.
  
-\begin_inset Formula $S/2\mod2=0$
+\begin_inset Formula $S\mod2=0$
 \end_inset
 
  then let 
@@ -668,9 +669,11 @@ A particular solution is computed using Euclid's extended algorithm for
 
  is the solution produced by Euclid then all solutions are of the form
 \begin_inset Formula 
-\[
-a=a_{1}+\frac{qk}{\gcd\left(p,q\right)},b=b_{1}-\frac{pk}{\gcd\left(p,q\right)},k\in\mathbb{Z}
-\]
+\begin{align*}
+a & =a_{1}+\frac{qk}{\gcd\left(p,q\right)}\\
+b & =b_{1}-\frac{pk}{\gcd\left(p,q\right)}\\
+k & \in\mathbb{Z}
+\end{align*}
 
 \end_inset
 
@@ -692,9 +695,11 @@ Expressing
 
  a general solution is of the form
 \begin_inset Formula 
-\[
-a=\frac{x\cdot S/2}{\gcd\left(p,q\right)}+\frac{qk}{\gcd\left(p,q\right)},b=\frac{y\cdot S/2}{\gcd\left(p,q\right)}-\frac{pk}{\gcd\left(p,q\right)},k\in\mathbb{Z}
-\]
+\begin{align*}
+a & =\frac{x\cdot S/2}{\gcd\left(p,q\right)}+\frac{qk}{\gcd\left(p,q\right)}\\
+b & =\frac{y\cdot S/2}{\gcd\left(p,q\right)}-\frac{pk}{\gcd\left(p,q\right)}\\
+k & \in\mathbb{Z}\\
+\end{align*}
 
 \end_inset
 
@@ -745,7 +750,7 @@ This is solvable in polynomial time.
 any difference in any two quantities of coins can be compensated for with
  smaller denomination coins, if there are enough in the bag.
  So we can simply take turns giving Bonnie and Clyde coins, and if there
- is enough money to make up the different then the money can be divided
+ is enough money to make up the difference then the money can be divided
  up equally.
  That is to say that we sort the coins in 
 \begin_inset Formula $O\left(n\log n\right)$
@@ -754,7 +759,7 @@ any difference in any two quantities of coins can be compensated for with
  time, give Bonnie the largest coin and then give Clyde the next largest
  coins until he has as much money as Bonnie.
  Then repeat.
- Obviously this only fails if the available denominations are convenient
+ Obviously this only fails if the available denominations are inconvenient
  (there are too many large denomination coins).
 \end_layout
 
@@ -844,7 +849,7 @@ Proof
 \series bold
 Claim
 \series default
-: SET-PARTITION is NP-Complete.
+: SET-PARTITION is NP-Hard.
 \begin_inset Newline newline
 \end_inset
 
@@ -874,7 +879,7 @@ Proof
 \begin_inset Formula $S'$
 \end_inset
 
-, the which we pass to SET-PARTITION, be 
+, that which we pass to SET-PARTITION, be 
 \begin_inset Formula $S'=S\cup\left\{ s+t,2s-t\right\} $
 \end_inset
 
@@ -1136,7 +1141,7 @@ Since the transformation to the decision problem in part (b) works for any
 \begin_inset Formula $k$
 \end_inset
 
- it certain works 
+ it certainly works 
 \begin_inset Formula $k=3$
 \end_inset
 
@@ -1686,7 +1691,24 @@ Follows from (b) and (d) since number of bins
 \end_layout
 
 \begin_layout Enumerate
+Put the first item in a bin.
+ For each item afterwards scan through open bins looking for space.
+ If no space then open a new bin.
+ As discussed in part (d) worst case is if each item get its own bin.
+ Supposing there are 
+\begin_inset Formula $n$
+\end_inset
 
+ items there will be 
+\begin_inset Formula $\sum_{i=1}^{n-1}i=\frac{n(n-1)}{2}$
+\end_inset
+
+ iterations, i.e.
+ running time 
+\begin_inset Formula $O\left(n^{2}\right)$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper

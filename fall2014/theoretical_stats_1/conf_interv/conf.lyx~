@@ -271,6 +271,10 @@ Hence
 
 .
  
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\blacksquare$
 \end_inset
 
@@ -700,6 +704,10 @@ and so
 
 .
  
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\blacksquare$
 \end_inset
 
@@ -1239,7 +1247,808 @@ Therefore, if we find the mean of a set of observations that we can reasonably
 \begin_layout Standard
 
 \series bold
-Strong Law of Large Numbers
+Central Limit theorem
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+The central limit theorem is magical.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Theorem 2.
+ 
+\series default
+If 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ are all i.i.d with 
+\begin_inset Formula $E\left(X_{i}\right)=\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X_{i}\right)=\sigma^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula 
+\[
+\bar{X_{n}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\mu\right)
+\]
+
+\end_inset
+
+the sampling distribution and 
+\begin_inset Formula 
+\[
+S_{n}=\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\underset{n\rightarrow\infty}{\lim}F_{S_{n}}\left(t\right)=F_{Z}\left(t\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $Z\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+.
+ That is to say 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ converges in distribution to a standard normal.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Think about this.
+ Regardless of the random variables (no matter what they themselves are
+ distributed as), as long as their mean and variance exist, after centering,
+ their properly normalized sum will converge to a normal distribution.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The proof will use the characteristic function (fourier transform) and so
+ we need a couple of lemmas.
+ The first one has to do with the 
+\begin_inset Quotes eld
+\end_inset
+
+smoothness
+\begin_inset Quotes erd
+\end_inset
+
+ of characteristic functions
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Lemma 1.
+ 
+\series default
+For real 
+\begin_inset Formula $t$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left|e^{it}-\sum_{k=0}^{n}\frac{\left(it\right)^{k}}{k!}\right|\leq\min\left\{ \frac{\left|t\right|^{n+1}}{\left(n+1\right)!},\frac{2\left|t\right|^{n}}{n!}\right\} 
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Afterward this result will be used to show that if 
+\begin_inset Formula $E\left(X\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\sigma^{2}<\infty$
+\end_inset
+
+ then its characteristic function 
+\begin_inset Formula $\phi_{X}\left(t\right)$
+\end_inset
+
+, to second order, is
+\begin_inset Formula 
+\[
+\phi\left(t\right)=1-\frac{t^{2}\sigma^{2}}{2}+o\left(t^{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof Lemma 1.
+ 
+\series default
+Clearly this has something to do with the Taylor series for 
+\begin_inset Formula $e^{it}$
+\end_inset
+
+.
+ So expand 
+\begin_inset Formula $e^{it}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+e^{it}=\sum_{k=0}^{n}\frac{\left(it\right)^{k}}{k!}+\frac{i^{n+1}}{\left(n\right)!}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left|e^{it}-\sum_{k=0}^{n}\frac{\left(it\right)^{k}}{k!}\right| & = & \left|\frac{i^{n+1}}{\left(n\right)!}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds\right|
+\end{eqnarray*}
+
+\end_inset
+
+We estimate
+\begin_inset Formula 
+\[
+\left|\frac{i^{n+1}}{\left(n\right)!}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds\right|
+\]
+
+\end_inset
+
+in two different ways; one will be better when 
+\begin_inset Formula $\left|t\right|$
+\end_inset
+
+ is small and the other when 
+\begin_inset Formula $\left|t\right|$
+\end_inset
+
+ is large.
+ First the obvious thing is
+\begin_inset Formula 
+\begin{eqnarray*}
+\left|e^{it}-\sum_{k=0}^{n}\frac{\left(it\right)^{k}}{k!}\right| & = & \left|\frac{i^{n+1}}{\left(n\right)!}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds\right|\\
+ & = & \frac{1}{\left(n\right)!}\left|\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds\right|\\
+ & \leq & \frac{1}{\left(n\right)!}\int_{0}^{t}\left|\left(t-s\right)^{n}e^{is}\right|ds\\
+ & = & \frac{1}{\left(n\right)!}\int_{0}^{t}\left|\left(t-s\right)^{n}\right|ds\\
+ & \leq & \frac{\left|t\right|^{n+1}}{\left(n+1\right)!}
+\end{eqnarray*}
+
+\end_inset
+
+Alternatively since by integration by parts
+\begin_inset Formula 
+\[
+\int_{0}^{t}\left(t-s\right)^{n-1}e^{is}ds=\frac{i}{n}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds+\frac{t^{n}}{n}
+\]
+
+\end_inset
+
+i.e.
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{i}{n}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds & = & \int_{0}^{t}\left(t-s\right)^{n-1}e^{is}ds-\frac{t^{n}}{n}\\
+\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds & = & \frac{n}{i}\left(\int_{0}^{t}\left(t-s\right)^{n-1}e^{is}ds-\frac{t^{n}}{n}\right)
+\end{eqnarray*}
+
+\end_inset
+
+and so it's the case that
+\begin_inset Formula 
+\begin{eqnarray*}
+\left|e^{it}-\sum_{k=0}^{n}\frac{\left(it\right)^{k}}{k!}\right| & = & \left|\frac{i^{n+1}}{\left(n\right)!}\int_{0}^{t}\left(t-s\right)^{n}e^{is}ds\right|\\
+ & = & \left|\frac{i^{n+1}}{\left(n\right)!}\frac{n}{i}\left(\int_{0}^{t}\left(t-s\right)^{n-1}e^{is}ds-\frac{t^{n}}{n}\right)\right|\\
+ & = & \frac{1}{\left(n-1\right)!}\left|\left(\int_{0}^{t}\left(t-s\right)^{n-1}e^{is}ds-\frac{t^{n}}{n}\right)\right|\\
+ & \leq & \frac{1}{\left(n-1\right)!}\left(\frac{\left|t\right|^{n}}{n}+\frac{\left|t\right|^{n}}{n}\right)=\frac{2\left|t\right|^{n}}{n!}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Note that for large 
+\begin_inset Formula $\left|t\right|$
+\end_inset
+
+ the tighter estimate is 
+\begin_inset Formula $\frac{2\left|t\right|^{n}}{n!}$
+\end_inset
+
+ (i.e.
+ it's smaller than 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{\left|t\right|^{n+1}}{\left(n+1\right)!}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ ) and for small 
+\begin_inset Formula $\left|t\right|$
+\end_inset
+
+ the tighter estimate is 
+\begin_inset Formula $\frac{\left|t\right|^{n+1}}{\left(n+1\right)!}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+It's a short hop skip and a jump away from the result of Lemma 1 to this
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Lemma 2.
+ 
+\series default
+If 
+\begin_inset Formula $E\left(\left|X\right|^{n}\right)<\infty$
+\end_inset
+
+ then its characteristic function is 
+\begin_inset Formula $n$
+\end_inset
+
+ times continuously differentiable with derivative 
+\begin_inset Formula 
+\[
+\phi^{\left(k\right)}\left(t\right)=i^{k}E\left(X^{k}e^{itX}\right)
+\]
+
+\end_inset
+
+and its Taylor series expansion is bounded
+\begin_inset Formula 
+\[
+\left|\phi\left(t\right)-\sum_{k=0}^{n}E\left(X^{k}\right)\frac{\left(it\right)^{k}}{k!}\right|\leq E\left(\min\left\{ \frac{\left|tX\right|^{n+1}}{\left(n+1\right)!},\frac{2\left|tX\right|^{n}}{n!}\right\} \right)
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $o\left(\left|t\right|^{n}\right)$
+\end_inset
+
+ as 
+\begin_inset Formula $t\rightarrow0$
+\end_inset
+
+.
+ Then in particular if 
+\begin_inset Formula $E\left(X\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\sigma^{2}<\infty$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\phi\left(t\right)=1-\frac{t^{2}\sigma^{2}}{2}+o\left(t^{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof Lemma 2.
+ 
+\series default
+Firstly 
+\begin_inset Formula 
+\[
+\frac{\phi\left(t+h\right)-\phi\left(t\right)}{h}=E\left(\frac{e^{i\left(t+h\right)X}-e^{itX}}{h}\right)=E\left(\frac{e^{ihX}-1}{h}e^{itX}\right)
+\]
+
+\end_inset
+
+and by Taylor's theorem 
+\begin_inset Formula $h\rightarrow0$
+\end_inset
+
+ (without worry about negativity since 
+\begin_inset Formula $h>0$
+\end_inset
+
+)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\lim_{h\rightarrow0}\frac{e^{ihX}-1}{h}e^{itX}=\lim_{h\rightarrow0}\frac{ihX}{h}e^{itX}=iXe^{itX}
+\]
+
+\end_inset
+
+and by lemma 2 for all 
+\begin_inset Formula $h$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\frac{e^{ihX}-1}{h}e^{itX}\right|\leq\left|iXe^{itX}\right|\leq\left|X\right|
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $E\left(\left|X\right|^{n}\right)<\infty$
+\end_inset
+
+ all moments of 
+\begin_inset Formula $E\left(\left|X\right|^{j}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $j<n$
+\end_inset
+
+ exist as well, i.e.
+ all 
+\begin_inset Formula $\left|X\right|^{j}$
+\end_inset
+
+ are integrable, in particular 
+\begin_inset Formula $\left|X\right|$
+\end_inset
+
+ and so by the dominated convergence theorem
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+\phi'\left(t\right)=\lim_{h\rightarrow0}\frac{\phi\left(t+h\right)-\phi\left(t\right)}{h}=\lim_{h\rightarrow0}E\left(\frac{e^{i\left(t+h\right)X}-e^{itX}}{h}\right)=E\left(iXe^{itX}\right)
+\]
+
+\end_inset
+
+which by induction (and by similar arguments, i.e.
+ 
+\begin_inset Formula $\left|X^{k}e^{itX}\right|\leq\left|X\right|^{k}$
+\end_inset
+
+) proves that
+\begin_inset Formula 
+\[
+\phi^{\left(k\right)}\left(t\right)=i^{k}E\left(X^{k}e^{itX}\right)
+\]
+
+\end_inset
+
+Then by Jensen's inequality
+\begin_inset Formula 
+\begin{eqnarray*}
+\left|\phi\left(t\right)-\sum_{k=0}^{n}E\left(X^{k}\right)\frac{\left(it\right)^{k}}{k!}\right| & = & \left|E\left(e^{itX}-\sum_{k=0}^{n}\frac{\left(itX\right)^{k}}{k!}\right)\right|\\
+ & \leq & E\left(\left|e^{itX}-\sum_{k=0}^{n}\frac{\left(itX\right)^{k}}{k!}\right|\right)\\
+ & \leq & E\left(\min\left\{ \frac{\left|tX\right|^{n+1}}{\left(n+1\right)!},\frac{2\left|tX\right|^{n}}{n!}\right\} \right)
+\end{eqnarray*}
+
+\end_inset
+
+Then by dominated convergence again, as 
+\begin_inset Formula $t\rightarrow0$
+\end_inset
+
+ (why???)
+\begin_inset Formula 
+\[
+\left|t\right|^{n}E\left(\left|X\right|^{n}\min\left\{ \left|tX\right|,2\right\} \right)=o\left(\left|t\right|^{n}\right)
+\]
+
+\end_inset
+
+and so, as 
+\begin_inset Formula $t\rightarrow0$
+\end_inset
+
+ (does that really meet the def of little o?) 
+\begin_inset Formula 
+\begin{eqnarray*}
+\phi\left(t\right) & \leq & \sum_{k=0}^{n-1}E\left(X^{k}\right)\frac{\left(it\right)^{k}}{k!}+E\left(\min\left\{ \frac{\left|tX\right|^{n+1}}{\left(n+1\right)!},\frac{2\left|tX\right|^{n}}{n!}\right\} \right)\\
+ & = & 1+\frac{\left(it\right)}{1}E\left(X\right)+\frac{\left(it\right)^{2}}{2!}E\left(X^{2}\right)+E\left(\min\left\{ \frac{\left|tX\right|^{3+1}}{\left(4\right)!},\frac{2\left|tX\right|^{3}}{3!}\right\} \right)\\
+ & = & 1-\frac{t^{2}\sigma^{2}}{2!}+\frac{\left|t\right|^{3}}{3!}E\left(\left|X\right|^{3}\min\left\{ \frac{\left|tX\right|}{4},2\right\} \right)\\
+ & = & 1-\frac{t^{2}\sigma^{2}}{2!}+o\left(\left|t\right|^{2}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Tiny Lemma 3: 
+\series default
+For 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\lim_{i\to\infty}a_{i}=a$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\left(1+\frac{a_{n}}{n}\right)^{n}=e^{a}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof Tiny Lemma 3: 
+\series default
+TODO
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Finally we can prove Theorem 2, the central limit theorem
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof Theorem 2.
+ 
+\series default
+Define 
+\begin_inset Formula $Y_{i}=\left(X_{i}-\mu\right)/\sigma$
+\end_inset
+
+ and let 
+\begin_inset Formula $\phi_{Y}\left(t\right)$
+\end_inset
+
+ be the characteristic function of the 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+S_{n}=\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}Y_{i}
+\]
+
+\end_inset
+
+and then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\phi_{\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}}\left(t\right) & = & \phi_{\frac{1}{\sqrt{n}}\sum_{i=1}^{n}Y_{i}}\left(t\right)\\
+ & = & \phi_{\sum_{i=1}^{n}Y_{i}}\left(\frac{t}{\sqrt{n}}\right)\\
+ & = & \left(\phi_{Y}\left(\frac{t}{\sqrt{n}}\right)\right)^{n}
+\end{eqnarray*}
+
+\end_inset
+
+and by Lemma 2
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(\phi_{Y}\left(\frac{t}{\sqrt{n}}\right)\right)^{n} & = & \left(1-\frac{t^{2}}{2n}+o\left(\left(\frac{t}{\sqrt{n}}\right)^{2}\right)\right)^{n}\\
+ & = & \left(1-\frac{1}{n}\left(\frac{t^{2}}{2}+n\cdot o\left(\frac{t^{2}}{n}\right)\right)\right)^{n}
+\end{eqnarray*}
+
+\end_inset
+
+Now 
+\begin_inset Formula $o\left(\left(\frac{t}{\sqrt{n}}\right)^{2}\right)=o\left(\left(\frac{t^{2}}{n}\right)\right)$
+\end_inset
+
+ means there exists 
+\begin_inset Formula $f\left(\frac{t^{2}}{n}\right)$
+\end_inset
+
+ such that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\frac{t^{2}}{2}+n\cdot o\left(\frac{t^{2}}{n}\right)=\frac{t^{2}}{2}+n\cdot f\left(\frac{t^{2}}{n}\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\lim_{n\to}\frac{f\left(\frac{t^{2}}{n}\right)}{t^{2}/n}=\lim_{n\to}n\cdot\frac{f\left(\frac{t^{2}}{n}\right)}{t^{2}}=0
+\]
+
+\end_inset
+
+therefore by tiny lemma 3
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\to\infty}\left(\phi_{Y}\left(\frac{t}{\sqrt{n}}\right)\right)^{n} & = & \lim_{n\to\infty}\left(1-\frac{1}{n}\left(\frac{t^{2}}{2}+n\cdot o\left(\frac{t^{2}}{n}\right)\right)\right)^{n}\\
+ & = & e^{-t^{2}/2}
+\end{eqnarray*}
+
+\end_inset
+
+which is the characteristic function of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{N}\left(0,1\right)$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\blacksquare$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Okay finally what's the point? What does the central limit buy us? Well
+ for example suppose we were drawing iid from a population but all we know
+ about the population is that the distribution that describes it has a finite
+ mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and finite variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ We can then use the central limit theorem give an approximate confidence
+ interval (a confidence confidence interval?).
+ Since
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}S_{n}=\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}\sim\mathcal{N}\left(0,1\right)
+\]
+
+\end_inset
+
+we have that for a large enough 
+\begin_inset Formula $n$
+\end_inset
+
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\to\infty}P\left(-1.96<\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}<1.96\right) & = & \lim_{n\to\infty}P\left(-1.96<\frac{\bar{X}_{n}-\mu}{\grave{\sqrt{\sigma^{2}/n}}}<1.96\right)\\
+ & \approx & P\left(-1.96<Z<1.96\right)\\
+ & \gtrapprox & .95
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Cantor's ternary set.
+
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Let
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A_{n}=\left[0,1\right]\backslash\bigcup_{k=0}^{3^{n-1}-1}\left(\frac{3k+1}{3^{m}},\frac{3k+2}{3^{m}}\right)
+\]
+
+\end_inset
+
+and for 
+\begin_inset Formula $s\in\left[0,1\right]$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{n}\left(s\right)=s+I_{A_{n}}\left(s\right)
+\]
+
+\end_inset
+
+Then for 
+\begin_inset Formula $X\left(s\right)=s$
+\end_inset
+
+  
+\begin_inset Formula 
+\[
+P\left(\lim_{n\to\infty}X_{n}=X\right)=1
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body

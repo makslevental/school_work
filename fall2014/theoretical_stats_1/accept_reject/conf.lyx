@@ -1,0 +1,1129 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{cancel}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+\series bold
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Accept/Reject Algorithm
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Suppose you want to generate a draw of a random variable, i.e.
+ from a distribution of a random variable 
+\begin_inset Formula $Y$
+\end_inset
+
+ but the direct method (integral transform, i.e.
+ 
+\begin_inset Formula $F_{Y}^{-1}\left(U\right)\sim Y$
+\end_inset
+
+ for 
+\begin_inset Formula $U\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+, which is from 
+\begin_inset Formula $F_{Y}\left(Y\right)\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+) doesn't work because you don't have a closed form for 
+\begin_inset Formula $F_{Y}$
+\end_inset
+
+.
+ What do you do? 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+How about this for an idea: print out a picture of the 
+\begin_inset Quotes eld
+\end_inset
+
+target
+\begin_inset Quotes erd
+\end_inset
+
+ density 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ (let's suppose compact support), draw a tight bounding box around it, and
+ throw darts at it.
+ Here's a picture to keep in mind (for now pretend that it's completely
+ shaded)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+ Let's also pretend we can always nail the bounding box and the darts will
+ be uniformly distributed within, i.e.
+ let 
+\begin_inset Formula $V$
+\end_inset
+
+ be the random variable that corresponds to the 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate of the dart hit, which is uniformly distributed on the support
+ of the target density 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ (remember that the support is the range of 
+\begin_inset Formula $Y$
+\end_inset
+
+, not the domain) and let 
+\begin_inset Formula $U$
+\end_inset
+
+ be the random variable that corresponds to the 
+\begin_inset Formula $y$
+\end_inset
+
+-coordinate, which is uniformly distributed on (0,height-of-the-bounding-box)
+\begin_inset Formula $\equiv\left(0,M\right)$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+M=\sup_{y\in\mathcal{Y}}f_{Y}\left(y\right)
+\]
+
+\end_inset
+
+Then what's the probability that we hit 
+\begin_inset Quotes eld
+\end_inset
+
+inside the density
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ under the curve of the density? Because we're throwing the darts uniformly,
+ with uniform distribution on the entire bounding box, it's the area subtended
+ between the curve of density and the 
+\begin_inset Formula $x$
+\end_inset
+
+-axis, divided by the area of the entire box.
+ Since 
+\begin_inset Formula $U$
+\end_inset
+
+ corresponds to the 
+\begin_inset Formula $y$
+\end_inset
+
+-coordinate of a dart hit and 
+\begin_inset Formula $V$
+\end_inset
+
+ corresponds to the 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate we want to know what the probability of the event 
+\begin_inset Formula $\left\{ U\leq f_{Y}\left(V\right)\right\} $
+\end_inset
+
+ is, i.e 
+\begin_inset Formula 
+\[
+P\left(U\leq f_{Y}\left(V\right)\right)=?
+\]
+
+\end_inset
+
+Note this is no different than something much more mundane like 
+\begin_inset Formula $P\left(H\leq G\right)$
+\end_inset
+
+ when 
+\begin_inset Formula $H,V$
+\end_inset
+
+ are for example uniformly distributed on 
+\begin_inset Formula $\left(0,1\right)$
+\end_inset
+
+ and then 
+\begin_inset Formula $P\left(H\leq G\right)$
+\end_inset
+
+ is just the lower or upper triangle (depending on how you orient the 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ axes).
+ Now 
+\begin_inset Formula $V$
+\end_inset
+
+ is only defined on 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+ so let 
+\begin_inset Formula $\lambda\left(\mathcal{Y}\right)$
+\end_inset
+
+ be the Lebesgue measure of 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+ and then 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(U\leq f_{Y}\left(V\right)\right) & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}f_{U,V}\left(u,v\right)du\right)dv\\
+ & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}f_{U}\left(u\right)f_{V}\left(v\right)du\right)dv\\
+ & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}\frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}du\right)dv\\
+ & = & \frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}\int_{\mathcal{Y}}f_{Y}\left(v\right)dv\\
+ & = & \frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}
+\end{eqnarray*}
+
+\end_inset
+
+Think about whether this makes sense.
+ If 
+\begin_inset Formula $\mathcal{Y}=\left(0,1\right)$
+\end_inset
+
+ and then the area of the bounding box is 
+\begin_inset Formula $M\cdot1$
+\end_inset
+
+, and the density 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+, which integrates to 1 on its support is fraction 
+\begin_inset Formula 
+\[
+\frac{\text{its area}}{M\cdot1}=\frac{1}{M}
+\]
+
+\end_inset
+
+*(Skip) Alternatively
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(U\leq f_{Y}\left(V\right)\right) & = & E\left(1_{U\leq f_{Y}\left(V\right)}\right)\\
+ & = & E\left(E\left(1_{U\leq f_{Y}\left(V\right)}\big|V\right)\right)\\
+ & = & E\left(P\left(U\leq f_{Y}\left(V\right)\big|V\right)\right)\\
+ & = & \int_{\mathcal{Y}}P\left(U\leq f_{Y}\left(v\right)\right)f_{V}\left(v\right)dv\\
+ & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}f_{U}\left(u\right)du\right)f_{V}\left(v\right)dv\\
+ & = & \frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}\int_{\mathcal{Y}}f_{Y}\left(v\right)dv\\
+ & = & \frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Now fix some 
+\begin_inset Formula $x$
+\end_inset
+
+ coordinate 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Given that a dart landed somewhere on the line 
+\begin_inset Formula $x=v$
+\end_inset
+
+ what's the probability it landed underneath the curve? Since 
+\begin_inset Formula $M$
+\end_inset
+
+ corresponds to the height of our bounding box, the probability that a dart
+ with 
+\begin_inset Formula $x$
+\end_inset
+
+ coordinate equal to 
+\begin_inset Formula $v$
+\end_inset
+
+ hit underneath the curve of the pdf is 
+\begin_inset Formula $f_{Y}\left(v\right)/M$
+\end_inset
+
+.
+ Why? Picture the bounding box and an 
+\begin_inset Formula $x$
+\end_inset
+
+-slice of it (cf.
+ Figure 1: picture the line denoting the slice at 
+\begin_inset Formula $v=y$
+\end_inset
+
+ in Figure 1 extended all the way to the top of the bounding box).
+ The slice has height 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{Y}\left(v\right)$
+\end_inset
+
+ is the height of the density there.
+ So the ratio of the length, on that slice, of the portion 
+\begin_inset Quotes eld
+\end_inset
+
+underneath the density
+\begin_inset Quotes erd
+\end_inset
+
+ to height of the bounding box is 
+\begin_inset Formula $f_{Y}\left(v\right)/M$
+\end_inset
+
+ and since the darts were thrown with uniform distribution in each coordinate
+ it's true that the probability of landing underneath is the ratio of the
+ length/total-height.
+ So the claim is 
+\begin_inset Formula 
+\[
+P\left(U\leq f_{Y}\left(v\right)\right)=f_{Y}\left(v\right)/M
+\]
+
+\end_inset
+
+When stated this way it's maybe obvious, since we said the 
+\begin_inset Formula $y$
+\end_inset
+
+-coordinate of the dart is uniformly distributed on 
+\begin_inset Formula $\left(0,M\right)$
+\end_inset
+
+ and we're basically computing
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(U\leq f_{Y}\left(v\right)\right) & = & \int_{0}^{f_{Y}\left(v\right)}\left(\frac{1}{M}\right)du\\
+ & = & f_{Y}\left(v\right)/M
+\end{eqnarray*}
+
+\end_inset
+
+So what's the punchline? Almost there: let's compute the conditional cumulative
+ distribution of 
+\begin_inset Formula $V$
+\end_inset
+
+, the random variable associated with the 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate of our dart hit, conditioned on the dart hitting below the pdf
+ of 
+\begin_inset Formula $Y$
+\end_inset
+
+, i.e.
+ conditioned on the event 
+\begin_inset Formula $\left\{ U\leq f_{Y}\left(V\right)\right\} $
+\end_inset
+
+ (by analogy with the 
+\begin_inset Formula $P\left(H\leq G\right)$
+\end_inset
+
+ example imagine computing 
+\begin_inset Formula $P\left(G\le g|H\leq G\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $P\left(G\le g\right)$
+\end_inset
+
+ given that we're constrained to the half triangle as mentioned before,
+ except it's 
+\begin_inset Formula $\left\{ H\leq f\left(G\right)\right\} $
+\end_inset
+
+ instead of simply 
+\begin_inset Formula $\left\{ H\leq G\right\} $
+\end_inset
+
+ ): 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(V\leq y\big|U\leq f_{Y}\left(V\right)\right) & = & \frac{P\left(V\leq y,U\leq f_{Y}\left(V\right)\right)}{P\left(U\leq f_{Y}\left(V\right)\right)}\\
+ & = & \frac{\int_{A}\int_{0}^{f_{Y}\left(v\right)}f_{U,V}\left(u,v\right)dudv}{1/M\lambda\left(\mathcal{Y}\right)}\text{ where }A=\left\{ v\in\mathcal{Y}:v\le y\right\} \\
+ & = & M\lambda\left(\mathcal{Y}\right)\int_{A}\int_{0}^{f_{Y}\left(v\right)}f_{U}\left(u\right)f_{V}\left(v\right)dudv\\
+ & = & M\lambda\left(\mathcal{Y}\right)\int_{A}\left(\int_{0}^{f_{Y}\left(v\right)}\frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}du\right)dv\\
+ & = & \int_{A}\int_{0}^{f_{Y}\left(v\right)}dudv\\
+ & = & \int_{A}f_{Y}\left(v\right)dv\\
+ & = & P\left(Y\leq y\right)
+\end{eqnarray*}
+
+\end_inset
+
+What does this mean? It means that the conditional distribution of 
+\begin_inset Formula $V$
+\end_inset
+
+, conditioned on the event 
+\begin_inset Formula $\left\{ U\leq f_{Y}\left(V\right)\right\} $
+\end_inset
+
+, is the same as the distribution of 
+\begin_inset Formula $Y$
+\end_inset
+
+, i.e.
+ the 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate of all of the darts that hit below the curve of the pdf is distribut
+ed the same as 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ The distilled algorithm then is: throw darts at your pdf-dartboard.
+ If one hits below the curve of the pdf then 
+\begin_inset Quotes eld
+\end_inset
+
+accept
+\begin_inset Quotes erd
+\end_inset
+
+ it and take its 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate as a true draw from the distribution of 
+\begin_inset Formula $Y$
+\end_inset
+
+ but otherwise 
+\begin_inset Quotes eld
+\end_inset
+
+reject
+\begin_inset Quotes erd
+\end_inset
+
+ it and throw again.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+How many darts do you have to throw before this will happen?
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ Well since 
+\begin_inset Formula $P\left(U\leq f_{Y}\left(V\right)\right)=\frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $1-P\left(U\leq f_{Y}\left(V\right)\right)=P\left(U>f_{Y}\left(V\right)\right)=1-\frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}$
+\end_inset
+
+ we see that the random variable 
+\begin_inset Formula 
+\[
+N=\text{number of pairs darts with coordinates }\left(v_{i},u_{i}\right)\text{ before }u_{i}\leq f_{Y}\left(v_{i}\right)
+\]
+
+\end_inset
+
+is geometrically distributed with success probability 
+\begin_inset Formula $\frac{1}{M}\frac{1}{\lambda\left(\mathcal{Y}\right)}$
+\end_inset
+
+ and therefore expectation equal to 
+\begin_inset Formula $M\lambda\left(\mathcal{Y}\right)$
+\end_inset
+
+, so you'd have to throw on average 
+\begin_inset Formula $M\lambda\left(\mathcal{Y}\right)$
+\end_inset
+
+ darts.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Particular Example
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Take for example 
+\begin_inset Formula $Y\sim\text{beta}\left(2.7,6.3\right)$
+\end_inset
+
+ (note that for integer values of the shape and scale parameters 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ the integral transform will work).
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+M=\sup_{y\in\mathcal{Y}}f_{Y}\left(y\right)
+\]
+
+\end_inset
+
+Take two independent uniform random variables 
+\begin_inset Formula $U\sim\text{uniform}\left(0,M\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $V\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+.
+ Then
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(V\leq y,U\leq f_{Y}\left(V\right)\right) & = & \int_{0}^{y}\left(\int_{0}^{f_{Y}\left(v\right)}f_{U,V}\left(u,v\right)du\right)dv\\
+ & = & \frac{1}{M}\frac{1}{1}\int_{0}^{y}\left(\int_{0}^{f_{Y}\left(v\right)}du\right)dv\\
+ & = & \frac{1}{M}\int_{0}^{y}f_{Y}\left(v\right)dv\\
+ & = & \frac{1}{M}P\left(Y\leq y\right)
+\end{eqnarray*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+P\left(U\leq f_{Y}\left(V\right)\right)=\frac{1}{M}
+\]
+
+\end_inset
+
+and so reaffirming our calculations from the motivational discussion
+\begin_inset Formula 
+\[
+P\left(V\leq y\big|U\leq f_{Y}\left(V\right)\right)=\frac{P\left(V\leq y,U\leq f_{Y}\left(V\right)\right)}{P\left(U\leq f_{Y}\left(V\right)\right)}=P\left(Y\leq y\right)
+\]
+
+\end_inset
+
+Recapitulating: if you want draw from a 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $Y\sim\text{beta}\left(2.7,6.3\right)$
+\end_inset
+
+ distribution then draw pairs 
+\begin_inset Formula $\left(v,u\right)$
+\end_inset
+
+ from 
+\begin_inset Formula $\left(U,V\right)$
+\end_inset
+
+ (where 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ are as defined above) and if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+u\leq f_{Y}\left(v\right)=v^{2.7-1}\left(1-v\right)^{6.3}/\text{B}\left(2.7,6.3\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\text{B}\left(2.7,6.3\right)$
+\end_inset
+
+ is the beta function defined by the 
+\begin_inset Formula 
+\[
+\text{B}\left(x,y\right)=\int_{0}^{1}t^{x-1}\left(1-t\right)^{y-1}dt
+\]
+
+\end_inset
+
+then 
+\begin_inset Quotes eld
+\end_inset
+
+accept
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $v$
+\end_inset
+
+ as a true draw from a 
+\begin_inset Formula $\text{beta}\left(2.7,6.3\right)$
+\end_inset
+
+ distribution and if 
+\begin_inset Formula $u>f_{Y}\left(v\right)=v^{2.7-1}\left(1-v\right)^{6.3}/\text{B}\left(2.7,6.3\right)$
+\end_inset
+
+ then 
+\begin_inset Quotes eld
+\end_inset
+
+reject
+\begin_inset Quotes erd
+\end_inset
+
+ and simply draw again.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Generalization
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Now why did this work? Well many reasons (the entire argument in the first
+ part) but one in particular is that the support 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+ of 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $Y\sim\text{beta}\left(2.7,6.3\right)$
+\end_inset
+
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ which is 
+\begin_inset Formula $\left(0,1\right)$
+\end_inset
+
+, is the same as the support of 
+\begin_inset Formula $V$
+\end_inset
+
+ (otherwise there would be no hope of them being equal, regardless of the
+ conditional).
+ But of course you couldn't use a uniform as the 
+\begin_inset Quotes eld
+\end_inset
+
+candidate
+\begin_inset Quotes erd
+\end_inset
+
+ (what 
+\begin_inset Formula $V$
+\end_inset
+
+ is called) to draw from a distribution that has non-compact support (e.g.
+ something like a Gamma distribution which has support 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+) since there's no uniform distribution on unbounded support (nothing like
+ 
+\begin_inset Formula $\text{uniform}\left(0,\infty\right)$
+\end_inset
+
+).
+ So you need another candidate but it has to 
+\begin_inset Quotes eld
+\end_inset
+
+cover
+\begin_inset Quotes erd
+\end_inset
+
+ the target density, i.e.
+ we need a bounding shape not a bounding box, and we need to make sure that
+ we throw darts only in this bounding shape.
+ Then conditionally the 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate of our dart throws should again be distributed the same as the
+ target density.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+First of all we need to scale our candidate density so that it definitely
+ covers the one we want to sample from, the target density.
+ If we compute 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+M=\sup_{y\in\mathcal{Y}}\frac{f_{Y}\left(y\right)}{f_{V}\left(y\right)}
+\]
+
+\end_inset
+
+we can scale our candidate density by 
+\begin_inset Formula $M$
+\end_inset
+
+ so that it's always greater than or equal to our intractable density.
+ The effect of the scaling is only seen insofar as when we throw darts underneat
+h the 
+\begin_inset Quotes eld
+\end_inset
+
+bounding shape
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ the candidate density, the 
+\begin_inset Formula $y$
+\end_inset
+
+-coordinate of our darts now has to be constrained differently for each
+ 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinate:
+\begin_inset Formula 
+\[
+U|V\sim\text{uniform}\left(0,M\cdot f_{V}\left(V\right)\right)
+\]
+
+\end_inset
+
+Picture two densities, one covering the other like this (where Proposal=candidat
+e)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pasted2.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+and we have to again find the probability of the event 
+\begin_inset Formula $\left\{ U\leq f_{Y}\left(V\right)\right\} $
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(U\leq f_{Y}\left(V\right)\right) & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}f_{U,V}\left(u,v\right)du\right)dv\\
+ & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}f_{U|V}\left(u|v\right)f_{V}\left(v\right)du\right)dv\\
+ & = & \int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}\frac{1}{M\cdot f_{V}\left(v\right)}f_{V}\left(v\right)du\right)dv\\
+ & = & \frac{1}{M}\int_{\mathcal{Y}}\left(\int_{0}^{f_{Y}\left(v\right)}du\right)dv\\
+ & = & \frac{1}{M}\int_{\mathcal{Y}}f_{Y}\left(v\right)dv\\
+ & = & \frac{1}{M}
+\end{eqnarray*}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and then 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(V\leq y\big|U\leq f_{Y}\left(V\right)\right) & = & \frac{P\left(V\leq y,U\leq f_{Y}\left(V\right)\right)}{P\left(U\leq f_{Y}\left(V\right)\right)}\\
+ & = & \frac{\int_{A}\int_{0}^{f_{Y}\left(v\right)}f_{U,V}\left(u,v\right)dudv}{1/M}\text{ where }A=\left\{ v\in\mathcal{Y}:v\le y\right\} \\
+ & = & M\int_{A}\int_{0}^{f_{Y}\left(v\right)}f_{U|V}\left(u|v\right)f_{V}\left(v\right)dudv\\
+ & = & M\int_{A}\left(\int_{0}^{f_{Y}\left(v\right)}\frac{1}{M\cdot f_{V}\left(v\right)}f_{V}\left(v\right)du\right)dv\\
+ & = & \int_{A}\left(\int_{0}^{f_{Y}\left(v\right)}du\right)dv\\
+ & = & \int_{A}f_{Y}\left(v\right)dv\\
+ & = & P\left(Y\leq y\right)
+\end{eqnarray*}
+
+\end_inset
+
+How many darts do you have to throw before this will happen?
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ Well since 
+\begin_inset Formula $P\left(U\leq f_{Y}\left(V\right)\right)=\frac{1}{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $1-P\left(U\leq f_{Y}\left(V\right)\right)=P\left(U>f_{Y}\left(V\right)\right)=1-\frac{1}{M}$
+\end_inset
+
+ we see that the random variable 
+\begin_inset Formula 
+\[
+N=\text{number of pairs darts with coordinates }\left(v_{i},u_{i}\right)\text{ before }u_{i}\leq f_{Y}\left(v_{i}\right)
+\]
+
+\end_inset
+
+is geometrically distributed with success probability 
+\begin_inset Formula $\frac{1}{M}$
+\end_inset
+
+ and therefore expectation equal to 
+\begin_inset Formula $M$
+\end_inset
+
+, so you'd have to throw on average 
+\begin_inset Formula $M$
+\end_inset
+
+ darts.
+\end_layout
+
+\end_body
+\end_document

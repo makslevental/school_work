@@ -428,8 +428,6 @@ on found then insert into event's list.
  sorting takes nlogn, each update takes logn and updated the priority queue
  (on x coordinate) takes log(n+k)=log(n).
  therefore for 2n+k events it's O((n+k)logn).
- the only difference is that intersections are now events too, which require
- flipping the order, the k switches in the priority queue take k log n time.
 \end_layout
 
 \begin_layout Enumerate
