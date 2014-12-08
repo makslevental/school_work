@@ -1294,13 +1294,13 @@ If
 the sampling distribution and 
 \begin_inset Formula 
 \[
-S_{n}=\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}
+T_{n}=\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}
 \]
 
 \end_inset
 
 Then 
-\begin_inset Formula $\underset{n\rightarrow\infty}{\lim}F_{S_{n}}\left(t\right)=F_{Z}\left(t\right)$
+\begin_inset Formula $\underset{n\rightarrow\infty}{\lim}F_{T_{n}}\left(t\right)=F_{Z}\left(t\right)$
 \end_inset
 
  where 
@@ -1309,7 +1309,7 @@ Then
 
 .
  That is to say 
-\begin_inset Formula $S_{n}$
+\begin_inset Formula $T_{n}$
 \end_inset
 
  converges in distribution to a standard normal.
@@ -1958,18 +1958,39 @@ Okay finally what's the point? What does the central limit buy us? Well
 \begin_inset Formula $\sigma^{2}$
 \end_inset
 
+ but we're again in the same position we were that led us to Student's 
+\begin_inset Formula $t$
+\end_inset
+
 .
+ So not only do we not know the distribution of 
+\begin_inset Formula $\bar{X}_{n}$
+\end_inset
+
+ but we don't know 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ either.
  We can then use the central limit theorem give an approximate confidence
  interval (a confidence confidence interval?).
  Since
 \begin_inset Formula 
 \[
-\lim_{n\to\infty}S_{n}=\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}\sim\mathcal{N}\left(0,1\right)
+\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}\sim\mathcal{N}\left(0,1\right)
 \]
 
 \end_inset
 
-we have that for a large enough 
+we might be able to claim that 
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{S_{n}}=\lim_{n\to\infty}\frac{\sigma}{S_{n}}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}\sim\mathcal{N}\left(0,1\right)
+\]
+
+\end_inset
+
+and then we would we have that for a large enough 
 \begin_inset Formula $n$
 \end_inset
 
@@ -1988,7 +2009,7 @@ we have that for a large enough
 
 \begin_inset Formula 
 \begin{eqnarray*}
-\lim_{n\to\infty}P\left(-1.96<\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}<1.96\right) & = & \lim_{n\to\infty}P\left(-1.96<\frac{\bar{X}_{n}-\mu}{\grave{\sqrt{\sigma^{2}/n}}}<1.96\right)\\
+\lim_{n\to\infty}P\left(-1.96<\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{S_{n}}<1.96\right) & = & \lim_{n\to\infty}P\left(-1.96<Z<1.96\right)\\
  & \approx & P\left(-1.96<Z<1.96\right)\\
  & \gtrapprox & .95
 \end{eqnarray*}
@@ -1997,6 +2018,228 @@ we have that for a large enough
 
 
 \begin_inset Newline newline
+\end_inset
+
+This depends on four results, one of which is the Strong Law of Large numbers.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Theorem 3 (Kolmogorow Strong Law of Large numbers): 
+\series default
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be iid random variables with 
+\begin_inset Formula $E\left(X_{i}\right)=\mu$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\bar{X}_{n}\underset{a.s}{\to}\mu
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+Omitted
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Corollary: 
+\series default
+For 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ iid with finite mean and variancethe sample variance is a consistent estimator
+ of the the true variance, i.e.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+S_{n}^{2} & =\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\underset{a.s}{\to}\sigma^{2}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Proof of corollary: 
+\series default
+By Kolmogorov SLLN and the sample manipulation as in theorem 1 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\lim_{n\to\infty}S_{n}^{2} & =\lim_{n\to\infty}\frac{1}{n-1}\left(\sum_{i=1}^{n}\left(X_{i}\right)^{2}-n\left(\bar{X}_{n}\right)^{2}\right)\\
+ & =\lim_{n\to\infty}\frac{n}{n-1}\left(\frac{\sum_{i=1}^{n}\left(X_{i}\right)^{2}}{n}-\left(\bar{X}_{n}\right)^{2}\right)\\
+ & =1\cdot\left(E\left(X_{i}^{2}\right)-\mu^{2}\right)=\sigma^{2}
+\end{align*}
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Lemma 5: 
+\begin_inset Formula $\sigma/S_{n}\underset{a.s}{\to}1$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Proof Lemma 5:
+\series default
+ Since continuous function of a sequence of random variables that converge
+ to a limit itself converges to the function evaluated at that limit we
+ have by the corollary above that 
+\begin_inset Formula $\sqrt{S_{n}^{2}}\underset{a.s}{\rightarrow}\sqrt{\sigma^{2}}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\sigma/S_{n}\underset{a.s}{\rightarrow}1$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Lemma 6 (Slutsky's Theorem): 
+\series default
+If 
+\begin_inset Formula $U_{n}\underset{D}{\to}U$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{n}\underset{P}{\to}a$
+\end_inset
+
+ then 
+\begin_inset Formula $Y_{n}U_{n}\underset{D}{\to}aU$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+Omitted
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Finally letting 
+\begin_inset Formula $Y_{n}=\sigma/S_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{n}=\sqrt{n}\left(\bar{X}_{n}-\mu\right)/\sigma$
+\end_inset
+
+ we have 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{S_{n}}=\lim_{n\to\infty}\frac{\sigma}{S_{n}}\frac{\sqrt{n}\left(\bar{X}_{n}-\mu\right)}{\sigma}\sim\mathcal{N}\left(0,1\right)
+\]
+
 \end_inset
 
 
