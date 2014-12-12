@@ -114,618 +114,230 @@ today
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Since you're not waiting for the frames to go all the way around the token-ring
- there's only 1 propagation time incurred for the token, i.e.
- 
-\begin_inset Formula 
-\begin{align*}
-u & =\frac{T_{1}+T_{2}+\cdots+T_{n}}{T_{1}+T_{2}+\cdots+T_{n}+Prop}\\
- & =\frac{\sum_{i=1}^{n}T_{i}}{\sum_{i=1}^{n}T_{i}+Prop}\\
- & \approx\frac{n\cdot E\left(T\right)}{n\cdot E\left(T\right)+Prop}\\
- & \approx\frac{n\cdot E\left(T\right)}{n\cdot E\left(T\right)}\frac{1}{1+\frac{Prop}{n\cdot E\left(T\right)}}\\
- & \approx\frac{1}{1+\frac{a}{n}}
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula $a=Prop/E\left(T\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-For release after reception
-\begin_inset Formula 
-\[
-u=\frac{1}{1+a}
-\]
-
-\end_inset
-
-and for CSMA/CD Ethernet 
-\begin_inset Formula 
-\[
-u=\frac{1}{1+5a}
-\]
-
-\end_inset
-
-For fixed 
-\begin_inset Formula $n=10$
-\end_inset
-
- we have 
-\begin_inset Formula $u$
-\end_inset
-
- vs.
- 
-\begin_inset Formula $a$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Graphics
-	filename token_ring.jpeg
-	scale 75
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-For release after transmission the utilization obviously goes up as the
- number of nodes 
-\begin_inset Formula $n$
-\end_inset
-
- increases, since the 
-\begin_inset Formula $a/n\rightarrow0$
-\end_inset
-
- implies that 
-\begin_inset Formula $u$
-\end_inset
-
- increases.
- For the release after reception the utilization does not change as a function
- of number of nodes.
- For Ethernet the constant coefficient 
-\begin_inset Formula $5$
-\end_inset
-
- increases because propagation delay increased as the number of collisions
- increase, which is a function of the number of nodes.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-For CSMA/CD Ethernet 
-\begin_inset Formula 
-\begin{align*}
-u & =\frac{1}{1+5a}\\
- & =\frac{1}{1+5\frac{t_{prop}}{t_{trans}}}
-\end{align*}
-
-\end_inset
-
-Supposing that propagation delay, 
-\begin_inset Formula $t_{prop}$
-\end_inset
-
-, is fixed, and that 
-\begin_inset Formula $t_{trans}\propto\frac{1}{R}$
-\end_inset
-
-, where 
-\begin_inset Formula $R$
-\end_inset
-
- is the bus data rate then for 
-\begin_inset Formula $R_{1}=10Mbps$
-\end_inset
-
- and 
-\begin_inset Formula $R_{2}=100Mbps$
-\end_inset
-
- we have that 
-\begin_inset Formula 
-\begin{align*}
-\frac{u_{1}}{u_{2}} & =\frac{\frac{1}{1+5\frac{t_{prop}}{t_{trans}}}}{\frac{1}{1+5\frac{t_{prop}}{t_{trans}}}}\\
- & =\frac{\frac{1}{1+5\frac{t_{prop}}{k(1/R_{1})}}}{\frac{1}{1+5\frac{t_{prop}}{k(1/R_{2})}}}\\
- & =\frac{\frac{1}{1+5R_{1}\frac{t_{prop}}{k}}}{\frac{1}{1+5R_{2}\frac{t_{prop}}{k}}}\\
- & =\frac{k+5R_{2}t_{prop}}{k+5R_{1}t_{prop}}\\
- & =\frac{k+5\cdot100\cdot t_{prop}}{k+5\cdot10\cdot t_{prop}}
-\end{align*}
-
-\end_inset
-
- And supposing that 
-\begin_inset Formula $k\ll5\cdot10\cdot t_{prop}$
-\end_inset
-
- 
-\begin_inset Formula $u_{1}\approx10u_{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-We can either change 
-\begin_inset Formula $t_{prop}$
-\end_inset
-
-, making it small would raise the utilization, or we can change the constant
- coefficient 5 which is also related to the estimated propagation delay.
- If we decrease 
-\begin_inset Formula $t_{prop_{2}}$
-\end_inset
-
- by a factor of 10 of the original 
-\begin_inset Formula $t_{prop_{1}}$
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-\frac{u_{1}}{u_{2}} & =\frac{k+5\cdot100\cdot t_{prop_{2}}}{k+5\cdot10\cdot t_{prop_{1}}}\\
- & =\frac{k+5\cdot100\cdot(1/10)t_{prop_{1}}}{k+5\cdot10\cdot t_{prop_{1}}}\\
- & =\frac{k+5\cdot10\cdot t_{prop_{1}}}{k+5\cdot10\cdot t_{prop_{1}}}\\
- & =1
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-No I don't agree.
- Since token propagation time will increase only negligibly then in either
- mechanism, 
+Sure why not? Since the internet is a network of networks there is administrativ
+e autonomy - each network administrator may choose how to control the routing
+ in its own domain.
+ Each router in the domain must run the same routing protocol because there
+ is no interoperability between for example link-state algorithms and distance
+ vector (the link state algorithm (Dijkstra's) would not have complete topology
+ link cost info for the entire autuonomous system because not all nodes
+ (in particular those nodes running the distance vector algorithm - Bellman-Ford
+) would not being 
 \begin_inset Quotes eld
 \end_inset
 
-release after transmission
+link state broadcast
 \begin_inset Quotes erd
 \end_inset
 
- or 
+).
+ But otherwise since traffic is aggregated and sent through a gateway router
+ and only those run the Border Gateway protocol so it's fine.
+ 
+\end_layout
+
+\begin_layout Enumerate
+RIP and OSPF are routing protocols.
+ RIP is Routing Information Protocol and is a distance vector algorithm.
+ OSPF is Open Shortest Path First and is a link-state algorithm.
+ IGRP is Interior Gateway Routing Protocol.
+ Collectively known as Interior Gateway Protocols.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Routing Information Protocol (RIP) advertisements.
+ Distance vectors are exchanged among neighbors every 30 seconds via Response
+ Message.
+ Each Response Message is a list of up to 25 destination networks within
+ the autonomous system.
+ If no advertisement is heard from neighbors after 180 seconds a neighbor
+ is declared dead and the consequently all routes through that neighbor
+ are invalided, a new advertisement is broadcast (informing live neighbors
+ of the untimely death of the dead neighbor and setting a date for a funeral
+ brunch).
+ Neighbors then in-turn send out the same advertisement propagating the
+ information.
+ Also poison reverse is used to prevent stupid neighbors from spinning in
+ circles because they don't realize they're essentially talking to themselves
+ (looping).
+ This is a soft-state protocol because it didn't grow up on the streets
+ and so it needs constant reassurance (updates after every time out) about
+ the state of its back-up (neighbors).
+\end_layout
+
+\begin_layout Enumerate
+Open Shortest Path First (OSPF) advertisements.
+ They carry one entry per neighbor router and are disseminated to the entire
+ autonomous system via flooding because OSPF is a loud mouth.
+ As a result there's a lot of overhead because the broadcasting node clogs
+ up the pipes.
+ The messages are transmitted directly over IP (instead of a service sitting
+ on top of IP like TCP or UDP) because it thinks it's special.
+ All OSPF messages are authenticated.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+TODO 
+\series default
+Lecture 35 (42:17) Lecture 38 (34:43) Lecture 37(54:50) The 
 \begin_inset Quotes eld
 \end_inset
 
-release after reception
+rendezvous problem
 \begin_inset Quotes erd
 \end_inset
 
-, the times between receipt and release of the the token will be the same.
- Hence, assuming that all nodes are attempting to transmit at all times
- and only kept from transmitting by a lack of token, they will all be able
- to transmit at the same rate, regardless of how many are on the network.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Switches allow multiple simultaneous transmissions and the switch does selective
- forwarding, instead of simply broadcast and filtration.
- Each host has a dedicated direct connection to the switch, the switch buffers
- packets sent by hosts, and then retransmits based on a correspondence between
- MAC address of recipient and interface that that recipient is connected
- to.
- Initially this correspondence is not established and so the first time
- a switch receives a packet for a host on unknown link it floods all the
- links and waits for a response from the host.
- From then on it only sends across that link and so there are no collisions
- - each link is its own collision domain links are full-duplex so no collisions
- occur.
- Therefore simultaneous transmission from all hosts is possible.
-\end_layout
-
-\begin_layout Enumerate
-CSMA/CD is not need in current implementations of Switched Ethernet because
- every host is on its own collision domain.
- It is still supported for backwards compatibility and for half-duplex connectio
-ns, where the switch needs to know when the host is sending so that its
- responses don't collide with the host's transmissions.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-No it is difficult to sense collisions when transmitting due to weak/fading
- received signals.
- Furthermore you can't in general sense all collisions of hidden nodes,
- discussed below.
-\end_layout
-
-\begin_layout Enumerate
-The hidden terminal problem is when, for example, 3 nodes A,B,C are communicatin
-g and node B can sense both A and C but neither A can sense C nor C sense
- A.
- And so collision detection becomes impossible since C can be transmitting
- to B and yet to A it appears as if no one is transmitting.
-\end_layout
-
-\begin_layout Enumerate
-The way that 802.11 works is that it first senses for an amount of time equal
- to DIFS, distributed inter-frame spacing.
- If the channel is clear then it transmits the entire frame.
- But if the channel is not clear, if the protocol senses that the channel
- is busy, then a random timer is started,which sets the amount of time the
- protocol will wait until trying to transmit.
- Since the timer is completely random it does not give preferential treatment
- to those who have gotten some data sent already.
- Alternatively you could have a situation where a node that is sending a
- large number of frames hogs the link because each time the timers of the
- users expire the channel is still busy but when the exploitative node finishes
- sending a frame all of other nodes still have timers running.
- This is an instance where priorities would be necessary, or where the DIFS
- helps the fairness.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Rate adaption is the selection of the appropriate encoding scheme in order
- to match the prevailing signal to noise ratio.
- That is to say that as the signal to noise ratio decreases it behooves
- the protocol to select a lower and lower encoding/transmission rate in
- order to space out the data, in order to reduce the bit error rate, so
- that the receiver has more time to detect it.
-\end_layout
-
-\begin_layout Enumerate
-Since TCP depends on round trip time estimates in order to gauge the congestion
- in the network it will not respond appropriately at time when the encoding
- rates on wifi are switched (because this will appear to be congestion but
- in fact will simply be lower signal to noise ratio).
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-Code division multiple access
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-A unique 
+ is the problem of how to inform hosts about new groups, or groups available
+ for joining.
+ One solution is the Session Directory tool, which lists active multicast
+ sessions on MBONE and allows hosts to join a conference using other MBONE
+ tools like vat, rat, vic, wb, nte.
+ PIM-SM solves this problem by creating a rendezvous point on the tree that
+ allows members and senders to 
 \begin_inset Quotes eld
 \end_inset
 
-code
-\begin_inset Quotes erd
-\end_inset
-
- is assigned toe each user, i.e.
- there's partitioning in code set instead of frequency or time, and so all
- users can share the same frequency.
- Multiple users can transmit simultaneously with minimal interference, if
- the codes are 
-\begin_inset Quotes eld
-\end_inset
-
-orthogonal
+meet
 \begin_inset Quotes erd
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Enumerate
-Spreading the signal power over a wide range of frequencies reduces fading
- effects because only part of the spectrum, hence only part of the signal,
- is affected by fading.
-\end_layout
-
-\begin_layout Enumerate
-No frequency planning is required since users can use the same frequency.
-\end_layout
-
-\begin_layout Enumerate
-A soft hand-off can be provided since all cells use the same frequency
-\end_layout
-
-\begin_layout Enumerate
-If you have the right signal to correlate with, the pseudo-noise signal,
- then you can decode the signal and if you don't have such a signal you
- will interpret just noise.
- This is useful for security since it effectively encrypts the signal.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-ATM chops up TCP/IP datagrams into many much smaller cells.
- When one ATM cell is dropped, due to congestion, all other ATM cells that
- belong to the same IP datagram are uselessly being sent across the network.
- This is because the datagram isn't reassembled until it gets to the end
- of the route and only then does TCP check for corruption.
- Also one IP flow could branch into many ATM virtual circuits per single
- IP datagram, since IP packets are statistically switched and don't stay
- together.
-\end_layout
-
-\begin_layout Enumerate
-Solution: a discard strategy such that when a cell is discarded you minimize
- the transmission of other useless cells (potentially those from the same
- datagram).
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Partial Packet Discard: The ATM header identifies the end of a datagram
- by setting the type bit to 1.
- So a sequence of cells with type bits 000001 indicate that all those cells
- belong to the same datagram.
- When a cell is dropped at a switch, all cells belonging to the same datagram
- are dropped as well.
- On average this leads to only 1/2 of the cells of a datagram being transmitted
- uselessly because on average you'll be half way between the end of and
- beginning of the datagram when you decide to drop the rest of its cells.
- The only other problem is when ATM flows are mixed and then ATM header
- type bits might be 0101010 and it's unclear which cells belong to which
- datagram.
- So it's important to stratify distinct flows.
-\end_layout
-
-\begin_layout Enumerate
-Early Packet Discard: Monitor queues and preemptively drop all cells associated
- with a datagram when queue length exceeds some threshold.
- The problem with this is that fairness.
- The shorter the datagram the more likely it is to be dropped because the
- algorithm simply scans through the queue and looks for the next ATM header
- with type bit set to 1, indicating the end of a datagram, and drops that
- one.
-\end_layout
-
-\begin_layout Enumerate
-Fair buffer allocation: Use Early Packet Discard but drop packets from those
- flows using more than their fair sure of the queues, according to 
-\begin_inset Formula 
-\[
-w\left(i\right)=\frac{n\left(i\right)}{n/v}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $n/v$
-\end_inset
-
- is the number of queue slots occupied per flows and 
-\begin_inset Formula $n\left(i\right)$
-\end_inset
-
- is the number occupied by the 
-\begin_inset Formula $i$
-\end_inset
-
-th flow.
- Hence drop datagrams from the 
-\begin_inset Formula $i$
-\end_inset
-
-th connection if 
-\begin_inset Formula $n>R$
-\end_inset
-
-, some congestion threshold, and 
-\begin_inset Formula $w\left(i\right)>1$
-\end_inset
-
-.
- The downside is that the switch has to keep track of number of flows, total
- occupancy, and occupancy per connection, which doesn't scale.
- The solution is to aggregate flows.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-AAL5 divides datagrams into cells and then reassembles these cells into
- original datagram at the receiving host and does a CRC check.
- The setting of the 
-\begin_inset Quotes eld
-\end_inset
-
-PAYLOAD TYPE
-\begin_inset Quotes erd
-\end_inset
-
- allows the indication of the end of a cell which then allows for algorithms
- mentioned in part (b) to work.
- This is called 
-\begin_inset Quotes eld
-\end_inset
-
-convergence
-\begin_inset Quotes erd
-\end_inset
-
-.
- AAL5 also does virtual circuit multiplexing which, by reducing number of
- cells needed to protocol data units, can increase efficiency.
+ Members send their explicit join requests to the rendezvous point and senders
+ send their packets to the rendezvous point.
  
 \end_layout
 
 \begin_layout Enumerate
-If convergence wasn't available as a service in AAL5 then neither PPD nor
- EPD could be implemented since it would be impossible to distinguish one
- datagram from another.
- Then cells would be dropped randomly and 
-\begin_inset Quotes eld
-\end_inset
-
-useless cells being transmitted
-\begin_inset Quotes erd
-\end_inset
-
- would be insoluble.
- If CRC were not offered it would bit error rates would be much higher and
- re-transmission would happen much more often.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Mobile IP attempts to provide support for host mobility while maintaining
- transparency.
- The point is so that the correspondent node doesn't need to know the location
- of the mobile node and that the connection already established should maintaine
-d during movement.
- It solves the problem using registration with home agent, indirect routing
- of datagrams, agent discovery.
- When a mobile node moves to a foreign network it obtains a care-of-address
- from the foreign agent and registers it with its home agent.
- Then the care-of-address is used by the home agent to forward packets to
- the mobile node via the foreign agent.
+Lecture 37(25,40)A group-shared tree is a single spanning tree that connects
+ all members of a group through which packets from all sources that have
+ receivers in the group will be transmitted on.
+ A router forwards each multicast packet to interfaces that are part of
+ the tree.
+ It is more effective than flooding but it incurs traffic concentration
+ on certain links and suboptimal routing because you're restricted to using
+ the single tree for all sources.
+ A source-based tree is a source-rooted distribution tree established for
+ every source subnet.
+ A different spanning tree is constructed for each active (source,group)
+ pair.
+ It does not require keeping track of previous packets as flooding does,
+ multicast packets follow shortest path from source to group members, and
+ avoids concentration over group-shared tree.
 \end_layout
 
 \begin_layout Enumerate
-The main problem is the problem inherent in triangle routing, namely that
- going through the foreign agent might be a longer route than going through
- a direct route.
- Furthermore it incurs lots of traffic through the home agent with every
- move hence not fit for small moves, and there are hand-off delays.
+
+\series bold
+TODO 
+\series default
+Lecture 38(2:21,26:49) In PIM-DM the source broadcasts a packet and creates
+ a prune state which is specific to that source, i.e.
+ information specific to the source has to be stored, in order for join
+ messages to propagate back up to the source against the prune state and
+ establish the appropriate branch.
+ And so the source has to do a periodic broadcast, even over branches that
+ do not lead to members, in order to capture dynamics of topology and membership.
+ In PIM-SM the source does not use broadcast.
+ New member initiate branches by sending join messages up the tree to the
+ root (a rendezvous point), which does not necessarily coincide with the
+ source .
+ It is only after this establishment of branches from a root that the source
+ can send packets to this root, which will then propagate to the receivers
+ on the branches.
+ Other incoming receivers then connect to the nearest branch on this distributio
+n tree, on the way to the root, not the source.
 \end_layout
 
 \begin_layout Enumerate
-To solve the triangular routing problem use route optimization to perform
- a binding update to bind new address to correspondent node after the first
- time the mobile node gets packets from it, so that the packets don't have
- to go through the home agent from then on.
- The correspondent also changes the destination address the packets to go
- to mobile node's new address.
- To solve the micromobility problem use the hierarchical approach: during
- frequent movement only local hand-off is performed, without changing the
- home agent or the correspondent node.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-A cellular system services a large number of users over an extended geographical
- region, and yet has a very limited frequency spectrum.
- As number of users grow the demand for channels will exceed the available
- spectrum.
+Lecture 37(35:50) Reverse Path Forwarding check is a check that's done to
+ discover whether a packet was received on the interface associated with
+ the source.
+ If the packet did indeed arrive on the interface associated (in the routing
+ table) with the source then it will be forwarded.
+ Otherwise it will be dropped; the reasoning is that it's a packet that
+ has been simply forwarded by some other node in the network, thus creating
+ a loop.
+ The two underlying assumptions are that here exists an underlying unicast
+ routing protocol that's giving you that information and two that the best
+ path from the source to me is the same as the best path from me to the
+ source.
  
 \end_layout
 
 \begin_layout Enumerate
-This spectral congestion problem is resolved, high capacity is achieved,
- by replacing a single high power base stations with many smaller, lower
- power base stations, and limiting the coverage of the base station to a
- localized region, a cell.
- Each smaller base stations is allocated a number of channels and then the
- same channels are reused in other cells.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+It's to address leave latency.
+ In IGMPv1 a host choosing not to participate in a group incurred 3 periods
+ of membership queries from the querier, to which it would not respond in
+ order to indicate it wasn't interested.
+ This was unnecessary overhead.
+ In IGMPv2 when a host leaves a group it sends a 
+\begin_inset Quotes eld
+\end_inset
+
+Leave Group
+\begin_inset Quotes erd
+\end_inset
+
+ message to the all-routers group with the group field set to the group
+ it wants to leave.
+ The querier then responds to the message by sending a group specific query
+ query whether there are hosts on the LAN that still want to participate
+ in the group, the response to which immediately prompts the querier to
+ prune that LAN from the membership list, instead of waiting 3 query periods.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+TODO
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Lecture 39(8:31)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+A soft state is updated often, every minute or so.
+ Hard state incurs a lower overhead even though there are two messages (a
+ join and a join-ack) per request because it is not constantly updated.
+ It is only updated explicitly, when a message is sent to remove it.
+ Hard state also incurs less join latency because if an ack is not received
+ another join message is sent.
+\end_layout
+
+\begin_layout Enumerate
+The main advantage of soft-state is robustness against failures, since nodes
+ are constantly polled.
 \end_layout
 
 \begin_layout Enumerate
@@ -741,53 +353,22 @@ status open
 
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-A problem may occur when moving from one base station to another while keeping
- the call uninterrupted, i.e.
- keeping the signal strength above some threshold.
- This is called the hand-off problem.
-\end_layout
-
-\begin_layout Enumerate
-Frequency-planning/channel-allocation is another problem.
- It is the problem of how to allocate in the most efficient way the spectra
- to each cluster, considering that sometimes there are shifting demands
- on the clusters.
- That is to say that sometimes one cluster will have very little demand
- placed on it while others have much demand and spectra should be allocated
- proportionally.
-\end_layout
-
-\begin_layout Enumerate
-You also get co-channel interference and adjacent channel interference.
-\end_layout
-
-\end_deeper
 \end_deeper
 \begin_layout Enumerate
-Sure.
- Why not? For applications where there isn't one particular source and many
- sinks (like streaming television) and just regular point to point communication
- a unicast protocol like TCP is best.
- With multicast any transmissions will be rate capped to the lowest common
- denominator (rate control algorithm in order to sync) but with unicast
- transmitters will abide by the TCP congestion control algorithms and transmit
- at peak possible throughput (subject to packet loss from interference and
- fading).
- Lun, Desmond S., Muriel Médard, and Ralf Koetter.
- "Network coding for efficient wireless unicast." Communications, 2006 Internatio
-nal Zurich Seminar on.
- IEEE, 2006.
- claim that with 
-\begin_inset Quotes eld
-\end_inset
-
-full coding
-\begin_inset Quotes erd
-\end_inset
-
-
+Lecture 36(33:45)Timer-suppression mechanism is what prevents all hosts
+ on a LAN from responding to query from a router.
+ It prevents report implosion.
+ When you as a host receive a query you set a randomized timer according
+ to which you'll respond.
+ If someone else sends a response that subsumes your response then you suppress
+ your response.
+ One mechanism is in IGMP and it's the local membership query.
+ The querier transmits queries periodically to check persistent members
+ in a group on a LAN and members of the same group respond with all members
+ in that group.
+ So if some other member of your group responds before you to this query
+ it will include information that you're a member as well, and so there's
+ no need for you to respond also.
 \end_layout
 
 \end_body

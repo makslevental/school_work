@@ -113,7 +113,7 @@ status open
 
 \begin_layout Plain Layout
 
-[3]
+[5.3]
 \end_layout
 
 \end_inset
@@ -157,7 +157,7 @@ status open
 
 \begin_layout Plain Layout
 
-[5]
+[5.5]
 \end_layout
 
 \end_inset
@@ -205,7 +205,7 @@ status open
 
 \begin_layout Plain Layout
 
-[6]
+[5.6]
 \end_layout
 
 \end_inset
@@ -336,7 +336,7 @@ status open
 
 \begin_layout Plain Layout
 
-[10]
+[5.10]
 \end_layout
 
 \end_inset
@@ -438,7 +438,7 @@ status open
 
 \begin_layout Plain Layout
 
-[13]
+[5.13]
 \end_layout
 
 \end_inset
@@ -494,7 +494,7 @@ status open
 
 \begin_layout Plain Layout
 
-[15]
+[5.15]
 \end_layout
 
 \end_inset
@@ -556,7 +556,7 @@ status open
 
 \begin_layout Plain Layout
 
-[17]
+[5.17]
 \end_layout
 
 \end_inset
@@ -730,7 +730,7 @@ status open
 
 \begin_layout Plain Layout
 
-[18]
+[5.18]
 \end_layout
 
 \end_inset
@@ -869,7 +869,7 @@ status open
 
 \begin_layout Plain Layout
 
-[21]
+[5.21]
 \end_layout
 
 \end_inset
@@ -934,7 +934,7 @@ status open
 
 \begin_layout Plain Layout
 
-[22]
+[5.22]
 \end_layout
 
 \end_inset
@@ -1007,7 +1007,7 @@ status open
 
 \begin_layout Plain Layout
 
-[25]
+[5.25]
 \end_layout
 
 \end_inset
@@ -1183,7 +1183,7 @@ status open
 
 \begin_layout Plain Layout
 
-[30]
+[5.30]
 \end_layout
 
 \end_inset
@@ -1231,7 +1231,7 @@ status open
 
 \begin_layout Plain Layout
 
-[32]
+[5.32]
 \end_layout
 
 \end_inset
@@ -1390,19 +1390,30 @@ Note that
 \end_inset
 
  therefore since 
-\begin_inset Formula $P\left(\frac{-a\epsilon}{1+\epsilon}<X_{n}-a<\frac{a\epsilon}{1-\epsilon}\right)\leq1$
+\begin_inset Formula 
+\[
+P\left(\frac{-a\epsilon}{1+\epsilon}<X_{n}-a<\frac{a\epsilon}{1-\epsilon}\right)\leq1
+\]
+
 \end_inset
 
- always, if 
-\begin_inset Formula $P\left(\frac{-a\epsilon}{1+\epsilon}<X_{n}-a<\frac{a\epsilon}{1+\epsilon}\right)\rightarrow1$
+always, if 
+\begin_inset Formula 
+\[
+P\left(\frac{-a\epsilon}{1+\epsilon}<X_{n}-a<\frac{a\epsilon}{1+\epsilon}\right)\rightarrow1
+\]
+
 \end_inset
 
- then 
-\begin_inset Formula $P\left(\frac{-a\epsilon}{1+\epsilon}<X_{n}-a<\frac{a\epsilon}{1-\epsilon}\right)\rightarrow1$
+then 
+\begin_inset Formula 
+\[
+P\left(\frac{-a\epsilon}{1+\epsilon}<X_{n}-a<\frac{a\epsilon}{1-\epsilon}\right)\rightarrow1
+\]
+
 \end_inset
 
-.
- But 
+But 
 \family default
 \series default
 \shape default
@@ -1490,7 +1501,7 @@ status open
 
 \begin_layout Plain Layout
 
-[34]
+[5.34]
 \end_layout
 
 \end_inset
@@ -1531,7 +1542,7 @@ status open
 
 \begin_layout Plain Layout
 
-[35]
+[5.35]
 \end_layout
 
 \end_inset
@@ -1591,7 +1602,7 @@ where
 \begin{align*}
 \frac{d}{dx}P\left(\bar{X}\leq\frac{x}{\sqrt{n}}+1\right) & =\frac{d}{dx}F_{\bar{X}}\left(\frac{x}{\sqrt{n}}+1\right)\\
  & =\left(\frac{1}{\sqrt{n}}\right)f_{\bar{X}}\left(\frac{x}{\sqrt{n}}+1\right)\\
- & =\left(\frac{1}{\sqrt{n}}\right)\frac{\left(\frac{x}{\sqrt{n}}+1\right)^{n-1}}{\Gamma\left(n\right)\left(\frac{1}{n}\right)^{n}}e^{-\left(\frac{x}{\sqrt{n}}+1\right)\Bigg/n}\\
+ & =\left(\frac{1}{\sqrt{n}}\right)\frac{\left(\frac{x}{\sqrt{n}}+1\right)^{n-1}}{\Gamma\left(n\right)\left(\frac{1}{n}\right)^{n}}e^{-\left(\frac{x}{\sqrt{n}}+1\right)/n}\\
  & =\left(\frac{1}{\sqrt{n}}\right)n\cdot\frac{n^{n-1}\left(\frac{x}{\sqrt{n}}+1\right)^{n-1}}{\Gamma\left(n\right)}e^{-\left(x\sqrt{n}+n\right)}\\
  & =\frac{\sqrt{n}}{\Gamma\left(n\right)}\left(x\sqrt{n}+n\right)^{n-1}e^{-\left(x\sqrt{n}+n\right)}
 \end{align*}
@@ -1625,7 +1636,7 @@ status open
 
 \begin_layout Plain Layout
 
-[36]
+[5.36]
 \end_layout
 
 \end_inset
@@ -1656,6 +1667,7 @@ and
 \begin{align*}
 \text{Var}\left(Y\right) & =E\left(\text{Var}\left(Y|N\right)\right)+\text{Var}\left(E\left(Y|N\right)\right)\\
  & =E\left(4N\right)+\text{Var}\left(2N\right)\\
+ & =E\left(4N\right)+4\text{Var}\left(N\right)\\
  & =4\theta+4\theta=8\theta
 \end{align*}
 
@@ -1665,25 +1677,110 @@ and
 \end_layout
 
 \begin_layout Enumerate
-Let 
-\begin_inset Formula $X_{i}\sim\chi_{2}^{2}$
-\end_inset
-
- then 
-\begin_inset Formula $\bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}=\frac{1}{n}\chi_{2n}^{2}=\frac{1}{n}Y|N$
-\end_inset
-
-.
- Then
+Then 
 \begin_inset Formula 
 \begin{align*}
-\frac{\sqrt{n}}{\sqrt{\text{Var}\left(X\right)}}\left(\bar{X}-E\left(X\right)\right) & =\frac{\sqrt{n}}{\sqrt{\text{Var}\left(X\right)}}\left(\frac{1}{n}\chi_{2n}^{2}-2\right)\\
- & =\frac{\sqrt{n}}{\sqrt{\text{Var}\left(X\right)}}\left(\frac{1}{n}Y-2\right)
+MGF_{Y}\left(t\right) & =E\left(e^{tY}\right)\\
+ & =E\left(E\left(e^{tY}\big|N\right)\right)\\
+ & =E\left(E\left(\left(\frac{1}{1-2t}\right)^{2N/2}\right)\right)\\
+ & =e^{-\theta}\sum_{n=0}^{\infty}\left(\frac{1}{1-2t}\right)^{n}\frac{\theta^{n}}{n!}\\
+ & =e^{-\theta}\sum_{n=0}^{\infty}\frac{1}{n!}\left(\frac{\theta}{1-2t}\right)^{n}\\
+ & =e^{-\theta}e^{\frac{\theta}{1-2t}}=e^{\theta\left(\frac{1}{1-2t}-1\right)}\\
+ & =e^{\left(\frac{2t\theta}{1-2t}\right)}
 \end{align*}
 
 \end_inset
 
-but I have no idea...
+Then for 
+\begin_inset Formula 
+\[
+K=\frac{\left(Y-2\theta\right)}{\sqrt{8\theta}}=\frac{Y}{2\sqrt{2\theta}}-\frac{\sqrt{\theta}}{\sqrt{2}}
+\]
+
+\end_inset
+
+the MGF is 
+\begin_inset Formula 
+\begin{align*}
+MGF_{K}\left(t\right) & =e^{-\sqrt{\frac{\theta}{2}}t}e^{\left(\frac{2\left(\frac{1}{2\sqrt{2\theta}}t\right)\theta}{1-2\left(\frac{1}{2\sqrt{2\theta}}t\right)}\right)}\\
+ & =e^{\left(\frac{2\left(\frac{1}{2\sqrt{2\theta}}t\right)\theta}{1-2\left(\frac{1}{2\sqrt{2\theta}}t\right)}-\sqrt{\frac{\theta}{2}}t\right)}\\
+ & =e^{\frac{t^{2}}{2-\frac{\sqrt{2}t}{\sqrt{\theta}}}}
+\end{align*}
+
+\end_inset
+
+and by convergence of MGFs implying convergence in distribution 
+\begin_inset Formula 
+\[
+\lim_{\theta\to\infty}MGF_{K}\left(t\right)=\lim_{\theta\to\infty}e^{\frac{t^{2}}{2-\frac{\sqrt{2}t}{\sqrt{\theta}}}}=e^{\frac{t^{2}}{2}}
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\frac{\left(Y-E\left(Y\right)\right)}{\sqrt{\text{Var}\left(Y\right)}}=\frac{\left(Y-2\theta\right)}{\sqrt{8\theta}}\underset{d}{\to}\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+Note that for 
+\begin_inset Formula $X_{k}\sim\chi_{k}^{2}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+\frac{\chi_{k}^{2}-k}{\sqrt{2k}}\underset{d}{\to}\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\chi_{n}^{2}=\sum_{n}X_{k}$
+\end_inset
+
+ where 
+\begin_inset Formula $X\sim\chi_{1}^{2}$
+\end_inset
+
+ has mean 
+\begin_inset Formula $1$
+\end_inset
+
+ and variance 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ So then 
+\begin_inset Formula 
+\begin{align*}
+\frac{\sqrt{n}\left(\bar{X}-1\right)}{\sqrt{2}} & =\frac{\sqrt{n}\left(\frac{1}{n}\sum_{n}X_{k}-1\right)}{\sqrt{2}}\\
+ & =\frac{\frac{\sqrt{n}}{n}\left(\sum_{n}X_{k}-n\right)}{\sqrt{2}}=\frac{\frac{1}{\sqrt{n}}\left(\sum_{n}X_{k}-n\right)}{\sqrt{2}}\\
+ & =\frac{\chi_{n}^{2}-n}{\sqrt{2n}}
+\end{align*}
+
+\end_inset
+
+but
+\begin_inset Formula 
+\[
+\frac{\chi_{n}^{2}-n}{\sqrt{2n}}=\frac{\sqrt{n}\left(\bar{X}-1\right)}{\sqrt{2}}\underset{d}{\to}\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\frac{\chi_{2N}^{2}-2N}{\sqrt{4N}}=\frac{\sqrt{N}\left(\bar{X}-1\right)}{\sqrt{2}}\underset{d}{\to}\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1693,7 +1790,7 @@ status open
 
 \begin_layout Plain Layout
 
-[39]
+[5.39]
 \end_layout
 
 \end_inset
@@ -1826,7 +1923,8 @@ status open
 
 \begin_inset Formula 
 \begin{align*}
-\left\{ X_{1},X_{2},X_{4},X_{7},X_{11},X_{16},\cdots\right\}  & =\left\{ s+I_{[0,1]}\left(s\right),s+I_{[0,1/2]}\left(s\right),s+I_{[0,1/3]}\left(s\right),s+I_{[0,1/4]}\left(s\right),s+I_{[0,1/5]}\left(s\right),s+I_{[0,1/6]}\left(s\right),\cdots\right\} \\
+\left\{ X_{1},X_{2},X_{4},X_{7},X_{11},X_{16},\cdots\right\}  & =\{s+I_{[0,1]}\left(s\right),s+I_{[0,1/2]}\left(s\right),s+I_{[0,1/3]}\left(s\right),\\
+ & s+I_{[0,1/4]}\left(s\right),s+I_{[0,1/5]}\left(s\right),s+I_{[0,1/6]}\left(s\right),\cdots\}\\
  & =\left\{ X_{k}\text{where \ensuremath{k}=}\frac{n\left(n+1\right)}{2}+1\text{ where }n\in\mathbb{N}\right\} 
 \end{align*}
 
@@ -1846,7 +1944,7 @@ status open
 
 \begin_layout Plain Layout
 
-[42]
+[5.42]
 \end_layout
 
 \end_inset
@@ -1913,7 +2011,16 @@ Hence
 \end_layout
 
 \begin_layout Enumerate
-The distribution of 
+Let 
+\begin_inset Formula $M_{n}=X_{\left(n\right)}-a_{n}$
+\end_inset
+
+ then 
+\begin_inset Formula $P\left(M_{n}\leq m\right)=P\left(X_{\left(n\right)}-a_{n}\leq m\right)=P\left(X_{\left(n\right)}\leq m+a_{n}\right)$
+\end_inset
+
+.
+ The cdf of 
 \begin_inset Formula $X_{\left(n\right)}$
 \end_inset
 
@@ -1925,33 +2032,331 @@ The distribution of
 \begin_inset Formula $\left(1-e^{-x}\right)^{n}$
 \end_inset
 
- and 
-\begin_inset Formula $\lim_{n\rightarrow\infty}\left(1-e^{-x}\right)^{n}=0$
+ and so 
+\begin_inset Formula 
+\begin{align*}
+\lim_{n\rightarrow\infty}\left(1-e^{-\left(m+a_{n}\right)}\right)^{n} & =\lim_{n\rightarrow\infty}\left(1-\frac{e^{-m}}{e^{a_{n}}}\right)^{n}
+\end{align*}
+
 \end_inset
 
- for all 
-\begin_inset Formula $x$
+and letting 
+\begin_inset Formula $a_{n}=\log\left(n\right)$
+\end_inset
+
+ we get 
+\begin_inset Formula 
+\begin{align*}
+\lim_{n\rightarrow\infty}P\left(M_{n}\leq m\right) & =\lim_{n\rightarrow\infty}\left(1-\frac{e^{-m}}{e^{\log\left(n\right)}}\right)^{n}\\
+ & =\lim_{n\rightarrow\infty}\left(1-\frac{e^{-m}}{n}\right)^{n}\\
+ & =e^{e^{-m}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.44]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $X_{i}\sim\text{Bernoulli}\left(p\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By CLT
+\begin_inset Formula 
+\[
+\frac{\sqrt{n}\left(\bar{X}_{n}-p\right)}{\sqrt{p\left(1-p\right)}}\underset{d}{\to}\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+and by scaling 
+\begin_inset Formula $\text{n}\left(0,1\right)$
+\end_inset
+
+ we get that 
+\begin_inset Formula 
+\begin{align*}
+\sqrt{n}\left(\bar{X}-p\right) & \underset{d}{\to}\sqrt{p\left(1-p\right)}\text{n}\left(0,1\right)\\
+ & \underset{d}{\to}\text{n}\left(0,p\left(1-p\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $S\left(\bar{X}\right)=\bar{X}_{n}\left(1-\bar{X}_{n}\right)=\bar{X}_{n}-\bar{X}_{n}^{2}$
 \end_inset
 
 .
- I have no idea.
- Wouldn't the constants 
-\begin_inset Formula $a_{n}$
+ Then by the delta method, by the above result and delta method (Taylor's
+ theorem hi-jinks)
+\begin_inset Formula 
+\[
+\sqrt{n}\left(g\left(Y_{n}\right)-g\left(\theta\right)\right)\to\text{n}\left(0,\sigma^{2}\left(g'\left(\theta\right)\right)^{2}\right)
+\]
+
 \end_inset
 
- have to depend on 
-\begin_inset Formula $x$
+we have
+\begin_inset Formula 
+\[
+\sqrt{n}\left(S\left(\bar{X}\right)-S\left(p\right)\right)=\sqrt{n}\left(S\left(\bar{X}\right)-p\left(1-p\right)\right)\to\text{n}\left(0,p\left(1-p\right)\left(1-2p\right)^{2}\right)
+\]
+
 \end_inset
 
- in order to make 
-\begin_inset Formula $F_{X_{\left(n\right)}}\left(x\right)$
+
+\end_layout
+
+\begin_layout Enumerate
+By the above, and the second order delta method we have that 
+\begin_inset Formula 
+\begin{align*}
+\sqrt{n}\left(S\left(\bar{X}\right)-S\left(\frac{1}{2}\right)\right) & =\sqrt{n}\left(S\left(\bar{X}\right)-\frac{1}{4}\right)\\
+ & \to\sigma^{2}\frac{S''\left(1/2\right)}{2}\chi_{1}^{2}\\
+ & \to\frac{1}{4}\frac{\left(-2\right)}{2}\chi_{1}^{2}\\
+ & \to-\frac{1}{4}\chi_{1}^{2}
+\end{align*}
+
 \end_inset
 
- converge to a non-zero value for all 
-\begin_inset Formula $x$
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.47]
+\end_layout
+
 \end_inset
 
-?
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(b)]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $Y=-\beta\sum_{j=1}^{a}\log\left(U_{j}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+Y & =-\beta\sum_{j=1}^{a}\log\left(U_{j}\right)\\
+ & =\sum_{j=1}^{a}\left(-\beta\log\left(U_{j}\right)\right)\\
+ & =\sum_{j=1}^{a}\left(\text{exponential}\left(\beta\right)\right)\\
+ & =\sum_{j=1}^{a}\left(\text{gamma}\left(1,\beta\right)\right)\\
+ & =\text{gamma}\left(a,\beta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(a)]
+\end_layout
+
+\end_inset
+
+By part (b) 
+\begin_inset Formula $Y\sim\text{gamma}\left(\nu,2\right)\sim\chi_{2\nu}^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since for 
+\begin_inset Formula $X\sim\text{gamma}\left(\alpha,\theta\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y\sim\text{gamma}\left(\beta,\theta\right)$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+\frac{X}{X+Y}\sim\text{beta}\left(\alpha,\beta\right)
+\]
+
+\end_inset
+
+it's the case that 
+\begin_inset Formula 
+\begin{align*}
+Y & =\frac{\sum_{j=1}^{a}\log\left(U_{j}\right)}{\sum_{j=1}^{a+b}\log\left(U_{j}\right)}\\
+ & =\frac{-\sum_{j=1}^{a}\log\left(U_{j}\right)}{-\sum_{j=1}^{a+b}\log\left(U_{j}\right)}\\
+ & \sim\frac{\text{gamma}\left(a,1\right)}{-\left(\sum_{j=1}^{a}\log\left(U_{j}\right)+\sum_{j=a+1}^{b}\log\left(U_{j}\right)\right)}\\
+ & \sim\frac{\text{gamma}\left(a,1\right)}{\text{gamma}\left(a,1\right)+\text{gamma}\left(b,1\right)}\\
+ & \sim\text{beta}\left(a,b\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.49]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $U\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $Y=-\log\left(U\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $U=e^{-Y}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|U'\right|=\left|-e^{-Y}\right|=e^{-Y}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+f_{Y}\left(y\right)=f_{U}\left(e^{-y}\right)e^{-y}=e^{-y}
+\]
+
+\end_inset
+
+ and 
+\begin_inset Formula $Y=-\log\left(1-U\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $U=1-e^{-Y}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|U'\right|=\left|e^{-Y}\right|=e^{-Y}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+f_{Y}\left(y\right)=f_{U}\left(e^{-y}\right)e^{-y}=e^{-y}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X=\log\left(\frac{U}{1-U}\right)=\log\left(\frac{U}{1-U}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+e^{x}=\frac{u}{1-u} & \implies\left(1-u\right)e^{x}=u\\
+ & \implies e^{x}=u\left(1+e^{x}\right)\\
+ & \implies\frac{e^{x}}{1+e^{x}}=u
+\end{align*}
+
+\end_inset
+
+ and then 
+\begin_inset Formula 
+\begin{align*}
+u' & =\frac{e^{x}}{1+e^{x}}-\frac{e^{x}e^{x}}{\left(1+e^{x}\right)^{2}}\\
+ & =\frac{e^{x}\left(1+e^{x}\right)-e^{2x}}{\left(1+e^{x}\right)^{2}}\\
+ & =\frac{e^{x}}{\left(1+e^{x}\right)^{2}}
+\end{align*}
+
+\end_inset
+
+which is the pdf of a 
+\begin_inset Formula $\text{logistic}\left(0,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+logistic distribution is a scale parameter family so if 
+\begin_inset Formula $Z\sim\text{logistic}\left(0,1\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\beta Z+\mu$
+\end_inset
+
+ is a 
+\begin_inset Formula $\text{logistic}\left(\mu,\beta\right)$
+\end_inset
+
+.
+ So generate a 
+\begin_inset Formula $U\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+ and set 
+\begin_inset Formula $Y=\beta\log\left(\frac{U}{1-U}\right)+\mu$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
