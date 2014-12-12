@@ -114,7 +114,6 @@ today
 \end_layout
 
 \begin_layout Enumerate
-
 Sure why not? Since the internet is a network of networks there is administrativ
 e autonomy - each network administrator may choose how to control the routing
  in its own domain.
@@ -193,8 +192,8 @@ rendezvous problem
  One solution is the Session Directory tool, which lists active multicast
  sessions on MBONE and allows hosts to join a conference using other MBONE
  tools like vat, rat, vic, wb, nte.
- PIM-SM solves this problem by creating a rendezvous point on the tree that
- allows members and senders to 
+ PIM-SM algorithmic mapping solves this problem by creating a rendezvous
+ point on the shared tree that allows members and senders to 
 \begin_inset Quotes eld
 \end_inset
 
@@ -203,9 +202,11 @@ meet
 \end_inset
 
 .
- Members send their explicit join requests to the rendezvous point and senders
+ Members send their explicit join requests to the rendezvous point and sourcess
  send their packets to the rendezvous point.
- 
+ Source specific multicast (SSM) solves the problem completely by enforcing
+ source specific destination addresses to which membership requests are
+ sent.
 \end_layout
 
 \begin_layout Enumerate
@@ -227,6 +228,10 @@ Lecture 37(25,40)A group-shared tree is a single spanning tree that connects
 \end_layout
 
 \begin_layout Enumerate
+
+\series bold
+TODO 
+\series default
 Lecture 38(2:21,26:49) In PIM-DM the source broadcasts a packet and creates
  a prune state which is specific to that source, i.e.
  information specific to the source has to be stored, in order for join
@@ -298,16 +303,17 @@ Leave Group
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
+When the last member of a group leaves it send a leave message to the router.
+ Then router then sends a query message and waits one round for a response
+ from the group.
+ Only then, after the timeout of the round does the router unsubscribe from
+ the broadcast from the source.
+ The entire time the source itself continues to use bandwidth to broadcast
+ to those absent group members.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Enumerate
+The solution is to forward leave requests up to source.
 \end_layout
 
 \end_deeper
@@ -340,16 +346,11 @@ The main advantage of soft-state is robustness against failures, since nodes
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+Use variable timers who timeout is set by predicted traffic at the source.
+ When traffic is low set the timeout for the variable timer to be high length
+ and when traffic is high set the variable timer to low length.
+ This is because traffic on the network is linear function of refresh rate
+ and therefore metering the refresh rate will cut down on traffic.
 \end_layout
 
 \end_deeper
@@ -368,6 +369,20 @@ Lecture 36(33:45)Timer-suppression mechanism is what prevents all hosts
  So if some other member of your group responds before you to this query
  it will include information that you're a member as well, and so there's
  no need for you to respond also.
+ In PIM-DM it's used to prevent a join override flood upon a prune message
+ from a particular router.
+ When a router sends a prune message all downstream routers would send join-over
+rides but in fact they set a randomized timer.
+ If they 
+\begin_inset Quotes eld
+\end_inset
+
+witness
+\begin_inset Quotes erd
+\end_inset
+
+ a response that subsumes their own join-override then they suppress their
+ response.
 \end_layout
 
 \end_body
