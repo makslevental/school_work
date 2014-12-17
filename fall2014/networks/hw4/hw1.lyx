@@ -118,21 +118,21 @@ Sure why not? Since the internet is a network of networks there is administrativ
 e autonomy - each network administrator may choose how to control the routing
  in its own domain.
  Each router in the domain must run the same routing protocol because there
- is no interoperability between for example link-state algorithms and distance
- vector (the link state algorithm (Dijkstra's) would not have complete topology
- link cost info for the entire autuonomous system because not all nodes
- (in particular those nodes running the distance vector algorithm - Bellman-Ford
-) would not being 
+ is no interoperability between, for example link-state algorithms and distance
+ vector algorithms(the link state algorithm - Dijkstra's - would not have
+ complete topology link cost info for the entire autonomous system because
+ not all nodes - in particular those nodes running the distance vector algorithm
+ - Bellman-Ford - would not be broadcasting 
 \begin_inset Quotes eld
 \end_inset
 
-link state broadcast
+link state
 \begin_inset Quotes erd
 \end_inset
 
 ).
- But otherwise since traffic is aggregated and sent through a gateway router
- and only those run the Border Gateway protocol so it's fine.
+ But otherwise since traffic is aggregated and sent through a gateway router,
+ and only those run the Border Gateway protocol, so it's fine.
  
 \end_layout
 
@@ -147,16 +147,16 @@ RIP and OSPF are routing protocols.
 \begin_deeper
 \begin_layout Enumerate
 Routing Information Protocol (RIP) advertisements.
- Distance vectors are exchanged among neighbors every 30 seconds via Response
+ Distance vectors are exchanged among neighbors every 30 seconds via a Response
  Message.
  Each Response Message is a list of up to 25 destination networks within
  the autonomous system.
  If no advertisement is heard from neighbors after 180 seconds a neighbor
- is declared dead and the consequently all routes through that neighbor
- are invalided, a new advertisement is broadcast (informing live neighbors
- of the untimely death of the dead neighbor and setting a date for a funeral
- brunch).
- Neighbors then in-turn send out the same advertisement propagating the
+ is declared dead and then consequently all routes through that neighbor
+ are invalidated, then a new advertisement is broadcast (informing live
+ neighbors of the untimely death of the dead neighbor and setting a date
+ for a funeral brunch).
+ Neighbors then in-turn send out the same advertisement propagating this
  information.
  Also poison reverse is used to prevent stupid neighbors from spinning in
  circles because they don't realize they're essentially talking to themselves
@@ -179,7 +179,7 @@ Open Shortest Path First (OSPF) advertisements.
 
 \end_deeper
 \begin_layout Enumerate
-Lecture 35 (42:17) Lecture 38 (34:43) Lecture 37(54:50) The 
+The 
 \begin_inset Quotes eld
 \end_inset
 
@@ -210,9 +210,9 @@ meet
 \end_layout
 
 \begin_layout Enumerate
-Lecture 37(25,40)A group-shared tree is a single spanning tree that connects
- all members of a group through which packets from all sources that have
- receivers in the group will be transmitted on.
+A group-shared tree is a single spanning tree that connects all members
+ of a group through which packets from all sources that have receivers in
+ the group will be transmitted on.
  A router forwards each multicast packet to interfaces that are part of
  the tree.
  It is more effective than flooding but it incurs traffic concentration
@@ -228,15 +228,15 @@ Lecture 37(25,40)A group-shared tree is a single spanning tree that connects
 \end_layout
 
 \begin_layout Enumerate
-Lecture 38(2:21,26:49) In PIM-DM the source broadcasts a packet and creates
- a prune state which is specific to that source, i.e.
+In PIM-DM the source broadcasts a packet and creates a prune state which
+ is specific to that source, i.e.
  information specific to the source has to be stored, in order for join
  messages to propagate back up to the source against the prune state and
  establish the appropriate branch.
  And so the source has to do a periodic broadcast, even over branches that
  do not lead to members, in order to capture dynamics of topology and membership.
  In PIM-SM the source does not use broadcast.
- New member initiate branches by sending join messages up the tree to the
+ New members initiate branches by sending join messages up the tree to the
  root (a rendezvous point), which does not necessarily coincide with the
  source .
  It is only after this establishment of branches from a root that the source
@@ -247,18 +247,17 @@ n tree, on the way to the root, not the source.
 \end_layout
 
 \begin_layout Enumerate
-Lecture 37(35:50) Reverse Path Forwarding check is a check that's done to
- discover whether a packet was received on the interface associated with
- the source.
+Reverse Path Forwarding check is a check that's done to discover whether
+ a packet was received on the interface associated with the source.
  If the packet did indeed arrive on the interface associated (in the routing
  table) with the source then it will be forwarded.
  Otherwise it will be dropped; the reasoning is that it's a packet that
  has been simply forwarded by some other node in the network, thus creating
  a loop.
- The two underlying assumptions are that here exists an underlying unicast
- routing protocol that's giving you that information and two that the best
- path from the source to me is the same as the best path from me to the
- source.
+ The two underlying assumptions are that there exists an underlying unicast
+ routing protocol that's giving you information about which interface leads
+ to the source and that the best path from the source to a node is the same
+ as the best path from a node to the source.
  
 \end_layout
 
@@ -293,17 +292,17 @@ Leave Group
  message to the all-routers group with the group field set to the group
  it wants to leave.
  The querier then responds to the message by sending a group specific query
- query whether there are hosts on the LAN that still want to participate
+ querying whether there are hosts on the LAN that still want to participate
  in the group, the response to which immediately prompts the querier to
  prune that LAN from the membership list, instead of waiting 3 query periods.
 \end_layout
 
 \begin_layout Enumerate
 When the last member of a group leaves it send a leave message to the router.
- Then router then sends a query message and waits one round for a response
+ Then the router then sends a query message and waits one round for a response
  from the group.
- Only then, after the timeout of the round does the router unsubscribe from
- the broadcast from the source.
+ Only then, after the timeout of the round, does the router unsubscribe
+ from the broadcast from the source.
  The entire time the source itself continues to use bandwidth to broadcast
  to those absent group members.
 \end_layout
@@ -314,20 +313,6 @@ The solution is to forward leave requests up to source.
 
 \end_deeper
 \begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-Lecture 39(8:31)
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
 A soft state is updated often, every minute or so.
  Hard state incurs a lower overhead even though there are two messages (a
  join and a join-ack) per request because it is not constantly updated.
@@ -336,23 +321,25 @@ A soft state is updated often, every minute or so.
  another join message is sent.
 \end_layout
 
+\begin_deeper
 \begin_layout Enumerate
 The main advantage of soft-state is robustness against failures, since nodes
  are constantly polled.
 \end_layout
 
 \begin_layout Enumerate
-Use variable timers who timeout is set by predicted traffic at the source.
+Use variable timers for which timeout is set by predicted traffic at the
+ source.
  When traffic is low set the timeout for the variable timer to be high length
  and when traffic is high set the variable timer to low length.
- This is because traffic on the network is linear function of refresh rate
- and therefore metering the refresh rate will cut down on traffic.
+ The reasoning that traffic on the network is a linear function of refresh
+ rate and therefore metering the refresh rate will cut down on traffic.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Lecture 36(33:45)Timer-suppression mechanism is what prevents all hosts
- on a LAN from responding to query from a router.
+Timer-suppression mechanism is what prevents all hosts on a LAN from responding
+ to query from a router.
  It prevents report implosion.
  When you as a host receive a query you set a randomized timer according
  to which you'll respond.
@@ -365,7 +352,7 @@ Lecture 36(33:45)Timer-suppression mechanism is what prevents all hosts
  So if some other member of your group responds before you to this query
  it will include information that you're a member as well, and so there's
  no need for you to respond also.
- In PIM-DM it's used to prevent a join override flood upon a prune message
+ In PIM-DM it's used to prevent a join-override flood upon a prune message
  from a particular router.
  When a router sends a prune message all downstream routers would send join-over
 rides but in fact they set a randomized timer.

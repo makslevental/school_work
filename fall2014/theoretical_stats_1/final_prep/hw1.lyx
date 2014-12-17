@@ -1,0 +1,1615 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{pst-plot} 
+\pgfplotsset{compat=1.6}
+
+\pgfplotsset{soldot/.style={color=blue,only marks,mark=*}} \pgfplotsset{holdot/.style={color=blue,fill=white,only marks,mark=*}}
+
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\psset{algebraic}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+STA 6326 Final Prep
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(08/09).2]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $X_{i},\dots X_{n}$
+\end_inset
+
+ iid 
+\begin_inset Formula 
+\[
+f_{X}\left(x;\beta,\theta\right)=\frac{1}{\beta}e^{-\left(x-\theta\right)/\beta}I_{\left(\theta,\infty\right)}\left(x\right)
+\]
+
+\end_inset
+
+ with 
+\begin_inset Formula $\beta>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta\in\mathbb{R}$
+\end_inset
+
+ and.
+ Let 
+\begin_inset Formula $X_{\left(1:n\right)},X_{\left(2:n\right)},\dots,X_{\left(n:n\right)}$
+\end_inset
+
+ be the order statistics.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X_{\left(1:n\right)}$
+\end_inset
+
+ (minimum) is greater than 
+\begin_inset Formula $x$
+\end_inset
+
+ then that means all 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ are greater than 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Note the minimum cannot be less than 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ So then
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{\left(1:n\right)}\leq x\right) & =1-P\left(X_{\left(1:n\right)}>x\right)\\
+ & =1-P\left(X_{1}>x,X_{2}>x,\dots,X_{n}>x\right)\\
+ & =1-\left(P\left(X_{1}>x\right)\right)^{n}\\
+ & =1-\left(\frac{1}{\beta}\int_{x}^{\infty}e^{-\left(t-\theta\right)/\beta}dt\right)^{n}\\
+ & =1-\left(\frac{1}{\beta}\int_{x-\theta}^{\infty}e^{-y/\beta}dy\right)^{n}\\
+ & =1-\left(-\left.\left(e^{-y/\beta}\right)\right|_{x-\theta}^{\infty}\right)^{n}\\
+ & =1-\left(e^{-\left(x-\theta\right)/\beta}\right)^{n}I_{\left(\theta,\infty\right)}\left(x\right)
+\end{align*}
+
+\end_inset
+
+and therefore 
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1:n\right)}}\left(x\right) & =\frac{n\left(e^{-\left(x-\theta\right)/\beta}\right)^{n-1}}{\beta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $Y_{n}=X_{\mbox{\left(1:n\right)}}$
+\end_inset
+
+ then 
+\begin_inset Formula $Y_{n}\underset{P}{\to}\theta$
+\end_inset
+
+.
+ Proof: By Theorem 5.5.13 (a sequence of random variables converges in distributio
+n to a constant if and only if it converges in probability to the same constant)
+ since
+\begin_inset Formula 
+\begin{align*}
+P\left(Y_{n}\leq x\right) & =1-\left(e^{-\left(x-\theta\right)/\beta}\right)^{n}I_{\left(\theta,\infty\right)}\left(x\right)
+\end{align*}
+
+\end_inset
+
+converges to 
+\begin_inset Formula 
+\[
+P\left(Y_{n}\leq x\right)=\begin{cases}
+0 & \text{if }x<\theta\\
+1 & \text{if }x>\theta
+\end{cases}
+\]
+
+\end_inset
+
+it's the case that 
+\begin_inset Formula 
+\[
+P\left(\left|Y_{n}-\theta\right|>\epsilon\right)\to0\text{ for every }\epsilon
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X_{\left(n:n\right)}$
+\end_inset
+
+ (maximum) is less than 
+\begin_inset Formula $x$
+\end_inset
+
+ then that means all 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ are less than 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ So then
+\begin_inset Formula 
+\begin{align*}
+P\left(X_{\left(1:n\right)}\leq x\right) & =P\left(X_{1}\leq x,X_{2}\leq x,\dots,X_{n}\leq x\right)\\
+ & =\left(P\left(X_{1}\leq x\right)\right)^{n}\\
+ & =\left(\frac{1}{\beta}\int_{\theta}^{x}e^{-\left(t-\theta\right)/\beta}dt\right)^{n}\\
+ & =\left(-\left.\left(e^{-y/\beta}\right)\right|_{\theta}^{x}\right)^{n}\\
+ & =\left(1-e^{-\left(x-\theta\right)/\beta}\right)^{n}
+\end{align*}
+
+\end_inset
+
+and therefore 
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1:n\right)}}\left(x\right) & =n\left(1-e^{-\left(x-\theta\right)/\beta}\right)^{n-1}\left(-e^{-\left(x-\theta\right)/\beta}\right)\left(-\frac{1}{\beta}\right)\\
+ & =\frac{n\left(1-e^{-\left(x-\theta\right)/\beta}\right)^{n-1}e^{-\left(x-\theta\right)/\beta}}{\beta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $Z_{n}=X_{\left(n:n\right)}$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+P\left(Z_{n}\leq z\right)=\left(1-e^{-\left(x-\theta\right)/\beta}\right)^{n}
+\]
+
+\end_inset
+
+and then for 
+\begin_inset Formula $M_{n}=Z_{n}-a_{n}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+P\left(M_{n}\leq m\right) & =P\left(Z_{n}-a_{n}\leq m\right)\\
+ & =P\left(Z_{n}\leq m+a_{n}\right)\\
+ & =\left(1-e^{-\frac{(m+a_{n})-\theta}{\beta}}\right)^{n}\\
+ & =\left(1-e^{-\frac{\left(m-\theta\right)}{\beta}}e^{-\frac{a_{n}}{\beta}}\right)^{n}\\
+ & =\left(1-\frac{e^{-\frac{\left(m-\theta\right)}{\beta}}}{e^{\frac{a_{n}}{\beta}}}\right)^{n}
+\end{align*}
+
+\end_inset
+
+So by choosing 
+\begin_inset Formula $a_{n}=\beta\log\left(n\right)$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+\lim_{n\to\infty}P\left(M_{n}\leq m\right) & =\lim_{n\to\infty}\left(1-\frac{e^{-\frac{\left(m-\theta\right)}{\beta}}}{e^{\frac{a_{n}}{\beta}}}\right)^{n}\\
+ & =\lim_{n\to\infty}\left(1-\frac{e^{-\frac{\left(m-\theta\right)}{\beta}}}{e^{\frac{\beta\log\left(n\right)}{\beta}}}\right)^{n}\\
+ & =\lim_{n\to\infty}\left(1-\frac{e^{-\frac{\left(m-\theta\right)}{\beta}}}{n}\right)^{n}\\
+ & =e^{e^{-\frac{\left(m-\theta\right)}{\beta}}}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $M_{n}\underset{D}{\to}M$
+\end_inset
+
+ where 
+\begin_inset Formula $M$
+\end_inset
+
+ has the cdf 
+\begin_inset Formula 
+\[
+P\left(M\leq m\right)=\begin{cases}
+0 & \text{if }x\leq\theta\\
+e^{e^{-\frac{\left(m-\theta\right)}{\beta}}} & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+which is monotone non-decreasing, right-continuous and 
+\begin_inset Formula $P\left(M\leq\infty\right)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(M\leq-\infty\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/11).2]
+\end_layout
+
+\end_inset
+
+Proving accept/reject
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Drawing from intractable 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Define instead 
+\begin_inset Formula $U|V\sim\text{uniform}\left(0,M\cdot f_{V}\left(V\right)\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $V$
+\end_inset
+
+ is a candidate.
+ Then compute 
+\begin_inset Formula 
+\begin{align*}
+P\left(U\leq f_{Y}\left(V\right)\right) & =\int_{\mathbb{R}}\int_{0}^{f_{Y}\left(v\right)}f_{U|V}\left(u|v\right)f_{V}\left(v\right)dudv\\
+ & =\int_{\mathbb{R}}\int_{0}^{f_{Y}\left(v\right)}\frac{1}{M\cdot f_{V}\left(v\right)}f_{V}\left(v\right)dudv\\
+ & =\frac{1}{M}\int_{\mathbb{R}}\left(\int_{0}^{f_{Y}\left(v\right)}du\right)dv\\
+ & =\frac{1}{M}\int_{\mathbb{R}}f_{Y}\left(v\right)dv\\
+ & =1/M
+\end{align*}
+
+\end_inset
+
+and then 
+\begin_inset Formula 
+\begin{align*}
+P\left(V\leq y\big|U\leq f_{Y}\left(V\right)\right) & =\frac{P\left(Y\leq y,U\leq f_{Y}\left(V\right)\right)}{P\left(U\leq f_{Y}\left(V\right)\right)}\\
+ & =
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+P\left(V\leq y\big|U\leq f_{Y}\left(V\right)\right) & =\frac{P\left(Y\leq y,U\leq f_{Y}\left(V\right)\right)}{P\left(U\leq f_{Y}\left(V\right)\right)}\\
+ & =\frac{\int_{-\infty}^{y}\int_{0}^{f_{Y}\left(v\right)}f_{U|V}\left(u|v\right)f_{V}\left(v\right)dudv}{1/M}\\
+ & =\frac{\int_{-\infty}^{y}\int_{0}^{f_{Y}\left(v\right)}\frac{1}{M\cdot f_{V}\left(v\right)}f_{V}\left(v\right)dudv}{1/M}\\
+ & =\frac{\frac{1}{M}\int_{-\infty}^{y}\left(\int_{0}^{f_{Y}\left(v\right)}du\right)dv}{1/M}\\
+ & =\int_{-\infty}^{y}f_{Y}\left(v\right)dv\\
+ & =P\left(Y\leq y\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $H$
+\end_inset
+
+ be the rv with pdf 
+\begin_inset Formula $f_{H}\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $H^{*}$
+\end_inset
+
+ be the rv with pdf 
+\begin_inset Formula 
+\[
+f_{H^{*}}\left(x\right)=\frac{f_{H}\left(x\right)I_{S}\left(x\right)}{c}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+c=\int_{S}f_{H}\left(x\right)dx
+\]
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+P\left(H\in S\right)=P\left(\int_{S}f_{H}\left(x\right)dx\right)
+\]
+
+\end_inset
+
+and the probability 
+\begin_inset Formula $P\left(Y\leq y\big|Y\in S\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+P\left(Y\leq y\big|Y\in S\right) & =\frac{P\left(Y\leq y,Y\in S\right)}{P\left(Y\in S\right)}\\
+ & =\frac{\int_{-\infty}^{y}h\left(x\right)I_{S}\left(x\right)dx}{1/c}\\
+ & =\int_{-\infty}^{y}ch\left(x\right)I_{S}\left(x\right)dx\\
+ & =P\left(H\leq y\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $S_{e}=\cup_{i=0}^{\infty}\left(2i,2+1\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{o}=\cup_{i=0}^{\infty}\left(2i+1,2+2\right]$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+d^{-1} & =\sum_{i=0}^{\infty}\left(\int_{2i}^{2i+1}e^{-x}dx+\int_{2i+1}^{2i+2}e^{-x/2}dx\right)\\
+ & =\sum_{i=0}^{\infty}\left(-\left(e^{-\left(2i+1\right)}-e^{-\left(2i\right)}\right)-2\left(e^{-\left(i+1\right)}-e^{-\left(i+1/2\right)}\right)\right)\\
+ & =\sum_{i=0}^{\infty}\left(e^{-\left(2i\right)}-e^{-\left(2i+1\right)}+2\left(e^{-\left(i+1/2\right)}-e^{-\left(i+1\right)}\right)\right)\\
+ & =\sum_{i=0}^{\infty}\left(e^{-\left(2i\right)}\left(1-\frac{1}{e}\right)+2e^{-i}\left(\frac{1}{\sqrt{e}}-\frac{1}{e}\right)\right)\\
+ & =\sum_{i=0}^{\infty}\left(\left(\frac{1}{e^{2}}\right)^{i}\left(1-\frac{1}{e}\right)+2\left(\frac{1}{e}\right)^{i}\left(\frac{1}{\sqrt{e}}-\frac{1}{e}\right)\right)\\
+ & =\left(1-\frac{1}{e}\right)\frac{1}{1-1/e^{2}}+2\left(\frac{1}{\sqrt{e}}-\frac{1}{e}\right)\frac{1}{1-1/e}\\
+ & =\frac{e}{1+e}+\frac{2}{1+\sqrt{e}}\\
+ & =\frac{2+3e+e^{3/2}}{\left(1+\sqrt{e}\right)\left(1+e\right)}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+d=\frac{\left(1+\sqrt{e}\right)\left(1+e\right)}{2+3e+e^{3/2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $f_{1}\left(x\right)=\frac{1}{d_{1}}e^{-x}I_{S_{e}}\left(x\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $d_{1}=\frac{e}{1+e}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}\left(x\right)=\frac{1}{d_{2}}2e^{-x/2}I_{S_{o}}\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{2}=\frac{2}{1+\sqrt{e}}$
+\end_inset
+
+.
+ Then the pdf in (1) can be written as 
+\begin_inset Formula 
+\begin{align*}
+\frac{e\left(1+\sqrt{e}\right)}{2+3e+e^{3/2}}\cdot f_{1}\left(x\right)+\frac{\left(1+e\right)}{2+3e+e^{3/2}}f_{2}\left(x\right) & =\frac{e\left(1+\sqrt{e}\right)}{2+3e+e^{3/2}}\cdot\frac{1}{d_{1}}e^{-x}I_{S_{e}}\left(x\right)+\frac{\left(1+e\right)}{2+3e+e^{3/2}}\frac{1}{d_{2}}2e^{-x/2}I_{S_{o}}\left(x\right)\\
+ & =\frac{\left(1+e\right)\left(1+\sqrt{e}\right)}{2+3e+e^{3/2}}\cdot e^{-x}I_{S_{e}}\left(x\right)+\frac{\left(1+\sqrt{e}\right)\left(1+e\right)}{2+3e+e^{3/2}}e^{-x/2}I_{S_{o}}\\
+ & =de^{-x}I_{S_{e}}\left(x\right)+de^{-x/2}I_{S_{o}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Approximate each of 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ using the algorithm from part (b).
+ That is approximate 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ by drawing from an 
+\begin_inset Formula $\text{exponential}\left(1\right)$
+\end_inset
+
+ distribution and accepting if the draw is in 
+\begin_inset Formula $S_{e}$
+\end_inset
+
+, then approximate 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ by drawing from an 
+\begin_inset Formula $\text{exponential}\left(2\right)$
+\end_inset
+
+ .
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/09).4]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(d)]
+\end_layout
+
+\end_inset
+
+Basically the normalizing constant is included in 
+\begin_inset Formula $M$
+\end_inset
+
+ so it cancels from 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+when you divide by it in the test.
+ Suppose we are interested in simulating a density 
+\begin_inset Formula $f_{2}\propto e^{-x^{2}/2}$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $f_{2}=ke^{-x^{2}/2}$
+\end_inset
+
+ with a candidate density 
+\begin_inset Formula $g\left(x\right)=e^{-\left(x-5\right)}$
+\end_inset
+
+.
+ We calculate 
+\begin_inset Formula 
+\[
+M_{2}=\sup_{x}\frac{f_{2}\left(x\right)}{g\left(x\right)}=\frac{ke^{-x^{2}/2}}{e^{-\left(x-5\right)}}=ke^{-5^{2}/2}\approx k3.73E-6
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula 
+\[
+M_{1}=\frac{\frac{1}{\sqrt{2\pi}\left(1-\Phi\left(5\right)\right)}}{1}\frac{e^{-x^{2}/2}}{e^{-\left(x-5\right)}}=\frac{\frac{1}{\sqrt{2\pi}\left(1-\Phi\left(5\right)\right)}}{1}\frac{1}{k}M_{2}\implies\frac{f_{2}\left(x\right)}{M_{2}}=\frac{ke^{-x^{2}/2}}{k3.73E-6}=\frac{f\left(x\right)}{M_{1}}
+\]
+
+\end_inset
+
+ and only the ratio of the target density to the sup appears in the test
+ condition
+\begin_inset Formula 
+\[
+U<\frac{1}{M}\frac{f_{X}\left(x\right)}{f_{V}\left(x\right)}
+\]
+
+\end_inset
+
+and so testing against 
+\begin_inset Formula 
+\[
+U<\frac{1}{M_{2}}\frac{f_{2,X}\left(x\right)}{f_{V}\left(x\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/11).1]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\left(X,Y\right)$
+\end_inset
+
+ be a continuous rv on 
+\begin_inset Formula $\left(0,1\right)\times\left(0,1\right)$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $U=2X+Y$
+\end_inset
+
+ and 
+\begin_inset Formula $V=X-2Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $0<U<3$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $-2<V<1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+With 
+\begin_inset Formula $A=\begin{pmatrix}2 & 1\\
+1 & -2
+\end{pmatrix}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $\left(X,Y\right)\cdot A=\left(U,V\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $\begin{pmatrix}2 & 1\\
+1 & -2
+\end{pmatrix}$
+\end_inset
+
+ is the new basis for the support.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A^{-1}=\frac{1}{-4-1}\begin{pmatrix}-2 & -1\\
+-1 & 2
+\end{pmatrix}=\begin{pmatrix}\frac{2}{5} & \frac{1}{5}\\
+\frac{1}{5} & -\frac{2}{5}
+\end{pmatrix}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\left(X,Y\right)=\left(U,V\right)\cdot A^{-1}=\left(\frac{2}{5}U+\frac{1}{5}V,\frac{1}{5}U-\frac{2}{5}V\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|J\right|=\frac{1}{5}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+f_{U,V}\left(u,v\right)=\frac{1}{5}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/10).3]
+\end_layout
+
+\end_inset
+
+Pmf of 
+\begin_inset Formula $Z$
+\end_inset
+
+ given 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+P\left(Z=z|\theta\right)=\Theta\left(1-\Theta\right)^{z}I_{\mathbb{Z}^{+}}\left(z\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\Theta\sim\text{beta}\left(\alpha,\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Marginal
+\begin_inset Formula 
+\begin{align*}
+P\left(Z\right) & =\int_{0}^{1}P\left(Z|\theta\right)f_{\Theta}\left(\theta\right)d\theta\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}I_{\mathbb{Z}^{+}}\left(z\right)\int_{0}^{1}\theta\left(1-\theta\right)^{z}\theta^{\alpha-1}\left(1-\theta\right)^{\beta-1}d\theta\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}I_{\mathbb{Z}^{+}}\left(z\right)\int_{0}^{1}\theta^{\left(\alpha+1\right)-1}\left(1-\theta\right)^{\left(\beta+z\right)-1}d\theta\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\frac{\Gamma\left(\alpha+\beta+z+1\right)}{\Gamma\left(\alpha+1\right)\Gamma\left(\beta+z\right)}I_{\mathbb{Z}^{+}}\left(z\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $a>-\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $b>-\beta$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+E\left(\Theta^{a}\left(1-\Theta\right)^{b}\right) & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\int_{0}^{1}\left(\theta^{a}\left(1-\theta\right)^{b}\right)\theta^{\alpha-1}\left(1-\theta\right)^{\beta-1}d\theta\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\int_{0}^{1}\theta^{\left(\alpha+a\right)-1}\left(1-\theta\right)^{\left(\beta+b\right)-1}d\theta\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\frac{\Gamma\left(\alpha+a+\beta+b\right)}{\Gamma\left(\alpha+a\right)\Gamma\left(\beta+b\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Z$
+\end_inset
+
+ is distributed geometric with success probability 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ so
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Marginal mean
+\begin_inset Formula 
+\begin{align*}
+E\left(Z\right) & =E\left(E\left(Z|\Theta\right)\right)\\
+ & =E\left(\frac{1-\Theta}{\Theta}\right)\\
+ & =E\left(\Theta^{-1}\left(1-\Theta\right)\right)\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\frac{\Gamma\left(\alpha+\beta\right)}{\Gamma\left(\alpha-1\right)\Gamma\left(\beta+1\right)}\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha-1\right)\Gamma\left(\beta+1\right)}=\frac{\alpha-1}{\beta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Marginal variance
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(Z\right) & =\text{Var}\left(E\left(Z|\Theta\right)\right)+E\left(\text{Var}\left(Z|\Theta\right)\right)\\
+ & =\text{Var}\left(\Theta^{-1}\left(1-\Theta\right)\right)+E\left(\frac{1-\Theta}{\Theta^{2}}\right)\\
+ & =E\left(\left(\Theta^{-1}\left(1-\Theta\right)\right)^{2}\right)-\left(E\left(\Theta^{-1}\left(1-\Theta\right)\right)\right)^{2}+E\left(\Theta^{-2}\left(1-\Theta\right)\right)\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\frac{\Gamma\left(\alpha+a+\beta+b\right)}{\Gamma\left(\alpha+a\right)\Gamma\left(\beta+b\right)}\\
+ & =E\left(\Theta^{-2}\left(1-\Theta\right)^{2}\right)-\left(E\left(\Theta^{-1}\left(1-\Theta\right)\right)\right)^{2}+E\left(\Theta^{-2}\left(1-\Theta\right)\right)\\
+ & =\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha-2\right)\Gamma\left(\beta+2\right)}-\left(\frac{\alpha-1}{\beta}\right)^{2}+\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}\frac{\Gamma\left(\alpha+\beta-1\right)}{\Gamma\left(\alpha-2\right)\Gamma\left(\beta+1\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(08/09).3]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $U\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $u=e^{-z/\theta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{d}{dz}u=-\frac{1}{\theta}e^{-z/\theta}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+f_{Z}\left(z\right)=1\cdot\left|-\frac{1}{\theta}e^{-z/\theta}\right|=\frac{1}{\theta}e^{-z/\theta}
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula $Z\sim\text{exponential}\left(\theta\right)\sim\text{gamma}\left(1,\theta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y\sim\text{gamma}\left(1,\beta\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+MGF_{Y}\left(t\right) & =E\left(e^{tY}\right)\\
+ & =\frac{1}{\Gamma\left(1\right)}\int_{0}^{\infty}\frac{1}{\beta}e^{ty}e^{-y/\beta}dy\\
+ & =\frac{1}{\beta}\int_{0}^{\infty}e^{-y/\beta+ty}dy\\
+ & =\frac{1}{\beta}\int_{0}^{\infty}e^{-y\left(1/\beta+t\right)}dy\\
+ & =\frac{1}{\beta}\frac{-1}{t+1/\beta}\left(0-1\right)=\frac{1}{\beta t+1}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $MGF_{S}\left(t\right)=\left(\frac{1}{1+\beta t}\right)^{n}$
+\end_inset
+
+ by the convolution theorem and 
+\begin_inset Formula $S\sim\text{gamma}\left(n,\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X\sim\text{gamma}\left(3.5,3.5\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $S\sim\text{gamma}\left(n,\beta\right)$
+\end_inset
+
+.
+ As long as 
+\begin_inset Formula $3.5-n\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta-3.5>0$
+\end_inset
+
+ there exists 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{align*}
+M & =\sup_{s}\frac{f_{X}\left(s\right)}{f_{S}\left(s\right)}\\
+ & =\sup_{s}\left(\frac{\frac{1}{\Gamma\left(3.5\right)3.5^{3.5}}s^{3.5-1}e^{-s/3.5}}{\frac{1}{\Gamma\left(n\right)\beta^{n-1}}s^{n-1}e^{-s/\beta}}\right)\\
+ & =\sup_{s}\left(\frac{\Gamma\left(n\right)\beta^{n-1}}{\Gamma\left(3.5\right)3.5^{3.5}}s^{3.5-n}e^{-s\left(\frac{1}{3.5}-\frac{1}{\beta}\right)}\right)\\
+ & =\frac{\Gamma\left(n\right)\beta^{n-1}}{\Gamma\left(3.5\right)3.5^{3.5}}\sup_{s}\left(s^{3.5-n}e^{-s\left(\frac{\beta-3.5}{3.5\beta}\right)}\right)
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $3.5-n\geq0$
+\end_inset
+
+ implies the ratio is bounded as 
+\begin_inset Formula $s\to0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta-3.5>0$
+\end_inset
+
+ implies the ratio is bounded as 
+\begin_inset Formula $s\to\infty$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The maximum w.r.t to 
+\begin_inset Formula $s$
+\end_inset
+
+ of the ratio above is found by differentiation 
+\begin_inset Formula 
+\[
+\frac{d}{ds}\left(s^{3.5-n}e^{-s\left(\frac{\beta-3.5}{3.5\beta}\right)}\right)=0
+\]
+
+\end_inset
+
+to be at
+\begin_inset Formula 
+\[
+s^{*}=\frac{\left(3.5-n\right)}{\left(3.5-\beta\right)/\left(3.5\beta\right)}
+\]
+
+\end_inset
+
+and equal to 
+\begin_inset Formula 
+\begin{align*}
+M & =\frac{\Gamma\left(n\right)\beta^{n-1}}{\Gamma\left(3.5\right)3.5^{3.5}}\left(s^{*}\right)^{3.5-n}e^{-s^{*}\left(\frac{\beta-3.5}{3.5\beta}\right)}\\
+ & =\frac{\Gamma\left(n\right)\beta^{n-1}}{\Gamma\left(3.5\right)3.5^{3.5}}\left(s^{*}\right)^{3.5-n}e^{s^{*}\left(\frac{3.5-\beta}{3.5\beta}\right)}\\
+ & =\frac{\Gamma\left(n\right)\beta^{n-1}}{\Gamma\left(3.5\right)3.5^{3.5}}\left(s^{*}\right)^{3.5-n}e^{3.5-n}\\
+ & =\frac{\Gamma\left(n\right)\beta^{n-1}}{\Gamma\left(3.5\right)3.5^{3.5}}\left(s^{*}e\right)^{3.5-n}
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=4$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+M & =\frac{1}{\Gamma\left(3.5\right)3.5^{3.5}}\left(s^{*}e\right)^{2.5}
+\end{align*}
+
+\end_inset
+
+Then generate the first uniform random variable 
+\begin_inset Formula $V$
+\end_inset
+
+ and compute 
+\begin_inset Formula $Z=-4\log\left(U\right)$
+\end_inset
+
+ and the generate the second uniform random variable 
+\begin_inset Formula $U$
+\end_inset
+
+ and test whether 
+\begin_inset Formula 
+\[
+u<\frac{1}{M}\frac{1}{\Gamma\left(3.5\right)3.5^{3.5}}\left(v\right)^{2.5}e^{-v\left(\frac{.5}{3.5\cdot.5}\right)}
+\]
+
+\end_inset
+
+If so accept, otherwise reject and draw again.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $P\left(U<\frac{1}{M}\frac{f_{X}\left(V\right)}{f_{S}\left(V\right)}\right)=\frac{1}{M}$
+\end_inset
+
+ the number of draws is geometrically distributed and and so the expected
+ number of draws is 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(08/09).1]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $X_{1},X_{2},X_{3},X_{4}$
+\end_inset
+
+ iid on the days of the week.
+ 
+\begin_inset Formula $Y=\left|\text{union}\left(X_{1},X_{2},X_{3},X_{4}\right)\right|$
+\end_inset
+
+ i.e.
+ number of unique days drawn.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $P\left(Y=2\right)$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $7^{4}$
+\end_inset
+
+ different samples.
+ Choose a day.
+ Then choose how many times it will appear (once, twice, or three times)
+ then choose the second day (for which you do not have to choose how many
+ times it appears since it is fixed as a function of the number of times
+ the first day appears): 
+\begin_inset Formula $7\times3\times6$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $P\left(Y=1\right)=7$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $P\left(Y=4\right)$
+\end_inset
+
+ there are 
+\begin_inset Formula $\binom{7}{4}$
+\end_inset
+
+ ways to choose the 4 days and then 
+\begin_inset Formula $4!$
+\end_inset
+
+ permutations of each of those choices and hence 
+\begin_inset Formula $\binom{7}{4}4!$
+\end_inset
+
+ then 
+\begin_inset Formula $P\left(Y=3\right)$
+\end_inset
+
+ by compliment.
+\end_layout
+
+\begin_layout Enumerate
+There are now 
+\begin_inset Formula $5^{4}$
+\end_inset
+
+ different samples.
+ 
+\begin_inset Formula $P\left(Y=1\right)=5$
+\end_inset
+
+,
+\begin_inset Formula $P\left(Y=2\right)=5\cdot3\cdot4$
+\end_inset
+
+,
+\begin_inset Formula $P\left(Y=4\right)=\binom{5}{4}4!$
+\end_inset
+
+, then 
+\begin_inset Formula $P\left(Y=3\right)$
+\end_inset
+
+ by compliment.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/09).1]
+\end_layout
+
+\end_inset
+
+Craps 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{bmatrix}\backslash & 1 & 2 & 3 & 4 & 5 & 6\\
+1 & 2 & 3 & 4 & 5 & 6 & 7\\
+2 & 3 & 4 & 5 & 6 & 7 & 8\\
+3 & 4 & 5 & 6 & 7 & 8 & 9\\
+4 & 5 & 6 & 7 & 8 & 9 & 10\\
+5 & 6 & 7 & 8 & 9 & 10 & 11\\
+6 & 7 & 8 & 9 & 10 & 11 & 12
+\end{bmatrix}
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+P\left(2\right) & =1/36,P\left(3\right)=2/36,P\left(4\right)=3/36,P\left(5\right)=4/36\\
+ & P\left(6\right)=5/36,P\left(7\right)=6/36,P\left(8\right)=5/36,P\left(9\right)=4/36,\\
+ & P\left(10\right)=3/36,P\left(11\right)=2/36,P\left(12\right)=1/36
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If he wins he either threw a 7 or 11 on the first throw or one of 
+\begin_inset Formula $\left\{ 4,5,6,8,9,10\right\} $
+\end_inset
+
+ on the first throw and then again.
+ First of all
+\begin_inset Formula 
+\begin{align*}
+P\left(wins|2\right) & =0\\
+P\left(wins|3\right) & =0\\
+P\left(wins|4\right) & =P\left(\text{roll a 4 before a 7}\right)=\frac{P\left(\text{rolling a 4}\right)}{P\left(\text{rolling a 4 or a 7}\right)}=\frac{3}{3+6}\\
+P\left(wins|5\right) & =P\left(\text{roll a 5 before a 7}\right)=\frac{P\left(\text{rolling a 5}\right)}{P\left(\text{rolling a 5 or a 7}\right)}=\frac{4}{5+6}\\
+P\left(wins|6\right) & =P\left(\text{roll a 6 before a 7}\right)=\frac{P\left(\text{rolling a 6}\right)}{P\left(\text{rolling a 6 or a 7}\right)}=\frac{5}{5+6}\\
+P\left(wins|7\right) & =1\\
+P\left(wins|8\right) & =P\left(\text{roll a 8 before a 7}\right)=\frac{P\left(\text{rolling a 8}\right)}{P\left(\text{rolling a 8 or a 7}\right)}=\frac{5}{5+6}\\
+P\left(wins|9\right) & =P\left(\text{roll a 9 before a 7}\right)=\frac{P\left(\text{rolling a 9}\right)}{P\left(\text{rolling a 9 or a 7}\right)}=\frac{4}{4+6}\\
+P\left(wins|10\right) & =P\left(\text{roll a 10 before a 7}\right)=\frac{P\left(\text{rolling a 10}\right)}{P\left(\text{rolling a 10 or a 7}\right)}=\frac{10}{10+6}\\
+P\left(wins|11\right) & =1\\
+P\left(wins|12\right) & =0
+\end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+P\left(j|wins\right)=\frac{P\left(wins|j\right)P\left(j\right)}{\sum P\left(wins|i\right)P\left(i\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/09).2]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X\sim\text{gamma}\left(\alpha,\beta\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{i}\sim\text{gamma}\left(1,1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{i}\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+MGF
+\begin_inset Formula 
+\begin{align*}
+MGF_{X}\left(t\right) & =E\left(e^{tX}\right)\\
+ & =\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\int_{0}^{\infty}x^{\alpha-1}e^{tx}e^{-x/\beta}dx\\
+ & =\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\int_{0}^{\infty}x^{\alpha-1}e^{-x/\left(\frac{\beta}{1-\beta t}\right)}dx\\
+ & =\frac{\left(\frac{\beta}{1-\beta t}\right)^{\alpha}\Gamma\left(\alpha\right)}{\Gamma\left(\alpha\right)\beta^{\alpha}}\int_{0}^{\infty}\frac{1}{\left(\frac{\beta}{1-\beta t}\right)^{\alpha}\Gamma\left(\alpha\right)}x^{\alpha-1}e^{-x/\left(\frac{\beta}{1-\beta t}\right)}dx\\
+ & =\left(\frac{1}{1-\beta t}\right)^{\alpha}
+\end{align*}
+
+\end_inset
+
+then 
+\begin_inset Formula 
+\begin{align*}
+E\left(X\right) & =\left.\frac{d}{dt}MGF_{X}\left(t\right)\right|_{t=0}\\
+ & =\left.\frac{d}{dt}\left(1-\beta t\right)^{-\alpha}\right|_{t=0}\\
+ & =\left.-\alpha\left(1-\beta t\right)^{-\alpha-1}\left(-\beta\right)\right|_{t=0}\\
+ & =\left.\alpha\beta\left(1-\beta t\right)^{-\alpha-1}\right|_{t=0}\\
+ & =\alpha\beta
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(X\right) & =\left.\frac{d}{dt}\left(\alpha\beta\left(1-\beta t\right)^{-\alpha-1}\right)\right|_{t=0}-\left(\alpha\beta\right)^{2}\\
+ & =\alpha\beta^{2}\left(-\alpha-1\right)\left.\left(1-\beta t\right)^{-\alpha-2}\right|_{t=0}-\left(\alpha\beta\right)^{2}\\
+ & =\alpha\beta^{2}\left(\alpha+1\right)-\left(\alpha\beta\right)^{2}\\
+ & =\alpha\beta^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+By the convolution theorem 
+\begin_inset Formula $\sum Y_{i}\sim\text{gamma}\left(n,1\right)$
+\end_inset
+
+ and by scale 
+\begin_inset Formula $\theta\sum Y_{i}\sim\text{gamma}\left(n,\theta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Y=-\log\left(U\right)$
+\end_inset
+
+ means 
+\begin_inset Formula $U=e^{-Y}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|\frac{d}{dy}e^{-y}\right|=\left|-e^{-y}\right|=\left|-e^{-y}\right|$
+\end_inset
+
+ so 
+\begin_inset Formula $Y\sim\text{exponential}\left(1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $U_{i}\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+ then if 
+\begin_inset Formula $Y=1-U_{i}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $U=1-Y$
+\end_inset
+
+ and then 
+\begin_inset Formula $\left|\frac{d}{dy}\left(1-Y\right)\right|=1$
+\end_inset
+
+ and so 
+\begin_inset Formula $\left(1-U_{i}\right)\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $V_{1}=\left(1-U_{2}\right),V_{2}=\left(1-U_{4}\right),\dots$
+\end_inset
+
+.
+ We compute the distribution of the 
+\begin_inset Formula $-\log$
+\end_inset
+
+ of the product.
+ For 
+\begin_inset Formula $2k=n$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-\log\left(\prod_{i=1}^{k}U_{i}V_{i}\right) & =\sum_{i=1}^{k}\left(-\log\left(U_{i}\right)\right)+\sum_{i=1}^{k}\left(-\log\left(V_{i}\right)\right)\\
+ & =\sum_{i=1}^{k}Y_{i}+\sum_{i=1}^{k}Z_{i}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $Z_{i}\sim Y_{i}\sim\text{exponential}\left(1\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+-\log\left(\prod_{i=1}^{k}U_{i}V_{i}\right)\sim\text{gamma}\left(n,1\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+\prod_{i=1}^{k}U_{i}V_{i}=e^{-X}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $X\sim\text{gamma}\left(n,1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $ $
+\end_inset
+
+so let 
+\begin_inset Formula $K\sim\prod_{i=1}^{k}U_{i}V_{i}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+f_{K}\left(k\right)=\frac{1}{\Gamma\left(n\right)}\left(-\frac{1}{k}\right)^{n-1}e^{\frac{1}{k}}\frac{1}{k^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $U_{1}x^{2}+U_{2}x+U_{3}$
+\end_inset
+
+ has positive roots iff
+\begin_inset Formula 
+\[
+\sqrt{U_{2}^{2}-4U_{1}U_{3}}
+\]
+
+\end_inset
+
+ is real, which is equivalent to
+\begin_inset Formula 
+\begin{align*}
+U_{2}^{2}-4U_{1}U_{3} & \geq0\\
+U_{2}^{2} & \geq4U_{1}U_{3}\\
+2\log\left(U_{2}\right) & \geq\log\left(4\right)+\log\left(U_{1}\right)+\log\left(U_{2}\right)\\
+-2\log\left(U_{2}\right) & \leq-\log\left(4\right)-\log\left(U_{1}\right)-\log\left(U_{2}\right)
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $V_{1}\sim\text{exponential}\left(2\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}\sim\text{gamma}\left(2,1\right)$
+\end_inset
+
+
+\begin_inset Formula $ $
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+P\left(U_{1}x^{2}+U_{2}x+U_{3}\text{ has positive roots}\right)=P\left(V_{1}\leq-\log\left(4\right)+V_{2}\right)
+\]
+
+\end_inset
+
+but
+\begin_inset Formula 
+\begin{align*}
+P\left(V_{1}\leq-\log\left(4\right)+V_{2}\right) & =E\left(P\left(V_{1}\leq-\log\left(4\right)+V_{2}|V_{2}\right)\right)\\
+ & =\frac{1}{\Gamma\left(2\right)}\int_{0}^{\infty}P\left(V_{1}\leq-\log\left(4\right)+v_{2}\right)\left(xe^{-x}\right)dx\\
+ & =\frac{1}{\Gamma\left(2\right)}\int_{\log\left(4\right)}^{\infty}\left(\int_{0}^{-\log\left(4\right)+x}\frac{1}{2}e^{-y/2}dy\right)\left(xe^{-x}\right)dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(05/09).5]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{uniform}\left(\theta,\theta+1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{i}\sim\text{uniform}\left(0,1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Consider 
+\begin_inset Formula 
+\[
+f\left(s,t\right)=n\left(n-1\right)\left(t-s\right)^{n-2}I_{\left(0<s<t<1\right)}
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $t>s$
+\end_inset
+
+ it's positive and 
+\begin_inset Formula 
+\begin{align*}
+\int f\left(s,t\right) & =n\left(n-1\right)\int_{0}^{1}\left(\int_{s}^{1}\left(t-s\right)^{n-2}dt\right)ds\\
+ & =n\left(n-1\right)\int_{0}^{1}\left(\int_{0}^{1-s}y^{n-2}dy\right)ds\\
+ & =n\int_{0}^{1}\left(1-s\right)^{n-1}ds\\
+ & =-n\int_{1}^{0}y^{n-1}ds\\
+ & =n\int_{0}^{1}y^{n-1}ds\\
+ & =\left.y^{n}\right|_{0}^{1}=1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $-\infty<u<v<\infty$
+\end_inset
+
+ the joint pdf of any two order statistics is
+\begin_inset Formula 
+\[
+f_{X_{\left(i\right)},X_{\left(i\right)}}\left(u,v\right)=n!f_{X}\left(u\right)f_{X}\left(v\right)\frac{\left(F_{X}\left(u\right)\right)^{i-1}\left(F_{X}\left(u\right)-F_{X}\left(v\right)\right)^{j-1-i}\left(F_{X}\left(v\right)\right)^{n-j}}{\left(i-1\right)!\left(j-1-i\right)!\left(n-j\right)!}
+\]
+
+\end_inset
+
+so it must be 1 and n
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1\right)},X_{\left(n\right)}}\left(u,v\right) & =n!\frac{\left(F_{X}\left(u\right)\right)^{1-1}\left(F_{X}\left(u\right)-F_{X}\left(v\right)\right)^{n-1-1}\left(F_{X}\left(v\right)\right)^{n-n}}{\left(1-1\right)!\left(n-1-1\right)!\left(n-n\right)!}\\
+ & =n\left(n-1\right)\left(u-v\right)^{n-2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Just use the general pdf again
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1\right)},X_{\left(n\right)}}\left(u,v\right) & =n!\frac{\left(F_{X}\left(u\right)\right)^{1-1}\left(F_{X}\left(u\right)-F_{X}\left(v\right)\right)^{n-1-1}\left(F_{X}\left(v\right)\right)^{n-n}}{\left(n-1-1\right)!\left(n-n\right)!}\\
+ & =n\left(n-1\right)\left(F_{X}\left(u\right)-F_{X}\left(v\right)\right)^{n-2}\\
+ & =n\left(n-1\right)\left(\frac{u-\theta}{1}-\frac{v-\theta}{1}\right)^{n-2}\\
+ & =n\left(n-1\right)\left(u-\theta-\left(v-\theta\right)\right)^{n-2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document

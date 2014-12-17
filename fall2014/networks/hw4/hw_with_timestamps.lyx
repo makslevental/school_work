@@ -179,7 +179,7 @@ Open Shortest Path First (OSPF) advertisements.
 
 \end_deeper
 \begin_layout Enumerate
-The 
+Lecture 35 (42:17) Lecture 38 (34:43) Lecture 37(54:50) The 
 \begin_inset Quotes eld
 \end_inset
 
@@ -210,9 +210,9 @@ meet
 \end_layout
 
 \begin_layout Enumerate
-A group-shared tree is a single spanning tree that connects all members
- of a group through which packets from all sources that have receivers in
- the group will be transmitted on.
+Lecture 37(25,40) A group-shared tree is a single spanning tree that connects
+ all members of a group through which packets from all sources that have
+ receivers in the group will be transmitted on.
  A router forwards each multicast packet to interfaces that are part of
  the tree.
  It is more effective than flooding but it incurs traffic concentration
@@ -228,8 +228,8 @@ A group-shared tree is a single spanning tree that connects all members
 \end_layout
 
 \begin_layout Enumerate
-In PIM-DM the source broadcasts a packet and creates a prune state which
- is specific to that source, i.e.
+Lecture 38(2:21,26:49) In PIM-DM the source broadcasts a packet and creates
+ a prune state which is specific to that source, i.e.
  information specific to the source has to be stored, in order for join
  messages to propagate back up to the source against the prune state and
  establish the appropriate branch.
@@ -247,8 +247,9 @@ n tree, on the way to the root, not the source.
 \end_layout
 
 \begin_layout Enumerate
-Reverse Path Forwarding check is a check that's done to discover whether
- a packet was received on the interface associated with the source.
+Lecture 37(35:50) Reverse Path Forwarding check is a check that's done to
+ discover whether a packet was received on the interface associated with
+ the source.
  If the packet did indeed arrive on the interface associated (in the routing
  table) with the source then it will be forwarded.
  Otherwise it will be dropped; the reasoning is that it's a packet that
@@ -311,6 +312,21 @@ When the last member of a group leaves it send a leave message to the router.
 The solution is to forward leave requests up to source.
 \end_layout
 
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Lecture 39(8:31)
+\end_layout
+
+\begin_deeper
 \begin_layout Enumerate
 A soft state is updated often, every minute or so.
  Hard state incurs a lower overhead even though there are two messages (a
@@ -336,8 +352,8 @@ Use variable timers for which timeout is set by predicted traffic at the
 
 \end_deeper
 \begin_layout Enumerate
-Timer-suppression mechanism is what prevents all hosts on a LAN from responding
- to query from a router.
+Lecture 36(33:45)Timer-suppression mechanism is what prevents all hosts
+ on a LAN from responding to query from a router.
  It prevents report implosion.
  When you as a host receive a query you set a randomized timer according
  to which you'll respond.
