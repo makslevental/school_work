@@ -1,0 +1,540 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Shor's algorithm
+\end_layout
+
+\begin_layout Part
+Basic Set Theory
+\end_layout
+
+\begin_layout Fact
+Inverse images and set operations commute
+\begin_inset Formula 
+\begin{align*}
+f^{-1}\left(\bigcup_{i\in I}C_{i}\right) & =\bigcup_{i\in I}f^{-1}\left(C_{i}\right)\\
+f^{-1}\left(\bigcap_{i\in I}C_{i}\right) & =\bigcap_{i\in I}f^{-1}\left(C_{i}\right)\\
+f^{-1}\left(C\backslash D\right) & =f^{-1}\left(C\right)\backslash f^{-1}\left(D\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras
+\end_layout
+
+\begin_layout Definition
+A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ on a set 
+\begin_inset Formula $X$
+\end_inset
+
+ is a family of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ with that following properties 
+\begin_inset Formula 
+\begin{align*}
+X & \in\mathcal{A}\\
+A\in\mathcal{A} & \Rightarrow A^{c}\in\mathcal{A}\\
+\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A} & \Rightarrow\bigcup_{j\in\mathbb{N}}A_{j}\subset\mathcal{A}
+\end{align*}
+
+\end_inset
+
+I.e.
+ the entire space is in the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra, it's (the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra) is closed under complements, and it's closed under countable unions.
+ A set 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+ is said to be 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+-measurable.
+\end_layout
+
+\begin_deeper
+\begin_layout Fact
+Properties of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\emptyset\in\mathcal{A}$
+\end_inset
+
+ (by the complemtentation property on 
+\begin_inset Formula $X$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A,B\in\mathcal{A}\Rightarrow A\cup B\in\mathcal{A}$
+\end_inset
+
+ (set 
+\begin_inset Formula $A_{j\geq3}=\emptyset$
+\end_inset
+
+ and then by closed under countable union)
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}\Rightarrow\bigcap_{j\in\mathbb{N}}A_{j}\subset\mathcal{A}$
+\end_inset
+
+ (
+\begin_inset Formula $A^{c}\in\mathcal{A}$
+\end_inset
+
+, then closed under countable union then complement again)
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example
+Trace 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+ Let 
+\begin_inset Formula $E\subset X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\mathcal{A}_{E}\equiv E\cap\mathcal{A}\equiv\left\{ E\cap A:A\in\mathcal{A}\right\} 
+\]
+
+\end_inset
+
+is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example
+Pre-image 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+ Let 
+\begin_inset Formula $f:X\rightarrow X'$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{A}'$
+\end_inset
+
+ be a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra over 
+\begin_inset Formula $X'$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\mathcal{A\equiv}f^{-1}\left(\mathcal{A}'\right)\equiv\left\{ f^{-1}\left(A'\right):A'\in\mathcal{A}'\right\} 
+\]
+
+\end_inset
+
+is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The intersection 
+\begin_inset Formula $\cap_{i\in I}\mathcal{A}_{i}$
+\end_inset
+
+ of arbitrary 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{A}_{i}$
+\end_inset
+
+ is again a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+\end_layout
+
+\begin_layout Enumerate
+For every collection of sets 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ in the powerset of 
+\begin_inset Formula $X$
+\end_inset
+
+ there exists a smallest/minimal/coarsest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra containing 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+.
+ This is called the sigma algebra genearted by 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ denoted 
+\begin_inset Formula $\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is called its generator.
+\end_layout
+
+\begin_layout Corollary
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is already a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra then 
+\begin_inset Formula $\mathcal{G}=\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\mathcal{F}\subset\mbox{\mathcal{G}\subset}\mathcal{A}$
+\end_inset
+
+ for any collections of sets 
+\begin_inset Formula $\mathcal{F},\mbox{\mathcal{G},}\mathcal{A}$
+\end_inset
+
+ then 
+\begin_inset Formula $\sigma\left(\mathcal{F}\right)\subset\sigma\mbox{\left(\mathcal{G}\right)}\subset\sigma\left(\mathcal{A}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+The 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\sigma\left(\mathcal{O}^{n}\right)$
+\end_inset
+
+ generated by the open set 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{O}^{n}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ is called the Borel 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra, containing the Borel sets or Borel measurable sets and denoted
+ 
+\begin_inset Formula $\mathcal{B}\left(\mathbb{R}^{n}\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathcal{B}^{n}$
+\end_inset
+
+.
+ Sometimes this is also called the topological sigma algebra (because the
+ open sets of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ are also the basis sets of the standard topology on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+If 
+\begin_inset Formula $\mathcal{O}^{n}$
+\end_inset
+
+,
+\begin_inset Formula $C^{n}$
+\end_inset
+
+,
+\begin_inset Formula $K^{n}$
+\end_inset
+
+ denote the families of open, closed, and compact sets in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+\mathcal{B}\left(\mathbb{R}^{n}\right)=\sigma\left(\mathcal{O}^{n}\right)=\sigma\mbox{\ensuremath{\left(\mathcal{C}^{n}\right)}}=\sigma\left(\mathcal{K}^{n}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Corollary
+The 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Borel 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is also generated by any of the following systems
+\begin_inset Formula 
+\begin{align*}
+\left\{ \left(-\infty,a\right):a\in\mathbb{Q}\right\} , & \left\{ \left(-\infty,a\right):a\in\mathbb{R}\right\} \\
+\left\{ \left(a,\infty\right):a\in\mathbb{Q}\right\} , & \left\{ \left(a,\infty\right):a\in\mathbb{R}\right\} \\
+\left\{ \left(-\infty,a\right]:a\in\mathbb{Q}\right\} , & \left\{ \left(-\infty,a\right]:a\in\mathbb{R}\right\} \\
+\left\{ \left[a,\infty\right):a\in\mathbb{Q}\right\} , & \left\{ \left[a,\infty\right):a\in\mathbb{R}\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark
+You cannot in fact generate 
+\begin_inset Formula $\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+ by simply unioning 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ with all countable unions of its members.
+ That set is still missing some that need to be in the sigma algebra.
+ You need transfinite induction.
+\end_layout
+
+\end_body
+\end_document
