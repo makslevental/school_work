@@ -1,0 +1,1072 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Shor's algorithm
+\end_layout
+
+\begin_layout Part
+Reduction to Order Finding
+\end_layout
+
+\begin_layout Theorem
+If there exists an algo to find the order of 
+\begin_inset Formula $x\left(mod\, N\right)$
+\end_inset
+
+ in time 
+\begin_inset Formula $\text{polylog}\left(N\right)$
+\end_inset
+
+, then there exists an algo that on input of an integer 
+\begin_inset Formula $N$
+\end_inset
+
+ produces the factorization of 
+\begin_inset Formula $N$
+\end_inset
+
+ in time 
+\begin_inset Formula $\text{polylog}\left(N\right)$
+\end_inset
+
+ with constant probability of success.
+\end_layout
+
+\begin_layout Standard
+Because 
+\begin_inset Formula $N$
+\end_inset
+
+ has at most 
+\begin_inset Formula $\log\left(N\right)$
+\end_inset
+
+ factors it suffices to find a single factor in 
+\begin_inset Formula $O\left(\log\left(N\right)\right)$
+\end_inset
+
+ with constant probability, and then repeating the process at most 
+\begin_inset Formula $\log\left(N\right)$
+\end_inset
+
+ times, but reducing the size of the input by the factor each time.
+\end_layout
+
+\begin_layout Paragraph*
+Algorithm 3.2 (Shor's Reduction to Order finding)
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $L=\log\left(N\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $N$
+\end_inset
+
+ is even, return the factor 2.
+\end_layout
+
+\begin_layout Enumerate
+Check if 
+\begin_inset Formula $N=a^{b}$
+\end_inset
+
+ and if so return 
+\begin_inset Formula $a$
+\end_inset
+
+ (can be done in 
+\begin_inset Formula $L\log\left(L\right)^{O\left(1\right)}$
+\end_inset
+
+ time).
+\end_layout
+
+\begin_layout Enumerate
+Randomly choose 
+\begin_inset Formula $x$
+\end_inset
+
+ in the range 
+\begin_inset Formula $1<x<N-1$
+\end_inset
+
+.
+ Compute 
+\begin_inset Formula $\gcd\left(x,N\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $O\left(L^{3}\right)$
+\end_inset
+
+and if 
+\begin_inset Formula $\gcd\left(x,N\right)>1$
+\end_inset
+
+ return
+\end_layout
+
+\begin_layout Enumerate
+Use finding subroutine to find 
+\begin_inset Formula $r$
+\end_inset
+
+ such that 
+\begin_inset Formula $x^{r}=1\left(\mod\, N\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $r$
+\end_inset
+
+ is even and 
+\begin_inset Formula $x^{r/2}+1\neq\left(\mod\, N\right)$
+\end_inset
+
+ then compute 
+\begin_inset Formula $\gcd\left(x^{2}-1,N\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\gcd\left(x^{2}+1,N\right)$
+\end_inset
+
+ to see which is a non-trivial factor.
+ Else return false (no factors).
+\end_layout
+
+\begin_layout Standard
+Preliminaries
+\end_layout
+
+\begin_layout Lemma
+Fermat's little theorem: suppose 
+\begin_inset Formula $N$
+\end_inset
+
+ is prime, and 
+\begin_inset Formula $a$
+\end_inset
+
+ is any integer.
+ Then 
+\begin_inset Formula $a^{N}=a\left(\mod N\right)$
+\end_inset
+
+ and if 
+\begin_inset Formula $a$
+\end_inset
+
+ is not divisible by 
+\begin_inset Formula $N$
+\end_inset
+
+ then 
+\begin_inset Formula $a^{N-1}=1\left(\mod N\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+The second part follows from the first.
+ The first part is proved by induction on 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ Base case is obvious.
+ Then consider 
+\begin_inset Formula $\left(1+a\right)^{N}=\sum_{k=0}^{N}\binom{N}{k}a^{k}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $N$
+\end_inset
+
+ divides 
+\begin_inset Formula $\binom{N}{k}$
+\end_inset
+
+ so taking 
+\begin_inset Formula $\mod N$
+\end_inset
+
+ of both sides kills all terms except the first and the last so hence 
+\begin_inset Formula $\left(1+a\right)^{N}\equiv1^{N}+a^{N}\mod N$
+\end_inset
+
+.
+ Then applying the inductive hypothesis to 
+\begin_inset Formula $a^{N}$
+\end_inset
+
+ where that 
+\begin_inset Formula $\left(1+a\right)^{N}=\left(1+a\right)\mod N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset Formula $\varphi\left(ab\right)=\varphi\left(a\right)\varphi\left(b\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Consider 
+\begin_inset Formula $x\equiv x_{a}\mod a$
+\end_inset
+
+ and 
+\begin_inset Formula $x\equiv x_{b}\mod b$
+\end_inset
+
+.
+ By the Chinese remainder theorem we see that there is a 1-1 correspondence
+ between tuples 
+\begin_inset Formula $\left(x_{a},x_{b}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $1\leq x_{a}<a$
+\end_inset
+
+,
+\begin_inset Formula $1\leq x_{b}<b$
+\end_inset
+
+, 
+\begin_inset Formula $\gcd\left(x_{a},a\right)=1$
+\end_inset
+
+,
+\begin_inset Formula $\gcd\left(x_{b},b\right)=1$
+\end_inset
+
+ and integers 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $1\leq x<ab$
+\end_inset
+
+, 
+\begin_inset Formula $\gcd\left(x,ab\right)=1$
+\end_inset
+
+.
+ There are 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\varphi\left(a\right)\varphi\left(b\right)$
+\end_inset
+
+ such pairs and therefore 
+\begin_inset Formula $\varphi\left(ab\right)=\varphi\left(a\right)\varphi\left(b\right)$
+\end_inset
+
+, by the 1-1 correspondence.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Relevance of gcd is that euler totient counts only those which are coprime.
+ I guess this is actually part of the proof the 
+\begin_inset Formula $Z_{N}$
+\end_inset
+
+ factors.
+\end_layout
+
+\begin_layout Standard
+In general 
+\end_layout
+
+\begin_layout Lemma
+Euler-totient theorem: suppose 
+\begin_inset Formula $a$
+\end_inset
+
+ is co-prime to 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a^{\varphi\left(N)\right)}=1\mod N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Again by induction.
+ Base case is obvious.
+ Assume 
+\begin_inset Formula $a^{\varphi\left(p^{\alpha}\right)}=1+kp^{\alpha}$
+\end_inset
+
+ , i.e.
+ 
+\begin_inset Formula $a^{\varphi\left(p^{\alpha}\right)}\equiv1\mod p^{\alpha}$
+\end_inset
+
+.
+ Then by 
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)=p^{\alpha-1}\left(p-1\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\begin{align*}
+a^{\varphi\left(p^{\alpha+1}\right)} & =a^{\varphi\left(p^{\alpha}\right)\left(p-1\right)}\\
+ & =a^{p\varphi\left(p^{\alpha}\right)}\\
+ & =\left(1+kp^{\alpha}\right)^{p}\\
+ & =1+\sum_{j=1}^{p}\binom{p}{j}k^{j}p^{j\alpha}
+\end{align*}
+
+\end_inset
+
+then using the same trick of dividing by 
+\begin_inset Formula $p^{\alpha+1}$
+\end_inset
+
+ to kill terms in the sum we have 
+\begin_inset Formula 
+\begin{align*}
+a^{\varphi\left(p^{\alpha+1}\right)} & \equiv1\mod p^{\alpha+1}
+\end{align*}
+
+\end_inset
+
+which completes the induction.
+ Then in general since 
+\begin_inset Formula $N=\prod_{i}p_{i}^{\alpha_{i}}$
+\end_inset
+
+, 
+\begin_inset Formula $a^{\varphi\left(N\right)}\equiv1\mod p_{i}^{\alpha_{i}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+, as 
+\begin_inset Formula $\varphi\left(N\right)$
+\end_inset
+
+ is a multiple of 
+\begin_inset Formula $\varphi\left(p_{i}^{\alpha_{i}}\right)$
+\end_inset
+
+, by lemma 4.
+ Apply the Chinese remainder theorem any solution to the set of equations
+ 
+\begin_inset Formula $x\equiv1\mod p_{j}^{\alpha_{j}}$
+\end_inset
+
+ must satisfy 
+\begin_inset Formula $x=1\mod N$
+\end_inset
+
+ and therefore since 
+\begin_inset Formula $a^{\varphi\left(p^{\alpha}\right)}\equiv1\mod p^{\alpha}$
+\end_inset
+
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $a^{\varphi\left(N\right)}\equiv1\mod N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+Facts
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbb{Z}_{N}^{*}$
+\end_inset
+
+, all those element in 
+\begin_inset Formula $\mathbb{Z}_{N}$
+\end_inset
+
+ which have inverses, i.e.
+ all those elements co-prime to 
+\begin_inset Formula $N$
+\end_inset
+
+, forms a cyclic group when 
+\begin_inset Formula $N=p^{\alpha}$
+\end_inset
+
+, i.e.
+ there's a generator, and the order of that generator, and the size of the
+ group is 
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)=p^{\alpha}\left(p-1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Lagrange's theorem: the order of a subgroup divides the order of the group.
+ Therefore the subgroup generated by any particular element in 
+\begin_inset Formula $\mathbb{Z}_{N}^{*}$
+\end_inset
+
+, say 
+\begin_inset Formula $a$
+\end_inset
+
+, has some order dividing 
+\begin_inset Formula $\varphi\left(N\right)$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $a^{\varphi\left(N\right)}\equiv1\mod N$
+\end_inset
+
+.
+ Therefore for any element 
+\begin_inset Formula $a\in\mathbb{Z}_{N}^{*}$
+\end_inset
+
+ the order of 
+\begin_inset Formula $a$
+\end_inset
+
+ is either 
+\begin_inset Formula $\varphi\left(N\right)$
+\end_inset
+
+ or divides 
+\begin_inset Formula $\varphi\left(N\right)$
+\end_inset
+
+ (since the subgroup generated by 
+\begin_inset Formula $a$
+\end_inset
+
+ has to divide 
+\begin_inset Formula $\varphi\left(N\right)$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection*
+Finally leading up to why the algorithm works.
+\end_layout
+
+\begin_layout Lemma
+For every 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ if 
+\begin_inset Formula $y^{2}\equiv1\left(\mod\, N\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y-1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+ nor 
+\begin_inset Formula $y+1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+, then 
+\begin_inset Formula $\gcd\left(y-1,N\right)$
+\end_inset
+
+ is a factor of 
+\begin_inset Formula $N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $y$
+\end_inset
+
+ be such that 
+\begin_inset Formula $y^{2}-1\equiv\left(\mod\, N\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y-1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+ nor 
+\begin_inset Formula $y+1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $y^{2}-1\equiv\left(y-1\right)\left(y+1\right)\equiv\left(\mod\, N\right)$
+\end_inset
+
+ and so there exists 
+\begin_inset Formula $m\in\mathbb{N}$
+\end_inset
+
+ such that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(y-1\right)\left(y+1\right)=mN$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\frac{\left(y-1\right)\left(y+1\right)}{N}=m$
+\end_inset
+
+.
+ But 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $y-1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y+1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+ means 
+\begin_inset Formula $N$
+\end_inset
+
+ there do not exists 
+\begin_inset Formula $a,b$
+\end_inset
+
+ such that 
+\begin_inset Formula $y-1=aN$
+\end_inset
+
+ and 
+\begin_inset Formula $y+1=bN$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $N$
+\end_inset
+
+ divides neither 
+\begin_inset Formula $y-1$
+\end_inset
+
+ nor 
+\begin_inset Formula $y+1$
+\end_inset
+
+.
+ But
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ then for 
+\begin_inset Formula $\frac{\left(y-1\right)\left(y+1\right)}{N}$
+\end_inset
+
+ to equal an integer it must be the case that each of 
+\begin_inset Formula $y-1$
+\end_inset
+
+ and 
+\begin_inset Formula $y+1$
+\end_inset
+
+ contain a factor of 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ More thoroughly: suppose 
+\begin_inset Formula $\gcd\left(y-1,N\right)=1$
+\end_inset
+
+ then for 
+\begin_inset Formula $\frac{\left(y-1\right)\left(y+1\right)}{N}=m$
+\end_inset
+
+ it must be the case that 
+\begin_inset Formula $N|\left(y+1\right)$
+\end_inset
+
+, a contradiction, similarly if 
+\begin_inset Formula $\gcd\left(y-1,N\right)=N$
+\end_inset
+
+ then 
+\begin_inset Formula $N|\left(y-1\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $y-1=N$
+\end_inset
+
+, both of which are disqualified by 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $y-1\not\equiv0\left(\mod\, N\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+Let p be an odd prime.
+ Let 
+\begin_inset Formula $2^{d}$
+\end_inset
+
+ be the largest power of 
+\begin_inset Formula $2$
+\end_inset
+
+ dividing 
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)$
+\end_inset
+
+.
+ Then with probability 1/2 
+\begin_inset Formula $2^{d}$
+\end_inset
+
+ divides the order modulo 
+\begin_inset Formula $p^{\alpha}$
+\end_inset
+
+ of a randomly chosen element in 
+\begin_inset Formula $\mathbb{Z}_{p^{\alpha}}^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Note that 
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)=p^{\alpha}\left(p-1\right)$
+\end_inset
+
+ is even since 
+\begin_inset Formula $p$
+\end_inset
+
+ is odd, and thus 
+\begin_inset Formula $d\geq1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathbb{Z}_{p^{\alpha}}^{*}$
+\end_inset
+
+ is a cyclic group there exists a generator 
+\begin_inset Formula $g$
+\end_inset
+
+ for it, such that any element 
+\begin_inset Formula $x\in\mathbb{Z}_{p^{\alpha}}^{*}$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $g^{k}\mod p^{\alpha}$
+\end_inset
+
+ with 
+\begin_inset Formula $1\leq k\leq\varphi\left(p^{\alpha}\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $r$
+\end_inset
+
+ be the order of this element and consider to cases.
+ If 
+\begin_inset Formula $k$
+\end_inset
+
+ is odd then 
+\begin_inset Formula $\left(x\right)^{r}\equiv\left(g^{k}\right)^{r}\equiv g^{kr}\equiv1\mod p^{\alpha}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $g$
+\end_inset
+
+ is the generator of 
+\begin_inset Formula $\mathbb{Z}_{p^{\alpha}}^{*}$
+\end_inset
+
+ its order is 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)$
+\end_inset
+
+ and therefore it can be equivalent to 1 
+\begin_inset Formula $\mod p^{\alpha}$
+\end_inset
+
+ iff 
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)|kr$
+\end_inset
+
+, and thus 
+\begin_inset Formula $2^{d}|r$
+\end_inset
+
+ since 
+\begin_inset Formula $k$
+\end_inset
+
+ is odd.
+ The second case is when 
+\begin_inset Formula $k$
+\end_inset
+
+ is even.
+ Then 
+\begin_inset Formula 
+\[
+\left(x\right)^{\varphi\left(p^{\alpha}\right)/2}\equiv g^{k\varphi\left(p^{\alpha}\right)/2}=\left(g^{\varphi\left(p^{\alpha}\right)}\right)^{k/2}\equiv1^{k/2}\mod p^{\alpha}\equiv1\mod p^{\alpha}
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $r|\varphi\left(p^{\alpha}\right)/2$
+\end_inset
+
+ since 
+\begin_inset Formula $r$
+\end_inset
+
+ is the period of 
+\begin_inset Formula $x$
+\end_inset
+
+, from which it's clear that 
+\begin_inset Formula $2^{d}$
+\end_inset
+
+ does not divide 
+\begin_inset Formula $r$
+\end_inset
+
+, since 
+\begin_inset Formula $\varphi\left(p^{\alpha}\right)=2^{d}c$
+\end_inset
+
+ and 
+\begin_inset Formula $r|\varphi\left(p^{\alpha}\right)/2\iff r|2^{d-1}c\iff r\cdot m=2^{d-1}c$
+\end_inset
+
+ and so 
+\begin_inset Formula $2^{d}$
+\end_inset
+
+ can't divide 
+\begin_inset Formula $r$
+\end_inset
+
+ because then it would divide 
+\begin_inset Formula $2^{d-1}c$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Therefore 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\mathbb{Z}_{p^{\alpha}}^{*}$
+\end_inset
+
+ is divided into 2 sets of equal size: those elements which may be written
+ as 
+\begin_inset Formula $g^{k}$
+\end_inset
+
+ for some odd 
+\begin_inset Formula $k$
+\end_inset
+
+ and for which 
+\begin_inset Formula $2^{d}|r$
+\end_inset
+
+ and those which may be written as 
+\begin_inset Formula $g^{k}$
+\end_inset
+
+ for even 
+\begin_inset Formula $k$
+\end_inset
+
+ but 
+\begin_inset Formula $2^{d}\not|r$
+\end_inset
+
+.
+ Thus with probability 
+\begin_inset Formula $1/2$
+\end_inset
+
+ 
+\begin_inset Formula $2^{d}$
+\end_inset
+
+ divides the order of an arbitrary element in 
+\begin_inset Formula $\mathbb{Z}_{p^{\alpha}}^{*}$
+\end_inset
+
+ and with probability 
+\begin_inset Formula $1/2$
+\end_inset
+
+ it doesn't.
+\end_layout
+
+\begin_layout Subsubsection*
+Last step
+\end_layout
+
+\begin_layout Lemma
+Suppose 
+\begin_inset Formula $N=p_{1}^{\alpha_{1}}\cdots p_{2}^{\alpha_{2}}$
+\end_inset
+
+ is an odd composite integer.
+ Let 
+\begin_inset Formula $x$
+\end_inset
+
+ be chosen uniformly at random from 
+\begin_inset Formula $\mathbb{Z}_{N}^{*}$
+\end_inset
+
+, and let 
+\begin_inset Formula $r$
+\end_inset
+
+ be the order of 
+\begin_inset Formula $x$
+\end_inset
+
+, modulo 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P\left(r\text{ is even and }x^{r/2}\neq-1\mod N\right)\geq1-\frac{1}{2^{m}}
+\]
+
+\end_inset
+
+which is equivalent to 
+\begin_inset Formula 
+\[
+P\left(r\text{ is odd or }x^{r/2}=-1\mod N\right)\leq\frac{1}{2^{m}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
