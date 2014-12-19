@@ -76,11 +76,7 @@ figs-within-sections
 
 \begin_body
 
-\begin_layout Standard
-Shor's algorithm
-\end_layout
-
-\begin_layout Part
+\begin_layout Section
 Basic Set Theory
 \end_layout
 
@@ -98,7 +94,445 @@ f^{-1}\left(C\backslash D\right) & =f^{-1}\left(C\right)\backslash f^{-1}\left(D
 
 \end_layout
 
-\begin_layout Part
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+For a sequence of sets 
+\begin_inset Formula $A_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j\in\mathbb{N}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\inf_{j\geq n}A_{j}\equiv\bigcap_{j=n}^{\infty}A_{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sup_{j\geq n}A_{j}\equiv\bigcup_{j=n}^{\infty}A_{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\liminf_{n\rightarrow\infty}A_{n}\equiv\bigcup_{n=1}^{\infty}\inf_{j\geq n}A_{j}=\bigcup_{n=1}^{\infty}\bigcap_{j=n}^{\infty}A_{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\limsup_{n\rightarrow\infty}A_{n}\equiv\bigcap_{n=1}^{\infty}\sup_{j\geq n}A_{j}=\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+If 
+\begin_inset Formula $\liminf_{n\rightarrow\infty}A_{n}=\limsup_{n\rightarrow\infty}A_{n}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}A_{n}\equiv\liminf_{n\rightarrow\infty}A_{n}=\limsup_{n\rightarrow\infty}A_{n}=A
+\]
+
+\end_inset
+
+Also denoted 
+\begin_inset Formula $A_{n}\rightarrow A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Proposition
+For any 
+\begin_inset Formula $\left(A_{n}\right)_{n\in\mathbb{N}}$
+\end_inset
+
+ with 
+\begin_inset Formula $A_{n}\subset X$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega\in A_{n}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\limsup_{n\rightarrow\infty}A_{n} & =\left\{ \omega\in X:\sum_{n\in\mathbb{N}}I_{A_{n}}\left(\omega\right)=\infty\right\} \\
+\liminf_{n\rightarrow\infty}A_{n} & =\left\{ \omega\in X:\sum_{n\in\mathbb{N}}I_{A_{n}^{c}}\left(\omega\right)<\infty\right\} 
+\end{align*}
+
+\end_inset
+
+I.e.
+ 
+\begin_inset Formula $\limsup_{n\rightarrow\infty}A_{n}$
+\end_inset
+
+ is the set of 
+\begin_inset Formula $\omega\in X$
+\end_inset
+
+ that appear infinitely often in the sequence 
+\begin_inset Formula $\left(A_{n}\right)_{n\in\mathbb{N}}$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\liminf_{n\rightarrow\infty}A_{n}$
+\end_inset
+
+ is the set of 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\omega\in X$
+\end_inset
+
+ that always appear in 
+\begin_inset Formula $\left(A_{n}\right)_{n\in\mathbb{N}}$
+\end_inset
+
+ except for a finite number of times.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary
+\begin_inset Formula $\liminf_{n\rightarrow\infty}A_{n}\subset\limsup_{n\rightarrow\infty}A_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+Sequences of sets
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+An increasing sequence 
+\begin_inset Formula $A_{1}\subset A_{2}\subset A_{3}\subset\cdots$
+\end_inset
+
+ such that 
+\begin_inset Formula $\cup_{j\in\mathbb{N}}A_{j}=X$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $A_{j}\uparrow X$
+\end_inset
+
+ and is said to have limit 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+A decreasing sequence 
+\begin_inset Formula $A_{1}\supset A_{2}\supset A_{3}\supset\cdots$
+\end_inset
+
+ such that 
+\begin_inset Formula $\cap_{j\in\mathbb{N}}A_{j}=X$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $A_{j}\downarrow X$
+\end_inset
+
+ and is said to have limit 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Proposition
+Limits
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $A_{j}\uparrow X$
+\end_inset
+
+ then 
+\begin_inset Formula $\lim_{j\rightarrow\infty}A_{j}=\sup_{j\geq1}A_{j}=X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $A_{j}\downarrow X$
+\end_inset
+
+ then 
+\begin_inset Formula $\lim_{j\rightarrow\infty}A_{j}=\inf_{j\geq1}A_{j}=X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+For part (1) we need to show that if 
+\begin_inset Formula $A_{j}\uparrow X$
+\end_inset
+
+ then 
+\begin_inset Formula $\limsup_{j\rightarrow\infty}A_{j}=\liminf_{j\rightarrow\infty}A_{j}=\sup_{j\geq1}A_{j}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A_{j}\uparrow X$
+\end_inset
+
+ we have that 
+\begin_inset Formula $A_{j}\subset A_{j+1}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $\cap_{k\geq j}A_{k}=A_{j}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\begin{align*}
+\liminf_{n\rightarrow\infty}A_{n} & =\bigcup_{n=1}^{\infty}\bigcap_{j=n}^{\infty}A_{j}=\bigcup_{j=1}^{\infty}A_{j}=X
+\end{align*}
+
+\end_inset
+
+and in general because intersections are contained in all of the sets intersecte
+d over we have 
+\begin_inset Formula 
+\begin{align*}
+\limsup_{n\rightarrow\infty}A_{n} & =\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}\subset\bigcup_{j=1}^{\infty}A_{j}\\
+ & =\liminf_{n\rightarrow\infty}A_{n}\subset\limsup_{n\rightarrow\infty}A_{n}
+\end{align*}
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $\limsup_{n\rightarrow\infty}A_{n}=\liminf_{j\rightarrow\infty}A_{j}=X$
+\end_inset
+
+.
+ For part (2) we need to show that if 
+\begin_inset Formula $A_{j}\downarrow X$
+\end_inset
+
+ then 
+\begin_inset Formula $\limsup_{j\rightarrow\infty}A_{j}=\liminf_{j\rightarrow\infty}A_{j}=\inf_{j\geq1}A_{j}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A_{j}\downarrow X$
+\end_inset
+
+ we have that 
+\begin_inset Formula $A_{j}\supset A_{j+1}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $\cup_{k\geq j}A_{k}=A_{j}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\limsup_{n\rightarrow\infty}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}=\bigcap_{j=1}^{\infty}A_{j}=X
+\]
+
+\end_inset
+
+and in general because intersection are contained in all of the sets intersected
+ over we have 
+\begin_inset Formula 
+\begin{align*}
+X & =\bigcup_{n=1}^{\infty}\bigcap_{j=1}^{\infty}A_{j}\\
+ & \subset\bigcup_{n=1}^{\infty}\bigcap_{j=n}^{\infty}A_{j}\\
+ & =\liminf_{j\rightarrow\infty}A_{j}\subset\limsup_{n\rightarrow\infty}A_{n}=X
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Corollary
+Since for 
+\begin_inset Formula $B_{n}=\cup_{k\geq n}A_{k}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $B_{n}\uparrow\cup_{k\in\mathbb{N}}A_{k}$
+\end_inset
+
+ and for 
+\begin_inset Formula $C_{n}=\cap_{k\geq n}A_{k}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $C_{n}\downarrow\cap_{k\in\mathbb{N}}A_{k}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\liminf_{n\rightarrow\infty} & =\lim_{n\rightarrow\infty}\inf_{k\geq n}A_{n}\\
+\limsup_{n\rightarrow\infty} & =\lim_{n\rightarrow\infty}\sup_{k\geq n}A_{n}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+ So the nomenclature is suggestive.
+\end_layout
+
+\begin_layout Section
 \begin_inset Formula $\sigma$
 \end_inset
 
@@ -107,10 +541,14 @@ f^{-1}\left(C\backslash D\right) & =f^{-1}\left(C\right)\backslash f^{-1}\left(D
 
 \begin_layout Definition
 A 
+\emph on
+
 \begin_inset Formula $\sigma$
 \end_inset
 
--algebra 
+-algebra
+\emph default
+ 
 \begin_inset Formula $\mathcal{A}$
 \end_inset
 
@@ -150,10 +588,13 @@ I.e.
 \begin_inset Formula $\mathcal{A}$
 \end_inset
 
--measurable.
+
+\emph on
+-measurable
+\emph default
+.
 \end_layout
 
-\begin_deeper
 \begin_layout Fact
 Properties of 
 \begin_inset Formula $\sigma$
@@ -162,6 +603,7 @@ Properties of
 -algebras
 \end_layout
 
+\begin_deeper
 \begin_layout Enumerate
 \begin_inset Formula $\emptyset\in\mathcal{A}$
 \end_inset
@@ -285,6 +727,7 @@ status open
 
 \end_layout
 
+\begin_deeper
 \begin_layout Enumerate
 The intersection 
 \begin_inset Formula $\cap_{i\in I}\mathcal{A}_{i}$
@@ -338,6 +781,7 @@ For every collection of sets
  is called its generator.
 \end_layout
 
+\end_deeper
 \begin_layout Corollary
 \begin_inset ERT
 status open
@@ -351,6 +795,7 @@ status open
 
 \end_layout
 
+\begin_deeper
 \begin_layout Enumerate
 If 
 \begin_inset Formula $\mathcal{G}$
@@ -381,9 +826,9 @@ If
 \end_inset
 
 .
- 
 \end_layout
 
+\end_deeper
 \begin_layout Definition
 The 
 \begin_inset Formula $\sigma$
@@ -413,24 +858,29 @@ The
 \begin_inset Formula $\mathbb{R}^{n}$
 \end_inset
 
- is called the Borel 
+ is called the 
 \family default
 \series default
 \shape default
 \size default
-\emph default
+\emph on
 \bar default
 \strikeout default
 \uuline default
 \uwave default
 \noun default
 \color inherit
-
+Borel 
 \begin_inset Formula $\sigma$
 \end_inset
 
--algebra, containing the Borel sets or Borel measurable sets and denoted
- 
+-algebra
+\emph default
+, containing the 
+\emph on
+Borel sets
+\emph default
+ or Borel measurable sets and denoted 
 \begin_inset Formula $\mathcal{B}\left(\mathbb{R}^{n}\right)$
 \end_inset
 
@@ -439,8 +889,11 @@ The
 \end_inset
 
 .
- Sometimes this is also called the topological sigma algebra (because the
- open sets of 
+ Sometimes this is also called the 
+\emph on
+topological
+\emph default
+ sigma algebra (because the open sets of 
 \begin_inset Formula $\mathbb{R}^{n}$
 \end_inset
 
@@ -471,7 +924,7 @@ If
  then
 \begin_inset Formula 
 \[
-\mathcal{B}\left(\mathbb{R}^{n}\right)=\sigma\left(\mathcal{F}\right)=\sigma\mbox{\ensuremath{\left(\mathcal{G}\right)}}\subset\sigma\left(\mathcal{A}\right)
+\mathcal{B}\left(\mathbb{R}^{n}\right)=\sigma\left(\mathcal{O}^{n}\right)=\sigma\mbox{\ensuremath{\left(\mathcal{C}^{n}\right)}}=\sigma\left(\mathcal{K}^{n}\right)
 \]
 
 \end_inset
@@ -479,5 +932,374 @@ If
 
 \end_layout
 
+\begin_layout Corollary
+The 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Borel 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is also generated by any of the following systems
+\begin_inset Formula 
+\begin{align*}
+\left\{ \left(-\infty,a\right):a\in\mathbb{Q}\right\} , & \left\{ \left(-\infty,a\right):a\in\mathbb{R}\right\} \\
+\left\{ \left(a,\infty\right):a\in\mathbb{Q}\right\} , & \left\{ \left(a,\infty\right):a\in\mathbb{R}\right\} \\
+\left\{ \left(-\infty,a\right]:a\in\mathbb{Q}\right\} , & \left\{ \left(-\infty,a\right]:a\in\mathbb{R}\right\} \\
+\left\{ \left[a,\infty\right):a\in\mathbb{Q}\right\} , & \left\{ \left[a,\infty\right):a\in\mathbb{R}\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark
+You cannot in fact generate 
+\begin_inset Formula $\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+ by simply unioning 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ with all countable unions of its members.
+ That set is still missing some that need to be in the sigma algebra.
+ You need transfinite induction.
+\end_layout
+
+\begin_layout Section
+Measures
+\end_layout
+
+\begin_layout Definition
+A (positive) measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ is a mapping 
+\begin_inset Formula $\mu:\mathcal{A}\rightarrow\left[0,\infty\right]$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mu\left(\emptyset\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-additivity: for any 
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mu\left(\bigsqcup_{j\in\mathbb{N}}A_{j}\right)=\sum_{j\in\mathbb{N}}\mu\left(A_{j}\right)
+\]
+
+\end_inset
+
+If both of these criteria are satisfied but 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is not a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra then 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is called a 
+\emph on
+pre-measure
+\emph default
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+Note that all 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras are stable (closed) under increasing and decreasing sequences,
+ i.e.
+ contain the limits of the increasing and decreasing sequences of their
+ elements (sets).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+A pair 
+\begin_inset Formula $\left(X,\mathcal{A}\right)$
+\end_inset
+
+ is a 
+\emph on
+measurable space
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+A pair 
+\begin_inset Formula $\left(X,\mathcal{A},\mu\right)$
+\end_inset
+
+ is a 
+\emph on
+measurable space
+\emph default
+.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\emph on
+finite measure
+\emph default
+ is a measure for which 
+\begin_inset Formula $\mu\left(X\right)<\infty$
+\end_inset
+
+.
+ The corresponding measure space is called a 
+\emph on
+finite measure space
+\emph default
+.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\emph on
+probability measure
+\emph default
+ is a measure for which 
+\begin_inset Formula $\mu\left(X\right)=1$
+\end_inset
+
+.
+ The corresponding measure space is called a 
+\emph on
+probability space
+\emph default
+.
+\end_layout
+
+\begin_layout Enumerate
+An 
+\emph on
+exhausting sequence 
+\emph default
+
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}$
+\end_inset
+
+ is such that 
+\begin_inset Formula $A_{j}\uparrow X$
+\end_inset
+
+.
+ A measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is called 
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\emph on
+-finite 
+\emph default
+and
+\emph on
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(X,\mathcal{A},\mu\right)$
+\end_inset
+
+ is called a 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\emph on
+-finite measure space 
+\emph default
+if it contains an exhausting sequence such that 
+\begin_inset Formula $\mu\left(A_{j}\right)<\infty$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Proposition
+For 
+\begin_inset Formula $\left(X,\mathcal{A},\mu\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $A\cap B=\emptyset\Rightarrow\mu\left(A\cup B\right)=\mu\left(A\right)+\mu\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A\subset B\Rightarrow\mu\left(A\right)\leq\mu\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A\subset B$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\left(A\right)<\infty$
+\end_inset
+
+ implies 
+\begin_inset Formula $\mu\left(B-A\right)=\mu\left(B\right)-\mu\left(A\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu\left(A\cup B\right)+\mu\left(A\cap B\right)=\mu\left(A\right)+\mu\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu\left(A\cup B\right)\leq\mu\left(A\right)+\mu\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Theorem
+A map 
+\begin_inset Formula $\mu:\mathcal{A}\rightarrow\left[0,\infty\right]$
+\end_inset
+
+ is a measure iff 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mu\left(\emptyset\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A\cap B=\emptyset\Rightarrow\mu\left(A\cup B\right)=\mu\left(A\right)+\mu\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Continuity of measure from below: for any 
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{j}\uparrow A$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu\left(\lim_{j\rightarrow\infty}A_{j}\right)=\lim_{j\rightarrow\infty}\mu\left(A_{j}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
