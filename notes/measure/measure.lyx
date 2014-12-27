@@ -715,13 +715,7 @@ is a
 \end_layout
 
 \begin_layout Theorem
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
+\begin_inset space ~
 \end_inset
 
 
@@ -783,13 +777,7 @@ For every collection of sets
 
 \end_deeper
 \begin_layout Corollary
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
+\begin_inset space ~
 \end_inset
 
 
@@ -1292,7 +1280,60 @@ Continuity of measure from below: for any
 
 \begin_inset Formula 
 \[
-\mu\left(\lim_{j\rightarrow\infty}A_{j}\right)=\lim_{j\rightarrow\infty}\mu\left(A_{j}\right)
+\mu\left(\lim_{j\rightarrow\infty}A_{j}\right)=\sup_{j\to\infty}\mu\left(A_{j}\right)=\lim_{j\rightarrow\infty}\mu\left(A_{j}\right)
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mu\left(A\right)<\infty$
+\end_inset
+
+ for all 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+ then 3 is equivalent to either 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Continuity of measure from above: for any 
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{j}\downarrow A$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu\left(\lim_{j\rightarrow\infty}A_{j}\right)=\inf_{j\to\infty}\mu\left(A_{j}\right)=\lim_{j\rightarrow\infty}\mu\left(A_{j}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Continuity of measure at 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+: for any 
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{j}\downarrow\emptyset$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{j\rightarrow\infty}\mu\left(A_{j}\right)=0
 \]
 
 \end_inset
@@ -1301,5 +1342,1632 @@ Continuity of measure from below: for any
 \end_layout
 
 \end_deeper
+\end_deeper
+\begin_layout Proof
+Sketch
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1,2]
+\end_layout
+
+\end_inset
+
+Just check the properties using 
+\begin_inset Formula $A_{i\geq3}=\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $B_{1}\equiv A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{2}\equiv A_{2}-A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{j+1}=A_{j+1}-A_{j}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A_{k}=\cup_{j=1}^{k}B_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3(a)]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $A_{j}\downarrow A$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(A_{1}-A_{j}\right)\uparrow\left(A_{1}-A\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\left(A_{1}\right)<\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3(b)]
+\end_layout
+
+\end_inset
+
+Take in particular 
+\begin_inset Formula $A=\emptyset$
+\end_inset
+
+ in the above.
+\end_layout
+
+\end_deeper
+\begin_layout Corollary
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:Every-measure-is"
+
+\end_inset
+
+Every measure is 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-additive
+\begin_inset Formula 
+\[
+\mu\left(\bigcup_{j\in\mathbb{N}}A_{j}\right)\leq\sum_{j\in\mathbb{N}}\mu\left(A_{j}\right)
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is a pre-measure then this still holds if 
+\begin_inset Formula $\cup A_{j}\in\mathcal{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+The set function 
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left(\mathbb{R}^{n},\mathcal{B}\left(\mathbb{R}^{n}\right)\right)$
+\end_inset
+
+ that assigns to assigns 
+\begin_inset Formula 
+\[
+\lambda^{n}\left(\left[a_{1},b_{1}\right)\times\cdots\times\left[a_{n},b_{n}\right)\right)=\prod_{j=1}^{n}\left(b_{j}-a_{j}\right)
+\]
+
+\end_inset
+
+is the 
+\emph on
+n-dimensional Lebesgue measure.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+ It is unclear whether 
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ is actually a measure.
+ It is only defined on half-open rectangles and it's unknown whether it's
+ a pre-measure on said half-open rectangles.
+ Furthermore it's unclear how to extend it to the sigma algebra generated
+ by those open rectangles.
+ I.e.
+ if 
+\begin_inset Formula $\mathcal{J}$
+\end_inset
+
+ is all the open rectanges of the form 
+\begin_inset Formula $\left[a,b\right)$
+\end_inset
+
+ then it remains to shown that 
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ is a pre-measure on 
+\begin_inset Formula $\mathcal{J}$
+\end_inset
+
+ and that it can extended to a proper measure on 
+\begin_inset Formula $\sigma\left(\mathcal{J}\right)$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+It is in fact true and this will be shown:
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:-exists,-is"
+
+\end_inset
+
+
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ exists, is a measure on 
+\begin_inset Formula $\sigma\left(\mathcal{J}\right)=\mathcal{B}\left(\mathbb{R}^{n}\right)$
+\end_inset
+
+, and is unique.
+ Further for all 
+\begin_inset Formula $B\in\mathcal{B}\left(\mathbb{R}^{n}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\lambda^{n}\left(x+B\right)=\lambda^{n}\left(B\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For all 
+\begin_inset Formula $R\in SO\left(n\right)$
+\end_inset
+
+ it's the case that
+\begin_inset Formula $\lambda^{n}\left(R^{-1}\left(B\right)\right)=\lambda^{n}\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For any invertible matrix 
+\begin_inset Formula $M$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\lambda^{n}\left(M^{-1}\left(B\right)\right)=\left|\det M\right|^{-1}\lambda^{n}\left(B\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Uniqueness of measures
+\end_layout
+
+\begin_layout Definition
+A family 
+\begin_inset Formula $\mathcal{D}\subset\mathcal{P}\left(X\right)$
+\end_inset
+
+ is a 
+\emph on
+Dynkin system 
+\emph default
+if 
+\begin_inset Formula 
+\begin{align*}
+X & \in\mathcal{D}\\
+D\in\mathcal{D} & \Rightarrow D^{c}\in\mathcal{D}\\
+\left(D_{j}\right)_{j\in\mathbb{N}}\text{ and }D_{i}\cap D_{j}=\emptyset & \Rightarrow\bigsqcup_{j\in\mathbb{N}}D_{j}\in\mathcal{D}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:mindink"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{G}\subset\mathcal{P}\left(X\right)$
+\end_inset
+
+.
+ Then there is a minimal Dynkin system 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ containing 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{G}\subset\delta\left(\mathcal{G}\right)\subset\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+Note that every 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is also a Dynkin system but the converse isn't necessarily true.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:dynkcapstable"
+
+\end_inset
+
+A Dynkin system 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra iff it is 
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable, i.e.
+ 
+\begin_inset Formula $D,E\in\mathcal{D}\Rightarrow D\cap E\in\mathcal{D}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Converse direction.
+ Set 
+\begin_inset Formula $E_{1}=D_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{2}=D_{2}-D_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{j}=D_{j}-D_{j-1}-\cdots-D_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+This doesn't help if 
+\begin_inset Formula $\mathcal{D}=\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ for some 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem
+If 
+\begin_inset Formula $\mathcal{G}\subset\mathcal{P}\left(X\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable, then 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\delta\left(\mathcal{G}\right)=\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+By 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:mindink"
+
+\end_inset
+
+ and the proceeding note all that remains to be shown is that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra and then by minimality of 
+\begin_inset Formula $\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+ we'll have 
+\begin_inset Formula $\sigma\left(\mathcal{G}\right)\subset\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ and therefore equality.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+By 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:dynkcapstable"
+
+\end_inset
+
+ it's enough to show that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ is 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable.
+ As an auxiliary device fix 
+\begin_inset Formula $D\subset\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ and define
+\begin_inset Formula 
+\[
+\mathcal{D}_{D}\equiv\left\{ Q\subset X\,:\, Q\cap D\in\delta\left(\mathcal{G}\right)\right\} 
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{D}_{D}$
+\end_inset
+
+ is a Dynkin system.
+ Then since 
+\begin_inset Formula $\mathcal{G}\subset\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ and since 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is 
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable 
+\begin_inset Formula $\mathcal{G}\subset\mathcal{D}_{G}$
+\end_inset
+
+ for all 
+\begin_inset Formula $G\in\mathcal{G}$
+\end_inset
+
+.
+ Why? Well 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+\mathcal{D}_{G}\equiv\left\{ Q\subset X\,:\, Q\cap G\in\delta\left(\mathcal{G}\right)\right\} 
+\]
+
+\end_inset
+
+ and by 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\cap$
+\end_inset
+
+-stability of 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ we have that for 
+\begin_inset Formula $Q\in\mathcal{G}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $G\cap Q\in\mathcal{G}\subset\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $G\cap Q\in\delta\left(\mathcal{G}\right)$
+\end_inset
+
+.
+ But because 
+\begin_inset Formula $\mathcal{D}_{G}$
+\end_inset
+
+ is a Dynkin system 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)\subset\mathcal{D}_{G}$
+\end_inset
+
+.
+ This is the important consequence of 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\mathcal{G}\subset\mathcal{D}_{G}$
+\end_inset
+
+ for all 
+\begin_inset Formula $G\in\mathcal{G}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Consequently if 
+\begin_inset Formula $D\in\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $G\in\mathcal{G}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+D\cap G\in\delta\left(\mathcal{G}\right)\,\,\forall G\in\mathcal{G},\forall D\in\delta\left(\mathcal{G}\right)
+\]
+
+\end_inset
+
+because 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)\subset\mathcal{D}_{G}$
+\end_inset
+
+ and the definition of 
+\begin_inset Formula $\mathcal{D}_{G}$
+\end_inset
+
+, meaning all 
+\begin_inset Formula $D\in\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ are such that their intersection with the any 
+\begin_inset Formula $G$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{D}_{G}$
+\end_inset
+
+ is in again in 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)$
+\end_inset
+
+.
+ So then by flipping the intersection we have that 
+\begin_inset Formula 
+\[
+G\cap D\in\delta\left(\mathcal{G}\right)\,\,\forall G\in\mathcal{G},\forall D\in\delta\left(\mathcal{G}\right)
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula $\mathcal{G}\subset\mathcal{D}_{D}$
+\end_inset
+
+ for all 
+\begin_inset Formula $D\in\delta\left(\mathcal{G}\right)$
+\end_inset
+
+.
+ But by minimality of 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ we immediately have that 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)\subset\mathcal{D}_{D}$
+\end_inset
+
+ for all 
+\begin_inset Formula $D\in\delta\left(\mathcal{G}\right)$
+\end_inset
+
+, which just says that 
+\begin_inset Formula $\delta\left(\mathcal{G}\right)$
+\end_inset
+
+ is 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:coincidemeas"
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is 
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable and there exists an exhausting sequence 
+\begin_inset Formula $G_{j}\uparrow\mathcal{G}$
+\end_inset
+
+ then any two measures 
+\begin_inset Formula $\mu,\nu$
+\end_inset
+
+ that are equal on 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ are equal on 
+\begin_inset Formula $\mathcal{A}=\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula 
+\[
+\mathcal{D}_{j}=\left\{ A\in\mathcal{A}\,:\,\mu\left(G_{j}\cap\mathcal{A}\right)=\nu\left(G_{j}\cap\mathcal{A}\right)\right\} 
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{D}_{j}$
+\end_inset
+
+ is a Dynkin system.
+ Since 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is 
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\delta\left(\mathcal{G}\right)=\sigma\left(\mathcal{G}\right)$
+\end_inset
+
+ and therefore (with a little work) 
+\begin_inset Formula $\mathcal{A}=\mathcal{D}_{j}$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\mu\left(G_{j}\cap\mathcal{A}\right)=\nu\left(G_{j}\cap\mathcal{A}\right)$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu\left(A\right)=\lim_{j\to\infty}\mu\left(G_{j}\cap\mathcal{A}\right)=\lim_{j\to\infty}\nu\left(G_{j}\cap\mathcal{A}\right)=\nu\left(A\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "thm:-exists,-is"
+
+\end_inset
+
+ parts (2) and (3) are corollaries.
+ Part (1) is the subject of the next section, Caratheodory's theorem.
+\end_layout
+
+\begin_layout Section
+Existence of Measures (Caratheodory's Theorem)
+\end_layout
+
+\begin_layout Definition
+A 
+\emph on
+semi-ring
+\emph default
+ is a family 
+\begin_inset Formula $\mathcal{S}\subset\mathcal{P}\left(X\right)$
+\end_inset
+
+ such that i
+\begin_inset Formula 
+\begin{align*}
+\emptyset & \in\mathcal{S}\\
+S,T\in\mathcal{S} & \Rightarrow S\cap T\in\mathcal{S}\\
+S,T\in\mathcal{S} & \Rightarrow\exists S_{j}\text{ such that }S-T=\bigsqcup_{j=1}^{M}S_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+(Caratheodory's) Let 
+\begin_inset Formula $\mathcal{S}\subset\mathcal{P}\left(X\right)$
+\end_inset
+
+ be a semi-ring and 
+\begin_inset Formula $\mu:\mathcal{S}\rightarrow\left[0,\infty\right]$
+\end_inset
+
+ be a pre-measure.
+ Then 
+\begin_inset Formula $\mu$
+\end_inset
+
+ has an extension to a measure on 
+\begin_inset Formula $\sigma\left(\mathcal{S}\right)$
+\end_inset
+
+, which is unique if 
+\begin_inset Formula $X$
+\end_inset
+
+ admits an exhausting sequence.
+\end_layout
+
+\begin_layout Proof
+Sketch.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula 
+\[
+\mathcal{C}\left(A\right)\equiv\left\{ \left(S_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{S}\bigg|A\subset\bigcup_{j\in\mathbb{N}}S_{j}\right\} 
+\]
+
+\end_inset
+
+be all countable coverings of 
+\begin_inset Formula $A$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+.
+ Define 
+\emph on
+outer-measure 
+\begin_inset Formula $\mu^{*}:\mathcal{P}\left(X\right)\rightarrow\left[0,\infty\right]$
+\end_inset
+
+ 
+\emph default
+by
+\emph on
+
+\begin_inset Formula 
+\[
+\mu^{*}\left(A\right)\equiv\inf\left\{ \sum_{j\in\mathbb{N}}\mu\left(S_{j}\right)\bigg|\left(S_{j}\right)_{j\in\mathbb{N}}\in\mathcal{C}\left(A\right)\right\} 
+\]
+
+\end_inset
+
+
+\emph default
+i.e.
+ the infimum of the 
+\begin_inset Formula $\mu$
+\end_inset
+
+ of all of the coverings in 
+\emph on
+
+\begin_inset Formula $\mathcal{C}\left(A\right)$
+\end_inset
+
+.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Then 
+\begin_inset Formula $\mu^{*}$
+\end_inset
+
+ is monotone, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-subadditive, and 
+\begin_inset Formula $\mu^{*}\left(\emptyset\right)=0$
+\end_inset
+
+.
+ To prove 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-subadditivity note that there exists (by definition of infimum) 
+\begin_inset Formula $\left(S_{k}^{j}\right)_{k\in\mathbb{N}}\in\mathcal{C}\left(A\right)$
+\end_inset
+
+ for each 
+\begin_inset Formula $A_{j}$
+\end_inset
+
+such that 
+\begin_inset Formula 
+\[
+\sum_{k\in\mathbb{N}}\mu\left(S_{j}^{k}\right)\leq\mu^{*}\left(A_{j}\right)+\frac{\epsilon}{2^{j}}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+\mu^{*}\left(A\right) & \leq\sum_{j\in\mathbb{N}}\sum_{k\in\mathbb{N}}\mu\left(S_{k}^{j}\right)\\
+ & \leq\sum_{j\in\mathbb{N}}\mu^{*}\left(A_{j}\right)+\frac{\epsilon}{2^{j}}\\
+ & =\sum_{j\in\mathbb{N}}\mu^{*}\left(A_{j}\right)+\epsilon
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Claim:
+\begin_inset Formula $\mu^{*}$
+\end_inset
+
+ extends 
+\begin_inset Formula $\mu$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\mu^{*}\left(S\right)=\mu\left(S\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $S\in\mathcal{S}$
+\end_inset
+
+.
+ Proof: Define on 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+, all 
+\emph on
+finite
+\emph default
+ disjoint unions in
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\begin{equation}
+\bar{\mu}\left(\bigsqcup_{j=1}^{M}S_{j}\right)\equiv\sum_{j=1}^{M}\mu\left(S_{j}\right)\label{eq:barmeas}
+\end{equation}
+
+\end_inset
+
+Since 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:barmeas"
+
+\end_inset
+
+ is a necessary condition for an additive set-function on the set of 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+ necessarily it's the unique extension of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+ if it is well-defined.
+ In fact it is well-defined (independent of representations of the sets
+ in 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+).
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Note that 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+ is closed under intersection and closed under union (it's manifestly closed
+ under disjoint union).
+ Therefore 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:barmeas"
+
+\end_inset
+
+ 
+\emph on
+can 
+\emph default
+be used to extend 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to all finite unions (not just disjoint) of sets in 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\bar{\mu}$
+\end_inset
+
+ is a pre-measure on 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+.
+\begin_inset Formula $\bar{\mu}$
+\end_inset
+
+ is 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-additive (by taking taking 
+\begin_inset Formula $T=\sqcup_{k\in\mathbb{N}}T_{k}\in\mathcal{S}_{\cup}$
+\end_inset
+
+ and by definition of 
+\begin_inset Formula $\mathcal{S}_{\cup}$
+\end_inset
+
+ it's also true that 
+\begin_inset Formula $T_{k}=\sqcup_{j=1}^{M}S_{j}^{k}$
+\end_inset
+
+.
+ Finally using corollary 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cor:Every-measure-is"
+
+\end_inset
+
+ for 
+\begin_inset Formula $S\in\mathcal{S}$
+\end_inset
+
+ we get that 
+\begin_inset Formula $\mu\left(S\right)\leq\mu^{*}\left(S\right)$
+\end_inset
+
+ and using 
+\begin_inset Formula $\left(S,\emptyset,\emptyset,\cdots\right)\in\mathcal{C}\left(\mathcal{S}\right)$
+\end_inset
+
+ yields 
+\begin_inset Formula $\mu^{*}\left(S\right)\leq\mu\left(S\right)$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\left.\mu\right|_{s}=\left.\mu^{*}\right|_{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{S}\subset\mathcal{A}^{*}$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\mathcal{A}^{*}=\left\{ A\subset X\big|\mu^{*}\left(Q\right)=\mu^{*}\left(Q\right)+\mu^{*}\left(Q-A\right)\;\forall Q\subset X\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\mathcal{A}^{*}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra and 
+\begin_inset Formula $\mu^{*}$
+\end_inset
+
+ is a measure on 
+\begin_inset Formula $\left(X,\mathcal{A}^{*}\right)$
+\end_inset
+
+.
+ It can be shown that 
+\begin_inset Formula $\mathcal{A}^{*}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\cup$
+\end_inset
+
+-stable Dynkin system then since 
+\begin_inset Formula $A\cap B=\left(A^{c}\cup B^{c}\right)^{c}$
+\end_inset
+
+ it's also the case that 
+\begin_inset Formula $\mathcal{A}^{*}$
+\end_inset
+
+is 
+\begin_inset Formula $\cap$
+\end_inset
+
+-stable and therefore a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+\end_layout
+
+\begin_layout Enumerate
+By step 3 
+\begin_inset Formula $\sigma\left(\mathcal{S}\right)\subset\mathcal{A}^{*}$
+\end_inset
+
+ and by step 2 
+\begin_inset Formula $\left.\mu\right|_{\sigma\left(\mathcal{S}\right)}=\left.\mu^{*}\right|_{\sigma\left(\mathcal{S}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+By Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:coincidemeas"
+
+\end_inset
+
+ if there exists an exhausting sequence of 
+\begin_inset Formula $X$
+\end_inset
+
+ by sets in 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is unique on 
+\begin_inset Formula $\sigma\left(\mathcal{S}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Proposition
+The family of n-dimensional rectangles 
+\begin_inset Formula $\mathcal{J}^{n}$
+\end_inset
+
+ is a semi-ring.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+In fact the cartesian product of any two semi-rings is again a semi-ring.
+\end_layout
+
+\begin_layout Proposition
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ is a pre-measure on 
+\begin_inset Formula $\mathcal{J}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Sketch.
+ We only check that 
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ is continuous at 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ for 
+\begin_inset Formula $n=2$
+\end_inset
+
+, everything is straightforward (including general 
+\begin_inset Formula $n$
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $I_{j}=\left[a_{1_{j}},b_{1_{j}}\right)\times\left[a_{2_{j}},b_{2_{j}}\right)$
+\end_inset
+
+.
+ It's clear that at least in one coordinate, say 
+\begin_inset Formula $k=2$
+\end_inset
+
+, it's the case that 
+\begin_inset Formula $\lim_{j\to\infty}\left(b_{2_{j}}-a_{2_{j}}\right)=0$
+\end_inset
+
+ because otherwise 
+\begin_inset Formula $\cap_{j\in\mathbb{N}}I_{j}$
+\end_inset
+
+ would contain a rectangle with non-zero side-lengths and therefore non-empty.
+ Then
+\begin_inset Formula 
+\[
+\lambda^{2}\left(I_{j}\right)=\prod_{k=1}^{2}\left(b_{k_{j}}-a_{k_{j}}\right)\leq\max_{k\neq2}\left(b_{k_{j}}-a_{k_{j}}\right)^{2-1}\left(b_{2_{j}}-a_{2_{j}}\right)\underset{j\to\infty}{\to}0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Corollary
+There is a unique extension of 
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ from 
+\begin_inset Formula $\mathcal{J}^{n}$
+\end_inset
+
+ to a measure on 
+\begin_inset Formula $\mathcal{B}\left(\mathbb{R}^{n}\right)$
+\end_inset
+
+.
+ The extension is again denoted 
+\begin_inset Formula $\lambda^{n}$
+\end_inset
+
+ and called Lebesgue measure.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\mathcal{B}\left(\mathbb{R}^{n}\right)=\sigma\left(\mathcal{J}^{n}\right)$
+\end_inset
+
+ and since 
+\begin_inset Formula $\left[-k,k\right)^{n}\uparrow\mathbb{R}^{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $\lambda^{n}\left(\left[-k,k\right)^{n}\right)=\left(2k\right)^{n}<\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+Note that by uniqueness Lebesgue measure is the only extension of 
+\begin_inset Formula $\text{vol}^{n}\left(\cdot\right)$
+\end_inset
+
+ to 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathcal{B}\left(\mathbb{R}^{n}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Exercise
+Borel-Cantelli lemma - the direct half.
+ For 
+\begin_inset Formula $\left(\Omega,\mathcal{A},P\right)$
+\end_inset
+
+ a probability space and every sequence 
+\begin_inset Formula $\left(A_{j}\right)_{j\in\mathbb{N}}\subset\mathcal{A}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sum_{j=1}^{\infty}P\left(A_{j}\right)<\infty\Rightarrow P\left(\limsup_{j\to\infty}A_{j}\right)=P\left(\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}\right)=0
+\]
+
+\end_inset
+
+That is, the probability of any event, 
+\begin_inset Formula $\omega\in A_{j}$
+\end_inset
+
+ for any 
+\begin_inset Formula $j$
+\end_inset
+
+, happening infinitely often is 0.
+ 
+\end_layout
+
+\begin_layout Proof
+Assume 
+\begin_inset Formula $\sum_{j=1}^{\infty}P\left(A_{j}\right)$
+\end_inset
+
+.
+ By 
+\begin_inset Quotes eld
+\end_inset
+
+intersection is subset
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}\subset\bigcup_{j=n}^{\infty}A_{j}
+\]
+
+\end_inset
+
+so by monotonicty of measure
+\begin_inset Formula 
+\[
+P\left(\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}\right)\leq P\left(\bigcup_{j=n}^{\infty}A_{j}\right)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\cup_{j\geq n}A_{j}$
+\end_inset
+
+ is a decreasing sequence by continuity of measure from above we have that
+\begin_inset Formula 
+\[
+P\left(\lim_{n\to\infty}\bigcup_{j=n}^{\infty}A_{j}\right)\leq\lim_{n\to\infty}P\left(\bigcup_{j=n}^{\infty}A_{j}\right)
+\]
+
+\end_inset
+
+Then by 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-additivity
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}P\left(\bigcup_{j=n}^{\infty}A_{j}\right)=\lim_{n\to\infty}\sum_{j=n}^{\infty}P\left(A_{j}\right)=0
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $P\left(\cdot\right)\geq0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+P\left(\bigcap_{n=1}^{\infty}\bigcup_{j=n}^{\infty}A_{j}\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
