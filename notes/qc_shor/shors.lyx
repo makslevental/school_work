@@ -3,9 +3,14 @@
 \begin_document
 \begin_header
 \textclass amsart
+\begin_preamble
+\usepackage{braket}
+\end_preamble
 \use_default_options true
 \begin_modules
 theorems-ams
+theorems-ams-extended
+theorems-sec
 eqs-within-sections
 figs-within-sections
 \end_modules
@@ -66,10 +71,629 @@ figs-within-sections
 \begin_body
 
 \begin_layout Standard
-Shor's algorithm
+So what's the deal with Quantum computing
 \end_layout
 
 \begin_layout Part
+Intro
+\end_layout
+
+\begin_layout Standard
+There are basically 2 magical things about QC and I'll point them out as
+ we get to them.
+ Today I'll cover the basics of QM/QC, a simple algorithm, experimental/empirica
+l aspects.
+ Next week I'll cover Shor's algorithm - Integer factorization in polylog
+ time - actual realizations of quantum circuits that implement Shor's algorithm,
+ and the mystical D-wave (if you don't know what that is it's the 10 milllion
+ dollar 
+\begin_inset Quotes eld
+\end_inset
+
+quantum computer
+\begin_inset Quotes erd
+\end_inset
+
+ (air quotes) purchased by USC and Lockheed Martin.
+\end_layout
+
+\begin_layout Part
+QM/Terms
+\end_layout
+
+\begin_layout Standard
+So okay classical computing is a matter bit manipulation right? A bit can
+ be 1 
+\series bold
+xor 
+\series default
+0.
+ In QC the bit values 0 and 1 are replaced by basis vectors 
+\begin_inset Formula $\Ket{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Ket{0}$
+\end_inset
+
+ in a complex Hilbert space.
+ This is silly physics notation for vectors invented by Dirac that's supposed
+ to make writing down innerproducts natural.
+ If you don't know what a Hilbert space it's just a vector space that's
+ a complete metric space (cauchy sequences converge) with respect to a metric
+ induced by an inner product.
+ This vector space is over the complex field (vector coefficients are complex
+ numbers) but just imagine 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ with the dot product.
+ Really this doesn't matter except in a couple of minutes and then you can
+ forget about it.
+ The inner product is taken by 
+\begin_inset Quotes eld
+\end_inset
+
+flipping the ket
+\begin_inset Quotes erd
+\end_inset
+
+ to a 
+\begin_inset Quotes eld
+\end_inset
+
+bra
+\begin_inset Quotes erd
+\end_inset
+
+ and forming a braket:
+\begin_inset Formula 
+\[
+\alpha\Ket{i}\rightarrow\Bra{i}\alpha^{*}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\Bra{1}\Ket{1}=1,\Bra{0}\Ket{0}=1,\Bra{i}\Ket{j}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+A single qubit is a linear combination of the basic vectors 
+\begin_inset Formula 
+\[
+\psi=\alpha\Ket{0}+\beta\Ket{1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So 
+\begin_inset Formula $\left\{ \Ket{1},\Ket{0}\right\} $
+\end_inset
+
+ form an orthnormal basis for the Hilbert space called the 
+\emph on
+computational 
+\emph default
+basis
+\emph on
+,
+\emph default
+ vectors are broadly called 
+\emph on
+states 
+\emph default
+or 
+\emph on
+wave functions,
+\emph default
+ 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is said to be a 
+\emph on
+superposition 
+\emph default
+of 
+\begin_inset Formula $\Ket{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Ket{0}$
+\end_inset
+
+, the coefficients are called 
+\emph on
+probability amplitudes
+\emph default
+.
+ I'll explain that in a second.
+ Note that 
+\begin_inset Formula $\Ket{0}$
+\end_inset
+
+ is not the zero vector the 
+\begin_inset Formula $0$
+\end_inset
+
+th basis vector.
+ Some people ascribe the physics interpretation that 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is simultaneously both 
+\begin_inset Formula $\Ket{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Ket{1}$
+\end_inset
+
+(Schrodinger's cat thing) but that is not correct.
+ The truth is that we simply cannot say anything about 
+\begin_inset Formula $\psi$
+\end_inset
+
+ until we measure (hairy what that means) it except the probability distribution
+ for what the measurement will result in: when we measure the system/qubit/wave
+ function with probability 
+\begin_inset Formula $\alpha^{2}$
+\end_inset
+
+ we will measure 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to be 
+\begin_inset Formula $\Ket{0}$
+\end_inset
+
+ and with probability 
+\series bold
+
+\begin_inset Formula $\beta^{2}$
+\end_inset
+
+ 
+\series default
+we will be measure 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to be 
+\begin_inset Formula $\Ket{1}$
+\end_inset
+
+.
+ Once we make a measurement all information about the coefficients is lost
+ since we just end up with one result, one basis vector.
+ This is called non-determinstic wave function collapse or decoherence.
+ Once the There are no whys/hows/whens here.
+ This is purely at the level of postulated interpretation of the mathematical
+ model.
+ So since the squares of the probability amplitudes are actual probabilities
+ it must be the case that 
+\begin_inset Formula 
+\[
+\alpha^{2}+\beta^{2}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Quotation
+
+\series bold
+Takeaway: Qubit exist as superpositions/linear combinations of basis vectors
+ and the squares of the coefficients determine the probability of measuring
+ the qubit to be that basis vectors.
+ Once a measurement is made all information is lost.
+ There is no way to recover 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ exactly except in constructing an ensemble and measuring all of the qubits
+ in the ensemble (sampling the distribution).
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Now while you cannot uncover any information whatsoever about the qubit
+ you can transform it without collapsing it.
+ You are allowed to transform 
+\begin_inset Formula $\psi$
+\end_inset
+
+ by any unitary transformation.
+ 
+\series bold
+These transformations correspond to/are quantum gates.
+ 
+\series default
+A unitary transformation preserves lengths (so that the sum of the squares
+ of the probability amplitudes never exceed 1) and is its own inverse (preservat
+ion of unit norms enforces this).
+ This will be important in a second.
+ For example
+\begin_inset Formula 
+\[
+U\Ket{0}=?
+\]
+
+\end_inset
+
+Practically speaking this is matrix vector multiplciation.
+ Let 
+\begin_inset Formula 
+\[
+H=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\
+1 & -1
+\end{pmatrix}
+\]
+
+\end_inset
+
+This is the Hadamard Gate.
+ Very important.
+ Since 
+\begin_inset Formula $\Ket{0}=\left(1,0\right)^{T}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+H\Ket{0}=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\
+1 & -1
+\end{pmatrix}\begin{pmatrix}1\\
+0
+\end{pmatrix}=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\
+1
+\end{pmatrix}=\frac{1}{\sqrt{2}}\left(\begin{pmatrix}1\\
+0
+\end{pmatrix}+\begin{pmatrix}0\\
+1
+\end{pmatrix}\right)=\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\Ket{1}=\left(0,1\right)^{T}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+H\Ket{1}=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\
+1 & -1
+\end{pmatrix}\begin{pmatrix}0\\
+1
+\end{pmatrix}=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\
+-1
+\end{pmatrix}=\frac{1}{\sqrt{2}}\left(\begin{pmatrix}1\\
+0
+\end{pmatrix}-\begin{pmatrix}0\\
+1
+\end{pmatrix}\right)=\frac{1}{\sqrt{2}}\left(\Ket{0}-\Ket{1}\right)
+\]
+
+\end_inset
+
+So the Hadamard Gate/operator/matrix take one basis vector and maps it to
+ a super position of both.
+ 
+\end_layout
+
+\begin_layout Standard
+Now what happens when we have a two qubit system? An 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit system is described by a Tensor product of the Hibert/Vector spaces
+ of each of the individual qubits.
+ In the case of a 2-qubit system, the first being an element of the vector
+ 
+\begin_inset Formula $V$
+\end_inset
+
+ and the second being an element of the vector sapce 
+\begin_inset Formula $W$
+\end_inset
+
+, the 2-qubit system is an element of the vector space 
+\begin_inset Formula $V\otimes W$
+\end_inset
+
+ defined as vector space spanned by basis vectors 
+\begin_inset Formula 
+\[
+\Ket{0}\otimes\Ket{0},\Ket{0}\otimes\Ket{1},\Ket{1}\otimes\Ket{0},\Ket{1}\otimes\Ket{1}
+\]
+
+\end_inset
+
+ (omit the 
+\begin_inset Formula $\otimes$
+\end_inset
+
+ for brevity) 
+\begin_inset Formula 
+\[
+\psi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}
+\]
+
+\end_inset
+
+with the constraint 
+\begin_inset Formula 
+\[
+\left|\alpha\right|^{2}+\left|\beta\right|^{2}+\left|\gamma\right|^{2}+\left|\delta\right|^{2}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+Take your typical 2bit register $s0.
+ If I tell you the state of $s0, for example $s0=10, that factum/factoid/piece
+ of information only tells you about the states (colloquial states) of 2
+ objects, each of the bits.
+ A 2-qubit quantum register actually gives you information about 
+\begin_inset Formula $2^{2}$
+\end_inset
+
+ things: 
+\begin_inset Formula $\psi$
+\end_inset
+
+ can have non-zero probability amplitudes for any of the 4 basis vectors.
+ In general while an 
+\begin_inset Formula $n$
+\end_inset
+
+-bit classical register will give you information about 
+\begin_inset Formula $n$
+\end_inset
+
+ objects (each of the bits) and 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit register will give you information about 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ objects (each of the basis vectors).
+ This is the first magical thing, that adding more qubits exponentially
+ grows that amount of information stored in a register.
+ There's a caveat here: like I mentioned before we cannot directly access
+ the coefficients, that information is completely unavailable to us.
+ But as we'll see we can still exploit this massive amount of information.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+The tensor product is actually our favorite thing in the world: a set of
+ equivalence classes quotiented by the equivalence relations
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(\alpha\psi\right)\otimes\phi & \sim & \psi\otimes\left(\alpha\phi\right)\sim\alpha\left(\psi\otimes\phi\right)\\
+\left(\psi+\varphi\right)\otimes\phi & \sim & \psi\otimes\phi+\varphi\otimes\phi\\
+\phi\otimes\left(\psi+\varphi\right) & \sim & \phi\otimes\psi+\phi\otimes\varphi
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What's happening here? This is saying that, for example, when the first
+ qubit is
+\begin_inset Formula $\left(\psi+\varphi\right)\in V$
+\end_inset
+
+ and the second is 
+\begin_inset Formula $\phi\in W$
+\end_inset
+
+, then the 2-qubit system (register) is is represented by 
+\begin_inset Formula $\psi\otimes\phi+\varphi\otimes\phi$
+\end_inset
+
+.
+ This representation would then be distilled down at the level of basis
+ vectors, i.e.
+\begin_inset Formula 
+\[
+\psi\otimes\phi+\varphi\otimes\phi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}
+\]
+
+\end_inset
+
+with the constraint 
+\begin_inset Formula 
+\[
+\left|\alpha\right|^{2}+\left|\beta\right|^{2}+\left|\gamma\right|^{2}+\left|\delta\right|^{2}=1
+\]
+
+\end_inset
+
+Now in general 
+\begin_inset Formula $V\otimes W$
+\end_inset
+
+ has more elements than the union of 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ What do I mean by this? States in 
+\begin_inset Formula $V\otimes W$
+\end_inset
+
+ that cannot be represented as simply the product of states in each of 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+: For two arbitrary single qubit states 
+\begin_inset Formula 
+\[
+\psi=a\Ket{0}+b\Ket{1}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\varphi=c\Ket{0}+d\Ket{1}
+\]
+
+\end_inset
+
+we have
+\begin_inset Formula 
+\begin{eqnarray*}
+\varphi\otimes\phi & = & \left(a\Ket{0}+b\Ket{1}\right)\otimes\left(c\Ket{0}+d\Ket{1}\right)\\
+ & = & ac\Ket{0}\Ket{0}+ad\Ket{0}\Ket{1}+bc\Ket{1}\Ket{0}+bd\Ket{1}\Ket{1}
+\end{eqnarray*}
+
+\end_inset
+
+and therefore to fit the general form of 
+\begin_inset Formula $\psi\in V\otimes W$
+\end_inset
+
+ it must be the case that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\alpha & = & ac\\
+\beta & = & ad\\
+\gamma & = & bc\\
+\delta & = & bd
+\end{eqnarray*}
+
+\end_inset
+
+but then 
+\begin_inset Formula $\alpha\delta=\beta\gamma$
+\end_inset
+
+.
+ Therefore an arbitrary 
+\begin_inset Formula $\psi$
+\end_inset
+
+ factors into a tensor product of factor qubits iff 
+\begin_inset Formula $\alpha\delta=\beta\gamma$
+\end_inset
+
+.
+ States that do not factor as such are called 
+\emph on
+entangled states.
+ 
+\emph default
+For example
+\begin_inset Formula 
+\[
+\frac{\Ket{0}\Ket{0}+\Ket{1}\Ket{1}}{\sqrt{2}}
+\]
+
+\end_inset
+
+cannot be factored.
+
+\emph on
+ 
+\end_layout
+
+\begin_layout Standard
+Gates on single qubit systems also map to gates on multi-qubit systems:
+\begin_inset Formula 
+\[
+H=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\
+1 & -1
+\end{pmatrix}\to H^{\otimes2}
+\]
+
+\end_inset
+
+where the definition of 
+\begin_inset Formula 
+\[
+H^{\otimes2}\varphi\otimes\phi=\left(H\otimes H\right)\left(\varphi\otimes\phi\right)=\left(H\varphi\right)\otimes\left(H\phi\right)
+\]
+
+\end_inset
+
+For example 
+\begin_inset Formula 
+\begin{eqnarray*}
+H^{\otimes2}\Ket{0}\Ket{0} & = & \left(H\Ket{0}\right)\otimes\left(H\Ket{0}\right)\\
+ & = & \left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)\otimes\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)\\
+ & = & \frac{1}{2}\left(\Ket{0}\Ket{0}+\Ket{0}\Ket{1}+\Ket{1}\Ket{0}+\Ket{1}\Ket{1}\right)
+\end{eqnarray*}
+
+\end_inset
+
+So in general 
+\begin_inset Formula 
+\[
+H^{\otimes n}\underbrace{\Ket{0}\cdots\Ket{0}}_{n}=\left(H\Ket{0}\right)^{\otimes n}=\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)^{\otimes n}=\frac{1}{\sqrt{2^{n}}}\sum_{i=0}^{2^{n-1}}\Ket{i}
+\]
+
+\end_inset
+
+where for convenience we represent 
+\begin_inset Formula $\Ket{0}\Ket{1}\cdots\Ket{0}\Ket{0}$
+\end_inset
+
+ as the decimal corresponding to the binary.
+ 
+\end_layout
+
+\begin_layout Section
 Reduction to Order Finding
 \end_layout
 
