@@ -94,7 +94,7 @@ quantum computer
 \begin_inset Quotes erd
 \end_inset
 
- (air quotes) purchased by USC and Lockheed Martin.
+ (air quotes) purchased by USC and Lockheed Martin).
 \end_layout
 
 \begin_layout Part
@@ -102,8 +102,8 @@ QM/Terms
 \end_layout
 
 \begin_layout Standard
-So okay classical computing is a matter bit manipulation right? A bit can
- be 1 
+Classical computing is a matter bit manipulation.
+ A bit can be 1 
 \series bold
 xor 
 \series default
@@ -118,18 +118,19 @@ xor
 
  in a complex Hilbert space.
  This is silly physics notation for vectors invented by Dirac that's supposed
- to make writing down innerproducts natural.
- If you don't know what a Hilbert space it's just a vector space that's
- a complete metric space (cauchy sequences converge) with respect to a metric
- induced by an inner product.
+ to make writing down inner products natural (If you don't know what a Hilbert
+ space it's just a 
+\series bold
+vector space
+\series default
+ that's a complete metric space (cauchy sequences converge) with respect
+ to a metric induced by an inner product).
  This vector space is over the complex field (vector coefficients are complex
  numbers) but just imagine 
 \begin_inset Formula $\mathbb{R}^{2}$
 \end_inset
 
  with the dot product.
- Really this doesn't matter except in a couple of minutes and then you can
- forget about it.
  The inner product is taken by 
 \begin_inset Quotes eld
 \end_inset
@@ -219,17 +220,17 @@ of
 probability amplitudes
 \emph default
 .
- I'll explain that in a second.
  Note that 
 \begin_inset Formula $\Ket{0}$
 \end_inset
 
- is not the zero vector the 
+ is not the zero vector but the 
 \begin_inset Formula $0$
 \end_inset
 
 th basis vector.
- Some people ascribe the physics interpretation that 
+ I would be remiss if I didn't mention that some people ascribe the physical
+ interpretation to this model that 
 \begin_inset Formula $\psi$
 \end_inset
 
@@ -249,7 +250,7 @@ th basis vector.
  until we measure (hairy what that means) it except the probability distribution
  for what the measurement will result in: when we measure the system/qubit/wave
  function with probability 
-\begin_inset Formula $\alpha^{2}$
+\begin_inset Formula $\left|\alpha\right|^{2}$
 \end_inset
 
  we will measure 
@@ -263,7 +264,7 @@ th basis vector.
  and with probability 
 \series bold
 
-\begin_inset Formula $\beta^{2}$
+\begin_inset Formula $\left|\beta\right|^{2}$
 \end_inset
 
  
@@ -277,48 +278,21 @@ we will be measure
 \end_inset
 
 .
+ This is why the coefficients are called probability amplitudes.
  Once we make a measurement all information about the coefficients is lost
  since we just end up with one result, one basis vector.
  This is called non-determinstic wave function collapse or decoherence.
- Once the There are no whys/hows/whens here.
- This is purely at the level of postulated interpretation of the mathematical
- model.
+ There are no whys/hows/whens here - this is purely at the level of postulated
+ interpretation of the mathematical model.
  So since the squares of the probability amplitudes are actual probabilities
  it must be the case that 
 \begin_inset Formula 
 \[
-\alpha^{2}+\beta^{2}=1
+\left|\alpha\right|^{2}+\left|\beta\right|^{2}=1
 \]
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Quotation
-
-\series bold
-Takeaway: Qubit exist as superpositions/linear combinations of basis vectors
- and the squares of the coefficients determine the probability of measuring
- the qubit to be that basis vectors.
- Once a measurement is made all information is lost.
- There is no way to recover 
-\begin_inset Formula $\alpha$
-\end_inset
-
- and 
-\begin_inset Formula $\beta$
-\end_inset
-
- exactly except in constructing an ensemble and measuring all of the qubits
- in the ensemble (sampling the distribution).
-\end_layout
-
-\begin_layout --Separator--
 
 \end_layout
 
@@ -339,16 +313,8 @@ A unitary transformation preserves lengths (so that the sum of the squares
  of the probability amplitudes never exceed 1) and is its own inverse (preservat
 ion of unit norms enforces this).
  This will be important in a second.
- For example
-\begin_inset Formula 
-\[
-U\Ket{0}=?
-\]
-
-\end_inset
-
-Practically speaking this is matrix vector multiplciation.
- Let 
+ Practically speaking this is matrix vector multiplciation.
+ For example let 
 \begin_inset Formula 
 \[
 H=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\
@@ -364,7 +330,7 @@ This is the Hadamard Gate.
 \begin_inset Formula $\Ket{0}=\left(1,0\right)^{T}$
 \end_inset
 
- we have
+ (since basis vector) we have
 \begin_inset Formula 
 \[
 H\Ket{0}=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\
@@ -409,23 +375,59 @@ So the Hadamard Gate/operator/matrix take one basis vector and maps it to
  
 \end_layout
 
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Quotation
+
+\series bold
+Takeaway: Qubits exist as superpositions/linear combinations of basis vectors
+ and the squares of the coefficients determine the probability of measuring
+ the qubit to be that basis vectors.
+ Once a measurement is made all information is lost.
+ There is no way to recover 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ exactly except in constructing an ensemble and measuring all of the qubits
+ in the ensemble (sampling the distribution).
+ Logic gates correspond to unitary transformations (invertible, norm preserving
+ matrices).
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
 \begin_layout Standard
 Now what happens when we have a two qubit system? An 
 \begin_inset Formula $n$
 \end_inset
 
--qubit system is described by a Tensor product of the Hibert/Vector spaces
+-qubit system is described by a tensor product of the Hibert/Vector spaces
  of each of the individual qubits.
- In the case of a 2-qubit system, the first being an element of the vector
- 
-\begin_inset Formula $V$
+ It's actually our favorite thing in the world: a set of equivalence classes
+ whose members are elements of the free-group over the cartesion product
+ of the vector spaces under the equivalence relation
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(\alpha\psi\right)\otimes\phi & \sim & \psi\otimes\left(\alpha\phi\right)\sim\alpha\left(\psi\otimes\phi\right)\\
+\left(\psi+\varphi\right)\otimes\phi & \sim & \psi\otimes\phi+\varphi\otimes\phi\\
+\phi\otimes\left(\psi+\varphi\right) & \sim & \phi\otimes\psi+\phi\otimes\varphi
+\end{eqnarray*}
+
 \end_inset
 
- and the second being an element of the vector sapce 
-\begin_inset Formula $W$
+For example for 
+\begin_inset Formula $n=2$
 \end_inset
 
-, the 2-qubit system is an element of the vector space 
+ it is an element of the vector space 
 \begin_inset Formula $V\otimes W$
 \end_inset
 
@@ -437,19 +439,20 @@ Now what happens when we have a two qubit system? An
 
 \end_inset
 
- (omit the 
+(omit the 
 \begin_inset Formula $\otimes$
 \end_inset
 
- for brevity) 
+ for brevity), i.e.
+ 
 \begin_inset Formula 
 \[
-\psi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}
+\psi\in V\otimes W=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}
 \]
 
 \end_inset
 
-with the constraint 
+with
 \begin_inset Formula 
 \[
 \left|\alpha\right|^{2}+\left|\beta\right|^{2}+\left|\gamma\right|^{2}+\left|\delta\right|^{2}=1
@@ -457,6 +460,141 @@ with the constraint
 
 \end_inset
 
+In particular 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)\otimes\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right) & = & \frac{1}{2}\left(\Ket{0}\Ket{0}+\Ket{0}\Ket{1}+\Ket{1}\Ket{0}+\Ket{1}\Ket{1}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+You can take this basically to mean that 
+\begin_inset Formula $\otimes$
+\end_inset
+
+ distributes.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Now in general 
+\begin_inset Formula $V\otimes W$
+\end_inset
+
+ has more elements than simply the 
+\begin_inset Quotes eld
+\end_inset
+
+separable
+\begin_inset Quotes erd
+\end_inset
+
+ states.
+
+\series default
+ What do I mean by this? States in 
+\begin_inset Formula $V\otimes W$
+\end_inset
+
+ that cannot be represented as simply the product of states in each of 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+: For two arbitrary single qubit states in the factor spaces 
+\begin_inset Formula 
+\[
+\psi=a\Ket{0}+b\Ket{1}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\varphi=c\Ket{0}+d\Ket{1}
+\]
+
+\end_inset
+
+we have
+\begin_inset Formula 
+\begin{eqnarray*}
+\varphi\otimes\phi & = & \left(a\Ket{0}+b\Ket{1}\right)\otimes\left(c\Ket{0}+d\Ket{1}\right)\\
+ & = & ac\Ket{0}\Ket{0}+ad\Ket{0}\Ket{1}+bc\Ket{1}\Ket{0}+bd\Ket{1}\Ket{1}
+\end{eqnarray*}
+
+\end_inset
+
+and therefore to fit the general form of 
+\begin_inset Formula 
+\[
+\psi=\psi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}\in V\otimes W
+\]
+
+\end_inset
+
+ it must be the case that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\alpha & = & ac\\
+\beta & = & ad\\
+\gamma & = & bc\\
+\delta & = & bd
+\end{eqnarray*}
+
+\end_inset
+
+but then 
+\begin_inset Formula $\alpha\delta=\beta\gamma$
+\end_inset
+
+.
+ Therefore an arbitrary 
+\begin_inset Formula $\psi$
+\end_inset
+
+ factors into a tensor product of factor qubits iff 
+\begin_inset Formula $\alpha\delta=\beta\gamma$
+\end_inset
+
+.
+ States that do not factor as such are called 
+\emph on
+entangled states.
+ 
+\emph default
+For example
+\begin_inset Formula 
+\[
+\frac{\Ket{0}\Ket{0}+\Ket{1}\Ket{1}}{\sqrt{2}}
+\]
+
+\end_inset
+
+cannot be factored.
+
+\emph on
+ 
+\series bold
+\emph default
+This is counterintuitive since I said cartesian product or state space of
+ factors but the key word is sum, so while each of the terms in the sum
+ factor the sum itself doesn't necessarily.
+\end_layout
+
+\begin_layout --Separator--
 
 \end_layout
 
@@ -504,151 +642,6 @@ Take your typical 2bit register $s0.
 \end_layout
 
 \begin_layout Standard
-The tensor product is actually our favorite thing in the world: a set of
- equivalence classes quotiented by the equivalence relations
-\begin_inset Formula 
-\begin{eqnarray*}
-\left(\alpha\psi\right)\otimes\phi & \sim & \psi\otimes\left(\alpha\phi\right)\sim\alpha\left(\psi\otimes\phi\right)\\
-\left(\psi+\varphi\right)\otimes\phi & \sim & \psi\otimes\phi+\varphi\otimes\phi\\
-\phi\otimes\left(\psi+\varphi\right) & \sim & \phi\otimes\psi+\phi\otimes\varphi
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-What's happening here? This is saying that, for example, when the first
- qubit is
-\begin_inset Formula $\left(\psi+\varphi\right)\in V$
-\end_inset
-
- and the second is 
-\begin_inset Formula $\phi\in W$
-\end_inset
-
-, then the 2-qubit system (register) is is represented by 
-\begin_inset Formula $\psi\otimes\phi+\varphi\otimes\phi$
-\end_inset
-
-.
- This representation would then be distilled down at the level of basis
- vectors, i.e.
-\begin_inset Formula 
-\[
-\psi\otimes\phi+\varphi\otimes\phi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}
-\]
-
-\end_inset
-
-with the constraint 
-\begin_inset Formula 
-\[
-\left|\alpha\right|^{2}+\left|\beta\right|^{2}+\left|\gamma\right|^{2}+\left|\delta\right|^{2}=1
-\]
-
-\end_inset
-
-Now in general 
-\begin_inset Formula $V\otimes W$
-\end_inset
-
- has more elements than the union of 
-\begin_inset Formula $V$
-\end_inset
-
- and 
-\begin_inset Formula $W$
-\end_inset
-
-.
- What do I mean by this? States in 
-\begin_inset Formula $V\otimes W$
-\end_inset
-
- that cannot be represented as simply the product of states in each of 
-\begin_inset Formula $V$
-\end_inset
-
- and 
-\begin_inset Formula $W$
-\end_inset
-
-: For two arbitrary single qubit states 
-\begin_inset Formula 
-\[
-\psi=a\Ket{0}+b\Ket{1}
-\]
-
-\end_inset
-
-and
-\begin_inset Formula 
-\[
-\varphi=c\Ket{0}+d\Ket{1}
-\]
-
-\end_inset
-
-we have
-\begin_inset Formula 
-\begin{eqnarray*}
-\varphi\otimes\phi & = & \left(a\Ket{0}+b\Ket{1}\right)\otimes\left(c\Ket{0}+d\Ket{1}\right)\\
- & = & ac\Ket{0}\Ket{0}+ad\Ket{0}\Ket{1}+bc\Ket{1}\Ket{0}+bd\Ket{1}\Ket{1}
-\end{eqnarray*}
-
-\end_inset
-
-and therefore to fit the general form of 
-\begin_inset Formula $\psi\in V\otimes W$
-\end_inset
-
- it must be the case that 
-\begin_inset Formula 
-\begin{eqnarray*}
-\alpha & = & ac\\
-\beta & = & ad\\
-\gamma & = & bc\\
-\delta & = & bd
-\end{eqnarray*}
-
-\end_inset
-
-but then 
-\begin_inset Formula $\alpha\delta=\beta\gamma$
-\end_inset
-
-.
- Therefore an arbitrary 
-\begin_inset Formula $\psi$
-\end_inset
-
- factors into a tensor product of factor qubits iff 
-\begin_inset Formula $\alpha\delta=\beta\gamma$
-\end_inset
-
-.
- States that do not factor as such are called 
-\emph on
-entangled states.
- 
-\emph default
-For example
-\begin_inset Formula 
-\[
-\frac{\Ket{0}\Ket{0}+\Ket{1}\Ket{1}}{\sqrt{2}}
-\]
-
-\end_inset
-
-cannot be factored.
-
-\emph on
- 
-\end_layout
-
-\begin_layout Standard
 Gates on single qubit systems also map to gates on multi-qubit systems:
 \begin_inset Formula 
 \[
@@ -672,11 +665,721 @@ For example
 \begin{eqnarray*}
 H^{\otimes2}\Ket{0}\Ket{0} & = & \left(H\Ket{0}\right)\otimes\left(H\Ket{0}\right)\\
  & = & \left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)\otimes\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)\\
- & = & \frac{1}{2}\left(\Ket{0}\otimes\Ket{0}+\Ket{0}\otimes\Ket{1}+\Ket{1}\otimes\Ket{0}+\Ket{1}\otimes\Ket{1}\right)
+ & = & \frac{1}{2}\left(\Ket{0}\Ket{0}+\Ket{0}\Ket{1}+\Ket{1}\Ket{0}+\Ket{1}\Ket{1}\right)
 \end{eqnarray*}
 
 \end_inset
 
+So in general 
+\begin_inset Formula 
+\[
+H^{\otimes n}\underbrace{\Ket{0}\cdots\Ket{0}}_{n}=\left(H\Ket{0}\right)^{\otimes n}=\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)^{\otimes n}=\frac{1}{\sqrt{2^{n}}}\sum_{i=0}^{2^{n-1}}\Ket{i}
+\]
+
+\end_inset
+
+where for convenience we represent 
+\begin_inset Formula $\Ket{0}\Ket{1}\cdots\Ket{0}\Ket{0}$
+\end_inset
+
+ as the decimal corresponding to the binary.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Quotation
+
+\series bold
+Takeaway: 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit systems are represented by vectors in the tensor product of the vector
+ spaces that each of the individual qubits are elements of.
+ A basis for this tensor product space is the set of tensor products of
+ basis vectors for the factor spaces.
+ The tensor product space is 
+\begin_inset Quotes eld
+\end_inset
+
+bigger
+\begin_inset Quotes erd
+\end_inset
+
+ than simply the cartesian product of the individual spaces: quantum entangled
+ states are those which cannot be factored.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Part
+Deutsch's Problem/Algorithm
+\end_layout
+
+\begin_layout Standard
+Given a classical circuit for computing any 
+\begin_inset Formula $f$
+\end_inset
+
+ there is a quantum circuit (reversible unitary transformation) of comparable
+ efficiency which computes the transformation on the state 
+\begin_inset Formula $\Ket{x}\Ket{y}\to\Ket{x}\Ket{y\oplus f\left(x\right)}$
+\end_inset
+
+(
+\begin_inset Formula $\oplus$
+\end_inset
+
+ is mod 2 addition).
+ Fredkin gate is a 3-bit gate universal for classical computation.
+ Let 
+\begin_inset Formula $U_{f}$
+\end_inset
+
+ be the quantum circuit that implements this action for and apply it to
+ the 2-qubit state (which we can create by 
+\begin_inset Formula $H\Ket{0}$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\left(\frac{\Ket{0}+\Ket{1}}{\sqrt{2}}\right)\otimes\Ket{0}=\left(\frac{\Ket{0}\otimes\Ket{0}+\Ket{1}\otimes\Ket{0}}{\sqrt{2}}\right)
+\]
+
+\end_inset
+
+Then the output is 
+\begin_inset Formula 
+\begin{eqnarray*}
+\psi & = & \left(\frac{\Ket{0}\otimes\Ket{0\oplus f\left(0\right)}+\Ket{1}\otimes\Ket{0\oplus f\left(1\right)}}{\sqrt{2}}\right)\\
+ & = & \left(\frac{\Ket{0}\otimes\Ket{f\left(0\right)}+\Ket{1}\otimes\Ket{f\left(1\right)}}{\sqrt{2}}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Notice that 
+\begin_inset Formula $f$
+\end_inset
+
+ has been evaluated at both points in its domain! This is magical thing
+ #2 and is called 
+\emph on
+quantum
+\emph default
+ 
+\emph on
+parallelism.
+
+\emph default
+ In general (if the domain of 
+\begin_inset Formula $f$
+\end_inset
+
+ is larger) we can use 
+\begin_inset Formula $H^{\otimes n}$
+\end_inset
+
+ to construct a state 
+\begin_inset Formula 
+\[
+\psi=H^{\otimes n}\underbrace{\Ket{0}\cdots\Ket{0}}_{n}=\frac{1}{\sqrt{2^{n}}}\sum_{i=0}^{2^{n-1}}\Ket{i}
+\]
+
+\end_inset
+
+a linear superposition over all basis states/vectors of the 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit system.
+ Then we apply 
+\begin_inset Formula $U_{f}$
+\end_inset
+
+ to 
+\begin_inset Formula $\psi\otimes\Ket{0}$
+\end_inset
+
+ and get 
+\begin_inset Formula 
+\[
+\phi=U_{f}\left(\psi\otimes\Ket{0}\right)=\frac{1}{\sqrt{2^{n}}}\sum_{i=0}^{2^{n-1}}\Ket{i}\Ket{f\left(i\right)}
+\]
+
+\end_inset
+
+I.e.
+ evaluating 
+\begin_inset Formula $f$
+\end_inset
+
+ at all possible values in its domain simultaneously.
+ But there's no free lunch.
+ Though you can say that this has actually happened, been effected, you
+ cannot recover this information because measurement of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ will return only one of the states in the sum and in doing so destroy informati
+on about the others.
+ You could construct an ensemble but that would completely defeat the point
+ (you might as well just compute 
+\begin_inset Formula $f$
+\end_inset
+
+ on a classical computer 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+times).
+ For this to be useful you need to make use of 
+\emph on
+global 
+\emph default
+information about the probability amplitudes, which is available to you.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Quotation
+
+\series bold
+Takeaway: In theory (implementations?) you can compute any classically computabl
+e function 
+\begin_inset Formula $f$
+\end_inset
+
+ using a unitary transformation (quantum gate).
+ Using Hadamard gates and 
+\begin_inset Quotes eld
+\end_inset
+
+quantum parallelism
+\begin_inset Quotes erd
+\end_inset
+
+ you can evaluate 
+\begin_inset Formula $f$
+\end_inset
+
+ at many values simultaneously.
+ Unfortunately you cannot recover information.
+ But there's still hope.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+This is a warmup so don't Let 
+\begin_inset Formula $f\left(x\right):\left\{ 0,1\right\} \to\left\{ 0,1\right\} $
+\end_inset
+
+ and suppose we are guarnteed/promised/contract that 
+\begin_inset Formula $f$
+\end_inset
+
+ is either constant or balanced (half and half).
+ How many evaluations classically to figure out which of the two characters
+ it has? 2 of course.
+ With QC you can find out in 1 application of 
+\begin_inset Formula $U_{f}$
+\end_inset
+
+.
+ How? First let's perform a calculation that will simplify what's to come.
+\begin_inset Formula 
+\begin{eqnarray*}
+U_{f}\left(\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\right) & = & U_{f}\left(\frac{\Ket{x}\Ket{0}-\Ket{x}\Ket{1}}{\sqrt{2}}\right)\\
+ & = & \frac{\Ket{x}\Ket{0\oplus f\left(x\right)}-\Ket{x}\Ket{1\oplus f\left(x\right)}}{\sqrt{2}}
+\end{eqnarray*}
+
+\end_inset
+
+Now if 
+\begin_inset Formula $f\left(x\right)=0$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\frac{\Ket{x}\Ket{0\oplus f\left(x\right)}-\Ket{x}\Ket{1\oplus f\left(x\right)}}{\sqrt{2}}=\frac{\Ket{x}\Ket{0}-\Ket{x}\Ket{1}}{\sqrt{2}}
+\]
+
+\end_inset
+
+and if 
+\begin_inset Formula $f\left(x\right)=1$
+\end_inset
+
+ then because 
+\begin_inset Formula $\oplus$
+\end_inset
+
+ is mod 2 
+\begin_inset Formula 
+\[
+\frac{\Ket{x}\Ket{0\oplus f\left(x\right)}-\Ket{x}\Ket{1\oplus f\left(x\right)}}{\sqrt{2}}=\frac{\Ket{x}\Ket{1}-\Ket{x}\Ket{0}}{\sqrt{2}}
+\]
+
+\end_inset
+
+so succintly put 
+\begin_inset Formula 
+\begin{eqnarray*}
+U_{f}\left(\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\right) & = & \left(-1\right)^{f\left(x\right)}\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Nothing deep just algebra.
+ Now we construct this circuit: 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\Ket{\psi_{1}} & = & H^{\otimes2}\left(\Ket{0}\otimes\Ket{1}\right)\\
+ & = & \left(H\Ket{0}\right)\otimes\left(H\Ket{1}\right)\\
+ & = & \left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)\otimes\left(\frac{1}{\sqrt{2}}\left(\Ket{0}-\Ket{1}\right)\right)\\
+ & = & \Ket{0}\otimes\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}+\Ket{1}\otimes\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+\psi_{2}=U_{f}\Ket{\psi_{1}}=\begin{cases}
+\pm & \left(\frac{\Ket{0}+\Ket{1}}{\sqrt{2}}\right)\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)=f\left(1\right)\\
+\pm & \left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)\neq f\left(1\right)
+\end{cases}
+\]
+
+\end_inset
+
+The final Hadamard gate on the first qubit gives
+\begin_inset Formula 
+\[
+\psi_{3}=\begin{cases}
+\pm & \Ket{0}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)=f\left(1\right)\\
+\pm & \Ket{1}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)\neq f\left(1\right)
+\end{cases}
+\]
+
+\end_inset
+
+Now if we measure the first qubit we know whether 
+\begin_inset Formula $f\left(0\right)=f\left(1\right)$
+\end_inset
+
+ or 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f\left(0\right)\neq f\left(1\right)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ (depending on whether we get 
+\begin_inset Formula $\Ket{0}$
+\end_inset
+
+or 
+\begin_inset Formula $\Ket{1}$
+\end_inset
+
+) Succinctly stated this allows us to measure a global property: since 
+\begin_inset Formula $f\left(0\right)\oplus f\left(1\right)=0$
+\end_inset
+
+ if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f\left(0\right)=f\left(1\right)$
+\end_inset
+
+ and 1 otherwise
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+\psi_{3}=\pm\Ket{f\left(0\right)\oplus f\left(1\right)}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\]
+
+\end_inset
+
+The reason why we can discern global properties is in fact because of interferen
+ce (entanglement).
+ Naively you might think that a state like 
+\begin_inset Formula $\Ket{0}\Ket{f\left(0\right)}+\Ket{1}\Ket{f\left(1\right)}$
+\end_inset
+
+ is some sort of a randomized computation (probability equal to 1/2 that
+ it's the first state and same for second), either exclusively the first
+ or second state.
+ The truth is that they can be made to interfere with each other (using
+ the final Hadamard gate).
+\end_layout
+
+\begin_layout Standard
+The Deutsch-Jozsa is much more impressive.
+ Now 
+\begin_inset Formula $f\left(x\right):\left\{ 0,1\right\} ^{n}\to\left\{ 0,1\right\} $
+\end_inset
+
+ and we can still discover the same thing: is 
+\begin_inset Formula $f$
+\end_inset
+
+ balanced or constant.
+ Classicaly this would take 
+\begin_inset Formula $\lceil2^{n}/2\rceil$
+\end_inset
+
+ evaluations but 
+\begin_inset Quotes eld
+\end_inset
+
+quantumly
+\begin_inset Quotes erd
+\end_inset
+
+ it can be done in just 1 evaluation! Top register is 
+\begin_inset Quotes eld
+\end_inset
+
+query
+\begin_inset Quotes erd
+\end_inset
+
+ register and bottom is 
+\begin_inset Quotes eld
+\end_inset
+
+target
+\begin_inset Quotes erd
+\end_inset
+
+ register.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{0}=\Ket{0}^{\otimes n}\Ket{1}
+\]
+
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\psi_{1}=\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\Ket{x}}{\sqrt{2^{n}}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\]
+
+\end_inset
+
+The first register is a superposition of all basis states in the 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit computational basis.
+ Using the simplification above again we have that 
+\begin_inset Formula 
+\[
+\psi_{2}=U_{f}\psi_{1}=\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}\Ket{x}}{\sqrt{2^{n}}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\]
+
+\end_inset
+
+Now extrapolating from 
+\begin_inset Formula $H\Ket{0}=\sum_{z\in\left\{ 0,1\right\} }\left(-1\right)^{0\cdot z}\Ket{z}/\sqrt{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $H\Ket{1}=\sum_{z\in\left\{ 0,1\right\} }\left(-1\right)^{1\cdot z}\Ket{z}/\sqrt{2}$
+\end_inset
+
+applying to 
+\begin_inset Formula 
+\begin{eqnarray*}
+H^{\otimes n}\Ket{x_{1},\dots,x_{n}}_{x_{i}\in\left\{ 0,1\right\} } & = & \otimes_{i=1}^{n}\left(H\Ket{x_{i}}\right)_{x_{i}\in\left\{ 0,1\right\} }\\
+ & = & \left(\sum_{z\in\left\{ 0,1\right\} }\frac{\left(-1\right)^{x_{i}\cdot z}}{\sqrt{2}}\Ket{z}\right)_{x_{i}\in\left\{ 0,1\right\} }^{\otimes n}\\
+ & = & \sum_{z_{1},\dots,z_{n}}\frac{\left(-1\right)^{x_{1}z_{1}+\cdots+x_{n}z_{n}}}{\sqrt{2^{n}}}\Ket{z_{1},\dots,z_{n}}
+\end{eqnarray*}
+
+\end_inset
+
+the last Hadamard operator 
+\begin_inset Formula 
+\[
+\psi_{3}=U_{f}\psi_{1}=\sum_{z\in\left\{ 0,1\right\} ^{n}}\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{x\cdot z+f\left(x\right)}\Ket{x}}{2^{n}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\]
+
+\end_inset
+
+where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x\cdot z$
+\end_inset
+
+ is bitwise inner product mod 2.
+ Let's observe the top register (query register).
+ Note that the amplitude for 
+\begin_inset Formula $\Ket{0}^{\otimes n}$
+\end_inset
+
+ is 
+\begin_inset Formula $\sum_{x}\left(-1\right)^{f\left(x\right)}/2^{n}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant then
+\begin_inset Formula 
+\[
+\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}}{2^{n}}=\pm1
+\]
+
+\end_inset
+
+and because 
+\begin_inset Formula $\psi_{3}$
+\end_inset
+
+ must be unit length we will certainly measure 
+\begin_inset Formula $\psi_{3}$
+\end_inset
+
+ to be in the 
+\begin_inset Formula $\Ket{0}^{\otimes n}$
+\end_inset
+
+ state.
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is balanced then by definition of balanced (
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ will be even as often as odd) 
+\begin_inset Formula 
+\[
+\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}}{2^{n}}=0
+\]
+
+\end_inset
+
+and we will certainly measure something other than 
+\begin_inset Formula $\Ket{0}^{\otimes n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Quotation
+
+\series bold
+Takeaway: We can use interference to extract global properties from 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit systems.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Let's talk about correspondence with physical phenomena/experimental setups.
+ Is there a physical system that can serve as a representation of qubits?
+ There are in fact many and I'll talk about which are practical next week
+ but for now just a proof of concept.
+ Take a run of the mill atom and shoot it through a magnetic field aligned
+ any which way.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename pasted3.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+What do we expect to happen? Well if the atom has a 
+\begin_inset Quotes eld
+\end_inset
+
+magnetic dipole moment
+\begin_inset Quotes erd
+\end_inset
+
+ it will be deflected as a function of the alignment of its moment with
+ the transverse field.
+ Because the atoms come out of the oven we expect them to have randomly
+ oriented magnetic moments and so for there to be a whole continuous range
+ of deflections.
+ In fact what was observed was a discrete set of deflections.
+ The typical heuristic for the magnetic dipole moment of the hydrogen atom
+ is that the electron circles the proton and therefore induces a magnetic
+ field along what we arbitrarily call the 
+\begin_inset Formula $\hat{z}$
+\end_inset
+
+ axis, as if it were an eddy current.
+ This is wrong.
+ We all know that electrons don't orbit the nucleus.
+ Indeed the magnetic dipole moment of an atom is due to the angular momentum
+ of the eletron, which is quantum mechanical and quantized.
+ 
+\end_layout
+
+\begin_layout Standard
+If the atom has no magnetic moment then we expect no deflection whatsoever.
+ In fact what was observed when this experiment was performed with hydrogen
+ atoms (which has zero 
+\begin_inset Quotes eld
+\end_inset
+
+orbital angular momentum
+\begin_inset Quotes erd
+\end_inset
+
+ and therefore should have zero magnetic moment) was that the beam was still
+ split into two.
+ This was the first piece of evidence for another quantum mechanical property
+ called spin and spin angular momentum.
+ The name comes from the hypothesis that eletrons rotate and therefore by
+ rotating create an eddy current around an axis through their center.
+ Again wrong.
+ Purely quantum mechanical and quantized into only two possible orientations.
+\end_layout
+
+\begin_layout Standard
+Incidentally this is a good demonstration of non-commuting measurements:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted4.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Quotation
+
+\series bold
+Takeaway: There are physical systems that behave in a digital way.
+ One such system is the spin of an electron which takes on only 1 of 2 values.
+\end_layout
+
+\begin_layout --Separator--
 
 \end_layout
 
