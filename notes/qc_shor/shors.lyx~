@@ -515,7 +515,7 @@ separable
 : For two arbitrary single qubit states in the factor spaces 
 \begin_inset Formula 
 \[
-\psi=a\Ket{0}+b\Ket{1}
+\varphi=a\Ket{0}+b\Ket{1}
 \]
 
 \end_inset
@@ -523,7 +523,7 @@ separable
 and
 \begin_inset Formula 
 \[
-\varphi=c\Ket{0}+d\Ket{1}
+\phi=c\Ket{0}+d\Ket{1}
 \]
 
 \end_inset
@@ -540,7 +540,7 @@ we have
 and therefore to fit the general form of 
 \begin_inset Formula 
 \[
-\psi=\psi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}\in V\otimes W
+\psi=\alpha\Ket{0}\Ket{0}+\beta\Ket{0}\Ket{1}+\gamma\Ket{1}\Ket{0}+\delta\Ket{1}\Ket{1}\in V\otimes W
 \]
 
 \end_inset
@@ -673,7 +673,7 @@ H^{\otimes2}\Ket{0}\Ket{0} & = & \left(H\Ket{0}\right)\otimes\left(H\Ket{0}\righ
 So in general 
 \begin_inset Formula 
 \[
-H^{\otimes n}\underbrace{\Ket{0}\cdots\Ket{0}}_{n}=\left(H\Ket{0}\right)^{\otimes n}=\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)^{\otimes n}=\frac{1}{\sqrt{2^{n}}}\sum_{i=0}^{2^{n-1}}\Ket{i}
+H^{\otimes n}\underbrace{\Ket{0}\cdots\Ket{0}}_{n}=\left(H\Ket{0}\right)^{\otimes n}=\left(\frac{1}{\sqrt{2}}\left(\Ket{0}+\Ket{1}\right)\right)^{\otimes n}=\frac{1}{\sqrt{2^{n}}}\sum_{i=0}^{2^{n}-1}\Ket{i}
 \]
 
 \end_inset
@@ -1376,7 +1376,8 @@ Incidentally this is a good demonstration of non-commuting measurements:
 
 \series bold
 Takeaway: There are physical systems that behave in a digital way.
- One such system is the spin of an electron which takes on only 1 of 2 values.
+ One such system is the spin of an electron which is quantized to only 2
+ states.
 \end_layout
 
 \begin_layout --Separator--
