@@ -7,7 +7,7 @@
 \input{qcircuit}
 
 \usetheme{Warsaw}
-\title[What's the deal with QC]{What's the deal with Quantum Computing\\How to break RSA}
+\title[What's the deal with QC]{What's the deal with Quantum Computing\\-How to break RSA-}
 \author{Maksim Levental}
 %\institute{Math-linux.com}
 \date{\today}
@@ -22,7 +22,7 @@
 \begin{frame}{Recap}
   
 \begin{itemize}
-     \item A single qubit is a (unit length) linear combination of the basis vectors 
+     \item A single qubit is a (unit length) linear combination of the basis vectors $\Ket{0},\Ket{1}$
   
        \[
        \psi=\alpha\Ket{0}+\beta\Ket{1}
@@ -62,6 +62,14 @@ information lost
 \end{itemize}
 \end{frame}
 
+%\begin{frame}{Bloch Sphere}
+%\begin{figure}[ht]
+%  \includegraphics[scale=0.55]{pasted12}
+%\end{figure}
+%\[
+%\Ket{\psi}=\cos\left(\frac{\theta}{2}\right)\Ket{0}+e^{i\varphi}\sin\left(\frac{\theta}{2}\right)\Ket{1}
+%\]
+%\end{frame}
 
 
 
@@ -82,7 +90,7 @@ to evaluate $f$ once! Let $U_f$ be the quantum circuit such that
 \[
 U_f\Ket{x}\Ket{y}=\Ket{x}\Ket{y\oplus f\left(x\right)}
 \]
-With some algebra (keepinging mind the small-ish domain and range of $f$)
+With some algebra (keeping in mind the small-ish domain and range of $f$)
 
 \[
 U_{f}\left(\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\right)=\left(-1\right)^{f\left(x\right)}\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
@@ -134,7 +142,7 @@ are used to discern global properties ($H$ is a generalized DFT).
 \begin{frame}{Deutsch-Jozsa Algorithm}
 
 Generalize to $f\left(x\right):\left\{ 0,1\right\} ^{n}\to\left\{ 0,1\right\} $ and still $f$ is either balanced or constant.
-How many evaluation classically? $2^n+1$ but quantumly still 1!
+How many evaluations classically? $2^{n-1}+1$ but quantumly still 1!
  
 \begin{figure}[ht]
   \includegraphics[scale=0.33]{pasted2}
@@ -204,6 +212,21 @@ and hence $\left(x^{r/2}-1\right),\left(x^{r/2}+1\right)$ must each have a facto
 
 \end{frame}
 
+\begin{frame}{Order example}
+For $N=2013$ it's the case that $8^{20}\equiv 1 \mod N \iff 8^{20}- 1 \equiv 0 \mod N$ and 
+
+\[
+\left(8^{\frac{20}{2}}-1\right)\left(8^{\frac{20}{2}}+1\right)\equiv 0 \mod N
+\]
+
+But $\left(8^{\frac{20}{2}}-1\right)\equiv 1584 \mod N$ and  $\left(8^{\frac{20}{2}}+1\right)\equiv 1586 \mod N$ and $0<1584<1586<2013$ so 
+\[
+\gcd \left(1584,2013\right)=33 \qquad \gcd \left(1586,2013\right)=61
+\]
+ and $61\times 33=2013$
+
+\end{frame}
+
 \begin{frame}{Shor's Algorithm}
 
 \begin{figure}[ht]
@@ -225,38 +248,126 @@ DFT\left(\ket{k}\right) = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}e^{2\pi i j k/N}\ket
 \begin{frame}{Shor's Algorithm}
 
 Then
-
+{\small
 
 \[
 \ket{\psi_2}=\frac{1}{\sqrt{2^t}}\sum_{j=0}^{2^t-1}\ket{j}\ket{x^j} \underset{r|2^t}{=} \frac{1}{\sqrt{2^t}}\sum_{b=0}^{r-1}\sum_{a=0}^{\frac{2^t}{r}-1}\ket{ar+b}\ket{x^b}
 \]
-
+}
+\begin{figure}[ht]
+  \includegraphics[scale=.3]{pasted9}
+\end{figure}
+\end{frame}
+\begin{frame}{Shor's Algorithm}
 
 \[
 \ket{\psi_3}=\sqrt{\frac{r}{2^t}}\sum_{a=0}^{\frac{2^t}{r}-1}\ket{ar+b_0}\ket{x^{b_0}}
 \]
 
+\begin{figure}[ht]
+  \includegraphics[scale=.5]{pasted7}
+\end{figure}
+
+\end{frame}
+\begin{frame}{Shor's Algorithm}
+
+
+
+
+{\small
 
 \[
 \ket{\psi_4}=\frac{1}{\sqrt{r}}\sum_{k=0}^{r-1}e^{2\pi \frac{k}{r}b_0}\ket{\frac{k2^t}{r}}\ket{x^{b_0}}
 \]
-\end{frame}
-\begin{frame}{Shor's Algorithm}
+
 Assuming the order of $x$, $r$ is a multiple of 2 (can be generalized), after measuring the first register we have $\ket{\psi_5}=\ket{\frac{k_0 2^t}{r}}$
 
 \begin{figure}[ht]
-  \includegraphics[scale=.5]{pasted6}
+  \includegraphics[scale=.45]{pasted6}
 \end{figure}
 
 If $k_0=0$ then we rerun. Otherwise divide $k_02^t/r$  by $2^t$. If $k_0,r$ are coprime then we can just take the denominator of $k_0/r$. Otherwise $r=r_1 r_2$ and we can find the order of $x^{r_1}$ to find $r$.
-
+}
 \end{frame}
 
 
+\begin{frame}{Shor's Algorithm Implementation}
+  
+\begin{figure}[ht]
+%\centering
+    \begin{minipage}{0.15\linewidth}
+       \includegraphics[scale=.2]{pasted10}
+    \end{minipage}
+    \qquad\qquad\qquad\qquad\qquad
+    \begin{minipage}{0.2\linewidth}
+       \includegraphics[scale=.3]{pasted11}
+    \end{minipage}
+\caption{Experimental realization of Shor's quantum factoring algorithm using nuclear magnetic resonance \cite{2001Natur.414..883V} }
+\end{figure}
+\end{frame}
 
+\begin{frame}{Computability}
 
+\begin{figure}[ht]
+%\centering
+{\small
+    \begin{minipage}{0.4\textwidth}
+       A \textbf{Probabilistic Turing machine} $M$ over an alphabet $A$ is $\left(Q,A,\delta,q_0,q_a,q_r\right)$ where
+       \begin{itemize}
+         \item $Q$ is the set of internal control states
+         \item $q_0,q_a,q_r\in Q$ are initial,accepting, and rejecting states
+         \item $\delta:Q\times A\times Q\times A\times\{-1,0,1\}\mapsto [0,1]$ is a transition probability function i.e.
+           \[
+             \sum_{\left(q_2,a_2,d\right)}\delta\left(q_1,a_1,q_2,a_2\right)=1
+           \]
+       \end{itemize}
+    \end{minipage}
+    \qquad
+    \begin{minipage}{0.4\textwidth}
+       A \textbf{Quantum Turing machine} $M$ over an alphabet $A$ is $\left(Q,A,\delta,q_0,q_a,q_r\right)$ where
+       \begin{itemize}
+         \item $Q$ is the set of internal control states
+         \item $q_0,q_a,q_r\in Q$ are initial,accepting, and rejecting states
+         \item $\delta:Q\times A\times Q\times A\times\{-1,0,1\}\mapsto \mathbb{C}$ is a transition probability function i.e.
+           \[
+             \sum_{\left(q_2,a_2,d\right)}|\delta\left(q_1,a_1,q_2,a_2\right)|^2=1
+           \]
+       \end{itemize}
+    \end{minipage}
+}
+\end{figure}
 
+\end{frame}
 
+\begin{frame}{Computability Theorems}
+  \begin{itemize}
+    \item $\textbf{BPP}\subset \textbf{BQP}$
+    \item A language $L$ has uniformly polynomial circuits iff $L\in \textbf{P}=\bigcup_k \textbf{TIME}\left( n^k \right)$
+    \item All Boolean circuits can be simulated using reversible Boolean circuits
+  \end{itemize}
+
+\begin{figure}[ht]
+\tiny
+\centering
+    \begin{minipage}{.5\linewidth}
+       \Qcircuit @C=1em @!R {
+         \lstick{\Ket{x}}   &   \qw   &   \ctrl{1}   &   \qw   &   \rstick{\Ket{x}}   \qw                     \\
+         \lstick{\Ket{y}}   &   \qw   &   \ctrl{1}   &   \qw   &   \rstick{\Ket{y}}   \qw                     \\
+         \lstick{\Ket{z}}   &   \qw   &   \targ      &   \qw   &   \rstick{\Ket{x \oplus (y \wedge z})} \qw
+       }
+    \end{minipage}%
+    \qquad\qquad\qquad
+    \begin{minipage}{0.5\linewidth}
+      \[
+      \begin{bmatrix}1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\\end{bmatrix}
+      \]
+    \end{minipage}
+\caption{Toffoli gate}
+\end{figure}
+\begin{itemize}
+\item Toffoli is classically universal but not quantum universal, but $\{TOF,H\}$ are quantum universal and both have successfully implemented \cite{5558424,2009PhRvL.102d0501M}. 
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}{Simon's problem and complexity results}
@@ -299,42 +410,41 @@ Interestingly while this algorithm uses the Fourier transform it is exact (as op
 
 \end{frame}
 
-
-
-
-
-\begin{frame}{Physical gates}
-
-\begin{figure}[ht]
-\centering
-    \begin{minipage}{.5\linewidth}
-       \Qcircuit @C=1em @!R {
-         \lstick{\Ket{x}}   &   \qw   &   \ctrl{1}   &   \qw   &   \rstick{\Ket{x}}   \qw                     \\
-         \lstick{\Ket{y}}   &   \qw   &   \ctrl{1}   &   \qw   &   \rstick{\Ket{y}}   \qw                     \\
-         \lstick{\Ket{z}}   &   \qw   &   \targ      &   \qw   &   \rstick{\Ket{x \oplus (y \wedge z})} \qw
-       }
-    \end{minipage}%
-    \qquad\qquad\qquad
-    \begin{minipage}{0.5\linewidth}
-      \[
-      \begin{bmatrix}1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\\end{bmatrix}
-      \]
-    \end{minipage}
-\caption{Toffoli gate}
+\begin{frame}{D-Wave}
+\begin{figure}
+  \includegraphics[scale=.25]{pasted14}
 \end{figure}
-Toffoli is classically universal but not quantum universal, but $\{TOF,H\}$ are quantum universal and both have successfully implemented \cite{5558424,2009PhRvL.102d0501M}. 
 \end{frame}
 
 
+\begin{frame}{D-Wave}
+
+\begin{figure}[ht]
+\tiny
+\centering
+    \begin{minipage}{.2\linewidth}
+      \includegraphics[scale=.15]{pasted13}
+    \end{minipage}%
+    \qquad\qquad\qquad\qquad\qquad\qquad
+    \begin{minipage}{.5\linewidth}
+      \includegraphics[scale=.25]{pasted15}
+    \end{minipage}%
+\end{figure}
 
 
+\end{frame}
 
-
-
-
-
-
-
+\begin{frame}{Timeline}
+\begin{itemize}
+  \item 1951 - EDVAC (first binary computer, Vacuum tubes)
+  \item 1956 - John Bardeen invents the transistor
+  \item 1958 - Jack Kilby invents ICs
+  \item 1964 - IBM System/360
+  \item 1968 - Intel founded by Robert Noyce
+  \item 1971 - Intel 4004 (first commercially available processor, 4bit @ 740 kHz)
+  \item 1975 - MITS Altair 8800 (first commercially successful hobby computer @ \$397 $\approx$ \$1700, uses Intel 8080) 
+\end{itemize}
+\end{frame}
 
 
 
@@ -411,8 +521,7 @@ H^{\otimes n}\Ket{x_{1},\dots,x_{n}}_{x_{i}\in\left\{ 0,1\right\} } & = & \bigot
 \end{frame}
 
 
-
-\begin{frame}{Bibliography}
+\begin{frame}[allowframebreaks]{Bibliography}
 \bibliography{tof.bib} 
 \end{frame}
 \end{document}
