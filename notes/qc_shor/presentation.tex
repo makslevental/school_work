@@ -7,7 +7,7 @@
 \input{qcircuit}
 
 \usetheme{Warsaw}
-\title[What's the deal with QC]{What's the deal with Quantum Computing\\-How to break RSA-}
+\title[What's the deal with QC]{What's the deal with Quantum Computing Part 2\\-A little less formalism-}
 \author{Maksim Levental}
 %\institute{Math-linux.com}
 \date{\today}
@@ -18,6 +18,22 @@
 \titlepage
 \end{frame}
 
+\begin{frame}
+  \begin{figure}[ht]
+    \includegraphics[scale=.27]{pasted18}
+  \end{figure}
+\end{frame}
+\begin{frame}
+  \begin{figure}[ht]
+    \includegraphics[scale=.27]{pasted17}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}[ht]
+    \includegraphics[scale=1.3]{pasted19}
+  \end{figure}
+\end{frame}
 
 \begin{frame}{Recap}
   
@@ -119,7 +135,7 @@ Construct the quantum circuit
 
 \begin{frame}{Deutsch's Algorithm}
 
-The final Hadamard gate on the first qubit gives
+The final Hadamard gate leaves the system in
 \[
 \psi_{3}=\begin{cases}
 \pm & \Ket{0}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)=f\left(1\right)\\
@@ -174,20 +190,20 @@ where $x\cdot z$ is bitwise inner product mod 2.
 
 \begin{frame}{Deutsch-Jozsa Algorithm}
 Let's observe the
-top register (query register). Note that the amplitude for $\Ket{0}^{\otimes n}$
+top register (query register). Note that the amplitude for $\Ket{0,0,\dots,0}$
 is $\sum_{x}\left(-1\right)^{f\left(x\right)}/2^{n}$. If $f$ is
 constant then
 \[
 \sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}}{2^{n}}=\pm1
 \]
 and because $\psi_{3}$ must be unit length we will certainly measure
-$\psi_{3}$ to be in the $\Ket{0}^{\otimes n}$ state. If $f$ is
+$\psi_{3}$ to be in the $\Ket{0,0,\dots,0}$ state. If $f$ is
 balanced then by definition of balanced ($f\left(x\right)$ will be
 even as often as odd) 
 \[
 \sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}}{2^{n}}=0
 \]
-and we will certainly measure something other than $\Ket{0}^{\otimes n}$.
+and we will certainly measure something other than $\Ket{0,0,\dots,0}$.
 \end{frame}
 
 
@@ -328,7 +344,7 @@ If $k_0=0$ then we rerun. Otherwise divide $k_02^t/r$  by $2^t$. If $k_0,r$ are 
        \begin{itemize}
          \item $Q$ is the set of internal control states
          \item $q_0,q_a,q_r\in Q$ are initial,accepting, and rejecting states
-         \item $\delta:Q\times A\times Q\times A\times\{-1,0,1\}\to \mathbb{C}$ is a transition probability function i.e.
+         \item $\delta:Q\times A\times Q\times A\times\{-1,0,1\}\to \mathbb{C}$ is the root of a transition probability function i.e.
            \[
              \sum_{\left(q_2,a_2,d\right)}|\delta\left(q_1,a_1,q_2,a_2,d\right)|^2=1
            \]
@@ -339,15 +355,11 @@ If $k_0=0$ then we rerun. Otherwise divide $k_02^t/r$  by $2^t$. If $k_0,r$ are 
 
 \end{frame}
 
-\begin{frame}{Computability conjectures}
-\begin{figure}
-  \includegraphics[scale=.5]{pasted16}
-\end{figure}
-\end{frame}
+
 
 \begin{frame}{Computability Theorems}
   \begin{itemize}
-    \item $\textbf{BPP}\subset \textbf{BQP}$
+    
     \item A language $L$ has uniformly polynomial circuits iff $L\in \textbf{P}=\bigcup_k \textbf{TIME}\left( n^k \right)$
     \item All Boolean circuits can be simulated using reversible Boolean circuits
   \end{itemize}
@@ -375,6 +387,11 @@ If $k_0=0$ then we rerun. Otherwise divide $k_02^t/r$  by $2^t$. If $k_0,r$ are 
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Complexity conjectures}
+\begin{figure}
+  \includegraphics[scale=.5]{pasted16}
+\end{figure}
+\end{frame}
 
 \begin{frame}{Simon's problem and complexity results}
 Let $f\left(x\right):\left\{ 0,1\right\} ^{n}\to\left\{ 0,1\right\}^n$ and we are guaranteed that $\exists ~ s\in \{0,1\}^n$ such that 
@@ -387,7 +404,7 @@ needs to make $\Omega\left(n\right)$.
 
 \vspace{\baselineskip}
 
-Yields an oracle separation between \textbf{BPP} and \textbf{BQP}. 
+Yields an \textbf{oracle} separation between \textbf{BPP} and \textbf{BQP}. Otherwise $\textbf{BPP}\subset \textbf{BQP}$
 
 \vspace{\baselineskip}
 
@@ -412,7 +429,7 @@ No known polynomial time classical algorithm; ``almost'' as hard as factorizatio
 \vspace{\baselineskip}
 
 
-Interestingly while this algorithm uses the Fourier transform it is exact (as opposed to Shor's).
+Interestingly, while this algorithm uses the Fourier transform it is exact (as opposed to Shor's).
 
 \end{frame}
 
