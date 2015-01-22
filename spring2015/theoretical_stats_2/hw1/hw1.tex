@@ -1,0 +1,324 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+\usepackage[latin9]{inputenc}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+%
+\usepackage{amsfonts}\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+
+\makeatother
+
+\begin{document}
+
+\title{STA 6326 Homework 1 Solutions}
+
+
+\author{Maksim Levental}
+
+
+\date{08/25/2014}
+\maketitle
+\begin{enumerate}
+\item [1.1]
+
+\begin{enumerate}
+\item All 4 bit sequences of $0$s and $1$s, where $0$ represents tails
+and $1$ represents heads, i.e. $\Omega=\{\omega_1,\omega_2,\omega_3,\omega_4\}$where
+$\omega_i \in \{0,1\}$.
+\item All $n$ bit sequences of $0$s and $1$s, where $0$ represents undamaged
+and $1$ represents damaged and $n$ is the number of leaves on the
+plant. Then the number of damaged leaves is the number of 1 bits in
+the sequence (a RV).
+\item All $x \in (0,\infty)$.
+\item All $x \in (0,k)$where $k$ is some reasonable maximum weight for
+a 10-day old rat (probably like 100 pounds).
+\item All $x \in [0,1]$.
+\end{enumerate}
+\item [1.2]
+
+\begin{enumerate}
+\item $A\backslash (A \cap B)=A \cap (A\cap B)^c = A\cap (A^c \cup B^c)= (A\cap A^c)\cup (A\cap B^c)= \emptyset \cup (A\cap B^c) = A\cap B^c$.
+\item $(B\cap A)\cup(B\cap A^c)=B\cap(A\cup A^c) = B\cap \Omega=B$.
+\item $B\backslash A = B\cap A^c$ by definition.
+\item $A\cup (B\cap A^c) = (A\cup B) \cap(A\cup A^c) = (A\cup B) \cap \Omega = A\cup B$.
+\end{enumerate}
+\item [1.4]
+
+\begin{enumerate}
+\item Probability of $A \vee B \iff P(A\cup B) = P(A)+P(B)-P(A\cap B)$.
+\item Probability of $(A \vee B)\wedge\lnot(A\wedge B) \iff P(A\cup B) -P(A\cap B)$ 
+and
+\begin{align*}
+P(A\cup B) -P(A\cap B) &= P(A)+P(B)-P(A\cap B)-P(A\cap B)\\ 
+&= P(A)+P(B)-2\cdot P(A\cap B)
+\end{align*}
+\item Same as (a).
+\item Same as (b).
+\end{enumerate}
+% \item [1.7]
+
+% \begin{enumerate}
+% \item The area of the dart board is $\pi r^2$ and so the probability of
+% hitting the board at all is $\pi r^2/A$ and so the probability of
+% missing the board is then $P(\text{scoring }0\text{ points})=1-\pi r^2/A$.
+% The rest of the values for the probability mass function are the same
+% as they are in \textbf{~Ex 1.2.7 }except renormalized by $A$ instead
+% of by the area of the dartboard, i.e. $$P(\text{scoring }i\text{ points}) = 
+% \left\{ 	
+% 		\begin{array}{ll} 		
+% 				 1-\pi r^2/A & \mbox{if } i = 0 \\
+% 				 \frac{\pi r^2}{A}\frac{(6-i)^2 -(5-i)^2}{5^2} & \mbox{if } i = 1,2,3,4,5 	
+% 		\end{array} 
+% \right.
+% $$
+% \item $P(\text{scoring }i\text{ points}|\text{board is hit})=\frac{P(\text{scoring }i\text{ points }\cap\text{ board is hit})}{P(\text{board is hit})} = \frac{P(\text{scoring }i\text{ points }\cap\text{ board is hit})}{\pi r^2/A}$
+% but $P(\text{scoring }0\text{ points }\cap\text{ board is hit})=P(\emptyset)=0$
+% and if $i=1,2,3,4,5$ then $P(\text{scoring }i\text{ points }\cap\text{ board is hit}) = P(\text{scoring }i\text{ points })$
+% since $\{\text{scoring }i\text{ points}\}\subset\{\text{board is hit}\}$
+% hence $$P(\text{scoring }i\text{ points}|\text{board is hit}) = 
+% \left\{ 	
+% 		\begin{array}{ll} 		
+% 				 0 & \mbox{if } i = 0 \\
+% 				 \begin{array}{ll}
+% 				 \frac{P(\text{scoring }i\text{ points })}{\pi r^2/A} &= \frac{\pi r^2/A}{\pi r^2/A}\frac{(6-i)^2 -(5-i)^2}{5^2}\\
+% 					&=\frac{(6-i)^2-(5-i)^2}{5^2}
+% 				 \end{array} & \mbox{if } i = 1,2,3,4,5 	
+% 		\end{array} 
+% \right.
+% $$
+% \end{enumerate}
+\item [1.13]$A \cap B = \emptyset \implies A \subset B^c \implies P(A) \leq P(B^c) \implies 1/3 \leq 1/4 $
+which is a contradiction.
+\item [1.14]Each subset involves making $n$ binary choices, one choice
+per element in the set $S$, of whether to include the element in
+that subset or exclude that element from the subset. Therefore by
+\textbf{Thm 1.2.14 }in Casella there are $\underbrace{2\times2\times\cdots\times 2}_\text{n times} = 2^n$
+different ways to pick which elements to include in a subset.
+\item [1.16]
+
+\begin{enumerate}
+\item Choose 3 from 26 with replacement hence $26^3=17576$.
+\item Choose 3 from 26 with replacement or (therefore the $\cup$) choose
+2 from 26 with replacement hence $26^{3}+26^{2}.$
+\item Choose 4 from 26 with replacement or (therefore the $\cup$) choose
+3 from 26 with replacement or choose 2 from 26 with replacement hence
+$26^{4}+26^{3}+26^{2}.$
+\end{enumerate}
+\item [1.18]Imagine laying out the $n$ balls in a particular order then
+going through one by one and assigning a cell to each ball. This induces
+an implicit order on the cell assignments since the balls have a fixed
+ordering. The sample space is all such assignments, i.e. all $n$-tuples
+with each entry being an integer from 1 to $n$. There are $n^n$
+different ways to assign the $n$ cells to the $n$ balls. A successful
+outcome is then one where exactly one cell is assigned twice, i.e.
+exactly two repetitions in the assignment list. There are $n$ ways
+to choose which cell will be assigned twice and $\binom{n}{2}$ to
+choose which balls will bear the reptition. Then there are $n-1$
+ways to choose a cell that will remain empty. Finally there are $(n-2)!$
+way to assign the remaining $n-2$ cells to the $n-2$ balls. Hence
+the probability is $n\binom{n}{2}(n-1)(n-2)!/n^{n}=\binom{n}{2}n!/n^{n}$.
+\item [1.21]The ``experiment'' is choosing $2r$ shoes from $2n$ shoes
+without replacement. There are $\binom{2n}{2r}$ ways to choose $2r$
+shoes from $2n$ shoes, i.e. $n$ pairs of shoes. There are $\binom{n}{2r}$
+different ways to choose $2r$ different pairs of shoes from $n$
+pairs of shoes, i.e. since we'll only be choosing one shoe from each
+pair we must choose which pairs exactly it is we'll be taking a single
+shoe from. Then finally there are $2^{2r}$ different ways to choose
+either the left shoe or right shoe from each pair of previously $2r$
+chosen shoes. Hence the fraction of choices of $2r$ shoes from $2n$
+shoes is \[\frac{\text{number of choices of 2r pairs} \times \text{number of ways of choosing either left or right}}{\text{number of ways of choosing 2r shoes}}=\frac{\binom{n}{2r}2^{2r}} {\binom{2n}{2r}}\].
+\item [1.22]
+
+\begin{enumerate}
+\item The ``experiment'' is to draw 180 days from the year. The sample
+spaces is all $180$-element subsets of the 366 days, so there are
+$\binom{366}{180}$ ways to draw 180 days from anywhere in the year
+for the 180 lottery tickets. In order that the days be evenly distributed
+there must be $180/12=15$ days chosen from each month. Then there
+are $\underbrace{\binom{30}{15}\times\binom{31}{15}\times\cdots\times\binom{29}{15}}_{12}=\binom{30}{15}^{4}\times\binom{31}{15}^{7}\times\binom{29}{15}$
+ways to assign exactly 15 lottery tickets to each of the 12 months.
+Hence the probability of having all 180 lottery tickets evenly distributed
+is $ $$\frac{\binom{30}{15}^{4}\times\binom{31}{15}^{7}\times\binom{29}{15}}{\binom{366}{180}}=.167\times10^{-8}$
+\item The experiment is again to draws days from the year. There are $\binom{336}{30}$
+ways to choose 30 days from all the days in the year that are not
+in September $(366-30=336)$ and $\binom{366}{30}$ ways to choose
+30 days from any of the days of the year. Hence the probability of
+not selecting any days from September is $ $$\binom{336}{30}/\binom{366}{30}=0.0686905$.
+\end{enumerate}
+\item [1.23] Every ``draw'' has 4 possibilities: $\left\{ \text{HH},\text{HT},\text{TH},\text{TT}\right\} $.
+So there are $4^{n}$ different outcomes of the $n$ ``draws''.
+Then there are $\binom{n}{i}\binom{n}{i}$ different each person could
+flip $i$ heads, for $i=0,1,2,\dots,n$. Hence the probability of
+each person flipping the same number of heads is $\sum_{i=0}^{n}\binom{n}{i}^{2}/4^{n}$.
+To see that this equals $\binom{2n}{n}/4^{n}$ we prove Vandermonde's
+identity, namely that
+\[
+\binom{m+n}{r}=\sum_{k=0}^{r}\binom{m}{k}\binom{n}{r-k}
+\]
+To see that this is the case take 2 urns, one with $m$ red balls
+and one with $n$ green balls and consider how many collections of
+size $r$ can be drawn from both urns. Certainly it's $\binom{m+n}{r}$.
+But it's also the sum, for all $k$, of the number of collections
+with $k$ red balls and $n-k$ green balls. For fixed $k$ this is
+$\binom{m}{k}\binom{n}{r-k}$ and thence follows Vandermonde's identity.
+Finally letting $m=r=n$ and using the fact that $\binom{n}{n-i}=\binom{n}{i}$
+we have 
+\[
+\frac{1}{4^{n}}\sum_{i=0}^{n}\binom{n}{i}\binom{n}{i}=\frac{1}{4^{n}}\sum_{i=0}^{n}\binom{n}{i}\binom{n}{n-i}=\frac{1}{4^{n}}\binom{n+n}{n}=\frac{1}{4^{n}}\binom{2n}{n}
+\]
+
+\item [1.24]
+
+\begin{enumerate}
+\item Number of flips until heads is geometrically distributed, i.e. the
+probability that the $k$th flip is a head $P(X=k)=(1-p)^{k-1}p$
+with $p=1/2$. The probability that $A$ wins is tantamount to the
+probability that $k$ is odd (since $A$ flips first). Therefore
+\[
+P(\text{A wins})=P(X=k=2i-1|i=1,2,3,\cdots)=\sum_{i=1}^{\infty}(1-p)^{(2i-1)-1}p=-\frac{(p-1)^{2}}{(1-p)^{2}(p-2)}
+\]
+For $p=1/2$ this is $-\frac{(1/2-1)^{2}}{(1-1/2)^{2}(1/2-2)}=\frac{2}{3}$.
+\item Simplifying the result from (a) we get that 
+\begin{align*}
+P(\text{A wins}) & =-\frac{(p-1)^{2}}{(1-p)^{2}(p-2)}\\
+ & =-\frac{(1-p)^{2}}{(1-p)^{2}(p-2)}\\
+ & =\frac{1}{2-p}\\
+ & =\frac{p}{2p-p^{2}}\\
+ & =\frac{p}{1-(1-2p+p^{2})}\\
+ & =\frac{p}{1-(1-p)^{2}}
+\end{align*}
+
+\item Since $P(\text{A wins})=\frac{1}{2-p}$ we see that if $0<p<1$ then
+$\frac{1}{2}<P(\text{A wins})=\frac{1}{2-p}<1$.
+\end{enumerate}
+% \item [1.26]''Casts'' until a 6 appears is geometrically distributed
+% with $p=1/6$, i.e.
+% \[
+% P(X=k)=\bigg(1-\frac{1}{6}\bigg)^{k-1}\frac{1}{6}
+% \]
+% Computing the probability that one has to cast more than 5 times is
+% tantamount to the complement of casting a 6 on either 1, 2, 3, 4,
+% or 5 times. Therefore 
+% \[
+% P(\text{casting more than 5 times)}=1-\sum_{k=1}^{5}\bigg(1-\frac{1}{6}\bigg)^{k-1}\frac{1}{6}=1-\bigg(\frac{1}{6}+\frac{5}{36}+\frac{25}{216}+\frac{125}{1296}+\frac{625}{7776}\bigg)=\frac{3125}{7776}=0.401878
+% \]
+
+\item [1.27]
+
+\begin{enumerate}
+\item Using the binomial theorem
+\[
+0=(1-1)^{n}=\sum_{k=0}^{n}\binom{n}{k}1^{n-k}(-1)^{k}=\sum_{k=0}^{n}(-1)^{k}\binom{n}{k}
+\]
+
+\item Using the binomial theorem
+\[
+\begin{aligned}\sum_{k=1}^{n}k\binom{n}{k} & =\sum_{k=1}^{n}k\frac{n!}{k!(n-k)!}\\
+ & =\sum_{k=1}^{n}\frac{n!}{(k-1)!(n-k)!}\\
+ & =\sum_{k=1}^{n}\frac{n\cdot(n-1)!}{(k-1)!\big(n-1-(k-1)\big)!}\\
+ & =n\sum_{k=1}^{n}\binom{n-1}{k-1} & \text{let }j=k-1\\
+ & =n\sum_{j=0}^{n-1}\binom{n-1}{j}\\
+ & =n(1+1)^{n-1}\\
+ & =n2^{n-1}\\
+\\
+\end{aligned}
+\]
+
+\item Using essentially the same calculation (steps 1-4) from part (a) we
+have that 
+\[
+\sum_{k=1}^{n}(-1)^{k+1}k\binom{n}{k}=n\sum_{k=1}^{n}(-1)^{k+1}\binom{n-1}{k-1}
+\]
+. Let $j=k-1$ then 
+\[
+\sum_{k=1}^{n}(-1)^{k+1}\binom{n-1}{k-1}=(-1)^{2}n\sum_{j=0}^{n-1}(-1)^{j}\binom{n-1}{j}=0
+\]
+ by part (a). 
+\end{enumerate}
+% \item [1.29]
+
+% \begin{enumerate}
+% \item [(c)]There are $6^{6}$ ordered draws of 6 numbers from 6 numbers
+% with replacement. There are $6!$ different arrangements of $\{2,7,7,8,14,14\}$
+% but there is overcounting by $2!2!$. So there are $6!/2!2!$ different
+% ordered draws that correspond to the unordered draw of $\{2,7,7,8,14,14\}$.
+% So the probability is 
+% \[
+% \frac{6!/2!2!}{6^{6}}=\frac{6!/4}{6^{6}}=
+% \]
+
+% \end{enumerate}
+\item [1.33]The probability is
+\begin{align*}
+P(\text{male}|\text{colorblind}) & =\frac{P(\text{colorblind}|\text{male})P(\text{male})}{\sum_{i\in sex}P(\text{colorblind}|\text{i})P(\text{i})}\\
+ & =\frac{P(\text{colorblind}|\text{male})P(\text{male})}{P(\text{colorblind}|\text{male})P(\text{male})+P(\text{colorblind}|\text{female})P(\text{female})}\\
+ & =\frac{.05\cdot.5}{.05\cdot.5+.25\cdot.5}\\
+ & =\frac{1}{6}
+\end{align*}
+
+% \item [1.35]Let $Q(A)=P(A|B)$. Firstly 
+% \[
+% Q(A)=P(A|B)=\frac{P(A\cap B)}{P(B)}\ge0
+% \]
+% by the non-negativity of $P(\cdot)$ and the hypothesis that $P(B)>0$.
+% Secondly 
+% \[
+% Q(\Omega)=P(\Omega)=\frac{P(\Omega|B)}{P(B)}=\frac{P(B)}{P(B)}=1
+% \]
+% Finally assume $A_{i},A_{j}$ for all $i,j$ are pairwise disjoint.
+% Then 
+% \[
+% Q\Bigg(\bigcup_{i=1}^{\infty}A_{i}\Bigg)=P\Bigg(\bigcup_{i=1}^{\infty}A_{i}\Bigg|B\Bigg)=\frac{P\Bigg(\bigg(\bigcup_{i=1}^{\infty}A_{i}\bigg)\cap B\Bigg)}{P(B)}=\frac{P\bigg(\bigcup_{i=1}^{\infty}(A_{i}\cap B)\bigg)}{P(B)}
+% \]
+% and since $A_{i},\, A_{j}$ for all $i,j$ are pairwise disjoint $(A_{i}\cap B),\,(A_{j}\cap B)$
+% are also pairwise disjoint for all $i,j$ and by the countable additivity
+% of $P(\cdot)$
+% \[
+% \frac{P\bigg(\bigcup_{i=1}^{\infty}(A_{i}\cap B)\bigg)}{P(B)}=\frac{\sum_{i=1}^{\infty}P(A_{i}\cap B)}{P(B)}=\sum_{i=1}^{\infty}\frac{P\bigg(A_{i}\cap B)\bigg)}{P(B)}=\sum_{i=1}^{\infty}P(A_{i}|B)=\sum_{i=1}^{\infty}Q(A_{i})
+% \]
+
+% \item [1.38]
+
+% \begin{enumerate}
+% \item If $P(B)=1$ then $P(A|B)=\frac{P(A\cap B)}{1}$ but $P(A)=P(A\cap B)+P(A\cap B^{c})$
+% and since $A\cap B^{c}\subset B^{c}$ and $P(A\cap B^{c})\leq P(B^{c})=1-P(B)=0$
+% it's the case that $P(A)=P(A\cap B)$ so $P(A|B)=P(A)$.
+% \item $P(B|A)=P(B\cap A)/P(A)$ but the hypothesis $A\subset B$ implies
+% $B\cap A=A$ so $P(B|A)=P(A)/P(A)=1$. Then $P(A|B)=P(B|A)P(A)/P(B)=P(A)/P(B)$.
+% \item 
+% \begin{align*}
+% P(A|A\cup B)= & \frac{P\bigg(A\cap(A\cup B)\bigg)}{P(A\cup B)}\\
+%  & \frac{P(A)}{P(A)+P(B)-P(A\cap B)} & \text{by }A\subset A\cup B\\
+%  & \frac{P(A)}{P(A)+P(B)} & \text{by "mutually exclusive"}\iff A\cap B=\emptyset
+% \end{align*}
+
+% \item $P(A\cap B\cap C)=P(A|B\cap C)P(B\cap C)=P(A|B\cap C)P(B|C)P(C)$.
+% \end{enumerate}
+% \item [1.39]
+
+% \begin{enumerate}
+% \item If $P(A)>0$ and$P(B)>0$ and$P(A\cap B)=0$ then obviously $P(A)\cdot P(B)\ne P(A\cap B)$.
+% \item If $P(A)>0$ and$P(B)>0$ and $P(A)P(B)=P(A\cap B)$ then obviously
+% $P(A\cap B)=P(A)P(B)>0$.
+% \end{enumerate}
+% \item [1.46]
+\end{enumerate}
+
+\end{document}
