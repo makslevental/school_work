@@ -493,10 +493,14 @@ but
 
 \end_inset
 
- so
+ so for 
+\begin_inset Formula $\theta_{1},\theta_{2},\theta_{3},\theta_{4}\in\mathbb{R}$
+\end_inset
+
+
 \begin_inset Formula 
 \[
-f_{\mathbf{Z}}\left(\mathbf{z}|\mathbf{\bm{\theta}}\right)=\frac{I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta_{1},\infty\right)}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(\theta_{3},\infty\right)}}{\left(\theta_{3}-\theta_{1}\right)^{n}}\frac{I\left(\min_{i}\left(y_{i}\right)\right)_{\left(\theta_{2},\infty\right)}I\left(\max_{i}\left(y_{i}\right)\right)_{\left(\theta_{4},\infty\right)}}{\left(\theta_{4}-\theta_{2}\right)^{n}}\text{ for }\theta_{1},\theta_{2},\theta_{3},\theta_{4}\in\mathbb{R}
+f_{\mathbf{Z}}\left(\mathbf{z}|\mathbf{\bm{\theta}}\right)=\frac{I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta_{1},\infty\right)}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(\theta_{3},\infty\right)}}{\left(\theta_{3}-\theta_{1}\right)^{n}}\frac{I\left(\min_{i}\left(y_{i}\right)\right)_{\left(\theta_{2},\infty\right)}I\left(\max_{i}\left(y_{i}\right)\right)_{\left(\theta_{4},\infty\right)}}{\left(\theta_{4}-\theta_{2}\right)^{n}}
 \]
 
 \end_inset
@@ -508,5 +512,370 @@ Therefore
  is sufficient.
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.13]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X$
+\end_inset
+
+ is such that 
+\begin_inset Formula $f_{X}\left(x\right)=\alpha x^{\alpha-1}e^{-x^{\alpha}}I\left(x\right)_{\mathbb{R}_{+}}$
+\end_inset
+
+ for 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ and 
+\begin_inset Formula $Y=g\left(X\right)=\log\left(X\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $g^{-1}\left(Y\right)=e^{Y}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\frac{d}{dy}\left(g^{-1}\left(Y\right)\right)=\frac{d}{dy}\left(e^{y}\right)=e^{y}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+f_{Y}\left(y\right)=\alpha\left(e^{y}\right)^{\alpha-1}e^{-e^{\alpha y}}e^{y}=\alpha e^{\alpha y-e^{\alpha y}}I\left(y\right)_{\mathbb{R}}
+\]
+
+\end_inset
+
+Now transform again to 
+\begin_inset Formula $Z=\alpha Y$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{Z}\left(z\right)=e^{z-e^{z}}I\left(z\right)_{\mathbb{R}}
+\]
+
+\end_inset
+
+which is independent of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ Therefore since 
+\begin_inset Formula $\log\left(X_{1}\right)\sim\log\left(X_{1}\right)\sim Y$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\log\left(X_{1}\right)}{\log\left(X_{2}\right)}=\frac{Z_{1}/\alpha}{Z_{2}/\alpha}=\frac{Z_{1}}{Z_{2}}
+\]
+
+\end_inset
+
+it's the case that 
+\begin_inset Formula $\log\left(X_{1}\right)/\log\left(X_{2}\right)$
+\end_inset
+
+ is ancillary.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.20]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\frac{2x}{\theta^{2}}I\left(x\right)_{\left(0,\theta\right)}\text{ for }\theta>0
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{2^{n}\left(\prod_{i=1}^{n}x_{i}\right)}{\theta^{2n}}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(0,\theta\right)}\text{ for }\theta>0
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula $\max_{i}\left(X_{i}\right)$
+\end_inset
+
+ is a sufficient statistic.
+ To see that it's minimal suppose we have two 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ are two observations such that 
+\begin_inset Formula $\max_{i}\left(x_{i}\right)=\max_{i}\left(y_{i}\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{\frac{2^{n}\left(\prod_{i=1}^{n}x_{i}\right)}{\theta^{2n}}}{\frac{2^{n}\left(\prod_{i=1}^{n}y_{i}\right)}{\theta^{2n}}}\frac{I\left(\max_{i}\left(x_{i}\right)\right)_{\left(0,\theta\right)}}{I\left(\max_{i}\left(y_{i}\right)\right)_{\left(0,\theta\right)}}\text{ for }\theta>0\\
+ & =\frac{\left(\prod_{i=1}^{n}x_{i}\right)}{\left(\prod_{i=1}^{n}y_{i}\right)}\text{ for }\theta>0\\
+ & \perp\theta\text{ for }\theta>0
+\end{align*}
+
+\end_inset
+
+To see that it's complete note that for 
+\begin_inset Formula $Y\sim\max_{i}\left(X_{i}\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y\right) & =f_{X_{\left(n\right)}}\left(y\right)\\
+ & =\frac{n!}{\left(n-1\right)!\left(n-n\right)!}\frac{2y}{\theta^{2}}I\left(y\right)_{\left(0,\theta\right)}\left[\int_{0}^{y}\frac{2x}{\theta^{2}}dx\right]^{n-1}\\
+ & =\frac{2ny}{\theta^{2}}I\left(y\right)_{\left(0,\theta\right)}\left[\frac{y^{2}}{\theta^{2}}\right]^{n-1}\\
+ & =\frac{2ny^{2n-1}}{\theta^{2n}}I\left(y\right)_{\left(0,\theta\right)}
+\end{align*}
+
+\end_inset
+
+and assume that 
+\begin_inset Formula $E_{\theta}g\left(y\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+0 & =E_{\theta}g\left(y\right)\\
+ & =\int_{0}^{\theta}g\left(y\right)\frac{2ny^{2n-1}}{\theta^{2n}}dy\\
+ & =\frac{2n}{\theta^{2n}}\int_{0}^{\theta}g\left(y\right)y^{2n-1}dy
+\end{align*}
+
+\end_inset
+
+Finally since 
+\begin_inset Formula 
+\[
+\frac{d}{dy}E_{\theta}g\left(y\right)\propto g\left(\theta\right)\theta^{2n-1}\propto\text{ for }\theta>0
+\]
+
+\end_inset
+
+this shows that 
+\begin_inset Formula $g\left(\theta\right)\propto0$
+\end_inset
+
+ for 
+\begin_inset Formula $\theta>0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\frac{\theta}{\left(1+x\right)^{1+\theta}}I\left(x\right)_{\left(0,\infty\right)}\text{ for }\theta>0
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}\text{ for }\theta>0
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula $\prod_{i=1}^{n}\left(1+X_{i}\right)$
+\end_inset
+
+ is a sufficient statistic.
+ To see that it's minimal suppose we have two 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ are two observations such that 
+\begin_inset Formula $\prod_{i=1}^{n}\left(1+x_{i}\right)=\prod_{i=1}^{n}\left(1+y_{i}\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+y_{i}\right)\left(\prod_{i=1}^{n}\left(1+y_{i}\right)\right)^{\theta}}I\left(\bm{y}\right)_{\mathbb{R}^{n}}}\text{ for }\theta>0\\
+ & =1\text{ for }\theta>0\\
+ & \perp\theta\text{ for }\theta>0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+It's the case that 
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x|\theta\right) & =\frac{\log\left(\theta\right)\theta^{x}}{\theta-1}I\left(x\right)_{\left(0,1\right)}\text{ for }\theta>1\\
+ & =\frac{\log\left(\theta\right)e^{\theta\log x}}{\theta-1}I\left(x\right)_{\left(0,1\right)}\text{ for }\theta>1
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $X$
+\end_inset
+
+ is a random variable from an exponential family
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=h\left(x\right)c\left(\theta\right)e\left(\sum_{j=1}^{k}w_{j}\left(\theta\right)t_{j}\left(x\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+h\left(x\right) & =I\left(x\right)_{\left(0,1\right)}\\
+c\left(\theta\right) & =\frac{\log\theta}{\theta-1}\\
+w_{1}\left(\theta\right) & =\theta\\
+t_{1}\left(x\right) & =\log x
+\end{align*}
+
+\end_inset
+
+and noting that 
+\begin_inset Formula $w_{1}\left(y\right)=1\times y$
+\end_inset
+
+ is continuous and invertible on 
+\begin_inset Formula $\left(1,\infty\right)$
+\end_inset
+
+ by Thm 6.2.25 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\sum_{i=1}^{n}\log\left(x_{i}\right)$
+\end_inset
+
+ is complete for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=e^{-\left(x-\theta\right)}e^{-e^{-\left(x-\theta\right)}}I\left(x\right)_{\mathbb{R}}\text{ for }\theta\in\mathbb{R}
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =e^{-\sum_{i=1}^{n}\left(x_{i}-\theta\right)}e^{-\sum_{i=1}^{n}e^{-\left(x_{i}-\theta\right)}}I\left(x\right)_{\mathbb{R}^{n}}\text{ for }\theta\in\mathbb{R}\\
+ & =e^{n\theta}e^{-\sum_{i=1}^{n}x_{i}}e^{-e^{\theta}\sum_{i=1}^{n}e^{-x_{i}}}I\left(x\right)_{\mathbb{R}^{n}}\text{ for }\theta\in\mathbb{R}\\
+ & =e^{n\theta}e^{-\sum_{i=1}^{n}x_{i}}\left(e^{-\sum_{i=1}^{n}e^{-x_{i}}}\right)^{e^{\theta}}I\left(x\right)_{\mathbb{R}^{n}}\text{ for }\theta\in\mathbb{R}
+\end{align*}
+
+\end_inset
+
+and for distinct, but otherwise arbitrary 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{e^{n\theta}e^{-\sum_{i=1}^{n}x_{i}}\left(e^{-\sum_{i=1}^{n}e^{-x_{i}}}\right)^{e^{\theta}}I\left(x\right)_{\mathbb{R}^{n}}}{e^{n\theta}e^{-\sum_{i=1}^{n}y_{i}}\left(e^{-\sum_{i=1}^{n}e^{-y_{i}}}\right)^{e^{\theta}}I\left(x\right)_{\mathbb{R}^{n}}}\text{ for }\theta\in\mathbb{R}\\
+ & =\frac{e^{-\sum_{i=1}^{n}x_{i}}\left(e^{-\sum_{i=1}^{n}e^{-x_{i}}}\right)^{e^{\theta}}}{e^{-\sum_{i=1}^{n}y_{i}}\left(e^{-\sum_{i=1}^{n}e^{-y_{i}}}\right)^{e^{\theta}}}\text{ for }\theta\in\mathbb{R}
+\end{align*}
+
+\end_inset
+
+This is independent of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ iff 
+\begin_inset Formula $\sum_{i=1}^{n}e^{-y_{i}}=\sum_{i=1}^{n}e^{-x_{i}}$
+\end_inset
+
+ which is the case iff 
+\begin_inset Formula $\left(x_{\left(1\right)},\dots,x_{\left(n\right)}\right)=\left(y_{\left(1\right)},\dots,y_{\left(n\right)}\right)$
+\end_inset
+
+ and hence the order statistics 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\left(X_{\left(1\right)},\dots,X_{\left(n\right)}\right)$
+\end_inset
+
+ is minimally sufficient.
+ Yet 
+\begin_inset Formula $f_{X}$
+\end_inset
+
+ is a location parameter family with location parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and so by Ex.
+ 6.2.18 the range 
+\begin_inset Formula $R\left(\mathbf{X}\right)=X_{\left(n\right)}-X_{\left(1\right)}$
+\end_inset
+
+ is ancillary.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
