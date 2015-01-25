@@ -35,6 +35,11 @@
   \end{figure}
 \end{frame}
 
+
+\begin{frame}{\textbf{}}
+\begin{center} \Huge Recap\end{center}
+\end{frame}
+
 \begin{frame}{Recap}
   
 \begin{itemize}
@@ -53,7 +58,7 @@ information lost
        \end{pmatrix}
        \]
 
-       \item $n$-qubit systems (registers) are represented by vectors (tensors) in the 
+       \item $n$-qubit (registers) systems are represented by vectors (tensors) in the 
          tensor product of the vector spaces that each of the individual qubits are 
          elements of
 \end{itemize}
@@ -87,7 +92,9 @@ information lost
 %\]
 %\end{frame}
 
-
+\begin{frame}{\textbf{}}
+\begin{center} \Huge Exponential Speed-up \end{center}
+\end{frame}
 
 \begin{frame}{Deutsch's Problem}
 ``Reversible computation can be done \textbf{efficiently}, without the production of garbage bits whose values depend on the input to the computation. That is, if there is an irreversible circuit computing a function $f$, then there is an efficient simulation of this circuit by a reversible [unitary transformation/quantum] circuit with action''\cite{Nielsen:2011:QCQ:1972505}
@@ -106,8 +113,7 @@ to evaluate $f$ once! Let $U_f$ be the quantum circuit such that
 \[
 U_f\Ket{x}\Ket{y}=\Ket{x}\Ket{y\oplus f\left(x\right)}
 \]
-With some algebra (keeping in mind the small-ish domain and range of $f$)
-
+Aside: algebraic simplification necessary for following
 \[
 U_{f}\left(\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\right)=\left(-1\right)^{f\left(x\right)}\Ket{x}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
 \]
@@ -124,7 +130,7 @@ Construct the quantum circuit
 \]
 
 \[
-\psi_{2}=U_{f}\Ket{\psi_{1}}=\begin{cases}
+\Ket{\psi_{2}}=U_{f}\Ket{\psi_{1}}=\begin{cases}
 \pm & \left(\frac{\Ket{0}+\Ket{1}}{\sqrt{2}}\right)\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)=f\left(1\right)\\
 \pm & \left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)\neq f\left(1\right)
 \end{cases}
@@ -137,7 +143,7 @@ Construct the quantum circuit
 
 The final Hadamard gate leaves the system in
 \[
-\psi_{3}=\begin{cases}
+\Ket{\psi_{3}}=\begin{cases}
 \pm & \Ket{0}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)=f\left(1\right)\\
 \pm & \Ket{1}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)\text{ if }f\left(0\right)\neq f\left(1\right)
 \end{cases}
@@ -146,7 +152,7 @@ The final Hadamard gate leaves the system in
 Now if we measure the first qubit we know whether $f\left(0\right)=f\left(1\right)$
 or $f\left(0\right)\neq f\left(1\right)$ (depending on whether we get $\Ket{0}$ or $\Ket{1}$ ). Succinctly stated this allows us to measure a global property: since $f\left(0\right)\oplus f\left(1\right)=0$ if $f\left(0\right)=f\left(1\right)$ and 1 otherwise
 \[
-\psi_{3}=\pm\Ket{f\left(0\right)\oplus f\left(1\right)}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\Ket{\psi_{3}}=\pm\Ket{f\left(0\right)\oplus f\left(1\right)}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
 \] 
 
 Naive interpretation is that this is a randomized algorithm but in truth interference effects (the final Hadmard gate)
@@ -165,39 +171,39 @@ How many evaluations classically? $2^{n-1}+1$ but quantumly still 1!
 \end{figure}
 
 \[
-\psi_{0}=\left(\Ket{0}^{\otimes n}\right)\otimes\Ket{1}
+\Ket{\psi_{0}}=\left(\Ket{0,0,\dots,0}\right)\otimes\Ket{1}
 \]
  then 
 \[
-\psi_{1}=\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\Ket{x}}{\sqrt{2^{n}}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\Ket{\psi_{1}}=\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\Ket{x}}{\sqrt{2^{n}}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
 \]
 
 \end{frame}
 
 \begin{frame}{Deutsch-Jozsa Algorithm}
 The first register is a superposition of all basis states in the $n$-qubit
-computational basis. Using the simplification above again we have
+computational basis. Using the algebraic simplification above again we have
 that 
 \[
-\psi_{2}=U_{f}\psi_{1}=\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}\Ket{x}}{\sqrt{2^{n}}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\Ket{\psi_{2}}=U_{f}\Ket{\psi_{1}}=\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}\Ket{x}}{\sqrt{2^{n}}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
 \]
-and the last Hadamard operator 
+and the last Hadamard operator (not an index mistake)
 \[
-\psi_{3}=H^{\otimes n}\psi_{2}=\sum_{z\in\left\{ 0,1\right\} ^{n}}\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{x\cdot z+f\left(x\right)}\Ket{z}}{2^{n}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
+\Ket{\psi_{3}}=H^{\otimes n}\Ket{\psi_{2}}=\sum_{z\in\left\{ 0,1\right\} ^{n}}\sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{x\cdot z+f\left(x\right)}\Ket{z}}{2^{n}}\left(\frac{\Ket{0}-\Ket{1}}{\sqrt{2}}\right)
 \]
 where $x\cdot z$ is bitwise inner product mod 2.  
 \end{frame}
 
 \begin{frame}{Deutsch-Jozsa Algorithm}
-Let's observe the
-top register (query register). Note that the amplitude for $\Ket{0,0,\dots,0}$
+Let's measure the
+top register. Note that the amplitude for $\Ket{0,0,\dots,0}$
 is $\sum_{x}\left(-1\right)^{f\left(x\right)}/2^{n}$. If $f$ is
 constant then
 \[
 \sum_{x\in\left\{ 0,1\right\} ^{n}}\frac{\left(-1\right)^{f\left(x\right)}}{2^{n}}=\pm1
 \]
-and because $\psi_{3}$ must be unit length we will certainly measure
-$\psi_{3}$ to be in the $\Ket{0,0,\dots,0}$ state. If $f$ is
+and because $\Ket{\psi_{3}}$ must be unit length we will certainly measure
+$\Ket{\psi_{3}}$ to be in the $\Ket{0,0,\dots,0}$ state. If $f$ is
 balanced then by definition of balanced ($f\left(x\right)$ will be
 even as often as odd) 
 \[
@@ -207,7 +213,11 @@ and we will certainly measure something other than $\Ket{0,0,\dots,0}$.
 \end{frame}
 
 
-\begin{frame}{Factoring integers - reduction to order finding}
+\begin{frame}{\textbf{}}
+\begin{center} \Huge How to break RSA \end{center}
+\end{frame}
+
+\begin{frame}{Reduction to order finding}
 Pick $x<N$. If $x$ and $N$ have a common factor then $\gcd(x,N)$ can be computed classically in polynomial time using Euclid's algorithm. Otherwise compute the order of $x$; the least $r$ such that
 \[
 x^r\equiv 1 \mod N
@@ -248,17 +258,20 @@ But $\left(8^{\frac{20}{2}}-1\right)\equiv 1584 \mod N$ and  $\left(8^{\frac{20}
 \begin{figure}[ht]
   \includegraphics[scale=0.4]{pasted5}
 \end{figure}
-
-where 
+where
+{\small 
 \[
 V_x \left(\ket{j}\ket{k}\right) = \ket{j}\ket{k+x^j}
 \]
-
-and
-
+}
+and 
+{\small
 \[
 DFT\left(\ket{k}\right) = \frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}e^{2\pi i j k/N}\ket{j}
 \]
+}
+DFT is circuit of size $O\left(\left(\log N\right)^2\right)$
+
 \end{frame}
 
 \begin{frame}{Shor's Algorithm}
@@ -322,6 +335,11 @@ If $k_0=0$ then we rerun. Otherwise divide $k_02^t/r$  by $2^t$. If $k_0,r$ are 
 \end{figure}
 \end{frame}
 
+
+\begin{frame}{\textbf{}}
+\begin{center} \Huge Trivia \end{center}
+\end{frame}
+
 \begin{frame}{Computability}
 
 \begin{figure}[ht]
@@ -360,7 +378,7 @@ If $k_0=0$ then we rerun. Otherwise divide $k_02^t/r$  by $2^t$. If $k_0,r$ are 
 \begin{frame}{Computability Theorems}
   \begin{itemize}
     
-    \item A language $L$ has uniformly polynomial circuits iff $L\in \textbf{P}=\bigcup_k \textbf{TIME}\left( n^k \right)$
+    \item Link between Turing machines and Boolean circuits: A language $L$ has uniformly polynomial circuits iff $L\in \textbf{P}=\bigcup_k \textbf{TIME}\left( n^k \right)$
     \item All Boolean circuits can be simulated using reversible Boolean circuits
   \end{itemize}
 
@@ -431,6 +449,10 @@ No known polynomial time classical algorithm; ``almost'' as hard as factorizatio
 
 Interestingly, while this algorithm uses the Fourier transform it is exact (as opposed to Shor's).
 
+\end{frame}
+
+\begin{frame}{\textbf{}}
+\begin{center} \Huge So where can I get one (so I can start mining Bitcoin)\end{center}
 \end{frame}
 
 \begin{frame}{D-Wave}

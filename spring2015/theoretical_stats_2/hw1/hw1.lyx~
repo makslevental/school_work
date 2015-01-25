@@ -7,6 +7,7 @@
 
 %
 \usepackage{amsfonts}
+\usepackage{mathabx}
 \usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \usepackage{bm}
 \addtolength{\topmargin}{-.5in}
@@ -876,6 +877,330 @@ This is independent of
  is ancillary.
 \end_layout
 
+\begin_layout Enumerate
+It's the case that 
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x|\theta\right) & =\binom{2}{x}\theta^{x}\left(1-\theta\right)^{2-x}I\left(x\right)_{\left\{ 0,1,2\right\} }\text{ for }\theta\in\left[0,1\right]\\
+ & =\binom{2}{x}I\left(x\right)_{\left\{ 0,1,2\right\} }\left(1-\theta\right)^{2}\left(\frac{\theta}{1-\theta}\right)^{x}\text{ for }\theta\in\left[0,1\right]\\
+ & =\binom{2}{x}I\left(x\right)_{\left\{ 0,1,2\right\} }\left(1-\theta\right)^{2}e^{x\log\left(\frac{\theta}{1-\theta}\right)}\text{ for }\theta\in\left[0,1\right]
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $X$
+\end_inset
+
+ is a random variable from an exponential family
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=h\left(x\right)c\left(\theta\right)e\left(\sum_{j=1}^{k}w_{j}\left(\theta\right)t_{j}\left(x\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+h\left(x\right) & =\binom{2}{x}I\left(x\right)_{\left\{ 0,1,2\right\} }\\
+c\left(\theta\right) & =\left(1-\theta\right)^{2}\\
+w_{1}\left(\theta\right) & =\log\left(\frac{\theta}{1-\theta}\right)\\
+t_{1}\left(x\right) & =x
+\end{align*}
+
+\end_inset
+
+and noting that 
+\begin_inset Formula $w_{1}\left(y\right)=\log\left(\frac{y}{1-y}\right)$
+\end_inset
+
+ is continuous and invertible on 
+\begin_inset Formula $\left(0,1\right)$
+\end_inset
+
+ by Thm 6.2.25 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\sum_{i=1}^{n}x_{i}$
+\end_inset
+
+ is complete for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.22]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\theta x^{\theta-1}I\left(x\right)_{\left(0,1\right)}\text{ for }\theta>1
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\theta^{n}\prod_{i=1}^{n}\left(\frac{1}{x_{i}}\right)\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\left(\prod_{i=1}^{n}x_{i}\right)^{\theta}\text{ for }\theta>1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)$
+\end_inset
+
+ doesn't factorize into 
+\begin_inset Formula $f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)=g\left(\sum_{i=1}^{n}x_{i}\right)h\left(\mathbf{x}\right)$
+\end_inset
+
+ the statistic 
+\begin_inset Formula $T\left(\mathbf{X}\right)=n\bar{X}$
+\end_inset
+
+ is not a sufficient statistic.
+\end_layout
+
+\begin_layout Enumerate
+By the preceeding clearly 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\prod_{i=1}^{n}X_{i}$
+\end_inset
+
+ is a sufficient statistic.
+ Furthermore since 
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\theta^{n}\prod_{i=1}^{n}\left(\frac{1}{x_{i}}\right)\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\left(\prod_{i=1}^{n}x_{i}\right)^{\theta}\text{ for }\theta>1\\
+ & =\theta^{n}e^{\log\left(\prod_{i=1}^{n}\left(\frac{1}{x_{i}}\right)\right)}e^{\log\left(\left(\prod_{i=1}^{n}x_{i}\right)^{\theta}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\text{ for }\theta>1\\
+ & =\theta^{n}e^{-\log\left(\prod_{i=1}^{n}x_{i}\right)}e^{\theta\log\left(\prod_{i=1}^{n}x_{i}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\text{ for }\theta>1\\
+ & =\theta^{n}\left(e^{-\log\left(\prod_{i=1}^{n}x_{i}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\right)e^{\theta\log\left(\prod_{i=1}^{n}x_{i}\right)}\text{ for }\theta>1
+\end{align*}
+
+\end_inset
+
+by Thm 6.2.25 with
+\begin_inset Formula 
+\begin{align*}
+h\left(x\right) & =\left(e^{-\log\left(\prod_{i=1}^{n}x_{i}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\right)\\
+c\left(\theta\right) & =\theta^{n}\\
+w_{1}\left(\theta\right) & =\theta\\
+t_{1}\left(x\right) & =\log\left(x_{i}\right)
+\end{align*}
+
+\end_inset
+
+we have that 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\sum_{i=1}^{n}\log\left(X_{i}\right)=\log\left(\prod_{i=1}^{n}X_{i}\right)$
+\end_inset
+
+ is a complete sufficient statistic (since 
+\begin_inset Formula $w_{1}\left(\theta\right)=1\times\theta$
+\end_inset
+
+ is certainly continuous and invertible).
+ Finally 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\prod_{i=1}^{n}X_{i}$
+\end_inset
+
+ is a 1-1 function of 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ so it as well is a complete sufficient statistic.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.23]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\frac{1}{\theta}I\left(x\right)_{\left(\theta,2\theta\right)}\text{ for }\theta>0
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{1}{\theta^{n}}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(\theta,2\theta\right)}\text{ for }\theta>0\\
+ & =\frac{1}{\theta^{n}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta,\infty\right)}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(-\infty,\theta\right)}\text{ for }\theta>0
+\end{align*}
+
+\end_inset
+
+and obviously for arbitrary (but distinct) samples 
+\series bold
+x 
+\series default
+and 
+\series bold
+y 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+it's the case that 
+\begin_inset Formula 
+\[
+\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)}\perp\theta\iff\left(\min_{i}\left(x_{i}\right),\max_{i}\left(x_{i}\right)\right)=\left(\min_{i}\left(y_{i}\right),\max_{i}\left(y_{i}\right)\right)
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\left(\min_{i}\left(x_{i}\right),\max_{i}\left(x_{i}\right)\right)$
+\end_inset
+
+ is minimal sufficient.
+ To show that is not complete note that if we can find a function 
+\begin_inset Formula $g'$
+\end_inset
+
+ of 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ that is independent of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ then we can use it to construct a function 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $E_{\theta}g\left(T\left(\mathbf{X}\right)\right)=0$
+\end_inset
+
+ and yet 
+\begin_inset Formula $g$
+\end_inset
+
+ is not identically zero.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Since 
+\begin_inset Formula $X_{i}\sim\text{uniform}\left(\theta,2\theta\right)$
+\end_inset
+
+ is a scale family we standardize.
+ The standard 
+\begin_inset Formula $X=\theta Z$
+\end_inset
+
+ is such that 
+\begin_inset Formula $Z\sim\text{uniform}\left(1,2\right)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)=Z_{\left(n\right)}/Z_{\left(1\right)}\perp\theta$
+\end_inset
+
+ and let 
+\begin_inset Formula $G=E_{\theta}\left(\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)\right)$
+\end_inset
+
+ which is also independent of 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)-G$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $E_{\theta}g\left(T\left(\mathbf{X}\right)\right)=0$
+\end_inset
+
+ and yet 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
+\end_inset
+
+ is not identically zero.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.31]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.40]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
