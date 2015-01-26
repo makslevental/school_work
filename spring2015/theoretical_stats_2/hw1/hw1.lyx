@@ -7,6 +7,7 @@
 
 %
 \usepackage{amsfonts}
+\usepackage{cancel}
 \usepackage{mathabx}
 \usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \usepackage{bm}
@@ -1192,6 +1193,89 @@ status open
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ be i.i.d 
+\begin_inset Formula $\text{n}\left(\mu,\sigma_{0}^{2}\right)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+f_{X}\left(x\right)=\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}e^{-\frac{\left(x-\mu\right)^{2}}{2\sigma_{0}^{2}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By above
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\mu\right) & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\sum_{i=1}^{n}\left(x-\mu\right)^{2}}\\
+ & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\sum_{i=1}^{n}\left(\left(x-\bar{x}\right)+\left(\bar{x}-\mu\right)\right)^{2}}\\
+ & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\left(\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}+\sum_{i=1}^{n}\left(\bar{x}-\mu\right)^{2}+2\left(\bar{x}-\mu\right)\cancelto{0}{\sum_{i=1}^{n}\left(x-\bar{x}\right)}\right)}\\
+ & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\left(\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}+\sum_{i=1}^{n}\left(\bar{x}-\mu\right)^{2}\right)}\\
+ & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}}e^{-\frac{1}{2\sigma_{0}^{2}}n\left(\bar{x}-\mu\right)^{2}}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\text{n}\left(\mu,\sigma_{0}^{2}\right)$
+\end_inset
+
+.
+ To see that is complete note that 
+\begin_inset Formula 
+\[
+-\frac{1}{2\sigma_{0}^{2}}n\left(\bar{x}-\mu\right)^{2}=-\frac{n}{2\sigma_{0}^{2}}\left(\bar{x}^{2}+\mu^{2}-2\bar{x}\mu\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $w_{1}\left(\mu\right)=\mu n/\sigma_{0}^{2}$
+\end_inset
+
+, which is certainly a continuous and invertible function of 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ To see that 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ is ancillary note that 
+\begin_inset Formula 
+\[
+S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left(\left(X_{i}-\mu\right)+\left(\bar{X}-\mu\right)\right)^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left(Z_{i}+\bar{Z}\right)^{2}
+\]
+
+\end_inset
+
+and that 
+\begin_inset Formula $Z_{i}\perp\mu$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
