@@ -722,39 +722,19 @@ f_{X}\left(x|\theta\right)=\frac{\theta}{\left(1+x\right)^{1+\theta}}I\left(x\ri
 then
 \begin_inset Formula 
 \begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}\text{ for }\theta>0
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}\text{ for }\theta>0\\
+ & =\frac{I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\prod_{i=1}^{n}\left(1+x_{i}\right)}\theta^{n}e^{-\theta\log\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)}\text{ for }\theta>0\\
+ & =\frac{I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\prod_{i=1}^{n}\left(1+x_{i}\right)}\theta^{n}e^{-\theta\sum_{i=1}^{n}\log\left(1+x_{i}\right)}\text{ for }\theta>0
 \end{align*}
 
 \end_inset
 
 Therefore
-\begin_inset Formula $\prod_{i=1}^{n}\left(1+X_{i}\right)$
+\begin_inset Formula $\sum_{i=1}^{n}\log\left(1+X_{i}\right)$
 \end_inset
 
- is a sufficient statistic.
- To see that it's minimal suppose we have two 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
- are two observations such that 
-\begin_inset Formula $\prod_{i=1}^{n}\left(1+x_{i}\right)=\prod_{i=1}^{n}\left(1+y_{i}\right)$
-\end_inset
-
- then
-\begin_inset Formula 
-\begin{align*}
-\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+y_{i}\right)\left(\prod_{i=1}^{n}\left(1+y_{i}\right)\right)^{\theta}}I\left(\bm{y}\right)_{\mathbb{R}^{n}}}\text{ for }\theta>0\\
- & =1\text{ for }\theta>0\\
- & \perp\theta\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-
+ is a complete sufficient statistic.
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -807,10 +787,121 @@ and noting that
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Lemma
+\series default
+: If 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is sufficient and 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)\not\equiv0$
+\end_inset
+
+ is ancillary then 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is not complete.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+Assume 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is sufficient and that there exists 
+\begin_inset Formula $g$
+\end_inset
+
+ such that 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
+\end_inset
+
+ is ancillary.
+ Then 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)\perp\theta$
+\end_inset
+
+ and so 
+\begin_inset Formula $e=E\left(g\left(T\left(\mathbf{X}\right)\right)\right)\perp\theta$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $g'\left(T\left(\mathbf{X}\right)\right)=g\left(T\left(\mathbf{X}\right)\right)-e$
+\end_inset
+
+ and obviously 
+\begin_inset Formula 
+\[
+E\left(g'\left(T\left(\mathbf{X}\right)\right)\right)=0
+\]
+
+\end_inset
+
+ and yet 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $g'\left(T\left(\mathbf{X}\right)\right)\not\equiv0$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is not complete.
 \end_layout
 
 \begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 If 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
 \begin_inset Formula 
 \[
 f_{X}\left(x|\theta\right)=e^{-\left(x-\theta\right)}e^{-e^{-\left(x-\theta\right)}}I\left(x\right)_{\mathbb{R}}\text{ for }\theta\in\mathbb{R}
@@ -875,7 +966,15 @@ This is independent of
 \begin_inset Formula $R\left(\mathbf{X}\right)=X_{\left(n\right)}-X_{\left(1\right)}$
 \end_inset
 
- is ancillary.
+ is ancillary and by the 
+\series bold
+Lemma
+\series default
+ 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is not complete.
 \end_layout
 
 \begin_layout Enumerate
@@ -1150,33 +1249,25 @@ Since
 \begin_inset Formula $\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)=Z_{\left(n\right)}/Z_{\left(1\right)}\perp\theta$
 \end_inset
 
- and let 
-\begin_inset Formula $g'=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)$
+ and by the 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Lemma 
+\series default
+from above 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
 \end_inset
 
- and 
-\begin_inset Formula $G=E_{\theta}g'$
-\end_inset
-
- which is also independent of 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)-G$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $E_{\theta}g\left(T\left(\mathbf{X}\right)\right)=0$
-\end_inset
-
- and yet 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
-\end_inset
-
- is not identically zero.
+ is not complete.
 \end_layout
 
 \begin_layout Enumerate
@@ -1274,6 +1365,224 @@ and that
 .
 \end_layout
 
+\begin_layout Enumerate
+By part (i) for any fixed value 
+\begin_inset Formula $\sigma_{0}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $Z_{i}\perp\mu$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ are generally independent.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By part (a) 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is complete sufficient for 
+\begin_inset Formula $\text{n}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+.
+ It remains to show that 
+\begin_inset Formula $M-\bar{X}$
+\end_inset
+
+ is ancillary and then by Basu's theorem and independence
+\begin_inset Formula 
+\[
+\text{Var}\left(M\right)=\text{Var}\left(M-\bar{X}+\bar{X}\right)=\text{Var}\left(M-\bar{X}\right)+\text{Var}\left(\bar{X}\right)
+\]
+
+\end_inset
+
+The 
+\begin_inset Formula $M$
+\end_inset
+
+ is defined 
+\begin_inset Formula 
+\[
+M=\begin{cases}
+X_{\left(\frac{n+1}{2}\right)} & \text{if }n\text{ is odd}\\
+\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right) & \text{if }n\text{ is even}
+\end{cases}
+\]
+
+\end_inset
+
+Assume 
+\begin_inset Formula $n$
+\end_inset
+
+ is odd.
+ Then 
+\begin_inset Formula 
+\[
+M-\bar{X}=X_{\left(\frac{n+1}{2}\right)}-\bar{X}=\left(X_{\left(\frac{n+1}{2}\right)}-\mu\right)-\left(\bar{X}-\mu\right)=Z_{\left(\frac{n+1}{2}\right)}-\bar{Z}\perp\mu
+\]
+
+\end_inset
+
+Assume 
+\begin_inset Formula $n$
+\end_inset
+
+ is even.
+ Then
+\begin_inset Formula 
+\begin{align*}
+M-\bar{X} & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right)-\bar{X}\\
+ & =\left(\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right)-\mu\right)-\left(\bar{X}-\mu\right)\\
+ & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}-2\mu\right)-\left(\bar{X}-\mu\right)\\
+ & =\frac{1}{2}\left(Z_{\left(\frac{n}{2}\right)}+Z_{\left(\frac{n}{2}+1\right)}\right)-\bar{Z}\perp\mu
+\end{align*}
+
+\end_inset
+
+ Hence 
+\begin_inset Formula $M-\bar{X}$
+\end_inset
+
+ is ancillary.
+\end_layout
+
+\begin_layout Enumerate
+By Thm 5.3.1...
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $X/Y$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ independent implies
+\begin_inset Formula 
+\[
+E\left(X^{k}\right)=E\left[\left(\frac{X}{Y}Y\right)^{k}\right]=E\left[\left(\frac{X}{Y}\right)^{k}\right]E\left(Y^{k}\right)\Rightarrow E\left[\left(\frac{X}{Y}\right)^{k}\right]=\frac{E\left(X^{k}\right)}{E\left(Y^{k}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\text{gamma}\left(\alpha_{0},\beta\right)$
+\end_inset
+
+ is an exponential family
+\begin_inset Formula 
+\[
+f_{\mathbf{X}}\left(\mathbf{x}|\beta\right)=\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha_{0}-1}\frac{1}{\beta^{\alpha_{0}}}e^{\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\bar{nX}$
+\end_inset
+
+ is complete sufficient for 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is a scale paramter 
+\begin_inset Formula $X_{\left(i\right)}=\beta Z_{\left(i\right)}$
+\end_inset
+
+ where 
+\begin_inset Formula $Z\sim\text{gamme\left(\alpha_{0},1\right)}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\frac{X_{\left(i\right)}}{n\bar{X}}=\frac{\beta Z_{\left(i\right)}}{\beta n\bar{Z}}=\frac{Z_{\left(i\right)}}{n\bar{Z}}\perp\beta
+\]
+
+\end_inset
+
+Then by above 
+\begin_inset Formula 
+\[
+E\left(X_{\left(i\right)}|T\right)=E\left(\frac{X_{\left(i\right)}}{T}T|T\right)=TE\left(\frac{X_{\left(i\right)}}{T}|T\right)
+\]
+
+\end_inset
+
+Now by independence of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{X_{\left(i\right)}}{T},T$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+TE\left(\frac{X_{\left(i\right)}}{T}|T\right)=TE\left(\frac{X_{\left(i\right)}}{T}\right)=T\frac{E\left(X_{\left(i\right)}\right)}{E\left(T\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \end_deeper
 \begin_layout Enumerate
@@ -1287,8 +1596,93 @@ status open
 
 \end_inset
 
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ i.i.d.
+ from a location-scale family and 
+\begin_inset Formula $T_{1},T_{2}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+T_{i}\left(ax_{1}+b,\dots,ax_{n}+b\right)=T_{i}\left(x_{1},\dots,x_{n}\right)\text{ for }a>0
+\]
+
+\end_inset
+
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $a,b$
+\end_inset
+
+ be the scale and location parameters, respectively for 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $X_{i}=aZ+b\iff\left(X_{i}-b\right)/a=Z$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+T_{i}\left(X_{1},\dots,X_{n}\right)=T_{i}\left(\frac{1}{a}X_{1}-\frac{b}{a},\dots,\frac{1}{a}X_{n}-\frac{b}{a}\right)=T_{i}\left(\frac{X_{1}-b}{a},\dots,\frac{X_{n}-b}{a}\right)=\frac{1}{a}T_{i}\left(Z_{1},\dots,Z_{n}\right)
+\]
+
+\end_inset
+
+Hence
+\begin_inset Formula 
+\[
+\frac{T_{1}\left(X_{1},\dots,X_{n}\right)}{T_{2}\left(X_{1},\dots,X_{n}\right)}=\frac{\frac{1}{a}T_{1}\left(Z_{1},\dots,Z_{n}\right)}{\frac{1}{a}T_{2}\left(Z_{1},\dots,Z_{n}\right)}=\frac{T_{1}\left(Z_{1},\dots,Z_{n}\right)}{T_{2}\left(Z_{1},\dots,Z_{n}\right)}\perp\left(a,b\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $R=X_{\left(n\right)}-X_{\left(1\right)}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+aR & =a\left(X_{\left(n\right)}-X_{\left(1\right)}\right)\\
+ & =aX_{\left(n\right)}-b+b-aX_{\left(1\right)}\\
+ & =\left(aX_{\left(n\right)}-b\right)-\left(aX_{\left(1\right)}-b\right)=R\left(\left(aX_{\left(n\right)}-b\right),\left(aX_{\left(1\right)}-b\right)\right)
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $S=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+aS & =a\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}\\
+ & =\sqrt{\frac{a^{2}}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}\\
+ & =\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(\left(aX_{i}-b\right)-\left(a\bar{X}-b\right)\right)^{2}}\\
+ & =S\left(\left(aX_{i}-b\right),\dots,\left(aX_{n}-b\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

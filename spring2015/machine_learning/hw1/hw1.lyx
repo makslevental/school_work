@@ -722,19 +722,39 @@ f_{X}\left(x|\theta\right)=\frac{\theta}{\left(1+x\right)^{1+\theta}}I\left(x\ri
 then
 \begin_inset Formula 
 \begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}\text{ for }\theta>0\\
- & =\frac{I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\prod_{i=1}^{n}\left(1+x_{i}\right)}\theta^{n}e^{-\theta\log\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)}\text{ for }\theta>0\\
- & =\frac{I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\prod_{i=1}^{n}\left(1+x_{i}\right)}\theta^{n}e^{-\theta\sum_{i=1}^{n}\log\left(1+x_{i}\right)}\text{ for }\theta>0
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}\text{ for }\theta>0
 \end{align*}
 
 \end_inset
 
 Therefore
-\begin_inset Formula $\sum_{i=1}^{n}\log\left(1+X_{i}\right)$
+\begin_inset Formula $\prod_{i=1}^{n}\left(1+X_{i}\right)$
 \end_inset
 
- is a complete sufficient statistic.
- 
+ is a sufficient statistic.
+ To see that it's minimal suppose we have two 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ are two observations such that 
+\begin_inset Formula $\prod_{i=1}^{n}\left(1+x_{i}\right)=\prod_{i=1}^{n}\left(1+y_{i}\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+y_{i}\right)\left(\prod_{i=1}^{n}\left(1+y_{i}\right)\right)^{\theta}}I\left(\bm{y}\right)_{\mathbb{R}^{n}}}\text{ for }\theta>0\\
+ & =1\text{ for }\theta>0\\
+ & \perp\theta\text{ for }\theta>0
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -787,121 +807,10 @@ and noting that
 \end_inset
 
 .
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Lemma
-\series default
-: If 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- is sufficient and 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)\not\equiv0$
-\end_inset
-
- is ancillary then 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- is not complete.
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-Proof: 
-\series default
-Assume 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- is sufficient and that there exists 
-\begin_inset Formula $g$
-\end_inset
-
- such that 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
-\end_inset
-
- is ancillary.
- Then 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)\perp\theta$
-\end_inset
-
- and so 
-\begin_inset Formula $e=E\left(g\left(T\left(\mathbf{X}\right)\right)\right)\perp\theta$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $g'\left(T\left(\mathbf{X}\right)\right)=g\left(T\left(\mathbf{X}\right)\right)-e$
-\end_inset
-
- and obviously 
-\begin_inset Formula 
-\[
-E\left(g'\left(T\left(\mathbf{X}\right)\right)\right)=0
-\]
-
-\end_inset
-
- and yet 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $g'\left(T\left(\mathbf{X}\right)\right)\not\equiv0$
-\end_inset
-
-.
- Hence 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- is not complete.
 \end_layout
 
 \begin_layout Enumerate
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
 If 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
 \begin_inset Formula 
 \[
 f_{X}\left(x|\theta\right)=e^{-\left(x-\theta\right)}e^{-e^{-\left(x-\theta\right)}}I\left(x\right)_{\mathbb{R}}\text{ for }\theta\in\mathbb{R}
@@ -966,15 +875,7 @@ This is independent of
 \begin_inset Formula $R\left(\mathbf{X}\right)=X_{\left(n\right)}-X_{\left(1\right)}$
 \end_inset
 
- is ancillary and by the 
-\series bold
-Lemma
-\series default
- 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- is not complete.
+ is ancillary.
 \end_layout
 
 \begin_layout Enumerate
@@ -1249,25 +1150,33 @@ Since
 \begin_inset Formula $\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)=Z_{\left(n\right)}/Z_{\left(1\right)}\perp\theta$
 \end_inset
 
- and by the 
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Lemma 
-\series default
-from above 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
+ and let 
+\begin_inset Formula $g'=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)$
 \end_inset
 
- is not complete.
+ and 
+\begin_inset Formula $G=E_{\theta}g'$
+\end_inset
+
+ which is also independent of 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)-G$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $E_{\theta}g\left(T\left(\mathbf{X}\right)\right)=0$
+\end_inset
+
+ and yet 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
+\end_inset
+
+ is not identically zero.
 \end_layout
 
 \begin_layout Enumerate
@@ -1461,7 +1370,7 @@ M-\bar{X} & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+
 
 \end_inset
 
-Hence 
+ Hence 
 \begin_inset Formula $M-\bar{X}$
 \end_inset
 
@@ -1469,7 +1378,7 @@ Hence
 \end_layout
 
 \begin_layout Enumerate
-No clue.
+By Thm 5.3.1
 \end_layout
 
 \end_deeper
