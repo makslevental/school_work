@@ -8,6 +8,9 @@
 %
 \usepackage{amsfonts}
 \usepackage{cancel}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{trees}
 \usepackage{mathabx}
 \usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \usepackage{bm}
@@ -80,7 +83,7 @@
 \begin_body
 
 \begin_layout Title
-STA 6327 Homework 1 Solutions
+CAP 6610 Homework 1 Solutions
 \end_layout
 
 \begin_layout Author
@@ -103,1111 +106,117 @@ today
 
 \end_layout
 
-\begin_layout Standard
-Sufficient statistic: 
-\begin_inset Formula 
-\[
-P_{\theta}\left(\mathbf{X}=x|T\left(\mathbf{X}\right)=t\right)=g\left(x\right)
-\]
-
-\end_inset
-
-I.e.
- if conditional distribution of 
-\series bold
-X 
-\series default
-conditioned on the event 
-\begin_inset Formula $T\left(\mathbf{X}\right)=t$
-\end_inset
-
- is independent of 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
- Equivalently if
-\series bold
- X 
-\series default
-is discrete 
-\begin_inset Formula 
-\begin{align*}
-P_{\theta}\left(\mathbf{X}=\mathbf{x}|T\left(\mathbf{X}\right)=T\left(\mathbf{x}\right)\right) & =\frac{P_{\theta}\left(\mathbf{X}=\mathbf{x},T\left(\mathbf{X}\right)=T\left(\mathbf{x}\right)\right)}{P_{\theta}\left(T\left(\mathbf{X}\right)=T\left(\mathbf{x}\right)\right)}
-\end{align*}
-
-\end_inset
-
-but 
-\begin_inset Formula $\mathbf{x}\in\left\{ \mathbf{X}=\mathbf{x}\right\} \Rightarrow\mathbf{x}\in\left\{ T\mathbf{\left(X\right)}=T\left(\mathbf{x}\right)\right\} $
-\end_inset
-
- so
-\begin_inset Formula 
-\begin{align*}
-P_{\theta}\left(\mathbf{X}=\mathbf{x}|T\left(\mathbf{X}\right)=T\left(\mathbf{x}\right)\right) & =\frac{P_{\theta}\left(\mathbf{X}=\mathbf{x}\right)}{P_{\theta}\left(T\left(\mathbf{X}\right)=T\left(\mathbf{x}\right)\right)}\\
- & =\frac{p\left(\mathbf{x}|\theta\right)}{q\left(T\left(\mathbf{x}\right)|\theta\right)}
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula $p$
-\end_inset
-
- and 
-\begin_inset Formula $q$
-\end_inset
-
- are the pmfs of 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- and 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
-.
- For different reasons this also works in the continuous case.
- Another characterization of sufficiency, by the factor theorem, is 
-\begin_inset Formula 
-\[
-f\left(\mathbf{x}|\theta\right)=g\left(T\left(\mathbf{X}\right)|\theta\right)h\left(\mathbf{x}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.1]
-\end_layout
-
-\end_inset
-
- Well 
-\begin_inset Formula $X\sim n\left(0,\sigma^{2}\right)$
-\end_inset
-
- implies for 
-\begin_inset Formula $Y=T\left(X\right)=\left|X\right|$
-\end_inset
-
- we have that 
-\begin_inset Formula 
-\[
-g^{-1}\left(y\right)=\begin{cases}
--y & \text{if }x<0\\
-y & \text{if }x\geq0
-\end{cases}
-\]
-
-\end_inset
-
-i.e.
- 
-\begin_inset Formula $g_{1}^{-1}\left(y\right)=-y$
-\end_inset
-
- on 
-\begin_inset Formula $x\in\left\{ \left(-\infty,0\right)\right\} $
-\end_inset
-
- and 
-\begin_inset Formula $g_{2}^{-1}\left(y\right)=y$
-\end_inset
-
- on 
-\begin_inset Formula $x\in\left\{ \left(0,\infty\right)\right\} $
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\left|\frac{d}{dy}\left(g_{i}^{-1}\left(y\right)\right)\right|=1
-\]
-
-\end_inset
-
-so 
-\begin_inset Formula 
-\begin{align*}
-f_{Y}\left(y\right) & =f_{X}\left(g_{1}^{-1}\left(y\right)\right)\left|\frac{d}{dy}\left(g_{1}^{-1}\left(y\right)\right)\right|+f_{X}\left(g_{2}^{-1}\left(y\right)\right)\left|\frac{d}{dy}\left(g_{2}^{-1}\left(y\right)\right)\right|\\
- & =\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{\frac{-\left(-y\right)^{2}}{2\sigma^{2}}}+\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{\frac{-\left(y\right)^{2}}{2\sigma^{2}}}\\
- & =\sqrt{\frac{2}{\pi\sigma^{2}}}e^{\frac{-y^{2}}{2\sigma^{2}}}
-\end{align*}
-
-\end_inset
-
-then
-\size small
-
-\begin_inset Formula 
-\begin{align*}
-P_{\sigma^{2}}\left(X=x|T\left(X\right)=T\left(x\right)\right) & =\frac{p\left(x|\sigma^{2}\right)}{q\left(T\left(x\right)|\sigma^{2}\right)}\\
- & =\frac{\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{\frac{-x^{2}}{2\sigma^{2}}}}{\sqrt{\frac{2}{\pi\sigma^{2}}}e^{\frac{-\left|x\right|^{2}}{2\sigma^{2}}}}1_{\left\{ 0,\infty\right\} }\left(x\right)\\
- & =\frac{1}{\sqrt{2}}\frac{e^{\frac{-x^{2}}{2\sigma^{2}}}}{e^{\frac{-x^{2}}{2\sigma^{2}}}}1_{\left\{ 0,\infty\right\} }\left(x\right)\\
- & =\frac{1}{\sqrt{2}}
-\end{align*}
-
-\end_inset
-
-So yes 
-\begin_inset Formula $\left|X\right|$
-\end_inset
-
- is a sufficient statistic.
- Alternatively you could use the factorization theorem to conclude that
- 
-\begin_inset Formula $\left|X\right|$
-\end_inset
-
- is sufficient since
-\begin_inset Formula 
-\[
-f\left(x|\sigma^{2}\right)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{x^{2}}{2\sigma^{2}}}=\frac{1}{\sigma}e^{-\frac{\left|x\right|^{2}}{2\sigma^{2}}}\times\frac{1}{\sqrt{2\pi}}=g\left(T\left(X\right)|\sigma^{2}\right)h\left(x\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.2]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula 
-\[
-f_{X_{i}}\left(x|\theta\right)=e^{i\theta-x}I\left(x\right)_{\left[i\theta,\infty\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-then 
-\begin_inset Formula 
-\[
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)=e^{-nx}e^{\theta\sum_{i=1}^{n}i}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left[i\theta,\infty\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-but 
-\begin_inset Formula $\mathbf{X}\in\prod_{i=1}^{n}\left[i\theta,\infty\right)\iff\forall i\; X_{i}\geq\theta i\iff\forall i\; X_{i}/i\geq\theta\iff\min_{i}\left(X_{i}/i\right)\geq\theta$
-\end_inset
-
- so
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =e^{-nx}e^{\theta\sum_{i=1}^{n}i}I\left(\min_{i}\left(X_{i}/i\right)\right)_{\left[\theta,\infty\right)}\text{ for }\theta>0\\
- & =h\left(\mathbf{x}\right)g\left(T\left(\mathbf{x}\right)|\theta\right)\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.3]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\mu,\sigma\right)=\frac{1}{\sigma}e^{-\frac{x-\mu}{\sigma}}I\left(x\right)_{\left[\mu,\infty\right)}\text{ for }\mu,\sigma>0
-\]
-
-\end_inset
-
-then 
-\begin_inset Formula 
-\[
-f_{\mathbf{X}}\left(\mathbf{x}|\mu,\sigma\right)=\left(\frac{1}{\sigma}e^{\frac{\mu}{\sigma}}\right)^{n}e^{-\frac{\sum_{i=1}^{n}x_{i}}{\sigma}}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left[\mu,\infty\right)}\text{ for }\mu,\sigma>0
-\]
-
-\end_inset
-
-but 
-\begin_inset Formula $\mathbf{X}\in\prod_{i=1}^{n}\left[\mu,\infty\right)\iff\forall i\; X_{i}\geq\mu\iff\min_{i}\left(X_{i}\right)\geq\mu$
-\end_inset
-
- so
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\mu,\sigma\right) & =\left(\frac{1}{\sigma}e^{\frac{\mu}{\sigma}}\right)^{n}e^{-\frac{\sum_{i=1}^{n}x_{i}}{\sigma}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left[\mu,\infty\right)}\text{ for }\mu,\sigma>0
-\end{align*}
-
-\end_inset
-
-Therefore 
-\begin_inset Formula $\left(\bar{X},\min_{i}\left(X_{i}\right)\right)$
-\end_inset
-
- is a sufficient statistic.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.5]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\mu,\sigma\right)=\frac{1}{2i\theta}I\left(x\right)_{\left(-i\left(\theta-1\right),i\left(\theta+1\right)\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-then 
-\begin_inset Formula 
-\[
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)=\left(\frac{1}{2\theta}\right)^{n}\frac{1}{n!}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(-i\left(\theta-1\right),i\left(\theta+1\right)\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-but 
-\begin_inset Formula 
-\begin{align*}
-\mathbf{X} & \in\prod_{i=1}^{n}\left(-i\left(\theta-1\right),i\left(\theta+1\right)\right)\\
- & \iff\forall i\;\left(X_{i}>-i\left(\theta-1\right)\right)\wedge\left(X_{i}<i\left(\theta+1\right)\right)\\
- & \iff\min_{i}\left(X_{i}/i\right)>\left(\theta-1\right)\wedge\max_{i}\left(X_{i}/i\right)<\left(\theta+1\right)
-\end{align*}
-
-\end_inset
-
- so
-\begin_inset Formula 
-\[
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)=\left(\frac{1}{2\theta}\right)^{n}\frac{1}{n!}I\left(\min_{i}\left(x_{i}/i\right)\right)_{\left(\theta-1,\infty\right)}I\left(\max_{i}\left(x_{i}/i\right)\right)_{\left(-\infty,\left(\theta+1\right)\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-Therefore 
-\begin_inset Formula $\left(\max_{i}\left(X_{i}/i\right),\min_{i}\left(X_{i}/i\right)\right)$
-\end_inset
-
- is a sufficient statistic.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.6]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\mu,\sigma\right)=\frac{x^{\alpha-1}}{\beta^{\alpha}\Gamma\left(\alpha\right)}e^{-x/\beta}I\left(x\right)_{\left(0,\infty\right)}\text{ for }\alpha,\beta>0
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\mu,\sigma\right) & =\frac{\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}}{\left(\beta^{\alpha}\Gamma\left(\alpha\right)\right)^{n}}e^{-\frac{\sum_{i=1}^{n}x_{i}}{\beta}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left(0,\infty\right)}\text{ for }\alpha,\beta>0
-\end{align*}
-
-\end_inset
-
-Therefore 
-\begin_inset Formula $\left(\prod_{i=1}^{n}X_{i},\sum_{i=1}^{n}X_{i}\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.7]
-\end_layout
-
-\end_inset
-
-If
-\begin_inset Formula 
-\[
-f_{X,Y}\left(x,y|\theta_{1},\theta_{2},\theta_{3},\theta_{4}\right)=\frac{I\left(x\right)_{\left[\theta_{1},\theta_{3}\right]}}{\theta_{3}-\theta_{1}}\frac{I\left(y\right)_{\left[\theta_{2},\theta_{4}\right]}}{\theta_{4}-\theta_{2}}\text{ for }\theta_{1},\theta_{2},\theta_{3},\theta_{4}\in\mathbb{R}
-\]
-
-\end_inset
-
-then for 
-\begin_inset Formula $Z=\left(X,Y\right)$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-f_{\mathbf{Z}}\left(\mathbf{z}|\mathbf{\bm{\theta}}\right)=\frac{\prod_{i=1}^{n}I\left(x_{i}\right)_{\left[\theta_{1},\theta_{3}\right]}}{\left(\theta_{3}-\theta_{1}\right)^{n}}\frac{\prod_{i=1}^{n}I\left(y_{i}\right)_{\left[\theta_{2},\theta_{4}\right]}}{\left(\theta_{4}-\theta_{2}\right)^{n}}\text{ for }\theta_{1},\theta_{2},\theta_{3},\theta_{4}\in\mathbb{R}
-\]
-
-\end_inset
-
-but 
-\begin_inset Formula 
-\begin{align*}
-\mathbf{Z} & \in\prod_{i=1}^{n}\left[\theta_{1},\theta_{3}\right]\times\left[\theta_{2},\theta_{4}\right]\\
- & \iff\forall i\;\left(\theta_{1}\leq X_{i}\leq\theta_{3}\right)\wedge\left(\theta_{2}\leq Y_{i}\leq\theta_{4}\right)\\
- & \iff\left(\left(\theta_{1}\leq\min_{i}\left(X_{i}\right)\right)\wedge\left(\max_{i}\left(X_{i}\right)\right)\leq\theta_{3}\right)\wedge\left(\left(\theta_{2}\leq\min_{i}\left(Y_{i}\right)\right)\wedge\left(\max_{i}\left(Y_{i}\right)\right)\leq\theta_{4}\right)
-\end{align*}
-
-\end_inset
-
- so for 
-\begin_inset Formula $\theta_{1},\theta_{2},\theta_{3},\theta_{4}\in\mathbb{R}$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-f_{\mathbf{Z}}\left(\mathbf{z}|\mathbf{\bm{\theta}}\right)=\frac{I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta_{1},\infty\right)}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(\theta_{3},\infty\right)}}{\left(\theta_{3}-\theta_{1}\right)^{n}}\frac{I\left(\min_{i}\left(y_{i}\right)\right)_{\left(\theta_{2},\infty\right)}I\left(\max_{i}\left(y_{i}\right)\right)_{\left(\theta_{4},\infty\right)}}{\left(\theta_{4}-\theta_{2}\right)^{n}}
-\]
-
-\end_inset
-
-Therefore 
-\begin_inset Formula $\left(\min_{i}\left(x_{i}\right),\max_{i}\left(x_{i}\right),\min_{i}\left(y_{i}\right),\max_{i}\left(y_{i}\right)\right)$
-\end_inset
-
- is sufficient.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.13]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula $X$
-\end_inset
-
- is such that 
-\begin_inset Formula $f_{X}\left(x\right)=\alpha x^{\alpha-1}e^{-x^{\alpha}}I\left(x\right)_{\mathbb{R}_{+}}$
-\end_inset
-
- for 
-\begin_inset Formula $\alpha>0$
-\end_inset
-
- and 
-\begin_inset Formula $Y=g\left(X\right)=\log\left(X\right)$
-\end_inset
-
- then 
-\begin_inset Formula $g^{-1}\left(Y\right)=e^{Y}$
-\end_inset
-
- and 
-\begin_inset Formula 
-\[
-\frac{d}{dy}\left(g^{-1}\left(Y\right)\right)=\frac{d}{dy}\left(e^{y}\right)=e^{y}
-\]
-
-\end_inset
-
-Then 
-\begin_inset Formula 
-\[
-f_{Y}\left(y\right)=\alpha\left(e^{y}\right)^{\alpha-1}e^{-e^{\alpha y}}e^{y}=\alpha e^{\alpha y-e^{\alpha y}}I\left(y\right)_{\mathbb{R}}
-\]
-
-\end_inset
-
-Now transform again to 
-\begin_inset Formula $Z=\alpha Y$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-f_{Z}\left(z\right)=e^{z-e^{z}}I\left(z\right)_{\mathbb{R}}
-\]
-
-\end_inset
-
-which is independent of 
-\begin_inset Formula $\alpha$
-\end_inset
-
-.
- Therefore since 
-\begin_inset Formula $\log\left(X_{1}\right)\sim\log\left(X_{1}\right)\sim Y$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\frac{\log\left(X_{1}\right)}{\log\left(X_{2}\right)}=\frac{Z_{1}/\alpha}{Z_{2}/\alpha}=\frac{Z_{1}}{Z_{2}}
-\]
-
-\end_inset
-
-it's the case that 
-\begin_inset Formula $\log\left(X_{1}\right)/\log\left(X_{2}\right)$
-\end_inset
-
- is ancillary.
- 
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.20]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\theta\right)=\frac{2x}{\theta^{2}}I\left(x\right)_{\left(0,\theta\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{2^{n}\left(\prod_{i=1}^{n}x_{i}\right)}{\theta^{2n}}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(0,\theta\right)}\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-Therefore
-\begin_inset Formula $\max_{i}\left(X_{i}\right)$
-\end_inset
-
- is a sufficient statistic.
- To see that it's minimal suppose we have two 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
- are two observations such that 
-\begin_inset Formula $\max_{i}\left(x_{i}\right)=\max_{i}\left(y_{i}\right)$
-\end_inset
-
- then
-\begin_inset Formula 
-\begin{align*}
-\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{\frac{2^{n}\left(\prod_{i=1}^{n}x_{i}\right)}{\theta^{2n}}}{\frac{2^{n}\left(\prod_{i=1}^{n}y_{i}\right)}{\theta^{2n}}}\frac{I\left(\max_{i}\left(x_{i}\right)\right)_{\left(0,\theta\right)}}{I\left(\max_{i}\left(y_{i}\right)\right)_{\left(0,\theta\right)}}\text{ for }\theta>0\\
- & =\frac{\left(\prod_{i=1}^{n}x_{i}\right)}{\left(\prod_{i=1}^{n}y_{i}\right)}\text{ for }\theta>0\\
- & \perp\theta\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-To see that it's complete note that for 
-\begin_inset Formula $Y\sim\max_{i}\left(X_{i}\right)$
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-f_{Y}\left(y\right) & =f_{X_{\left(n\right)}}\left(y\right)\\
- & =\frac{n!}{\left(n-1\right)!\left(n-n\right)!}\frac{2y}{\theta^{2}}I\left(y\right)_{\left(0,\theta\right)}\left[\int_{0}^{y}\frac{2x}{\theta^{2}}dx\right]^{n-1}\\
- & =\frac{2ny}{\theta^{2}}I\left(y\right)_{\left(0,\theta\right)}\left[\frac{y^{2}}{\theta^{2}}\right]^{n-1}\\
- & =\frac{2ny^{2n-1}}{\theta^{2n}}I\left(y\right)_{\left(0,\theta\right)}
-\end{align*}
-
-\end_inset
-
-and assume that 
-\begin_inset Formula $E_{\theta}g\left(y\right)=0$
-\end_inset
-
- for all 
-\begin_inset Formula $g$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{align*}
-0 & =E_{\theta}g\left(y\right)\\
- & =\int_{0}^{\theta}g\left(y\right)\frac{2ny^{2n-1}}{\theta^{2n}}dy\\
- & =\frac{2n}{\theta^{2n}}\int_{0}^{\theta}g\left(y\right)y^{2n-1}dy
-\end{align*}
-
-\end_inset
-
-Finally since 
-\begin_inset Formula 
-\[
-\frac{d}{dy}E_{\theta}g\left(y\right)\propto g\left(\theta\right)\theta^{2n-1}\propto\text{ for }\theta>0
-\]
-
-\end_inset
-
-this shows that 
-\begin_inset Formula $g\left(\theta\right)\propto0$
-\end_inset
-
- for 
-\begin_inset Formula $\theta>0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\theta\right)=\frac{\theta}{\left(1+x\right)^{1+\theta}}I\left(x\right)_{\left(0,\infty\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-Therefore
-\begin_inset Formula $\prod_{i=1}^{n}\left(1+X_{i}\right)$
-\end_inset
-
- is a sufficient statistic.
- To see that it's minimal suppose we have two 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
- are two observations such that 
-\begin_inset Formula $\prod_{i=1}^{n}\left(1+x_{i}\right)=\prod_{i=1}^{n}\left(1+y_{i}\right)$
-\end_inset
-
- then
-\begin_inset Formula 
-\begin{align*}
-\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+x_{i}\right)\left(\prod_{i=1}^{n}\left(1+x_{i}\right)\right)^{\theta}}I\left(\bm{x}\right)_{\mathbb{R}^{n}}}{\frac{\theta^{n}}{\prod_{i=1}^{n}\left(1+y_{i}\right)\left(\prod_{i=1}^{n}\left(1+y_{i}\right)\right)^{\theta}}I\left(\bm{y}\right)_{\mathbb{R}^{n}}}\text{ for }\theta>0\\
- & =1\text{ for }\theta>0\\
- & \perp\theta\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-It's the case that 
-\begin_inset Formula 
-\begin{align*}
-f_{X}\left(x|\theta\right) & =\frac{\log\left(\theta\right)\theta^{x}}{\theta-1}I\left(x\right)_{\left(0,1\right)}\text{ for }\theta>1\\
- & =\frac{\log\left(\theta\right)e^{\theta\log x}}{\theta-1}I\left(x\right)_{\left(0,1\right)}\text{ for }\theta>1
-\end{align*}
-
-\end_inset
-
-so 
-\begin_inset Formula $X$
-\end_inset
-
- is a random variable from an exponential family
-\begin_inset Formula 
-\[
-f\left(x|\theta\right)=h\left(x\right)c\left(\theta\right)e\left(\sum_{j=1}^{k}w_{j}\left(\theta\right)t_{j}\left(x\right)\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula 
-\begin{align*}
-h\left(x\right) & =I\left(x\right)_{\left(0,1\right)}\\
-c\left(\theta\right) & =\frac{\log\theta}{\theta-1}\\
-w_{1}\left(\theta\right) & =\theta\\
-t_{1}\left(x\right) & =\log x
-\end{align*}
-
-\end_inset
-
-and noting that 
-\begin_inset Formula $w_{1}\left(y\right)=1\times y$
-\end_inset
-
- is continuous and invertible on 
-\begin_inset Formula $\left(1,\infty\right)$
-\end_inset
-
- by Thm 6.2.25 
-\begin_inset Formula $T\left(\mathbf{X}\right)=\sum_{i=1}^{n}\log\left(x_{i}\right)$
-\end_inset
-
- is complete for 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\theta\right)=e^{-\left(x-\theta\right)}e^{-e^{-\left(x-\theta\right)}}I\left(x\right)_{\mathbb{R}}\text{ for }\theta\in\mathbb{R}
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =e^{-\sum_{i=1}^{n}\left(x_{i}-\theta\right)}e^{-\sum_{i=1}^{n}e^{-\left(x_{i}-\theta\right)}}I\left(x\right)_{\mathbb{R}^{n}}\text{ for }\theta\in\mathbb{R}\\
- & =e^{n\theta}e^{-\sum_{i=1}^{n}x_{i}}e^{-e^{\theta}\sum_{i=1}^{n}e^{-x_{i}}}I\left(x\right)_{\mathbb{R}^{n}}\text{ for }\theta\in\mathbb{R}\\
- & =e^{n\theta}e^{-\sum_{i=1}^{n}x_{i}}\left(e^{-\sum_{i=1}^{n}e^{-x_{i}}}\right)^{e^{\theta}}I\left(x\right)_{\mathbb{R}^{n}}\text{ for }\theta\in\mathbb{R}
-\end{align*}
-
-\end_inset
-
-and for distinct, but otherwise arbitrary 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{align*}
-\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)} & =\frac{e^{n\theta}e^{-\sum_{i=1}^{n}x_{i}}\left(e^{-\sum_{i=1}^{n}e^{-x_{i}}}\right)^{e^{\theta}}I\left(x\right)_{\mathbb{R}^{n}}}{e^{n\theta}e^{-\sum_{i=1}^{n}y_{i}}\left(e^{-\sum_{i=1}^{n}e^{-y_{i}}}\right)^{e^{\theta}}I\left(x\right)_{\mathbb{R}^{n}}}\text{ for }\theta\in\mathbb{R}\\
- & =\frac{e^{-\sum_{i=1}^{n}x_{i}}\left(e^{-\sum_{i=1}^{n}e^{-x_{i}}}\right)^{e^{\theta}}}{e^{-\sum_{i=1}^{n}y_{i}}\left(e^{-\sum_{i=1}^{n}e^{-y_{i}}}\right)^{e^{\theta}}}\text{ for }\theta\in\mathbb{R}
-\end{align*}
-
-\end_inset
-
-This is independent of 
-\begin_inset Formula $\theta$
-\end_inset
-
- iff 
-\begin_inset Formula $\sum_{i=1}^{n}e^{-y_{i}}=\sum_{i=1}^{n}e^{-x_{i}}$
-\end_inset
-
- which is the case iff 
-\begin_inset Formula $\left(x_{\left(1\right)},\dots,x_{\left(n\right)}\right)=\left(y_{\left(1\right)},\dots,y_{\left(n\right)}\right)$
-\end_inset
-
- and hence the order statistics 
-\begin_inset Formula $T\left(\mathbf{X}\right)=\left(X_{\left(1\right)},\dots,X_{\left(n\right)}\right)$
-\end_inset
-
- is minimally sufficient.
- Yet 
-\begin_inset Formula $f_{X}$
-\end_inset
-
- is a location parameter family with location parameter 
-\begin_inset Formula $\theta$
-\end_inset
-
- and so by Ex.
- 6.2.18 the range 
-\begin_inset Formula $R\left(\mathbf{X}\right)=X_{\left(n\right)}-X_{\left(1\right)}$
-\end_inset
-
- is ancillary.
-\end_layout
-
-\begin_layout Enumerate
-It's the case that 
-\begin_inset Formula 
-\begin{align*}
-f_{X}\left(x|\theta\right) & =\binom{2}{x}\theta^{x}\left(1-\theta\right)^{2-x}I\left(x\right)_{\left\{ 0,1,2\right\} }\text{ for }\theta\in\left[0,1\right]\\
- & =\binom{2}{x}I\left(x\right)_{\left\{ 0,1,2\right\} }\left(1-\theta\right)^{2}\left(\frac{\theta}{1-\theta}\right)^{x}\text{ for }\theta\in\left[0,1\right]\\
- & =\binom{2}{x}I\left(x\right)_{\left\{ 0,1,2\right\} }\left(1-\theta\right)^{2}e^{x\log\left(\frac{\theta}{1-\theta}\right)}\text{ for }\theta\in\left[0,1\right]
-\end{align*}
-
-\end_inset
-
-so 
-\begin_inset Formula $X$
-\end_inset
-
- is a random variable from an exponential family
-\begin_inset Formula 
-\[
-f\left(x|\theta\right)=h\left(x\right)c\left(\theta\right)e\left(\sum_{j=1}^{k}w_{j}\left(\theta\right)t_{j}\left(x\right)\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula 
-\begin{align*}
-h\left(x\right) & =\binom{2}{x}I\left(x\right)_{\left\{ 0,1,2\right\} }\\
-c\left(\theta\right) & =\left(1-\theta\right)^{2}\\
-w_{1}\left(\theta\right) & =\log\left(\frac{\theta}{1-\theta}\right)\\
-t_{1}\left(x\right) & =x
-\end{align*}
-
-\end_inset
-
-and noting that 
-\begin_inset Formula $w_{1}\left(y\right)=\log\left(\frac{y}{1-y}\right)$
-\end_inset
-
- is continuous and invertible on 
-\begin_inset Formula $\left(0,1\right)$
-\end_inset
-
- by Thm 6.2.25 
-\begin_inset Formula $T\left(\mathbf{X}\right)=\sum_{i=1}^{n}x_{i}$
-\end_inset
-
- is complete for 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.22]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\theta\right)=\theta x^{\theta-1}I\left(x\right)_{\left(0,1\right)}\text{ for }\theta>1
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\theta^{n}\prod_{i=1}^{n}\left(\frac{1}{x_{i}}\right)\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\left(\prod_{i=1}^{n}x_{i}\right)^{\theta}\text{ for }\theta>1
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Since 
-\begin_inset Formula $f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)$
-\end_inset
-
- doesn't factorize into 
-\begin_inset Formula $f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)=g\left(\sum_{i=1}^{n}x_{i}\right)h\left(\mathbf{x}\right)$
-\end_inset
-
- the statistic 
-\begin_inset Formula $T\left(\mathbf{X}\right)=n\bar{X}$
-\end_inset
-
- is not a sufficient statistic.
-\end_layout
-
-\begin_layout Enumerate
-By the preceeding clearly 
-\begin_inset Formula $T\left(\mathbf{X}\right)=\prod_{i=1}^{n}X_{i}$
-\end_inset
-
- is a sufficient statistic.
- Furthermore since 
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\theta^{n}\prod_{i=1}^{n}\left(\frac{1}{x_{i}}\right)\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\left(\prod_{i=1}^{n}x_{i}\right)^{\theta}\text{ for }\theta>1\\
- & =\theta^{n}e^{\log\left(\prod_{i=1}^{n}\left(\frac{1}{x_{i}}\right)\right)}e^{\log\left(\left(\prod_{i=1}^{n}x_{i}\right)^{\theta}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\text{ for }\theta>1\\
- & =\theta^{n}e^{-\log\left(\prod_{i=1}^{n}x_{i}\right)}e^{\theta\log\left(\prod_{i=1}^{n}x_{i}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\text{ for }\theta>1\\
- & =\theta^{n}\left(e^{-\log\left(\prod_{i=1}^{n}x_{i}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\right)e^{\theta\log\left(\prod_{i=1}^{n}x_{i}\right)}\text{ for }\theta>1
-\end{align*}
-
-\end_inset
-
-by Thm 6.2.25 with
-\begin_inset Formula 
-\begin{align*}
-h\left(x\right) & =\left(e^{-\log\left(\prod_{i=1}^{n}x_{i}\right)}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(0,1\right)}\right)\\
-c\left(\theta\right) & =\theta^{n}\\
-w_{1}\left(\theta\right) & =\theta\\
-t_{1}\left(x\right) & =\log\left(x_{i}\right)
-\end{align*}
-
-\end_inset
-
-we have that 
-\begin_inset Formula $T\left(\mathbf{X}\right)=\sum_{i=1}^{n}\log\left(X_{i}\right)=\log\left(\prod_{i=1}^{n}X_{i}\right)$
-\end_inset
-
- is a complete sufficient statistic (since 
-\begin_inset Formula $w_{1}\left(\theta\right)=1\times\theta$
-\end_inset
-
- is certainly continuous and invertible).
- Finally 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\prod_{i=1}^{n}X_{i}$
-\end_inset
-
- is a 1-1 function of 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- so it as well is a complete sufficient statistic.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.23]
-\end_layout
-
-\end_inset
-
-If 
-\begin_inset Formula 
-\[
-f_{X}\left(x|\theta\right)=\frac{1}{\theta}I\left(x\right)_{\left(\theta,2\theta\right)}\text{ for }\theta>0
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{1}{\theta^{n}}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(\theta,2\theta\right)}\text{ for }\theta>0\\
- & =\frac{1}{\theta^{n}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta,\infty\right)}I\left(\max_{i}\left(x_{i}\right)\right)_{\left(-\infty,\theta\right)}\text{ for }\theta>0
-\end{align*}
-
-\end_inset
-
-and obviously for arbitrary (but distinct) samples 
-\series bold
-x 
-\series default
-and 
-\series bold
-y 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-it's the case that 
-\begin_inset Formula 
-\[
-\frac{f_{\mathbf{X}}\left(\mathbf{x}|\theta\right)}{f_{\mathbf{X}}\left(\mathbf{y}|\theta\right)}\perp\theta\iff\left(\min_{i}\left(x_{i}\right),\max_{i}\left(x_{i}\right)\right)=\left(\min_{i}\left(y_{i}\right),\max_{i}\left(y_{i}\right)\right)
-\]
-
-\end_inset
-
-Hence 
-\begin_inset Formula $T\left(\mathbf{X}\right)=\left(\min_{i}\left(x_{i}\right),\max_{i}\left(x_{i}\right)\right)$
-\end_inset
-
- is minimal sufficient.
- To show that is not complete note that if we can find a function 
-\begin_inset Formula $g'$
-\end_inset
-
- of 
-\begin_inset Formula $T\left(\mathbf{X}\right)$
-\end_inset
-
- that is independent of 
-\begin_inset Formula $\theta$
-\end_inset
-
- then we can use it to construct a function 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
-\end_inset
-
- such that 
-\begin_inset Formula $E_{\theta}g\left(T\left(\mathbf{X}\right)\right)=0$
-\end_inset
-
- and yet 
-\begin_inset Formula $g$
-\end_inset
-
- is not identically zero.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Since 
-\begin_inset Formula $X_{i}\sim\text{uniform}\left(\theta,2\theta\right)$
-\end_inset
-
- is a scale family we standardize.
- The standard 
-\begin_inset Formula $X=\theta Z$
-\end_inset
-
- is such that 
-\begin_inset Formula $Z\sim\text{uniform}\left(1,2\right)$
-\end_inset
-
-.
- Therefore 
-\begin_inset Formula $\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)=Z_{\left(n\right)}/Z_{\left(1\right)}\perp\theta$
-\end_inset
-
- and let 
-\begin_inset Formula $g'=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)$
-\end_inset
-
- and 
-\begin_inset Formula $G=E_{\theta}g'$
-\end_inset
-
- which is also independent of 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)=\max_{i}\left(X_{i}\right)/\min_{i}\left(X_{i}\right)-G$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $E_{\theta}g\left(T\left(\mathbf{X}\right)\right)=0$
-\end_inset
-
- and yet 
-\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
-\end_inset
-
- is not identically zero.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.31]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
 \begin_layout Enumerate
 Let 
-\begin_inset Formula $X_{1},\dots,X_{n}$
+\begin_inset Formula $X\sim\text{Bernoulli}\left(\frac{1}{5}\right)$
 \end_inset
 
- be i.i.d 
-\begin_inset Formula $\text{n}\left(\mu,\sigma_{0}^{2}\right)$
+ and 
+\begin_inset Formula $\bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}$
 \end_inset
 
 .
- Then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Firstly 
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+ is distributed
+\begin_inset Formula $\text{Binomial}\left(n,\frac{1}{5}\right)$
+\end_inset
+
+ (since 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ can only take values in 
+\begin_inset Formula $\left\{ 0,1\right\} $
+\end_inset
+
+ the number of 
+\begin_inset Formula $1$
+\end_inset
+
+s in a sequence 
+\begin_inset Formula $\left(X_{1},\dots,X_{n}\right)$
+\end_inset
+
+ is equal to the sum of all the 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+).
+ Then 
 \begin_inset Formula 
 \[
-f_{X}\left(x\right)=\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}e^{-\frac{\left(x-\mu\right)^{2}}{2\sigma_{0}^{2}}}
+E\left(n\bar{X}\right)=\frac{n}{5}\Rightarrow nE\left(\bar{X}\right)=\frac{n}{5}\Rightarrow E\left(\bar{X}\right)=\frac{1}{5}
+\]
+
+\end_inset
+
+and so by Markov's inequality
+\begin_inset Formula 
+\[
+P\left(\bar{X}\geq\frac{3}{5}\right)\leq\frac{1/5}{3/5}=\frac{1}{3}
+\]
+
+\end_inset
+
+Hence the probability that the biased coin lands heads up 
+\begin_inset Formula $60\%$
+\end_inset
+
+ of the time is less than 
+\begin_inset Formula $1/3$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $V=\left(X-\mu\right)^{2}$
+\end_inset
+
+ then by Markov's inequality
+\begin_inset Formula 
+\[
+P\left(V\geq k^{2}\right)\leq\frac{E\left[\left(X-\mu\right)^{2}\right]}{k^{2}}=\frac{\text{Var}\left(X\right)}{k^{2}}=\frac{\sigma^{2}}{k^{2}}
+\]
+
+\end_inset
+
+but since 
+\begin_inset Formula $V\geq0$
+\end_inset
+
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+P\left(\left|X-\mu\right|\geq k\right)=P\left(\sqrt{V}\geq\sqrt{k^{2}}\right)=P\left(V\geq k^{2}\right)
+\]
+
+\end_inset
+
+ and hence
+\begin_inset Formula 
+\[
+P\left(\left|X-\mu\right|\geq k\right)\leq\frac{\sigma^{2}}{k^{2}}
 \]
 
 \end_inset
@@ -1215,257 +224,28 @@ f_{X}\left(x\right)=\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}e^{-\frac{\left(x-\mu\rig
 
 \end_layout
 
-\begin_deeper
 \begin_layout Enumerate
-By above
-\begin_inset Formula 
-\begin{align*}
-f_{\mathbf{X}}\left(\mathbf{x}|\mu\right) & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\sum_{i=1}^{n}\left(x-\mu\right)^{2}}\\
- & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\sum_{i=1}^{n}\left(\left(x-\bar{x}\right)+\left(\bar{x}-\mu\right)\right)^{2}}\\
- & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\left(\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}+\sum_{i=1}^{n}\left(\bar{x}-\mu\right)^{2}+2\left(\bar{x}-\mu\right)\cancelto{0}{\sum_{i=1}^{n}\left(x-\bar{x}\right)}\right)}\\
- & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\left(\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}+\sum_{i=1}^{n}\left(\bar{x}-\mu\right)^{2}\right)}\\
- & =\left(\frac{1}{\sqrt{2\pi\sigma_{0}^{2}}}\right)^{n}e^{-\frac{1}{2\sigma_{0}^{2}}\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}}e^{-\frac{1}{2\sigma_{0}^{2}}n\left(\bar{x}-\mu\right)^{2}}
-\end{align*}
-
+The variance of 
+\begin_inset Formula $n\bar{X}$
 \end_inset
 
-Hence 
-\begin_inset Formula $\bar{X}$
-\end_inset
 
- is sufficient for 
-\begin_inset Formula $\text{n}\left(\mu,\sigma_{0}^{2}\right)$
-\end_inset
-
-.
- To see that is complete note that 
 \begin_inset Formula 
 \[
--\frac{1}{2\sigma_{0}^{2}}n\left(\bar{x}-\mu\right)^{2}=-\frac{n}{2\sigma_{0}^{2}}\left(\bar{x}^{2}+\mu^{2}-2\bar{x}\mu\right)
+\text{Var}\left(n\bar{X}\right)=n\left(\frac{1}{5}\right)\left(1-\frac{1}{5}\right)=\frac{4n}{25}
 \]
 
 \end_inset
 
 and so 
-\begin_inset Formula $w_{1}\left(\mu\right)=\mu n/\sigma_{0}^{2}$
-\end_inset
-
-, which is certainly a continuous and invertible function of 
-\begin_inset Formula $\mu$
-\end_inset
-
-.
- To see that 
-\begin_inset Formula $S^{2}$
-\end_inset
-
- is ancillary note that 
 \begin_inset Formula 
 \[
-S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left(\left(X_{i}-\mu\right)+\left(\bar{X}-\mu\right)\right)^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\left(Z_{i}+\bar{Z}\right)^{2}
-\]
-
-\end_inset
-
-and that 
-\begin_inset Formula $Z_{i}\perp\mu$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-By part (i) for any fixed value 
-\begin_inset Formula $\sigma_{0}$
-\end_inset
-
- it's the case that 
-\begin_inset Formula $Z_{i}\perp\mu$
-\end_inset
-
- and therefore 
-\begin_inset Formula $\bar{X}$
-\end_inset
-
- and 
-\begin_inset Formula $S^{2}$
-\end_inset
-
- are generally independent.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Let 
-\begin_inset Formula $X_{i}\sim\text{n}\left(\mu,\sigma^{2}\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-By part (a) 
-\begin_inset Formula $\bar{X}$
-\end_inset
-
- is complete sufficient for 
-\begin_inset Formula $\text{n}\left(\mu,\sigma^{2}\right)$
-\end_inset
-
-.
- It remains to show that 
-\begin_inset Formula $M-\bar{X}$
-\end_inset
-
- is ancillary and then by Basu's theorem and independence
-\begin_inset Formula 
-\[
-\text{Var}\left(M\right)=\text{Var}\left(M-\bar{X}+\bar{X}\right)=\text{Var}\left(M-\bar{X}\right)+\text{Var}\left(\bar{X}\right)
-\]
-
-\end_inset
-
-The 
-\begin_inset Formula $M$
-\end_inset
-
- is defined 
-\begin_inset Formula 
-\[
-M=\begin{cases}
-X_{\left(\frac{n+1}{2}\right)} & \text{if }n\text{ is odd}\\
-\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right) & \text{if }n\text{ is even}
-\end{cases}
-\]
-
-\end_inset
-
-Assume 
-\begin_inset Formula $n$
-\end_inset
-
- is odd.
- Then 
-\begin_inset Formula 
-\[
-M-\bar{X}=X_{\left(\frac{n+1}{2}\right)}-\bar{X}=\left(X_{\left(\frac{n+1}{2}\right)}-\mu\right)-\left(\bar{X}-\mu\right)=Z_{\left(\frac{n+1}{2}\right)}-\bar{Z}\perp\mu
-\]
-
-\end_inset
-
-Assume 
-\begin_inset Formula $n$
-\end_inset
-
- is even.
- Then
-\begin_inset Formula 
-\begin{align*}
-M-\bar{X} & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right)-\bar{X}\\
- & =\left(\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right)-\mu\right)-\left(\bar{X}-\mu\right)\\
- & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}-2\mu\right)-\left(\bar{X}-\mu\right)\\
- & =\frac{1}{2}\left(Z_{\left(\frac{n}{2}\right)}+Z_{\left(\frac{n}{2}+1\right)}\right)-\bar{Z}\perp\mu
-\end{align*}
-
-\end_inset
-
- Hence 
-\begin_inset Formula $M-\bar{X}$
-\end_inset
-
- is ancillary.
-\end_layout
-
-\begin_layout Enumerate
-By Thm 5.3.1
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-\begin_inset Formula $X/Y$
-\end_inset
-
- and 
-\begin_inset Formula $Y$
-\end_inset
-
- independent implies
-\begin_inset Formula 
-\[
-E\left(X^{k}\right)=E\left[\left(\frac{X}{Y}Y\right)^{k}\right]=E\left[\left(\frac{X}{Y}\right)^{k}\right]E\left(Y^{k}\right)\Rightarrow E\left[\left(\frac{X}{Y}\right)^{k}\right]=\frac{E\left(X^{k}\right)}{E\left(Y^{k}\right)}
+n^{2}\text{Var}\left(\bar{X}\right)=\frac{4n}{25}\Rightarrow\text{Var}\left(\bar{X}\right)=\frac{1}{n}\frac{4}{25}
 \]
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Enumerate
-Since 
-\begin_inset Formula $\text{gamma}\left(\alpha_{0},\beta\right)$
-\end_inset
-
- is an exponential family
-\begin_inset Formula 
-\[
-f_{\mathbf{X}}\left(\mathbf{x}|\beta\right)=\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha_{0}-1}\frac{1}{\beta^{\alpha_{0}}}e^{\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}
-\]
-
-\end_inset
-
-
-\begin_inset Formula $\bar{nX}$
-\end_inset
-
- is complete sufficient for 
-\begin_inset Formula $\beta$
-\end_inset
-
-.
- Then since 
-\begin_inset Formula $\beta$
-\end_inset
-
- is a scale paramter 
-\begin_inset Formula $X_{\left(i\right)}=\beta Z_{\left(i\right)}$
-\end_inset
-
- where 
-\begin_inset Formula $Z\sim\text{gamme\left(\alpha_{0},1\right)}$
-\end_inset
-
- and so 
-\begin_inset Formula 
-\[
-\frac{X_{\left(i\right)}}{n\bar{X}}=\frac{\beta Z_{\left(i\right)}}{\beta n\bar{Z}}=\frac{Z_{\left(i\right)}}{n\bar{Z}}\perp\beta
-\]
-
-\end_inset
-
-Then by above 
-\begin_inset Formula 
-\[
-E\left(X_{\left(i\right)}|T\right)=E\left(\frac{X_{\left(i\right)}}{T}T|T\right)=TE\left(\frac{X_{\left(i\right)}}{T}|T\right)
-\]
-
-\end_inset
-
-Now by independence of 
 \family roman
 \series medium
 \shape up
@@ -1477,14 +257,10 @@ Now by independence of
 \uwave off
 \noun off
 \color none
-
-\begin_inset Formula $\frac{X_{\left(i\right)}}{T},T$
-\end_inset
-
-
+Therefore by Chebyshev's inequality
 \begin_inset Formula 
 \[
-TE\left(\frac{X_{\left(i\right)}}{T}|T\right)=TE\left(\frac{X_{\left(i\right)}}{T}\right)=T\frac{E\left(X_{\left(i\right)}\right)}{E\left(T\right)}
+P\left(\bar{X}\geq\frac{3}{5}\right)=P\left(\bar{X}-\frac{1}{5}\geq\frac{2}{5}\right)\leq P\left(\left|\bar{X}-\frac{1}{5}\right|\geq\frac{2}{5}\right)\leq\frac{4/n25}{\left(2/5\right)^{2}}=\frac{1}{n}
 \]
 
 \end_inset
@@ -1493,66 +269,63 @@ TE\left(\frac{X_{\left(i\right)}}{T}|T\right)=TE\left(\frac{X_{\left(i\right)}}{
 \end_layout
 
 \end_deeper
-\end_deeper
-\begin_layout Enumerate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[6.40]
-\end_layout
-
-\end_inset
-
-Let 
-\begin_inset Formula $X_{1},\dots,X_{n}$
-\end_inset
-
- i.i.d.
- from a location-scale family and 
-\begin_inset Formula $T_{1},T_{2}$
-\end_inset
-
- such that
-\begin_inset Formula 
-\[
-T_{i}\left(ax_{1}+b,\dots,ax_{n}+b\right)=T_{i}\left(x_{1},\dots,x_{n}\right)\text{ for }a>0
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
 \begin_layout Enumerate
 Let 
-\begin_inset Formula $a,b$
-\end_inset
-
- be the scale and location parameters, respectively for 
-\begin_inset Formula $X_{i}$
+\begin_inset Formula $\left(x_{1},\dots,x_{n}\right)\in\mathbb{R}_{+}^{n}$
 \end_inset
 
 .
- Then 
-\begin_inset Formula $X_{i}=aZ+b\iff\left(X_{i}-b\right)/a=Z$
-\end_inset
-
- and so 
+ By rule of logs
 \begin_inset Formula 
 \[
-T_{i}\left(X_{1},\dots,X_{n}\right)=T_{i}\left(\frac{1}{a}X_{1}-\frac{b}{a},\dots,\frac{1}{a}X_{n}-\frac{b}{a}\right)=T_{i}\left(\frac{X_{1}-b}{a},\dots,\frac{X_{n}-b}{a}\right)=\frac{1}{a}T_{i}\left(Z_{1},\dots,Z_{n}\right)
+\log\left(\left(\prod_{i=1}^{n}x_{i}\right)^{1/n}\right)=\frac{1}{n}\sum_{i=1}^{n}\log\left(x_{i}\right)
 \]
 
 \end_inset
 
-Hence
+Then by Jensen's inequality and concavity of 
+\begin_inset Formula $\log$
+\end_inset
+
+
 \begin_inset Formula 
 \[
-\frac{T_{1}\left(X_{1},\dots,X_{n}\right)}{T_{2}\left(X_{1},\dots,X_{n}\right)}=\frac{\frac{1}{a}T_{1}\left(Z_{1},\dots,Z_{n}\right)}{\frac{1}{a}T_{2}\left(Z_{1},\dots,Z_{n}\right)}=\frac{T_{1}\left(Z_{1},\dots,Z_{n}\right)}{T_{2}\left(Z_{1},\dots,Z_{n}\right)}\perp\left(a,b\right)
+\log\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}\right)\geq\frac{1}{n}\sum_{i=1}^{n}\log\left(x_{i}\right)
 \]
+
+\end_inset
+
+So finally
+\begin_inset Formula 
+\[
+\log\left(\left(\prod_{i=1}^{n}x_{i}\right)^{1/n}\right)\leq\log\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}\right)
+\]
+
+\end_inset
+
+Taking 
+\begin_inset Formula $e^{x}$
+\end_inset
+
+ of both sides shows 
+\begin_inset Formula $AM\geq GM$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $GM\geq HM$
+\end_inset
+
+ let 
+\begin_inset Formula $y_{i}=\frac{1}{x_{i}}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\left(\prod_{i=1}^{n}\frac{1}{y_{i}}\right)^{1/n}\leq\frac{1}{n}\sum_{i=1}^{n}\frac{1}{y_{i}} & \iff\left(\prod_{i=1}^{n}y_{i}\right)^{-1/n}\leq\frac{1}{n}\sum_{i=1}^{n}\frac{1}{y_{i}}\\
+ & \iff\frac{n}{\sum_{i=1}^{n}\frac{1}{y_{i}}}\leq\left(\prod_{i=1}^{n}y_{i}\right)^{1/n}
+\end{align*}
 
 \end_inset
 
@@ -1560,31 +333,58 @@ Hence
 \end_layout
 
 \begin_layout Enumerate
-For 
-\begin_inset Formula $R=X_{\left(n\right)}-X_{\left(1\right)}$
+Proof by induction.
+ The base case with with 
+\begin_inset Formula $\lambda_{1}=\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{2}=1-\lambda$
+\end_inset
+
+ is just the convex condition, i.e.
+ that 
+\begin_inset Formula 
+\[
+\psi\left(\lambda_{1}x_{1}+\lambda_{2}x_{2}\right)=\psi\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)\leq\lambda\psi\left(x_{1}\right)+\left(1-\lambda\right)\psi\left(x_{2}\right)
+\]
+
+\end_inset
+
+So assume the the induction hypothesis, i.e.
+ that for 
+\begin_inset Formula $\left(x_{1},\dots,x_{n}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\lambda_{1},\dots,\lambda_{n}\right)$
+\end_inset
+
+, with 
+\begin_inset Formula $\sum_{i=1}^{n}\lambda_{i}=1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\psi\left(\sum_{i=1}^{n}\lambda_{i}x_{i}\right)\le\sum_{i=1}^{n}\lambda_{i}\psi\left(x_{i}\right)
+\]
+
+\end_inset
+
+Then with 
+\begin_inset Formula $\sum_{i=1}^{n+1}\lambda_{i}=1$
 \end_inset
 
  
 \begin_inset Formula 
 \begin{align*}
-aR & =a\left(X_{\left(n\right)}-X_{\left(1\right)}\right)\\
- & =aX_{\left(n\right)}-b+b-aX_{\left(1\right)}\\
- & =\left(aX_{\left(n\right)}-b\right)-\left(aX_{\left(1\right)}-b\right)=R\left(\left(aX_{\left(n\right)}-b\right),\left(aX_{\left(1\right)}-b\right)\right)
-\end{align*}
-
-\end_inset
-
-and 
-\begin_inset Formula $S=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}$
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-aS & =a\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}\\
- & =\sqrt{\frac{a^{2}}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}\\
- & =\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(\left(aX_{i}-b\right)-\left(a\bar{X}-b\right)\right)^{2}}\\
- & =S\left(\left(aX_{i}-b\right),\dots,\left(aX_{n}-b\right)\right)
+\psi\left(\sum_{i=1}^{n+1}\lambda_{i}x_{i}\right) & =\psi\left(\frac{\sum_{i=1}^{n}\lambda_{i}}{\sum_{i=1}^{n}\lambda_{i}}\sum_{i=1}^{n}\lambda_{i}x_{i}+\lambda_{n+1}x_{n+1}\right)\\
+ & \text{now since }\left(\sum_{i=1}^{n}\lambda_{i}\right)+\lambda_{n+1}=1\\
+ & \leq\left(\sum_{i=1}^{n}\lambda_{i}\right)\psi\left(\sum_{i=1}^{n}\frac{\lambda_{i}}{\left(\sum_{i=1}^{n}\lambda_{i}\right)}x_{i}\right)+\lambda_{n+1}\psi\left(x_{n+1}\right)\\
+ & \text{now by the induction hypothesis since }\sum_{i=1}^{n}\frac{\lambda_{i}}{\left(\sum_{i=1}^{n}\lambda_{i}\right)}=1\\
+ & \leq\left(\sum_{i=1}^{n}\lambda_{i}\right)\left(\sum_{i=1}^{n}\left(\frac{\lambda_{i}}{\sum_{i=1}^{n}\lambda_{i}}\psi\left(x_{i}\right)\right)\right)+\lambda_{n+1}\psi\left(x_{n+1}\right)\\
+ & =\sum_{i=1}^{n}\lambda_{i}\psi\left(x_{i}\right)+\lambda_{n+1}\psi\left(x_{n+1}\right)=\sum_{i=1}^{n+1}\lambda_{i}\psi\left(x_{i}\right)
 \end{align*}
 
 \end_inset
@@ -1592,6 +392,312 @@ aS & =a\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}}\\
 
 \end_layout
 
-\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\oplus=\text{Class}\left(1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\ominus=\text{Class}\left(0\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ be the data-entropy.
+ Then
+\begin_inset Formula 
+\begin{align*}
+H_{0} & =-\sum_{i\in\left\{ \oplus,\ominus\right\} }p_{i}\log_{2}p_{i}=\\
+ & =-\left(p_{\oplus}\log_{2}p_{\oplus}+p_{\ominus}\log_{2}p_{\ominus}\right)\\
+ & =-\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)\\
+ & =1
+\end{align*}
+
+\end_inset
+
+So
+\begin_inset Formula 
+\begin{align*}
+IG\left(First\right) & =1-\left(\frac{\left|A\right|}{\left|First\right|}H\left(A\right)+\frac{\left|B\right|}{\left|First\right|}H\left(B\right)\right)\\
+ & =1-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)\right)\\
+ & =1-\left(\frac{1}{2}\left(\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(\log_{2}\left(\frac{1}{2}\right)\right)\right)=0
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+IG\left(Second\right) & =1-\left(\frac{\left|M\right|}{\left|Second\right|}H\left(M\right)+\frac{\left|N\right|}{\left|Second\right|}H\left(N\right)\right)\\
+ & =1-\left(\frac{1}{2}\left(\frac{1}{4}\log_{2}\left(\frac{1}{4}\right)+\frac{3}{4}\log_{2}\left(\frac{3}{4}\right)\right)+\frac{1}{2}\left(\frac{3}{4}\log_{2}\left(\frac{3}{4}\right)+\frac{1}{4}\log_{2}\left(\frac{1}{4}\right)\right)\right)\\
+ & =1-\left(\frac{1}{4}\log_{2}\left(\frac{1}{4}\right)+\frac{3}{4}\log_{2}\left(\frac{3}{4}\right)\right)\approx.188722
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+IG\left(Third\right) & =1-\left(\frac{\left|Y\right|}{\left|Third\right|}H\left(Y\right)+\frac{\left|Z\right|}{\left|Third\right|}H\left(Z\right)\right)\\
+ & =1-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)\right)\\
+ & =1-\left(\frac{1}{2}\left(\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(\log_{2}\left(\frac{1}{2}\right)\right)\right)=0
+\end{align*}
+
+\end_inset
+
+Hence we should partition on 
+\begin_inset Formula $\text{Class}\left(Second\right)$
+\end_inset
+
+ first.
+ Therefore the 1-level tree is
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+tikzset{level distance=50pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Tree [.{
+\backslash
+begin{tabular}{c} {1,2,3,4,5,6,7,8} 
+\backslash
+
+\backslash
+ Second 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+edge node[auto=right] {M}; [.{
+\backslash
+begin{tabular}{c} {1,2,5,6} 
+\backslash
+
+\backslash
+ First 
+\backslash
+end{tabular}}   
+\end_layout
+
+\begin_layout Plain Layout
+
+										[.Det 
+\end_layout
+
+\begin_layout Plain Layout
+
+											 the ]
+\end_layout
+
+\begin_layout Plain Layout
+
+										[.N cat ]
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+edge node[auto=left] {N}; [.{
+\backslash
+begin{tabular}{c} {3,4,7,8} 
+\backslash
+
+\backslash
+ First 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+										[.V sat ]
+\end_layout
+
+\begin_layout Plain Layout
+
+										[.PP
+\end_layout
+
+\begin_layout Plain Layout
+
+											[.P on ]
+\end_layout
+
+\begin_layout Plain Layout
+
+											[.NP
+\end_layout
+
+\begin_layout Plain Layout
+
+												[.Det
+\end_layout
+
+\begin_layout Plain Layout
+
+													the ]
+\end_layout
+
+\begin_layout Plain Layout
+
+												[.N 
+\end_layout
+
+\begin_layout Plain Layout
+
+													mat ]
+\end_layout
+
+\begin_layout Plain Layout
+
+											]
+\end_layout
+
+\begin_layout Plain Layout
+
+										]
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+	  ]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $H_{1}\left(M\right)$
+\end_inset
+
+ be the entropy in the left subtree and 
+\begin_inset Formula $H_{1}\left(N\right)$
+\end_inset
+
+ be the entropy in the right subtree.
+ Then
+\begin_inset Formula 
+\begin{align*}
+H_{1}\left(M\right) & =-\left(\frac{1}{4}\log_{2}\left(\frac{1}{4}\right)+\frac{3}{4}\log_{2}\left(\frac{3}{4}\right)\right)=.811278
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+IG\left(First\right) & =.811278-\left(\frac{\left|A\right|}{\left|First\right|}H\left(A\right)+\frac{\left|B\right|}{\left|First\right|}H\left(B\right)\right)\\
+ & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
+ & =.811278-\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)=.311278
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+IG\left(Third\right) & =.811278-\left(\frac{\left|Y\right|}{\left|Third\right|}H\left(Y\right)+\frac{\left|Z\right|}{\left|Third\right|}H\left(Z\right)\right)\\
+ & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
+ & =.311278
+\end{align*}
+
+\end_inset
+
+Hence we can partition the left subtree on either 
+\begin_inset Formula $\text{Class}\left(First\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $\text{Class}\left(Third\right)$
+\end_inset
+
+.
+ For the right subtree 
+\begin_inset Formula 
+\begin{align*}
+H_{1}\left(N\right) & =-\left(\frac{3}{4}\log_{2}\left(\frac{3}{4}\right)+\frac{1}{4}\log_{2}\left(\frac{1}{4}\right)\right)=.811278
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+IG\left(First\right) & =.811278-\left(\frac{\left|A\right|}{\left|First\right|}H\left(A\right)+\frac{\left|B\right|}{\left|First\right|}H\left(B\right)\right)\\
+ & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(1\log_{2}\left(1\right)+0\log_{2}\left(0\right)\right)\right)\\
+ & =.311278
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+IG\left(Third\right) & =.811278-\left(\frac{\left|Y\right|}{\left|Third\right|}H\left(Y\right)+\frac{\left|Z\right|}{\left|Third\right|}H\left(Z\right)\right)\\
+ & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
+ & =.311278
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
