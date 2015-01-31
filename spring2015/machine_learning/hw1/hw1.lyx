@@ -452,7 +452,7 @@ Hence we should partition on
 \end_inset
 
  first.
- Therefore the 1-level tree is
+ Therefore the 1-level tree is (where numbers correspond to samples)
 \begin_inset Newline newline
 \end_inset
 
@@ -491,7 +491,7 @@ begin{tabular}{c} {1,2,3,4,5,6,7,8}
 \backslash
 
 \backslash
- Second 
+ $<$Second$>$ 
 \backslash
 end{tabular}}
 \end_layout
@@ -502,33 +502,9 @@ end{tabular}}
 \backslash
 edge node[auto=right] {M}; [.{
 \backslash
-begin{tabular}{c} {1,2,5,6} 
+begin{tabular}{c} {1,2,5,6}  
 \backslash
-
-\backslash
- First 
-\backslash
-end{tabular}}   
-\end_layout
-
-\begin_layout Plain Layout
-
-										[.Det 
-\end_layout
-
-\begin_layout Plain Layout
-
-											 the ]
-\end_layout
-
-\begin_layout Plain Layout
-
-										[.N cat ]
-\end_layout
-
-\begin_layout Plain Layout
-
-		]
+end{tabular}} ]
 \end_layout
 
 \begin_layout Plain Layout
@@ -537,68 +513,9 @@ end{tabular}}
 \backslash
 edge node[auto=left] {N}; [.{
 \backslash
-begin{tabular}{c} {3,4,7,8} 
+begin{tabular}{c} {3,4,7,8}  
 \backslash
-
-\backslash
- First 
-\backslash
-end{tabular}}
-\end_layout
-
-\begin_layout Plain Layout
-
-										[.V sat ]
-\end_layout
-
-\begin_layout Plain Layout
-
-										[.PP
-\end_layout
-
-\begin_layout Plain Layout
-
-											[.P on ]
-\end_layout
-
-\begin_layout Plain Layout
-
-											[.NP
-\end_layout
-
-\begin_layout Plain Layout
-
-												[.Det
-\end_layout
-
-\begin_layout Plain Layout
-
-													the ]
-\end_layout
-
-\begin_layout Plain Layout
-
-												[.N 
-\end_layout
-
-\begin_layout Plain Layout
-
-													mat ]
-\end_layout
-
-\begin_layout Plain Layout
-
-											]
-\end_layout
-
-\begin_layout Plain Layout
-
-										]
-\end_layout
-
-\begin_layout Plain Layout
-
-		]
+end{tabular}} ]
 \end_layout
 
 \begin_layout Plain Layout
@@ -643,7 +560,7 @@ and so
 \begin_inset Formula 
 \begin{align*}
 IG\left(First\right) & =.811278-\left(\frac{\left|A\right|}{\left|First\right|}H\left(A\right)+\frac{\left|B\right|}{\left|First\right|}H\left(B\right)\right)\\
- & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
+ & =.811278-\left(\frac{2}{4}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{2}{4}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
  & =.811278-\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)=.311278
 \end{align*}
 
@@ -653,7 +570,7 @@ and
 \begin_inset Formula 
 \begin{align*}
 IG\left(Third\right) & =.811278-\left(\frac{\left|Y\right|}{\left|Third\right|}H\left(Y\right)+\frac{\left|Z\right|}{\left|Third\right|}H\left(Z\right)\right)\\
- & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
+ & =.811278-\left(\frac{2}{4}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{2}{4}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
  & =.311278
 \end{align*}
 
@@ -665,6 +582,10 @@ Hence we can partition the left subtree on either
 
  or 
 \begin_inset Formula $\text{Class}\left(Third\right)$
+\end_inset
+
+; we arbitrarily choose to partition on 
+\begin_inset Formula $\text{Class}\left(First\right)$
 \end_inset
 
 .
@@ -680,7 +601,7 @@ and so
 \begin_inset Formula 
 \begin{align*}
 IG\left(First\right) & =.811278-\left(\frac{\left|A\right|}{\left|First\right|}H\left(A\right)+\frac{\left|B\right|}{\left|First\right|}H\left(B\right)\right)\\
- & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(1\log_{2}\left(1\right)+0\log_{2}\left(0\right)\right)\right)\\
+ & =.811278-\left(\frac{2}{4}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{2}{4}\left(1\log_{2}\left(1\right)+0\log_{2}\left(0\right)\right)\right)\\
  & =.311278
 \end{align*}
 
@@ -690,8 +611,382 @@ and
 \begin_inset Formula 
 \begin{align*}
 IG\left(Third\right) & =.811278-\left(\frac{\left|Y\right|}{\left|Third\right|}H\left(Y\right)+\frac{\left|Z\right|}{\left|Third\right|}H\left(Z\right)\right)\\
- & =.811278-\left(\frac{1}{2}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{1}{2}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
+ & =.811278-\left(\frac{2}{4}\left(\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)+\frac{1}{2}\log_{2}\left(\frac{1}{2}\right)\right)+\frac{2}{4}\left(0\log_{2}\left(0\right)+1\log_{2}\left(1\right)\right)\right)\\
  & =.311278
+\end{align*}
+
+\end_inset
+
+Hence similarly we partition on the 
+\begin_inset Formula $\text{Class}\left(First\right)$
+\end_inset
+
+.
+ Then the 2-level tree is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+tikzset{level distance=50pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Tree [.{
+\backslash
+begin{tabular}{c} {1,2,3,4,5,6,7,8} 
+\backslash
+
+\backslash
+ $<$Second$>$ 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+edge node[auto=right] {M}; [.{
+\backslash
+begin{tabular}{c} {1,2,5,6} 
+\backslash
+
+\backslash
+ $<$First$>$ 
+\backslash
+end{tabular}}   
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=right] {A};[.{
+\backslash
+begin{tabular}{c} {1,2}  
+\backslash
+end{tabular}} ]
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=left] {B};[.$
+\backslash
+ominus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+edge node[auto=left] {N}; [.{
+\backslash
+begin{tabular}{c} {3,4,7,8} 
+\backslash
+
+\backslash
+ $<$First$>$ 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=right] {A};[.{
+\backslash
+begin{tabular}{c} {3,4}  
+\backslash
+end{tabular}} ]
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=left] {B};[.$
+\backslash
+oplus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+	  ]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+Finally partitioning on the 
+\begin_inset Formula $\text{Class}\left(Third\right)$
+\end_inset
+
+ in the remaining subtrees
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+tikzset{level distance=50pt}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Tree [.{
+\backslash
+begin{tabular}{c} {1,2,3,4,5,6,7,8} 
+\backslash
+
+\backslash
+ $<$Second$>$ 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+edge node[auto=right] {M}; [.{
+\backslash
+begin{tabular}{c} {1,2,5,6} 
+\backslash
+
+\backslash
+ $<$First$>$ 
+\backslash
+end{tabular}}   
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=right] {A};[.{
+\backslash
+begin{tabular}{c} {1,2} 
+\backslash
+
+\backslash
+$<$Third$>$ 
+\backslash
+end{tabular}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+											
+\backslash
+edge node[auto=right] {Y};[.$
+\backslash
+oplus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+											
+\backslash
+edge node[auto=left] {Z};[.$
+\backslash
+ominus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+										]
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=left] {B};[.$
+\backslash
+ominus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+edge node[auto=left] {N}; [.{
+\backslash
+begin{tabular}{c} {3,4,7,8} 
+\backslash
+
+\backslash
+ $<$First$>$ 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=right] {A};[.{
+\backslash
+begin{tabular}{c} {3,4} 
+\backslash
+
+\backslash
+$<$Third$>$ 
+\backslash
+end{tabular}}
+\end_layout
+
+\begin_layout Plain Layout
+
+											
+\backslash
+edge node[auto=right] {Y};[.$
+\backslash
+ominus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+											
+\backslash
+edge node[auto=left] {Z};[.$
+\backslash
+oplus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+										]
+\end_layout
+
+\begin_layout Plain Layout
+
+										
+\backslash
+edge node[auto=left] {B};[.$
+\backslash
+oplus$ ]
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+	  ]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+We minimize empirical risk
+\begin_inset Formula 
+\[
+R_{\text{emp}}\left(\alpha\right)=\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-f\left(x_{i},\alpha\right)\right)^{2}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left(x_{i},y_{i}\right)$
+\end_inset
+
+ are i.i.d drawn from 
+\begin_inset Formula $\mathbf{Z}=\left(X,Y\right)$
+\end_inset
+
+ is distributed such that
+\begin_inset Formula 
+\begin{align*}
+X & \sim\text{uniform}\left(-2,2\right)\\
+Y|X & \sim\text{n}\left(.3X^{2}-.6X^{2}+.05X-3,.0625\right)
 \end{align*}
 
 \end_inset
@@ -699,5 +994,363 @@ IG\left(Third\right) & =.811278-\left(\frac{\left|Y\right|}{\left|Third\right|}H
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+In case of the third degree polynomial 
+\begin_inset Formula $\boldsymbol{\alpha}=\left(\alpha_{0},\alpha_{1},\alpha_{2},\alpha_{3}\right)\in\mathbb{R}^{4}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+f\left(x,\boldsymbol{\alpha}\right)=\alpha_{3}x^{3}+\alpha_{2}x^{2}+\alpha_{1}x+\alpha_{0}
+\]
+
+\end_inset
+
+ minimizing 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $R_{\text{emp}}\left(\boldsymbol{\alpha}\right)$
+\end_inset
+
+ by method of critical points
+\begin_inset Formula 
+\begin{align*}
+0=\nabla\cdot R_{\text{emp}}\left(\boldsymbol{\alpha}\right) & =\begin{pmatrix}\frac{\partial}{\partial\alpha_{0}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
+\frac{\partial}{\partial\alpha_{1}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
+\frac{\partial}{\partial\alpha_{2}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
+\frac{\partial}{\partial\alpha_{3}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)
+\end{pmatrix}\\
+ & =\begin{pmatrix}\frac{\partial}{\partial\alpha_{0}}\left(\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)^{2}\right)\\
+\frac{\partial}{\partial\alpha_{1}}\left(\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)^{2}\right)\\
+\frac{\partial}{\partial\alpha_{2}}\left(\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)^{2}\right)\\
+\frac{\partial}{\partial\alpha_{3}}\left(\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)^{2}\right)
+\end{pmatrix}\\
+ & =\begin{pmatrix}-\frac{2}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)\\
+-\frac{2}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)x_{i}\\
+-\frac{2}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)x_{i}^{2}\\
+-\frac{2}{n}\sum_{i=1}^{n}\left(y_{i}-\left(\alpha_{3}x_{i}^{3}+\alpha_{2}x_{i}^{2}+\alpha_{1}x_{i}+\alpha_{0}\right)\right)x_{i}^{3}
+\end{pmatrix}\\
+ & =-\frac{2}{n}\begin{pmatrix}\sum_{i=1}^{n}y_{i}\\
+\sum_{i=1}^{n}y_{i}x_{i}\\
+\sum_{i=1}^{n}y_{i}x_{i}^{2}\\
+\sum_{i=1}^{n}y_{i}x_{i}^{3}
+\end{pmatrix}+\frac{2}{n}\begin{pmatrix}\alpha_{0}\sum_{i=1}^{n}1+\alpha_{1}\sum_{i=1}^{n}x_{i}+\alpha_{2}\sum_{i=1}^{n}x_{i}^{2}+\alpha_{3}\sum_{i=1}^{n}x_{i}^{3}\\
+\alpha_{0}\sum_{i=1}^{n}x_{i}+\alpha_{1}\sum_{i=1}^{n}x_{i}^{2}+\alpha_{2}\sum_{i=1}^{n}x_{i}^{3}+\alpha_{3}\sum_{i=1}^{n}x_{i}^{4}\\
+\alpha_{0}\sum_{i=1}^{n}x_{i}^{2}+\alpha_{1}\sum_{i=1}^{n}x_{i}^{3}+\alpha_{2}\sum_{i=1}^{n}x_{i}^{4}+\alpha_{3}\sum_{i=1}^{n}x_{i}^{5}\\
+\alpha_{0}\sum_{i=1}^{n}x_{i}^{3}+\alpha_{1}\sum_{i=1}^{n}x_{i}^{4}+\alpha_{2}\sum_{i=1}^{n}x_{i}^{5}+\alpha_{3}\sum_{i=1}^{n}x_{i}^{6}
+\end{pmatrix}\\
+0 & =-\frac{2}{n}\begin{pmatrix}\sum_{i=1}^{n}y_{i}\\
+\sum_{i=1}^{n}y_{i}x_{i}\\
+\sum_{i=1}^{n}y_{i}x_{i}^{2}\\
+\sum_{i=1}^{n}y_{i}x_{i}^{3}
+\end{pmatrix}+\frac{2}{n}\begin{pmatrix}n & \sum_{i=1}^{n}x_{i} & \sum_{i=1}^{n}x_{i}^{2} & \sum_{i=1}^{n}x_{i}^{3}\\
+\sum_{i=1}^{n}x_{i} & \sum_{i=1}^{n}x_{i}^{2} & \sum_{i=1}^{n}x_{i}^{3} & \sum_{i=1}^{n}x_{i}^{4}\\
+\sum_{i=1}^{n}x_{i}^{2} & \sum_{i=1}^{n}x_{i}^{3} & \sum_{i=1}^{n}x_{i}^{4} & \sum_{i=1}^{n}x_{i}^{5}\\
+\sum_{i=1}^{n}x_{i}^{3} & \sum_{i=1}^{n}x_{i}^{4} & \sum_{i=1}^{n}x_{i}^{5} & \sum_{i=1}^{n}x_{i}^{6}
+\end{pmatrix}\begin{pmatrix}\alpha_{0}\\
+\alpha_{1}\\
+\alpha_{2}\\
+\alpha_{3}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+This yields the matrix equation
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\begin{align*}
+\begin{pmatrix}\sum_{i=1}^{n}y_{i}\\
+\sum_{i=1}^{n}y_{i}x_{i}\\
+\sum_{i=1}^{n}y_{i}x_{i}^{2}\\
+\sum_{i=1}^{n}y_{i}x_{i}^{3}
+\end{pmatrix} & =\begin{pmatrix}n & \sum_{i=1}^{n}x_{i} & \sum_{i=1}^{n}x_{i}^{2} & \sum_{i=1}^{n}x_{i}^{3}\\
+\sum_{i=1}^{n}x_{i} & \sum_{i=1}^{n}x_{i}^{2} & \sum_{i=1}^{n}x_{i}^{3} & \sum_{i=1}^{n}x_{i}^{4}\\
+\sum_{i=1}^{n}x_{i}^{2} & \sum_{i=1}^{n}x_{i}^{3} & \sum_{i=1}^{n}x_{i}^{4} & \sum_{i=1}^{n}x_{i}^{5}\\
+\sum_{i=1}^{n}x_{i}^{3} & \sum_{i=1}^{n}x_{i}^{4} & \sum_{i=1}^{n}x_{i}^{5} & \sum_{i=1}^{n}x_{i}^{6}
+\end{pmatrix}\begin{pmatrix}\alpha_{0}\\
+\alpha_{1}\\
+\alpha_{2}\\
+\alpha_{3}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+which further simplifies to
+\begin_inset Formula 
+\begin{align*}
+\begin{pmatrix}1 & 1 & \cdots & 1\\
+x_{1} & x_{2} & \cdots & x_{n}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{1}^{3} & x_{2}^{3} & \cdots & x_{n}^{3}
+\end{pmatrix}\begin{pmatrix}y_{1}\\
+y_{2}\\
+\vdots\\
+y_{n}
+\end{pmatrix} & =\begin{pmatrix}1 & 1 & \cdots & 1\\
+x_{1} & x_{2} & \cdots & x_{n}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{1}^{3} & x_{2}^{3} & \cdots & x_{n}^{3}
+\end{pmatrix}\begin{pmatrix}1 & x_{1} & \cdots & x_{1}^{3}\\
+1 & x_{2} & \cdots & x_{2}^{3}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & x_{n} & \cdots & x_{n}^{3}
+\end{pmatrix}\begin{pmatrix}\alpha_{0}\\
+\alpha_{1}\\
+\alpha_{2}\\
+\alpha_{3}
+\end{pmatrix}\\
+ & \iff\\
+\begin{pmatrix}y_{1}\\
+y_{2}\\
+\vdots\\
+y_{n}
+\end{pmatrix} & =\begin{pmatrix}1 & x_{1} & \cdots & x_{1}^{3}\\
+1 & x_{2} & \cdots & x_{2}^{3}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & x_{n} & \cdots & x_{n}^{3}
+\end{pmatrix}\begin{pmatrix}\alpha_{0}\\
+\alpha_{1}\\
+\alpha_{2}\\
+\alpha_{3}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+Therefore we can compute the coefficients by inverting 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\mathbf{X}=\begin{pmatrix}1 & x_{1} & \cdots & x_{1}^{3}\\
+1 & x_{2} & \cdots & x_{2}^{3}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & x_{n} & \cdots & x_{n}^{3}
+\end{pmatrix}
+\]
+
+\end_inset
+
+but because 
+\series bold
+X 
+\series default
+is generally non-square it is better for solve the first equation in the
+ above simplification, i.e.
+\begin_inset Formula 
+\[
+\boldsymbol{\alpha}=\left(\mathbf{X}^{T}\mathbf{X}\right)^{-1}\mathbf{X}^{T}\mathbf{y}
+\]
+
+\end_inset
+
+Our twenty i.i.d samples are 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{x} & =\begin{pmatrix}0.62216162 & -0.26293205 & 0.69185863 & 1.54096388\\
+0.95622788 & -1.23688293 & 1.00968213 & 1.7071131\\
+-0.02822448 & -1.96152104 & -1.73584604 & 1.62520304\\
+-1.39550314 & -0.30587093 & 1.20730297 & 0.85136206\\
+1.66289376 & 0.44884055 & 1.46786568 & -0.19738658
+\end{pmatrix}\\
+\mathbf{y} & =\begin{pmatrix}0.60075553 & -0.32874498 & 0.68522604 & 1.44528184\\
+0.94041605 & -1.1207807 & 1.02144943 & 1.82532831\\
+-0.05670195 & -1.95425586 & -1.8576913 & 1.59121328\\
+-1.33651484 & -0.3992536 & 1.15310639 & 0.89608477\\
+1.63507322 & 0.48773534 & 1.47881012 & -0.18672264
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+After computing the Vandermonde 
+\series bold
+X
+\series default
+ matrix and 
+\begin_inset Formula $\left(\mathbf{X}^{T}\mathbf{X}\right)^{-1}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+\boldsymbol{\alpha}=\left(-0.00851482,0.9781353,0.00335204,0.00889043\right)
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Fitting the polynomial to the data
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figure_1.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In case of the third degree polynomial 
+\begin_inset Formula $\boldsymbol{\alpha}=\left(\alpha_{0},\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4},\alpha_{5}\right)\in\mathbb{R}^{6}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+f\left(x,\boldsymbol{\alpha}\right)=\alpha_{5}x^{5}+\alpha_{4}x^{4}+\alpha_{3}x^{3}+\alpha_{2}x^{2}+\alpha_{1}x+\alpha_{0}
+\]
+
+\end_inset
+
+After computing the Vandermonde 
+\series bold
+X
+\series default
+ matrix and 
+\begin_inset Formula $\left(\mathbf{X}^{T}\mathbf{X}\right)^{-1}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+\boldsymbol{\alpha}=\left(.022330,.004711,-.085773,.0005115,1.0588,-.015614\right)
+\]
+
+\end_inset
+
+Fitting the polynomial to the data
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figure_2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
