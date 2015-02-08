@@ -1,0 +1,238 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+COP 5555 Homework 2 
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
+\end_inset
+
+
+\series bold
+LL(1) violations
+\series default
+: This grammar is not LL(1) because 
+\begin_inset Formula 
+\begin{align*}
+\text{FIRST}\left(\left\langle Factor\right\rangle ::={\color{red}IDENT}\right)\bigcap\text{FIRST}\left(\left\langle Factor\right\rangle ::={\color{red}IDENT\,[\,}\left\langle Expression\right\rangle \,{\color{red}]}\right)\bigcap\\
+\text{FIRST}\left(\left\langle Factor\right\rangle ::=\left\langle ClosureEvalExpression\right\rangle \right) & ={\color{red}IDENT}\neq\emptyset\\
+\text{FIRST}\left(\left\langle Factor\right\rangle ::=\left\langle List\right\rangle \right)\bigcap\text{FIRST}\left(\left\langle Factor\right\rangle ::=\left\langle Maplist\right\rangle \right) & ={\color{red}@}\neq\emptyset
+\end{align*}
+
+\end_inset
+
+and similarly for 
+\begin_inset Formula $\left\langle Thing\right\rangle $
+\end_inset
+
+,
+\begin_inset Formula $\left\langle Elem\right\rangle $
+\end_inset
+
+,
+\begin_inset Formula $\left\langle Term\right\rangle $
+\end_inset
+
+,
+\begin_inset Formula $\left\langle Expression\right\rangle $
+\end_inset
+
+,
+\begin_inset Formula $\left\langle RangeExpr\right\rangle $
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\left\langle KeyValueExpression\right\rangle $
+\end_inset
+
+,
+\begin_inset Formula $\left\langle KeyValueList\right\rangle $
+\end_inset
+
+,
+\begin_inset Formula $\left\langle ExpressionList\right\rangle $
+\end_inset
+
+.
+ Also 
+\begin_inset Formula 
+\begin{align*}
+\text{FIRST}\left(\left\langle Statement\right\rangle ::={\color{red}if\,(}\left\langle Expression\right\rangle {\color{red})}\left\langle Block\right\rangle \right)\bigcap\\
+\text{FIRST}\left(\left\langle Statement\right\rangle ::={\color{red}if\,(}\left\langle Expression\right\rangle {\color{red})}\left\langle Block\right\rangle {\color{red}else\,}\left\langle Block\right\rangle \right) & ={\color{red}if}\neq\emptyset\\
+\text{FIRST}\left(\left\langle Statement\right\rangle ::={\color{red}while*(}\left\langle Expression\right\rangle {\color{red})}\left\langle Block\right\rangle \right)\bigcap\\
+\text{FIRST}\left(\left\langle Statement\right\rangle ::={\color{red}while*(}\left\langle RangeExpression\right\rangle {\color{red})}\left\langle Block\right\rangle \right) & ={\color{red}while*}\neq\emptyset
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\text{FIRST}\left(\left\langle Type\right\rangle ::=\left\langle KeyValueType\right\rangle \right)\bigcap\\
+\text{FIRST}\left(\left\langle Type\right\rangle ::=\left\langle ListType\right\rangle \right) & ={\color{red}@}\neq\emptyset
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\text{FIRST}\left(\left\langle Declaration\right\rangle ::={\color{red}def}\left\langle VarDec\right\rangle \right)\bigcap\\
+\text{FIRST}\left(\left\langle Declaration\right\rangle ::={\color{red}def}\left\langle ClosureDec\right\rangle \right) & ={\color{red}def}\neq\emptyset
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[]
+\end_layout
+
+\end_inset
+
+
+\series bold
+Predict Sets
+\series default
+: Since EPS(Factor)=false 
+\begin_inset Formula 
+\begin{align*}
+\text{PREDICT}\left(\left\langle Factor\right\rangle \right) & =\text{FIRST}\left(\left\langle Factor\right\rangle \right)\\
+ & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} 
+\end{align*}
+
+\end_inset
+
+Since EPS(Statement)=true
+\begin_inset Formula 
+\begin{align*}
+\text{PREDICT}\left(\left\langle Statement\right\rangle \right) & =\text{FIRST}\left(\left\langle Statement\right\rangle \right)\bigcup\text{FOLLOW}\left(\left\langle Statement\right\rangle \right)\\
+ & =\left\{ IDENT,print,while,while*,if,\%,return\right\} \bigcup\left\{ ;\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

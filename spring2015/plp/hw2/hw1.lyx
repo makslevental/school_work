@@ -119,7 +119,7 @@ and similarly for
 \begin_inset Formula $\left\langle Thing\right\rangle ,\left\langle Elem\right\rangle ,\left\langle Term\right\rangle ,\left\langle Expression\right\rangle ,\left\langle RangeExpr\right\rangle ,\left\langle KeyValueExpression\right\rangle ,\left\langle KeyValueList\right\rangle ,\left\langle ExpressionList\right\rangle $
 \end_inset
 
-.
+ .
  Also 
 \begin_inset Formula 
 \begin{align*}
@@ -136,6 +136,47 @@ and
 \begin{align*}
 \text{FIRST}\left(\left\langle Type\right\rangle ::=\left\langle KeyValueType\right\rangle \right)\bigcap\\
 \text{FIRST}\left(\left\langle Type\right\rangle ::=\left\langle ListType\right\rangle \right) & ={\color{red}@}\neq\emptyset
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\text{FIRST}\left(\left\langle Declaration\right\rangle ::={\color{red}def}\left\langle VarDec\right\rangle \right)\bigcap\\
+\text{FIRST}\left(\left\langle Declaration\right\rangle ::={\color{red}def}\left\langle ClosureDec\right\rangle \right) & ={\color{red}def}\neq\emptyset
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Predict Sets]
+\end_layout
+
+\end_inset
+
+Since EPS(Factor)=false 
+\begin_inset Formula 
+\begin{align*}
+\text{PREDICT}\left(\left\langle Factor\right\rangle \right) & =\text{FIRST}\left(\left\langle Factor\right\rangle \right)\\
+ & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} 
+\end{align*}
+
+\end_inset
+
+Since EPS(Statement)=true
+\begin_inset Formula 
+\begin{align*}
+\text{PREDICT}\left(\left\langle Statement\right\rangle \right) & =\text{FIRST}\left(\left\langle Statement\right\rangle \right)\bigcup\text{FOLLOW}\left(\left\langle Statement\right\rangle \right)\\
+ & =\left\{ IDENT,print,while,while*,if,\%,return\right\} \bigcup\left\{ ;\right\} 
 \end{align*}
 
 \end_inset
@@ -174,7 +215,7 @@ status open
 \left\langle List\right\rangle  & =\left\{ @\right\} \\
 \left\langle LValue\right\rangle  & =\left\{ IDENT\right\} \\
 \left\langle ClosureEvalExpression\right\rangle  & =\left\{ IDENT\right\} \\
-\left\langle Statement\right\rangle  & =\left\{ \epsilon,IDENT,print,while,while*,{\color{green}while*},if,{\color{green}if},\%,return\right\} {\color{green}}\\
+\left\langle Statement\right\rangle  & =\left\{ \epsilon,IDENT,print,while,while*,{\color{green}while*},if,{\color{green}if},\%,return\right\} \\
 \left\langle VarDec\right\rangle  & =\left\{ IDENT\right\} \\
 \left\langle FormalArgList\right\rangle  & =\left\{ \epsilon,IDENT\right\} \\
 \left\langle Closure\right\rangle  & =\left\{ \{\right\} \\
@@ -198,9 +239,9 @@ Refactoring
 \left\langle StrongOp\right\rangle  & =\left\{ *,/\right\} \\
 \left\langle WeakOp\right\rangle  & =\left\{ +,-\right\} \\
 \left\langle RelOp\right\rangle  & =\left\{ |,\&,==,!=,<,>,\leq,\geq\right\} \\
-\left\langle IdentInFactor\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|{\color{red}[}\left\langle Expression\right\rangle {\color{red}]}|{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\right)\\
+\left\langle IdentInFactor\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|{\color{red}[}\left\langle Expression\right\rangle {\color{red}]}|{\color{red}(}\left\langle ExpressionList\right\rangle {\color{red})}\right)\\
  & =\left\{ IDENT\right\} \\
-\left\langle List\right\rangle  & ::={\color{red}@}\,\left({\color{red}@[}\left\langle KeyValueList\right\rangle {\color{red}]}|{\color{red}[}\left\langle ExpressionList\right\rangle {\color{red}]}\right)\\
+\left\langle List\right\rangle  & ::={\color{red}@}\,\left({\color{red}@[}\left\langle KeyValueList\right\rangle {\color{red}]}|{\color{red}[}\left\langle Expression\right\rangle {\color{red}]}\right)\\
 \left\langle Factor\right\rangle  & ::=\left\langle IdentInFactor\right\rangle |{\color{red}INT\_LIT}|{\color{red}true}|{\color{red}false}|{\color{red}STRING\_LIT}|{\color{red}!}\left\langle Factor\right\rangle |{\color{red}-}\left\langle Factor\right\rangle |{\color{red}size}{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\\
  & |{\color{red}key(}\left\langle Expression\right\rangle {\color{red})}|{\color{red}value(}\left\langle Expression\right\rangle {\color{red})}|\left\langle Closure\right\rangle |\\
  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
@@ -265,11 +306,11 @@ The only non-terminal for which EPS is true is
 \left\langle StrongOp\right\rangle  & =\left\{ *,/\right\} \\
 \left\langle WeakOp\right\rangle  & =\left\{ +,-\right\} \\
 \left\langle RelOp\right\rangle  & =\left\{ |,\&,==,!=,<,>,\leq,\geq\right\} \\
-\left\langle IdentInFactor\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|{\color{red}[}\left\langle Expression\right\rangle {\color{red}]}|{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\right)\\
+\left\langle IdentInFactor\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|{\color{red}[}\left\langle Expression\right\rangle {\color{red}]}|{\color{red}(}\left\langle ExpressionList\right\rangle {\color{red})}\right)\\
  & =\left\{ IDENT\right\} \\
 \left\langle List\right\rangle  & ::={\color{red}@}\,\left({\color{red}@[}\left\langle KeyValueList\right\rangle {\color{red}]}|{\color{red}[}\left\langle ExpressionList\right\rangle {\color{red}]}\right)\\
 \left\langle Factor\right\rangle  & ::=\left\langle IdentInFactor\right\rangle |{\color{red}INT\_LIT}|{\color{red}true}|{\color{red}false}|{\color{red}STRING\_LIT}|{\color{red}!}\left\langle Factor\right\rangle |{\color{red}-}\left\langle Factor\right\rangle |{\color{red}size}{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\\
- & |{\color{red}key(}\left\langle Expression\right\rangle {\color{red})}|{\color{red}value(}\left\langle Expression\right\rangle {\color{red})}|\left\langle Closure\right\rangle |\\
+ & |{\color{red}key(}\left\langle Expression\right\rangle {\color{red})}|{\color{red}value(}\left\langle Expression\right\rangle {\color{red})}|\left\langle Closure\right\rangle |\left\langle List\right\rangle |{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\\
  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle Thing\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle Elem\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
@@ -294,15 +335,21 @@ The only non-terminal for which EPS is true is
  & =\left\{ if\right\} \\
 \left\langle Else\right\rangle  & ::=\epsilon|{\color{red}else}\left\langle Block\right\rangle \\
  & =\left\{ \epsilon,else\right\} \\
-\left\langle Statement\right\rangle  & =\left\{ \epsilon,IDENT,print,\left\langle While\right\rangle ,if,\%,return\right\} \\
+\left\langle Statement\right\rangle  & =\left\{ \epsilon,IDENT,print,\left\langle While\right\rangle ,if,\%,return,;\right\} \\
 \left\langle VarDec\right\rangle  & =\left\{ IDENT\right\} \\
 \left\langle FormalArgList\right\rangle  & =\left\{ \epsilon,IDENT\right\} \\
-\left\langle Closure\right\rangle  & =\left\{ \{\right\} \\
+\left\langle Closure\right\rangle  & ::==\left\{ \left\langle FormalArgList\right\rangle ->\left(\left\langle Statement\right\rangle {\color{red};}\right)*\right\} \\
+ & =\left\{ \{\right\} \\
 \left\langle ClosureDec\right\rangle  & =\left\{ IDENT\right\} \\
-\left\langle ValueType\right\rangle  & ::={\color{red}@}\left({\color{red}[}\left\langle Type\right\rangle {\color{red}]}|{\color{red}@}{\color{red}[}\left\langle SimpleType\right\rangle :\left\langle Type\right\rangle {\color{red}]}\right)\\
+\left\langle CompositeValueType\right\rangle  & ::={\color{red}@}\left({\color{red}[}\left\langle Type\right\rangle {\color{red}]}|{\color{red}@}{\color{red}[}\left\langle SimpleType\right\rangle {\color{red}:}\left\langle Type\right\rangle {\color{red}]}\right)\\
  & =\left\{ @\right\} \\
 \left\langle SimpleType\right\rangle  & =\left\{ int,boolean,string\right\} \\
 \left\langle Type\right\rangle  & =\left\{ int,boolean,string,@\right\} \\
+\left\langle DecTail\right\rangle  & ={\color{red}=}\left\langle Closure\right\rangle |{\color{red}:}\left\langle CompositeValueType\right\rangle |{\color{red}:}\left\langle SimpleType\right\rangle |\epsilon\\
+ & =\left\{ =,:,\epsilon\right\} \\
+\left\langle DecHead\right\rangle  & ::={\color{red}IDENT}\left\langle DecTail\right\rangle \\
+ & =\left\{ IDENT\right\} \\
+\left\langle Declaration\right\rangle  & ::={\color{red}def}\left\langle DecHead\right\rangle \\
 \left\langle Declaration\right\rangle  & =\left\{ def\right\} \\
 \left\langle Block\right\rangle  & =\left\{ \{\right\} \\
 \left\langle ImportList\right\rangle  & =\left\{ \epsilon,import\right\} \\
