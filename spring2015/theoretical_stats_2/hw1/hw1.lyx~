@@ -169,7 +169,8 @@ where
 
 .
  For different reasons this also works in the continuous case.
- Another characterization of sufficiency, by the factor theorem, is 
+ Another characterization of sufficiency (iff), by the factor theorem, is
+ 
 \begin_inset Formula 
 \[
 f\left(\mathbf{x}|\theta\right)=g\left(T\left(\mathbf{X}\right)|\theta\right)h\left(\mathbf{x}\right)
@@ -178,6 +179,231 @@ f\left(\mathbf{x}|\theta\right)=g\left(T\left(\mathbf{X}\right)|\theta\right)h\l
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+A useful identity is 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{n}\left(x_{i}-\mu\right)=\left(\sum_{i=1}^{n}\left(x-\bar{x}\right)^{2}\right)+n\left(\bar{x}-\mu\right)^{2}
+\]
+
+\end_inset
+
+For random variables distributed according to a distribution from an exponential
+ family given by
+\begin_inset Formula 
+\[
+f\left(x|\boldsymbol{\theta}\right)=h\left(x\right)c\left(\boldsymbol{\theta}\right)e^{\sum_{i=1}^{k}w_{i}\left(\boldsymbol{\theta}\right)t_{i}\left(x\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\theta}=\left(\theta_{1},\theta_{2},\dots,\theta_{d}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $d\leq k$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T\left(\mathbf{X}\right)=\left(\sum_{j=1}^{n}t_{1}\left(X_{j}\right),\dots,\sum_{j=1}^{n}t_{k}\left(X_{j}\right)\right)
+\]
+
+\end_inset
+
+is a sufficient statistic.
+ A 
+\series bold
+minimal sufficient
+\series default
+ statistic is any sufficient statistic 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ such that for any other sufficient statistic 
+\begin_inset Formula $T'\left(\mathbf{X}\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $T\left(\mathbf{X}\right)=g\left(T'\left(\mathbf{X}\right)\right)$
+\end_inset
+
+.
+ Characterization: If 
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x}|\theta\right)}{f\left(\mathbf{y}|\theta\right)}\perp\theta\iff T\left(\mathbf{x}\right)=T\left(\mathbf{y}\right)
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is minimal sufficient.
+ Any 1-1 function of a minimally sufficient statistic is also minimally
+ sufficient.
+\end_layout
+
+\begin_layout Standard
+An ancillary is one whose distribution does not depend on 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ To construct an ancillary statistic take the sample vector, make it independent
+ of 
+\begin_inset Formula $\theta$
+\end_inset
+
+, and then construct a statistic.
+ For any location family the range 
+\begin_inset Formula $R=X_{\left(n\right)}-X_{\left(1\right)}$
+\end_inset
+
+ is ancillary.
+ For any scale family the ratio of any 2 samples is ancillary.
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+complete statistic
+\series default
+ 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is one such that 
+\begin_inset Formula 
+\[
+E_{\theta}\left(g\left(T\right)\right)\Rightarrow P_{\theta}\left(g\left(T\right)=0\right)=1\,\forall\theta
+\]
+
+\end_inset
+
+
+\series bold
+Basu's Theorem
+\series default
+: A complete and minimal statistic is independent of every ancillary statistic.
+\end_layout
+
+\begin_layout Standard
+For exponential distribution the above mentioned statistic is complete if
+ 
+\begin_inset Formula $\left\{ w_{1}\left(\boldsymbol{\theta}\right),w_{2}\left(\boldsymbol{\theta}\right),\dots,w_{k}\left(\boldsymbol{\theta}\right)\right\} $
+\end_inset
+
+ contains an open set in 
+\begin_inset Formula $\mathbb{R}^{k}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ is an invertible continuous transformation.
+\end_layout
+
+\begin_layout Standard
+If a minimal sufficient statistic exists then any complete statistic is
+ also minimal sufficient.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Lemma
+\series default
+: If 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is sufficient and 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)\not\equiv0$
+\end_inset
+
+ is ancillary then 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is not complete.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof: 
+\series default
+Assume 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is sufficient and that there exists 
+\begin_inset Formula $g$
+\end_inset
+
+ such that 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)$
+\end_inset
+
+ is ancillary.
+ Then 
+\begin_inset Formula $g\left(T\left(\mathbf{X}\right)\right)\perp\theta$
+\end_inset
+
+ and so 
+\begin_inset Formula $e=E\left(g\left(T\left(\mathbf{X}\right)\right)\right)\perp\theta$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $g'\left(T\left(\mathbf{X}\right)\right)=g\left(T\left(\mathbf{X}\right)\right)-e$
+\end_inset
+
+ and obviously 
+\begin_inset Formula 
+\[
+E\left(g'\left(T\left(\mathbf{X}\right)\right)\right)=0
+\]
+
+\end_inset
+
+and yet 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $g'\left(T\left(\mathbf{X}\right)\right)\not\equiv0$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $T\left(\mathbf{X}\right)$
+\end_inset
+
+ is not complete.
+\end_layout
+
+\begin_layout Standard
+I.e.
+ if there exists a function of a sufficient statistic that is ancillary
+ then that sufficient statistic isn't complete.
 \end_layout
 
 \begin_layout Enumerate
@@ -374,6 +600,19 @@ status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [6.5]
 \end_layout
 
@@ -520,6 +759,342 @@ status open
 
 \begin_layout Plain Layout
 
+[6.8]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ have common pdf 
+\begin_inset Formula $f\left(x_{i}-\theta\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+f\left(\mathbf{x}|\theta\right)=\prod_{i=1}^{n}f\left(x_{i}-\theta\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.9]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,1\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}\left(x^{2}-2x\theta+\theta^{2}\right)}\\
+ & =\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^{2}}e^{-\frac{1}{2}\theta^{2}}e^{x\theta}
+\end{align*}
+
+\end_inset
+
+and so by Thm something something something 
+\begin_inset Formula $\sum_{i=1}^{n}x_{i}$
+\end_inset
+
+ is a sufficient statistic for 
+\begin_inset Formula $\theta$
+\end_inset
+
+, and in fact it's a minimally sufficient statistic since 
+\begin_inset Formula $w\left(\theta\right)=\theta$
+\end_inset
+
+ is certainly continouos and invertible.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=e^{-\left(x-\theta\right)}I\left(x\right)_{\left(\theta,\infty\right)}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{x}|\theta\right) & =e^{n\theta}e^{-\sum x_{i}}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left(\theta,\infty\right)}\\
+ & =e^{n\theta}e^{-\sum x_{i}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta,\infty\right)}
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula $\min_{i}\left(x_{i}\right)$
+\end_inset
+
+ is sufficient.
+ Furthermore for arbitrary 
+\begin_inset Formula $\mathbf{x}\neq\mathbf{y}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(\mathbf{x}|\theta\right)}{f\left(\mathbf{y}|\theta\right)} & =\frac{e^{n\theta}e^{-\sum x_{i}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta,\infty\right)}}{e^{n\theta}e^{-\sum y_{i}}I\left(\min_{i}\left(y_{i}\right)\right)_{\left(\theta,\infty\right)}}\\
+ & =\frac{e^{-\sum x_{i}}I\left(\min_{i}\left(x_{i}\right)\right)_{\left(\theta,\infty\right)}}{e^{-\sum y_{i}}I\left(\min_{i}\left(y_{i}\right)\right)_{\left(\theta,\infty\right)}}\perp\theta\iff\min_{i}\left(x_{i}\right)=\min_{i}\left(y_{i}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\frac{e^{-\left(x-\theta\right)}}{\left(1+e^{-\left(x-\theta\right)}\right)^{2}}
+\end{align*}
+
+\end_inset
+
+Then for arbitrary 
+\begin_inset Formula $\mathbf{x}\neq\mathbf{y}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(\mathbf{x}|\theta\right)}{f\left(\mathbf{y}|\theta\right)} & =\frac{e^{n\theta}e^{-\sum x_{i}}/\left(\prod_{i=1}^{n}\left(1+e^{-\left(x_{i}-\theta\right)}\right)\right)^{2}}{e^{n\theta}e^{-\sum y_{i}}/\left(\prod_{i=1}^{n}\left(1+e^{-\left(y_{i}-\theta\right)}\right)\right)^{2}}\\
+ & =\frac{e^{-\sum x_{i}}}{e^{-\sum y_{i}}}\frac{\left(\prod_{i=1}^{n}\left(1+e^{-\left(y_{i}-\theta\right)}\right)\right)^{2}}{\left(\prod_{i=1}^{n}\left(1+e^{-\left(x_{i}-\theta\right)}\right)\right)^{2}}\\
+ & \perp\theta\iff\left(x_{\left(1\right)},\dots,x_{\left(n\right)}\right)=\left(y_{\left(1\right)},\dots,y_{\left(n\right)}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\frac{1}{\pi\left(1+\left(x-\theta\right)^{2}\right)}
+\end{align*}
+
+\end_inset
+
+Order statistics again
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\frac{1}{2}e^{\left|x-\theta\right|}\\
+ & =\frac{1}{2}e^{\sqrt{\left(x-\theta\right)^{2}}}
+\end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+f\left(\mathbf{x}|\theta\right)=\frac{1}{2^{n}}e^{\sum_{i=1}^{n}\left|x_{i}-\theta\right|}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\left|\mathbf{x}\right|$
+\end_inset
+
+ is minimal sufficient.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.10]
+\end_layout
+
+\end_inset
+
+The sufficient statistic is 
+\begin_inset Formula $T\left(\mathbf{X}\right)=\left(X_{\left(1\right)},X_{\left(n\right)}\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $R=X_{\left(n\right)}-X_{\left(1\right)}\sim\text{beta}\left(n-1,2\right)$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $R$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $r=E\left(R\right)=\frac{n-1}{2+\left(n-1\right)}$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $g=R-r$
+\end_inset
+
+ we have that 
+\begin_inset Formula $E\left(g\left(T\right)\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and yet 
+\begin_inset Formula $g$
+\end_inset
+
+ is not identically zero.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.11]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{X}=\left(X_{1},\dots,X_{n}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\mathbf{Z}=\left(X_{1}-\theta,\dots,X_{n}-\theta\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(Z_{\left(1\right)},\dots,Z_{\left(n\right)}\right)\sim\left(X_{\left(1\right)},\dots,X_{\left(n\right)}\right)$
+\end_inset
+
+ since subtracting 
+\begin_inset Formula $\theta$
+\end_inset
+
+ doesn't reorder.
+ Then for any 
+\begin_inset Formula 
+\begin{align*}
+Y_{i} & =X_{\left(n\right)}-X_{\left(i\right)}\\
+ & =Z_{\left(n\right)}+\theta-\left(Z_{\left(i\right)}+\theta\right)\\
+ & =Z_{\left(n\right)}-Z_{\left(i\right)}\perp\theta
+\end{align*}
+
+\end_inset
+
+So really the difference of any 2 order statistics is ancillary.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.12]
+\end_layout
+
+\end_inset
+
+We sample from a joint distribution 
+\begin_inset Formula $\left(X,N\right)$
+\end_inset
+
+ where
+\begin_inset Formula $X\sim\text{Binomial}\left(N,\theta\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $N\sim P_{i}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(x,n|\theta\right)}{f\left(y,n'|\theta\right)} & =\frac{f\left(x|N=n,\theta\right)P\left(N=n\right)}{f\left(y|N=n',\theta\right)P\left(N=n'\right)}\\
+ & =\frac{\binom{n}{x}\theta^{x}\left(1-\theta\right)^{n-x}p_{n}}{\binom{n'}{y}\theta^{y}\left(1-\theta\right)^{n'-y}p_{n'}}\\
+ & =\theta^{x-y}\left(1-\theta\right)^{n-n'-\left(x-y\right)}\frac{\binom{n}{x}p_{n}}{\binom{n'}{y}p_{n'}}\\
+ & \perp\theta\iff\left(x,n\right)=\left(y,n'\right)
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\left(X,N\right)$
+\end_inset
+
+ is minimal suffiicent but since 
+\begin_inset Formula $P\left(N=n\right)=p_{n}\perp\theta$
+\end_inset
+
+ it is ancillary.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [6.13]
 \end_layout
 
@@ -598,6 +1173,280 @@ it's the case that
  
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.14]
+\end_layout
+
+\end_inset
+
+With 
+\begin_inset Formula 
+\[
+M_{X}=\begin{cases}
+X_{\left(\frac{n+1}{2}\right)} & \text{if }n=2k+1\\
+\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+1\right)}\right) & \text{if }n=2k
+\end{cases}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{X}=\left(X_{1},\dots,X_{n}\right)$
+\end_inset
+
+ be a sample from a location family and 
+\begin_inset Formula $\mathbf{Z}=\left(Z_{1},\dots,Z_{n}\right)=\left(X_{1}-\theta,\dots,X_{n}-\theta\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $M_{X}-\theta=M_{Z}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{Z}=\bar{X}-\theta$
+\end_inset
+
+ and therefore
+\begin_inset Formula 
+\[
+M_{X}-\bar{X}=M_{X}-\theta-\left(\bar{X}-\theta\right)=M_{Z}-\bar{Z}\perp\theta
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.15]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,a_{0}\theta^{2}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\theta>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Since the parameter space is parameterized by a single hyperparameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ it is only 1 dimensional.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\frac{1}{\sqrt{2\pi a_{0}\theta^{2}}}e^{-\frac{\left(x-\theta\right)^{2}}{2a_{0}\theta^{2}}}
+\end{align*}
+
+\end_inset
+
+Then using the factorization theorem
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{x}|\theta\right) & =\frac{1}{\left(\sqrt{2\pi a_{0}\theta^{2}}\right)^{n}}e^{-\frac{\sum_{i=1}^{n}\left(x_{i}-\theta\right)^{2}}{2a_{0}\theta^{2}}}\\
+ & =\frac{1}{\left(\sqrt{2\pi a_{0}\theta^{2}}\right)^{n}}e^{-\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}+\bar{x}-\theta\right)^{2}}{2a_{0}\theta^{2}}}\\
+ & =\frac{1}{\left(\sqrt{2\pi a_{0}\theta^{2}}\right)^{n}}e^{-\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\theta\right)^{2}}{2a_{0}\theta^{2}}}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $f\left(\mathbf{x}|\theta,a_{0}\theta^{2}\right)$
+\end_inset
+
+ depends on 
+\begin_inset Formula $\theta$
+\end_inset
+
+ only through 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+g\left(T_{1}\left(\mathbf{X}\right),T_{2}\left(\mathbf{X}\right)\right)=e^{\frac{\left(n-1\right)t_{2}+n\left(t_{1}-\theta\right)^{2}}{2a_{0}\theta^{2}}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $T_{1}\left(\mathbf{X}\right)=\bar{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}\left(\mathbf{X}\right)=\frac{1}{n-1}\sum_{i=1}^{n}\left(X-\bar{X}\right)^{2}$
+\end_inset
+
+.
+ To show that 
+\begin_inset Formula $\left(\bar{X},S^{2}\right)$
+\end_inset
+
+ is not complete note that 
+\begin_inset Formula $E\left(S^{2}\right)=a_{0}\theta^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $E\left(\bar{X}\right)=\theta$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+E\left(\bar{X}^{2}\right)=\text{Var}\left(\bar{X}\right)+\left(E\left(\bar{X}\right)\right)^{2}=\frac{a_{0}\theta^{2}}{n}+\theta^{2}
+\]
+
+\end_inset
+
+and hence 
+\begin_inset Formula 
+\[
+E\left(\bar{X}^{2}-\frac{S^{2}}{n}-\frac{S^{2}}{a_{0}}\right)=\left(\frac{a_{0}\theta^{2}}{n}+\theta^{2}\right)-\frac{a_{0}\theta^{2}}{n}-\theta^{2}=0
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\left(\bar{X},S^{2}\right)$
+\end_inset
+
+ is incomplete.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.16]
+\end_layout
+
+\end_inset
+
+Let
+\begin_inset Formula 
+\[
+f\left(\mathbf{x}|\theta\right)=\frac{}{}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.19]
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Firstly
+\begin_inset Formula 
+\begin{align*}
+E\left(g\left(X\right)\right) & =g\left(0\right)p+g\left(1\right)3p+g\left(2\right)\left(1-4p\right)\\
+ & =p\left(g\left(0\right)+3g\left(1\right)-4g\left(2\right)\right)+g\left(2\right)=0\\
+ & \Rightarrow\\
+4g\left(2\right)-\frac{g\left(2\right)}{p} & =g\left(0\right)+3g\left(1\right)\\
+ & \Rightarrow g\left(2\right)=1,g\left(0\right)=4g\left(2\right)=4,g\left(1\right)=-\frac{g\left(2\right)}{3p}=-\frac{1}{3p}
+\end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+E\left(g\left(X\right)\right) & =g\left(0\right)p+g\left(1\right)3p+g\left(2\right)\left(1-4p\right)\\
+ & =4p-\frac{1}{3p}p+\left(1-4p\right)=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left(g\left(X\right)\right) & =g\left(0\right)p+g\left(1\right)p^{2}+g\left(2\right)\left(1-p-p^{2}\right)=0\\
+ & =\left(g\left(1\right)-g\left(2\right)\right)p^{2}+\left(g\left(0\right)-g\left(2\right)\right)p+g\left(2\right)=0
+\end{align*}
+
+\end_inset
+
+Since this is a quadratic the only way it could be identically zero (for
+ all 
+\begin_inset Formula $p$
+\end_inset
+
+) is if all coefficients are zero which implies that 
+\begin_inset Formula $g\left(0\right)=g\left(1\right)=g\left(2\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1037,6 +1886,32 @@ status open
 
 \begin_layout Plain Layout
 
+[6.21]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be one observation from the pdf
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=\left(\frac{\theta}{2}\right)^{\left|x\right|}\left(1-\theta\right)^{\left|x\right|}I\left(x\right)_{\left\{ -1,0,1\right\} }\text{ for }\theta\in\left[0,1\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [6.22]
 \end_layout
 
@@ -1461,7 +2336,7 @@ M-\bar{X} & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+
 
 \end_inset
 
- Hence 
+Hence 
 \begin_inset Formula $M-\bar{X}$
 \end_inset
 
@@ -1469,7 +2344,7 @@ M-\bar{X} & =\frac{1}{2}\left(X_{\left(\frac{n}{2}\right)}+X_{\left(\frac{n}{2}+
 \end_layout
 
 \begin_layout Enumerate
-By Thm 5.3.1...
+No clue.
 \end_layout
 
 \end_deeper

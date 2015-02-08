@@ -452,14 +452,248 @@ status open
 
 \begin_layout Plain Layout
 
-[7.11]
+[7.10]
 \end_layout
+
+\end_inset
+
+The common pdf is 
+\begin_inset Formula 
+\[
+f\left(x|\alpha,\beta\right)=\frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha}I\left(x\right)_{\left[0,\beta\right]}
+\]
 
 \end_inset
 
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Then 
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{x}|\alpha,\beta\right) & =\alpha^{n}\left(\frac{1}{\beta}\right)^{n\left(\alpha+1\right)}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha}\prod_{i=1}^{n}I\left(x_{i}\right)_{\left[0,\beta\right]}\\
+ & =\alpha^{n}\left(\frac{1}{\beta}\right)^{n\left(\alpha+1\right)}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha}I\left(\min_{i}\left(x_{i}\right)_{\left[0,\infty\right]}\right)I\left(\max_{i}\left(x_{i}\right)_{\left[-\infty,\beta\right]}\right)
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\left(\prod_{i=1}^{n}X_{i},\max_{i}\left(X_{i}\right)\right)$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\left(\alpha,\beta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $f\left(x|\alpha,\beta\right)$
+\end_inset
+
+ is a decreasing function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for 
+\begin_inset Formula $\beta>x_{\left(n\right)}$
+\end_inset
+
+ it's the case that for fixed 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ the likelihood is maximum at 
+\begin_inset Formula $\beta=x_{\left(n\right)}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\hat{\beta}_{MLE}=x_{\left(n\right)}$
+\end_inset
+
+.
+ Maximizing the log-likelihood wrt 
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\alpha}\log L\left(\alpha,\hat{\beta}|\mathbf{x}\right) & =\frac{n}{\alpha}-n\log x_{\left(n\right)}+\sum_{i=1}^{n}\log\left(x_{i}\right)=0\Rightarrow\\
+\alpha & =\left(\frac{1}{n}\sum_{i=1}^{n}\log x_{\left(n\right)}-\log x_{i}\right)^{-1}
+\end{align*}
+
+\end_inset
+
+The second derivative is
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}}{\partial\alpha^{2}}\log L\left(\alpha,\hat{\beta}|\mathbf{x}\right) & =-\frac{n}{\alpha^{2}}
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\left(\hat{\alpha},\hat{\beta}\right)=\left(\left(\frac{1}{n}\sum_{i=1}^{n}\log\left(X_{\left(n\right)}\right)-\log\left(X_{i}\right)\right)^{-1},X_{\left(n\right)}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.11]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ with common pdf
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=\theta x^{\theta-1}I\left(x\right)_{\left[0,1\right]}\text{ for }\theta>0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Then 
+\begin_inset Formula 
+\begin{align*}
+\log L\left(\theta|\mathbf{x}\right) & =\log f\left(\mathbf{x}|\theta\right)\\
+ & =n\log\theta+\left(\theta-1\right)\log\left(\prod_{i=1}^{n}x_{i}\right)\log\left(\prod_{i=1}^{n}I\left(x_{i}\right)_{\left[0,1\right]}\right)\text{ for }\theta>0\\
+ & =n\log\theta+\left(\theta-1\right)\log\left(\prod_{i=1}^{n}x_{i}\right)
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+\frac{d}{d\theta}\log L\left(\theta|\mathbf{x}\right) & =\frac{n}{\theta}+\log\left(\prod_{i=1}^{n}x_{i}\right)\\
+ & =\frac{n}{\theta}+\sum_{i=1}^{n}\log\left(x_{i}\right)=0
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $\mathbf{x}\neq\mathbf{0}$
+\end_inset
+
+ (and since 
+\begin_inset Formula $P\left(\mathbf{x}=\mathbf{0}\right)=0$
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+\theta=-\frac{n}{\sum_{i=1}^{n}\log\left(x_{i}\right)}=\frac{1}{-\left(\frac{1}{n}\sum_{i=1}^{n}\log\left(x_{i}\right)\right)}
+\]
+
+\end_inset
+
+To check that this is the global maximum
+\begin_inset Formula 
+\begin{align*}
+\frac{d^{2}}{d\theta^{2}}\log L\left(\theta|\mathbf{x}\right) & =-\frac{n}{\theta^{2}}<0
+\end{align*}
+
+\end_inset
+
+To compute 
+\begin_inset Formula $\text{Var}\left(\hat{\theta}_{MLE}\right)$
+\end_inset
+
+ first note 
+\begin_inset Formula $Y=-\log\left(X\right)\Rightarrow e^{-Y}=X$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+f_{Y}\left(y\right)=\theta e^{-\theta y}I\left(y\right)_{\left(0,\theta\right)}
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $Z=\frac{1}{n}\sum_{i=1}^{n}Y_{i}\sim\text{gamma}\left(n,\frac{1}{n\theta}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $W=1/Z\Rightarrow Z=1/W$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\theta}_{MLE}\right) & =E\left(\frac{1}{Z}\right)=E\left(W\right)\\
+ & =\int_{0}^{\infty}w\frac{\left(1/w\right)^{n-1}}{\Gamma\left(n\right)\left(\frac{1}{n\theta}\right)^{n}}e^{-\frac{n\theta}{w}}\left(\frac{1}{w^{2}}\right)dw\\
+ & =\frac{1}{\Gamma\left(n\right)}\int_{0}^{\infty}\left(\frac{n\theta}{w}\right)^{n}e^{-\frac{n\theta}{w}}dw\\
+ & =\frac{n\theta}{n-1}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\theta}_{MLE}^{2}\right) & =E\left(W^{2}\right)\\
+ & =\int_{0}^{\infty}w^{2}\frac{\left(1/w\right)^{n-1}}{\Gamma\left(n\right)\left(\frac{1}{n\theta}\right)^{n}}e^{-\frac{n\theta}{w}}\left(\frac{1}{w^{2}}\right)dw\\
+ & =\frac{1}{\Gamma\left(n\right)}\int_{0}^{\infty}w\left(\frac{n\theta}{w}\right)^{n}e^{-\frac{n\theta}{w}}dw\\
+ & =\frac{n^{2}\theta^{2}}{\left(n-1\right)\left(n-2\right)}
+\end{align*}
+
+\end_inset
+
+Hence
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(\hat{\theta}_{MLE}\right) & =\frac{n^{2}\theta^{2}}{\left(n-1\right)\left(n-2\right)}-\left(\frac{n\theta}{n-1}\right)^{2}\\
+ & =\frac{n^{2}\theta^{2}}{\left(n-1\right)}\left(\frac{1}{n-2}-\frac{1}{n-1}\right)\\
+ & =\frac{n^{2}\theta}{\left(n-1\right)^{2}\left(n-2\right)}\underset{n\to\infty}{\longrightarrow}0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The first moment of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E\left(X_{i}\right)=\theta\int_{0}^{1}x^{\theta}dx=\frac{\theta}{\theta+1}\Rightarrow\hat{\theta}_{MOM}=\frac{\bar{X}}{\bar{X}-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -471,7 +705,325 @@ status open
 
 \end_inset
 
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
 
+ be 
+\begin_inset Formula $\text{Bernoulli}\left(\theta\right)$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\begin{align*}
+P_{\theta}\left(X=x\right) & =\theta^{x}\left(1-\theta\right)^{1-x}\text{ for }\theta\in\left[0,\frac{1}{2}\right]\\
+ & =\left(\frac{\theta}{1-\theta}\right)^{x}\left(1-\theta\right)\text{ for }\theta\in\left[0,\frac{1}{2}\right]
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+L\left(\theta|\mathbf{x}\right)=\prod_{i=1}^{n}\theta^{x_{i}}\left(1-\theta\right)^{1-x_{i}}=\theta^{n\bar{x}}\left(1-\theta\right)^{1-n\bar{x}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $E\left(X_{i}\right)=\theta$
+\end_inset
+
+ it's the case that
+\begin_inset Formula 
+\[
+\hat{\theta}_{MOM}=\bar{X}
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $\hat{\theta}_{MLE}$
+\end_inset
+
+, if 
+\begin_inset Formula $\mathbf{x\neq}\mathbf{0}$
+\end_inset
+
+, then we maximize 
+\begin_inset Formula 
+\begin{align*}
+\log L\left(\theta|\mathbf{x}\right) & =\log\left(\theta^{n\bar{x}}\left(1-\theta\right)^{1-n\bar{x}}\right)\\
+ & =n\left(\bar{x}\log\left(\theta\right)+\left(1-\bar{x}\right)\log\left(1-\theta\right)\right)
+\end{align*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+\frac{d}{d\theta}\log L\left(\theta|\mathbf{x}\right) & =n\left(\frac{\bar{x}}{\theta}-\frac{1-\bar{x}}{1-\theta}\right)=0
+\end{align*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+\theta=\bar{x}
+\]
+
+\end_inset
+
+To show that 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is in fact a global maximum note that since 
+\begin_inset Formula 
+\begin{align*}
+\frac{d^{2}}{d\theta^{2}}\log L\left(\theta|\mathbf{x}\right) & =-n\left(\frac{\bar{x}}{\theta^{2}}+\frac{1-\bar{x}}{\left(1-\theta\right)^{2}}\right)<0
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathbf{x=}\mathbf{0}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\log L\left(\theta|\mathbf{x}\right) & =n\log\left(1-\theta\right)
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathbf{x=}\mathbf{1}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\log L\left(\theta|\mathbf{x}\right) & =n\log\left(\theta\right)
+\end{align*}
+
+\end_inset
+
+In either of these cases 
+\begin_inset Formula $\theta=\bar{x}$
+\end_inset
+
+ produces the right answer and furthermore 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\log L\left(\theta|\mathbf{x}\right)$
+\end_inset
+
+ is a monotone concave function.
+ But since 
+\begin_inset Formula $0\leq\theta\leq\frac{1}{2}$
+\end_inset
+
+ if 
+\begin_inset Formula $\bar{x}>\frac{1}{2}$
+\end_inset
+
+ then 
+\begin_inset Formula $\theta=\frac{1}{2}$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+\hat{\theta}_{MLE}=\min\left\{ \bar{X},\frac{1}{2}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For both 
+\begin_inset Formula $\hat{\theta}_{MOM}$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\hat{\theta}_{MLE}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\[
+E_{\theta}\left(\hat{\theta}-\theta\right)^{2}=E_{\theta}\left(\bar{X}-\theta\right)^{2}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+ is distributed as 
+\begin_inset Formula $\text{Binomial}\left(n,\theta\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E_{\theta}\left(\hat{\theta}-\theta\right)^{2} & =\frac{1}{n^{2}}E_{\theta}\left(n\bar{X}-n\theta\right)^{2}\\
+ & =\frac{1}{n^{2}}\text{Var}\left(n\bar{X}\right)\\
+ & =\frac{1}{n^{2}}n\theta\left(1-\theta\right)\\
+ & =\frac{1}{n}\theta\left(1-\theta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.13]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ with common pdf
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=\frac{1}{2}e^{-\left|x-\theta\right|}
+\]
+
+\end_inset
+
+Then the likelihood
+\begin_inset Formula 
+\begin{align*}
+L\left(\theta|\mathbf{x}\right) & =f\left(\mathbf{x}|\theta\right)\\
+ & =\frac{1}{2^{n}}e^{-\sum_{i=1}^{n}\left|x_{i}-\theta\right|}\\
+ & =\frac{1}{2^{n}}e^{-\sum_{i=1}^{n}\sqrt{\left(x_{i}-\theta\right)^{2}}}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta}L\left(\theta|\mathbf{x}\right) & =\frac{1}{2^{n}}\frac{\partial}{\partial\theta}e^{-\sum_{i=1}^{n}\sqrt{\left(x_{i}-\theta\right)^{2}}}\\
+ & =\frac{1}{2^{n}}e^{-\sum_{i=1}^{n}\sqrt{\left(x_{i}-\theta\right)^{2}}}\left(\sum_{i=1}^{n}\frac{\left(x_{i}-\theta\right)}{\sqrt{\left(x_{i}-\theta\right)^{2}}}\right)=0\Rightarrow\\
+\sum_{i=1}^{n}\frac{\left(x_{i}-\theta\right)}{\left|x_{i}-\theta\right|} & =0
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ is even then this will be true only if there are as many 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ greater than 
+\begin_inset Formula $\theta$
+\end_inset
+
+ as there are less than 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\[
+\theta=Median\left(x_{i}\right)=\frac{1}{2}\left(x_{\left(n/2\right)}+x_{\left(n/2+1\right)}\right)
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ is odd then this will be true only if there are as many 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ greater than 
+\begin_inset Formula $\theta$
+\end_inset
+
+ as there are less than 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and the extra term in the sum is zero, which is only the case if it equals
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ So again 
+\begin_inset Formula 
+\[
+\theta=Median\left(x_{i}\right)=x_{\left(\frac{n+1}{2}\right)}
+\]
+
+\end_inset
+
+Since 
 \end_layout
 
 \begin_layout Enumerate
@@ -485,8 +1037,357 @@ status open
 
 \end_inset
 
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ with common pdf
+\begin_inset Formula 
+\[
+f\left(x|\mu,\lambda\right)=\sqrt{\frac{\lambda}{2\pi x^{3}}}e^{-\frac{\lambda\left(x-\mu\right)^{2}}{2\mu^{2}x}}I\left(x\right)_{\mathbb{R}_{+}}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+L\left(\mu,\lambda|\mathbf{x}\right)=f\left(\mathbf{x}|\mu,\lambda\right)=\left(\sqrt{\frac{\lambda}{2\pi}}\right)^{n}\prod_{i=1}^{n}\left(\frac{1}{\sqrt{x_{i}^{3}}}\right)e^{-\frac{\lambda}{2\mu^{2}}\sum_{i=1}^{n}\frac{\left(x_{i}-\mu\right)^{2}}{x_{i}}}
+\]
+
+\end_inset
+
+and we maximize 
+\begin_inset Formula $\log L\left(\mu,\lambda|\mathbf{x}\right)$
+\end_inset
+
+ (with 
+\begin_inset Formula $\nabla=\left(\frac{\partial}{\partial\mu},\frac{\partial}{\partial\lambda}\right)$
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+\nabla\log L\left(\mu,\lambda|\mathbf{x}\right)=\begin{pmatrix}\frac{\lambda}{\mu^{3}}\sum_{i=1}^{n}\left(x_{i}-\mu\right)\\
+\frac{1}{2}\left(\frac{n}{\lambda}-\frac{1}{\mu^{2}}\sum_{i=1}^{n}\frac{\left(x_{i}-\mu\right)^{2}}{x_{i}}\right)
+\end{pmatrix}=\mathbf{0}
+\]
+
+\end_inset
+
+Then clearly 
+\begin_inset Formula $\mu=\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\frac{1}{2}\left(\frac{n}{\lambda}-\frac{1}{\mu^{2}}\sum_{i=1}^{n}\frac{\left(x_{i}-\mu\right)^{2}}{x_{i}}\right)=0
+\]
+
+\end_inset
+
+implies that
+\begin_inset Formula 
+\begin{align*}
+\lambda & =\frac{n}{\sum_{i=1}^{n}\left(\frac{x_{i}-\bar{x}}{\bar{x}}\right)^{2}\frac{1}{x_{i}}}\\
+ & =\frac{n}{\sum_{i=1}^{n}\left(\frac{x_{i}}{\bar{x}}-1\right)^{2}\frac{1}{x_{i}}}\\
+ & =\frac{n}{\sum_{i=1}^{n}\left(\frac{x_{i}^{2}}{\bar{x}^{2}}+1-2\frac{x_{i}}{\bar{x}}\right)\frac{1}{x_{i}}}\\
+ & =\frac{n}{\sum_{i=1}^{n}\left(\frac{x_{i}}{\bar{x}^{2}}+\frac{1}{x_{i}}-\frac{2}{\bar{x}}\right)}\\
+ & =\frac{n}{\sum_{i=1}^{n}\left(\frac{1}{x_{i}}\right)+\left(\frac{n\bar{x}}{\bar{x}^{2}}-\frac{2n}{\bar{x}}\right)}\\
+ & =\frac{n}{\sum_{i=1}^{n}\left(\frac{1}{x_{i}}\right)-\frac{n}{\bar{x}}}\\
+ & =\frac{n}{\sum_{i=1}^{n}\left(\frac{1}{x_{i}}-\frac{1}{\bar{x}}\right)}
+\end{align*}
+
+\end_inset
+
+Finally confirming they are in fact maxima
+\begin_inset Formula 
+\begin{align*}
+\left|\left.\nabla^{2}\log L\left(\mu,\lambda|\mathbf{x}\right)\right|_{\mu=\bar{x},\lambda}\right| & =\left|\left.\left(\begin{array}{cc}
+-\sum_{i=1}^{n}\lambda\left(\frac{\mu^{2}+4\mu\left(x_{i}-\mu\right)+3\left(x_{i}-\mu\right)^{2}}{\mu^{4}x_{i}}\right) & \sum_{i=1}^{n}\frac{\mu\left(x_{i}-\mu\right)+\left(x_{i}-\mu\right)^{2}}{x_{i}\mu^{3}}\\
+-\sum_{i=1}^{n}\frac{\mu\left(x_{i}-\mu\right)+\left(x_{i}-\mu\right)^{2}}{x_{i}\mu^{3}} & -\frac{n}{2\lambda^{2}}
+\end{array}\right)\right|_{\mu=\bar{x},\lambda}\right|\\
+ & =\left|\left(\begin{array}{cc}
+-\lambda\sum_{i=1}^{n}\frac{\left(1+2\right)x_{i}-2\bar{x}}{\bar{x}^{4}} & \sum_{i=1}^{n}\frac{\left(x_{i}-\bar{x}\right)}{\bar{x}^{3}}\\
+\sum_{i=1}^{n}\frac{\left(x_{i}-\bar{x}\right)}{\bar{x}^{3}} & -\frac{n}{2\lambda^{2}}
+\end{array}\right)\right|\\
+ & =\left|\left(\begin{array}{cc}
+-\lambda\frac{n}{\bar{x}^{3}} & 0\\
+0 & -\frac{n}{2\lambda^{2}}
+\end{array}\right)\right|
+\end{align*}
+
+\end_inset
+
+and by the 
+\begin_inset Formula $AM\geq GM\geq HM$
+\end_inset
+
+ inequality
+\begin_inset Formula 
+\begin{align*}
+AM & \geq HM\\
+\bar{x} & \geq\frac{n}{\left(\sum_{i=1}^{n}\frac{1}{x_{i}}\right)}\\
+\left(\sum_{i=1}^{n}\frac{1}{x_{i}}\right) & \geq\frac{n}{\bar{x}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ (almost surely since 
+\begin_inset Formula $AM=GM=HM$
+\end_inset
+
+ iff 
+\begin_inset Formula $\forall_{i}\, x_{i}=x$
+\end_inset
+
+ some fixed quantity, a measure 0 event).
+ So finally 
+\begin_inset Formula $\left(\hat{\mu}_{MLE},\hat{\lambda}_{MLE}\right)=\left(\bar{X},\frac{n}{\sum_{i=1}^{n}\left(\frac{1}{X_{i}}-\frac{1}{\bar{X}}\right)}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.19]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y_{1},\dots,Y_{n}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+Y_{i}=\beta x_{i}+E_{i}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ are fixed constants and 
+\begin_inset Formula $E_{i}\sim\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Y_{i}\sim\text{n}\left(\beta x_{i},\sigma^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+f\left(y_{i}|\beta,\sigma^{2}\right) & =\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{\left(y_{i}-\beta x_{i}\right)^{2}}{2\sigma^{2}}}\\
+ & =\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\left(\frac{y_{i}^{2}}{2\sigma^{2}}+\frac{\left(\beta x_{i}\right)^{2}}{2\sigma^{2}}+\frac{y_{i}\beta x_{i}}{\sigma^{2}}\right)}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+By Thm 6.2.10 
+\begin_inset Formula $\left(\sum_{i=1}^{n}Y_{i}^{2},\sum_{i=1}^{n}Y_{i}x_{i}\right)$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\left(\sigma^{2},\beta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For fixed 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ maximizing
+\begin_inset Formula 
+\[
+\log L\left(\beta,\sigma^{2}|\mathbf{y}\right)=n\log\left(\frac{1}{\sqrt{2\pi\sigma^{2}}}\right)^{n}-\left(\sum_{i=1}^{n}\frac{\left(y_{i}-\beta x_{i}\right)^{2}}{2\sigma^{2}}\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\beta}\log L\left(\beta,\sigma^{2}|\mathbf{y}\right) & =0\\
+\left(\sum_{i=1}^{n}\frac{\left(y_{i}-\beta x_{i}\right)x_{i}}{\sigma^{2}}\right) & =0\\
+\sum_{i=1}^{n}y_{i}x_{i} & =\sum_{i=1}^{n}\beta\left(x_{i}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\beta=\frac{1}{\sum_{i=1}^{n}\left(x_{i}\right)^{2}}\sum_{i=1}^{n}y_{i}x_{i}$
+\end_inset
+
+.
+ Then checking the second derivative 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\frac{\partial^{2}}{\partial\beta^{2}}\log L\left(\beta,\sigma^{2}|\mathbf{y}\right)=-\sum_{i=1}^{n}\frac{x_{i}^{2}}{\sigma^{2}}<0
+\]
+
+\end_inset
+
+Hence
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\[
+\hat{\beta}=\frac{1}{\mathbf{x}^{2}}\sum_{i=1}^{n}Y_{i}x_{i}
+\]
+
+\end_inset
+
+For the bias of 
+\begin_inset Formula $\hat{\beta}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E_{\beta}\hat{\beta}=\frac{1}{\mathbf{x}^{2}}E_{\beta}\left(\sum_{i=1}^{n}Y_{i}x_{i}\right)=\frac{1}{\mathbf{x}^{2}}\sum_{i=1}^{n}x_{i}E_{\beta}\left(Y_{i}\right)=\frac{\beta}{\mathbf{x}^{2}}\sum_{i=1}^{n}x_{i}x_{i}=\beta
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\text{Bias}_{\beta}\hat{\beta}=\beta-\beta=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In general 
+\begin_inset Formula $Y_{i}x_{i}\sim\text{n}\left(\beta x_{i},\left(\sigma x_{i}\right)^{2}\right)$
+\end_inset
+
+ and by corollary 4.6.10 
+\begin_inset Formula $\sum_{i}Y_{i}\frac{x_{i}}{\sum x_{i}}\sim\text{n}\left(\sum_{i}\frac{x_{i}}{\sum x_{i}^{2}}\left(\beta x_{i}\right),\sigma^{2}\sum_{i}\left(\frac{x_{i}}{\sum_{i}x_{i}^{2}}\right)^{2}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\hat{\beta}\sim\text{n}\left(\beta,\frac{\sigma^{2}}{\sum_{i}x_{i}^{2}}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.20]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y_{1},\dots,Y_{n}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+Y_{i}=\beta x_{i}+E_{i}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ are fixed constants and 
+\begin_inset Formula $E_{i}\sim\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Y_{i}\sim\text{n}\left(\beta x_{i},\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula 
+\[
+Z=\sum_{i=1}^{n}\left(\frac{1}{\sum_{i=1}^{n}x_{i}}\right)Y_{i}
+\]
+
+\end_inset
+
+ Then by corollary 4.6.10
+\begin_inset Formula 
+\begin{align*}
+Z & \sim\text{n}\left(\sum_{i=1}^{n}\left(\frac{1}{\sum_{i=1}^{n}x_{i}}\right)\beta x_{i},\sum_{i=1}^{n}\left(\frac{1}{\sum_{i=1}^{n}x_{i}}\right)^{2}\sigma^{2}\right)\\
+ & \sim\text{n}\left(\beta,\left(\frac{\sqrt{n}\sigma}{\sum_{i=1}^{n}x_{i}}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

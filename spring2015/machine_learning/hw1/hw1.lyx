@@ -1024,10 +1024,38 @@ f\left(x,\boldsymbol{\alpha}\right)=\alpha_{3}x^{3}+\alpha_{2}x^{2}+\alpha_{1}x+
 \begin_inset Formula $R_{\text{emp}}\left(\boldsymbol{\alpha}\right)$
 \end_inset
 
- by method of critical points
+ by method of critical points 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+(with 
+\begin_inset Formula $\nabla=\left(\frac{\partial}{\partial\alpha_{0}},\frac{\partial}{\partial\alpha_{1}},\frac{\partial}{\partial\alpha_{2}},\frac{\partial}{\partial\alpha_{3}}\right)$
+\end_inset
+
+)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
 \begin_inset Formula 
 \begin{align*}
-0=\nabla\cdot R_{\text{emp}}\left(\boldsymbol{\alpha}\right) & =\begin{pmatrix}\frac{\partial}{\partial\alpha_{0}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
+0=\nabla R_{\text{emp}}\left(\boldsymbol{\alpha}\right) & =\begin{pmatrix}\frac{\partial}{\partial\alpha_{0}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
 \frac{\partial}{\partial\alpha_{1}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
 \frac{\partial}{\partial\alpha_{2}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)\\
 \frac{\partial}{\partial\alpha_{3}}R_{\text{emp}}\left(\boldsymbol{\alpha}\right)
