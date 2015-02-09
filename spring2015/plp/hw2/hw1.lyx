@@ -309,47 +309,44 @@ The only non-terminal for which EPS is true is
 \left\langle IdentInFactor\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|{\color{red}[}\left\langle Expression\right\rangle {\color{red}]}|{\color{red}(}\left\langle ExpressionList\right\rangle {\color{red})}\right)\\
  & =\left\{ IDENT\right\} \\
 \left\langle List\right\rangle  & ::={\color{red}@}\,\left({\color{red}@[}\left\langle KeyValueList\right\rangle {\color{red}]}|{\color{red}[}\left\langle ExpressionList\right\rangle {\color{red}]}\right)\\
-\left\langle Factor\right\rangle  & ::=\left\langle IdentInFactor\right\rangle |{\color{red}INT\_LIT}|{\color{red}true}|{\color{red}false}|{\color{red}STRING\_LIT}|{\color{red}!}\left\langle Factor\right\rangle |{\color{red}-}\left\langle Factor\right\rangle |{\color{red}size}{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\\
- & |{\color{red}key(}\left\langle Expression\right\rangle {\color{red})}|{\color{red}value(}\left\langle Expression\right\rangle {\color{red})}|\left\langle Closure\right\rangle |\left\langle List\right\rangle |{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\\
+ & =\left\{ @\right\} \\
+\left\langle Factor\right\rangle  & ::=\left\langle IdentInFactor\right\rangle |{\color{red}INT\_LIT}|{\color{red}true}|{\color{red}false}|{\color{red}STRING\_LIT}|{\color{red}(}\left\langle Expression\right\rangle {\color{red})}|{\color{red}!}\left\langle Factor\right\rangle |{\color{red}-}\left\langle Factor\right\rangle |{\color{red}size}{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\\
+ & |{\color{red}key(}\left\langle Expression\right\rangle {\color{red})}|{\color{red}value(}\left\langle Expression\right\rangle {\color{red})}|\left\langle Closure\right\rangle |\left\langle List\right\rangle \\
  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle Thing\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle Elem\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle Term\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle Expression\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
-\left\langle RangeExpr\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
-\left\langle RangeExprTail\right\rangle  & ::={\color{red}..}\left\langle Expression\right\rangle \\
- & =\left\{ ..\right\} \\
 \left\langle KeyValueExpression\right\rangle  & =\left\{ IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle KeyValueList\right\rangle  & =\left\{ \epsilon,IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
 \left\langle ExpressionList\right\rangle  & =\left\{ \epsilon,IDENT,INT\_LIT,true,false,STRING\_LIT,(,!,-,size,key,value,\{,@\right\} \\
-\left\langle LRValue\right\rangle  & ::={\color{red}[}\left\langle ExpressionList\right\rangle {\color{red}]}\\
+\left\langle LValueTail\right\rangle  & ::={\color{red}[}\left\langle ExpressionList\right\rangle {\color{red}]}\\
  & =\left\{ [\right\} \\
-\left\langle LValue\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|\left\langle LRValue\right\rangle \right)\\
+\left\langle LValue\right\rangle  & ::={\color{red}IDENT}\,\left(\epsilon|\left\langle LValueTail\right\rangle \right)\\
  & =\left\{ IDENT\right\} \\
-\left\langle WhileStarExprTail\right\rangle  & ::=\epsilon|\left\langle RangeExprTail\right\rangle {\color{red})}\left\langle Block\right\rangle \\
-\left\langle WhileStar\right\rangle  & ::={\color{red}*{\color{red}(}}\left\langle Expression\right\rangle \left\langle WhileStarExprTail\right\rangle \\
+\left\langle WhileStar\right\rangle  & ::={\color{red}*{\color{red}(}}\left(\left\langle Expression\right\rangle {\color{red})}|{\color{red}..}\left\langle Expression\right\rangle {\color{red})}\right)\\
  & =\left\{ *\right\} \\
-\left\langle While\right\rangle  & ::={\color{red}while}\left(\left\langle WhileStar\right\rangle |{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\left\langle Block\right\rangle \right)\\
+\left\langle While\right\rangle  & ::={\color{red}while}\left(\left\langle WhileStar\right\rangle |{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\right)\left\langle Block\right\rangle \\
  & =\left\{ while\right\} \\
-\left\langle If\right\rangle  & ::={\color{red}if}{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\left\langle Block\right\rangle \\
+\left\langle If\right\rangle  & ::={\color{red}if}{\color{red}(}\left\langle Expression\right\rangle {\color{red})}\left\langle Block\right\rangle \left\langle Else\right\rangle \\
  & =\left\{ if\right\} \\
 \left\langle Else\right\rangle  & ::=\epsilon|{\color{red}else}\left\langle Block\right\rangle \\
  & =\left\{ \epsilon,else\right\} \\
-\left\langle Statement\right\rangle  & =\left\{ \epsilon,IDENT,print,\left\langle While\right\rangle ,if,\%,return,;\right\} \\
+\left\langle Statement\right\rangle  & ::=\left\langle LValue\right\rangle {\color{red}=}\left\langle Expression\right\rangle |{\color{red}print}\left\langle Expression\right\rangle |\left\langle While\right\rangle |\left\langle If\right\rangle |{\color{red}\%}%\left\langle Expression\right\rangle |{\color{red}return}\left\langle Expression\right\rangle |\epsilon{\color{red}}
+\\
+ & =\left\{ \epsilon,IDENT,print,while,if,\%,return,;\right\} \\
 \left\langle VarDec\right\rangle  & =\left\{ IDENT\right\} \\
 \left\langle FormalArgList\right\rangle  & =\left\{ \epsilon,IDENT\right\} \\
-\left\langle Closure\right\rangle  & ::==\left\{ \left\langle FormalArgList\right\rangle ->\left(\left\langle Statement\right\rangle {\color{red};}\right)*\right\} \\
+\left\langle Closure\right\rangle  & ::=\left\{ \left\langle FormalArgList\right\rangle ->\left(\left\langle Statement\right\rangle {\color{red};}\right)*\right\} \\
  & =\left\{ \{\right\} \\
-\left\langle ClosureDec\right\rangle  & =\left\{ IDENT\right\} \\
 \left\langle CompositeValueType\right\rangle  & ::={\color{red}@}\left({\color{red}[}\left\langle Type\right\rangle {\color{red}]}|{\color{red}@}{\color{red}[}\left\langle SimpleType\right\rangle {\color{red}:}\left\langle Type\right\rangle {\color{red}]}\right)\\
  & =\left\{ @\right\} \\
 \left\langle SimpleType\right\rangle  & =\left\{ int,boolean,string\right\} \\
-\left\langle Type\right\rangle  & =\left\{ int,boolean,string,@\right\} \\
-\left\langle DecTail\right\rangle  & ={\color{red}=}\left\langle Closure\right\rangle |{\color{red}:}\left\langle CompositeValueType\right\rangle |{\color{red}:}\left\langle SimpleType\right\rangle |\epsilon\\
+\left\langle Type\right\rangle  & ::=\left\langle CompositeValueType\right\rangle |\left\langle SimpleType\right\rangle \\
+ & =\left\{ int,boolean,string,@\right\} \\
+\left\langle DecTail\right\rangle  & ={\color{red}=}\left\langle Closure\right\rangle |{\color{red}:}\left\langle Type\right\rangle |\epsilon\\
  & =\left\{ =,:,\epsilon\right\} \\
-\left\langle DecHead\right\rangle  & ::={\color{red}IDENT}\left\langle DecTail\right\rangle \\
- & =\left\{ IDENT\right\} \\
-\left\langle Declaration\right\rangle  & ::={\color{red}def}\left\langle DecHead\right\rangle \\
+\left\langle Declaration\right\rangle  & ::={\color{red}def}\,{\color{red}IDENT}\left\langle DecTail\right\rangle \\
 \left\langle Declaration\right\rangle  & =\left\{ def\right\} \\
 \left\langle Block\right\rangle  & =\left\{ \{\right\} \\
 \left\langle ImportList\right\rangle  & =\left\{ \epsilon,import\right\} \\
