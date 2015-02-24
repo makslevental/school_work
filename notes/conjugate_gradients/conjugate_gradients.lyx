@@ -1,0 +1,892 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{cancel}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part
+Quadratic Forms
+\end_layout
+
+\begin_layout Standard
+The gradient of quadratic form 
+\begin_inset Formula 
+\[
+f\left(\mathbf{x}\right)=\frac{1}{2}\mathbf{x}^{t}\mathbf{A}\mathbf{x}-\mathbf{b}^{t}\mathbf{x}+\mathbf{c}
+\]
+
+\end_inset
+
+is
+\begin_inset Formula 
+\begin{align*}
+\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{x}_{0}} & =\left.\begin{bmatrix}\frac{\partial}{\partial x_{1}}f\\
+\vdots\\
+\frac{\partial}{\partial x_{n}}f
+\end{bmatrix}\right|_{\mathbf{x}=\mathbf{x}_{0}}\\
+ & \equiv\nabla f\left(\mathbf{x}_{0}\right)\\
+ & =\frac{1}{2}\left(\mathbf{A}^{t}+\mathbf{A}\right)\mathbf{x}_{0}-\mathbf{b}
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathbf{A}^{t}=\mathbf{A}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}_{0}\right) & =\mathbf{A}\mathbf{x}_{0}-\mathbf{b}
+\end{align*}
+
+\end_inset
+
+hence minimizing 
+\begin_inset Formula $f$
+\end_inset
+
+ is equivalent to solving 
+\begin_inset Formula $\mathbf{A}\mathbf{x}=\mathbf{b}$
+\end_inset
+
+ and vice-versa.
+ If 
+\begin_inset Formula $\mathbf{A}^{t}=\mathbf{A}$
+\end_inset
+
+ and positive semi-definite and 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ is such that 
+\begin_inset Formula $\mathbf{A}\mathbf{x}=\mathbf{b}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathbf{y}=\mathbf{x}+\boldsymbol{\delta}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{y}\right) & =\frac{1}{2}\left(\mathbf{x}+\boldsymbol{\delta}\right)^{t}\mathbf{A}\left(\mathbf{x}+\boldsymbol{\delta}\right)-\mathbf{b}^{t}\left(\mathbf{x}+\boldsymbol{\delta}\right)+\mathbf{c}\\
+ & =\frac{1}{2}\mathbf{x}^{t}\mathbf{A}\mathbf{x}+\frac{1}{2}\boldsymbol{\delta}^{t}\mathbf{A}\mathbf{x}+\frac{1}{2}\boldsymbol{\mathbf{x}}^{t}\mathbf{A}\boldsymbol{\delta}+\frac{1}{2}\boldsymbol{\delta}^{t}\mathbf{A}\boldsymbol{\delta}-\mathbf{b}^{t}\mathbf{x}-\mathbf{b}^{t}\boldsymbol{\delta}+\mathbf{c}\\
+ & =\frac{1}{2}\mathbf{x}^{t}\mathbf{A}\mathbf{x}+\boldsymbol{\delta}^{t}\mathbf{A}\mathbf{x}+\frac{1}{2}\boldsymbol{\delta}^{t}\mathbf{A}\boldsymbol{\delta}-\mathbf{b}^{t}\mathbf{x}-\mathbf{b}^{t}\boldsymbol{\delta}+\mathbf{c}\text{ by symmetry of }\mathbf{A}\\
+ & =\frac{1}{2}\mathbf{x}^{t}\mathbf{A}\mathbf{x}+\boldsymbol{\delta}^{t}\mathbf{b}+\frac{1}{2}\boldsymbol{\delta}^{t}\mathbf{A}\boldsymbol{\delta}-\mathbf{b}^{t}\mathbf{x}-\mathbf{b}^{t}\boldsymbol{\delta}+\mathbf{c}\\
+ & =\frac{1}{2}\mathbf{x}^{t}\mathbf{A}\mathbf{x}-\mathbf{b}^{t}\mathbf{x}+\mathbf{c}+\frac{1}{2}\boldsymbol{\delta}^{t}\mathbf{A}\boldsymbol{\delta}\\
+ & =f\left(\mathbf{x}\right)+\frac{1}{2}\boldsymbol{\delta}^{t}\mathbf{A}\boldsymbol{\delta}\geq f\left(\mathbf{x}\right)\text{ by positive semi-definiteness of }\mathbf{A}
+\end{align*}
+
+\end_inset
+
+Therefore for positive semi-definite and symmetric 
+\begin_inset Formula $f$
+\end_inset
+
+ there exists a unique minimum at 
+\begin_inset Formula $\mathbf{x}=\mathbf{A}^{-1}\mathbf{b}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part
+Gradient Descent
+\end_layout
+
+\begin_layout Standard
+How to minimize 
+\begin_inset Formula $f$
+\end_inset
+
+? Most naive strategy is to pick an arbitrary point 
+\begin_inset Formula $\mathbf{x}_{0}$
+\end_inset
+
+ and head down the gradient, i.e.
+ head in the direction 
+\begin_inset Formula 
+\begin{align*}
+-\nabla f\left(\mathbf{x}_{0}\right) & =\mathbf{b}-\mathbf{A}\mathbf{x}_{0}
+\end{align*}
+
+\end_inset
+
+Define 
+\begin_inset Formula $\mathbf{r}_{0}\equiv-\nabla f\left(\mathbf{x}_{0}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{x}_{1} & =\mathbf{x}_{0}+\alpha_{0}\mathbf{r}_{0}
+\end{align*}
+
+\end_inset
+
+But how to pick how far in the direction 
+\begin_inset Formula $\mathbf{r}_{0}\equiv-\nabla f\left(\mathbf{x}_{0}\right)$
+\end_inset
+
+ ? Do a 
+\begin_inset Quotes eld
+\end_inset
+
+line search
+\begin_inset Quotes erd
+\end_inset
+
+ to minimize 
+\begin_inset Formula $f$
+\end_inset
+
+ on the line 
+\begin_inset Formula $\mathbf{x}_{0}+\alpha_{0}\mathbf{r}_{0}$
+\end_inset
+
+, i.e.
+ find where 
+\begin_inset Formula 
+\[
+\frac{d}{d\alpha}f\left(\mathbf{x}_{0}+\alpha_{0}\mathbf{r}_{0}\right)=0
+\]
+
+\end_inset
+
+By the chain rule 
+\begin_inset Formula 
+\begin{align*}
+\frac{d}{d\alpha}f\left(\mathbf{x}_{0}+\alpha_{0}\mathbf{r}_{0}\right) & =\left(\nabla f\left(\mathbf{x}_{0}\right)\right)^{t}\frac{d}{d\alpha}\left(\mathbf{x}_{0}+\alpha_{0}\mathbf{r}_{0}\right)\\
+ & =\left(\nabla f\left(\mathbf{x}_{0}\right)\right)^{t}\mathbf{r}_{0}
+\end{align*}
+
+\end_inset
+
+Therefore where 
+\begin_inset Formula $\nabla f\left(\mathbf{x}_{0}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{r}_{0}$
+\end_inset
+
+ are orthogonal is minimum of 
+\begin_inset Formula $f$
+\end_inset
+
+ on the line.
+ We can use this to determine 
+\begin_inset Formula $\alpha_{0}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-\left(\nabla f\left(\mathbf{x}_{0}\right)\right)^{t}\mathbf{r}_{0} & =0\\
+\mathbf{r}_{1}^{t}\mathbf{r}_{0} & =0\\
+\left(\mathbf{b}-\mathbf{A}\left(\mathbf{x}_{0}+\alpha_{0}\mathbf{r}_{0}\right)\right)^{t}\mathbf{r}_{0} & =0\\
+\left(\mathbf{b}-\mathbf{A}\mathbf{x}_{0}\right)^{t}\mathbf{r}_{0}-\alpha_{0}\left(\mathbf{A}\mathbf{r}_{0}\right)^{t}\mathbf{r}_{0} & =0\Rightarrow\\
+\alpha_{0}\left(\mathbf{A}\mathbf{r}_{0}\right)^{t}\mathbf{r}_{0} & =\left(\mathbf{b}-\mathbf{A}\mathbf{x}_{0}\right)^{t}\mathbf{r}_{0}\Rightarrow\\
+\alpha_{0} & =\frac{\mathbf{r}_{0}^{t}\mathbf{r}_{0}}{\mathbf{r}_{0}^{t}\mathbf{A}\mathbf{r}_{0}}
+\end{align*}
+
+\end_inset
+
+Therefore the gradient descent algorithm is a set of update rules
+\begin_inset Formula 
+\begin{align*}
+\mathbf{r}_{i} & =\mathbf{b}-\mathbf{A}\mathbf{x}_{i}\\
+\alpha_{i} & =\frac{\mathbf{r}_{i}^{t}\mathbf{r}_{i}}{\mathbf{r}_{i}^{t}\mathbf{A}\mathbf{r}_{i}}\\
+\mathbf{x}_{i+1} & =\mathbf{x}_{i}+\alpha_{i}\mathbf{r}_{i}
+\end{align*}
+
+\end_inset
+
+The complexity of the algorithm is dominated by matrix multiplications 
+\begin_inset Formula $\mathbf{A}\mathbf{x}_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{A}\mathbf{r}_{i}$
+\end_inset
+
+ but we can eliminate one: multiply the last update rule by 
+\begin_inset Formula $-\mathbf{A}$
+\end_inset
+
+ and add 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{b}-\mathbf{A}\mathbf{x}_{i+1} & =\mathbf{b}-\mathbf{A}\mathbf{x}_{i}-\alpha_{i}\mathbf{A}\mathbf{r}_{i}\\
+\mathbf{r}_{i+1} & =\mathbf{r}_{i}-\alpha_{i}\mathbf{A}\mathbf{r}_{i}
+\end{align*}
+
+\end_inset
+
+The disadvantage of using this recurrence relation is accumulation of floating
+ point roundoff error in computation of 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+, not corrected by this recurrence since it's computed isolated from 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+.
+ Solution is to periodically use the naive update rule for 
+\begin_inset Formula $\mathbf{r}_{i}$
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+So what's the problem with this? Why can't we just always use gradient descent?
+ Let 
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{x}\right) & =\frac{1}{2}\mathbf{x}^{t}\begin{pmatrix}2 & 1 & 0\\
+1 & 2 & 0\\
+0 & 0 & 2
+\end{pmatrix}\mathbf{x}\\
+ & =x_{1}^{2}+x_{1}x_{2}+x_{2}^{2}+x_{3}^{2}
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $\mathbf{x}_{0}=\left(1,2,3\right)$
+\end_inset
+
+.
+ Minimizing direction 
+\begin_inset Formula $\mathbf{e}_{1}$
+\end_inset
+
+ we get to 
+\begin_inset Formula $\mathbf{x}_{1}=\left(-1,2,3\right)$
+\end_inset
+
+ and after minimizing in direction 
+\begin_inset Formula $\mathbf{e}_{2}$
+\end_inset
+
+ we get to 
+\begin_inset Formula $\mathbf{x}_{2}=\left(-1,1/2,3\right)$
+\end_inset
+
+.
+ But now the minimizing in the 
+\begin_inset Formula $\mathbf{e}_{1}$
+\end_inset
+
+ direction has been 
+\begin_inset Quotes eld
+\end_inset
+
+messed up
+\begin_inset Quotes erd
+\end_inset
+
+, in that if the line search along 
+\begin_inset Formula $\mathbf{e}_{1}$
+\end_inset
+
+ is repeated it's shifted to 
+\begin_inset Formula $x_{1}=-1/4$
+\end_inset
+
+.
+ So the problem turns out to be that picking line search directions in this
+ manner selects directions that interfere with each other, undo already
+ effected minimizations.
+ How can we pick directions that don't behave this way?
+\end_layout
+
+\begin_layout Part
+Conjugate Directions
+\end_layout
+
+\begin_layout Standard
+We want to choose directions 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ such that if we've just performed a minimization along direction 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ it won't be undone I.e.
+ we want 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ to be perpendicular to 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ before and after the minimization.
+ This will be true if 
+\emph on
+the change in 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ is perpendicular to 
+\emph default
+
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+.
+ Let 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ be the point from which we set out in the direction 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+.
+ Then we want
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{u}\cdot\delta\left(\nabla f\right) & =0\\
+\mathbf{u}\cdot\nabla f\left(\mathbf{x}_{i+1}\right) & =0\text{ given that }\mathbf{u}\cdot\nabla f\left(\mathbf{x}_{i}\right)=0\\
+\mathbf{u}\cdot\left(\nabla f\left(\mathbf{x}_{i+1}\right)-\nabla f\left(\mathbf{x}_{i}\right)\right) & =0\\
+\mathbf{u}\cdot\left(\left(\mathbf{b}-\mathbf{A}\mathbf{x}_{i+1}\right)-\left(\mathbf{b}-\mathbf{A}\mathbf{x}_{i}\right)\right) & =0\\
+\mathbf{u}\cdot\left(\mathbf{A}\mathbf{x}_{i}-\mathbf{A}\mathbf{x}_{i+1}\right) & =0\\
+-\mathbf{u}\cdot\mathbf{A}\mathbf{v} & =0
+\end{align*}
+
+\end_inset
+
+This is kind of not correct (since we don't compute the gradients the points
+ we arrive at) but oh well it's still true.
+ We need a set of directions 
+\begin_inset Formula $\mathbf{d}_{i}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\mathbf{d}_{i}\cdot\mathbf{A}\cdot\mathbf{d}_{j}=0\text{ for }i\ne j
+\]
+
+\end_inset
+
+Such a set of directions is called 
+\emph on
+conjugate
+\emph default
+.
+ So if we had in hand a set of conjugate directions we could line search
+ all each one in sequence and minimize 
+\begin_inset Formula $f$
+\end_inset
+
+ (in at most number of steps equal to the number of conjugate directions).
+ Very quickly a 
+\begin_inset Quotes eld
+\end_inset
+
+technical
+\begin_inset Quotes erd
+\end_inset
+
+ lemma
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Lemma
+\series default
+: If 
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ is positive definite then a set of conjugate vectors/directions 
+\begin_inset Formula $\left\{ \mathbf{d}_{0},\dots,\mathbf{d}_{n-1}\right\} $
+\end_inset
+
+ is linearly independent and hence forms a basis for 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Proof
+\series default
+: Let
+\begin_inset Formula 
+\[
+\sum_{i=0}^{n-1}c_{i}\mathbf{d}_{i}=0
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+\mathbf{d}_{i}^{t}\mathbf{A}\sum_{i=0}^{n-1}c_{i}\mathbf{d}_{i} & =0\\
+\sum_{i=0}^{n-1}c_{i}\mathbf{d}_{i}^{t}\mathbf{A}\mathbf{d}_{i} & =0\\
+c_{i}\mathbf{d}_{i}^{t}\mathbf{A}\mathbf{d}_{i} & =0
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $c_{i}=0$
+\end_inset
+
+ since 
+\series bold
+
+\begin_inset Formula $\mathbf{A}$
+\end_inset
+
+ 
+\series default
+is positive definite.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Now we just need some conjugate directions.
+ Gram-Schmidt to the rescue.
+ Start with a set of already linearly independent vectors/directions 
+\begin_inset Formula $\left\{ \mathbf{u}_{i}\right\} $
+\end_inset
+
+ (the standard basis vectors 
+\begin_inset Formula $\left\{ \mathbf{e}_{i}\right\} $
+\end_inset
+
+ will suffice) and use 
+\begin_inset Quotes eld
+\end_inset
+
+conjugate
+\begin_inset Quotes erd
+\end_inset
+
+ Gram-Schmidt to 
+\begin_inset Quotes eld
+\end_inset
+
+
+\series bold
+A
+\series default
+-orthogonalize
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbf{d}_{i}=\mathbf{u}_{i}-\sum_{k=0}^{i-1}\beta_{ik}\mathbf{d}_{k}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\beta_{ik}$
+\end_inset
+
+ is the standard
+\begin_inset Formula 
+\[
+\beta_{ik}=\frac{\mathbf{u}_{i}\mathbf{A}\mathbf{d}_{k}}{\mathbf{d}_{k}^{t}\mathbf{A}\mathbf{d}_{k}}
+\]
+
+\end_inset
+
+Here's are the update rules if we have such a set 
+\begin_inset Formula $\left\{ \mathbf{d}_{0},\dots,\mathbf{d}_{n-1}\right\} $
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathbf{r}_{i+1} & =\mathbf{r}_{i}-\alpha_{i}\mathbf{A}\mathbf{d}_{i}\\
+\alpha_{i} & =\frac{\mathbf{d}_{i}^{t}\mathbf{r}_{i}}{\mathbf{d}_{i}^{t}\mathbf{A}\mathbf{d}_{i}}\\
+\mathbf{x}_{i+1} & =\mathbf{x}_{i}+\alpha_{i}\mathbf{d}_{i}
+\end{align*}
+
+\end_inset
+
+The computation of 
+\begin_inset Formula $\mathbf{r}_{i}$
+\end_inset
+
+ is for the purposes of the line search.
+ So we're set right? We can cook up some conjugate directions and run the
+ regular gradient descent right? Unfortunately this scheme has the slight
+ flaw that all conjugate vectors to have forever be kept in memory and the
+ quite serious flaw that all of the repetitive matrix multiplications mean
+ an 
+\begin_inset Formula $O\left(n^{3}\right)$
+\end_inset
+
+ runtime.
+ 
+\end_layout
+
+\begin_layout Part
+Conjugate Gradients
+\end_layout
+
+\begin_layout Standard
+We just need to pick a more convenient set of vectors to Gram-Schmidt-
+\series bold
+A
+\series default
+-orthogonalize.
+ I have an idea (not really me): let's use gradients/residuals! Why? Well
+ firstly if we already have a set of mutually 
+\series bold
+A
+\series default
+-orthogonal directions 
+\begin_inset Formula $\left\{ \mathbf{d}_{0},\dots,\mathbf{d}_{n-1}\right\} $
+\end_inset
+
+ then the gradient computed on each line search will be orthogonal (straight-up
+ orthogonal) to preceeding line search directions.
+ Here's some proof: in general (keep in mind we already have 
+\begin_inset Formula $\left\{ \mathbf{d}_{0},\dots,\mathbf{d}_{n-1}\right\} $
+\end_inset
+
+ in hand) 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{x}_{1} & =\mathbf{x}_{0}+\alpha_{0}\mathbf{d}_{0}\\
+\mathbf{x}_{2} & =\left(\mathbf{x}_{1}\right)+\alpha_{1}\mathbf{d}_{1}\\
+ & =\left(\mathbf{x}_{0}+\alpha_{0}\mathbf{d}_{0}\right)+\alpha_{1}\mathbf{d}_{1}\\
+ & \vdots\\
+\mathbf{x}_{i+1} & =\mathbf{x}_{0}+\sum_{j=0}^{i}\alpha_{j}\mathbf{d}_{j}\\
+ & \vdots\\
+\mathbf{x}_{n-1} & =\mathbf{x}_{0}+\sum_{j=0}^{n-1}\alpha_{j}\mathbf{d}_{j}
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\nabla f\left(\mathbf{x}_{n-1}\right)=0$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathbf{x}_{n-1}$
+\end_inset
+
+ minimizes the quadratic form, so 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{A}\mathbf{x}_{n-1}-\mathbf{b} & =\mathbf{A}\mathbf{x}_{0}-\mathbf{b}+\sum_{j=0}^{n-1}\alpha_{j}\mathbf{A}\mathbf{d}_{j}\\
+\nabla f\left(\mathbf{x}_{n-1}\right) & =\nabla f\left(\mathbf{x}_{0}\right)+\sum_{j=0}^{n-1}\alpha_{j}\mathbf{A}\mathbf{d}_{j}\\
+0 & =\nabla f\left(\mathbf{x}_{0}\right)+\sum_{j=0}^{n-1}\alpha_{j}\mathbf{A}\mathbf{d}_{j}\\
+ & \Rightarrow\\
+\nabla f\left(\mathbf{x}_{0}\right) & =-\sum_{j=1}^{n-1}\alpha_{j}\mathbf{A}\mathbf{d}_{j}
+\end{align*}
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\begin{align*}
+\mathbf{A}\mathbf{x}_{i+1}-\mathbf{b} & =\mathbf{A}\mathbf{x}_{0}-\mathbf{b}+\sum_{j=1}^{i}\alpha_{j}\mathbf{A}\mathbf{d}_{j}\\
+\nabla f\left(\mathbf{x}_{i+1}\right) & =-\sum_{j=1}^{n-1}\alpha_{j}\mathbf{A}\mathbf{d}_{j}+\sum_{j=1}^{i}\alpha_{j}\mathbf{A}\mathbf{d}_{j}\\
+ & =-\sum_{j=i+1}^{n-1}\alpha_{j}\mathbf{A}\mathbf{d}_{j}
+\end{align*}
+
+\end_inset
+
+Finally
+\begin_inset Formula 
+\begin{align*}
+\mathbf{d}_{k}^{t}\nabla f\left(\mathbf{x}_{i+1}\right) & =-\sum_{j=i+1}^{n-1}\alpha_{j}\mathbf{d}_{k}\mathbf{A}\mathbf{d}_{j}\\
+ & =0\text{ by \textbf{A}-orthogonality for }k<i
+\end{align*}
+
+\end_inset
+
+Intuitively this makes sense because on every line search we're choosing
+ 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ so that it's orthogonal to the search direction (though of course this
+ in and of itself isn't a guarantee that orthogonality will be preserved
+ - cue the above proof).
+ Succinctly with 
+\begin_inset Formula $\mathcal{D}_{i-1}=\text{span}\left(\left\{ \mathbf{d}_{0},\dots,\mathbf{d}_{i-1}\right\} \right)$
+\end_inset
+
+ it's the case that the hyperplane/linear-variety 
+\begin_inset Formula $\mathbf{x}_{0}+\mathcal{D}_{i}$
+\end_inset
+
+ is tangent to the level surface of 
+\begin_inset Formula $f\left(\mathbf{x}_{i}\right)$
+\end_inset
+
+, an ellipsoid, and hence the gradient 
+\begin_inset Formula $\nabla f\left(\mathbf{x}_{i}\right)\cdot\mathcal{D}_{i}=0$
+\end_inset
+
+.
+ Furthermore (remember 
+\begin_inset Formula $\mathbf{r}_{i}\equiv\nabla f\left(\mathbf{x}_{i}\right)$
+\end_inset
+
+) using the direction update rule from conjugate directions with 
+\begin_inset Formula $\mathbf{u}_{i}=\mathbf{r}_{i}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{d}_{i} & =\mathbf{r}_{i}-\sum_{k=0}^{i-1}\beta_{ik}\mathbf{d}_{k}\\
+ & \Rightarrow\\
+\mathbf{d}_{i}^{t}\mathbf{r}_{j} & =\mathbf{r}_{i}^{t}\mathbf{r}_{j}-\sum_{k=0}^{i-1}\beta_{ik}\mathbf{d}_{k}^{t}\mathbf{r}_{j}\\
+ & =\mathbf{r}_{i}^{t}\mathbf{r}_{j}
+\end{align*}
+
+\end_inset
+
+It gets even better.
+ If we use gradients to 
+\series bold
+construct 
+\series default
+the search directions then (remember 
+\begin_inset Formula $\mathbf{r}_{i}\equiv\nabla f\left(\mathbf{x}_{i}\right)$
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+\text{span}\left(\left\{ \mathbf{r}_{0},\dots,\mathbf{r}_{i-1}\right\} \right)=\text{span}\left(\left\{ \mathbf{d}_{0},\dots,\mathbf{d}_{i-1}\right\} \right)
+\]
+
+\end_inset
+
+remember that 
+\begin_inset Formula $\mathbf{r}_{i+1}=\mathbf{r}_{i}-\alpha_{i}\mathbf{A}\mathbf{r}_{i}$
+\end_inset
+
+ so actually
+\begin_inset Formula 
+\begin{align*}
+\text{span}\left(\left\{ \mathbf{r}_{0},\dots,\mathbf{r}_{i-1}\right\} \right) & =\text{span}\left(\left\{ \mathbf{r}_{0},\mathbf{A}\mathbf{r}_{0},\mathbf{A}^{2}\mathbf{r}_{0},\dots,\mathbf{A}^{-1}\mathbf{r}_{0}\right\} \right)
+\end{align*}
+
+\end_inset
+
+This is a 
+\emph on
+Krylov 
+\emph default
+subspace, a subspace created by repeatedly applying a matrix to a vector.
+ The use is that since 
+\begin_inset Formula $\mathbf{A}\mathcal{D}_{i-1}\subset\mathcal{D}_{i}$
+\end_inset
+
+ and that 
+\begin_inset Formula $\mathbf{r}_{i}\cdot\mathcal{D}_{i}=-\nabla f\left(\mathbf{x}_{i}\right)\cdot\mathcal{D}_{i}=0$
+\end_inset
+
+ means that 
+\begin_inset Formula $\mathbf{r}_{i}\cdot\mathbf{A}\mathcal{D}_{i-1}=0$
+\end_inset
+
+! That means Gram-Schmidt-
+\series bold
+A
+\series default
+-orthogonalization reduces to just one term (just the direction purely in
+ 
+\begin_inset Formula $\mathcal{D}_{i}$
+\end_inset
+
+) ! From Gram-Schmidt 
+\begin_inset Formula 
+\[
+\mathbf{d}_{i}=\mathbf{u}_{i}-\sum_{k=0}^{i-1}\beta_{ik}\mathbf{d}_{k}
+\]
+
+\end_inset
+
+but from conjugate directions and the result above 
+\begin_inset Formula $\mathbf{d}_{i}^{t}\mathbf{r}_{j}=\mathbf{r}_{i}^{t}\mathbf{r}_{j}$
+\end_inset
+
+ and that 
+\begin_inset Formula $\mathbf{r}_{i}^{t}\mathbf{r}_{j}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{r}_{i+1} & =\mathbf{r}_{i}-\alpha_{i}\mathbf{A}\mathbf{d}_{i}\\
+ & \Rightarrow\\
+\mathbf{r}_{j}^{t}\mathbf{r}_{i+1} & =\mathbf{r}_{j}^{t}\mathbf{r}_{i}-\alpha_{i}\mathbf{r}_{j}^{t}\mathbf{A}\mathbf{d}_{i}\\
+ & \Rightarrow\\
+\alpha_{i}\mathbf{r}_{j}^{t}\mathbf{A}\mathbf{d}_{i} & =\mathbf{r}_{j}^{t}\mathbf{r}_{i}-\mathbf{r}_{j}^{t}\mathbf{r}_{i+1}\\
+\mathbf{r}_{j}^{t}\mathbf{A}\mathbf{d}_{i} & =\begin{cases}
+\frac{1}{\alpha_{i}}\mathbf{r}_{i}^{t}\mathbf{r}_{i} & \text{if }i=j\\
+-\frac{1}{\alpha_{i-1}} & \mathbf{r}_{i}^{t}\mathbf{r}_{i}\text{if }i=j+1
+\end{cases}\\
+ & \Rightarrow\\
+\beta_{ij} & =\begin{cases}
+\frac{1}{\alpha_{i}}\frac{\mathbf{r}_{i}^{t}\mathbf{r}_{i}}{\mathbf{d}_{i-1}^{t}\mathbf{A}\mathbf{d}_{i-1}} & \text{if }i=j+1\\
+0 & \text{if }i>j+1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Simplifying further since only 
+\begin_inset Formula $\beta_{i,i-1}\equiv\beta_{i}$
+\end_inset
+
+ are non-zero
+\begin_inset Formula 
+\begin{align*}
+\beta_{i} & =\frac{1}{\alpha_{i}}\frac{\mathbf{r}_{i}^{t}\mathbf{r}_{i}}{\mathbf{d}_{i-1}^{t}\mathbf{A}\mathbf{d}_{i-1}}\\
+ & =\frac{\mathbf{r}_{i}^{t}\mathbf{r}_{i}}{\mathbf{d}_{i-1}^{t}\mathbf{r}_{i-1}}
+\end{align*}
+
+\end_inset
+
+Finally the entire set of update rules
+\begin_inset Formula 
+\begin{align*}
+\mathbf{d}_{0} & =\mathbf{r}_{0}\\
+\alpha_{i} & =\frac{\mathbf{r}_{i}^{t}\mathbf{r}_{i}}{\mathbf{d}_{i}^{t}\mathbf{A}\mathbf{d}_{i}}\\
+\mathbf{x}_{i+1} & =\mathbf{x}_{i}+\alpha_{i}\mathbf{d}_{i}\\
+\mathbf{r}_{i+1} & =\mathbf{r}_{i}-\alpha_{i}\mathbf{A}\mathbf{d}_{i}\\
+\beta_{i+1} & =\frac{\mathbf{r}_{i+1}^{t}\mathbf{r}_{i+1}}{\mathbf{d}_{i}^{t}\mathbf{r}_{i}}\\
+\mathbf{d}_{i+1} & =\mathbf{r}_{i}-\beta_{i+1}\mathbf{d}_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
