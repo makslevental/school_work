@@ -1,0 +1,560 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+SVD
+\end_layout
+
+\begin_layout Part
+First Isomorphism Theorem
+\end_layout
+
+\begin_layout Section
+Parallel development
+\end_layout
+
+\begin_layout Subsection*
+Equivalence relations
+\end_layout
+
+\begin_layout Standard
+Any map 
+\begin_inset Formula $\varphi:S\rightarrow T$
+\end_inset
+
+ defines an equivalence relation on the domain 
+\begin_inset Formula $S$
+\end_inset
+
+, namely the relation 
+\begin_inset Formula $a\sim b$
+\end_inset
+
+ if 
+\begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)$
+\end_inset
+
+ (necessitates proof, i.e.
+ checking reflexivity, symmetry, transitivty).
+ Note an (any) equivalence relation partitions the set on which it is defined
+ (the set of equivalence classes) so this equivalence relation does as well.
+ 
+\series bold
+The equivalence classes turn out to be the non-empty inverse images (
+\emph on
+fibres
+\emph default
+) of the map 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ 
+\series default
+This is since if 
+\begin_inset Formula $a\in\varphi^{-1}\left(t\right)=\left\{ s\in S|\varphi\left(s\right)=t\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $a\sim b$
+\end_inset
+
+ then 
+\begin_inset Formula $\varphi\left(b\right)=\varphi\left(a\right)=t$
+\end_inset
+
+ and so 
+\begin_inset Formula $b\in\varphi^{-1}\left(t\right)$
+\end_inset
+
+.
+
+\series bold
+ 
+\series default
+Let 
+\begin_inset Formula $S_{/\sim}$
+\end_inset
+
+ be the set of equivalence classes/fibres.
+
+\series bold
+ 
+\series default
+Then 
+\begin_inset Formula $\bar{\varphi}:S_{/\sim}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
+\end_inset
+
+ defined as 
+\begin_inset Formula $\bar{\varphi}\left(\left[a\right]\right)=\varphi\left(a\right)$
+\end_inset
+
+ is a bijection
+\series bold
+.
+
+\series default
+ The proof follows from the immediately preceding statement: if 
+\begin_inset Formula $\bar{\varphi}\left(\left[a\right]\right)=\bar{\varphi}\left(\left[b\right]\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\left[a\right]=\left[b\right]$
+\end_inset
+
+ so 
+\begin_inset Formula $\bar{\varphi}$
+\end_inset
+
+ is injective and 
+\begin_inset Formula $\bar{\varphi}$
+\end_inset
+
+ is surjective on 
+\begin_inset Formula $\text{im}\left(\varphi\right)$
+\end_inset
+
+ since 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is surjective on its image, i.e.
+ for 
+\begin_inset Formula $t\in\text{im}\left(\varphi\right)$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\varphi^{-1}\left(t\right)$
+\end_inset
+
+ and hence exists 
+\begin_inset Formula $\left[\varphi^{-1}\left(t\right)\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Cosets
+\end_layout
+
+\begin_layout Standard
+A left coset 
+\begin_inset Formula $aH$
+\end_inset
+
+ of any subgroup 
+\begin_inset Formula $H$
+\end_inset
+
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined as all elements in 
+\begin_inset Formula $G$
+\end_inset
+
+ which have a part 
+\begin_inset Formula $a$
+\end_inset
+
+ and a part equal to some element in 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Sum notation works better 
+\begin_inset Formula $a+H$
+\end_inset
+
+ (or maybe re-expressing the idea as all elements in 
+\begin_inset Formula $G$
+\end_inset
+
+ that have a factor 
+\begin_inset Formula $a$
+\end_inset
+
+ and a factor equal to some element in 
+\begin_inset Formula $H$
+\end_inset
+
+).
+ Formally
+\begin_inset Formula 
+\begin{align*}
+a+H & \equiv\left\{ g\in G|g=a+h\text{ for }h\in H\right\} \\
+ & \equiv\left\{ a+h|h\in H\right\} \\
+aH & \equiv\left\{ g\in G|g=ah\text{ for }h\in H\right\} \\
+ & \equiv\left\{ ah|h\in H\right\} 
+\end{align*}
+
+\end_inset
+
+Note that cosets are equivalence classes
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+By virtue of being equivalence classes they partition the group 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Furthermore there exists a bijection from 
+\begin_inset Formula $H$
+\end_inset
+
+ to the coset 
+\begin_inset Formula $aH$
+\end_inset
+
+ which sends 
+\begin_inset Formula $h\rightsquigarrow ah$
+\end_inset
+
+.
+ It's a bijection because the group operation is invertible.
+ Therefore every coset has the same order/cardinality as 
+\begin_inset Formula $H$
+\end_inset
+
+.Define 
+\begin_inset Formula $\left[G:H\right]$
+\end_inset
+
+ (called the index of 
+\begin_inset Formula $H$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+) to be the number of distinct cosets of 
+\begin_inset Formula $H$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Since the cosets are equivalence classes and partition the group 
+\begin_inset Formula $G$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left|G\right|=\left[G:H\right]\left|H\right|$
+\end_inset
+
+ and hence the order 
+\begin_inset Formula $\left|H\right|$
+\end_inset
+
+ of any subgroup of 
+\begin_inset Formula $G$
+\end_inset
+
+ divides the order 
+\begin_inset Formula $\left|G\right|$
+\end_inset
+
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+ (Lagrange's theorem).
+\end_layout
+
+\end_inset
+
+ (necessitates proof, i.e.
+ checking reflexivity, symmetry, transitivty) for the equivalence relation
+ 
+\begin_inset Formula 
+\[
+a\sim b\text{ if }b=ah\text{ for some }h\in H
+\]
+
+\end_inset
+
+This is denoted as 
+\begin_inset Formula $G_{/H}$
+\end_inset
+
+ instead of the typical 
+\begin_inset Formula $G_{/\sim}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Quotient groups and Normal subgroups
+\end_layout
+
+\begin_layout Standard
+Now we'd like to define a group operation 
+\begin_inset Formula $G_{/H}$
+\end_inset
+
+.
+ To even have any hope of being able to do this first we need to define
+ products of cosets.
+ So for 
+\begin_inset Formula $A,B\subset G$
+\end_inset
+
+ first let 
+\begin_inset Formula $A\times B=\left\{ ab|a\in A,b\in B\right\} $
+\end_inset
+
+, called the product of the two subsets of the group.
+ Now specialize to 
+\begin_inset Formula $A=aH$
+\end_inset
+
+ and 
+\begin_inset Formula $B=bH$
+\end_inset
+
+, two cosets.
+ Is 
+\begin_inset Formula $A\times B=\left(aH\right)\left(bH\right)$
+\end_inset
+
+ again a coset? I.e.
+ would 
+\begin_inset Formula $G_{/H}$
+\end_inset
+
+ be closed under this product operation (we deal with the other axioms in
+ a moment)? In general no: for a generic 
+\begin_inset Formula $H$
+\end_inset
+
+ there we left cosets whose products do not lie in a single left coset.
+ 
+\series bold
+For example 
+\series default
+since 
+\begin_inset Formula $aha^{-1}$
+\end_inset
+
+ is not necessarily in 
+\begin_inset Formula $H$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left(aH\right)\left(a^{-1}H\right)$
+\end_inset
+
+ is not a left coset: it contains 
+\begin_inset Formula $a1a^{-1}1=1$
+\end_inset
+
+ which is an element of 
+\begin_inset Formula $H$
+\end_inset
+
+ so if it were contained in a left coset it would be contained in 
+\begin_inset Formula $1H$
+\end_inset
+
+ but it also contains 
+\begin_inset Formula $aha^{-1}1$
+\end_inset
+
+ which is not in 
+\begin_inset Formula $H$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Now let 
+\begin_inset Formula $\varphi:G\rightarrow G'$
+\end_inset
+
+ be a homomorphism.
+ The equivalence is typically denoted by 
+\begin_inset Formula $\equiv$
+\end_inset
+
+ and called congruence modulo 
+\begin_inset Formula $\varphi$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+a\equiv b\iff\varphi\left(a\right)=\varphi\left(b\right)
+\]
+
+\end_inset
+
+A succinct restatement is 
+\end_layout
+
+\begin_layout Proposition
+Let 
+\begin_inset Formula $\varphi:G\rightarrow G'$
+\end_inset
+
+ be a group homomorphism with kernel 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)\iff b=an$
+\end_inset
+
+ from some 
+\begin_inset Formula $n\in N$
+\end_inset
+
+.
+ Equivalently 
+\begin_inset Formula $ab^{-1}\in N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\varphi\left(a\right)\left(\varphi\left(b\right)\right)^{-1}=1$
+\end_inset
+
+ and since 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a homomorphism 
+\begin_inset Formula $\varphi\left(ab^{-1}\right)=1\iff ab^{-1}\in N$
+\end_inset
+
+.
+ Alternatively assume 
+\begin_inset Formula $b=an$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi\left(b\right)=\varphi\left(an\right)=\varphi\left(a\right)\varphi\left(n\right)=\varphi\left(a\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now 
+\begin_inset Formula $aN=\left\{ g\in G|g=an\text{ for some }n\in N\right\} $
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document
