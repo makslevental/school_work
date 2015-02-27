@@ -85,10 +85,10 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-SVD
+Singular Value Decomposition
 \end_layout
 
-\begin_layout Section
+\begin_layout Section*
 First Isomorphism Theorem
 \end_layout
 
@@ -97,15 +97,15 @@ Equivalence relations
 \end_layout
 
 \begin_layout Standard
-Any map 
+Any map
 \begin_inset Formula $\varphi:S\rightarrow T$
 \end_inset
 
- defines an equivalence relation on the domain 
+ generates an equivalence relation on the domain 
 \begin_inset Formula $S$
 \end_inset
 
-, namely the relation 
+, namely the relation '
 \begin_inset Formula $a\sim b$
 \end_inset
 
@@ -113,13 +113,12 @@ Any map
 \begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)$
 \end_inset
 
- (necessitates proof, i.e.
+' (necessitates proof, i.e.
  checking reflexivity, symmetry, transitivty).
- Note an (any) equivalence relation partitions the set on which it is defined
- (the set of equivalence classes) so this equivalence relation does as well.
  
 \series bold
-The equivalence classes turn out to be the non-empty inverse images (
+The equivalence classes under this equivalence relation turn out to be the
+ non-empty inverse images (
 \emph on
 fibres
 \emph default
@@ -128,9 +127,9 @@ fibres
 \end_inset
 
 .
- 
+
 \series default
-This is since if 
+ This is since if 
 \begin_inset Formula $a\in\varphi^{-1}\left(t\right)=\left\{ s\in S|\varphi\left(s\right)=t\right\} $
 \end_inset
 
@@ -147,33 +146,30 @@ This is since if
 \end_inset
 
 .
+ Note that any equivalence relation partitions the set on which it is defined
+ (the partition is the set of equivalence classes) so this equivalence relation
+ does as well and hence 
+\begin_inset Formula $\varphi$
+\end_inset
 
-\series bold
- 
-\series default
-Let 
+ can be extended to a map on subsets of 
+\begin_inset Formula $S$
+\end_inset
+
+: let 
 \begin_inset Formula $S_{/\sim}$
 \end_inset
 
- be the set of equivalence classes/fibres.
-
-\series bold
- 
-\series default
-Then 
+ be that set of equivalence classes/fibres and
 \begin_inset Formula $\bar{\varphi}:S_{/\sim}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
 \end_inset
 
- defined as 
+ be defined as 
 \begin_inset Formula $\bar{\varphi}\left(\left[a\right]\right)=\varphi\left(a\right)$
 \end_inset
 
- is a bijection
-\series bold
 .
-
-\series default
- The proof follows from the immediately preceding statement: if 
+ In fact this map is a bijection: if 
 \begin_inset Formula $\bar{\varphi}\left(\left[a\right]\right)=\bar{\varphi}\left(\left[b\right]\right)$
 \end_inset
 
@@ -215,6 +211,9 @@ Then
 \end_inset
 
 .
+
+\series bold
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -264,7 +263,7 @@ A left coset
 \end_inset
 
 ).
- Formally
+ Precisely
 \begin_inset Formula 
 \begin{align*}
 a+H & \equiv\left\{ g\in G|g=a+h\text{ for }h\in H\right\} \\
@@ -518,24 +517,7 @@ Let
 \end_inset
 
  be a homomorphism.
- The equivalence is typically denoted by 
-\begin_inset Formula $\equiv$
-\end_inset
-
- and called congruence modulo 
-\begin_inset Formula $\varphi$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula 
-\[
-a\equiv b\iff\varphi\left(a\right)=\varphi\left(b\right)
-\]
-
-\end_inset
-
-Then the equivalence classes induced by 
+ Then the equivalence classes induced by 
 \begin_inset Formula $\varphi$
 \end_inset
 
@@ -556,6 +538,36 @@ Then the equivalence classes induced by
 \end_inset
 
 .
+ The equivalence is typically denoted by 
+\begin_inset Formula $\equiv$
+\end_inset
+
+ and called congruence modulo 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+a\equiv b\iff\varphi\left(a\right)=\varphi\left(b\right)
+\]
+
+\end_inset
+
+The qualification of 
+\begin_inset Quotes eld
+\end_inset
+
+congruence modulo 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ is this
 \end_layout
 
 \begin_layout Proposition
@@ -642,7 +654,7 @@ So if we have a homomorphism
 \end_inset
 
  then 
-\begin_inset Formula $G_{/N}$
+\begin_inset Formula $aN\in G_{/N}$
 \end_inset
 
  are in 1-1 correspondence with the fibers 
@@ -650,11 +662,46 @@ So if we have a homomorphism
 \end_inset
 
 .
- is a collection of group if 
-\begin_inset Formula $N$
+ Therefore by the result in the first section on equivalence relations 
+\begin_inset Formula $G_{/N}$
 \end_inset
 
- is a normal subgroup of 
+ is in 1-1 correspondence with 
+\begin_inset Formula $\text{im}\left(\varphi\right)$
+\end_inset
+
+, by 
+\begin_inset Formula $\bar{\varphi}:G_{/N}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
+\end_inset
+
+ defined as 
+\begin_inset Formula $\bar{\varphi}\left(aN\right)=\varphi\left(a\right)$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+ is a normal subgroup
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For 
+\begin_inset Formula $a\in\text{ker}\left(\varphi\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\varphi\left(bab^{-1}\right)=\varphi\left(b\right)\varphi\left(a\right)\varphi\left(b\right)^{-1}=\varphi\left(b\right)1\varphi\left(b\right)^{-1}=1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of 
 \begin_inset Formula $G$
 \end_inset
 
@@ -662,23 +709,312 @@ So if we have a homomorphism
 \begin_inset Formula $N\triangleleft G$
 \end_inset
 
-.
-\end_layout
+, it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
-\begin_layout --Separator--
+\begin_inset Formula $G_{/N}$
+\end_inset
 
-\end_layout
+ is a group with the product operation defined above and 
+\begin_inset Formula $\bar{\varphi}$
+\end_inset
 
-\begin_layout Standard
-Now 
-\end_layout
 
-\begin_layout Standard
-Now 
-\begin_inset Formula $aN=\left\{ g\in G|g=an\text{ for some }n\in N\right\} $
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ preserves this operation: 
+\begin_inset Formula $\bar{\varphi}\left(aNbN\right)=\bar{\varphi}\left(abN\right)=\varphi\left(ab\right)=\varphi\left(a\right)\varphi\left(b\right)=\bar{\varphi}\left(aN\right)\bar{\varphi}\left(bN\right)$
 \end_inset
 
 .
+ This is the 
+\series bold
+First Isomorphism theorem
+\end_layout
+
+\begin_layout Theorem*
+First Isomorphism Theorem: Let 
+\begin_inset Formula $\varphi:G\longrightarrow G'$
+\end_inset
+
+ be a group homomorphism.
+ Then 
+\begin_inset Formula $G_{/\text{ker}\left(\varphi\right)}$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $\text{im}\left(\varphi\right)$
+\end_inset
+
+ by the isomorphism 
+\begin_inset Formula $\bar{\varphi}:G_{/N}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
+\end_inset
+
+ defined as 
+\begin_inset Formula $\bar{\varphi}\left(aN\right)=\varphi\left(a\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
+Rank-Nullity Theorem
+\end_layout
+
+\begin_layout Subsection*
+Direct Sums
+\end_layout
+
+\begin_layout Standard
+How to 
+\begin_inset Quotes eld
+\end_inset
+
+combine
+\begin_inset Quotes erd
+\end_inset
+
+ vector spaces?
+\end_layout
+
+\begin_layout Definition*
+If 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ are vector spaces over the same field their 
+\emph on
+direct sum
+\emph default
+ 
+\begin_inset Formula $U\oplus V$
+\end_inset
+
+ is defined as the set of ordered pairs 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $u\in U,v\in V$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\alpha_{1}\left(u_{1},v_{1}\right)+\alpha_{2}\left(u_{2},v_{2}\right)=\left(\alpha_{1}u_{1}+\alpha_{2}u_{2},\alpha_{1}v_{1}+\alpha_{2}v_{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Lemma*
+The dimension of a direct sum is the sum of the dimensions of the summands.
+\end_layout
+
+\begin_layout Proof
+The result will follow if 
+\begin_inset Formula $\left\{ \left(x_{1},0\right),\cdots,\left(x_{n},0\right),\left(y_{1},0\right),\cdots,\left(y_{m},0\right)\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $U\oplus V$
+\end_inset
+
+, where 
+\begin_inset Formula $\left\{ x_{1},\cdots,x_{n}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ y_{1},\cdots,y_{m}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ First note that by identifying 
+\begin_inset Formula $x$
+\end_inset
+
+ with 
+\begin_inset Formula $\left(x,0\right)$
+\end_inset
+
+ and y with
+\begin_inset Formula $\left(0,y\right)$
+\end_inset
+
+ we can write 
+\begin_inset Formula $z\in U\oplus V$
+\end_inset
+
+ uniquely as 
+\begin_inset Formula $z=x+y=\left(x,y\right)$
+\end_inset
+
+ (unique because if 
+\begin_inset Formula $z=\left(x_{1},y_{1}\right)=\left(x_{2},y_{2}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(x_{1},y_{1}\right)-\left(x_{2},y_{2}\right)=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $x_{1}=x_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{1}=y_{2}$
+\end_inset
+
+).
+ Then 
+\begin_inset Formula $\left\{ \left(x_{1},0\right),\cdots,\left(x_{n},0\right),\left(y_{1},0\right),\cdots,\left(y_{m},0\right)\right\} $
+\end_inset
+
+ is spans 
+\begin_inset Formula $U\oplus V$
+\end_inset
+
+.
+ To prove linear independence let 
+\begin_inset Formula 
+\[
+\alpha_{1}x_{1}+\cdots+\alpha_{n}x_{n}+\beta_{1}y_{1}+\cdots+\beta_{m}y_{m}=0
+\]
+
+\end_inset
+
+Uniqueness of 
+\begin_inset Formula $0\in U\oplus V$
+\end_inset
+
+ implies that both parts of 0, the part in 
+\begin_inset Formula $U$
+\end_inset
+
+ and the part in 
+\begin_inset Formula $V$
+\end_inset
+
+, must be zero and therefore all of the coefficients 
+\begin_inset Formula $\left\{ \alpha_{1},\cdots,\alpha_{n},\beta_{1},\cdots,\beta_{m}\right\} $
+\end_inset
+
+ must be zero.
+\end_layout
+
+\begin_layout Lemma*
+If 
+\begin_inset Formula $W$
+\end_inset
+
+ is an 
+\begin_inset Formula $n+m$
+\end_inset
+
+ dimensional vector space and 
+\begin_inset Formula $U$
+\end_inset
+
+ is any 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional subspace of 
+\begin_inset Formula $W$
+\end_inset
+
+ then there exists an 
+\begin_inset Formula $m$
+\end_inset
+
+ dimensional subspace 
+\begin_inset Formula $V$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\oplus V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\left\{ x_{1},\cdots,x_{n}\right\} $
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ We can extend this to a basis for the whole space 
+\begin_inset Formula $U\oplus V$
+\end_inset
+
+ by simply finding 
+\begin_inset Formula $m$
+\end_inset
+
+ more linearly independent vectors.
+ Then let 
+\begin_inset Formula $V$
+\end_inset
+
+ be the subspace spanned by these extended basis vectors 
+\begin_inset Formula $\left\{ y_{1},\cdots,y_{m}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma*
+If 
+\begin_inset Formula $W=U\oplus V$
+\end_inset
+
+ then for 
+\begin_inset Formula $u\in U$
+\end_inset
+
+ the map 
+\begin_inset Formula $\varphi:U\rightarrow$
+\end_inset
+
+
 \end_layout
 
 \end_body
