@@ -88,12 +88,8 @@ figs-within-sections
 SVD
 \end_layout
 
-\begin_layout Part
-First Isomorphism Theorem
-\end_layout
-
 \begin_layout Section
-Parallel development
+First Isomorphism Theorem
 \end_layout
 
 \begin_layout Subsection*
@@ -281,7 +277,7 @@ aH & \equiv\left\{ g\in G|g=ah\text{ for }h\in H\right\} \\
 
 Note that cosets are equivalence classes
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 By virtue of being equivalence classes they partition the group 
@@ -395,7 +391,7 @@ Now we'd like to define a group operation
 \end_inset
 
  first let 
-\begin_inset Formula $A\times B=\left\{ ab|a\in A,b\in B\right\} $
+\begin_inset Formula $A\cdot B=\left\{ ab|a\in A,b\in B\right\} $
 \end_inset
 
 , called the product of the two subsets of the group.
@@ -409,7 +405,7 @@ Now we'd like to define a group operation
 
 , two cosets.
  Is 
-\begin_inset Formula $A\times B=\left(aH\right)\left(bH\right)$
+\begin_inset Formula $A\cdot B=\left(aH\right)\left(bH\right)$
 \end_inset
 
  again a coset? I.e.
@@ -422,24 +418,26 @@ Now we'd like to define a group operation
 \begin_inset Formula $H$
 \end_inset
 
- there we left cosets whose products do not lie in a single left coset.
+ there will be left cosets whose products do not lie in a single left coset.
  
 \series bold
 For example 
 \series default
-since 
-\begin_inset Formula $aha^{-1}$
-\end_inset
 
- is not necessarily in 
-\begin_inset Formula $H$
-\end_inset
-
- it's the case that 
 \begin_inset Formula $\left(aH\right)\left(a^{-1}H\right)$
 \end_inset
 
- is not a left coset: it contains 
+ is not necessarily a left coset.
+ Assume 
+\begin_inset Formula $aha^{-1}\notin H$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left(aH\right)\left(a^{-1}H\right)$
+\end_inset
+
+ contains 
 \begin_inset Formula $a1a^{-1}1=1$
 \end_inset
 
@@ -460,14 +458,62 @@ since
 \end_inset
 
 .
+ Therefore to guarantee that 
+\begin_inset Formula $G_{/H}$
+\end_inset
+
+ is closed under the group operation 
+\begin_inset Formula $A\cdot B=\left(aH\right)\left(bH\right)$
+\end_inset
+
+ we must have that 
+\begin_inset Formula $aha^{-1}\in H$
+\end_inset
+
+.
+ This is the definition of a 
+\series bold
+Normal
+\series default
+ subgroup given this 
+\begin_inset Formula $G_{/H}$
+\end_inset
+
+ is a group.
+ Usually normal subgroups are denoted by 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In case we have such 
+\begin_inset Formula $N$
+\end_inset
+
+ note that 
+\begin_inset Formula $Nb=bN$
+\end_inset
+
+ and 
+\begin_inset Formula $NN=N$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\left(aN\right)\left(bN\right)=a\left(Nb\right)N=a\left(bN\right)N=abNN=\left(ab\right)N
+\]
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout --Separator--
-
+\begin_layout Subsection*
+Homomorphisms and finally the First Isomorphism Theorem
 \end_layout
 
 \begin_layout Standard
-Now let 
+Let 
 \begin_inset Formula $\varphi:G\rightarrow G'$
 \end_inset
 
@@ -489,7 +535,27 @@ a\equiv b\iff\varphi\left(a\right)=\varphi\left(b\right)
 
 \end_inset
 
-A succinct restatement is 
+Then the equivalence classes induced by 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ on 
+\begin_inset Formula $G$
+\end_inset
+
+ (the fibres of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+) are exactly the cosets of 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Proposition
@@ -498,7 +564,7 @@ Let
 \end_inset
 
  be a group homomorphism with kernel 
-\begin_inset Formula $N$
+\begin_inset Formula $N=\text{ker}\left(\varphi\right)$
 \end_inset
 
 .
@@ -511,8 +577,30 @@ Let
 \end_inset
 
 .
+ I.e.
+ for a fixed 
+\begin_inset Formula $a$
+\end_inset
+
+ all 
+\series bold
+
+\begin_inset Formula $b$
+\end_inset
+
+ 
+\series default
+such that 
+\begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)$
+\end_inset
+
+ are in the coset 
+\begin_inset Formula $aN$
+\end_inset
+
+.
  Equivalently 
-\begin_inset Formula $ab^{-1}\in N$
+\begin_inset Formula $a^{-1}b\in N$
 \end_inset
 
 .
@@ -524,7 +612,7 @@ Suppose
 \end_inset
 
  then 
-\begin_inset Formula $\varphi\left(a\right)\left(\varphi\left(b\right)\right)^{-1}=1$
+\begin_inset Formula $\left(\varphi\left(a\right)\right)^{-1}\varphi\left(b\right)=1$
 \end_inset
 
  and since 
@@ -532,11 +620,11 @@ Suppose
 \end_inset
 
  is a homomorphism 
-\begin_inset Formula $\varphi\left(ab^{-1}\right)=1\iff ab^{-1}\in N$
+\begin_inset Formula $\varphi\left(a^{-1}b\right)=1\iff a^{-1}b\in N$
 \end_inset
 
 .
- Alternatively assume 
+ For the converse assume 
 \begin_inset Formula $b=an$
 \end_inset
 
@@ -546,6 +634,43 @@ Suppose
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+So if we have a homomorphism 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ then 
+\begin_inset Formula $G_{/N}$
+\end_inset
+
+ are in 1-1 correspondence with the fibers 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ is a collection of group if 
+\begin_inset Formula $N$
+\end_inset
+
+ is a normal subgroup of 
+\begin_inset Formula $G$
+\end_inset
+
+, denoted 
+\begin_inset Formula $N\triangleleft G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Now 
 \end_layout
 
 \begin_layout Standard

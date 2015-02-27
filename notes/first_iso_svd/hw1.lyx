@@ -88,12 +88,8 @@ figs-within-sections
 SVD
 \end_layout
 
-\begin_layout Part
+\begin_layout Section*
 First Isomorphism Theorem
-\end_layout
-
-\begin_layout Section
-Parallel development
 \end_layout
 
 \begin_layout Subsection*
@@ -101,11 +97,11 @@ Equivalence relations
 \end_layout
 
 \begin_layout Standard
-Any map 
+Any map
 \begin_inset Formula $\varphi:S\rightarrow T$
 \end_inset
 
- defines an equivalence relation on the domain 
+ generates an equivalence relation on the domain 
 \begin_inset Formula $S$
 \end_inset
 
@@ -119,11 +115,10 @@ Any map
 
  (necessitates proof, i.e.
  checking reflexivity, symmetry, transitivty).
- Note an (any) equivalence relation partitions the set on which it is defined
- (the set of equivalence classes) so this equivalence relation does as well.
  
 \series bold
-The equivalence classes turn out to be the non-empty inverse images (
+The equivalence classes under this equivalence relation turn out to be the
+ non-empty inverse images (
 \emph on
 fibres
 \emph default
@@ -132,9 +127,9 @@ fibres
 \end_inset
 
 .
- 
+
 \series default
-This is since if 
+ This is since if 
 \begin_inset Formula $a\in\varphi^{-1}\left(t\right)=\left\{ s\in S|\varphi\left(s\right)=t\right\} $
 \end_inset
 
@@ -151,20 +146,21 @@ This is since if
 \end_inset
 
 .
+ Note that any equivalence relation partitions the set on which it is defined
+ (the set of equivalence classes) so this equivalence relation does as well
+ and hence 
+\begin_inset Formula $\varphi$
+\end_inset
 
-\series bold
- 
-\series default
-Let 
+ can be extended to a map on subsets of 
+\begin_inset Formula $S$
+\end_inset
+
+: let 
 \begin_inset Formula $S_{/\sim}$
 \end_inset
 
- be the set of equivalence classes/fibres.
-
-\series bold
- 
-\series default
-Then 
+ be that set of equivalence classes/fibres and
 \begin_inset Formula $\bar{\varphi}:S_{/\sim}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
 \end_inset
 
@@ -172,12 +168,8 @@ Then
 \begin_inset Formula $\bar{\varphi}\left(\left[a\right]\right)=\varphi\left(a\right)$
 \end_inset
 
- is a bijection
-\series bold
 .
-
-\series default
- The proof follows from the immediately preceding statement: if 
+ In fact this map is a bijection: if 
 \begin_inset Formula $\bar{\varphi}\left(\left[a\right]\right)=\bar{\varphi}\left(\left[b\right]\right)$
 \end_inset
 
@@ -219,6 +211,9 @@ Then
 \end_inset
 
 .
+
+\series bold
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -268,7 +263,7 @@ A left coset
 \end_inset
 
 ).
- Formally
+ Precisely
 \begin_inset Formula 
 \begin{align*}
 a+H & \equiv\left\{ g\in G|g=a+h\text{ for }h\in H\right\} \\
@@ -281,7 +276,7 @@ aH & \equiv\left\{ g\in G|g=ah\text{ for }h\in H\right\} \\
 
 Note that cosets are equivalence classes
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 By virtue of being equivalence classes they partition the group 
@@ -395,7 +390,7 @@ Now we'd like to define a group operation
 \end_inset
 
  first let 
-\begin_inset Formula $A\times B=\left\{ ab|a\in A,b\in B\right\} $
+\begin_inset Formula $A\cdot B=\left\{ ab|a\in A,b\in B\right\} $
 \end_inset
 
 , called the product of the two subsets of the group.
@@ -409,7 +404,7 @@ Now we'd like to define a group operation
 
 , two cosets.
  Is 
-\begin_inset Formula $A\times B=\left(aH\right)\left(bH\right)$
+\begin_inset Formula $A\cdot B=\left(aH\right)\left(bH\right)$
 \end_inset
 
  again a coset? I.e.
@@ -467,7 +462,7 @@ For example
 \end_inset
 
  is closed under the group operation 
-\begin_inset Formula $A\times B=\left(aH\right)\left(bH\right)$
+\begin_inset Formula $A\cdot B=\left(aH\right)\left(bH\right)$
 \end_inset
 
  we must have that 
@@ -484,24 +479,71 @@ Normal
 \end_inset
 
  is a group.
+ Usually normal subgroups are denoted by 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In case we have such 
+\begin_inset Formula $N$
+\end_inset
+
+ note that 
+\begin_inset Formula $Nb=bN$
+\end_inset
+
+ and 
+\begin_inset Formula $NN=N$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\left(aN\right)\left(bN\right)=a\left(Nb\right)N=a\left(bN\right)N=abNN=\left(ab\right)N
+\]
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout --Separator--
-
+\begin_layout Subsection*
+Homomorphisms and finally the First Isomorphism Theorem
 \end_layout
 
 \begin_layout Standard
-Now let 
+Let 
 \begin_inset Formula $\varphi:G\rightarrow G'$
 \end_inset
 
  be a homomorphism.
+ Then the equivalence classes induced by 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ on 
+\begin_inset Formula $G$
+\end_inset
+
+ (the fibres of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+) are exactly the cosets of 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+.
  The equivalence is typically denoted by 
 \begin_inset Formula $\equiv$
 \end_inset
 
  and called congruence modulo 
-\begin_inset Formula $\varphi$
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
 \end_inset
 
 , i.e.
@@ -513,7 +555,19 @@ a\equiv b\iff\varphi\left(a\right)=\varphi\left(b\right)
 
 \end_inset
 
-A succinct restatement is 
+The qualification of 
+\begin_inset Quotes eld
+\end_inset
+
+congruence modulo 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ is this
 \end_layout
 
 \begin_layout Proposition
@@ -522,7 +576,7 @@ Let
 \end_inset
 
  be a group homomorphism with kernel 
-\begin_inset Formula $N$
+\begin_inset Formula $N=\text{ker}\left(\varphi\right)$
 \end_inset
 
 .
@@ -535,8 +589,30 @@ Let
 \end_inset
 
 .
+ I.e.
+ for a fixed 
+\begin_inset Formula $a$
+\end_inset
+
+ all 
+\series bold
+
+\begin_inset Formula $b$
+\end_inset
+
+ 
+\series default
+such that 
+\begin_inset Formula $\varphi\left(a\right)=\varphi\left(b\right)$
+\end_inset
+
+ are in the coset 
+\begin_inset Formula $aN$
+\end_inset
+
+.
  Equivalently 
-\begin_inset Formula $ab^{-1}\in N$
+\begin_inset Formula $a^{-1}b\in N$
 \end_inset
 
 .
@@ -548,7 +624,7 @@ Suppose
 \end_inset
 
  then 
-\begin_inset Formula $\varphi\left(a\right)\left(\varphi\left(b\right)\right)^{-1}=1$
+\begin_inset Formula $\left(\varphi\left(a\right)\right)^{-1}\varphi\left(b\right)=1$
 \end_inset
 
  and since 
@@ -556,11 +632,11 @@ Suppose
 \end_inset
 
  is a homomorphism 
-\begin_inset Formula $\varphi\left(ab^{-1}\right)=1\iff ab^{-1}\in N$
+\begin_inset Formula $\varphi\left(a^{-1}b\right)=1\iff a^{-1}b\in N$
 \end_inset
 
 .
- Alternatively assume 
+ For the converse assume 
 \begin_inset Formula $b=an$
 \end_inset
 
@@ -573,8 +649,124 @@ Suppose
 \end_layout
 
 \begin_layout Standard
-Now 
-\begin_inset Formula $aN=\left\{ g\in G|g=an\text{ for some }n\in N\right\} $
+So if we have a homomorphism 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ then 
+\begin_inset Formula $aN\in G_{/N}$
+\end_inset
+
+ are in 1-1 correspondence with the fibers 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ Therefore by the result in the first section on equivalence relations 
+\begin_inset Formula $G_{/N}$
+\end_inset
+
+ is in 1-1 correspondence with 
+\begin_inset Formula $\text{im}\left(\varphi\right)$
+\end_inset
+
+ .
+ Then since 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+ is a normal subgroup
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For 
+\begin_inset Formula $a\in\text{ker}\left(\varphi\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\varphi\left(bab^{-1}\right)=\varphi\left(b\right)\varphi\left(a\right)\varphi\left(b\right)^{-1}=\varphi\left(b\right)1\varphi\left(b\right)^{-1}=1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+, denoted 
+\begin_inset Formula $N\triangleleft G$
+\end_inset
+
+, it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $G_{/N}$
+\end_inset
+
+ is a group with the product operation defined above and 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\bar{\varphi}:G_{/N}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
+\end_inset
+
+ defined as 
+\begin_inset Formula $\bar{\varphi}\left(aN\right)=\varphi\left(a\right)$
+\end_inset
+
+ preserves this operation: 
+\begin_inset Formula $\bar{\varphi}\left(aNbN\right)=\bar{\varphi}\left(abN\right)=\varphi\left(ab\right)=\varphi\left(a\right)\varphi\left(b\right)=\bar{\varphi}\left(aN\right)\bar{\varphi}\left(bN\right)$
+\end_inset
+
+.
+ This is the 
+\series bold
+First Isomorphism theorem
+\end_layout
+
+\begin_layout Theorem*
+First Isomorphism Theorem: Let 
+\begin_inset Formula $\varphi:G\longrightarrow G'$
+\end_inset
+
+ be a group homomorphism.
+ Then 
+\begin_inset Formula $G_{/\text{ker}\left(\varphi\right)}$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $\text{im}\left(\varphi\right)$
+\end_inset
+
+ by the isomorphism 
+\begin_inset Formula $\bar{\varphi}:G_{/N}\longrightarrow\mathbf{\text{im}}\left(\varphi\right)$
+\end_inset
+
+ defined as 
+\begin_inset Formula $\bar{\varphi}\left(aN\right)=\varphi\left(a\right)$
 \end_inset
 
 .
