@@ -751,7 +751,7 @@ For
 First Isomorphism theorem
 \end_layout
 
-\begin_layout Theorem*
+\begin_layout Theorem
 First Isomorphism Theorem: Let 
 \begin_inset Formula $\varphi:G\longrightarrow G'$
 \end_inset
@@ -796,7 +796,7 @@ combine
  vector spaces?
 \end_layout
 
-\begin_layout Definition*
+\begin_layout Definition
 If 
 \begin_inset Formula $U$
 \end_inset
@@ -832,7 +832,13 @@ direct sum
 
 \end_layout
 
-\begin_layout Lemma*
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:dim_sum"
+
+\end_inset
+
 The dimension of a direct sum is the sum of the dimensions of the summands.
 \end_layout
 
@@ -935,7 +941,13 @@ Uniqueness of
  must be zero.
 \end_layout
 
-\begin_layout Lemma*
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem5:19.2"
+
+\end_inset
+
 If 
 \begin_inset Formula $W$
 \end_inset
@@ -1001,31 +1013,178 @@ Let
 .
 \end_layout
 
-\begin_layout Lemma*
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:comp_sio"
+
+\end_inset
+
 If 
 \begin_inset Formula $W=U\oplus V$
 \end_inset
 
- then for 
-\begin_inset Formula $u\in U$
+ then 
+\begin_inset Formula $V\simeq W_{/U}$
 \end_inset
 
- the map 
-\begin_inset Formula $\bar{\varphi}\left(v\right)=v+U$
+ .
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\varphi:W\rightarrow V$
 \end_inset
 
- is an isomorphism between 
-\begin_inset Formula $n$
+ be the map that sends 
+\begin_inset Formula $v\rightarrow v$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in V$
 \end_inset
 
  and 
+\begin_inset Formula $u\rightarrow0$
+\end_inset
+
+ for all 
+\begin_inset Formula $u\in U$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $U\cap V=\left\{ 0\right\} $
+\end_inset
+
+ this is a well defined map.
+ Then the result follows from the First Isomorphism Theorem.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:dim_quot"
+
+\end_inset
+
+If 
+\begin_inset Formula $U$
+\end_inset
+
+ is an m-dimensional subspace of n-dimensional 
+\begin_inset Formula $W$
+\end_inset
+
+ then 
+\begin_inset Formula $W_{/U}$
+\end_inset
+
+ is 
+\begin_inset Formula $n-m$
+\end_inset
+
+ dimensional.
+\end_layout
+
+\begin_layout Proof
+By lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem5:19.2"
+
+\end_inset
+
+ there exists a subspace 
+\begin_inset Formula $V$
+\end_inset
+
+ such that 
+\begin_inset Formula $W=U\oplus V$
+\end_inset
+
+ and by lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:dim_sum"
+
+\end_inset
+
+ it has dimension 
+\begin_inset Formula $n-m$
+\end_inset
+
+ and by lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:comp_sio"
+
+\end_inset
+
+ 
+\begin_inset Formula $V$
+\end_inset
+
+ is isomorphic to 
 \begin_inset Formula $W_{/U}$
 \end_inset
 
 .
 \end_layout
 
+\begin_layout Standard
+We now have everything we need to prove that Rank-Nullity Theorem.
+\end_layout
+
+\begin_layout Theorem
+If 
+\begin_inset Formula $\varphi:W\rightarrow Y$
+\end_inset
+
+ is linear with 
+\begin_inset Formula $W$
+\end_inset
+
+ finite dimension 
+\begin_inset Formula $\text{dim}\left(W\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\text{dim}\left(W\right)=\text{dim}\left(\text{im}\left(\varphi\right)\right)+\text{dim}\left(\text{ker}\left(\varphi\right)\right)$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Proof
+By the First Isomorphism Theorem 
+\begin_inset Formula $W_{/\text{ker}\left(\varphi\right)}\simeq\text{im}\left(\varphi\right)$
+\end_inset
+
+ and since 
+\begin_inset Formula $\text{ker}\left(\varphi\right)$
+\end_inset
+
+ is a subspace of 
+\begin_inset Formula $W$
+\end_inset
+
+ by lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:dim_quot"
+
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+\text{dim}\left(W_{/\text{ker}\left(\varphi\right)}\right) & =\text{dim}\left(W\right)-\text{dim}\left(\text{ker}\left(\varphi\right)\right)\\
+\text{dim}\left(\text{im}\left(\varphi\right)\right) & =\text{dim}\left(W\right)-\text{dim}\left(\text{ker}\left(\varphi\right)\right)
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
