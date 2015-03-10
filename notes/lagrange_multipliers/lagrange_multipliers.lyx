@@ -1,0 +1,2122 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+\usepackage{cancel}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Lagrange Multipliers over coffee
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Section
+Theory
+\end_layout
+
+\begin_layout Standard
+There is absolutely only one
+\series bold
+ 
+\series default
+thing you need to know to understand Lagrange multiplers and it's so simple
+ you can digest it over coffee (don't worry this note is as long as it is
+ only because I included lots of pictures).
+ It is the 
+\series bold
+linear approximation
+\series default
+ to 
+\begin_inset Formula $f$
+\end_inset
+
+ at a point 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ where 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable
+\begin_inset Formula 
+\[
+L\left(\mathbf{x}\right)=f\left(\mathbf{a}\right)+\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)
+\]
+
+\end_inset
+
+It's called the 
+\emph on
+linear 
+\emph default
+approximation because, for example in one dimension, with 
+\begin_inset Formula $m=\left.\nabla f\left(x\right)\right|_{x=a}$
+\end_inset
+
+ the equation reads
+\begin_inset Formula 
+\begin{align*}
+L\left(x\right) & =f\left(a\right)+m\cdot\left(x-a\right)\\
+ & =mx+\left(f\left(a\right)-ma\right)
+\end{align*}
+
+\end_inset
+
+which is the equation of a line with slope 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+-intercept 
+\begin_inset Formula $\left(f\left(a\right)-ma\right)$
+\end_inset
+
+.
+ But what gives us the right to say is 
+\begin_inset Formula $L$
+\end_inset
+
+ is an approximation of 
+\begin_inset Formula $f$
+\end_inset
+
+? Even if it is an approximation is it a good approximation? And if so,
+ in what sense is it good? 
+\end_layout
+
+\begin_layout Standard
+Intuitively it's a good approximation because 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable and differentiability is a measure of smoothness.
+ For example functions that are infinitely differentiable are just called
+ 
+\emph on
+smooth 
+\emph default
+and a once-differentiable function is 
+\begin_inset Quotes eld
+\end_inset
+
+smooth
+\begin_inset Quotes erd
+\end_inset
+
+ in the exactly the sense that it admits a linear approximation.
+ 
+\end_layout
+
+\begin_layout Standard
+Ok enough intuition.
+ What do I need to show to actually prove that 
+\begin_inset Formula $L$
+\end_inset
+
+ is a good approximaton of 
+\begin_inset Formula $f$
+\end_inset
+
+ in the neighborhood of a point 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+, where 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable at 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+.
+ Well I need to show that in using 
+\begin_inset Formula $L\left(\mathbf{x}\right)$
+\end_inset
+
+ as a substitute for 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+ I incur an error that is small and becomes smaller as 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ approaches 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+.
+ Namely that the error 
+\begin_inset Formula $e\left(\mathbf{x}\right)=\left|f\left(\mathbf{x}\right)-L\left(\mathbf{x}\right)\right|$
+\end_inset
+
+ is 
+\series bold
+small
+\series default
+ as 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ approaches 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+.
+ I'm going to sketch the argument for 
+\begin_inset Formula $f$
+\end_inset
+
+ a function of a single variable 
+\begin_inset Formula $x$
+\end_inset
+
+ and then indicate how it can be generalized to multivariate 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+What do I have at my disposal? I have that 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable at 
+\begin_inset Formula $a$
+\end_inset
+
+, i.e.
+ that the derivative 
+\begin_inset Formula $f'\left(a\right)$
+\end_inset
+
+ exists; this limit exists
+\begin_inset Formula 
+\begin{align*}
+\lim_{x\rightarrow a} & \frac{f\left(x\right)-f\left(a\right)}{x-a}=f'\left(a\right)
+\end{align*}
+
+\end_inset
+
+But this is trivially equivalent to
+\begin_inset Formula 
+\begin{align*}
+\lim_{x\rightarrow a} & \frac{f\left(x\right)-f\left(a\right)}{x-a}-f'\left(a\right)=0
+\end{align*}
+
+\end_inset
+
+and underneath the calculus machinery what this really mean is that for
+ all 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ blah blah blah there exists 
+\begin_inset Formula $\delta$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\left|\frac{f\left(x\right)-f\left(a\right)}{x-a}-f'\left(a\right)\right|<\epsilon
+\]
+
+\end_inset
+
+Now we're almost done
+\begin_inset Formula 
+\begin{align*}
+\left|x-a\right|\left|\frac{f\left(x\right)-f\left(a\right)}{x-a}-f'\left(a\right)\right| & <\epsilon\left|x-a\right|\\
+\left|\left(x-a\right)\left(\frac{f\left(x\right)-f\left(a\right)}{x-a}-f'\left(a\right)\right)\right| & <\epsilon\left|x-a\right|\\
+\left|f\left(x\right)-f\left(a\right)-f'\left(a\right)\left(x-a\right)\right| & <\epsilon\left|x-a\right|\\
+\left|f\left(x\right)-L\left(x\right)\right| & <\epsilon\left|x-a\right|
+\end{align*}
+
+\end_inset
+
+What does this say? It says that near 
+\begin_inset Formula $a$
+\end_inset
+
+ the error made in using the value 
+\begin_inset Formula $L\left(x\right)$
+\end_inset
+
+ as an approximation for the value 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is less than 
+\begin_inset Formula $\left|x-a\right|$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In fact much smaller since 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ will be much smaller than 1.
+\end_layout
+
+\end_inset
+
+ i.e.
+ strictly dominated
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Maybe you know this, maybe you don't, but this is exactly the condition
+ for 
+\begin_inset Formula $e\left(x\right)=\left|L\left(x\right)-f\left(x\right)\right|$
+\end_inset
+
+ to be little 
+\begin_inset Formula $o\left(\left|x-a\right|\right)$
+\end_inset
+
+ as 
+\begin_inset Formula $x$
+\end_inset
+
+ approaches 
+\begin_inset Formula $a$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ by how far you are from 
+\begin_inset Formula $a$
+\end_inset
+
+ .
+ So now I'm justified in writing that 
+\begin_inset Formula 
+\[
+f\left(x\right)\approx f\left(a\right)+f'\left(a\right)\left(x-a\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How to generalize this to 
+\begin_inset Formula $f$
+\end_inset
+
+ a function of 
+\begin_inset Formula $n$
+\end_inset
+
+ variables? If the domain of 
+\begin_inset Formula $f$
+\end_inset
+
+ is an open set then we can restrict 
+\series bold
+x 
+\series default
+to a neighborhood of 
+\series bold
+a 
+\series default
+and parameterize the line from 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ by the single variable vector valued function 
+\begin_inset Formula $\mathbf{u}\left(t\right)=\mathbf{a}+t\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $g\left(t\right)=f\left(\mathbf{u}\left(t\right)\right)$
+\end_inset
+
+ is again a single variable real valued differentiable function such that
+ 
+\begin_inset Formula $g\left(1\right)=f\left(\mathbf{x}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(0\right)=f\left(\mathbf{a}\right)$
+\end_inset
+
+ and using the above result we construct the linear approximation for 
+\begin_inset Formula $g\left(1\right)$
+\end_inset
+
+ at 
+\begin_inset Formula $t=0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+g\left(1\right) & \approx g\left(0\right)+g'\left(0\right)\left(1-0\right)\\
+f\left(\mathbf{x}\right) & \approx f\left(\mathbf{a}\right)+g'\left(0\right)
+\end{align*}
+
+\end_inset
+
+But what is 
+\begin_inset Formula $g'\left(0\right)$
+\end_inset
+
+? Using the chain rule
+\begin_inset Formula 
+\begin{align*}
+g'\left(0\right) & =\left.\frac{\partial}{\partial x_{1}}f\left(\mathbf{u}\left(t\right)\right)\frac{d}{dt}\mathbf{u}\left(t\right)\right|_{t=0}+\left.\frac{\partial}{\partial x_{2}}f\left(\mathbf{u}\left(t\right)\right)\frac{d}{dt}\mathbf{u}\left(t\right)\right|_{t=0}+\cdots+\left.\frac{\partial}{\partial x_{n}}f\left(\mathbf{u}\left(t\right)\right)\frac{d}{dt}\mathbf{u}\left(t\right)\right|_{t=0}\\
+ & =\frac{\partial f}{\partial x_{1}}\cdot\left(x_{1}-a_{1}\right)+\frac{\partial f}{\partial x_{2}}\cdot\left(x_{2}-a_{2}\right)+\cdots+\frac{\partial f}{\partial x_{n}}\cdot\left(x_{n}-a_{n}\right)\\
+ & =\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)
+\end{align*}
+
+\end_inset
+
+Tada!
+\begin_inset Formula 
+\[
+f\left(\mathbf{x}\right)\approx f\left(\mathbf{a}\right)+\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This marks the end of the real math.
+ If you don't understand, don't care, or don't want to know just take away
+ from this that for a differentiable
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I'll just note that this is not a trivial characterization of smoothness.
+ You might think that all continuous functions admit linear approximations.
+ Obvious counter-examples include 
+\begin_inset Formula $f\left(x\right)=\left|x\right|$
+\end_inset
+
+ and other piecewise defined functions.
+ Now you might think that at worst continuous functions might fail to be
+ smooth at only a finite (or at most countable) number of points in their
+ domain.
+ Well here's a continuous function that is 
+\series bold
+nowhere differentiable
+\series default
+; for 
+\begin_inset Formula $b\in\mathbb{Z}$
+\end_inset
+
+ and 
+\begin_inset Formula $0<a<1$
+\end_inset
+
+ and 
+\begin_inset Formula $ab>1+(3/2)\pi$
+\end_inset
+
+
+\series bold
+ 
+\begin_inset Formula 
+\[
+f\left(x\right)=\sum_{i=1}^{\infty}a^{n}\cos\left(b^{n}\pi x\right)
+\]
+
+\end_inset
+
+
+\series default
+is continuous everywhere but has derivatives nowhere.
+ The plot is at the bottom of the next page; clearly not very smooth.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centerline{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename WeierstrassFunction.svg
+	scale 20
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ the linear approximation is good near the point at which the approximation
+ is constructed.
+\end_layout
+
+\begin_layout Standard
+Now that we have the linear approximation in hand what can we conclude about
+ general differentiable 
+\begin_inset Formula $f$
+\end_inset
+
+ using it? The first thing is what happens when
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{x}\right) & \approx f\left(\mathbf{a}\right)+\underbrace{\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)}_{0}\\
+f\left(\mathbf{x}\right) & \approx f\left(\mathbf{a}\right)
+\end{align*}
+
+\end_inset
+
+That is 
+\begin_inset Formula $f\left(\mathbf{x}\right)-f\left(\mathbf{a}\right)\approx0$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ doesn't change.
+ Belaboring it: 
+\begin_inset Formula $f$
+\end_inset
+
+ doesn't increase nor decrease.
+ So 
+\begin_inset Formula $f\left(\mathbf{a}\right)$
+\end_inset
+
+ must be a 
+\series bold
+stationary point
+\series default
+.
+ What I'm saying is
+\series bold
+ 
+\series default
+that
+\series bold
+ when the product 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+ is 0 
+\series default
+then 
+\begin_inset Formula $f$
+\end_inset
+
+ doesn't change
+\series bold
+ 
+\series default
+and 
+\begin_inset Formula $f\left(\mathbf{a}\right)$
+\end_inset
+
+ is a stationary point,
+\series bold
+ NOT WHEN 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}=0$
+\end_inset
+
+
+\series default
+.
+ If you're uncomfortable with the shift in focus from 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ to 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+ reassure yourself by noticing that for 
+\begin_inset Formula $f$
+\end_inset
+
+ a function of a single variable the only way 
+\begin_inset Formula 
+\[
+\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)=f'\left(a\right)\cdot\left(x-a\right)=0
+\]
+
+\end_inset
+
+is if 
+\begin_inset Formula $f'\left(a\right)=0$
+\end_inset
+
+.
+ So it coincides with what you already know and the point is that the product
+ being zero is the appropriate generalization
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Of course it's still true that if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ in a neighborhood of 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ then 
+\begin_inset Formula $f\left(\mathbf{a}\right)$
+\end_inset
+
+ is local optimum (minimum or maximum) but for multivariate functions inflection
+ points (or 
+\family default
+\series default
+\shape default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+saddle points
+\emph default
+) can occur at points where 
+\family roman
+\series medium
+\shape up
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\neq0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+for 
+\begin_inset Formula $f$
+\end_inset
+
+ a multivariate function.
+ The second thing is that 
+\begin_inset Formula $f\left(\mathbf{x}\right)-f\left(\mathbf{a}\right)$
+\end_inset
+
+ is maximized when 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+ is maximized and this occurs when 
+\begin_inset Formula $\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+ is in the same direction as 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+.
+ Therefore the direction of 
+\begin_inset Quotes eld
+\end_inset
+
+steepest ascent
+\begin_inset Quotes erd
+\end_inset
+
+ is 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+.
+ This is not very important for understanding Lagrange multipliers but it's
+ important for things like gradient descent and conjugate gradients so it's
+ worth mentioning.
+ 
+\end_layout
+
+\begin_layout Section
+Practice
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Okay finally I'm going to draw some pictures
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Most are actually they're shamelessly stolen from 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size normal
+http://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf
+\family roman
+\series medium
+\shape up
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\end_layout
+
+\end_inset
+
+.
+ Here's a function of two variables 
+\begin_inset Formula $f\left(x_{1},x_{2}\right)=\frac{3x_{1}^{2}}{2}+3x_{2}^{2}+2x_{1}x_{2}-2x_{1}+8x_{2}$
+\end_inset
+
+, whose plot appears in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "parab"
+
+\end_inset
+
+.
+ It has a global minimum at 
+\begin_inset Formula $\left(2,-2\right)$
+\end_inset
+
+, as can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "parab-1"
+
+\end_inset
+
+.
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Graphics
+	filename 3dplot2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Paraboloid
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset CommandInset label
+LatexCommand label
+name "parab"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Graphics
+	filename glob_min.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Level curves
+\begin_inset CommandInset label
+LatexCommand label
+name "parab-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Now suppose I wanted to minimize 
+\begin_inset Formula $f$
+\end_inset
+
+ subject to the constraint 
+\begin_inset Formula $x_{2}=(2/3)x_{1}-(2/3)$
+\end_inset
+
+, i.e.
+ along this line.
+ This is equivalent to finding a point on the intersection of a plane with
+ the surface as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Intersection"
+
+\end_inset
+
+.
+ How to proceed? Let's 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+linearize
+\emph default
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ around points on the line we're constrained to move along and then w
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+e can use our result that stationary points 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+a
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ occur where 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)=0$
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Graphics
+	filename constrained3dplot.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Intersection
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Intersection"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename gradients.png
+	scale 45
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Constrained gradient
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Constrained-gradient"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Note that both 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+a 
+\series default
+and 
+\series bold
+x 
+\series default
+are on the line 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x_{2}=(2/3)x_{1}-(2/3)$
+\end_inset
+
+.
+ For 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+x 
+\series default
+it's because our constraint requires it to be so and for 
+\series bold
+a 
+\series default
+it's because we decided to compute the linear approximation to 
+\begin_inset Formula $f$
+\end_inset
+
+ at points on the line.
+ Therefore the vector
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\mathbf{x}-\mathbf{a}$
+\end_inset
+
+ is in the direction of the line, namely some multiple
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+If you don't know why that's the direction of the line then prove it to
+ yourself by computing 
+\begin_inset Formula $\left(x_{2_{1}},x_{1_{1}}\right)-\left(x_{2_{0}},x_{1_{0}}\right)$
+\end_inset
+
+ for some particular 
+\begin_inset Formula $x_{1_{0}},x_{1_{1}}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $\left(1,2/3\right)$
+\end_inset
+
+.
+ So in searching for where 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)=0$
+\end_inset
+
+ we just need to look at the projection of 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ onto the line.
+ The dotted arrows in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Constrained-gradient"
+
+\end_inset
+
+ are these projections.
+ It's very obvious where 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)=0$
+\end_inset
+
+ on the line: it's where 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ is perpendicular (
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+orthogonal
+\emph default
+) to the line! It bears recapitulating: to identify where 
+\begin_inset Formula $f$
+\end_inset
+
+ is minimized subject to the constraint we need to find a point 
+\series bold
+a
+\series default
+ where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ is perpendicular to the line 
+\begin_inset Formula $x_{2}=(2/3)x_{1}-(2/3)$
+\end_inset
+
+.
+ But this is easy.
+ We can immediately write down
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The equation of the line perpendicular to 
+\begin_inset Formula $y=mx+b$
+\end_inset
+
+ is 
+\begin_inset Formula $y'=-(1/m)x+b$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ the direction vector of the perpendicular line 
+\begin_inset Formula $\left(1,-3/2\right)$
+\end_inset
+
+ and find where 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ points in the same direction
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+For 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ to point in the same direction means for it to be a multiple of the direction
+ of the perpendicular line, just like, for example, 
+\begin_inset Formula $\left(1,2\right)$
+\end_inset
+
+ points in the same direction as 
+\begin_inset Formula $2\cdot\left(1,2\right)=\left(2,4\right)$
+\end_inset
+
+.
+ Hence the 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ factor, which can be positive or negative.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}} & =\lambda\begin{pmatrix}1\\
+-\frac{3}{2}
+\end{pmatrix}\\
+\begin{pmatrix}-2+3a_{1}+a_{2}\\
+8+2a_{1}+6a_{2}
+\end{pmatrix} & =\lambda\begin{pmatrix}1\\
+-\frac{3}{2}
+\end{pmatrix}\\
+\begin{pmatrix}3a_{1}+xa_{2}\\
+2a_{1}+6a_{2}
+\end{pmatrix} & =\begin{pmatrix}\lambda+2\\
+-\lambda\frac{3}{2}-8
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+We have what looks like 2 equations and 3 unknowns 
+\begin_inset Formula $\left(a_{1},a_{2},\lambda\right)$
+\end_inset
+
+ but in fact we have a third equation: we have the constraint.
+ Hence we need to solve
+\begin_inset Formula 
+\begin{align*}
+\begin{pmatrix}3a_{1}+a_{2}\\
+2a_{1}+6a_{2}\\
+-\frac{2}{3}a_{1}+a_{2}
+\end{pmatrix} & =\begin{pmatrix}\lambda+2\\
+-\lambda\frac{3}{2}-8\\
+-\frac{2}{3}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+This system has a solution at 
+\begin_inset Formula $\left(a_{1},a_{2},\lambda\right)=\left(\frac{2}{25},-\frac{46}{75},-\frac{224}{75}\right)$
+\end_inset
+
+.
+ Not the prettiest but if you check 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+ for any point 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+x 
+\series default
+on the line you'll see that it's 0.
+
+\series bold
+ 
+\series default
+I'll repeat for a third time what we've demonstrated:
+\series bold
+ 
+\series default
+to identify where 
+\begin_inset Formula $f$
+\end_inset
+
+ is minimized subject to the constraint we need to find a point 
+\series bold
+a
+\series default
+ that satisfies the constraint and where
+\series bold
+ 
+\begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ is also perpendicular to the constraint
+\series default
+.
+
+\series bold
+ 
+\end_layout
+
+\begin_layout Standard
+From now on I'm going to call the constraint 
+\begin_inset Formula $g\left(\mathbf{x}\right)=c$
+\end_inset
+
+.
+ If you prefer to think of it as 
+\begin_inset Formula $g'\left(\mathbf{x}\right)=g\left(\mathbf{x}\right)-c=0$
+\end_inset
+
+ that's fine too.
+ Note we can express the linear constraint in the previous example as 
+\begin_inset Formula $g\left(\mathbf{x}\right)=-(2/3)x_{1}+x_{2}=-(2/3)$
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename nonlinear_con.jpeg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Nonlinear constraint
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Nonlinear-constraint"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+This was all really easy because the constraint 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+ was linear.
+ And not just linear but exactly a line! What if the constraint were a plane
+ or some nonlinear function of its variables? In the case that 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+ is a plane then computing its normal vector is simple
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If 
+\begin_inset Formula $g\left(\mathbf{x}\right)=\sum k_{i}x_{i}=c$
+\end_inset
+
+ then 
+\begin_inset Formula $\mathbf{k}=\left(k_{1},\dots,k_{n}\right)$
+\end_inset
+
+ is normal to the plane.
+\end_layout
+
+\end_inset
+
+ But indeed what about a nonlinear constraint? A curve such as in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Nonlinear-constraint"
+
+\end_inset
+
+? The story is exactly the same: we need to find where 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ is orthogonal to 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+, like in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Orthogonal-to-nonlinear"
+
+\end_inset
+
+.
+ Except now it's not as simple as finding the equation of the perpendicular
+ line, or the normal vector.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ What shall we do? Linear approximation to the rescue! First compute the
+ linear approximation to 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+ everywhere
+\begin_inset Formula 
+\[
+g\left(\mathbf{x}\right)\approx g\left(\mathbf{a}\right)+\left.\nabla g\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)
+\]
+
+\end_inset
+
+Then observe we already know that for all 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ that satisfy the constraint 
+\begin_inset Formula $g\left(\mathbf{x}\right)-g\left(\mathbf{a}\right)=c-c=0$
+\end_inset
+
+.
+ This immediately implies that for all 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ that satisfy the constraint 
+\begin_inset Formula $\left.\nabla g\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}\cdot\left(\mathbf{x}-\mathbf{a}\right)=0$
+\end_inset
+
+ and this could only be the case if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left.\nabla g\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ is orthogonal to any such vector
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\left.\nabla g\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}$
+\end_inset
+
+ is orthogonal to any motion along the constraint!
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\left(\mathbf{x}-\mathbf{a}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+So here we have exactly the tool we need to find where 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ is orthogonal to 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+: find where it points in the same direction as 
+\begin_inset Formula $\nabla g$
+\end_inset
+
+! That is to say just solve 
+\begin_inset Formula 
+\[
+\nabla f\left(\mathbf{x}\right)=\lambda\nabla g\left(\mathbf{x}\right)
+\]
+
+\end_inset
+
+The curve in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Nonlinear-constraint"
+
+\end_inset
+
+ is simply 
+\begin_inset Formula $x_{2}=x_{1}^{3}$
+\end_inset
+
+ and therefore the constraint is 
+\begin_inset Formula $g\left(\mathbf{x}\right)=-x_{1}^{3}+x_{2}=0$
+\end_inset
+
+ and then solving
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+With some help from Mathematica :)
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}} & =\lambda\begin{pmatrix}-3x_{1}^{2}\\
+1
+\end{pmatrix}\\
+\begin{pmatrix}-2+3x_{1}+x_{2}\\
+8+2x_{1}+6x_{2}\\
+-x_{1}^{3}+x_{2}
+\end{pmatrix} & =\lambda\begin{pmatrix}-3x_{1}^{2}\\
+1\\
+0
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+yields the result 
+\begin_inset Formula $\left(x_{1},x_{2}\right)=\left(-0.845793,-0.605051\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Incidentally this works just fine for the linear case as well; for 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $g\left(\mathbf{x}\right)=-(2/3)x_{1}+x_{2}=-(2/3)$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ we get that 
+\begin_inset Formula $\nabla g=\left(-\frac{2}{3},1\right)=-\frac{3}{2}\left(1,-\frac{3}{2}\right)$
+\end_inset
+
+ and then solving
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-1.5\lambda\begin{pmatrix}1\\
+-\frac{3}{2}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+will produce the exact same answer as before with simply a different 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Graphics
+	filename orth_nonlinear.jpeg
+	scale 22
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Orthogonal to nonlinear constraint
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Orthogonal-to-nonlinear"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What happens if you have multiple simultaneous constraints? For example
+ 
+\begin_inset Formula $m$
+\end_inset
+
+ simultaneous constraints 
+\begin_inset Formula $g_{1}\left(\mathbf{x}\right),g_{2}\left(\mathbf{x}\right),\dots,g_{m}\left(\mathbf{x}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $f$
+\end_inset
+
+ an 
+\begin_inset Formula $n$
+\end_inset
+
+ variable function? For each constraint 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\nabla f\left(\mathbf{x}\right)=\lambda\nabla g\left(\mathbf{x}\right)$
+\end_inset
+
+ must hold and so you need to solve the system
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =\lambda_{1}\nabla g_{1}\left(\mathbf{x}\right)\\
+\nabla f\left(\mathbf{x}\right) & =\lambda_{2}\nabla g_{2}\left(\mathbf{x}\right)\\
+ & \vdots\\
+\nabla f\left(\mathbf{x}\right) & =\lambda_{m}\nabla g_{m}\left(\mathbf{x}\right)
+\end{align*}
+
+\end_inset
+
+Again note that this looks like you have 
+\begin_inset Formula $n+m$
+\end_inset
+
+ unknowns but only 
+\begin_inset Formula $n$
+\end_inset
+
+ equations
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Each 
+\begin_inset Formula $\nabla f\left(\mathbf{x}\right)=\lambda_{i}\nabla g_{i}\left(\mathbf{x}\right)$
+\end_inset
+
+ is actually 
+\begin_inset Formula $n$
+\end_inset
+
+ equations since 
+\begin_inset Formula $\nabla$
+\end_inset
+
+ gives you an 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional vector.
+ 
+\end_layout
+
+\end_inset
+
+ but in fact you 
+\begin_inset Formula $m$
+\end_inset
+
+ more in the 
+\begin_inset Formula $m$
+\end_inset
+
+ constraints 
+\begin_inset Formula 
+\begin{align*}
+g_{1}\left(\mathbf{x}\right) & =c_{1}\\
+g_{2}\left(\mathbf{x}\right) & =c_{2}\\
+ & \vdots\\
+g_{m}\left(\mathbf{x}\right) & =c_{m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
