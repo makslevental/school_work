@@ -596,13 +596,27 @@ That is
 
  doesn't increase nor decrease.
  So 
+\series bold
+a
+\series default
+ must be a 
+\emph on
+stationary point 
+\emph default
+and 
 \begin_inset Formula $f\left(\mathbf{a}\right)$
 \end_inset
 
- must be a 
-\series bold
-stationary point
-\series default
+ must be a local optimum
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Minimum, maximum, or inflection point.
+\end_layout
+
+\end_inset
+
 .
  What I'm saying is
 \series bold
@@ -628,7 +642,7 @@ and
 \begin_inset Formula $f\left(\mathbf{a}\right)$
 \end_inset
 
- is a stationary point,
+ must be a local optimum,
 \series bold
  NOT WHEN 
 \begin_inset Formula $\left.\nabla f\left(\mathbf{x}\right)\right|_{\mathbf{x}=\mathbf{a}}=0$
@@ -1639,6 +1653,7 @@ If
 
 \end_inset
 
+.
  But indeed what about a nonlinear constraint? A curve such as in figure
  
 \begin_inset CommandInset ref
