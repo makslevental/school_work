@@ -799,6 +799,13 @@ steepest ascent
 
 \begin_layout Section
 Practice
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Practice"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2131,6 +2138,1706 @@ g_{m}\left(\mathbf{x}\right) & =c_{m}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Extensions
+\end_layout
+
+\begin_layout Subsection
+Karush-Kuhn-Tucker Conditions
+\end_layout
+
+\begin_layout Standard
+Everything I've set out here works for 
+\emph on
+constrained optimization
+\emph default
+ problems where the constraints are 
+\emph on
+equality constraints
+\emph default
+, i.e.
+ 
+\begin_inset Formula $g_{i}\left(\mathbf{x}\right)=c$
+\end_inset
+
+ (actually from now on let's assume that all of our constraints are of the
+ form 
+\begin_inset Formula $g'\left(\mathbf{x}\right)=g\left(\mathbf{x}\right)-c=0$
+\end_inset
+
+).
+ The extension to 
+\emph on
+inequality constraints 
+\emph default
+is simple but a richer theory.
+ Therefore 4 possible optimization problems
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+As opposed the two possible with equality constraints; maximize 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+ subject to 
+\begin_inset Formula $g\left(\mathbf{x}\right)=0$
+\end_inset
+
+ or minimize 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+ subject to 
+\begin_inset Formula $g\left(\mathbf{x}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ with inequality constraints: 
+\begin_inset Formula 
+\begin{eqnarray}
+\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t & g\left(\mathbf{x}\right)\leq0\label{minlecon}\\
+\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t & g\left(\mathbf{x}\right)\geq0\label{mingecon}\\
+\max_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t & g\left(\mathbf{x}\right)\leq0\label{maxlecon}\\
+\max_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t & g\left(\mathbf{x}\right)\geq0\label{maxgecon}
+\end{eqnarray}
+
+\end_inset
+
+I'll discuss 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "maxlecon"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "maxgecon"
+
+\end_inset
+
+ and allude to how 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "minlecon"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mingecon"
+
+\end_inset
+
+ follow similarly.
+ 
+\end_layout
+
+\begin_layout Standard
+Let's start with 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "maxgecon"
+
+\end_inset
+
+.
+ 
+\series bold
+There are two cases here as well.
+
+\series default
+ In the 
+\series bold
+first case
+\series default
+ the 
+\emph on
+feasible region
+\emph default
+, the region where 
+\begin_inset Formula $g\left(\mathbf{x}\right)\geq0$
+\end_inset
+
+, does not include the global maximum of 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+.
+
+\emph on
+ 
+\emph default
+Here's an example to provide intuition:
+\begin_inset Formula 
+\begin{align*}
+\max_{\mathbf{x}} & f\left(\mathbf{x}\right)=5-\left(\left(x_{1}-3\right)^{2}+x_{2}^{2}\right)\\
+s.t & g\left(\mathbf{x}\right)=2-\left(x_{1}^{2}+x_{2}^{2}\right)\geq0
+\end{align*}
+
+\end_inset
+
+This is a completely contrived example, contrived as such so that I could
+ produce pretty pictures like 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Inequality-constraints-perspecti"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ineqconsperspective.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Inequality constraints perspective view.
+ The light blue plane is the 
+\begin_inset Formula $\left(x_{1},x_{2},x_{3}=0\right)$
+\end_inset
+
+ plane; the feasible region is where the orange paraboloid is above this
+ plane.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Inequality-constraints-perspecti"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Note that figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Clear-view-of-under"
+
+\end_inset
+
+ clearly shows where the feasible region is (the orange part).
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ineqsconreallygoodunder.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Clear view of the the feasible (orange) region.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Clear-view-of-under"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ineqgradients.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Contour plot with intersection and gradients at the local (in the feasible
+ region) optimum.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Clear-gradients"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The relevant facts here are that 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+ has a global maximum at 
+\begin_inset Formula $\left(3,0\right)$
+\end_inset
+
+ (no duh it's just a shifted paraboloid) and the domains of the 
+\emph on
+objective
+\emph default
+ 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+ and the constraint intersect between 
+\begin_inset Formula $x_{1}=3-\sqrt{5}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}=\sqrt{2}$
+\end_inset
+
+.
+ By inspection of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Clear-view-of-under"
+
+\end_inset
+
+ it's clear that the constrained maximum is at 
+\begin_inset Formula $\left(x_{1},x_{2}\right)=\left(\sqrt{2},0\right)$
+\end_inset
+
+.
+ Note this is a point in the set where 
+\begin_inset Formula $g\left(\mathbf{x}\right)=0$
+\end_inset
+
+.
+ Since we've been discussing directions of gradients this entire time it
+ should come as no surprise that here and now we'd be interested in what
+ the gradients look like: figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Clear-gradients"
+
+\end_inset
+
+.
+ Again this should be very obvious given the figures; 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+ increases in the positive 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ direction and 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+ increases in the negative 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ direction.
+ 
+\series bold
+In cases such as this, where the objective is maximized on the boundary
+ of the constraint (on the set where 
+\begin_inset Formula $g\left(\mathbf{x}\right)=0$
+\end_inset
+
+) and the constraint is 
+\begin_inset Formula $g\left(\mathbf{x}\right)\geq0$
+\end_inset
+
+ the gradients 
+\begin_inset Formula $\nabla g$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ will always be anti-parallel.
+ 
+\series default
+That is to say it will necessarily be the case that 
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda & \geq0
+\end{align*}
+
+\end_inset
+
+The sign of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is significant here: for 
+\series bold
+
+\begin_inset Formula $\nabla g$
+\end_inset
+
+ 
+\series default
+and
+\series bold
+ 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ 
+\series default
+to be anti-parallel one must be some negative scaled version of the other
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Equivalently we could have said that 
+\begin_inset Formula $\nabla f\left(\mathbf{x}\right)=\lambda\nabla g\left(\mathbf{x}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\lambda\leq0$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fn:Equivalently-we-could"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In the 
+\series bold
+second case
+\series default
+ for the same conditions feasible region 
+\series bold
+does
+\series default
+ include the global maximum 
+\begin_inset Formula $f\left(\mathbf{a}\right)$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For example when both 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ are convex functions.
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $f\left(\mathbf{x}\right)$
+\end_inset
+
+.
+ Then we simply have that 
+\begin_inset Formula $\nabla f\left(\mathbf{x}\right)=0$
+\end_inset
+
+ at 
+\series bold
+a
+\series default
+.
+ Note that despite the absence of 
+\begin_inset Formula $\nabla g$
+\end_inset
+
+ in this condition we can artifically include it by stipulating that 
+\begin_inset Formula 
+\begin{align*}
+\nabla f & =-\lambda\nabla g\\
+ & \text{\textbf{AND}}\\
+\lambda & =0
+\end{align*}
+
+\end_inset
+
+since this is trivially equivalent by 
+\begin_inset Formula $\nabla f=-\lambda\nabla g=-\left(0\right)\nabla g=0$
+\end_inset
+
+.
+ Now look: in the first case for a constrained optimization problem of type
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "maxgecon"
+
+\end_inset
+
+ the solution is on the boundary of the feasible region, exactly where 
+\begin_inset Formula $g\left(\mathbf{x}\right)=0$
+\end_inset
+
+ and so trivially 
+\begin_inset Formula $\lambda g\left(\mathbf{x}\right)=0$
+\end_inset
+
+ there.
+ But in the second case the solution is the global maximum and we've prescribed
+ that 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ there and so again trivially 
+\begin_inset Formula $\lambda g\left(\mathbf{x}\right)=0$
+\end_inset
+
+ there.
+ Therefore the conditions 
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+ & \text{\textbf{AND}}\\
+\lambda g\left(\mathbf{x}\right) & =0\\
+\lambda & \geq0
+\end{align*}
+
+\end_inset
+
+are necessary
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+As opposed to sufficient.
+ If you don't know the difference then 
+\family typewriter
+http://en.wikipedia.org/wiki/Necessity_and_sufficiency.
+\end_layout
+
+\end_inset
+
+ conditions for 
+\series bold
+x
+\series default
+ to be where 
+\begin_inset Formula $f$
+\end_inset
+
+ is maximized.
+\end_layout
+
+\begin_layout Standard
+Okay on to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "maxlecon"
+
+\end_inset
+
+.
+ We can manipulate the same example: just flip 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+ over! The feasible region is exactly the same.
+ The only thing that changes is the direction of the gradient of 
+\begin_inset Formula $g\left(\mathbf{x}\right)$
+\end_inset
+
+ on the set 
+\begin_inset Formula $g\left(\mathbf{x}\right)=0$
+\end_inset
+
+: it now points to the right instead of the right! Therefore by reasoning
+ as we did before for constrained optimization problems of type 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "maxgecon"
+
+\end_inset
+
+ we can quickly conclude that the necessary conditions for this type in
+ the first case (if the global maximum is not in the feasible region) are
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda & \geq0
+\end{align*}
+
+\end_inset
+
+since the gradients should point in the same direction, as indicated by
+ figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:revgradients"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Literally the only thing I did was flip the orange arrow :)
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename revgradientsminmax.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Contour plot with the local (in the feasible region) maximum for 
+\begin_inset Formula $g\left(\mathbf{x}\right)\leq0$
+\end_inset
+
+ constraint.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:revgradients"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+For reasons that will become clear in about 2 pages it's more convenient
+ to express the necessary conditions as 
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda & \leq0
+\end{align*}
+
+\end_inset
+
+If you don't understand why this is equivalent go back and look at footnote
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fn:Equivalently-we-could"
+
+\end_inset
+
+.
+ In the second case (if the global maximum is in the feasible region) then
+ it's the same thing
+\begin_inset Formula 
+\begin{align*}
+\nabla f & =-\lambda\nabla g\\
+ & \text{\textbf{AND}}\\
+\lambda & =0
+\end{align*}
+
+\end_inset
+
+Then as before summarizing both cases the necessary conditions are
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+ & \text{\textbf{AND}}\\
+\lambda g\left(\mathbf{x}\right) & =0\\
+\lambda & \leq0
+\end{align*}
+
+\end_inset
+
+Note 
+\begin_inset Formula $\lambda\leq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Okay that's it for constraining maximization problems.
+ How to handle constrained minimization problems? Just flip the pictures!
+ If you invert the blue paraboloid, which corresponds to constrained optimizatio
+n problems of type 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mingecon"
+
+\end_inset
+
+, in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Inequality-constraints-perspecti"
+
+\end_inset
+
+ you get figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Minimizing-the-objective"
+
+\end_inset
+
+ with contour plot like in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:localmin"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename revgradientsminmin.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Contour plot with the local (in the feasible region) minimum for constraint
+ 
+\begin_inset Formula $g\left(\mathbf{x}\right)\geq0$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:localmin"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename invertpersp.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Minimizing the objective subject to the constraint 
+\begin_inset Formula $g\left(\mathbf{x}\right)\geq0$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Minimizing-the-objective"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+For the case where the global minimum is not in the feasible region of the
+ constraint, and the local minimum occurs on the boundary, we want to consider
+ which direction the negative gradient 
+\begin_inset Formula $-\nabla f$
+\end_inset
+
+ points.
+ In fact we want the negative 
+\begin_inset Formula $-\nabla f$
+\end_inset
+
+ to point in the opposite direction of 
+\begin_inset Formula $\nabla g$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Go back and read the discussion around figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Constrained-gradient"
+
+\end_inset
+
+ if you don't understand why they should point in opposite directions.
+\end_layout
+
+\end_inset
+
+.
+ So the necessary conditions are 
+\begin_inset Formula 
+\begin{align*}
+-\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda & \geq0
+\end{align*}
+
+\end_inset
+
+which is of course equivalent to
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda & \geq0
+\end{align*}
+
+\end_inset
+
+which again for reasons that will become clear in about 2 pages I'll rewrite
+ as 
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda & \leq0
+\end{align*}
+
+\end_inset
+
+And for the case where the global minimum is in the feasible region of the
+ constraint it's again 
+\begin_inset Formula 
+\begin{align*}
+\nabla f & =-\lambda\nabla g\\
+ & \text{\textbf{AND}}\\
+\lambda & =0
+\end{align*}
+
+\end_inset
+
+For both of these cases the conditons on 
+\series bold
+x 
+\series default
+are likewise summarized by 
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda g\left(\mathbf{x}\right) & =0\\
+\lambda & \leq0
+\end{align*}
+
+\end_inset
+
+Finally without doing any work
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Do it yourself!
+\end_layout
+
+\end_inset
+
+, just by analogy constrained optimization problems of type 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "minlecon"
+
+\end_inset
+
+ have necessary conditions on 
+\series bold
+x 
+\series default
+
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda\nabla g\left(\mathbf{x}\right)\\
+\lambda g\left(\mathbf{x}\right) & =0\\
+\lambda & \geq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general this set of necessary conditions on the stationary point 
+\series bold
+x 
+\series default
+are called the Karush-Kuhn-Tucker (KKT) conditions.
+ Note that for multiple constrains we simply have multiple 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ the generalizations follow from the discussion on generalizations at the
+ end of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Practice"
+
+\end_inset
+
+.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Karush-Kuhn-Tucker-conditions"
+
+\end_inset
+
+ summarizes the KKT conditions in their general form.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\text{to}\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{i}\nabla g\left(\mathbf{x}\right)\\
+\lambda_{i}g_{i}\left(\mathbf{x}\right) & =0\\
+\lambda_{i} & \geq0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{to}\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\geq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{i}\nabla g\left(\mathbf{x}\right)\\
+\lambda_{i}g_{i}\left(\mathbf{x}\right) & =0\\
+\lambda_{i} & \leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\:\;\;\;$
+\end_inset
+
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\text{to}\max_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\geq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{i}\nabla g\left(\mathbf{x}\right)\\
+\lambda_{i}g_{i}\left(\mathbf{x}\right) & =0\\
+\lambda_{i} & \geq0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{to}\max_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{i}\nabla g\left(\mathbf{x}\right)\\
+\lambda_{i}g_{i}\left(\mathbf{x}\right) & =0\\
+\lambda_{i} & \leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Karush-Kuhn-Tucker conditions
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Karush-Kuhn-Tucker-conditions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The Lagrangian 
+\end_layout
+
+\begin_layout Standard
+There's a very cutesy mathematician-esque way to restate the KKT conditions.
+ Define the 
+\emph on
+Lagrangian 
+\emph default
+as
+\begin_inset Formula 
+\[
+L\left(\mathbf{x},\boldsymbol{\lambda}\right)=f\left(\mathbf{x}\right)+\sum_{i=1}^{m}\lambda_{i}g_{i}\left(\mathbf{x}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\lambda}=\left(\lambda_{1},\dots,\lambda_{m}\right)$
+\end_inset
+
+.
+ Then for the KKT conditions now involve solving
+\begin_inset Formula 
+\begin{align*}
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0
+\end{align*}
+
+\end_inset
+
+For example for constrained optimization problems of type 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "minlecon"
+
+\end_inset
+
+ the restated conditions are 
+\begin_inset Formula 
+\begin{align*}
+\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
+\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
+\lambda_{i} & \geq0\text{ for }i=1,2,\dots,m
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{g}=\left(g_{1}\left(\mathbf{x}\right),\dots,g_{m}\left(\mathbf{x}\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)=\left(\frac{\partial L\left(\mathbf{x},\boldsymbol{\lambda}\right)}{\partial x_{1}},\frac{\partial L\left(\mathbf{x},\boldsymbol{\lambda}\right)}{\partial x_{2}},\dots,\frac{\partial L\left(\mathbf{x},\boldsymbol{\lambda}\right)}{\partial x_{n}}\right)$
+\end_inset
+
+.
+ Why is this equivalent? Well the KKT conditions as I've written them down
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Karush-Kuhn-Tucker-conditions"
+
+\end_inset
+
+ would be
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{1}\nabla g_{1}\left(\mathbf{x}\right)\\
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{2}\nabla g_{2}\left(\mathbf{x}\right)\\
+ & \vdots\\
+\nabla f\left(\mathbf{x}\right) & =-\lambda_{m}\nabla g_{m}\left(\mathbf{x}\right)\\
+\lambda_{1}g_{1}\left(\mathbf{x}\right) & =0\\
+\lambda_{2}g_{2}\left(\mathbf{x}\right) & =0\\
+ & \vdots\\
+\lambda_{m}g_{m}\left(\mathbf{x}\right) & =0\\
+\lambda_{1} & \geq0\\
+\lambda_{2} & \geq0\\
+ & \vdots\\
+\lambda_{m} & \geq0
+\end{align*}
+
+\end_inset
+
+First of all obviously the 
+\begin_inset Formula $\lambda_{i}\geq0$
+\end_inset
+
+ conditions match in both statements of the conditions so they're equivalent
+ in that respect.
+ Adding all the 
+\begin_inset Formula $\nabla f\left(\mathbf{x}\right)=-\lambda_{i}\nabla g_{i}\left(\mathbf{x}\right)$
+\end_inset
+
+ equations we get 
+\begin_inset Formula $m\nabla f\left(\mathbf{x}\right)=-\sum_{i=1}^{m}\lambda_{i}\nabla g_{i}\left(\mathbf{x}\right)$
+\end_inset
+
+.
+ Dividing through by 
+\begin_inset Formula $m$
+\end_inset
+
+ and defining 
+\begin_inset Formula $\lambda_{i}^{'}$
+\end_inset
+
+ we get that 
+\begin_inset Formula $\nabla f\left(\mathbf{x}\right)=-\sum_{i=1}^{m}\lambda_{i}^{'}\nabla g_{i}\left(\mathbf{x}\right)$
+\end_inset
+
+ which is of course equivalent to 
+\begin_inset Formula $\nabla_{\mathbf{x}}L=0$
+\end_inset
+
+ since absorbing the 
+\begin_inset Formula $1/m$
+\end_inset
+
+ in the 
+\begin_inset Formula $\lambda_{i}^{'}$
+\end_inset
+
+ doesn't matter
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+All we've cared about this entire time is whether 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla g$
+\end_inset
+
+ are parallel; they're relative lengths aren't important.
+\end_layout
+
+\end_inset
+
+.
+ Now
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ for the 
+\begin_inset Formula $\lambda_{i}g_{i}\left(\mathbf{x}\right)=0$
+\end_inset
+
+ equations in the original KKT conditions: since in the restated conditions
+ 
+\begin_inset Formula $\lambda_{i}\geq0$
+\end_inset
+
+ the only way 
+\begin_inset Formula $\boldsymbol{\lambda}\cdot\mathbf{g}$
+\end_inset
+
+ could equal zero is if every 
+\begin_inset Formula $\lambda_{i}g_{i}\left(\mathbf{x}\right)$
+\end_inset
+
+ equals zero.
+ Voila the conditions are equivalent in which 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+x 
+\series default
+they identify as the points that satisfy
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\min_{\mathbf{x}}f\left(\mathbf{x}\right)s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m$
+\end_inset
+
+.
+ All of the other KKT version are equivalent for similar reasons.
+ The KKT conditions using the Lagrangian form are restated in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:KKT-lagrange"
+
+\end_inset
+
+.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Boxed
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\text{to}\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
+\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
+\lambda_{i} & \geq0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{to}\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\geq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
+\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
+\lambda_{i} & \leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\:\;\;\;$
+\end_inset
+
+
+\begin_inset Box Boxed
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\text{to}\max_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g\left(\mathbf{x}\right)\geq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
+\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
+\lambda_{i} & \geq0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{to}\max_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
+\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
+\lambda_{i} & \leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Lagrange form Karush-Kuhn-Tucker conditions
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:KKT-lagrange"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Duality
+\end_layout
+
+\begin_layout Standard
+Let's take again the concrete example of the constrained minimization problem
+ of type 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "minlecon"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
+\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
+\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
+\lambda_{i} & \geq0\text{ for }i=1,2,\dots,m
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $g_{i}\left(\mathbf{x}\right)\leq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{i}\geq0$
+\end_inset
+
+ observe that for every feasible 
+\series bold
+x 
+\series default
+it's the case that
+\series bold
+ 
+\series default
+
+\begin_inset Formula $f\left(\mathbf{x}\right)\geq f\left(\mathbf{x}\right)+\boldsymbol{\lambda}\cdot\mathbf{g}=L\left(\mathbf{x},\boldsymbol{\lambda}\right)$
+\end_inset
+
+.
+ Also note that 
+\begin_inset Formula 
+\[
+\max_{\boldsymbol{\lambda}\geq0}\boldsymbol{\lambda}\cdot\mathbf{g}=\begin{cases}
+0 & \text{if }g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\infty & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+which means that for us 
+\begin_inset Formula $\max_{\boldsymbol{\lambda}\geq0}\boldsymbol{\lambda}\cdot\mathbf{g}=0$
+\end_inset
+
+ since 
+\begin_inset Formula $g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m$
+\end_inset
+
+.
+ Using these two facts our constrained minimization problem can be expressed
+ as the unconstrained minimization problem
+\begin_inset Formula 
+\begin{align*}
+\min_{\mathbf{x}} & f\left(\mathbf{x}\right)\\
+\min_{\mathbf{x}} & f\left(\mathbf{x}\right)+\max_{\boldsymbol{\lambda}\geq0}\left(\boldsymbol{\lambda}\cdot\mathbf{g}\right)\\
+\min_{\mathbf{x}} & \max_{\boldsymbol{\lambda}\geq0}\left(f\left(\mathbf{x}\right)+\boldsymbol{\lambda}\cdot\mathbf{g}\right)\\
+\min_{\mathbf{x}} & \left(\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\series bold
+This is not the dual problem yet but
+\series default
+ why this is useful will be clear in a moment.
+ Two more facts are necessary in order to write down the dual problem.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+weak duality
+\emph default
+: if 
+\begin_inset Formula $\boldsymbol{\lambda}\geq0$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
+\end_inset
+
+and thus
+\begin_inset Formula 
+\[
+\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+strong duality
+\emph default
+: if additionally there exist 
+\begin_inset Formula $\mathbf{x}^{*},\boldsymbol{\lambda}^{*}\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+L\left(\mathbf{x}^{*},\boldsymbol{\lambda}\right)\leq L\left(\mathbf{x}^{*},\boldsymbol{\lambda}^{*}\right)\leq L\left(\mathbf{x},\boldsymbol{\lambda}^{*}\right)
+\]
+
+\end_inset
+
+for all feasible 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{\lambda}\geq0$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & \leq\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\\
+ & =L\left(\mathbf{x}^{*},\boldsymbol{\lambda}^{*}\right)\\
+ & =\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}^{*}\right)\\
+ & =\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally when strong duality holds (weak duality always holds) we have that
+ 
+\begin_inset Formula 
+\[
+\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula 
+\[
+\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)=\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
+\end_inset
+
+In such cases
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Strong duality holds when 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ are all convex and there exists at least feasible point which is an interior
+ point of the feasible point.
+\end_layout
+
+\end_inset
+
+ if we define the 
+\emph on
+Lagrangian dual
+\emph default
+ 
+\begin_inset Formula 
+\[
+D\left(\mathbf{\boldsymbol{\lambda}}\right)=\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
+\end_inset
+
+we can alternativey solve the optimization problem
+\begin_inset Formula 
+\[
+\max D\left(\boldsymbol{\lambda}\right)\, s.t\,\boldsymbol{\lambda}\geq0
+\]
+
+\end_inset
+
+Some properties of this maximization problem are that for all feasible 
+\begin_inset Formula $\boldsymbol{\lambda}$
+\end_inset
+
+ and 
+\series bold
+x 
+\series default
+it's the case that 
+\begin_inset Formula $D\left(\mathbf{\boldsymbol{\lambda}}\right)\leq f\left(\mathbf{x}\right)$
+\end_inset
+
+ and so the 
+\emph on
+dual solution
+\emph default
+ 
+\begin_inset Formula $\mathbf{d^{*}}$
+\end_inset
+
+ is always less than the 
+\emph on
+primal solution 
+\emph default
+
+\begin_inset Formula $\mathbf{p^{*}}$
+\end_inset
+
+.
+ Further 
+\begin_inset Formula $\mathbf{p^{*}}-\mathbf{d}^{*}$
+\end_inset
+
+ is called the 
+\emph on
+duality gap
+\emph default
+ and can be used to measure how close you are to the optimum.
 \end_layout
 
 \end_body
