@@ -3594,8 +3594,69 @@ Duality
 \end_layout
 
 \begin_layout Standard
-Let's take again the concrete example of the constrained minimization problem
- of type 
+Under certain conditions it's possible to express a constrained optimization
+ problem as another optimization problem that is in some sense equal and
+ opposite
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This should be called Newton's third law of optimization or something :)
+\end_layout
+
+\end_inset
+
+.
+ For example if the optimization problem you're interested in is a minimization
+ problem then there exists (under certain conditions) a maximization problem
+ whose solution is also the solution to minimization problem.
+ This reformulation is called the 
+\emph on
+dual 
+\emph default
+problem
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Dual because it reveals a dual nature to the original problem.
+\end_layout
+
+\end_inset
+
+ (and the original is called the 
+\emph on
+primal
+\emph default
+ problem).
+ 
+\series bold
+Warning:
+\series default
+ this is probably the most difficult part of this note (i.e.
+ there will be some short lemmas and theorems).
+ If you're not interested then I'll just tell you the punchline right now
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Okay on to the math.
+ The reformulation is dependent on which type of optimization problem our
+ primal problem is so let's fix a particular one and then at the end I'll
+ say what needs to be adjusted to reformulate the other types.
+ So let's take again the concrete example of the constrained minimization
+ problem of type 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "minlecon"
@@ -3605,138 +3666,29 @@ reference "minlecon"
  
 \begin_inset Formula 
 \begin{align*}
-\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\, g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
-\mathbf{x},\lambda_{i} & \,\text{must satisfy}\\
-\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =0\\
-\boldsymbol{\lambda}\cdot\mathbf{g} & =0\\
-\lambda_{i} & \geq0\text{ for }i=1,2,\dots,m
+\min_{\mathbf{x}}f\left(\mathbf{x}\right) & s.t\,\mathbf{g}\left(\mathbf{x}\right)\leq\mathbf{0}
 \end{align*}
 
 \end_inset
 
-Since 
-\begin_inset Formula $g_{i}\left(\mathbf{x}\right)\leq0$
+To express the dual problem first we need to express the original constrained
+ optimization as an unconstrained one.
+ For this we need a fact so 
+\end_layout
+
+\begin_layout Fact*
+For any 
+\begin_inset Formula $\mathbf{g}\in\mathbb{R}^{m}$
 \end_inset
 
- and 
-\begin_inset Formula $\lambda_{i}\geq0$
-\end_inset
 
- observe that for every feasible 
-\series bold
-x 
-\series default
-it's the case that
-\series bold
- 
-\series default
-
-\begin_inset Formula $f\left(\mathbf{x}\right)\geq f\left(\mathbf{x}\right)+\boldsymbol{\lambda}\cdot\mathbf{g}=L\left(\mathbf{x},\boldsymbol{\lambda}\right)$
-\end_inset
-
-.
- Also note that 
 \begin_inset Formula 
 \[
-\max_{\boldsymbol{\lambda}\geq0}\boldsymbol{\lambda}\cdot\mathbf{g}=\begin{cases}
-0 & \text{if }g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m\\
+\max_{\boldsymbol{\lambda}\geq\mathbf{0}}\boldsymbol{\lambda}\cdot\mathbf{g}=\begin{cases}
+0 & \text{if }\mathbf{g}\leq\mathbf{0}\\
 \infty & \text{otherwise}
 \end{cases}
 \]
-
-\end_inset
-
-which means that for us 
-\begin_inset Formula $\max_{\boldsymbol{\lambda}\geq0}\boldsymbol{\lambda}\cdot\mathbf{g}=0$
-\end_inset
-
- since 
-\begin_inset Formula $g_{i}\left(\mathbf{x}\right)\leq0\text{ for }i=1,2,\dots,m$
-\end_inset
-
-.
- Using these two facts our constrained minimization problem can be expressed
- as the unconstrained minimization problem
-\begin_inset Formula 
-\begin{align*}
-\min_{\mathbf{x}} & f\left(\mathbf{x}\right)\\
-\min_{\mathbf{x}} & f\left(\mathbf{x}\right)+\max_{\boldsymbol{\lambda}\geq0}\left(\boldsymbol{\lambda}\cdot\mathbf{g}\right)\\
-\min_{\mathbf{x}} & \max_{\boldsymbol{\lambda}\geq0}\left(f\left(\mathbf{x}\right)+\boldsymbol{\lambda}\cdot\mathbf{g}\right)\\
-\min_{\mathbf{x}} & \left(\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\series bold
-This is not the dual problem yet but
-\series default
- why this is useful will be clear in a moment.
- Two more facts are necessary in order to write down the dual problem.
- 
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-weak duality
-\emph default
-: if 
-\begin_inset Formula $\boldsymbol{\lambda}\geq0$
-\end_inset
-
- then 
-\begin_inset Formula 
-\[
-\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
-\]
-
-\end_inset
-
-and thus
-\begin_inset Formula 
-\[
-\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-strong duality
-\emph default
-: if additionally there exist 
-\begin_inset Formula $\mathbf{x}^{*},\boldsymbol{\lambda}^{*}\geq0$
-\end_inset
-
- such that 
-\begin_inset Formula 
-\[
-L\left(\mathbf{x}^{*},\boldsymbol{\lambda}\right)\leq L\left(\mathbf{x}^{*},\boldsymbol{\lambda}^{*}\right)\leq L\left(\mathbf{x},\boldsymbol{\lambda}^{*}\right)
-\]
-
-\end_inset
-
-for all feasible 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- and 
-\begin_inset Formula $\boldsymbol{\lambda}\geq0$
-\end_inset
-
- then 
-\begin_inset Formula 
-\begin{align*}
-\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & \leq\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\\
- & =L\left(\mathbf{x}^{*},\boldsymbol{\lambda}^{*}\right)\\
- & =\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}^{*}\right)\\
- & =\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
-\end{align*}
 
 \end_inset
 
@@ -3744,100 +3696,765 @@ for all feasible
 \end_layout
 
 \begin_layout Standard
-Finally when strong duality holds (weak duality always holds) we have that
+This looks more mysterious than it is.
+ All it's saying is that if all of the components of a vector 
+\series bold
+g 
+\series default
+are negative, then the largest number you can construct using only positive
+ linear combinations (that's the 
+\begin_inset Formula $\boldsymbol{\lambda}\geq\mathbf{0}$
+\end_inset
+
+ part) of those components is 0, but if even a single component of 
+\series bold
+g 
+\series default
+is positive we can just scale that component to infinity in order to make
  
+\begin_inset Formula $\boldsymbol{\lambda}\cdot\mathbf{g}$
+\end_inset
+
+ equal to infinity.
+ 
+\end_layout
+
+\begin_layout Standard
+Remember that to solve our constrained minimization we're going to constrain
+ the lagrange multiplers to 
+\begin_inset Formula $\boldsymbol{\lambda}\geq\mathbf{0}$
+\end_inset
+
+.
+ Hence we can use this fact to make a function that acts as a 
+\begin_inset Quotes eld
+\end_inset
+
+barrier
+\begin_inset Quotes erd
+\end_inset
+
+ for our minimization 
 \begin_inset Formula 
 \[
-\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\leq\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+M\left(\mathbf{x}\right)=\max_{\boldsymbol{\lambda}\geq\mathbf{0}}\boldsymbol{\lambda}\cdot\mathbf{g}\left(\mathbf{x}\right)=\begin{cases}
+0 & \text{if }\mathbf{g}\left(\mathbf{x}\right)\leq\mathbf{0}\\
+\infty & \text{otherwise}
+\end{cases}
 \]
 
 \end_inset
 
-and therefore 
-\begin_inset Formula 
-\[
-\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq0}L\left(\mathbf{x},\boldsymbol{\lambda}\right)=\max_{\boldsymbol{\lambda}\geq0}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
-\]
+This function goes to infinity very quickly if we leave the feasible region,
+ i.e.
+ where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
+\begin_inset Formula $\mathbf{g}\left(\mathbf{x}\right)\leq\mathbf{0}$
 \end_inset
 
-In such cases
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Therefore minimizing 
+\begin_inset Formula $f$
+\end_inset
+
+ over the feasible region is the same thing as minimizing 
+\begin_inset Formula $f+M$
+\end_inset
+
+ everywhere
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Strong duality holds when 
-\begin_inset Formula $f$
+The function 
+\begin_inset Formula $M$
 \end_inset
 
- and 
-\begin_inset Formula $g_{i}$
-\end_inset
-
- are all convex and there exists at least feasible point which is an interior
- point of the feasible point.
+ will prevent us from leaving the feasible region by driving the sum to
+ infinity outside it, the feasible region.
 \end_layout
 
 \end_inset
 
- if we define the 
-\emph on
-Lagrangian dual
-\emph default
+.
+ So the unconstrained version of our constrained minimization problem is
  
 \begin_inset Formula 
 \[
-D\left(\mathbf{\boldsymbol{\lambda}}\right)=\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\min_{\mathbf{x}}\left(f\left(\mathbf{x}\right)+M\left(\mathbf{x}\right)\right)=\min_{\mathbf{x}}\left(f\left(\mathbf{x}\right)+\max_{\boldsymbol{\lambda}\geq\mathbf{0}}\boldsymbol{\lambda}\cdot\mathbf{g}\left(\mathbf{x}\right)\right)
 \]
 
 \end_inset
 
-we can alternativey solve the optimization problem
-\begin_inset Formula 
-\[
-\max D\left(\boldsymbol{\lambda}\right)\, s.t\,\boldsymbol{\lambda}\geq0
-\]
-
+but 
+\begin_inset Formula $f$
 \end_inset
 
-Some properties of this maximization problem are that for all feasible 
+ is not a function of 
 \begin_inset Formula $\boldsymbol{\lambda}$
 \end_inset
 
- and 
-\series bold
-x 
-\series default
-it's the case that 
-\begin_inset Formula $D\left(\mathbf{\boldsymbol{\lambda}}\right)\leq f\left(\mathbf{x}\right)$
+ so this is the same as 
+\begin_inset Formula 
+\[
+\min_{\mathbf{x}}\left(f\left(\mathbf{x}\right)+\max_{\boldsymbol{\lambda}\geq\mathbf{0}}\boldsymbol{\lambda}\cdot\mathbf{g}\left(\mathbf{x}\right)\right)=\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq\mathbf{0}}\left(f\left(\mathbf{x}\right)+\boldsymbol{\lambda}\cdot\mathbf{g}\left(\mathbf{x}\right)\right)=\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq\mathbf{0}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
 \end_inset
 
- and so the 
-\emph on
-dual solution
-\emph default
+Well isn't that interesting :) The constrained minimization can be expressed
+ as an unconstrained minimization of a function of the Lagrangian.
  
-\begin_inset Formula $\mathbf{d^{*}}$
+\series bold
+This is not the dual problem yet!
+\series default
+ But we're getting there.
+ We need some more stuff.
+ 
+\end_layout
+
+\begin_layout Lemma
+For any real valued function 
+\begin_inset Formula $h\left(x_{1},x_{2}\right)$
 \end_inset
 
- is always less than the 
-\emph on
-primal solution 
-\emph default
 
-\begin_inset Formula $\mathbf{p^{*}}$
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:weak"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)\leq\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Clearly for all 
+\series bold
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+
+\series default
+ 
+\begin_inset Formula $\min_{x_{1}}\left(x_{1},x_{2}\right)\leq\left(x_{1},x_{2}\right)$
+\end_inset
+
+ for all
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The left side is only a function of 
+\series bold
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ 
+\series default
+and the right side is a function of both 
+\series bold
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ 
+\series default
+and 
+\begin_inset Formula $x_{2}$
 \end_inset
 
 .
- Further 
-\begin_inset Formula $\mathbf{p^{*}}-\mathbf{d}^{*}$
+\end_layout
+
 \end_inset
 
- is called the 
+ 
+\series bold
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ 
+\series default
+and 
+\series bold
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+
+\series default
+ .
+ Then taking the max wrt 
+\series bold
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ 
+\series default
+of both sides preserves the inequality so
+\begin_inset Formula $\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)\leq\max_{x_{2}}h\left(x_{1},x_{2}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+.
+ Finally taking the min wrt 
+\series bold
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ 
+\series default
+of both sides doesn't change the left side
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The left side is just a number and the right side is only a function of
+ 
+\size normal
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)\leq\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+This is called the 
 \emph on
-duality gap
+minimax
 \emph default
- and can be used to measure how close you are to the optimum.
+ inequality or 
+\emph on
+weak duality
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Of course this generalize to 
+\begin_inset Formula $h\left(x_{1},\dots,x_{n}\right)$
+\end_inset
+
+.
+ I'll repeat: lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:weak"
+
+\end_inset
+
+ holds for any function 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ Immediately this implies that if 
+\begin_inset Formula $\mathbf{p}^{*}$
+\end_inset
+
+ is the solution
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+p
+\series default
+ for primal.
+\end_layout
+
+\end_inset
+
+ to the unconstrained minimization, i.e.
+ 
+\begin_inset Formula $\mathbf{p}^{*}=\min_{\mathbf{x}}\max_{\boldsymbol{\lambda}\geq\mathbf{0}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+\mathbf{p}^{*}\geq\max_{\boldsymbol{\lambda}\geq\mathbf{0}}\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\]
+
+\end_inset
+
+Define 
+\begin_inset Formula $D\left(\mathbf{\boldsymbol{\lambda}}\right)=\min_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)$
+\end_inset
+
+ and we have that 
+\begin_inset Formula 
+\[
+\mathbf{p}^{*}\geq\mathbf{d}^{*}=\max_{\boldsymbol{\lambda}\geq\mathbf{0}}D\left(\mathbf{\boldsymbol{\lambda}}\right)
+\]
+
+\end_inset
+
+This 
+\begin_inset Formula $D$
+\end_inset
+
+ is the dual to the Lagrangian and this shows that the solution to this
+ constrained maximization problem
+\begin_inset Formula 
+\begin{align*}
+\max_{\boldsymbol{\lambda}}D\left(\boldsymbol{\lambda}\right)\, & s.t\,\boldsymbol{\lambda}\geq\mathbf{0}
+\end{align*}
+
+\end_inset
+
+is a lower bound for the solution to our original constrained minimization
+ 
+\begin_inset Formula $\min_{\mathbf{x}}f\left(\mathbf{x}\right)\, s.t\,\mathbf{g}\left(\mathbf{x}\right)\leq\mathbf{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+This is still not the dual problem
+\series default
+ since solving it doesn't give you a solution to your original problem,
+ only a lower bound, but anyway you can imagine it's still useful for convergenc
+e checks and things like that.
+ What would have to be true for the solution to this problem to be equal
+ to the solution to the original problem, i.e.
+\begin_inset Formula 
+\[
+\mathbf{p}^{*}=\mathbf{d}^{*}=\max_{\boldsymbol{\lambda}\geq\mathbf{0}}D\left(\mathbf{\boldsymbol{\lambda}}\right)
+\]
+
+\end_inset
+
+Well since the weak duality inequality is how we arrived at the lower bound
+ the weak duality inequality but be an equality, i.e.
+ 
+\begin_inset Formula 
+\[
+\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)=\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+So when does this equality hold for the minimax inequality? The condition
+ is that 
+\begin_inset Formula $h$
+\end_inset
+
+ should have a 
+\emph on
+saddle point
+\emph default
+, i.e.
+ there should exist 
+\begin_inset Formula $\left(x_{1}^{*},x_{2}^{*}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+h\left(x_{1}^{*},x_{2}\right)\leq h\left(x_{1}^{*},x_{2}^{*}\right)\leq h\left(x_{1},x_{2}^{*}\right)
+\]
+
+\end_inset
+
+It's called a saddle point because when you vary 
+\series bold
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ 
+\series default
+while holding 
+\series bold
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ 
+\series default
+fixed to be 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x_{1}^{*}$
+\end_inset
+
+ the value of 
+\begin_inset Formula $h$
+\end_inset
+
+ decreases and when vary 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ 
+\series default
+while holding 
+\series bold
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ 
+\series default
+fixed to be 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x_{2}^{*}$
+\end_inset
+
+ the value of 
+\begin_inset Formula $h$
+\end_inset
+
+ increases.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Saddle"
+
+\end_inset
+
+ is an example where the point 
+\begin_inset Formula $\left(0,0\right)$
+\end_inset
+
+ is a saddle point.
+ Why is it that if 
+\begin_inset Formula $h$
+\end_inset
+
+ has a saddle point 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)=\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)$
+\end_inset
+
+ ? Here's a quick proof
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Graphics
+	filename saddle.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Saddle
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Saddle"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Lemma
+For a function 
+\begin_inset Formula $h\left(x_{1},x_{2}\right)$
+\end_inset
+
+, if there exists a point 
+\begin_inset Formula $\left(x_{1}^{*},x_{2}^{*}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+h\left(x_{1}^{*},x_{2}\right)\leq h\left(x_{1}^{*},x_{2}^{*}\right)\leq h\left(x_{1},x_{2}^{*}\right)
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula 
+\[
+\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)=\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\left(x_{1}^{*},x_{2}^{*}\right)$
+\end_inset
+
+ be such a point.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right) & \leq\max_{x_{2}}h\left(x_{1}^{*},x_{2}\right)\\
+ & =h\left(x_{1}^{*},x_{2}^{*}\right)\\
+ & =\min_{\mathbf{x}}h\left(x_{1},x_{2}^{*}\right)\\
+ & \leq\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)
+\end{align*}
+
+\end_inset
+
+and by lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:weak"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)\leq\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\[
+\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)\leq\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)\leq\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+and thus
+\begin_inset Formula 
+\[
+\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)=\min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right)
+\]
+
+\end_inset
+
+This is called 
+\emph on
+strong duality
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+So when does a function 
+\begin_inset Formula $h\left(x_{1},\dots,x_{n}\right)$
+\end_inset
+
+ have a saddle point? When its Hessian
+\begin_inset Formula 
+\[
+H_{h}\left(x_{1},\dots,x_{n}\right)=\begin{pmatrix}\frac{\partial^{2}}{\partial x_{1}\partial x_{1}}h\left(x_{1},\dots,x_{n}\right) & \cdots & \frac{\partial^{2}}{\partial x_{1}\partial x_{n}}h\left(x_{1},\dots,x_{n}\right)\\
+\vdots & \ddots & \vdots\\
+\frac{\partial^{2}}{\partial x_{n}\partial x_{1}}h\left(x_{1},\dots,x_{n}\right) & \cdots & \frac{\partial^{2}}{\partial x_{n}\partial x_{n}}h\left(x_{1},\dots,x_{n}\right)
+\end{pmatrix}
+\]
+
+\end_inset
+
+at a stationary point is indefinte.
+\end_layout
+
+\begin_layout Standard
+Therefore when strong duality does hold maximizing over the dual Lagrangian
+ 
+\begin_inset Formula $D\left(\mathbf{\boldsymbol{\lambda}}\right)$
+\end_inset
+
+ subject to constraint 
+\begin_inset Formula $\boldsymbol{\lambda}\geq\mathbf{0}$
+\end_inset
+
+ produces the solution to the problem of 
+\begin_inset Formula $\min_{\mathbf{x}}f\left(\mathbf{x}\right)\, s.t\,\mathbf{g}\left(\mathbf{x}\right)\leq\mathbf{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So when does the Lagrangian have a saddle point? Well
+\begin_inset Formula 
+\[
+\nabla L\left(\mathbf{x},\boldsymbol{\lambda}\right)=\begin{bmatrix}\nabla_{\mathbf{x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\\
+\nabla_{\boldsymbol{\lambda}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\end{bmatrix}=\begin{bmatrix}\nabla f\left(\mathbf{x}\right)+\sum_{i=1}^{m}\lambda_{i}\nabla g_{i}\left(\mathbf{x}\right)\\
+\mathbf{g}\left(\mathbf{x}\right)
+\end{bmatrix}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\begin{align*}
+H_{L}\left(\mathbf{x},\boldsymbol{\lambda}\right) & =\begin{bmatrix}\nabla_{\mathbf{xx}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & \nabla_{\mathbf{x\boldsymbol{\lambda}}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)\\
+\nabla_{\mathbf{\boldsymbol{\lambda}x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & \nabla_{\boldsymbol{\lambda}\boldsymbol{\lambda}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
+\end{bmatrix}\\
+ & =\begin{bmatrix}H_{f}\left(\mathbf{x}\right)+\sum_{i=1}^{m}\lambda_{i}H_{g}\left(\mathbf{x}\right) & \sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\\
+\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right) & \mathbf{0}
+\end{bmatrix}
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $H_{L}$
+\end_inset
+
+ is a block symmetric matrix but it can never be positive or negative definite
+ because of the lower 
+\begin_inset Formula $\mathbf{0}$
+\end_inset
+
+ block.
 \end_layout
 
 \end_body
