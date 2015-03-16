@@ -1,0 +1,745 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Midterm 2
+\end_layout
+
+\begin_layout Standard
+Four problems
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Find the posterior distribution for a given Bayesian model.
+
+\series default
+ A Bayesian model includes prior information and updates the prior with
+ the data, i.e.
+ 
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\boldsymbol{\theta}|\mathbf{x}\right) & =\frac{f\left(\mathbf{x}|\boldsymbol{\theta}\right)\pi\left(\boldsymbol{\theta}\right)}{m\left(\mathbf{x}\right)}\\
+ & =\frac{f\left(\mathbf{x}|\boldsymbol{\theta}\right)\pi\left(\boldsymbol{\theta}\right)}{\int f\left(\mathbf{x}|\boldsymbol{\theta}\right)\pi\left(\boldsymbol{\theta}\right)d\boldsymbol{\theta}}
+\end{align*}
+
+\end_inset
+
+So practice marginalizing over the parameter.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Derive a property of the posterior distribution (e.g.
+ mean, variance).
+
+\series default
+ So just practice computing summary statistics of the posterior.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Provide a complete sufficient statistic in a given exponential family model.
+
+\series default
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be iid from an exponential family with common pdf
+\begin_inset Formula 
+\[
+f\left(x|\boldsymbol{\theta}\right)=h\left(x\right)c\left(\boldsymbol{\theta}\right)e^{\sum_{j}w_{j}\left(\boldsymbol{\theta}\right)t_{j}\left(x\right)}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+T\left(\mathbf{X}\right)=\left(\sum_{i}t_{1}\left(X_{i}\right),\dots,\sum_{i}t_{m}\left(X_{i}\right)\right)
+\]
+
+\end_inset
+
+is complete sufficient if 
+\begin_inset Formula $W$
+\end_inset
+
+ is invertible and the parameter space contains an open set.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Find an unbiased estimator of a function of the underyling parameter.
+
+\series default
+ So MLE or MOM estimator.
+ MLE is invariant under transformation so maybe just find the MLE and then
+ take a function of it?
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Find a UMVUE estimator of a function of a function of the underlying parameter.
+ 
+\series default
+Conditioning an unbiased estimator on a complete sufficient statistic produces
+ the UMVUE.
+ Since in the first a complete sufficient statistic will have been calculated,
+ conditioning the result from the second part on it will produce the UMVUE.
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be the complete sufficient statistic computed in the first part and 
+\begin_inset Formula $W$
+\end_inset
+
+ be the unbiased statistic computed in the second part.
+ Then 
+\begin_inset Formula 
+\[
+\phi\left(T\right)=E\left(W|T\right)
+\]
+
+\end_inset
+
+ is UMVUE.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Find the Cramer-Rao lower bound for unbiased estimators of a function of
+ the underlying parameter in the model.
+ 
+\series default
+The Cramer-Rao lower bound is 
+\begin_inset Formula 
+\[
+\text{Var}\left(W\left(\mathbf{X}\right)\right)\geq\frac{\left(\frac{d}{d\theta}E_{\theta}W\left(\mathbf{X}\right)\right)^{2}}{E_{\theta}\left(\left(\frac{\partial}{\partial\theta}\log f\left(\mathbf{X}|\theta\right)\right)^{2}\right)}
+\]
+
+\end_inset
+
+and if 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is iid then
+\begin_inset Formula 
+\[
+\text{Var}\left(W\left(\mathbf{X}\right)\right)\geq\frac{\left(\frac{d}{d\theta}E_{\theta}W\left(\mathbf{X}\right)\right)^{2}}{nE_{\theta}\left(\left(\frac{\partial}{\partial\theta}\log f\left(X|\theta\right)\right)^{2}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Determine is the Cramer-Rao lower bound is attained.
+
+\series default
+ The conditions for attainment are that 
+\begin_inset Formula $W\left(\mathbf{X}\right)$
+\end_inset
+
+ be unbiased (duh) and 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be iid and that 
+\begin_inset Formula 
+\[
+a\left(\theta\right)\left(W\left(\mathbf{x}\right)-\tau\left(\theta\right)\right)=\frac{\partial}{\partial\theta}\log L\left(\theta|\mathbf{x}\right)
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $L\left(\theta|\mathbf{x}\right)$
+\end_inset
+
+ is the likelihood function, just 
+\begin_inset Formula $\prod_{i}f\left(x_{i}|\theta\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Derive the likelihood ratio test (with a given size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+) for a testing problem.
+ 
+\series default
+If 
+\begin_inset Formula $\Theta_{o}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Theta_{o}^{c}$
+\end_inset
+
+ are the null space and the alternative hypothesis space then the hypotheses
+ are 
+\begin_inset Formula 
+\[
+H_{0}\,:\,\theta\in\Theta_{0}\: H_{1}\,:\,\theta\in\Theta_{0}^{c}
+\]
+
+\end_inset
+
+The LRT is 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{\sup_{\theta\in\Theta}L\left(\theta|\mathbf{x}\right)}\\
+ & =\frac{L\left(\hat{\theta}_{0}|\mathbf{x}\right)}{L\left(\hat{\theta}|\mathbf{x}\right)}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{\theta}$
+\end_inset
+
+ is the unrestricted MLE for the model and 
+\begin_inset Formula $\hat{\theta}_{0}$
+\end_inset
+
+is the restricted MLE.
+ The test dictates that we should reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ for some value such that 
+\begin_inset Formula $\lambda\left(\mathbf{x}\right)<c$
+\end_inset
+
+.
+ Then the power function of the test is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\text{Making Type I error}\right)\\
+ & =P_{\theta}\left(\text{Rejecting when }\theta\in\Theta_{0}\right)\\
+ & =P_{\theta}\left(\mathbf{X}\in\text{Rejection region as dictated by the test}\right)
+\end{align*}
+
+\end_inset
+
+Then the size is 
+\begin_inset Formula 
+\[
+\sup_{\theta\in\Theta_{0}}\beta\left(\theta\right)
+\]
+
+\end_inset
+
+Note that this sup is computed over the null space.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Same.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.24]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{Poisson}\left(\Lambda\right)$
+\end_inset
+
+ and let 
+\begin_inset Formula $\Lambda\sim\text{Gamma}\left(\alpha,\beta\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The posterior distribution is 
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\lambda|\mathbf{x}\right) & =\frac{f\left(\mathbf{x}|\theta\right)\pi\left(\lambda\right)}{m\left(\mathbf{x}\right)}\\
+ & =\frac{\frac{1}{\prod_{i=1}^{n}x_{i}!}e^{-n\lambda}\lambda^{\sum_{i=1}^{n}x_{i}}\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\lambda^{\alpha-1}e^{-\lambda/\beta}}{\int_{0}^{\infty}\left(\frac{1}{\prod_{i=1}^{n}x_{i}!}e^{-n\lambda}\lambda^{\sum_{i=1}^{n}x_{i}}\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\lambda^{\alpha-1}e^{-\lambda/\beta}\right)d\lambda}\\
+ & =\frac{\frac{1}{\prod_{i=1}^{n}x_{i}!}e^{-n\lambda}\lambda^{\sum_{i=1}^{n}x_{i}}\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\lambda^{\alpha-1}e^{-\lambda/\beta}}{\int_{0}^{\infty}\left(\frac{1}{\prod_{i=1}^{n}x_{i}!}e^{-n\lambda}\lambda^{\sum_{i=1}^{n}x_{i}}\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\lambda^{\alpha-1}e^{-\lambda/\beta}\right)d\lambda}\\
+ & =ce^{-\lambda/\left(n+\frac{1}{\beta}\right)^{-1}}\lambda^{\sum_{i=1}^{n}x_{i}+\alpha-1}\\
+ & =\frac{1}{\Gamma\left(\sum_{i=1}^{n}x_{i}+\alpha\right)\left(n+\frac{1}{\beta}\right)^{-\left(\sum_{i=1}^{n}x_{i}+\alpha\right)}}e^{-\lambda/\left(n+\frac{1}{\beta}\right)^{-1}}\lambda^{\sum_{i=1}^{n}x_{i}+\alpha-1}
+\end{align*}
+
+\end_inset
+
+Define 
+\begin_inset Formula $y=\sum_{i=1}^{n}y_{i}$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\lambda|\mathbf{x}\right) & =\frac{1}{\Gamma\left(\sum_{i=1}^{n}x_{i}+\alpha\right)\left(n+\frac{1}{\beta}\right)^{-\left(\sum_{i=1}^{n}x_{i}+\alpha\right)}}e^{-\lambda/\left(n+\frac{1}{\beta}\right)^{-1}}\lambda^{\sum_{i=1}^{n}x_{i}+\alpha-1}\\
+ & =\frac{1}{\Gamma\left(y+\alpha\right)\left(1\Bigg/\left(n+\frac{1}{\beta}\right)\right)^{\left(y+\alpha\right)}}e^{-\lambda/\left(n+\frac{1}{\beta}\right)^{-1}}\lambda^{y+\alpha-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since the posterior distribution is 
+\begin_inset Formula $\text{Gamma}\left(y+\alpha,\frac{\beta}{\beta n+1}\right)$
+\end_inset
+
+ the posterior mean is 
+\begin_inset Formula $\left(y+\alpha\right)\left(\frac{\beta}{\beta n+1}\right)$
+\end_inset
+
+ and the posterior variance is 
+\begin_inset Formula $\left(y+\alpha\right)\left(\frac{\beta}{\beta n+1}\right)^{2}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.60]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X_{i}\sim\text{Gamma}\left(\alpha,\beta\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ known.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+A complete sufficient statistic.
+ By
+\begin_inset Formula 
+\begin{align*}
+f\left(\mathbf{x}|\theta\right) & =\frac{1}{\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{n}}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}\\
+ & =\frac{1}{\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{n}}e^{\left(\alpha-1\right)\sum_{i=1}^{n}\log x_{i}}e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\left(x\right)^{\alpha-1}e^{-\frac{1}{\beta}x}\\
+ & =\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}e^{\left(\alpha-1\right)\log x}e^{-\frac{1}{\beta}x}
+\end{align*}
+
+\end_inset
+
+According to Theorem blah blah blah with 
+\begin_inset Formula $h\left(\mathbf{x}\right)=1,c\left(\alpha,\beta\right)=\Gamma\left(\alpha\right)\beta^{\alpha},w_{1}=\left(\alpha-1\right),t_{1}=\log x,w_{2}=-\frac{1}{\beta},t_{2}=x$
+\end_inset
+
+ the complete sufficient statistic for 
+\begin_inset Formula $\left(\alpha,\beta\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(\sum_{i=1}^{n}\log X_{i},\sum_{i=1}^{n}X_{i}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+I need to construct an unbiased estimator of 
+\begin_inset Formula $1/\beta$
+\end_inset
+
+.
+ The MOM estimators for 
+\begin_inset Formula $\left(\alpha,\beta\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\bar{X} & =E\left(X\right)=\hat{\alpha}\hat{\beta}\\
+\frac{1}{n}\sum_{i=1}^{n}X_{i}^{2} & =E\left(X^{2}\right)=\hat{\alpha}\hat{\beta}^{2}+\left(\hat{\alpha}\hat{\beta}\right)^{2}\\
+ & =\left(\frac{1}{\hat{\alpha}}+1\right)\left(\bar{X}\right)^{2}
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula 
+\begin{align*}
+\hat{\alpha} & =\frac{1}{\frac{1}{\bar{X}n}\sum_{i=1}^{n}X_{i}^{2}-1}\\
+ & =\frac{n\bar{X}}{\sum_{i=1}^{n}\left(X_{i}^{2}-X_{i}\right)}\\
+\hat{\beta} & =\frac{\sum_{i=1}^{n}\left(X_{i}^{2}-X_{i}\right)}{n}
+\end{align*}
+
+\end_inset
+
+God damn it.
+ The MOM isn't invariant.
+ Calculating the MLE by hand for 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Actually an even bigger idiot.
+ With 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ known 
+\begin_inset Formula $\bar{X}/\alpha$
+\end_inset
+
+ is unbiased for 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ 
+\begin_inset Formula $X_{i}\sim\Gamma\left(\alpha,\beta\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\sum_{i=1}^{n}X_{i}\sim\Gamma\left(n\alpha,\beta\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{\sum_{i=1}^{n}X_{i}} & \sim\text{Inv}\Gamma\left(n\alpha,\frac{1}{\beta}\right)
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+E\left(\frac{1}{\sum_{i=1}^{n}X_{i}}\right)=\frac{1}{\beta}\frac{1}{n\alpha-1}
+\]
+
+\end_inset
+
+so with 
+\begin_inset Formula $W\left(\mathbf{X}\right)=\frac{n\alpha-1}{\sum_{i=1}^{n}X_{i}}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+E\left(W\left(\mathbf{X}\right)\right)=\left(n\alpha-1\right)E\left(\frac{1}{\sum_{i=1}^{n}X_{i}}\right)=\frac{1}{\beta}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Finally conditioning 
+\begin_inset Formula $W\left(\mathbf{X}\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is just 
+\begin_inset Formula $W\left(\mathbf{X}\right)$
+\end_inset
+
+ since 
+\begin_inset Formula $\frac{n\alpha-1}{\sum_{i=1}^{n}X_{i}}=\frac{\alpha-1/n}{\frac{1}{n}\sum_{i=1}^{n}X_{i}}=\frac{\alpha-1/n}{\bar{X}}$
+\end_inset
+
+ and conditioning on a function of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is just the function again.
+\end_layout
+
+\begin_layout Enumerate
+Let's confirm that is in fact UMVUE by checking the Cramer-Rao bound.
+ We have to compute
+\begin_inset Formula 
+\[
+\frac{d}{d\beta}E_{\beta}W\left(\mathbf{X}\right)=-\frac{1}{\beta^{2}}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{\infty}\frac{\partial}{\partial\beta}\left[\frac{n\alpha-1\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}}{\sum_{i=1}^{n}x_{i}}\frac{e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}}{\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{n}}\right]d\mathbf{x} & =\\
+\int_{0}^{\infty}\frac{\partial}{\partial\beta}\left[\frac{n\alpha-1}{\sum_{i=1}^{n}x_{i}}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}\left[\left(-n\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{-n-1}\alpha\beta^{\alpha-1}\right)e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}+\frac{e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}}{\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{n}}\left(\frac{1}{\beta^{2}}\sum_{i=1}^{n}x_{i}\right)\right]\right]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\text{Var}\left(W\left(\mathbf{X}\right)\right)=\frac{\left(\frac{d}{d\theta}E_{\theta}W\left(\mathbf{X}\right)\right)^{2}}{nE_{\theta}\left(\left(\frac{\partial}{\partial\theta}\log f\left(X|\theta\right)\right)^{2}\right)}
+\]
+
+\end_inset
+
+So first of all 
+\begin_inset Formula 
+\begin{align*}
+\left(\frac{d}{d\beta}E_{\beta}\left(W\left(\mathbf{X}\right)\right)\right)^{2} & =\left(\frac{d}{d\beta}E_{\beta}\left(\frac{n\alpha-1}{\sum_{i=1}^{n}X_{i}}\right)\right)^{2}\\
+ & =\frac{1}{\beta^{4}}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+nE_{\theta}\left(\left(\frac{\partial}{\partial\theta}\log f\left(X|\theta\right)\right)^{2}\right) & =nE_{\beta}\left(\left[\frac{\partial}{\partial\beta}\left(-\log\Gamma\left(\alpha\right)-\alpha\log\left(\beta\right)+\left(\alpha-1\right)\log X-\frac{1}{\beta}X\right)\right]^{2}\right)\\
+ & =nE_{\beta}\left(\left[-\frac{\alpha}{\beta}+\frac{X}{\beta^{2}}\right]^{2}\right)\\
+ & =nE_{\beta}\left(\frac{\alpha^{2}}{\beta^{2}}+\frac{X^{2}}{\beta^{4}}-\frac{2\alpha}{\beta^{3}}X\right)\\
+ & =n\left(\frac{\alpha^{2}}{\beta^{2}}+\frac{1}{\beta^{4}}\left(\alpha\beta^{2}+\left(\alpha\beta\right)^{2}\right)-\frac{2\alpha}{\beta^{3}}\left(\alpha\beta\right)\right)\\
+ & =\frac{n\alpha}{\beta^{2}}
+\end{align*}
+
+\end_inset
+
+and so the lower bound is
+\begin_inset Formula 
+\[
+\frac{1/\beta^{4}}{n\alpha/\beta^{2}}=\frac{1}{\beta^{2}n\alpha}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\frac{n\alpha-1}{\sum_{i=1}^{n}X_{i}}\sim\text{Inv}\Gamma\left(n\alpha,\frac{n\alpha-1}{\beta}\right)$
+\end_inset
+
+ implies 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(W\left(\mathbf{X}\right)\right) & =\frac{\left(\frac{n\alpha-1}{\beta}\right)^{2}}{\left(n\alpha-1\right)^{2}\left(n\alpha-2\right)}\\
+ & =\frac{1}{\left(n\alpha-2\right)}\frac{1}{\beta^{2}}
+\end{align*}
+
+\end_inset
+
+Alternatively we could have used the attainment Theorem.
+ We search for 
+\begin_inset Formula $a\left(\theta\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{align*}
+a\left(\beta\right)\left(W\left(\mathbf{X}\right)-\frac{1}{\beta}\right) & =\frac{\partial}{\partial\beta}\log L\left(\theta|\mathbf{x}\right)\\
+ & =\frac{\partial}{\partial\beta}\left(-n\log\Gamma\left(\alpha\right)-n\alpha\log\left(\beta\right)+\left(\alpha-1\right)\sum_{i=1}^{n}\log X_{i}-\frac{1}{\beta}\sum_{i=1}^{n}X_{i}\right)\\
+ & =-\frac{n\alpha}{\beta}+\frac{1}{\beta^{2}}\sum_{i=1}^{n}X_{i}\\
+ & =\frac{n\alpha}{\beta^{2}}\left(\frac{1}{\alpha}\bar{X}-\beta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
