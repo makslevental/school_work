@@ -4112,54 +4112,12 @@ h\left(x_{1}^{*},x_{2}\right)\leq h\left(x_{1}^{*},x_{2}^{*}\right)\leq h\left(x
 
 \end_inset
 
-It's called a saddle point because when you vary 
+It's called a saddle point because if you start at 
+\begin_inset Formula $\left(x_{1}^{*},x_{2}^{*}\right)$
+\end_inset
+
+ and you vary 
 \series bold
-
-\begin_inset Formula $x_{2}$
-\end_inset
-
- 
-\series default
-while holding 
-\series bold
-
-\begin_inset Formula $x_{1}$
-\end_inset
-
- 
-\series default
-fixed to be 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $x_{1}^{*}$
-\end_inset
-
- the value of 
-\begin_inset Formula $h$
-\end_inset
-
- decreases and when vary 
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
 
 \begin_inset Formula $x_{1}$
 \end_inset
@@ -4194,7 +4152,53 @@ fixed to be
 \begin_inset Formula $h$
 \end_inset
 
- increases.
+ increases and if you vary 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ 
+\series default
+while holding 
+\series bold
+
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ 
+\series default
+fixed to be 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x_{1}^{*}$
+\end_inset
+
+ the value of 
+\begin_inset Formula $h$
+\end_inset
+
+ decreases.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4305,7 +4309,7 @@ For a function
 \begin_inset Formula $h\left(x_{1},x_{2}\right)$
 \end_inset
 
-, if there exists a point 
+, if there exists a unique point 
 \begin_inset Formula $\left(x_{1}^{*},x_{2}^{*}\right)$
 \end_inset
 
@@ -4334,12 +4338,44 @@ Let
 \end_inset
 
  be such a point.
- Then 
+ Then maximizing 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ along 
+\begin_inset Formula $x_{1}^{*}$
+\end_inset
+
+ is the best place to do it, or alternatively 
+\begin_inset Formula $h$
+\end_inset
+
+ is along any 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is maximal at 
+\begin_inset Formula $x_{1}^{*}$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+\max_{x_{2}}h\left(x_{1},x_{2}\right)\leq\max_{x_{2}}h\left(x_{1}^{*},x_{2}\right)
+\]
+
+\end_inset
+
+and since the right side isn't a function of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ anymore 
 \begin_inset Formula 
 \begin{align*}
 \min_{x_{1}}\max_{x_{2}}h\left(x_{1},x_{2}\right) & \leq\max_{x_{2}}h\left(x_{1}^{*},x_{2}\right)\\
  & =h\left(x_{1}^{*},x_{2}^{*}\right)\\
- & =\min_{\mathbf{x}}h\left(x_{1},x_{2}^{*}\right)\\
+ & =\min_{x_{1}}h\left(x_{1},x_{2}^{*}\right)\\
  & \leq\max_{x_{2}}\min_{x_{1}}h\left(x_{1},x_{2}\right)
 \end{align*}
 

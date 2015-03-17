@@ -1041,8 +1041,130 @@ A size
 
 \end_inset
 
-The joint distribution of 
-\begin_inset Formula $\left(X_{1},\dots,X_{n-1}|X_{\left(1\right)}\right)$
+Firstly 
+\begin_inset Formula $\left(X_{1},\dots,X_{n}|X_{\left(1\right)}\right)=\left(X_{\left(1\right)},X_{\left(2\right)},\dots,X_{\left(n\right)}|X_{\left(1\right)}\right)$
+\end_inset
+
+.
+ So then 
+\begin_inset Formula $\left(X_{\left(2\right)},\dots,X_{\left(n\right)}|X_{\left(1\right)}\right)$
+\end_inset
+
+ are still iid and so are 
+\begin_inset Formula $\left(\frac{X_{\left(2\right)}}{X_{\left(1\right)},}\dots,\frac{X_{\left(n\right)}}{X_{\left(1\right)}}|X_{\left(1\right)}\right)$
+\end_inset
+
+.
+ The joint distribution of 
+\begin_inset Formula $\left(X_{1},\dots,X_{n}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{\mathbf{X}}\left(\mathbf{x}\right)=\frac{\theta^{n}\nu^{n\theta}}{\left(\prod_{i=1}^{n}x_{i}\right)^{\theta+1}}I\left(x_{\left(1\right)}\right)_{\left[\nu,\infty\right)}
+\]
+
+\end_inset
+
+Because 
+\begin_inset Formula $\nu>x_{\left(1\right)}$
+\end_inset
+
+ and iid of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ the marginal of 
+\begin_inset Formula $X_{\left(1\right)}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1\right)}}\left(x_{\left(1\right)}\right) & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\underbrace{\int_{x_{\left(1\right)}}^{\infty}\cdots\int_{x_{\left(1\right)}}^{\infty}}_{n-1}\prod_{i=2}^{n}f_{X_{\left(i\right)}}\left(x_{\left(i\right)}\right)d_{x_{\left(i\right)}}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\left(P\left(X_{i}>x_{\left(1\right)}\right)\right)^{n-1}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\left(1-P\left(X_{i}\leq x_{\left(1\right)}\right)\right)^{n-1}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\left[\left(\frac{\nu}{x_{\left(1\right)}}\right)^{\theta}\right]^{n-1}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\left(\frac{\nu}{x_{\left(1\right)}}\right)^{n\theta-\theta}\\
+ & =\frac{\theta\nu^{n\theta}}{\left(x_{\left(1\right)}\right)^{n\theta+1}}
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+f_{\left(X_{\left(2\right)},\dots,X_{\left(n\right)}\bigg|X_{\left(1\right)}\right)}\left(x_{\left(2\right)},\dots,x_{\left(n\right)}\big|x_{\left(1\right)}\right) & =\frac{f_{\mathbf{X}}\left(\mathbf{x}\right)}{f_{X_{\left(1\right)}}\left(x_{\left(1\right)}\right)}\\
+ & =\frac{\frac{\theta^{n}\nu^{n\theta}}{\left(\prod_{i=1}^{n}x_{i}\right)^{\theta+1}}}{\frac{\theta\nu^{n\theta}}{\left(x_{\left(1\right)}\right)^{n\theta+1}}}\\
+ & \frac{\theta^{n-1}\left(x_{\left(1\right)}\right)^{\theta\left(n-1\right)}}{\left(\prod_{i=2}^{n}x_{\left(i\right)}\right)^{\theta+1}}\\
+ & =\prod_{i=2}^{n}\frac{\theta\left(x_{\left(1\right)}\right)^{\theta}}{\left(x_{\left(i\right)}\right)^{\theta+1}}
+\end{align*}
+
+\end_inset
+
+Therefore for 
+\begin_inset Formula $j\neq1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X_{\left(j\right)}|X_{\left(1\right)}\sim\text{Pareto}\left(\theta,X_{\left(1\right)}\right)$
+\end_inset
+
+.
+ The joint distribution of 
+\begin_inset Formula $\left(X_{\left(1\right)},X_{\left(j\right)}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1\right)},X_{\left(j\right)}}\left(x_{\left(1\right)},x_{\left(j\right)}\right) & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\underbrace{\int_{x_{\left(1\right)}}^{\infty}\cdots\int_{x_{\left(1\right)}}^{\infty}}_{n-2}\prod_{i\neq1,j}^{n}f_{X_{\left(i\right)}}\left(x_{\left(i\right)}\right)d_{x_{\left(i\right)}}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\frac{\theta\nu^{\theta}}{\left(x_{\left(j\right)}\right)^{\theta+1}}\left(P\left(X_{i}>x_{\left(1\right)}\right)\right)^{n-2}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\frac{\theta\nu^{\theta}}{\left(x_{\left(j\right)}\right)^{\theta+1}}\left(1-P\left(X_{i}\leq x_{\left(1\right)}\right)\right)^{n-2}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\frac{\theta\nu^{\theta}}{\left(x_{\left(j\right)}\right)^{\theta+1}}\left[\left(\frac{\nu}{x_{\left(1\right)}}\right)^{\theta}\right]^{\left(n-1\right)-1}\\
+ & =\frac{\theta\nu^{\theta}}{\left(x_{\left(1\right)}\right)^{\theta+1}}\frac{\theta\nu^{\theta}}{\left(x_{\left(j\right)}\right)^{\theta+1}}\left(\frac{\nu}{x_{\left(1\right)}}\right)^{\left(n-1\right)\theta-\theta}\\
+ & =\frac{\theta^{2}\nu^{n\theta}}{\left(x_{\left(1\right)}\right)^{\left(n-1\right)\theta+1}\left(x_{\left(j\right)}\right)^{\theta+1}}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+P\left(\frac{X_{\left(j\right)}}{X_{\left(1\right)}}\leq y\right) & =P\left(X_{\left(j\right)}\leq yX_{\left(1\right)}\right)\\
+ & =\int_{\nu}^{\infty}\int_{x_{\left(1\right)}}^{yx_{\left(1\right)}}\frac{\theta^{2}\nu^{n\theta}}{\left(x_{\left(1\right)}\right)^{\left(n-1\right)\theta+1}\left(x_{\left(j\right)}\right)^{\theta+1}}dx_{\left(j\right)}dx_{\left(1\right)}\\
+ & =\frac{1-y^{-\theta}}{n}
+\end{align*}
+
+\end_inset
+
+and therefore for 
+\begin_inset Formula $j\neq1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $Y_{j}=\frac{X_{\left(j\right)}}{X_{\left(1\right)}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{Y_{j}}\left(y_{j}\right)=\frac{\theta}{n\left(y_{j}\right)^{\theta+1}}
+\]
+
+\end_inset
+
+Then the joint distribution of 
+\begin_inset Formula $\left(Y_{2},\dots,Y_{n}\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{\mathbf{Y}}\left(\mathbf{y}\right)=\frac{\theta^{n}}{n^{n}\left(\prod_{j\neq1}^{n}y_{j}\right)^{\theta+1}}
+\]
+
 \end_inset
 
 
