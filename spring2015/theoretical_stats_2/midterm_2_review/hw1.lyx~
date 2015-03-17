@@ -653,36 +653,11 @@ Finally conditioning
 \end_layout
 
 \begin_layout Enumerate
-Let's confirm that is in fact UMVUE by checking the Cramer-Rao bound.
- We have to compute
-\begin_inset Formula 
-\[
-\frac{d}{d\beta}E_{\beta}W\left(\mathbf{X}\right)=-\frac{1}{\beta^{2}}
-\]
-
-\end_inset
-
-and
+Interestingly enough it doesn't attain the Cramer-Rao lower bound.
+ So first of all 
 \begin_inset Formula 
 \begin{align*}
-\int_{0}^{\infty}\frac{\partial}{\partial\beta}\left[\frac{n\alpha-1\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}}{\sum_{i=1}^{n}x_{i}}\frac{e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}}{\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{n}}\right]d\mathbf{x} & =\\
-\int_{0}^{\infty}\frac{\partial}{\partial\beta}\left[\frac{n\alpha-1}{\sum_{i=1}^{n}x_{i}}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}\left[\left(-n\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{-n-1}\alpha\beta^{\alpha-1}\right)e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}+\frac{e^{-\frac{1}{\beta}\sum_{i=1}^{n}x_{i}}}{\left(\Gamma\left(\alpha\right)\beta^{\alpha}\right)^{n}}\left(\frac{1}{\beta^{2}}\sum_{i=1}^{n}x_{i}\right)\right]\right]
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\text{Var}\left(W\left(\mathbf{X}\right)\right)=\frac{\left(\frac{d}{d\theta}E_{\theta}W\left(\mathbf{X}\right)\right)^{2}}{nE_{\theta}\left(\left(\frac{\partial}{\partial\theta}\log f\left(X|\theta\right)\right)^{2}\right)}
-\]
-
-\end_inset
-
-So first of all 
-\begin_inset Formula 
-\begin{align*}
-\left(\frac{d}{d\beta}E_{\beta}\left(W\left(\mathbf{X}\right)\right)\right)^{2} & =\left(\frac{d}{d\beta}E_{\beta}\left(\frac{n\alpha-1}{\sum_{i=1}^{n}X_{i}}\right)\right)^{2}\\
+\left(\frac{d}{d\beta}E_{\beta}\left(W\left(\mathbf{X}\right)\right)\right)^{2} & =\left(\frac{d}{d\beta}\frac{1}{\beta}\right)^{2}\\
  & =\frac{1}{\beta^{4}}
 \end{align*}
 
@@ -721,23 +696,360 @@ Then
 
 \end_inset
 
-Alternatively we could have used the attainment Theorem.
- We search for 
-\begin_inset Formula $a\left(\theta\right)$
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.44]
+\end_layout
+
 \end_inset
 
- such that 
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,1\right)$
+\end_inset
+
+.
+ Find the best unbiased estimator of 
+\begin_inset Formula $\theta^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\bar{X}^{2}-1/n$
+\end_inset
+
+ is unbiased for 
+\begin_inset Formula $\theta^{2}$
+\end_inset
+
+ then it's UMVUE by Lehmann-Scheffe.
+ First of all 
+\begin_inset Formula $\bar{X}\sim\text{n}\left(\theta,\frac{1}{n}\right)$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+E\left(\bar{X}^{2}\right)=\text{Var}\left(\bar{X}\right)+\left(E\bar{X}\right)^{2}=\frac{1}{n}+\theta^{2}
+\]
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\[
+E\left(\bar{X}^{2}-\frac{1}{n}\right)=\frac{1}{n}+\theta^{2}-\frac{1}{n}=\theta^{2}
+\]
+
+\end_inset
+
+so since 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is complete sufficient for 
+\begin_inset Formula $\theta$
+\end_inset
+
+ for this model it's the case that 
+\begin_inset Formula $\bar{X}^{2}-1/n$
+\end_inset
+
+ is UMVUE for 
+\begin_inset Formula $\theta^{2}$
+\end_inset
+
+.
+ To calculate its variance we need to compute 
 \begin_inset Formula 
 \begin{align*}
-a\left(\beta\right)\left(W\left(\mathbf{X}\right)-\frac{1}{\beta}\right) & =\frac{\partial}{\partial\beta}\log L\left(\theta|\mathbf{x}\right)\\
- & =\frac{\partial}{\partial\beta}\left(-n\log\Gamma\left(\alpha\right)-n\alpha\log\left(\beta\right)+\left(\alpha-1\right)\sum_{i=1}^{n}\log X_{i}-\frac{1}{\beta}\sum_{i=1}^{n}X_{i}\right)\\
- & =-\frac{n\alpha}{\beta}+\frac{1}{\beta^{2}}\sum_{i=1}^{n}X_{i}\\
- & =\frac{n\alpha}{\beta^{2}}\left(\frac{1}{\alpha}\bar{X}-\beta\right)
+\text{Var}\left(\bar{X}^{2}-\frac{1}{n}\right) & =\text{Var}\left(\bar{X}^{2}\right)=E\left(\bar{X}^{4}\right)-\left(E\bar{X}^{2}\right)^{4}
+\end{align*}
+
+\end_inset
+
+Stein's lemma is for 
+\begin_inset Formula $X\sim\text{n}\left(\theta,\sigma^{2}\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $E\left[g\left(X\right)\left(X-\theta\right)\right]=\sigma^{2}Eg'\left(X\right)$
+\end_inset
+
+.
+ So then
+\begin_inset Formula 
+\begin{align*}
+E\left(\bar{X}^{4}\right) & =E\left[\bar{X}^{3}\left(\bar{X}-\theta\right)\right]+E\left(\bar{X}^{3}\theta\right)\\
+E\left[\bar{X}^{3}\left(\bar{X}-\theta\right)\right] & =3\left(\frac{1}{n}\right)E\bar{X}^{2}=\frac{3}{n}\left(\theta^{2}+\frac{1}{n}\right)=\frac{3\theta^{2}}{n}+\frac{3}{n^{2}}\\
+\theta E\bar{X}^{3} & =\theta\left(E\bar{X}^{2}\left(\bar{X}-\theta\right)+\theta E\bar{X}^{2}\right)=\theta\left(\frac{2}{n}E\bar{X}+\theta\left(\theta^{2}+\frac{1}{n}\right)\right)\\
+ & =\theta\left(\frac{2}{n}\theta+\theta\left(\theta^{2}+\frac{1}{n}\right)\right)=\frac{3}{n}\theta^{2}+\theta^{4}\\
+E\left(\bar{X}^{4}\right) & =\frac{3\theta^{2}}{n}+\frac{3}{n^{2}}+\frac{3}{n}\theta^{2}+\theta^{4}\\
+ & =\frac{3}{n^{2}}+6\left(\frac{1}{n}\right)\theta^{2}+\theta^{4}
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(\bar{X}^{2}\right) & =\frac{3}{n^{2}}+6\left(\frac{1}{n}\right)\theta^{2}+\theta^{4}-\left(E\bar{X}^{2}\right)^{2}\\
+ & =\frac{3}{n^{2}}+6\left(\frac{1}{n}\right)\theta^{2}+\theta^{4}-\left(\theta^{2}+\frac{1}{n}\right)^{2}\\
+ & =\frac{3}{n^{2}}+6\left(\frac{1}{n}\right)\theta^{2}+\theta^{4}-\left(\theta^{4}+\frac{1}{n^{2}}+2\frac{\theta^{2}}{n}\right)\\
+ & =\frac{2}{n^{2}}+4\left(\frac{1}{n}\right)\theta^{2}
 \end{align*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Enumerate
+The Cramer-Rao lower bound
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(W\left(\mathbf{X}\right)\right) & \geq\frac{\left(\frac{\partial}{\partial\theta}E_{\theta}W\left(\mathbf{X}\right)\right)^{2}}{E\left[\left(\frac{\partial}{\partial\theta}\log L\left(\theta|\mathbf{X}\right)\right)^{2}\right]}\\
+ & =\frac{\left(\frac{\partial}{\partial\theta}\theta^{2}\right)^{2}}{nE\left[\left(\frac{\partial}{\partial\theta}\left(-\frac{1}{2}\log\left(2\pi\right)-\frac{1}{2}\left(X-\theta\right)^{2}\right)\right)^{2}\right]}\\
+ & =\frac{4\theta^{2}}{nE\left[\left(-\left(X-\theta\right)\right)^{2}\right]}\\
+ & =\frac{4\theta^{2}}{nE\left[\left(X-\theta\right)^{2}\right]}\\
+ & =\frac{4\theta^{2}}{n}
+\end{align*}
+
+\end_inset
+
+and so 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{2}{n^{2}}+4\left(\frac{1}{n}\right)\theta^{2}>\frac{4\theta^{2}}{n}$
+\end_inset
+
+.
+ An alternative way to compute the Cramer-Rao lower bound is using the identity
+ 
+\begin_inset Formula 
+\[
+E\left[\left(\frac{\partial}{\partial\theta}\log L\left(\theta|X\right)\right)^{2}\right]=-E\left[\frac{\partial^{2}}{\partial\theta^{2}}\log L\left(\theta|X\right)\right]
+\]
+
+\end_inset
+
+ So
+\begin_inset Formula 
+\begin{align*}
+-E\left[\frac{\partial^{2}}{\partial\theta^{2}}\log L\left(\theta|X\right)\right] & =-E\left[\frac{\partial^{2}}{\partial\theta^{2}}\left(-\frac{1}{2}\log\left(2\pi\right)-\frac{1}{2}\left(X-\theta\right)^{2}\right)\right]\\
+ & =-E\left[\frac{\partial}{\partial\theta}\left(X-\theta\right)\right]\\
+ & =1
+\end{align*}
+
+\end_inset
+
+and hence 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(W\left(\mathbf{X}\right)\right) & \geq\frac{\left(\frac{\partial}{\partial\theta}E_{\theta}W\left(\mathbf{X}\right)\right)^{2}}{-nE\left[\frac{\partial^{2}}{\partial\theta^{2}}\log L\left(\theta|X\right)\right]}\\
+ & =\frac{4\theta^{2}}{n}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.5]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+f\left(x|\theta,\nu\right)=\frac{\theta\nu^{\theta}}{x^{\theta+1}}I\left(x\right)_{\left[\nu,\infty\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The likelihood is 
+\begin_inset Formula 
+\[
+L\left(\theta,\nu|\mathbf{x}\right)=\frac{\theta^{n}\nu^{n\theta}}{\left(\prod_{i=1}^{n}x_{i}\right)^{\theta+1}}I\left(x_{\left(1\right)}\right)_{\left[\nu,\infty\right)}
+\]
+
+\end_inset
+
+Then the log-likelihood is 
+\begin_inset Formula 
+\[
+\log L\left(\theta,\nu|\mathbf{x}\right)=n\log\theta+n\theta\log\nu-\left(\theta+1\right)\sum_{i=1}^{n}\log x_{i}
+\]
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $\nu<x_{\left(1\right)}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\hat{\nu}=x_{\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+\partial_{\theta}\log L\left(\theta,\nu|\mathbf{x}\right) & =\frac{n}{\theta}+n\log x_{\left(1\right)}-\sum_{i=1}^{n}\log x_{i}\\
+0 & =\frac{n}{\theta}+n\log x_{\left(1\right)}-\sum_{i=1}^{n}\log x_{i}\\
+\sum_{i=1}^{n}\log x_{i}-n\log x_{\left(1\right)} & =\frac{n}{\theta}\\
+\hat{\theta} & =\frac{n}{\sum_{i=1}^{n}\log x_{i}-n\log x_{\left(1\right)}}\\
+\hat{\theta} & =\frac{n}{\log\left(\frac{\prod_{i=1}^{n}x_{i}}{x_{\left(1\right)^{n}}}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\Theta_{0}=\left\{ 1\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\Theta_{0}^{c}=\mathbb{R}-\left\{ 1\right\} $
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+H_{0}\,:\,\theta=1,\nu\text{ uknown}\: H_{1}\,:\,\theta\neq1,\nu\text{ uknown}
+\]
+
+\end_inset
+
+Then the likelihood ratio test statistic is 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{L\left(1,\nu|\mathbf{x}\right)}{L\left(\hat{\theta},\nu|\mathbf{x}\right)}\\
+ & =\frac{\frac{x_{\left(1\right)}^{n}}{\left(\prod_{i=1}^{n}x_{i}\right)^{2}}}{\frac{\left(n/T\right)^{n}x_{\left(1\right)}^{n^{2}/T}}{\left(\prod_{i=1}^{n}x_{i}\right)^{\left(n/T\right)+1}}}\\
+ & =\left(x_{\left(1\right)}^{n}e^{T}\right)^{\left(n/T\right)-1}\frac{x_{\left(1\right)}^{n}}{\left(n/T\right)^{n}x_{\left(1\right)}^{n^{2}/T}}\\
+ & =e^{n-T}\left(\frac{T}{n}\right)^{n}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $e^{n-T}\left(\frac{T}{n}\right)^{n}$
+\end_inset
+
+ is an increasing function 
+\begin_inset Formula $T$
+\end_inset
+
+ for 
+\begin_inset Formula $T\leq n$
+\end_inset
+
+ since 
+\begin_inset Formula 
+\begin{align*}
+\partial_{T}\log\lambda\left(\mathbf{x}\right) & =\partial_{T}\left(\left(n-T\right)+n\log\left(\frac{T}{n}\right)\right)\\
+ & =-1+\frac{n}{T/n}\frac{1}{n}\\
+ & =\frac{n}{T}-1
+\end{align*}
+
+\end_inset
+
+ and decreasing for 
+\begin_inset Formula $T>n$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $T\leq c$
+\end_inset
+
+ is equivalent to 
+\begin_inset Formula $T\leq c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $T\ge c_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+A size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test means 
+\begin_inset Formula 
+\[
+\sup_{\theta\in\Theta_{0}}\beta\left(\theta\right)=P\left(T\leq c_{1}\vee\, T\geq c_{1}\right)
+\]
+
+\end_inset
+
+But under 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ 
+\begin_inset Formula $2T$
+\end_inset
+
+ has a chi squared distribution with
 \end_layout
 
 \end_deeper
