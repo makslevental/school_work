@@ -355,9 +355,9 @@ Then
  & =\left[\left(\prod_{i=1}^{n}x_{i}\right)^{1/\left(\sum_{i=1}^{n}\log x_{i}\right)}\right]^{\frac{n\left(\sum_{i=1}^{m}\log y_{i}\right)-m\left(\sum_{i=1}^{n}\log x_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}\\
  & \times\left[\left(\prod_{i=1}^{m}y_{i}\right)^{1/\left(\sum_{i=1}^{m}\log y_{i}\right)}\right]^{\frac{m\left(\sum_{i=1}^{n}\log x_{i}\right)-n\left(\sum_{i=1}^{m}\log y_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}\\
  & =\left[\left(\prod_{i=1}^{n}x_{i}\right)^{1/\log\left(\prod_{i=1}^{n}x_{i}\right)}\right]^{\frac{n\left(\sum_{i=1}^{m}\log y_{i}\right)-m\left(\sum_{i=1}^{n}\log x_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}\times\\
- & \left[\left(\prod_{i=1}^{m}y_{i}\right)^{1/\log\left(\prod_{i=1}^{m}\log y_{i}\right)}\right]^{\frac{m\left(\sum_{i=1}^{n}\log x_{i}\right)-n\left(\sum_{i=1}^{m}\log y_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}\\
+ & \left[\left(\prod_{i=1}^{m}y_{i}\right)^{1/\log\left(\prod_{i=1}^{m}y_{i}\right)}\right]^{\frac{m\left(\sum_{i=1}^{n}\log x_{i}\right)-n\left(\sum_{i=1}^{m}\log y_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}\\
  & =\left[\left(\prod_{i=1}^{n}x_{i}\right)^{1/\log\left(\prod_{i=1}^{n}x_{i}\right)}\right]^{\frac{n\left(\sum_{i=1}^{m}\log y_{i}\right)-m\left(\sum_{i=1}^{n}\log x_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}\times\\
- & \left[\left(\prod_{i=1}^{m}y_{i}\right)^{1/\log\left(\prod_{i=1}^{m}\log y_{i}\right)}\right]^{\frac{m\left(\sum_{i=1}^{n}\log x_{i}\right)-n\left(\sum_{i=1}^{m}\log y_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}
+ & \left[\left(\prod_{i=1}^{m}y_{i}\right)^{1/\log\left(\prod_{i=1}^{m}y_{i}\right)}\right]^{\frac{m\left(\sum_{i=1}^{n}\log x_{i}\right)-n\left(\sum_{i=1}^{m}\log y_{i}\right)}{\left(\sum_{i=1}^{n}\log x_{i}+\sum_{i=1}^{m}\log y_{i}\right)}}
 \end{align*}
 
 \end_inset
@@ -429,7 +429,7 @@ When
 \begin{align*}
 T & =\frac{-\left(\sum_{i=1}^{n}\log X_{i}\right)}{-\left(\sum_{i=1}^{n}\log X_{i}+\sum_{i=1}^{m}\log Y_{i}\right)}\\
  & \sim\frac{\text{Gamma}\left(n,1/\mu\right)}{\text{Gamma}\left(n,1/\mu\right)+\text{Gamma}\left(m,1/\theta\right)}\\
- & \sim\frac{\text{Gamma}\left(n,\gamma\right)}{\text{Gamma}\left(n,\gamma\right)+\text{Gamma}\left(m,\gamma\right)}
+ & \sim\frac{\text{Gamma}\left(n,\gamma\right)}{\text{Gamma}\left(n,\gamma\right)+\text{Gamma}\left(m,\gamma'\right)}
 \end{align*}
 
 \end_inset
@@ -588,7 +588,7 @@ Let
  with hypotheses 
 \begin_inset Formula 
 \begin{align*}
-H_{0}:\theta\leq\theta_{0} & H_{1}:\theta>\theta_{0}
+H_{0}:\theta\leq\theta_{0} & \: H_{1}:\theta>\theta_{0}
 \end{align*}
 
 \end_inset
@@ -961,9 +961,35 @@ The test is
 The size of this test is 
 \begin_inset Formula 
 \begin{align*}
-\beta\left(\theta\right) & =P_{\theta}\left(\frac{\left|\bar{X}-\theta_{0}\right|}{S/\sqrt{n}}>t_{n-1,\alpha/2}\right)\\
- & =1-P_{\theta}\left(\frac{\left|\bar{X}-\theta_{0}\right|}{S/\sqrt{n}}\leq t_{n-1,\alpha/2}\right)\\
- & =1-P_{\theta}\left(-t_{n-1,\alpha/2}+\frac{\theta_{0}-\theta}{S/\sqrt{n}}\leq\frac{\bar{X}-\theta}{S/\sqrt{n}}\leq t_{n-1,\alpha/2}+\frac{\theta_{0}-\theta}{S/\sqrt{n}}\right)
+\beta\left(\theta\right) & =P_{\theta}\left(\frac{\left|\bar{X}-\theta\right|}{S/\sqrt{n}}>t_{n-1,\alpha/2}\right)\\
+ & =1-P_{\theta}\left(\frac{\left|\bar{X}-\theta\right|}{S/\sqrt{n}}\leq t_{n-1,\alpha/2}\right)\\
+ & =1-P_{\theta}\left(-t_{n-1,\alpha/2}\leq\frac{\bar{X}-\theta}{S/\sqrt{n}}\leq t_{n-1,\alpha/2}\right)
+\end{align*}
+
+\end_inset
+
+Under 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ the 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta_{0},\sigma^{2}\right)$
+\end_inset
+
+ so 
+\begin_inset Formula $\frac{\bar{X}-\theta_{0}}{S/\sqrt{n}}\sim t_{n-1}$
+\end_inset
+
+ and hence by the definition of the cutoff points 
+\begin_inset Formula $t_{n-1,\alpha/2}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\sup_{\theta=\theta_{0}}\beta\left(\theta\right) & =\beta\left(\theta_{0}\right)\\
+ & =1-P_{\theta}\left(-t_{n-1,\alpha/2}\leq\frac{\bar{X}-\theta_{0}}{S/\sqrt{n}}\leq t_{n-1,\alpha/2}\right)\\
+ & =1-\left(1-\alpha\right)=\alpha
 \end{align*}
 
 \end_inset
@@ -980,46 +1006,10 @@ Since
 \begin_inset Formula 
 \begin{align*}
 \lambda\left(\mathbf{x}\right) & =\frac{\sup_{\boldsymbol{\theta}\in\Theta_{0}}L\left(\boldsymbol{\theta}|\mathbf{x}\right)}{L\left(\hat{\boldsymbol{\theta}}|\mathbf{x}\right)}\\
- & =\frac{\sup_{\boldsymbol{\theta}\in\Theta_{0}}L\left(\boldsymbol{\theta}|\mathbf{x}\right)}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}
-\end{align*}
-
-\end_inset
-
-Then for the restricted MLE is 
-\begin_inset Formula $\left(\theta_{0},n^{-1}\sum_{i=1}^{n}\left(X_{i}-\theta_{0}\right)^{2}\right)$
-\end_inset
-
- if 
-\begin_inset Formula $\theta_{0}\leq\bar{x}$
-\end_inset
-
- so 
-\begin_inset Formula 
-\begin{align*}
-\lambda\left(\mathbf{x}\right) & =\begin{cases}
-\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
-\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}} & \text{otherwise }
-\end{cases}\\
- & =\begin{cases}
-1 & \text{if }\theta_{0}\geq\bar{x}\\
-\frac{\frac{1}{\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}}}{\frac{1}{\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}}} & \text{otherwise }
-\end{cases}\\
- & =\begin{cases}
-1 & \text{if }\theta_{0}\geq\bar{x}\\
-\left(\frac{n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2} & \text{otherwise }
-\end{cases}\\
- & =\begin{cases}
-1 & \text{if }\theta_{0}\geq\bar{x}\\
-\left(\frac{\left(n-1\right)n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{\left(n-1\right)n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2} & \text{otherwise }
-\end{cases}\\
- & =\begin{cases}
-1 & \text{if }\theta_{0}\geq\bar{x}\\
-\left(\frac{s^{2}}{s^{2}+\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}\right) & \text{otherwise }
-\end{cases}\\
- & =\begin{cases}
-1 & \text{if }\theta_{0}\geq\bar{x}\\
-\left(\frac{1}{1+\frac{\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}}\right) & \text{otherwise }
-\end{cases}
+ & =\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}/\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}\\
+ & =\left(\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2}\\
+ & \left(\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\theta_{0}\right)^{2}}\right)^{n/2}\\
+ & =\left(\frac{1}{1+n\left(\bar{x}-\theta_{0}\right)^{2}/\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}\right)^{n/2}
 \end{align*}
 
 \end_inset
@@ -1031,10 +1021,41 @@ Thus rejecting if
  is equivalent to rejecting if 
 \begin_inset Formula 
 \begin{align*}
-\frac{1}{1+\frac{\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}} & <c\\
-\frac{\frac{1}{c}-1}{n\left(n-1\right)} & <\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}\\
-\sqrt{\frac{\frac{1}{c}-1}{n\left(n-1\right)}} & <\frac{\left(\bar{x}-\theta_{0}\right)}{s/\sqrt{n}}\\
-c' & <\frac{\left(\bar{x}-\theta_{0}\right)}{s/\sqrt{n}}
+\frac{1}{1+\frac{n}{n-1}\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}} & <c'\\
+\left(n-1\right)\left(\frac{1-c'}{c'}\right) & <\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}/n}\\
+-\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}>\frac{\bar{x}-\theta_{0}}{\sqrt{s^{2}/n}} & \vee\;\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}<\frac{\bar{x}-\theta_{0}}{\sqrt{s^{2}/n}}
+\end{align*}
+
+\end_inset
+
+But under 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\frac{\bar{X}-\theta_{0}}{\sqrt{S^{2}/n}}\sim t_{n-1}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta_{0}\right) & =P\left(-\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}>\frac{\bar{X}-\theta_{0}}{\sqrt{S^{2}/n}}\vee\;\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}<\frac{\bar{X}-\theta_{0}}{\sqrt{S^{2}/n}}\right)\\
+ & =1-P\left(-\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}<\frac{\bar{X}-\theta_{0}}{\sqrt{S^{2}/n}}<\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}\right)
+\end{align*}
+
+\end_inset
+
+ Therefore if 
+\begin_inset Formula $\sqrt{\left(n-1\right)\left(\frac{1-c'}{c'}\right)}=t_{n-1,\alpha/2}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta_{0}\right) & =1-P\left(-t_{n-1,\alpha/2}<\frac{\bar{X}-\theta_{0}}{\sqrt{S^{2}/n}}<t_{n-1,\alpha/2}\right)\\
+ & =1-P\left(-t_{n-1,\alpha/2}\sqrt{\frac{S^{2}}{n}}<\bar{X}-\theta_{0}<t_{n-1,\alpha/2}\sqrt{\frac{S^{2}}{n}}\right)\\
+ & =1-\left(1-\alpha\right)\\
+ & =\alpha
 \end{align*}
 
 \end_inset

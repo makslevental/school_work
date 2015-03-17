@@ -1112,7 +1112,35 @@ Therefore for
 \end_inset
 
 .
- The joint distribution of 
+ Note that 
+\begin_inset Formula $cX\sim\text{Pareto}\left(\theta,c\nu\right)$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+X_{\left(j\right)}/X_{\left(1\right)}|X_{\left(1\right)}\sim\text{Pareto}\left(\theta,1\right)
+\]
+
+\end_inset
+
+and hence for 
+\begin_inset Formula $Y_{j}=\frac{X_{\left(j\right)}}{X_{\left(1\right)}}$
+\end_inset
+
+ with 
+\begin_inset Formula $j\neq1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f_{Y_{2},\dots,Y_{n}}\left(y_{2},\dots,y_{n}\right)=\frac{\theta^{n}}{\left(\prod_{j=2}^{n}y_{j}\right)^{n\left(\theta+1\right)}}
+\]
+
+\end_inset
+
+ is The joint distribution of 
 \begin_inset Formula $\left(X_{\left(1\right)},X_{\left(j\right)}\right)$
 \end_inset
 
@@ -1140,13 +1168,29 @@ P\left(\frac{X_{\left(j\right)}}{X_{\left(1\right)}}\leq y\right) & =P\left(X_{\
 \end_inset
 
 and therefore for 
-\begin_inset Formula $Y=\frac{X_{\left(j\right)}}{X_{\left(1\right)}}$
+\begin_inset Formula $j\neq1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $Y_{j}=\frac{X_{\left(j\right)}}{X_{\left(1\right)}}$
 \end_inset
 
 
 \begin_inset Formula 
 \[
-f_{Y}\left(y\right)=\frac{\theta}{ny^{\theta+1}}
+f_{Y_{j}}\left(y_{j}\right)=\frac{\theta}{n\left(y_{j}\right)^{\theta+1}}
+\]
+
+\end_inset
+
+Then the joint distribution of 
+\begin_inset Formula $\left(Y_{2},\dots,Y_{n}\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{\mathbf{Y}}\left(\mathbf{y}\right)=\frac{\theta^{n}}{n^{n}\left(\prod_{j\neq1}^{n}y_{j}\right)^{\theta+1}}
 \]
 
 \end_inset
