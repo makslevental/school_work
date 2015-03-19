@@ -313,15 +313,6 @@ a\left(\theta\right)\left(W\left(\mathbf{x}\right)-\tau\left(\theta\right)\right
 
 \end_deeper
 \begin_layout Itemize
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
@@ -407,6 +398,254 @@ Note that this sup is computed over the null space.
 Same.
 \end_layout
 
+\end_deeper
+\begin_layout Itemize
+Distributions
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Bernoulli
+\begin_inset Formula $\left(p\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pmf: 
+\begin_inset Formula $P\left(X=x|p\right)=p^{x}\left(1-p\right)^{x}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=p$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=p\left(1-p\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+MLE 
+\begin_inset Formula $\hat{p}=\bar{X}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Binomial
+\begin_inset Formula $\left(n,p\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pmf: 
+\begin_inset Formula $P\left(X=x|n,p\right)=\binom{n}{x}p^{x}\left(1-p\right)^{n-x}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=np$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=np\left(1-p\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+MLE 
+\begin_inset Formula $\hat{p}=X/n$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Geometric
+\begin_inset Formula $\left(p\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pmf: 
+\begin_inset Formula $P\left(X=x|p\right)=\left(1-p\right)^{x-1}p$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=\frac{1}{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\frac{\left(1-p\right)}{p^{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+MLE 
+\begin_inset Formula $\hat{p}=1/\bar{X}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Poisson
+\begin_inset Formula $\left(\lambda\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pmf: 
+\begin_inset Formula $P\left(X=x|p\right)=\frac{e^{-\lambda}\lambda^{x}}{x!}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\lambda$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+MLE 
+\begin_inset Formula $\hat{\lambda}=\bar{X}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Beta
+\begin_inset Formula $\left(\alpha,\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pdf: 
+\begin_inset Formula $f_{X}\left(x|\alpha,\beta\right)=\frac{\Gamma\left(\alpha\right)\Gamma\left(\beta\right)}{\Gamma\left(\alpha+\beta\right)}x^{\alpha-1}\left(1-x\right)^{\beta-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=\frac{\alpha}{\alpha+\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\frac{\alpha\beta}{\left(\alpha+\beta\right)\left(\alpha+\beta\right)\left(\alpha+\beta+1\right)}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Gamma
+\begin_inset Formula $\left(\alpha,\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pdf: 
+\begin_inset Formula $f_{X}\left(x|\alpha,\beta\right)=\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=\alpha\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\alpha\beta^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Exponential
+\begin_inset Formula $\left(\beta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+pdf: 
+\begin_inset Formula $f_{X}\left(x|\beta\right)=\frac{1}{\beta}e^{-x/\beta}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+mean and variance: 
+\begin_inset Formula $EX=\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(X\right)=\beta^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
@@ -1041,7 +1280,21 @@ A size
 
 \end_inset
 
-Firstly 
+Firstly let's construct the transformation 
+\begin_inset Formula 
+\begin{align*}
+Y_{1} & =X_{i\neq\left(1\right)}\\
+Y_{2} & =X_{j\neq i\neq\left(1\right)}\\
+Y_{3} & =X_{\left(1\right)}
+\end{align*}
+
+\end_inset
+
+Cases: if 
+\begin_inset Formula $X_{\left(1\right)}=X_{1}=Y_{1}$
+\end_inset
+
+ then Then 
 \begin_inset Formula $\left(X_{1},\dots,X_{n}|X_{\left(1\right)}\right)=\left(X_{\left(1\right)},X_{\left(2\right)},\dots,X_{\left(n\right)}|X_{\left(1\right)}\right)$
 \end_inset
 
@@ -1199,5 +1452,723 @@ f_{\mathbf{Y}}\left(\mathbf{y}\right)=\frac{\theta^{n}}{n^{n}\left(\prod_{j\neq1
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.13]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{uniform}\left(\theta,\theta+1\right)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\[
+f_{X}\left(x\right)=I\left(x\right)_{\left[\theta,\theta+1\right]}
+\]
+
+\end_inset
+
+ let 
+\begin_inset Formula $\Theta_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\Theta_{0}^{c}=\left(0,1\right]$
+\end_inset
+
+.
+ Therefore the tests
+\begin_inset Formula 
+\[
+H_{0}:\theta=0\quad H_{1}:\theta>0
+\]
+
+\end_inset
+
+The two tests are 
+\begin_inset Formula 
+\begin{align*}
+\phi_{1}\left(X_{1}\right) & :\text{ Reject }H_{0}\text{ if }X_{1}>.95\\
+\phi_{2}\left(X_{1},X_{2}\right) & :\text{ Reject }H_{0}\text{ if }X_{1}+X_{2}>C
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The size of 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+\sup_{\theta\in\Theta_{0}}\beta_{\phi_{1}}\left(\theta\right) & =P\left(X_{1}\in R\right)\\
+ & =P\left(X_{1}>.95\right)\\
+ & =.05
+\end{align*}
+
+\end_inset
+
+The size of 
+\begin_inset Formula $\phi_{2}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+\sup_{\theta\in\Theta_{0}}\beta_{\phi_{2}}\left(\theta\right) & =P\left(X_{1}+X_{2}>c\right)\\
+ & =1-P\left(X_{1}+X_{2}<c\right)\\
+ & =1-\frac{c^{2}}{2}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $c=\sqrt{1.9}=1.378$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The power functions are 
+\begin_inset Formula 
+\begin{align*}
+\beta_{\phi_{1}}\left(\theta\right) & =P\left(X_{1}>.95\right)\\
+ & =1-P\left(X_{1}<.95\right)\\
+ & =\begin{cases}
+0 & \text{if }.95<\theta\\
+1-\frac{.95-\theta}{\theta+1-\theta} & \text{if }\theta<.95<\theta+1\\
+1 & \text{if }\theta+1<.95
+\end{cases}\\
+ & =\begin{cases}
+0 & \text{if }.95<\theta\\
+.05+\theta & \text{if }\theta<.95<\theta+1\\
+1 & \text{if }\theta+1<.95
+\end{cases}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\beta_{\phi_{2}}\left(\theta\right) & =P\left(X_{1}+X_{2}>c\right)\\
+ & =1-P\left(X_{1}+X_{2}<c\right)\\
+ & =\begin{cases}
+0 & \text{if }c<\theta\\
+1-\frac{1}{2}\left(c-\theta\right)\left(c-\theta\right) & \text{if }\theta<c<\theta+1\\
+1 & \text{if }\theta+1<c
+\end{cases}\\
+ & =\begin{cases}
+0 & \text{if }c<\theta\\
+1-\frac{1}{2}\left(\theta^{2}+c^{2}-2\theta c\right) & \text{if }\theta<c<\theta+1\\
+1 & \text{if }\theta+1<cx`
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.25]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(b)]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be distributed such that
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x|\theta\right) & =\frac{\theta}{\left(1+x\right)^{\theta+1}}I\left(x\right)_{\left(0,\infty\right)}\\
+ & =\theta\left(1+x\right)^{-\left(\theta+1\right)}\\
+ & =\theta e^{-\left(\theta+1\right)\log\left(1+x\right)}
+\end{align*}
+
+\end_inset
+
+Hence with 
+\begin_inset Formula $h\left(x\right)=1,c\left(\theta\right)=\theta,w\left(\theta\right)=-\left(\theta+1\right),t\left(x\right)=\log\left(1+x\right)$
+\end_inset
+
+, and since 
+\begin_inset Formula $w\left(\theta\right)=-\left(\theta+1\right)$
+\end_inset
+
+ is obviously invertible, the complete sufficient statistic is 
+\begin_inset Formula $\sum_{i=1}^{n}\log\left(1+x_{i}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(c)]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be distributed such that
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x|\theta\right) & =\frac{\theta^{x}\log\left(\theta\right)}{\theta-1}I\left(x\right)_{\left(0,1\right)}\\
+ & =\frac{\log\left(\theta\right)}{\theta-1}e^{x\log\theta}
+\end{align*}
+
+\end_inset
+
+Hence with 
+\begin_inset Formula $h\left(x\right)=1,c\left(\theta\right)=\frac{\log\theta}{\theta-1},w\left(\theta\right)=\log\theta,t\left(x\right)=x$
+\end_inset
+
+, and since 
+\begin_inset Formula $w\left(\theta\right)=\log\theta$
+\end_inset
+
+ is obviously invertible, the complete sufficient statistic is 
+\begin_inset Formula $\sum_{i=1}^{n}x_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[(e)]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be distributed such that
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x|\theta\right) & =\binom{2}{x}\theta^{x}\left(1-\theta\right)^{2-x}I\left(x\right)_{\left\{ 0,1,2\right\} }\\
+ & =\binom{2}{x}\left(1-\theta\right)^{2}\left(\frac{\theta}{1-\theta}\right)^{x}\\
+ & =\binom{2}{x}\left(1-\theta\right)^{2}e^{x\log\left(\frac{\theta}{1-\theta}\right)}
+\end{align*}
+
+\end_inset
+
+Hence with 
+\begin_inset Formula $h\left(x\right)=\binom{2}{x},c\left(\theta\right)=\left(1-\theta\right)^{2},w\left(\theta\right)=\log\left(\frac{\theta}{1-\theta}\right),t\left(x\right)=x$
+\end_inset
+
+, and since 
+\begin_inset Formula $w\left(\theta\right)=\log\left(\frac{\theta}{1-\theta}\right)$
+\end_inset
+
+ is obviously invertible on 
+\begin_inset Formula $\left(0,1\right)$
+\end_inset
+
+, the complete sufficient statistic is 
+\begin_inset Formula $\sum_{i=1}^{n}x_{i}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.58]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\left(\frac{\theta}{2}\right)^{\left|x\right|}\left(1-\theta\right)^{1-\left|x\right|}I\left(x\right)_{\left\{ -1,0,1\right\} }
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The MLE 
+\begin_inset Formula 
+\begin{align*}
+L\left(\theta|-1\right) & =\left(\frac{\theta}{2}\right)\\
+\hat{\theta} & =1\\
+L\left(\theta|0\right) & =\left(1-\theta\right)\\
+\hat{\theta} & =0\\
+L\left(\theta|1\right) & =\left(\frac{\theta}{2}\right)\\
+\hat{\theta} & =1
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\hat{\theta}=\left|x\right|$
+\end_inset
+
+.
+ The expected value is 
+\begin_inset Formula 
+\begin{align*}
+E_{\theta}\hat{\theta} & =\left|1\right|\left(\frac{\theta}{2}\right)+\left|0\right|\left(1-\theta\right)+\left|-1\right|\left(\frac{\theta}{2}\right)\\
+ & =\theta
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\hat{\theta}=\left|x\right|$
+\end_inset
+
+ is unbiased for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ The second moment
+\begin_inset Formula 
+\[
+E_{\theta}\hat{\theta}^{2}=\theta
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula 
+\[
+T\left(X\right)=\begin{cases}
+2 & \text{if }x=1\\
+0 & \text{othetwise}
+\end{cases}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+E_{\theta}T\left(X\right) & =T\left(1\right)\left(\frac{\theta}{2}\right)^{\left|1\right|}\left(1-\theta\right)^{1-\left|1\right|}+T\left(0\right)\left(\frac{\theta}{2}\right)^{\left|0\right|}\left(1-\theta\right)^{1-\left|0\right|}+T\left(-1\right)\left(\frac{\theta}{2}\right)^{\left|-1\right|}\left(1-\theta\right)^{1-\left|-1\right|}\\
+ & =2\left(\frac{\theta}{2}\right)+0+0=\theta
+\end{align*}
+
+\end_inset
+
+The second moment
+\begin_inset Formula 
+\begin{align*}
+E_{\theta}\left(T\left(X\right)\right)^{2} & =T\left(1\right)^{2}\left(\frac{\theta}{2}\right)^{\left|1\right|}\left(1-\theta\right)^{1-\left|1\right|}+T\left(0\right)^{2}\left(\frac{\theta}{2}\right)^{\left|0\right|}\left(1-\theta\right)^{1-\left|0\right|}+T\left(-1\right)^{2}\left(\frac{\theta}{2}\right)^{\left|-1\right|}\left(1-\theta\right)^{1-\left|-1\right|}\\
+ & =4\left(\frac{\theta}{2}\right)+0+0=2\theta
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+It's clear from the computations of the second moments that 
+\begin_inset Formula $\hat{\theta}$
+\end_inset
+
+ is a smaller variance estimator for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.40]
+\end_layout
+
+\end_inset
+
+Let iid 
+\begin_inset Formula $X_{i}\sim\text{Bernoulli}\left(p\right)$
+\end_inset
+
+.
+ The Cramer-Rao lower bound is 
+\begin_inset Formula 
+\[
+\text{Var}\left(W\left(\mathbf{X}\right)\right)\geq\frac{\left(\partial_{p}E_{p}W\left(\mathbf{X}\right)\right)^{2}}{E_{p}\left[\left(\partial_{p}\log L\left(\mathbf{X}|\theta\right)\right)^{2}\right]}
+\]
+
+\end_inset
+
+Since iid
+\begin_inset Formula 
+\[
+\text{Var}\left(W\left(\mathbf{X}\right)\right)\geq\frac{\left(\partial_{p}E_{p}W\left(\mathbf{X}\right)\right)^{2}}{nE_{p}\left[\left(\partial_{p}\log L\left(X|\theta\right)\right)^{2}\right]}
+\]
+
+\end_inset
+
+and since exponential family
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(W\left(\mathbf{X}\right)\right) & \geq\frac{\left(\partial_{p}E_{p}W\left(\mathbf{X}\right)\right)^{2}}{-nE_{p}\left[\partial_{pp}\log L\left(X|\theta\right)\right]}
+\end{align*}
+
+\end_inset
+
+The estimator is 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(\bar{X}\right) & \geq\frac{\left(\partial_{p}E_{p}\bar{X}\right)^{2}}{-nE_{p}\left[\partial_{pp}\log L\left(X|\theta\right)\right]}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is certainly unbiased for 
+\begin_inset Formula $p$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(\bar{X}\right) & \geq\frac{\left(\partial_{p}p\right)^{2}}{-nE_{p}\left[\partial_{pp}\log\left(p^{X}\left(1-p\right)^{1-X}\right)\right]}\\
+ & =\frac{1}{-nE_{p}\left[\partial_{pp}\left(X\log p+\left(1-X\right)\log\left(1-p\right)\right)\right]}\\
+ & =\frac{1}{-nE_{p}\left[\partial_{p}\left(\frac{X}{p}+\frac{\left(1-X\right)}{1-p}\right)\right]}\\
+ & =\frac{1}{-nE_{p}\left[-\frac{X}{p^{2}}+\frac{\left(1-X\right)}{\left(1-p\right)^{2}}\right]}\\
+ & =\frac{1}{-n\left(-\frac{p}{p^{2}}+\frac{\left(1-p\right)}{\left(1-p\right)^{2}}\right)}\\
+ & =\frac{p\left(p-1\right)}{n\left(2p-1\right)}
+\end{align*}
+
+\end_inset
+
+But according to the attainment theorem 
+\begin_inset Formula 
+\begin{align*}
+a\left(\theta\right)\left(W\left(\mathbf{X}\right)-\tau\left(\theta\right)\right) & =\partial_{\theta}\log L\left(\theta|\mathbf{X}\right)\\
+ & =\partial_{p}\log\left(\prod_{i=1}^{n}p^{X_{i}}\left(1-p\right)^{1-X_{i}}\right)\\
+ & =\partial_{p}\log\left(p^{\sum_{i}X_{i}}\left(1-p\right)^{n-\sum_{i}X_{i}}\right)\\
+ & =\partial_{p}\log\left(e^{\left(\sum_{i}X_{i}\right)\log p+\left(n-\left(\sum_{i}X_{i}\right)\right)\log\left(1-p\right)}\right)\\
+ & =\frac{\left(\sum_{i}X_{i}\right)}{p}-\frac{n-\left(\sum_{i}X_{i}\right)}{1-p}\\
+ & =\frac{\left(\sum_{i}X_{i}\right)\left(1-p\right)-p\left(n-\left(\sum_{i}X_{i}\right)\right)}{p\left(1-p\right)}\\
+ & =\frac{\left(\sum_{i}X_{i}\right)-np}{p\left(1-p\right)}\\
+ & =\frac{n}{p\left(1-p\right)}\left(\bar{X}-p\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Ex 8.2.3]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=e^{-\left(x-\theta\right)}I\left(x\right)_{\left[\theta,\infty\right)}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\Theta_{0}=\theta\le\theta_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Theta_{0}^{c}=\theta>\theta_{0}$
+\end_inset
+
+.
+ So the hypotheses are 
+\begin_inset Formula 
+\[
+H_{0}:\theta\leq\theta_{0}\quad H_{1}:\theta>\theta_{0}
+\]
+
+\end_inset
+
+The likelihood function is 
+\begin_inset Formula 
+\begin{align*}
+L\left(\theta|\mathbf{x}\right) & =e^{-\sum_{i=1}^{n}\left(x_{i}-\theta\right)}I\left(x_{\left(1\right)}\right)_{\left[\theta,\infty\right)}\\
+ & =e^{n\theta-\sum_{i=1}^{n}x_{i}}I\left(x_{\left(1\right)}\right)_{\left[\theta,\infty\right)}
+\end{align*}
+
+\end_inset
+
+and so the LRT
+\begin_inset Formula 
+\[
+\lambda\left(\mathbf{x}\right)=\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{\sup_{\theta\in\Theta}L\left(\theta|\mathbf{x}\right)}
+\]
+
+\end_inset
+
+The likelihood is a monotonically increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ on 
+\begin_inset Formula $-\infty<\theta\leq x_{\left(1\right)}$
+\end_inset
+
+ so the unrestricted MLE is 
+\begin_inset Formula $x_{\left(1\right)}$
+\end_inset
+
+.
+ Similarly for the numerator if 
+\begin_inset Formula $\theta_{0}<x_{\left(1\right)}$
+\end_inset
+
+ then the restricted MLE is 
+\begin_inset Formula $x_{\left(1\right)}$
+\end_inset
+
+ and if 
+\begin_inset Formula $x_{\left(1\right)}<\theta_{0}$
+\end_inset
+
+ then the restricted MLE is 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\begin{cases}
+\frac{L\left(x_{\left(1\right)}|\mathbf{x}\right)}{L\left(x_{\left(1\right)}|\mathbf{x}\right)} & \text{if }\theta_{0}<x_{\left(1\right)}\\
+\frac{L\left(\theta_{0}|\mathbf{x}\right)}{L\left(x_{\left(1\right)}|\mathbf{x}\right)} & \text{if }\theta_{0}>x_{\left(1\right)}
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}<x_{\left(1\right)}\\
+\frac{e^{n\theta_{0}-\sum_{i=1}^{n}x_{i}}}{e^{nx_{\left(1\right)}-\sum_{i=1}^{n}x_{i}}} & \text{if }\theta_{0}>x_{\left(1\right)}
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}<x_{\left(1\right)}\\
+e^{n\left(\theta_{0}-x_{\left(1\right)}\right)} & \text{if }\theta_{0}>x_{\left(1\right)}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+The power function of a test is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right)=P\left(\text{reject }H_{0}\text{ when }\theta\in\Theta_{0}\right)=P\left(\mathbf{X}\in R\right) & =\begin{cases}
+P\left(\text{\text{committing a type I error}}\right) & \text{if }\theta\in\Theta_{0}\\
+1-P\left(\mathbf{X}\in R^{c}\right) & \text{if }\theta\in\Theta_{0}^{c}
+\end{cases}\\
+ & =\begin{cases}
+P\left(\text{\text{committing a type I error}}\right) & \text{if }\theta\in\Theta_{0}\\
+1-P\left(\text{\text{committing a type II error}}\right) & \text{if }\theta\in\Theta_{0}^{c}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+The size of a test is 
+\begin_inset Formula $\sup_{\theta\in\Theta_{0}}\beta\left(\theta\right)$
+\end_inset
+
+.
+ Reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ is equivalent to 
+\begin_inset Formula $\lambda\left(\mathbf{X}\right)<c$
+\end_inset
+
+.
+ This is equivalent to
+\begin_inset Formula 
+\begin{align*}
+e^{n\left(\theta_{0}-X_{\left(1\right)}\right)} & <c\\
+\left(\theta_{0}-X_{\left(1\right)}\right) & <\frac{e^{c}}{n}\\
+X_{\left(1\right)} & >\frac{e^{c}}{n}-\theta_{0}
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ is distributed something something something.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Ex 8.3.2]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X\sim\text{Binomial}\left(5,\theta\right)$
+\end_inset
+
+.
+ The null hypothesis space is 
+\begin_inset Formula $\Theta_{0}=\theta\leq1/2$
+\end_inset
+
+ and 
+\begin_inset Formula $\Theta_{0}^{c}=\theta>1/2.$
+\end_inset
+
+ The hypotheses are 
+\begin_inset Formula 
+\[
+H_{0}:\theta\leq1/2\quad H_{1}:\theta>1/2
+\]
+
+\end_inset
+
+The LRT is 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|x\right)}{\sup_{\theta\in\Theta}L\left(\theta|x\right)}\\
+ & =\frac{\sup_{\theta\in\Theta_{0}}\left[\binom{5}{x}\theta^{x}\left(1-\theta\right)^{5-x}\right]}{\sup_{\theta\in\Theta}\left[\binom{5}{x}\theta^{x}\left(1-\theta\right)^{5-x}\right]}
+\end{align*}
+
+\end_inset
+
+The unrestricted MLE is 
+\begin_inset Formula $x/5$
+\end_inset
+
+.
+ 
+\begin_inset Formula $L$
+\end_inset
+
+ has a global maximum as a functon of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ so if 
+\begin_inset Formula $\theta_{0}<x/5$
+\end_inset
+
+ then the restricted MLE is 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+ and otherwise it's the unrestricted MLE.
+ Hence
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\begin{cases}
+1 & \text{if }\theta_{0}>x/5\\
+\frac{\binom{5}{x}\left(\theta_{0}\right)^{x}\left(1-\theta_{0}\right)^{5-x}}{\binom{5}{x}\left(\frac{x}{5}\right)^{x}\left(1-\frac{x}{5}\right)^{5-x}} & \text{otherwise}
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}>x/5\\
+\left(\frac{5\theta_{0}}{x}\right)^{x}\left(\frac{1-\theta_{0}}{1-\frac{x}{5}}\right)^{5-x} & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+I can't calculate the power for any of these functions tests! More testing
+ and randomized tests and uncorralted estimators of 0.
+\end_layout
+
 \end_body
 \end_document

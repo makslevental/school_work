@@ -1181,9 +1181,8 @@ If
  so 
 \begin_inset Formula 
 \begin{align*}
-\text{Var}\left(T'\left(X\right)\right) & =E\left(T'^{2}\right)+\left(E\left(T'\right)\right)^{2}\\
- & =\left(\frac{a^{2}+b^{2}}{2}\right)\theta+\left(\left(\frac{a+b}{2}\right)\theta\right)^{2}\\
- & =\theta+\theta^{2}
+\text{Var}\left(T'\left(X\right)\right) & =E\left(T'^{2}\right)-\left(E\left(T'\right)\right)^{2}\\
+ & =\left(\frac{a^{2}+b^{2}}{2}\right)\theta-\left(\left(\frac{a+b}{2}\right)\theta\right)^{2}
 \end{align*}
 
 \end_inset
@@ -1195,8 +1194,8 @@ If
  then 
 \begin_inset Formula 
 \begin{align*}
-\text{Var}\left(T'\left(X\right)\right) & =\left(\frac{a^{2}+b^{2}}{2}\right)\theta+\left(\left(\frac{a+b}{2}\right)\theta\right)^{2}\\
- & =\theta+\theta^{2}
+\text{Var}\left(T'\left(X\right)\right) & =\left(\frac{a^{2}+b^{2}}{2}\right)\theta-\left(\left(\frac{a+b}{2}\right)\theta\right)^{2}\\
+ & =\theta-\theta^{2}
 \end{align*}
 
 \end_inset
@@ -1209,8 +1208,8 @@ The variance of
 \begin_inset Formula 
 \begin{align*}
 \text{Var}\left(T\left(X\right)\right) & =E\left(T^{2}\right)+\left(E\left(T\right)\right)^{2}\\
- & =2^{2}\cdot P\left(X=1\right)+0^{2}\cdot P\left(X\neq1\right)+\theta^{2}\\
- & =2\theta+\theta^{2}
+ & =2^{2}\cdot P\left(X=1\right)+0^{2}\cdot P\left(X\neq1\right)-\theta^{2}\\
+ & =2\theta-\theta^{2}
 \end{align*}
 
 \end_inset
