@@ -2094,6 +2094,143 @@ status open
 
 \begin_layout Plain Layout
 
+[Randomized testing]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\psi\left(\mathbf{x}\right)=P\left(\text{reject }H_{0}\text{ when }\mathbf{X}=\mathbf{x}\right)$
+\end_inset
+
+.For non-randomized testing 
+\begin_inset Formula 
+\[
+\psi\left(\mathbf{x}\right)=\begin{cases}
+1 & \text{if }\mathbf{x}\in R\\
+0 & \text{if }\mathbf{x}\in R
+\end{cases}
+\]
+
+\end_inset
+
+For a randomized test 
+\begin_inset Formula 
+\[
+\psi\left(\mathbf{x}\right)=\begin{cases}
+1 & \text{if }\mathbf{x}\in R\\
+\gamma & \text{if }\mathbf{x}=\mathbf{x}_{0}\\
+0 & \text{if }\mathbf{x}\notin R\text{ and }x\neq\mathbf{x}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+So flip a coin weighted like 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and reject based on how it lands.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Suppose 
+\begin_inset Formula $X_{i}\sim\text{Poisson}\left(\lambda\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+H_{0}:\lambda=.1\quad H_{1}:\lambda>.1
+\]
+
+\end_inset
+
+The MLE 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is distributed 
+\begin_inset Formula $\text{Poisson}\left(n\lambda\right)$
+\end_inset
+
+.
+ Using a sample size of 10 and under 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\bar{X}\sim\text{Poisson}\left(1\right)$
+\end_inset
+
+.
+ Therefore the test can be to reject for large values of 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+.
+ Suppose we wish to have a size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test.
+ Note that 
+\begin_inset Formula 
+\begin{align*}
+P\left(\bar{X}\geq0\right) & =1\\
+P\left(\bar{X}\geq1\right) & =.632\\
+P\left(\bar{X}\geq2\right) & =.264\\
+P\left(\bar{X}\geq3\right) & =.080\\
+P\left(\bar{X}\geq4\right) & =.019\\
+P\left(\bar{X}\geq5\right) & =.00365\\
+P\left(\bar{X}\geq6\right) & =.000594\\
+P\left(\bar{X}\geq7\right) & =.0000832\\
+P\left(\bar{X}\geq8\right) & =.0000102\\
+P\left(\bar{X}\geq9\right) & =.00000111\\
+P\left(\bar{X}\geq10\right) & =.0000001013
+\end{align*}
+
+\end_inset
+
+Now look for a pair of values such that 
+\begin_inset Formula 
+\begin{align*}
+\alpha=P\left(H_{0}\text{ is rejected}\right) & =1\times P\left(\bar{X}\geq k\right)+\gamma\times P\left(\bar{X}=k\right)
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $\alpha=.05$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\begin{align*}
+\alpha=P\left(H_{0}\text{ is rejected}\right) & =1\times P\left(\bar{X}\geq4\right)+\gamma\times P\left(\bar{X}=3\right)
+\end{align*}
+
+\end_inset
+
+and for 
+\begin_inset Formula $\gamma=31/61$
+\end_inset
+
+ the test will have size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [Ex 8.3.2]
 \end_layout
 
@@ -2105,11 +2242,11 @@ Let
 
 .
  The null hypothesis space is 
-\begin_inset Formula $\Theta_{0}=\theta\leq1/2$
+\begin_inset Formula $\Theta_{0}=\theta=1/2$
 \end_inset
 
  and 
-\begin_inset Formula $\Theta_{0}^{c}=\theta>1/2.$
+\begin_inset Formula $\Theta_{0}^{c}=\theta\neq1/2.$
 \end_inset
 
  The hypotheses are 
@@ -2120,54 +2257,147 @@ H_{0}:\theta\leq1/2\quad H_{1}:\theta>1/2
 
 \end_inset
 
-The LRT is 
-\begin_inset Formula 
-\begin{align*}
-\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|x\right)}{\sup_{\theta\in\Theta}L\left(\theta|x\right)}\\
- & =\frac{\sup_{\theta\in\Theta_{0}}\left[\binom{5}{x}\theta^{x}\left(1-\theta\right)^{5-x}\right]}{\sup_{\theta\in\Theta}\left[\binom{5}{x}\theta^{x}\left(1-\theta\right)^{5-x}\right]}
-\end{align*}
-
+Let the test be the number of successes and we want a size 
+\begin_inset Formula $\alpha$
 \end_inset
 
-The unrestricted MLE is 
-\begin_inset Formula $x/5$
-\end_inset
-
-.
- 
-\begin_inset Formula $L$
-\end_inset
-
- has a global maximum as a functon of 
+ test.
+ For arbitrary 
 \begin_inset Formula $\theta$
 \end_inset
 
- so if 
-\begin_inset Formula $\theta_{0}<x/5$
-\end_inset
 
- then the restricted MLE is 
-\begin_inset Formula $\theta_{0}$
-\end_inset
-
- and otherwise it's the unrestricted MLE.
- Hence
 \begin_inset Formula 
 \begin{align*}
-\lambda\left(\mathbf{x}\right) & =\begin{cases}
-1 & \text{if }\theta_{0}>x/5\\
-\frac{\binom{5}{x}\left(\theta_{0}\right)^{x}\left(1-\theta_{0}\right)^{5-x}}{\binom{5}{x}\left(\frac{x}{5}\right)^{x}\left(1-\frac{x}{5}\right)^{5-x}} & \text{otherwise}
-\end{cases}\\
- & =\begin{cases}
-1 & \text{if }\theta_{0}>x/5\\
-\left(\frac{5\theta_{0}}{x}\right)^{x}\left(\frac{1-\theta_{0}}{1-\frac{x}{5}}\right)^{5-x} & \text{otherwise}
-\end{cases}
+P\left(X\geq0\right) & =1\\
+P\left(X\geq1\right) & =\sum_{i=1}^{5}\binom{5}{i}\theta^{i}\left(1-\theta\right)^{5-i}\\
+P\left(X\geq2\right) & =\sum_{i=2}^{5}\binom{5}{i}\theta^{i}\left(1-\theta\right)^{5-i}\\
+P\left(X\geq3\right) & =\sum_{i=3}^{5}\binom{5}{i}\theta^{i}\left(1-\theta\right)^{5-i}\\
+P\left(X\geq4\right) & =\sum_{i=4}^{5}\binom{5}{i}\theta^{i}\left(1-\theta\right)^{5-i}\\
+P\left(X\geq5\right) & =\theta^{5}
 \end{align*}
 
 \end_inset
 
-I can't calculate the power for any of these functions tests! More testing
- and randomized tests and uncorralted estimators of 0.
+If we want a size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test then we need 
+\begin_inset Formula 
+\[
+\beta_{\psi}\left(\theta\right)=E_{\theta}\left[\psi\left(\theta\right)\right]=1\times P_{\theta}\left(X\geq k\right)+\gamma\times P_{\theta}\left(X=k\right)
+\]
+
+\end_inset
+
+But each of the CDFs are monotonic increasing as function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+\sup_{\theta\leq1/2}\beta_{\psi}\left(\theta\right)=\beta_{\psi}\left(1/2\right)=E_{1/2}\left[\psi\left(\theta\right)\right]=1\times P_{1/2}\left(X\geq k\right)+\gamma\times P_{1/2}\left(X=k\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+P\left(X\geq0\right) & =1\\
+P\left(X\geq1\right) & =0.97\\
+P\left(X\geq2\right) & =0.8125\\
+P\left(X\geq3\right) & =0.5\\
+P\left(X\geq4\right) & =0.1875\\
+P\left(X\geq5\right) & =0.03125
+\end{align*}
+
+\end_inset
+
+and we can solve 
+\begin_inset Formula 
+\[
+\alpha=1\times P_{1/2}\left(X\geq k\right)+\gamma\times P_{1/2}\left(X=k\right)
+\]
+
+\end_inset
+
+ for any value 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Consider 
+\begin_inset Formula $X\sim\text{uniform}\left(a,b\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+H_{0}:\left(a,b\right)=\left(1,3\right)\quad H_{1}:\left(a,b\right)=2,6
+\]
+
+\end_inset
+
+We want a randomized test with 
+\begin_inset Formula $\alpha=.05$
+\end_inset
+
+ from one observation.
+ Consider the obvious test
+\begin_inset Formula 
+\[
+\psi\left(x\right)=\begin{cases}
+1 & \text{if }x\in\left(3,6\right)\\
+\gamma & \text{if }x\in\left(2,3\right)\\
+0 & \text{if }x\in\left(1,2\right)
+\end{cases}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =P\left(\text{reject }H_{0}|H_{0}\text{ is true}\right)\\
+ & =1\times P_{\left(1,3\right)}\left(x\in\left(3,6\right)\right)+\gamma\times P_{\left(1,3\right)}\left(x\in\left(2,3\right)\right)\\
+ & =0+\gamma\times1/2
+\end{align*}
+
+\end_inset
+
+Then the power of the test is
+\begin_inset Formula 
+\begin{align*}
+P\left(\text{reject }H_{0}|H_{1}\text{ is true}\right) & =1\times P_{\left(2,6\right)}\left(x\in\left(3,6\right)\right)+2\alpha\times P_{\left(2,6\right)}\left(x\in\left(2,3\right)\right)\\
+ & =\frac{3}{4}+\frac{2\alpha}{4}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Unbiased estimators of zero]
+\end_layout
+
+\end_inset
+
+A UMVUE is uncorrelated with all unbiased estimators of zero.
+ This hard to test but a complete sufficient statistic which is an unbiased
+ estimator is uncorrelated with all unbiased estimators of zero by completeness.
 \end_layout
 
 \end_body
