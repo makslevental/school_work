@@ -154,7 +154,7 @@ The hyperplane given by all
  that satisfy 
 \begin_inset Formula 
 \[
-\left(0,0,1\right)\cdot\mathbf{r}+\left(0,0,-1/2\right)=0
+\left(0,0,1\right)\cdot\mathbf{r}-1/2=0
 \]
 
 \end_inset
@@ -162,7 +162,7 @@ The hyperplane given by all
 and assigns class label 2 for 
 \begin_inset Formula 
 \[
-\left(0,0,1\right)\cdot\mathbf{r}+\left(0,0,-1/2\right)\geq0
+\left(0,0,1\right)\cdot\mathbf{r}-1/2\geq0
 \]
 
 \end_inset
@@ -170,7 +170,7 @@ and assigns class label 2 for
 and assigns class label 1 for 
 \begin_inset Formula 
 \[
-\left(0,0,1\right)\cdot\mathbf{r}+\left(0,0,-1/2\right)<0
+\left(0,0,1\right)\cdot\mathbf{r}-1/2<0
 \]
 
 \end_inset
@@ -182,22 +182,26 @@ separates the data.
 The objective function is
 \begin_inset Formula 
 \[
-\frac{1}{2}\hat{\mathbf{w}}\cdot\hat{\mathbf{w}}=\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)
+\frac{1}{2}\mathbf{w}\cdot\mathbf{w}=\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)
 \]
 
 \end_inset
 
 Let a class label of 
+\begin_inset Formula $1$
+\end_inset
+
+ correspond to class 1 and a class label of 
 \begin_inset Formula $-1$
 \end_inset
 
- correspond to class 1 and a class label of 1 correspond to class 2.
+ correspond to class 2.
  Then the constraints are
 \begin_inset Formula 
 \begin{align*}
--1\left(\hat{\mathbf{w}}\cdot\left(0,0,0\right)+b\right) & \geq1\Rightarrow-b-1\geq0\\
-1\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},1\right)+b\right) & \geq1\Rightarrow\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},1\right)+b\right)-1\geq0\\
-1\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},1\right)+b\right) & \geq1\Rightarrow\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},1\right)+b\right)-1\geq0
+1\left(\mathbf{w}\cdot\left(0,0,0\right)+b\right) & \geq1\Rightarrow\left(\mathbf{w}\cdot\left(0,0,0\right)+b\right)-1\geq0\\
+-1\left(\mathbf{w}\cdot\left(-1,-\sqrt{2},1\right)+b\right) & \geq1\Rightarrow-\left(\mathbf{w}\cdot\left(-1,-\sqrt{2},1\right)+b\right)-1\geq0\\
+-1\left(\mathbf{w}\cdot\left(1,\sqrt{2},1\right)+b\right) & \geq1\Rightarrow-\left(\mathbf{w}\cdot\left(1,\sqrt{2},1\right)+b\right)-1\geq0
 \end{align*}
 
 \end_inset
@@ -205,9 +209,84 @@ Let a class label of
 The Lagrangian
 \begin_inset Formula 
 \begin{align*}
-L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)-\lambda_{1}\left(\hat{\mathbf{w}}\cdot\left(0,0,0\right)+b\right)+\lambda_{2}\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},1\right)+b\right)+\lambda_{3}\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},1\right)+b\right)\\
- & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)-\lambda_{1}\left(b+1\right)+\lambda_{2}\left(w_{3}-\sqrt{2}w_{2}-w_{1}+b-1\right)+\lambda_{2}\left(w_{3}+\sqrt{2}w_{2}+w_{1}+b-1\right)
+L\left(\mathbf{x},b,\boldsymbol{\lambda}\right) & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)+\lambda_{1}\left(\mathbf{w}\cdot\left(0,0,0\right)+b-1\right)-\lambda_{2}\left(\mathbf{w}\cdot\left(-1,-\sqrt{2},1\right)+b\right)-\lambda_{3}\left(\mathbf{w}\cdot\left(1,\sqrt{2},1\right)+b\right)
 \end{align*}
+
+\end_inset
+
+Then solving the system
+\begin_inset Formula 
+\begin{align*}
+\nabla_{\mathbf{w},b}L\left(\mathbf{w},b,\boldsymbol{\lambda}\right) & =0\\
+\lambda_{1}\left(\mathbf{w}\cdot\left(0,0,0\right)+b-1\right) & =0\\
+\lambda_{2}\left(-\mathbf{w}\cdot\left(-1,-\sqrt{2},1\right)-b-1\right) & =0\\
+\lambda_{3}\left(-\mathbf{w}\cdot\left(1,\sqrt{2},1\right)-b-1\right) & =0\\
+\lambda_{i} & \leq0
+\end{align*}
+
+\end_inset
+
+Yields the solution
+\begin_inset Formula 
+\begin{align*}
+w_{1} & =0\\
+w_{2} & =0\\
+w_{3} & =-2\\
+\lambda_{1} & =-2\\
+\lambda_{2} & =-1\\
+\lambda_{3} & =-1\\
+b & =1
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\hat{\mathbf{w}}=\left(0,0,-2\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $b=1$
+\end_inset
+
+ with margin 
+\begin_inset Formula $1/\left\Vert \hat{\mathbf{w}}\right\Vert _{2}=1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The new solution becomes
+\begin_inset Formula 
+\begin{align*}
+w_{1} & =0\\
+w_{2} & =0\\
+w_{3} & =-2p\\
+\lambda_{1} & =-2p\\
+\lambda_{2} & =-p\\
+\lambda_{3} & =-p\\
+b & =p
+\end{align*}
+
+\end_inset
+
+which is equivalent since the equation of the separating plane is
+\begin_inset Formula 
+\[
+\left(0,0,-2p\right)+p=0
+\]
+
+\end_inset
+
+and dividing both sides by 
+\begin_inset Formula $p$
+\end_inset
+
+ gives
+\begin_inset Formula 
+\[
+\left(0,0,-2\right)+1=0
+\]
 
 \end_inset
 
@@ -551,5 +630,9 @@ and hence since
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+
+\end_layout
+
 \end_body
 \end_document
