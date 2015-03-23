@@ -195,9 +195,9 @@ Let a class label of
  Then the constraints are
 \begin_inset Formula 
 \begin{align*}
--1\left(\hat{\mathbf{w}}\cdot\left(0,0,0\right)+b\right) & \geq1\\
-1\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},01\right)+b\right) & \geq1\\
-1\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},01\right)+b\right) & \geq1
+-1\left(\hat{\mathbf{w}}\cdot\left(0,0,0\right)+b\right) & \geq1\Rightarrow-b-1\geq0\\
+1\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},1\right)+b\right) & \geq1\Rightarrow\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},1\right)+b\right)-1\geq0\\
+1\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},1\right)+b\right) & \geq1\Rightarrow\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},1\right)+b\right)-1\geq0
 \end{align*}
 
 \end_inset
@@ -205,8 +205,8 @@ Let a class label of
 The Lagrangian
 \begin_inset Formula 
 \begin{align*}
-L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)-\lambda_{1}\left(\hat{\mathbf{w}}\cdot\left(0,0,0\right)+b\right)+\lambda_{2}\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},01\right)+b\right)+\lambda_{3}\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},01\right)+b\right)\\
- & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)-\lambda_{1}b+
+L\left(\mathbf{x},\boldsymbol{\lambda}\right) & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)-\lambda_{1}\left(\hat{\mathbf{w}}\cdot\left(0,0,0\right)+b\right)+\lambda_{2}\left(\hat{\mathbf{w}}\cdot\left(-1,-\sqrt{2},1\right)+b\right)+\lambda_{3}\left(\hat{\mathbf{w}}\cdot\left(1,\sqrt{2},1\right)+b\right)\\
+ & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)-\lambda_{1}\left(b+1\right)+\lambda_{2}\left(w_{3}-\sqrt{2}w_{2}-w_{1}+b-1\right)+\lambda_{2}\left(w_{3}+\sqrt{2}w_{2}+w_{1}+b-1\right)
 \end{align*}
 
 \end_inset
