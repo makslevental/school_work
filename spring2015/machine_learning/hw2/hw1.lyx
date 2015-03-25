@@ -422,7 +422,7 @@ Then
 
 \end_inset
 
- is convex combination of 
+ is a convex combination of 
 \begin_inset Formula $\left(\frac{\mathbf{a}}{t}\right)$
 \end_inset
 
@@ -434,8 +434,10 @@ Then
  So 
 \begin_inset Formula 
 \begin{align*}
-\left(\left(1-\lambda\right)t+\lambda t'\right)f\left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)+\lambda\frac{t'}{t}}\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)\frac{t}{t'}+\lambda}\left(\frac{\mathbf{b}}{t'}\right)\right) & \leq\left(\left(1-\lambda\right)t+\lambda t'\right)\left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)+\lambda\frac{t'}{t}}f\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)\frac{t}{t'}+\lambda}f\left(\frac{\mathbf{b}}{t'}\right)\right)\\
- & =\left(\left(1-\lambda\right)t+\lambda t'\right)\left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)t+\lambda t'}tf\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)t+\lambda t'}t'f\left(\frac{\mathbf{b}}{t'}\right)\right)\\
+\left(\left(1-\lambda\right)t+\lambda t'\right)f\left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)+\lambda\frac{t'}{t}}\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)\frac{t}{t'}+\lambda}\left(\frac{\mathbf{b}}{t'}\right)\right) & \leq\left(\left(1-\lambda\right)t+\lambda t'\right)\times\\
+ & \left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)+\lambda\frac{t'}{t}}f\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)\frac{t}{t'}+\lambda}f\left(\frac{\mathbf{b}}{t'}\right)\right)\\
+ & =\left(\left(1-\lambda\right)t+\lambda t'\right)\times\\
+ & \left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)t+\lambda t'}tf\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)t+\lambda t'}t'f\left(\frac{\mathbf{b}}{t'}\right)\right)\\
  & =\left(1-\lambda\right)tf\left(\frac{\mathbf{a}}{t}\right)+\lambda t'f\left(\frac{\mathbf{b}}{t'}\right)\\
  & =\left(1-\lambda\right)g\left(\mathbf{a}'\right)+\lambda g\left(\mathbf{b}'\right)
 \end{align*}
@@ -503,8 +505,11 @@ matrix derivative
 \end_inset
 
  and set it equal to zero.
- Using the formulae here http://www.imm.dtu.dk/pubdb/views/edoc_download.php/3274/pd
-f/imm3274.pdf
+ Using the formulae here 
+\begin_inset Newline newline
+\end_inset
+
+http://www.imm.dtu.dk/pubdb/views/edoc_download.php/3274/pdf/imm3274.pdf
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial}{\partial\mathbf{X}}\left(\text{tr}\left(\mathbf{Y}\mathbf{X}\right)+\log\left(\det\left(\mathbf{X}\right)\right)\right) & =\frac{\partial}{\partial\mathbf{X}}\text{tr}\left(\mathbf{Y}\mathbf{X}\right)+\frac{\partial}{\partial\mathbf{X}}\log\left(\det\left(\mathbf{X}\right)\right)\\
@@ -631,6 +636,746 @@ and hence since
 
 \end_deeper
 \begin_layout Enumerate
+The neural network was constructed using PyBrain.
+ The source code is at 
+\begin_inset Newline newline
+\end_inset
+
+https://github.com/ice109/school_work/blob/master/spring2015/machine_learning/hw2
+/ann.py.
+\begin_inset Newline newline
+\end_inset
+
+Note that there are 20 parameters for the hyperplane because the package
+ transforms a 1 dimensional class variable (0,1) into a dimensional class
+ variable and so there are 2 output nodes and then it takes largest output
+ as the class label.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    0   train error: 51.00%   test error: 65.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.19177908  0.02737599  0.4891786   1.80220435 
+ 1.44131558 -0.91838293  -1.17331635  1.84122076 -0.18722531  1.88496883 -0.70865794
+ -0.5196584   0.29512875  2.23233988  0.16676205  0.97202316 -0.38751795 -0.08441788
+  -1.35147715 -0.50803409]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    0   train error: 57.00%   test error: 40.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.78981065  0.50922854 -0.07581271 -1.12209112 
+ 0.02016123  0.262952   0.20721995 -0.86780213  1.02575291 -0.43657005 -1.615863
+   -0.67435821   1.02936496 -0.72950252  0.90572882  1.3959832   0.03486375 -2.36060438
+   0.57773205  0.57356598]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    1   train error: 51.00%   test error: 65.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.61559001  1.49781357 -2.1687085   0.09173058 
+ 0.45280812  0.71321865   0.63741809 -0.38887498 -0.2418769   0.39180074 -0.15246443
+  0.01762109  -1.48760754  0.14576217  0.37257273  1.16483736 -0.4475972  -0.4417803
+  -0.75901503 -0.81403632]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    1   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.72112911  0.26063354 -0.03509966 -0.60542487 -0.3338362
+1  1.91605464  -0.47163996 -1.26743695 -0.81651828 -0.1513118   0.13087739 -0.41967647
+  -1.13338866  0.88091453  0.10992141 -0.85301266 -1.46332676 -0.60060403   1.20207508
+  0.35698313]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    2   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.70327454 -1.10155991 -1.40302117  0.81111374 
+ 0.74679378  1.95585854  -0.1659323   0.41490239 -1.00810246 -0.58910528 -1.19274693
+ -0.09672387   0.61802886  1.36140138 -0.65843481 -1.06654484  0.81048055  1.48247275
+  -0.14222239  0.22727764]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    2   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.25739834 -1.73254321  1.47936334  0.04503207 -1.6873706
+9  2.01990293   0.27098099 -1.0121111  -0.35817331 -3.58207637 -0.47304656  0.18357065
+   0.54197266  0.86450635 -0.69114105  0.60389271 -0.55058957 -0.18540412  -0.40445656
+  0.45487193]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    3   train error: 51.00%   test error: 65.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.4697982   2.03444156  0.91345225 -0.88752067 -0.9536455
+5  0.21270663  -1.65270666  0.49421166 -0.47843822  0.94508102 -0.86959874 -1.00244283
+  -0.52461319  0.57777479 -0.10934062  1.25123413 -0.88100256  0.30242047  -0.50959722
+  0.60271355]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    3   train error: 42.00%   test error: 32.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.48242376 -2.59375452 -0.54310668 -0.32716637 -0.3331743
+5  0.28315887   0.47193346  0.77281006 -1.24933185  1.65106884 -0.88755371  1.47659783
+   0.14155752  0.16242123  1.36153827 -0.19489756 -0.12690867 -0.72413361   0.30322969
+ -0.7257861 ]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    4   train error: 51.00%   test error: 65.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.96281643  1.26808387  0.97164445  1.56901206 
+ 0.50727795  1.18254313  -1.01253099  0.90648819 -0.43775436  1.19532847 -0.63169259
+  0.62211708  -0.18499902  0.18888769  0.20323296  1.17681554 -0.06989933 -0.21029192
+  -1.81339437  0.25205132]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    4   train error: 32.00%   test error: 28.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-1.1831483   0.71012884 -2.13942197  0.99562365 
+ 0.00521501  0.67579112  -0.13062241 -0.06424463  1.00287534 -0.34964303  0.44771801
+ -0.24108164   1.24632174 -1.47215759 -0.43066114 -0.55548188 -0.034508    1.10822165
+   0.40141523 -0.25854702]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    5   train error: 62.00%   test error: 69.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.22183073 -0.89115675  0.67637707  1.1339803  -0.0785000
+7 -0.41609845   0.92762539 -0.92311273 -0.88872679 -0.1732005   0.70650208 -1.3929077
+  -1.35248208  0.2802451   0.26855007 -0.42982339  0.86806431 -0.94664532   1.06645147
+  0.48895638]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    5   train error: 28.00%   test error: 30.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.37944327 -0.68733999 -1.00121814  0.32914084 -0.8820714
+6 -0.69035477  -0.46647499  0.31054212  1.71838156 -1.91717675 -1.30197982  0.38001996
+  -0.39203384  0.6065268  -1.68710805  0.16378188 -2.04349915 -0.44166533  -0.42507278
+ -1.51670369]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    6   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-1.14358153  1.31855376  0.22366956 -0.88943425 -0.5984758
+3 -0.07633403  -1.45468923  0.53665898  0.91181784 -0.83644762  0.16687941  0.82960623
+   1.29966125  1.51212107  0.4937413  -1.08083478 -0.18286885  0.66554518  -0.38807149
+ -1.30128401]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    6   train error: 46.00%   test error: 33.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.89854536 -1.22604406  1.15659203 -0.64146238 
+ 0.9554888   0.48153196  -0.12481993 -0.07025562 -0.79268695 -0.74302772  1.62304869
+ -2.01498207  -1.28836723  0.64034374  0.85402517  0.35964165 -0.84211535 -0.08933972
+  -0.87784976  0.69212548]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    7   train error: 51.00%   test error: 65.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.34728404  0.56943083 -0.6168652   0.19962209 
+ 0.10411868  0.60835892  -1.04455582 -1.33121735 -0.54950991 -1.16063702 -0.53073656
+ -1.08385898   0.45563857 -0.41262099  1.15024196 -1.06442056  0.56203091 -0.3276631
+   1.43859065 -2.16499226]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    7   train error: 38.00%   test error: 44.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.89248308  0.14413334 -0.44310539 -0.76459281 
+ 0.43591697  1.80168389   1.53892824  0.0469901   0.12373373  0.66959453  0.96206442
+ -0.44025715  -0.59420344 -0.35020722  0.75529435  0.24463173  0.77011786 -0.33312962
+   0.09408626 -0.90264329]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    8   train error: 24.00%   test error: 22.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.20016058  0.18356044 -1.22583549  0.98226469 -0.3190559
+4  1.66408357  -1.24163295  0.81525901  1.15211686 -1.32889071  2.04826159  0.5645726
+   0.85332672 -0.45169979  0.0465024  -0.46039739 -0.29031828 -1.28228759  -0.67984079
+ -1.17834569]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    8   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.79452108 -0.17510375  0.63449206 -1.52959388 
+ 0.3234896   1.65520319  -1.02115666  0.42247534 -1.24768029 -0.96319791  0.86327682
+ -1.10956727  -1.19120401  0.41515938 -0.10318468 -0.54977238 -0.59427143  0.91768829
+   0.50932208 -0.80734837]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    9   train error: 43.00%   test error: 49.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.04550862 -0.54109015  2.19529448 -1.74393234 
+ 1.24730891 -1.16000867  -0.08485457 -1.18095329 -0.67757602 -1.00499702  0.53596255
+  0.64905124  -0.306671   -0.69635203  0.24789595  0.67863363 -1.47475128  0.52700916
+   0.71822769 -2.38843354]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:    9   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.32875304 -1.12983005  0.70649129  1.24382261 
+ 0.79209103  0.1167797   0.18519777 -1.88856244 -0.52429406  0.78663213 -0.32149407
+  0.12679021  -0.13128046  1.7410615   1.76032921  0.00205885 -0.05974696  0.70454341
+  -0.91284607 -1.33823297]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   10   train error: 46.00%   test error: 27.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.09465578  0.02060911 -0.75267053  0.90989933 
+ 0.3785263   1.1335087  -0.06470994  0.05069494  0.08508691 -0.75893782  0.310129
+    0.30476562   0.98136857  0.08775124 -0.34250155 -0.38924668  0.89247851  0.62035861
+  -0.32708857 -0.45624702]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   10   train error: 49.00%   test error: 33.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.62233091 -0.28622659  0.42079231 -1.38865442 
+ 0.69807754 -0.87577699   0.33892344  0.70510731  1.92272663  0.77162544  0.32332203
+ -0.36993292  -0.45006939 -0.25564079  0.52212623  1.15125378  0.33625898 -1.40723792
+   0.08379909  1.5856274 ]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   11   train error: 29.00%   test error: 25.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.47420017 -0.34339628  0.51378168 -0.49342986 -0.4961031
+2 -1.13206348  -0.6267369   0.42458416  0.55734447  1.33354813 -0.38044323  0.32094896
+  -0.52712627 -0.65979478  1.3627494   0.93675903 -1.10078154 -0.15721176  -0.50056603
+ -0.19002483]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   11   train error: 26.00%   test error: 22.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-1.00967918  0.67175337 -0.1921881   0.03245324 -0.5500119
+   0.62814946   0.35690503  0.87239306  0.17010809  0.33456228 -0.38250831 -0.08694398
+  -0.78331651  0.39665821  1.61617321  0.7180271  -0.71095322 -0.48939664   0.65189556
+ -1.44007346]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   12   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.02451583  0.96562881 -1.10058279  0.58548727 -0.8915071
+7  0.82487433  -0.55544544 -1.67524991  0.83649439 -0.87888866 -1.36933349  0.78361731
+   0.7599037  -1.2330079   0.40366101  1.23848753  0.3480732   0.56604836  -0.86579887
+ -0.0069588 ]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   12   train error: 36.00%   test error: 32.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.43108824 -0.47496673 -0.84116983 -0.1307443  
+ 1.95466538 -1.17308835  -0.98533522 -1.9092797  -0.70209034 -1.3441854   0.00241919
+ -1.2478858  -0.54378192  0.24624465 -0.30778688  0.87946565 -0.14465879 -0.34240539
+  -0.92898408  1.19477844]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   13   train error: 26.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.99612013  1.04529185 -0.33763829  0.00904789 
+ 0.65215953 -0.58551168  -1.04354992 -1.07868289 -0.096917    0.58116574 -0.09237955
+ -1.88445182   1.39675562  0.55128249 -0.3937469   0.15302222  0.50857232 -0.84990178
+   1.22686371 -0.88243548]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   13   train error: 27.00%   test error: 22.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.35603377 -0.66916346  1.43229986 -0.20773302 
+ 0.8051684   1.75043174   0.02339628 -0.45492888  0.84993506 -1.6124271  -0.15489483
+ -0.04775873  -0.54029904  1.33739584 -0.93969095  0.31401921  0.16143264 -0.18394206
+   0.30716825 -0.10287375]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   14   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.01087841 -0.08978798  0.56587496 -1.96732181 
+ 0.11994419  0.31027023   0.12739938 -0.43165392  1.41725481 -0.31950423  0.38233799
+  0.41033986  -0.97653225 -0.06862473  0.15093064  0.65069009  0.56055446 -0.89864771
+   0.26623509  0.06429063]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   14   train error: 25.00%   test error: 28.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.75209158  0.45000569  1.92547125  0.09952203 -1.1060406
+2  1.00892122   1.19098853  1.35323266  0.30818799 -1.51621364 -0.43852338 -0.03082501
+  -0.44242145 -0.05963039  0.24394056 -0.13182854  0.09545101 -1.29276047  -1.50953538
+  0.60118242]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   15   train error: 48.00%   test error: 36.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.09201722  0.66947651  0.16429982  0.22801926 -1.1644929
+4  0.14336867   0.48608141 -0.02516612 -0.72386022 -0.50819373  0.80213173  0.02174078
+  -1.37317371  0.38103558 -0.24519365 -1.03393918  0.71952589  0.31150511  -0.55467244
+  0.10210244]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   15   train error: 19.00%   test error: 29.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.21619596  0.00305042  0.94182195 -0.98428132 
+ 0.10739079  0.19792288  -0.68211563  0.20728082  0.55670313 -0.83713302  0.32358871
+ -0.19757056  -0.39714116 -0.20554234 -0.80125096 -0.94024977  0.25714854 -1.76690705
+  -0.54955063 -0.72730027]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   16   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-1.21097418  0.54529569 -0.40010589 -1.36890741 
+ 0.52556001 -0.51003696   1.00301447 -0.20041786  0.23158711  0.96410913  0.99354175
+ -1.41296934   0.80206242  0.23537737 -1.458559    0.5367575   0.45268317 -1.52769382
+   1.14650875 -0.15705537]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   16   train error: 30.00%   test error: 25.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.16422238 -0.45503384 -1.07867003 -0.92993891 -1.2352643
+   0.98853348   0.36020381 -0.41354355  0.77783144 -0.92065756 -0.33650063 -0.46749165
+  -0.14025587 -1.02570159 -0.46421734  1.21231282 -0.72708274  0.97491019  -0.67629377
+ -0.40625867]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   17   train error: 49.00%   test error: 35.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.16968289 -2.09094973  0.75759003  0.79714182 -0.0793370
+2  0.53163786  -0.65996089  0.61211768 -0.62498904  0.12605671  0.66115069 -1.20706796
+  -0.10055898  0.54752929  0.86539787  1.19462495  0.18532172 -0.00966623  -0.6310497
+  -0.07024291]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   17   train error: 29.00%   test error: 32.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-1.08389233  1.46858795 -0.77492931  0.24120799 
+ 1.59261033 -0.26706577   1.11132271 -0.16544817 -1.81815621  0.91964969 -1.32302331
+  0.16650573   2.11252247 -0.78875135 -0.18491759  0.82163262 -1.5920804   0.05446827
+   0.55373238  0.56183464]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   18   train error: 28.00%   test error: 34.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 1.34496923 -0.50206136 -0.73233737 -1.69244396 -0.3863970
+6 -1.44473919   0.09376898  1.0593595   0.54536775  1.16938058 -0.39465808 -0.31805331
+  -1.2974654  -0.35690626 -0.51442257  0.83240047  0.42132011 -0.27042597   0.36864389
+  0.8875319 ]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   18   train error: 48.00%   test error: 33.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [ 0.9978204   0.6753916  -0.73920033 -0.27808849 
+ 0.65091777  0.04242297  -0.44146592 -0.28182482  1.34484988 -0.21337375  0.49777844
+  0.15616282   0.88324297 -0.73983275  0.6330783   0.77353836 -0.05087297  0.54967886
+  -0.0224978   0.75513376]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Sigmoid net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   19   train error: 32.00%   test error: 46.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.32535051  1.25979242  0.37751856  0.50989339 -0.8049803
+6 -0.76321695  -1.03140257  0.37671459  0.03939343  1.01078554  0.74842414  0.73539057
+   0.77653682 -0.3355925  -0.1159895   0.25057369 -1.38783859 -0.07180117  -0.5600207
+   0.15445842]
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Step function net
+\end_layout
+
+\begin_layout Plain Layout
+
+*** epochs:   19   train error: 27.00%   test error: 25.00% 
+\end_layout
+
+\begin_layout Plain Layout
+
+*** Hyperplane Parameters [-0.20208731 -0.29936851  1.29701931 -0.47852873 
+ 0.20292061 -0.10708863  -0.79957697  2.06742639  2.05993704 -0.87885475 -1.12761298
+ -1.17787669   0.87876867  0.13800639 -0.10338906  1.48075113 -0.41093467 -1.09479016
+  -0.23357517  0.24804847]
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
