@@ -209,7 +209,8 @@ Let a class label of
 The Lagrangian
 \begin_inset Formula 
 \begin{align*}
-L\left(\mathbf{x},b,\boldsymbol{\lambda}\right) & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)+\lambda_{1}\left(\mathbf{w}\cdot\left(0,0,0\right)+b-1\right)-\lambda_{2}\left(\mathbf{w}\cdot\left(-1,-\sqrt{2},1\right)+b\right)-\lambda_{3}\left(\mathbf{w}\cdot\left(1,\sqrt{2},1\right)+b\right)
+L\left(\mathbf{x},b,\boldsymbol{\lambda}\right) & =\frac{1}{2}\left(w_{1}^{2}+w_{2}^{2}+w_{3}^{2}\right)+\lambda_{1}\left(\mathbf{w}\cdot\left(0,0,0\right)+b-1\right)-\\
+ & \lambda_{2}\left(\mathbf{w}\cdot\left(-1,-\sqrt{2},1\right)+b\right)-\lambda_{3}\left(\mathbf{w}\cdot\left(1,\sqrt{2},1\right)+b\right)
 \end{align*}
 
 \end_inset
@@ -389,7 +390,7 @@ Then with
 \begin_inset Formula 
 \begin{align*}
 g\left(\left(1-\lambda\right)\mathbf{a}'+\lambda\mathbf{b}'\right) & =g\left(\left(1-\lambda\right)\left(\mathbf{a},t\right)+\lambda\left(\mathbf{b},t'\right)\right)\\
- & =g\left(\left(\left(1-\lambda\right)\mathbf{a}+\lambda\mathbf{b},\left(1-\lambda\right)t+\lambda t'\right)\right)\\
+ & =g\left(\left(1-\lambda\right)\mathbf{a}+\lambda\mathbf{b},\left(1-\lambda\right)t+\lambda t'\right)\\
  & =\left(\left(1-\lambda\right)t+\lambda t'\right)f\left(\frac{\left(1-\lambda\right)\mathbf{a}+\lambda\mathbf{b}}{\left(1-\lambda\right)t+\lambda t'}\right)\\
  & =\left(\left(1-\lambda\right)t+\lambda t'\right)f\left(\frac{\left(1-\lambda\right)}{\left(1-\lambda\right)+\lambda\frac{t'}{t}}\left(\frac{\mathbf{a}}{t}\right)+\frac{\lambda}{\left(1-\lambda\right)\frac{t}{t'}+\lambda}\left(\frac{\mathbf{b}}{t'}\right)\right)
 \end{align*}

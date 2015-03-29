@@ -1,0 +1,678 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+STA 6327 Homework 5 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.28]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+f\left(x|\theta\right)=\frac{e^{x}e^{-\theta}}{\left(1+e^{x}e^{-\theta}\right)^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Assume 
+\begin_inset Formula $\theta_{1}>\theta_{0}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)} & =\frac{e^{x}e^{-\theta_{1}}}{\left(1+e^{x}e^{-\theta_{1}}\right)^{2}}\frac{\left(1+e^{x}e^{-\theta_{0}}\right)^{2}}{e^{x}e^{-\theta_{0}}}\\
+ & =\frac{e^{\theta_{0}}}{e^{\theta_{1}}}\frac{\left(1+e^{x}e^{-\theta_{0}}\right)^{2}}{\left(1+e^{x}e^{-\theta_{1}}\right)^{2}}\\
+ & =e^{\theta_{1}-\theta_{0}}\frac{\left(e^{\theta_{0}}+e^{x}\right)^{2}}{\left(e^{\theta_{1}}+e^{x}\right)^{2}}
+\end{align*}
+
+\end_inset
+
+Then taking the derivative wrt 
+\begin_inset Formula $x$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial x}\left(\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}\right) & =e^{\theta_{1}-\theta_{0}}\frac{\partial}{\partial x}\left(\frac{\left(e^{\theta_{0}}+e^{x}\right)^{2}}{\left(e^{\theta_{1}}+e^{x}\right)^{2}}\right)\\
+ & =e^{\theta_{1}-\theta_{0}}\left(\frac{2\left(e^{\theta_{0}}+e^{x}\right)e^{x}}{\left(e^{\theta_{1}}+e^{x}\right)^{2}}-\frac{2\left(e^{\theta_{0}}+e^{x}\right)e^{x}}{\left(e^{\theta_{1}}+e^{x}\right)^{3}}\right)\\
+ & =2e^{\theta_{1}-\theta_{0}+x}\left(\frac{\left(e^{\theta_{0}}+e^{x}\right)}{\left(e^{\theta_{1}}+e^{x}\right)^{2}}-\frac{\left(e^{\theta_{0}}+e^{x}\right)^{2}}{\left(e^{\theta_{1}}+e^{x}\right)^{3}}\right)\\
+ & =2e^{\theta_{1}-\theta_{0}+x}\left(\frac{\left(e^{\theta_{0}}+e^{x}\right)\left(e^{\theta_{1}}-e^{\theta_{0}}\right)}{\left(e^{\theta_{1}}+e^{x}\right)^{3}}\right)
+\end{align*}
+
+\end_inset
+
+Then sinze 
+\begin_inset Formula $\theta_{1}>\theta_{0}$
+\end_inset
+
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $e^{\theta_{1}}-e^{\theta_{0}}>0$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial x}\left(\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}\right)>0
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)$
+\end_inset
+
+ is monotone increasing as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+By the Peyman-Nearson lemma the test 
+\begin_inset Formula 
+\[
+x\in R\text{ if }\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}>k
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Since 
+\begin_inset Formula $f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)$
+\end_inset
+
+ is monotone increasing as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)>k\iff x>k'
+\]
+
+\end_inset
+
+The power function is So for 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right)=P_{\theta}\left(x\in R\right) & =P_{\theta}\left(x>k'\right)\\
+ & =\int_{k'}^{\infty}\frac{e^{x}e^{-\theta}}{\left(1+e^{x}e^{-\theta}\right)^{2}}dx\\
+ & =\frac{e^{\theta}}{e^{k'}+e^{\theta}}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $\alpha=1/5=\beta\left(\theta_{0}\right)$
+\end_inset
+
+ since the null hypothesis is simple.
+ Solving for 
+\begin_inset Formula $k'$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+k' & =\log\left(\frac{\left(1-\alpha\right)e^{\theta_{0}}}{\alpha}\right)\\
+ & =\log\left(4e^{\theta_{0}}\right)\\
+ & \approx1.38629
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+\beta\left(\theta\right)=\frac{e^{\theta}}{4e^{\theta_{0}}+e^{\theta}}
+\]
+
+\end_inset
+
+And the probability of type II errors is
+\begin_inset Formula 
+\begin{align*}
+1-\beta\left(\theta_{1}\right) & =\frac{4e^{\theta_{0}}}{4e^{\theta_{0}}+e^{\theta_{1}}}\\
+ & =\frac{4}{4+e}\\
+ & \approx.59539
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $x$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\theta$
+\end_inset
+
+ for a sample size of 1 and by (a) the location shifted logistic has a monotonic
+ally increasing likelihood ratio and the test rejects iff 
+\begin_inset Formula $x>k'$
+\end_inset
+
+ the conditions of Rarlin-Kubin are satisfied.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.29]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be one observation from a Cauchy
+\begin_inset Formula $\left(\theta\right)$
+\end_inset
+
+ distribution, i.e.
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\frac{1}{\pi\left(1+\left(x-\theta\right)^{2}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Assume 
+\begin_inset Formula $\theta_{1}>\theta_{0}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}=\frac{\left(1+\left(x-\theta_{0}\right)^{2}\right)}{\left(1+\left(x-\theta_{1}\right)^{2}\right)}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial x}\left(\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}\right) & =\frac{\partial}{\partial x}\left(\frac{1+\left(x-\theta_{0}\right)^{2}}{1+\left(x-\theta_{1}\right)^{2}}\right)\\
+ & =\frac{2\left(\theta_{0}-\theta_{1}\right)\left(x^{2}-x\left(\theta_{0}+\theta_{1}\right)+\theta_{0}\theta_{1}-1\right)}{\left(1+\left(x-\theta_{1}\right){}^{2}\right){}^{2}}
+\end{align*}
+
+\end_inset
+
+Since the support of 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(-\infty,\infty\right)$
+\end_inset
+
+ the derivative can be positive or negative and therefore this family does
+ not have a monotone likelihood ratio.
+ **************************what can be said in general?
+\end_layout
+
+\begin_layout Enumerate
+The likelihood ratio for 
+\begin_inset Formula $\theta_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta_{1}=1$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(x|1\right)}{f\left(x|0\right)} & =\frac{\left(1+x^{2}\right)}{\left(1+\left(x-1\right)^{2}\right)}\\
+ & =\frac{1+x^{2}}{x^{2}-2x+2}
+\end{align*}
+
+\end_inset
+
+At 
+\begin_inset Formula $x=1$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{f\left(1|1\right)}{f\left(1|0\right)}=2
+\]
+
+\end_inset
+
+and at 
+\begin_inset Formula $x=3$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{f\left(3|1\right)}{f\left(3|0\right)}=2
+\]
+
+\end_inset
+
+Inspecting the plot of 
+\begin_inset Formula $f\left(x|1\right)/f\left(x|0\right)$
+\end_inset
+
+ we see that for 
+\begin_inset Formula $1<x<3$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{f\left(x|1\right)}{f\left(x|0\right)}>2
+\]
+
+\end_inset
+
+ the 
+\begin_inset Formula $R=\left(1,3\right)$
+\end_inset
+
+ is equivalent to rejecting if 
+\begin_inset Formula 
+\[
+\frac{f\left(x|1\right)}{f\left(x|0\right)}>2
+\]
+
+\end_inset
+
+and therefore the Peyman-Nearson lemma is satisfied.
+ The power function
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =\int_{1}^{3}\frac{1}{\pi\left(1-\left(x-\theta\right)^{2}\right)}dx\\
+ & =\frac{\arctan(3-\theta)-\arctan(1-\theta)}{\pi}
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ is simple the size of the test is
+\begin_inset Formula 
+\begin{align*}
+\beta\left(0\right) & =\frac{\arctan(3)-\arctan(1)}{\pi}
+\end{align*}
+
+\end_inset
+
+and the probablity of type II error is 
+\begin_inset Formula 
+\[
+1-\beta\left(1\right)=\frac{\arctan(2)-\arctan(0)}{\pi}=\frac{\arctan(2)}{\pi}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+****************
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.33]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{uniform}\left(\theta,\theta+1\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $H_{0}:\theta=0$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{1}:\theta>0$
+\end_inset
+
+.
+ Use the test: reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ if 
+\begin_inset Formula $X_{\left(n\right)}>1$
+\end_inset
+
+ or 
+\begin_inset Formula $X_{\left(1\right)}>k$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The cdf of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+F_{X_{i}}\left(x\right)=x-\theta
+\]
+
+\end_inset
+
+Then the density of 
+\begin_inset Formula $X_{\left(1\right)}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{X_{\left(1\right)}}\left(x\right)=n\left(1+\theta-x\right)^{n-1}
+\]
+
+\end_inset
+
+and the density of 
+\begin_inset Formula $X_{\left(n\right)}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{X_{\left(n\right)}}\left(x\right)=n\left(x-\theta\right)^{n-1}
+\]
+
+\end_inset
+
+Then the power function is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =\int_{k}^{\theta+1}f_{X_{\left(1\right)}}\left(x\right)dx+\int_{1}^{\theta+1}f_{X_{\left(n\right)}}\left(x\right)dx\\
+ & =\int_{k}^{\theta+1}\left(n\left(1+\theta-x\right)^{n-1}\right)dx+\int_{1}^{\theta+1}\left(n\left(x-\theta\right)^{n-1}\right)dx
+\end{align*}
+
+\end_inset
+
+Since the null hypothesis is simple the sup over 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of the power function is
+\begin_inset Formula 
+\begin{align*}
+\alpha=\beta\left(0\right) & =\int_{k}^{1}\left(n\left(1-x\right)^{n-1}\right)dx+\int_{1}^{1}\left(nx^{n-1}\right)dx\\
+ & =\int_{k}^{1}\left(n\left(1-x\right)^{n-1}\right)dx\\
+ & =\left(1-k\right)^{n}
+\end{align*}
+
+\end_inset
+
+Solve for 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ we get that 
+\begin_inset Formula 
+\[
+k=1-\sqrt[n]{\alpha}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The power function is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =\int_{k}^{\theta+1}f_{X_{\left(1\right)}}\left(x\right)dx+\int_{1}^{\theta+1}f_{X_{\left(n\right)}}\left(x\right)dx\\
+ & =\int_{k}^{\theta+1}\left(n\left(1+\theta-x\right)^{n-1}\right)dx+\int_{1}^{\theta+1}\left(n\left(x-\theta\right)^{n-1}\right)dx\\
+ & =1-\left(1-\theta\right)^{n}+\left(1-k-\theta\right)^{n}-\left(-2\theta\right)^{n}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\left(X_{\left(1\right)},X_{\left(n\right)}\right)$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and the family has a nondecreasing MLR (since the density is just flat)
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.34]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.37]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.46]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.49]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
