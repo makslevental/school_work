@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass article
+\textclass amsart
 \begin_preamble
 
 %
@@ -23,6 +23,11 @@
 %
 \end_preamble
 \use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package none
@@ -663,9 +668,204 @@ status open
 
 \end_inset
 
+Family of cdfs 
+\begin_inset Formula $\left\{ F_{T}\left(x|\theta\right),\theta\in\Theta\right\} $
+\end_inset
+
+ is stochastically increasing iff 
+\begin_inset Formula 
+\begin{align*}
+\theta_{1}<\theta_{2} & \Rightarrow F_{T}\left(x|\theta_{2}\right)\leq F_{T}\left(x|\theta_{1}\right)\\
+ & \iff P_{\theta_{2}}\left(X\leq x\right)\leq P_{\theta_{1}}\left(X\leq x\right)\\
+ & \iff1-P_{\theta_{2}}\left(X\geq x\right)\leq1-P_{\theta_{1}}\left(X\geq x\right)\\
+ & \iff P_{\theta_{1}}\left(X\geq x\right)\leq P_{\theta_{2}}\left(X\geq x\right)
+\end{align*}
+
+\end_inset
+
+Stochastic ordering is a much more natural statement of this property.
+ A random variable 
+\begin_inset Formula $A$
+\end_inset
+
+ is stochastically smaller than a random variable 
+\begin_inset Formula $B$
+\end_inset
+
+ if
+\begin_inset Formula 
+\[
+P\left(A>x\right)\leq P\left(B>x\right)
+\]
+
+\end_inset
+
+I.e the event 
+\begin_inset Formula $\left\{ A>x\right\} \Rightarrow\left\{ B>x\right\} $
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Let 
+\begin_inset Formula $\theta_{1}\leq\theta_{2}$
+\end_inset
+
+ and show that 
+\begin_inset Formula $P_{\theta_{1}}\left(T>c\right)\leq P_{\theta_{2}}\left(T>c\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\theta_{2}=h+\theta_{1}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $F_{T}$
+\end_inset
+
+ is a location family
+\begin_inset Formula 
+\begin{align*}
+P_{\theta_{1}}\left(T>c\right) & =P_{\theta_{1}}\left(T+h>c+h\right)\\
+ & =1-F_{T}\left(c+h|\theta_{1}+h\right)\\
+ & =1-F_{T}\left(c+h|\theta_{2}\right)\\
+ & =P_{\theta_{2}}\left(T>c+h\right)\\
+ & \leq P_{\theta_{2}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
+\begin_layout Enumerate
+Assume the family of pdfs 
+\begin_inset Formula $\left\{ g\left(t|\theta\right),\theta\in\Theta\right\} $
+\end_inset
+
+has a monotone likelihood ratio.
+ Assume the family is monotone increasing.
+ Then 
+\begin_inset Formula $\theta_{1}\leq\theta_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{1}\leq t_{2}$
+\end_inset
+
+ and implies 
+\begin_inset Formula 
+\[
+\frac{g\left(t_{2}|\theta_{2}\right)}{g\left(t_{2}|\theta_{1}\right)}\geq\frac{g\left(t_{1}|\theta_{2}\right)}{g\left(t_{1}|\theta_{1}\right)}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+t'=\arg\sup_{t}\left(\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\right)\text{ s.t }\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\leq1
+\]
+
+\end_inset
+
+then for all 
+\begin_inset Formula $c,u\leq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\leq1 & \Rightarrow\int_{-\infty}^{c}g\left(u|\theta_{2}\right)du\leq\int_{-\infty}^{c}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T<c\right)\leq P_{\theta_{1}}\left(T<c\right)\\
+ & \Rightarrow1-P_{\theta_{2}}\left(T>c\right)\leq1-P_{\theta_{1}}\left(T>c\right)\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\geq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+and for all 
+\begin_inset Formula $c,u\geq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\geq1 & \Rightarrow\int_{c}^{\infty}g\left(u|\theta_{2}\right)du\geq\int_{c}^{\infty}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\geq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+If the family is monotone decreasing then 
+\begin_inset Formula $\theta_{1}\leq\theta_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{1}\leq t_{2}$
+\end_inset
+
+ and implies 
+\begin_inset Formula 
+\[
+\frac{g\left(t_{2}|\theta_{2}\right)}{g\left(t_{2}|\theta_{1}\right)}\leq\frac{g\left(t_{1}|\theta_{2}\right)}{g\left(t_{1}|\theta_{1}\right)}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+t'=\arg\inf_{t}\left(\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\right)\text{ s.t }\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\leq1
+\]
+
+\end_inset
+
+then for all 
+\begin_inset Formula $c,u\leq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\geq1 & \Rightarrow\int_{-\infty}^{c}g\left(u|\theta_{2}\right)du\geq\int_{-\infty}^{c}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T<c\right)\geq P_{\theta_{1}}\left(T<c\right)\\
+ & \Rightarrow1-P_{\theta_{2}}\left(T>c\right)\geq1-P_{\theta_{1}}\left(T>c\right)\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\leq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+and for all 
+\begin_inset Formula $c,u\geq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\leq1 & \Rightarrow\int_{c}^{\infty}g\left(u|\theta_{2}\right)du\leq\int_{c}^{\infty}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\leq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -677,9 +877,346 @@ status open
 
 \end_inset
 
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,\sigma^{2}\right)$
+\end_inset
+
+ and the testing scenario be such that 
+\begin_inset Formula $\Theta=\mathbb{R},\Theta_{0}=\left(-\infty,\theta_{0}\right],\Theta_{0}^{c}=\left(\theta_{0},\infty\right)$
+\end_inset
+
+ with hypotheses 
+\begin_inset Formula 
+\begin{align*}
+H_{0}:\theta\leq\theta_{0} & \: H_{1}:\theta>\theta_{0}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The test is 
+\begin_inset Formula 
+\begin{align*}
+\bar{X} & >\theta_{0}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\\
+\frac{\bar{X}-\theta_{0}}{\sigma/\sqrt{n}} & >z_{\alpha}
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\frac{\bar{X}-\theta_{0}}{\sigma/\sqrt{n}}>z_{\alpha}\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}>z_{\alpha}+\frac{\theta_{0}-\theta}{\sigma/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+But 
+\begin_inset Formula $\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}$
+\end_inset
+
+ is distributioned 
+\begin_inset Formula $\text{n}\left(0,1\right)$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(Z>z_{\alpha}+\frac{\theta_{0}-\theta}{\sigma/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+which is an increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta\left(\theta_{0}\right)=\alpha$
+\end_inset
+
+ iff 
+\begin_inset Formula $P\left(Z>z_{\alpha}\right)=\alpha$
+\end_inset
+
+, which is of course exactly the definition of the cutoff 
+\begin_inset Formula $z_{\alpha}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The likelihood ratio statistic 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{\sup_{\theta\in\Theta}L\left(\theta|\mathbf{x}\right)}\\
+ & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{L\left(\hat{\theta}|\mathbf{x}\right)}
+\end{align*}
+
+\end_inset
+
+But 
+\begin_inset Formula $\hat{\theta}=\bar{x}$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{L\left(\hat{\theta}|\mathbf{x}\right)}\\
+ & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}}
+\end{align*}
+
+\end_inset
+
+To compute 
+\begin_inset Formula $\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+L\left(\theta|\mathbf{x}\right) & =\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\theta\right)^{2}}\\
+ & =\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\theta\right)^{2}\right)}
+\end{align*}
+
+\end_inset
+
+So maximizing is equivalent to minimizing 
+\begin_inset Formula $-n\left(\bar{x}-\theta\right)^{2}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left(-\infty,\theta_{0}\right]$
+\end_inset
+
+.
+ There are two cases 
+\begin_inset Formula 
+\[
+\arg\min_{\theta\in\left(-\infty,\theta_{0}\right]}n\left(\bar{x}-\theta\right)^{2}=\begin{cases}
+\bar{x} & \text{if }\theta_{0}\geq\bar{x}\\
+\theta_{0} & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+Thus the likelihood ratio statistic
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\begin{cases}
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\bar{x}\right)^{2}\right)}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\theta_{0}\right)^{2}\right)}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
+e^{-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+e^{-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2}} & \text{otherwise }
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Thus rejecting if 
+\begin_inset Formula $\lambda\left(\mathbf{x}\right)<c$
+\end_inset
+
+ is equivalent to 
+\begin_inset Formula 
+\begin{align*}
+e^{-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2}} & <c\\
+-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2} & <\log c\\
+\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{\sigma^{2}/n} & >-\log c^{2}\\
+\frac{\bar{x}-\theta_{0}}{\sigma/\sqrt{n}} & >\sqrt{\log\left(1/c^{2}\right)}\\
+\bar{x} & >\frac{\sigma}{\sqrt{n}}\sqrt{\log\left(1/c^{2}\right)}+\theta_{0}\\
+\bar{x} & >\frac{\sigma}{\sqrt{n}}z_{\alpha}+\theta_{0}
+\end{align*}
+
+\end_inset
+
+For some 
+\begin_inset Formula $z_{\alpha}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The test is 
+\begin_inset Formula 
+\begin{align*}
+\bar{X} & >\theta_{0}+t_{n-1,\alpha}\frac{S}{\sqrt{n}}\\
+\frac{\bar{X}-\theta_{0}}{S/\sqrt{n}} & >t_{n-1,\alpha}
+\end{align*}
+
+\end_inset
+
+The size of this test is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\frac{\bar{X}-\theta_{0}}{S/\sqrt{n}}>t_{n-1,\alpha}\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta}{S/\sqrt{n}}>t_{n-1,\alpha}+\frac{\theta_{0}-\theta}{S/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\frac{\bar{X}-\theta}{S/\sqrt{n}}$
+\end_inset
+
+ is distrubted Student's t so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(T_{n-1}>t_{n-1,\alpha}+\frac{\theta_{0}-\theta}{S/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and
+\begin_inset Formula $\beta\left(\theta_{0}\right)=\alpha$
+\end_inset
+
+ if 
+\begin_inset Formula $P\left(T_{n-1}>t_{n-1,\alpha}\right)=\alpha$
+\end_inset
+
+, which is of course the definition of the cutoff point 
+\begin_inset Formula $t_{n-1,\alpha}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\left(\bar{X},n^{-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\right)$
+\end_inset
+
+ is MLE for this family
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\boldsymbol{\theta}\in\Theta_{0}}L\left(\boldsymbol{\theta}|\mathbf{x}\right)}{L\left(\hat{\boldsymbol{\theta}}|\mathbf{x}\right)}\\
+ & =\frac{\sup_{\boldsymbol{\theta}\in\Theta_{0}}L\left(\boldsymbol{\theta}|\mathbf{x}\right)}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}
+\end{align*}
+
+\end_inset
+
+Then for the restricted MLE is 
+\begin_inset Formula $\left(\theta_{0},n^{-1}\sum_{i=1}^{n}\left(X_{i}-\theta_{0}\right)^{2}\right)$
+\end_inset
+
+ if 
+\begin_inset Formula $\theta_{0}\leq\bar{x}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\begin{cases}
+\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
+\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\frac{\frac{1}{\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}}}{\frac{1}{\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{\left(n-1\right)n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{\left(n-1\right)n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{s^{2}}{s^{2}+\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}\right) & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{1}{1+\frac{\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}}\right) & \text{otherwise }
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Thus rejecting if 
+\begin_inset Formula $\lambda\left(\mathbf{x}\right)<c$
+\end_inset
+
+ is equivalent to rejecting if 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{1+\frac{\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}} & <c\\
+\frac{\frac{1}{c}-1}{n\left(n-1\right)} & <\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}\\
+\sqrt{\frac{\frac{1}{c}-1}{n\left(n-1\right)}} & <\frac{\left(\bar{x}-\theta_{0}\right)}{s/\sqrt{n}}\\
+c' & <\frac{\left(\bar{x}-\theta_{0}\right)}{s/\sqrt{n}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open

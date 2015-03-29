@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass article
+\textclass amsart
 \begin_preamble
 
 %
@@ -23,6 +23,11 @@
 %
 \end_preamble
 \use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package none
@@ -591,7 +596,11 @@ k=1-\sqrt[n]{\alpha}
 \end_layout
 
 \begin_layout Enumerate
-The power function is 
+For 
+\begin_inset Formula $\theta>1$
+\end_inset
+
+ 
 \begin_inset Formula 
 \begin{align*}
 \beta\left(\theta\right) & =\int_{k}^{\theta+1}f_{X_{\left(1\right)}}\left(x\right)dx+\int_{1}^{\theta+1}f_{X_{\left(n\right)}}\left(x\right)dx\\
@@ -614,7 +623,37 @@ Since
 \end_inset
 
  and the family has a nondecreasing MLR (since the density is just flat)
- 
+ and rejecting for 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(X_{\left(1\right)},X_{\left(n\right)}\right)>\left(k,1\right)$
+\end_inset
+
+ is equivalent to rejecting for ***********
+\end_layout
+
+\begin_layout Enumerate
+Because*********8 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =1-\left(1-\theta\right)^{n}+\left(1-k-\theta\right)^{n}-\left(-2\theta\right)^{n}\\
+ & =\int_{k}^{\theta+1}\left(n\left(1+\theta-x\right)^{n-1}\right)dx+\int_{1}^{\theta+1}\left(n\left(x-\theta\right)^{n-1}\right)dx\\
+ & =1-\left(1-\theta\right)^{n}+\left(1-k-\theta\right)^{n}-\left(-2\theta\right)^{n}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -629,9 +668,204 @@ status open
 
 \end_inset
 
+Family of cdfs 
+\begin_inset Formula $\left\{ F_{T}\left(x|\theta\right),\theta\in\Theta\right\} $
+\end_inset
+
+ is stochastically increasing iff 
+\begin_inset Formula 
+\begin{align*}
+\theta_{1}<\theta_{2} & \Rightarrow F_{T}\left(x|\theta_{2}\right)\leq F_{T}\left(x|\theta_{1}\right)\\
+ & \iff P_{\theta_{2}}\left(X\leq x\right)\leq P_{\theta_{1}}\left(X\leq x\right)\\
+ & \iff1-P_{\theta_{2}}\left(X\geq x\right)\leq1-P_{\theta_{1}}\left(X\geq x\right)\\
+ & \iff P_{\theta_{1}}\left(X\geq x\right)\leq P_{\theta_{2}}\left(X\geq x\right)
+\end{align*}
+
+\end_inset
+
+Stochastic ordering is a much more natural statement of this property.
+ A random variable 
+\begin_inset Formula $A$
+\end_inset
+
+ is stochastically smaller than a random variable 
+\begin_inset Formula $B$
+\end_inset
+
+ if
+\begin_inset Formula 
+\[
+P\left(A>x\right)\leq P\left(B>x\right)
+\]
+
+\end_inset
+
+I.e the event 
+\begin_inset Formula $\left\{ A>x\right\} \Rightarrow\left\{ B>x\right\} $
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Let 
+\begin_inset Formula $\theta_{1}\leq\theta_{2}$
+\end_inset
+
+ and show that 
+\begin_inset Formula $P_{\theta_{1}}\left(T>c\right)\leq P_{\theta_{2}}\left(T>c\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\theta_{2}=h+\theta_{1}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $F_{T}$
+\end_inset
+
+ is a location family
+\begin_inset Formula 
+\begin{align*}
+P_{\theta_{1}}\left(T>c\right) & =P_{\theta_{1}}\left(T+h>c+h\right)\\
+ & =1-F_{T}\left(c+h|\theta_{1}+h\right)\\
+ & =1-F_{T}\left(c+h|\theta_{2}\right)\\
+ & =P_{\theta_{2}}\left(T>c+h\right)\\
+ & \leq P_{\theta_{2}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
+\begin_layout Enumerate
+Assume the family of pdfs 
+\begin_inset Formula $\left\{ g\left(t|\theta\right),\theta\in\Theta\right\} $
+\end_inset
+
+has a monotone likelihood ratio.
+ Assume the family is monotone increasing.
+ Then 
+\begin_inset Formula $\theta_{1}\leq\theta_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{1}\leq t_{2}$
+\end_inset
+
+ and implies 
+\begin_inset Formula 
+\[
+\frac{g\left(t_{2}|\theta_{2}\right)}{g\left(t_{2}|\theta_{1}\right)}\geq\frac{g\left(t_{1}|\theta_{2}\right)}{g\left(t_{1}|\theta_{1}\right)}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+t'=\arg\sup_{t}\left(\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\right)\text{ s.t }\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\leq1
+\]
+
+\end_inset
+
+then for all 
+\begin_inset Formula $c,u\leq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\leq1 & \Rightarrow\int_{-\infty}^{c}g\left(u|\theta_{2}\right)du\leq\int_{-\infty}^{c}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T<c\right)\leq P_{\theta_{1}}\left(T<c\right)\\
+ & \Rightarrow1-P_{\theta_{2}}\left(T>c\right)\leq1-P_{\theta_{1}}\left(T>c\right)\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\geq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+and for all 
+\begin_inset Formula $c,u\geq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\geq1 & \Rightarrow\int_{c}^{\infty}g\left(u|\theta_{2}\right)du\geq\int_{c}^{\infty}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\geq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+If the family is monotone decreasing then 
+\begin_inset Formula $\theta_{1}\leq\theta_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{1}\leq t_{2}$
+\end_inset
+
+ and implies 
+\begin_inset Formula 
+\[
+\frac{g\left(t_{2}|\theta_{2}\right)}{g\left(t_{2}|\theta_{1}\right)}\leq\frac{g\left(t_{1}|\theta_{2}\right)}{g\left(t_{1}|\theta_{1}\right)}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+t'=\arg\inf_{t}\left(\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\right)\text{ s.t }\frac{g\left(t|\theta_{2}\right)}{g\left(t|\theta_{1}\right)}\leq1
+\]
+
+\end_inset
+
+then for all 
+\begin_inset Formula $c,u\leq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\geq1 & \Rightarrow\int_{-\infty}^{c}g\left(u|\theta_{2}\right)du\geq\int_{-\infty}^{c}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T<c\right)\geq P_{\theta_{1}}\left(T<c\right)\\
+ & \Rightarrow1-P_{\theta_{2}}\left(T>c\right)\geq1-P_{\theta_{1}}\left(T>c\right)\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\leq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+and for all 
+\begin_inset Formula $c,u\geq t'$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{g\left(u|\theta_{2}\right)}{g\left(u|\theta_{1}\right)}\leq1 & \Rightarrow\int_{c}^{\infty}g\left(u|\theta_{2}\right)du\leq\int_{c}^{\infty}g\left(u|\theta_{1}\right)du\\
+ & \Rightarrow P_{\theta_{2}}\left(T>c\right)\leq P_{\theta_{1}}\left(T>c\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
