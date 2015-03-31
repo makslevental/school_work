@@ -161,7 +161,7 @@ Then taking the derivative wrt
 
 \end_inset
 
-Then sinze 
+Then since 
 \begin_inset Formula $\theta_{1}>\theta_{0}$
 \end_inset
 
@@ -197,14 +197,27 @@ Hence
 \begin_inset Formula $x$
 \end_inset
 
-.
+ since for 
+\begin_inset Formula $y>x$
+\end_inset
+
+ the positivity of the derivative implies the difference quotient 
+\begin_inset Formula 
+\[
+\frac{\frac{f\left(y|\theta_{1}\right)}{f\left(y|\theta_{0}\right)}-\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}}{y-x}>0\Rightarrow\frac{f\left(y|\theta_{1}\right)}{f\left(y|\theta_{0}\right)}-\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}>0
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
-By the Peyman-Nearson lemma the test 
+Since the hypotheses are simple we can use the Peyman-Nearson lemma; the
+ test 
 \begin_inset Formula 
 \[
-x\in R\text{ if }\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}>k
+x\in R\text{ iff }\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}>k
 \]
 
 \end_inset
@@ -221,7 +234,12 @@ x\in R\text{ if }\frac{f\left(x|\theta_{1}\right)}{f\left(x|\theta_{0}\right)}>k
 \uwave off
 \noun off
 \color none
-Since 
+is UMP level-
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ But since 
 \begin_inset Formula $f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)$
 \end_inset
 
@@ -237,7 +255,8 @@ f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)>k\iff x>k'
 
 \end_inset
 
-The power function is So for 
+So this is an equivalent test.
+ The power function for this test 
 \begin_inset Formula 
 \begin{align*}
 \beta\left(\theta\right)=P_{\theta}\left(x\in R\right) & =P_{\theta}\left(x>k'\right)\\
@@ -288,7 +307,7 @@ And the probability of type II errors is
 \end_layout
 
 \begin_layout Enumerate
-Since 
+Note that 
 \begin_inset Formula $x$
 \end_inset
 
@@ -296,12 +315,44 @@ Since
 \begin_inset Formula $\theta$
 \end_inset
 
- for a sample size of 1 and by (a) the location shifted logistic has a monotonic
-ally increasing likelihood ratio and the test rejects iff 
+ and that the ratio 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)$
+\end_inset
+
+ is monotone increasing as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Hence by the Rarlin-Kubin theorem the test that rejects 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ iff 
 \begin_inset Formula $x>k'$
 \end_inset
 
- the conditions of Rarlin-Kubin are satisfied.
+ is a UMP level-
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test where 
+\begin_inset Formula $\alpha=P_{\theta_{0}}\left(T>k'\right)$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
@@ -358,17 +409,53 @@ and
 
 \end_inset
 
-Since the support of 
-\begin_inset Formula $x$
+This expression has roots at 
+\begin_inset Formula 
+\[
+x=\frac{1}{2}\left(\theta_{0}+\theta_{1}\pm\sqrt{4-\left(\theta_{0}-\theta_{1}\right)^{2}}\right)
+\]
+
 \end_inset
 
- is 
-\begin_inset Formula $\left(-\infty,\infty\right)$
+and therefore either the derivative is positive on 
+\begin_inset Formula 
+\[
+\left(-\infty,\frac{1}{2}\left(\theta_{0}+\theta_{1}-\sqrt{4-\left(\theta_{0}-\theta_{1}\right)^{2}}\right)\right)\cup\left(\frac{1}{2}\left(\theta_{0}+\theta_{1}+\sqrt{4-\left(\theta_{0}-\theta_{1}\right)^{2}}\right),\infty\right)
+\]
+
 \end_inset
 
- the derivative can be positive or negative and therefore this family does
- not have a monotone likelihood ratio.
- **************************what can be said in general?
+and negative
+\begin_inset Formula 
+\[
+\left(\left(\theta_{0}+\theta_{1}-\sqrt{4-\left(\theta_{0}-\theta_{1}\right)^{2}}\right),\frac{1}{2}\left(\theta_{0}+\theta_{1}+\sqrt{4-\left(\theta_{0}-\theta_{1}\right)^{2}}\right)\right)
+\]
+
+\end_inset
+
+or vice-versa.
+ Either way the derivative alternates between positive and negative and
+ therefore for no values of 
+\begin_inset Formula $\theta_{0},\theta_{1}$
+\end_inset
+
+ is the ratio 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f\left(x|\theta_{1}\right)/f\left(x|\theta_{0}\right)$
+\end_inset
+
+ monotone.
 \end_layout
 
 \begin_layout Enumerate
@@ -458,7 +545,7 @@ Since
  is simple the size of the test is
 \begin_inset Formula 
 \begin{align*}
-\beta\left(0\right) & =\frac{\arctan(3)-\arctan(1)}{\pi}
+\beta\left(0\right) & =\frac{\arctan(3)-\arctan(1)}{\pi}=.147584
 \end{align*}
 
 \end_inset
@@ -466,7 +553,7 @@ Since
 and the probablity of type II error is 
 \begin_inset Formula 
 \[
-1-\beta\left(1\right)=\frac{\arctan(2)-\arctan(0)}{\pi}=\frac{\arctan(2)}{\pi}
+1-\beta\left(1\right)=1-\frac{\arctan(2)-\arctan(0)}{\pi}=1-\frac{\arctan(2)}{\pi}=.647584
 \]
 
 \end_inset
@@ -475,7 +562,33 @@ and the probablity of type II error is
 \end_layout
 
 \begin_layout Enumerate
-****************
+For any value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ the value of the ratio 
+\begin_inset Formula $f\left(x|\theta\right)/f\left(x|0\right)$
+\end_inset
+
+ at the end points of the critical region 
+\begin_inset Formula $\left[1,3\right]$
+\end_inset
+
+ won't be equal, i.e.
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(1|\theta\right)}{f\left(1|0\right)} & =\frac{f\left(3|\theta\right)}{f\left(3|0\right)}\\
+\frac{2}{\left(1+\left(1-\theta\right)^{2}\right)} & =\frac{10}{\left(1+\left(3-\theta\right)^{2}\right)}\\
+ & \Rightarrow\\
+\theta & =0\text{ or }1
+\end{align*}
+
+\end_inset
+
+Therefore nowhere else are the conditions of the Peyman-Nearson hypothesis
+ satisfied (and the Rarlin-Kubin hypothesis is certaintly not satisfied
+ because the ration isn't MLR).
+ So the test won't be UMP.
 \end_layout
 
 \end_deeper
@@ -546,22 +659,44 @@ f_{X_{\left(1\right)}}\left(x\right)=n\left(1+\theta-x\right)^{n-1}
 \end_inset
 
 and the density of 
-\begin_inset Formula $X_{\left(n\right)}$
+\begin_inset Formula $\left(X_{\left(1\right)},X_{\left(n\right)}\right)$
 \end_inset
 
 
 \begin_inset Formula 
 \[
-f_{X_{\left(n\right)}}\left(x\right)=n\left(x-\theta\right)^{n-1}
+f_{\left(X_{\left(1\right)},X_{\left(n\right)}\right)}\left(x_{1},x_{n}\right)=n\left(n-1\right)\left(x_{n}-x_{1}\right)^{n-2}
 \]
 
 \end_inset
 
-Then the power function is 
+with 
+\begin_inset Formula $0<x_{1}<x_{n}<\theta+1$
+\end_inset
+
+.
+ Then the power function is 
 \begin_inset Formula 
 \begin{align*}
-\beta\left(\theta\right) & =\int_{k}^{\theta+1}f_{X_{\left(1\right)}}\left(x\right)dx+\int_{1}^{\theta+1}f_{X_{\left(n\right)}}\left(x\right)dx\\
- & =\int_{k}^{\theta+1}\left(n\left(1+\theta-x\right)^{n-1}\right)dx+\int_{1}^{\theta+1}\left(n\left(x-\theta\right)^{n-1}\right)dx
+\beta\left(\theta\right) & =P\left(X_{\left(1\right)}\geq k\right)+P\left(X_{\left(n\right)}\geq1\right)
+\end{align*}
+
+\end_inset
+
+But 
+\begin_inset Formula $X_{\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{\left(n\right)}$
+\end_inset
+
+ aren't independent so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(X_{\left(1\right)}\geq k\right)+P\left(X_{\left(n\right)}\geq1\right)\\
+ & =P\left(X_{\left(1\right)}\geq k\right)+\int P\left(X_{\left(n\right)}\geq1,X_{\left(1\right)}\leq x_{1}\right)dx_{1}\\
+ & =\int_{k}^{\theta+1}\left(n\left(1-x\right)^{n-1}\right)dx_{1}+\int\int_{1}^{\theta+1}n\left(n-1\right)\left(x_{n}-x_{1}\right)^{n-2}dx_{n}dx_{1}
 \end{align*}
 
 \end_inset
@@ -573,14 +708,14 @@ Since the null hypothesis is simple the sup over
  of the power function is
 \begin_inset Formula 
 \begin{align*}
-\alpha=\beta\left(0\right) & =\int_{k}^{1}\left(n\left(1-x\right)^{n-1}\right)dx+\int_{1}^{1}\left(nx^{n-1}\right)dx\\
- & =\int_{k}^{1}\left(n\left(1-x\right)^{n-1}\right)dx\\
+\alpha=\beta\left(0\right) & =\int_{k}^{0+1}\left(n\left(1-x_{1}\right)^{n-1}\right)dx_{1}+\int\int_{1}^{0+1}n\left(n-1\right)\left(x_{n}-x_{1}\right)^{n-2}dx_{n}dx_{1}\\
+ & =\int_{k}^{1}\left(n\left(1-x_{1}\right)^{n-1}\right)dx_{1}\\
  & =\left(1-k\right)^{n}
 \end{align*}
 
 \end_inset
 
-Solve for 
+Solving for 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -597,15 +732,42 @@ k=1-\sqrt[n]{\alpha}
 
 \begin_layout Enumerate
 For 
-\begin_inset Formula $\theta>1$
+\begin_inset Formula $k\leq\theta$
 \end_inset
 
  
 \begin_inset Formula 
 \begin{align*}
-\beta\left(\theta\right) & =\int_{k}^{\theta+1}f_{X_{\left(1\right)}}\left(x\right)dx+\int_{1}^{\theta+1}f_{X_{\left(n\right)}}\left(x\right)dx\\
- & =\int_{k}^{\theta+1}\left(n\left(1+\theta-x\right)^{n-1}\right)dx+\int_{1}^{\theta+1}\left(n\left(x-\theta\right)^{n-1}\right)dx\\
- & =1-\left(1-\theta\right)^{n}+\left(1-k-\theta\right)^{n}-\left(-2\theta\right)^{n}
+\beta\left(\theta\right) & \leq P\left(X_{\left(1\right)}\geq k\right)+\int P\left(X_{\left(n\right)}\geq1,X_{\left(1\right)}\leq x_{1}\right)dx_{1}\\
+ & \int_{\theta}^{\theta+1}\left(n\left(1-x\right)^{n-1}\right)dx_{1}+\int_{\theta}^{\theta+1}\int_{1}^{\theta+1}n\left(n-1\right)\left(x_{n}-x_{1}\right)^{n-2}dx_{n}dx_{1}\\
+ & =1
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $\theta\leq k\leq\theta+1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & \leq P\left(X_{\left(1\right)}\geq k\right)+\int_{\theta}^{\theta+1}P\left(X_{\left(n\right)}\geq1,X_{\left(1\right)}\leq x_{1}\right)dx_{1}\\
+ & \int_{k}^{\theta+1}\left(n\left(1-x\right)^{n-1}\right)dx_{1}+\int_{\theta}^{\theta+1}\int_{1}^{\theta+1}n\left(n-1\right)\left(x_{n}-x_{1}\right)^{n-2}dx_{n}dx_{1}\\
+ & =\left(1-\left(k-\theta\right)\right)^{n}+1-\left(1-\theta\right)^{n}+\left(-\theta\right)^{n}
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $k\geq\theta+1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & \leq\int_{\theta+1}^{\theta+1}f_{X_{\left(1\right)}}\left(x\right)dx+\int_{\theta+1}^{\theta+1}\int_{1}^{\theta+1}n\left(n-1\right)\left(x_{n}-x_{1}\right)^{n-2}dx_{n}dx_{1}\\
+ & =0
 \end{align*}
 
 \end_inset
@@ -623,7 +785,7 @@ Since
 \end_inset
 
  and the family has a nondecreasing MLR (since the density is just flat)
- and rejecting for 
+ the test that rejects for 
 \family roman
 \series medium
 \shape up
@@ -636,20 +798,34 @@ Since
 \noun off
 \color none
 
-\begin_inset Formula $\left(X_{\left(1\right)},X_{\left(n\right)}\right)>\left(k,1\right)$
+\begin_inset Formula 
+\[
+\frac{f_{\left(X_{\left(1\right)},X_{\left(n\right)}\right)}\left(x_{1},x_{n}|\theta_{1}\right)}{f_{\left(X_{\left(1\right)},X_{\left(n\right)}\right)}\left(x_{1},x_{n}|\theta_{0}\right)}>k
+\]
+
 \end_inset
 
- is equivalent to rejecting for ***********
+is level-
+\begin_inset Formula $\alpha$
+\end_inset
+
+ for some 
+\begin_inset Formula $k$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
-Because*********8 
+By part (a) choose 
+\begin_inset Formula $k,n$
+\end_inset
+
+ such that 
 \begin_inset Formula 
-\begin{align*}
-\beta\left(\theta\right) & =1-\left(1-\theta\right)^{n}+\left(1-k-\theta\right)^{n}-\left(-2\theta\right)^{n}\\
- & =\int_{k}^{\theta+1}\left(n\left(1+\theta-x\right)^{n-1}\right)dx+\int_{1}^{\theta+1}\left(n\left(x-\theta\right)^{n-1}\right)dx\\
- & =1-\left(1-\theta\right)^{n}+\left(1-k-\theta\right)^{n}-\left(-2\theta\right)^{n}
-\end{align*}
+\[
+k=1-\sqrt[n]{.1}
+\]
 
 \end_inset
 
@@ -810,6 +986,54 @@ and for all
 
 \end_inset
 
+Note that if 
+\series bold
+
+\begin_inset Formula $g\left(t|\theta_{2}\right)/g\left(t|\theta_{1}\right)>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $t$
+\end_inset
+
+ then let 
+\begin_inset Formula $t'=-\infty$
+\end_inset
+
+ and all 
+\begin_inset Formula $c,u$
+\end_inset
+
+ will be 
+\begin_inset Formula $\geq t'$
+\end_inset
+
+.
+ Alternatively if 
+\begin_inset Formula $g\left(t|\theta_{2}\right)/g\left(t|\theta_{1}\right)<1$
+\end_inset
+
+ then let 
+\begin_inset Formula $t'=\infty$
+\end_inset
+
+ and all 
+\begin_inset Formula $c,u$
+\end_inset
+
+ will be 
+\begin_inset Formula $\leq t'$
+\end_inset
+
+
+\series default
+.
+
+\series bold
+ 
+\end_layout
+
+\begin_layout Enumerate
 If the family is monotone decreasing then 
 \begin_inset Formula $\theta_{1}\leq\theta_{2}$
 \end_inset
@@ -1067,16 +1291,48 @@ For some
 
 \end_deeper
 \begin_layout Enumerate
-\begin_inset ERT
-status open
+Since 
+\begin_inset Formula $\bar{X}$
+\end_inset
 
-\begin_layout Plain Layout
+ is a sufficient for 
+\begin_inset Formula $\mu$
+\end_inset
 
-\end_layout
+ by the Rarlin-Kubin theorem the test is UMP if the family has a nondecreasing
+ MLR.
+ 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is distributed 
+\begin_inset Formula $\text{Normal}\left(\mu,\sigma^{2}/n\right)$
+\end_inset
+
+ .
+ Let 
+\begin_inset Formula $\mu_{1}>\mu_{0}$
+\end_inset
+
+ so the ratio 
+\begin_inset Formula 
+\begin{align*}
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{1/2}}e^{-\frac{1}{2\sigma^{2}}\left(\bar{x}-\mu_{1}\right)^{2}}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{1/2}}e^{-\frac{1}{2\sigma^{2}}\left(\bar{x}-\mu_{0}\right)^{2}}} & =e^{-\frac{1}{2\sigma^{2}}\left[\left(\bar{x}-\mu_{1}\right)^{2}-\left(\bar{x}-\mu_{0}\right)^{2}\right]}\\
+ & =e^{-\frac{1}{2\sigma^{2}}\left[\left(\left(\bar{x}-\mu_{1}\right)-\left(\bar{x}-\mu_{0}\right)\right)\left(\left(\bar{x}-\mu_{1}\right)+\left(\bar{x}-\mu_{0}\right)\right)\right]}\\
+ & =e^{\frac{1}{2\sigma^{2}}\left(\mu_{1}-\mu_{0}\right)\left(2\bar{x}-\left(\mu_{1}+\mu_{0}\right)\right)}
+\end{align*}
 
 \end_inset
 
+which is non-decreasing as a function of 
+\begin_inset Formula $\bar{x}$
+\end_inset
 
+ since 
+\begin_inset Formula $\left(\mu_{1}-\mu_{0}\right)>0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -1427,52 +1683,9 @@ The first term
 \end_layout
 
 \begin_layout Enumerate
-A test is unbiased if 
-\begin_inset Formula $\beta\left(\theta\right)\geq\alpha$
-\end_inset
-
- for all 
-\begin_inset Formula $\theta\in\Theta_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\beta\left(\theta\right)\leq\alpha$
-\end_inset
-
- for all 
-\begin_inset Formula $\theta\in\Theta_{0}$
-\end_inset
-
-.
+What does it mean to be unbiased of their size?
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-***********************In part (a) I argued that for all 
-\begin_inset Formula $\theta\in\Theta_{0}$
-\end_inset
-
- it's the case that 
-\begin_inset Formula $\beta\left(\theta\right)\leq\alpha$
-\end_inset
-
-.
- To see that 
-\begin_inset Formula $\beta\left(\theta\right)\geq\alpha$
-\end_inset
-
- for all 
-\begin_inset Formula $\theta\in\Theta_{1}$
-\end_inset
-
- note that 
-\end_layout
-
-\begin_layout Enumerate
-***********************
-\end_layout
-
-\end_deeper
 \end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
@@ -1630,7 +1843,7 @@ The test that rejects if
  Then 
 \begin_inset Formula 
 \begin{align*}
-p\left(3\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq3\right)
+p\left(9\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq9\right)
 \end{align*}
 
 \end_inset
@@ -1642,8 +1855,8 @@ Since
 
 \begin_inset Formula 
 \begin{align*}
-p\left(3\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq3\right)\\
- & =\sup_{\theta\in\Theta_{0}}\left(1-e^{-3\lambda}\sum_{i=0}^{3-1}\frac{\left(3\lambda\right)^{i}}{i!}\right)
+p\left(9\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq9\right)\\
+ & =\sup_{\theta\in\Theta_{0}}\left(1-e^{-3\lambda}\sum_{i=0}^{9-1}\frac{\left(3\lambda\right)^{i}}{i!}\right)
 \end{align*}
 
 \end_inset
@@ -1655,8 +1868,8 @@ Similarly to part (b) this function is increasing in
  
 \begin_inset Formula 
 \begin{align*}
-p\left(3\right) & =1-e^{-3}\sum_{i=0}^{3-1}\frac{3{}^{i}}{i!}\\
- & =.57681
+p\left(3\right) & =1-e^{-3}\sum_{i=0}^{8}\frac{3{}^{i}}{i!}\\
+ & =.00380299
 \end{align*}
 
 \end_inset
