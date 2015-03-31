@@ -877,9 +877,346 @@ status open
 
 \end_inset
 
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,\sigma^{2}\right)$
+\end_inset
+
+ and the testing scenario be such that 
+\begin_inset Formula $\Theta=\mathbb{R},\Theta_{0}=\left(-\infty,\theta_{0}\right],\Theta_{0}^{c}=\left(\theta_{0},\infty\right)$
+\end_inset
+
+ with hypotheses 
+\begin_inset Formula 
+\begin{align*}
+H_{0}:\theta\leq\theta_{0} & \: H_{1}:\theta>\theta_{0}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The test is reject if 
+\begin_inset Formula 
+\begin{align*}
+\bar{X} & >\theta_{0}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\\
+\frac{\bar{X}-\theta_{0}}{\sigma/\sqrt{n}} & >z_{\alpha}
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\frac{\bar{X}-\theta_{0}}{\sigma/\sqrt{n}}>z_{\alpha}\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}>z_{\alpha}+\frac{\theta_{0}-\theta}{\sigma/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+But 
+\begin_inset Formula $\frac{\bar{X}-\theta}{\sigma/\sqrt{n}}$
+\end_inset
+
+ is distributioned 
+\begin_inset Formula $\text{n}\left(0,1\right)$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(Z>z_{\alpha}+\frac{\theta_{0}-\theta}{\sigma/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+which is an increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta\left(\theta_{0}\right)=\alpha$
+\end_inset
+
+ iff 
+\begin_inset Formula $P\left(Z>z_{\alpha}\right)=\alpha$
+\end_inset
+
+, which is of course exactly the definition of the cutoff 
+\begin_inset Formula $z_{\alpha}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The likelihood ratio statistic 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{\sup_{\theta\in\Theta}L\left(\theta|\mathbf{x}\right)}\\
+ & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{L\left(\hat{\theta}|\mathbf{x}\right)}
+\end{align*}
+
+\end_inset
+
+But 
+\begin_inset Formula $\hat{\theta}=\bar{x}$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{L\left(\hat{\theta}|\mathbf{x}\right)}\\
+ & =\frac{\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}}
+\end{align*}
+
+\end_inset
+
+To compute 
+\begin_inset Formula $\sup_{\theta\in\Theta_{0}}L\left(\theta|\mathbf{x}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+L\left(\theta|\mathbf{x}\right) & =\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\theta\right)^{2}}\\
+ & =\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\theta\right)^{2}\right)}
+\end{align*}
+
+\end_inset
+
+So maximizing is equivalent to minimizing 
+\begin_inset Formula $-n\left(\bar{x}-\theta\right)^{2}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left(-\infty,\theta_{0}\right]$
+\end_inset
+
+.
+ There are two cases 
+\begin_inset Formula 
+\[
+\arg\min_{\theta\in\left(-\infty,\theta_{0}\right]}n\left(\bar{x}-\theta\right)^{2}=\begin{cases}
+\bar{x} & \text{if }\theta_{0}\geq\bar{x}\\
+\theta_{0} & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+Thus the likelihood ratio statistic
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\begin{cases}
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\bar{x}\right)^{2}\right)}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}+n\left(\bar{x}-\theta_{0}\right)^{2}\right)}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+\frac{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}{\frac{1}{\left(2\pi\sigma^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/\sigma^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
+e^{-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+e^{-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2}} & \text{otherwise }
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Thus rejecting if 
+\begin_inset Formula $\lambda\left(\mathbf{x}\right)<c$
+\end_inset
+
+ is equivalent to 
+\begin_inset Formula 
+\begin{align*}
+e^{-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2}} & <c\\
+-\frac{1}{2\sigma^{2}}n\left(\bar{x}-\theta_{0}\right)^{2} & <\log c\\
+\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{\sigma^{2}/n} & >-\log c^{2}\\
+\frac{\bar{x}-\theta_{0}}{\sigma/\sqrt{n}} & >\sqrt{\log\left(1/c^{2}\right)}\\
+\bar{x} & >\frac{\sigma}{\sqrt{n}}\sqrt{\log\left(1/c^{2}\right)}+\theta_{0}\\
+\bar{x} & >\frac{\sigma}{\sqrt{n}}z_{\alpha}+\theta_{0}
+\end{align*}
+
+\end_inset
+
+For some 
+\begin_inset Formula $z_{\alpha}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The test is 
+\begin_inset Formula 
+\begin{align*}
+\bar{X} & >\theta_{0}+t_{n-1,\alpha}\frac{S}{\sqrt{n}}\\
+\frac{\bar{X}-\theta_{0}}{S/\sqrt{n}} & >t_{n-1,\alpha}
+\end{align*}
+
+\end_inset
+
+The size of this test is reject if 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\frac{\bar{X}-\theta_{0}}{S/\sqrt{n}}>t_{n-1,\alpha}\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta}{S/\sqrt{n}}>t_{n-1,\alpha}+\frac{\theta_{0}-\theta}{S/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\frac{\bar{X}-\theta}{S/\sqrt{n}}$
+\end_inset
+
+ is distrubted Student's t so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(T_{n-1}>t_{n-1,\alpha}+\frac{\theta_{0}-\theta}{S/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and
+\begin_inset Formula $\beta\left(\theta_{0}\right)=\alpha$
+\end_inset
+
+ if 
+\begin_inset Formula $P\left(T_{n-1}>t_{n-1,\alpha}\right)=\alpha$
+\end_inset
+
+, which is of course the definition of the cutoff point 
+\begin_inset Formula $t_{n-1,\alpha}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\left(\bar{X},n^{-1}\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\right)$
+\end_inset
+
+ is MLE for this family
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\frac{\sup_{\boldsymbol{\theta}\in\Theta_{0}}L\left(\boldsymbol{\theta}|\mathbf{x}\right)}{L\left(\hat{\boldsymbol{\theta}}|\mathbf{x}\right)}\\
+ & =\frac{\sup_{\boldsymbol{\theta}\in\Theta_{0}}L\left(\boldsymbol{\theta}|\mathbf{x}\right)}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}
+\end{align*}
+
+\end_inset
+
+Then for the restricted MLE is 
+\begin_inset Formula $\left(\theta_{0},n^{-1}\sum_{i=1}^{n}\left(X_{i}-\theta_{0}\right)^{2}\right)$
+\end_inset
+
+ if 
+\begin_inset Formula $\theta_{0}\leq\bar{x}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(\mathbf{x}\right) & =\begin{cases}
+\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}} & \text{if }\theta_{0}\geq\bar{x}\\
+\frac{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}}{\frac{1}{\left(2\pi n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{1}{2}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}/n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\frac{\frac{1}{\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}}}{\frac{1}{\left(n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{n/2}}e^{-\frac{n}{2}}} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{\left(n-1\right)n^{-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}{\left(n-1\right)n^{-1}\sum_{i=1}^{n}\left(x_{i}-\theta_{0}\right)^{2}}\right)^{n/2} & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{s^{2}}{s^{2}+\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}\right) & \text{otherwise }
+\end{cases}\\
+ & =\begin{cases}
+1 & \text{if }\theta_{0}\geq\bar{x}\\
+\left(\frac{1}{1+\frac{\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}}\right) & \text{otherwise }
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Thus rejecting if 
+\begin_inset Formula $\lambda\left(\mathbf{x}\right)<c$
+\end_inset
+
+ is equivalent to rejecting if 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{1+\frac{\left(n-1\right)\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}} & <c\\
+\frac{\frac{1}{c}-1}{n\left(n-1\right)} & <\frac{\left(\bar{x}-\theta_{0}\right)^{2}}{s^{2}}\\
+\sqrt{\frac{\frac{1}{c}-1}{n\left(n-1\right)}} & <\frac{\left(\bar{x}-\theta_{0}\right)}{s/\sqrt{n}}\\
+c' & <\frac{\left(\bar{x}-\theta_{0}\right)}{s/\sqrt{n}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -891,9 +1228,252 @@ status open
 
 \end_inset
 
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,\sigma^{2}\right)$
+\end_inset
+
+ and the testing scenario be such that 
+\begin_inset Formula $\Theta=\mathbb{R},\Theta_{0}=\left[\theta_{1},\theta_{2}\right],\Theta_{0}^{c}=\left(-\infty,\theta_{1}\right)\cup\left(\theta_{2},\infty\right)$
+\end_inset
+
+ with hypotheses 
+\begin_inset Formula 
+\begin{align*}
+H_{0}:\theta_{1}\leq\theta\leq\theta_{2} & \: H_{1}:\theta>\theta_{2}\text{ or }\theta<\theta_{1}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+The test is reject if 
+\begin_inset Formula 
+\begin{align*}
+\bar{X}>\theta_{2}+t_{n-1,\alpha/2}\frac{S}{\sqrt{n}} & \text{ or }\bar{X}<\theta_{1}-t_{n-1,\alpha/2}\frac{S}{\sqrt{n}}\\
+\frac{\bar{X}-\theta_{2}}{S/\sqrt{n}}>t_{n-1,\alpha/2} & \text{ or }\frac{\bar{X}-\theta_{1}}{S/\sqrt{n}}<-t_{n-1,\alpha/2}
+\end{align*}
+
+\end_inset
+
+The size of this test is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\left\{ \frac{\bar{X}-\theta_{2}}{S/\sqrt{n}}>t_{n-1,\alpha/2}\right\} \bigcup\left\{ \frac{\bar{X}-\theta_{1}}{S/\sqrt{n}}<-t_{n-1,\alpha/2}\right\} \right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta_{2}}{S/\sqrt{n}}>t_{n-1,\alpha/2}\right)+P_{\theta}\left(\frac{\bar{X}-\theta_{1}}{S/\sqrt{n}}<-t_{n-1,\alpha/2}\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta}{S/\sqrt{n}}>t_{n-1,\alpha/2}+\frac{\theta_{2}-\theta}{S/\sqrt{n}}\right)+P_{\theta}\left(\frac{\bar{X}-\theta}{S/\sqrt{n}}<-t_{n-1,\alpha/2}+\frac{\theta_{1}-\theta}{S/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\frac{\bar{X}-\theta}{S/\sqrt{n}}$
+\end_inset
+
+ is distrubted Student's t so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(T_{n-1}>t_{n-1,\alpha}+\frac{\theta_{2}-\theta}{S/\sqrt{n}}\right)+P\left(T_{n-1}<-t_{n-1,\alpha}+\frac{\theta_{1}-\theta}{S/\sqrt{n}}\right)\\
+ & =\beta_{1}\left(\theta\right)+\beta_{2}\left(\theta\right)
+\end{align*}
+
+\end_inset
+
+The first term 
+\begin_inset Formula $\beta_{1}\left(\theta\right)$
+\end_inset
+
+ is an increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and
+\begin_inset Formula $\beta_{1}\left(\theta_{2}\right)=\alpha/2$
+\end_inset
+
+ if 
+\begin_inset Formula $P\left(T_{n-1}>t_{n-1,\alpha/2}\right)=\alpha/2$
+\end_inset
+
+, which is of course the definition of the cutoff point 
+\begin_inset Formula $t_{n-1,\alpha/2}$
+\end_inset
+
+.
+ The second term 
+\begin_inset Formula $\beta_{2}\left(\theta\right)$
+\end_inset
+
+ is a decreasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and
+\begin_inset Formula $\beta_{2}\left(\theta_{1}\right)=\alpha/2$
+\end_inset
+
+ if 
+\begin_inset Formula $P\left(T_{n-1}<-t_{n-1,\alpha/2}\right)=\alpha/2$
+\end_inset
+
+, which is of course the definition of the cutoff point 
+\begin_inset Formula $t_{n-1,\alpha/2}$
+\end_inset
+
+.
+ But under 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\theta_{1}<\theta\leq\theta_{2} & \Rightarrow\beta\left(\theta\right)=\beta_{1}\left(\theta\right)+\beta_{2}\left(\theta\right)<\beta_{1}\left(\theta\right)+\beta_{2}\left(\theta_{1}\right)\leq\frac{\alpha}{2}+\frac{\alpha}{2}=\alpha\\
+\theta_{1}\leq\theta<\theta_{2} & \Rightarrow\beta\left(\theta\right)=\beta_{1}\left(\theta\right)+\beta_{2}\left(\theta\right)<\beta_{1}\left(\theta_{1}\right)+\beta_{2}\left(\theta\right)\leq\frac{\alpha}{2}+\frac{\alpha}{2}=\alpha\\
+\theta_{1}<\theta<\theta_{2} & \Rightarrow\beta\left(\theta\right)=\beta_{1}\left(\theta\right)+\beta_{2}\left(\theta\right)<\beta_{1}\left(\theta_{1}\right)+\beta_{2}\left(\theta_{2}\right)=\frac{\alpha}{2}+\frac{\alpha}{2}=\alpha
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The test is reject if 
+\begin_inset Formula 
+\begin{align*}
+\left|\bar{X}-\bar{\theta}\right| & >k\frac{S}{\sqrt{n}}\\
+\bar{X}-\bar{\theta}>k\frac{S}{\sqrt{n}} & \text{ or }\bar{X}-\bar{\theta}<-k\frac{S}{\sqrt{n}}
+\end{align*}
+
+\end_inset
+
+The size of this test is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(\left\{ \bar{X}-\bar{\theta}>k\frac{S}{\sqrt{n}}\right\} \bigcup\left\{ \bar{X}-\bar{\theta}<-k\frac{S}{\sqrt{n}}\right\} \right)\\
+ & =P_{\theta}\left(\bar{X}-\bar{\theta}>k\frac{S}{\sqrt{n}}\right)+P_{\theta}\left(\bar{X}-\bar{\theta}<-k\frac{S}{\sqrt{n}}\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\bar{\theta}}{S/\sqrt{n}}>k\right)+P_{\theta}\left(\frac{\bar{X}-\bar{\theta}}{S/\sqrt{n}}<-k\right)\\
+ & =P_{\theta}\left(\frac{\bar{X}-\theta}{S/\sqrt{n}}>k+\frac{\bar{\theta}-\theta}{S/\sqrt{n}}\right)+P_{\theta}\left(\frac{\bar{X}-\theta}{S/\sqrt{n}}<-k+\frac{\bar{\theta}-\theta}{S/\sqrt{n}}\right)
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\frac{\bar{X}-\theta}{S/\sqrt{n}}$
+\end_inset
+
+ is distrubted Student's t so 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(T_{n-1}>k+\frac{\bar{\theta}-\theta}{S/\sqrt{n}}\right)+P_{\theta}\left(T_{n-1}<-k+\frac{\bar{\theta}-\theta}{S/\sqrt{n}}\right)\\
+ & =\beta_{1}\left(\theta\right)+\beta_{2}\left(\theta\right)
+\end{align*}
+
+\end_inset
+
+The first term 
+\begin_inset Formula $\beta_{1}\left(\theta\right)$
+\end_inset
+
+ is an increasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and
+\begin_inset Formula $\beta_{1}\left(\bar{\theta}\right)=\alpha/2$
+\end_inset
+
+ if 
+\begin_inset Formula $P\left(T_{n-1}>k\right)=\alpha/2$
+\end_inset
+
+.
+ The second term 
+\begin_inset Formula $\beta_{2}\left(\theta\right)$
+\end_inset
+
+ is a decreasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and
+\begin_inset Formula $\beta_{2}\left(\bar{\theta}\right)=\alpha/2$
+\end_inset
+
+ if 
+\begin_inset Formula $P\left(T_{n-1}<-k\right)=\alpha/2$
+\end_inset
+
+.
+ This is the case if 
+\begin_inset Formula $k=t_{n-1,\alpha/2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\sup_{\theta}\beta\left(\theta\right) & =\beta\left(\bar{\theta}\right)\\
+ & =\beta_{1}\left(\bar{\theta}\right)+\beta_{2}\left(\bar{\theta}\right)\\
+ & =\frac{\alpha}{2}+\frac{\alpha}{2}=\alpha
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+A test is unbiased if 
+\begin_inset Formula $\beta\left(\theta\right)\geq\alpha$
+\end_inset
+
+ for all 
+\begin_inset Formula $\theta\in\Theta_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta\left(\theta\right)\leq\alpha$
+\end_inset
+
+ for all 
+\begin_inset Formula $\theta\in\Theta_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+***********************In part (a) I argued that for all 
+\begin_inset Formula $\theta\in\Theta_{0}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\beta\left(\theta\right)\leq\alpha$
+\end_inset
+
+.
+ To see that 
+\begin_inset Formula $\beta\left(\theta\right)\geq\alpha$
+\end_inset
+
+ for all 
+\begin_inset Formula $\theta\in\Theta_{1}$
+\end_inset
+
+ note that 
+\end_layout
+
+\begin_layout Enumerate
+***********************
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -908,5 +1488,170 @@ status open
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+For 
+\begin_inset Formula $X_{i}\sim\text{Bernoulli}\left(p\right)$
+\end_inset
+
+ the joint pmf 
+\begin_inset Formula 
+\[
+f\left(\mathbf{x}|p\right)=\left(1-p\right)\left(\frac{p}{1-p}\right)^{\sum_{i=1}^{n}x_{i}}
+\]
+
+\end_inset
+
+The test that rejects if 
+\begin_inset Formula 
+\[
+W\left(\mathbf{x}\right)=\sum_{i=1}^{n}x_{i}>c
+\]
+
+\end_inset
+
+is fitting to be used for a 
+\begin_inset Formula $p$
+\end_inset
+
+ value.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+p\left(\mathbf{x}\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(W\left(\mathbf{X}\right)\geq W\left(\mathbf{x}\right)\right)\\
+ & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(n\bar{X}\geq n\bar{x}\right)
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+ is distributed 
+\begin_inset Formula $\text{Binomial}\left(n,p\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+p\left(7\right) & =\sup_{\theta\in\Theta_{0}}P\left(n\bar{X}\geq7\right)\\
+ & =\sup_{p\in\left[0,\frac{1}{2}\right]}\sum_{i=7}^{10}\binom{10}{i}p^{i}\left(1-p\right)^{10-i}
+\end{align*}
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $p$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+p\left(7\right) & =\sup_{\theta\in\Theta_{0}}P\left(n\bar{X}\geq7\right)\\
+ & =\sum_{i=7}^{10}\binom{10}{i}\left(\frac{1}{2}\right)^{i}\left(1-\frac{1}{2}\right)^{10-i}\\
+ & =.171875
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $X\sim\text{Poisson}\left(\lambda\right)$
+\end_inset
+
+ the pmf 
+\begin_inset Formula 
+\[
+f\left(x|\lambda\right)=e^{-\lambda}\frac{\lambda^{x}}{x!}
+\]
+
+\end_inset
+
+The test that rejects if 
+\begin_inset Formula $X$
+\end_inset
+
+ is large is fitting to be used for a 
+\begin_inset Formula $p$
+\end_inset
+
+ value.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+p\left(3\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X\geq3\right)\\
+ & =\sup_{\lambda\in\left[0,1\right]}\left(1-e^{-\lambda}\sum_{i=0}^{3-1}\frac{\lambda^{i}}{i!}\right)
+\end{align*}
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\begin{align*}
+p\left(3\right) & =1-e^{-1}\sum_{i=0}^{3-1}\frac{1^{i}}{i!}\\
+ & =.0803014
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $X_{i}\sim\text{Poisson}\left(\lambda\right)$
+\end_inset
+
+ the pmf 
+\begin_inset Formula 
+\[
+f\left(x|\lambda\right)=e^{-3\lambda}\frac{\lambda^{x_{1}+x_{2}+x_{3}}}{x_{1}!x_{2}!x_{3}!}
+\]
+
+\end_inset
+
+The test that rejects if 
+\begin_inset Formula $X$
+\end_inset
+
+ is large is fitting to be used for a 
+\begin_inset Formula $p$
+\end_inset
+
+ value.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+p\left(3\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X\geq3\right)\\
+ & =\sup_{\lambda\in\left[0,1\right]}\left(1-e^{-\lambda}\sum_{i=0}^{3-1}\frac{\lambda^{i}}{i!}\right)
+\end{align*}
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\begin{align*}
+p\left(3\right) & =1-e^{-1}\sum_{i=0}^{3-1}\frac{1^{i}}{i!}\\
+ & =.0803014
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
