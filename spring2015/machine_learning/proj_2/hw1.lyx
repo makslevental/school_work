@@ -1,0 +1,474 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{trees}
+\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+CAP 6610 Project Part I
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I chose to use the 
+\family typewriter
+\series bold
+scikit-learn
+\family default
+\series default
+ Python platform for its ease of use of the ready availability of the following
+ plugins
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+sklearn.svm
+\family default
+: Support Vector Machines
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+sklearn.tree
+\family default
+: Decision Trees
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+sklearn.lda
+\family default
+: Fisher's Linear Discriminant Analysis
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+sklearn.linear_model
+\family default
+: Generalized Linear Models
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\family typewriter
+linear_model.LogisticRegression
+\family default
+: Logistic regression
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+linear_model.LinearRegression
+\family default
+: Linear regression
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\family typewriter
+sklearn.neighbors
+\family default
+: Nearest Neighbors
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+sklearn.naive_bayes
+\family default
+: Naive Bayes
+\end_layout
+
+\begin_layout Standard
+Because 
+\family typewriter
+\series bold
+scikit-learn
+\family default
+\series default
+ is missing a simple way to work with arbitrary basis functions for Generalized
+ Linear Models I will use the 
+\family typewriter
+\series bold
+statsmodels
+\family default
+\series default
+ package 
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+statsmodels.genmod.generalized_linear_model.GLM
+\family default
+: Generalized Linear Models
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\family typewriter
+statsmodels.genmod.families.family.InverseGaussian
+\family default
+: Inverse Gaussian
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+statsmodels.genmod.families.family.Gamma
+\family default
+: Gamma (of which exponential is a special case)'
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+The datasets are
+\end_layout
+
+\begin_layout Enumerate
+Breast Cancer Wisconsin (Original)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 699
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 400
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 100
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 199
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 10
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: 6
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Optical Recognition of Handwritten Digits
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 3823+1797
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 3823
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: N/A
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 1797
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 64
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: 10
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Ecoli
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 336
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 250
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 50
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 36
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 8
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: 8
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Parkinsons Disease Data Set
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 197
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 150
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 27
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 20
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 23
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: 2
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Forest Fires Data Set
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 517
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 440
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 40
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 37
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 12
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: N/A (real valued)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Banknote Authentication
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 1372
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 1000
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 200
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 172
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 4
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: Countable (integers)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Yacht Hydrodynamics
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 308
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 250
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 20
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 38
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 6
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: N/A (real valued)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Climate Model
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Total number of instances: 540
+\end_layout
+
+\begin_layout Enumerate
+Size of training set: 450
+\end_layout
+
+\begin_layout Enumerate
+Size of validation set: 50
+\end_layout
+
+\begin_layout Enumerate
+Size of test set: 40
+\end_layout
+
+\begin_layout Enumerate
+Number of features: 17
+\end_layout
+
+\begin_layout Enumerate
+Number of classes: 2
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
