@@ -1,0 +1,346 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Warm up
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X_{1},X_{2}$
+\end_inset
+
+ both be discrete uniformly distributed on 
+\begin_inset Formula $\left\{ 1,2,3,4\right\} $
+\end_inset
+
+.
+ Compute the joint distribution of 
+\begin_inset Formula $\left(X_{i},X_{\left(1\right)}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $i$
+\end_inset
+
+ can be either 1 or 2.
+ Well there are two cases and one of the cases has two subcases.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Case 1]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X_{\left(1\right)}=j$
+\end_inset
+
+ for some 
+\begin_inset Formula $j\in\left\{ 1,2,3,4\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $X_{i}=k\neq j$
+\end_inset
+
+ then the other random variable has to be larger, i.e.
+ 
+\begin_inset Formula $k>j$
+\end_inset
+
+, so the two aren't independent.
+ Hence 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(X_{i}=j,X_{\left(1\right)}=k\right) & = & P\left(X_{i}=k\big|X_{\left(1\right)}=j\right)P\left(X_{\left(1\right)}=j\right)\\
+ & = & \frac{P\left(X_{i}=k\right)}{\sum_{x=k}^{4}P\left(X_{i}=j\right)}P\left(X_{\left(1\right)}=j\right)
+\end{eqnarray*}
+
+\end_inset
+
+What does this really mean? Think about it.
+ If 
+\begin_inset Formula $X_{\left(1\right)}=2$
+\end_inset
+
+ then 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ can only equal 3 or 4 and it equals each of them with probability 1/2.
+ This is ad hoc leap of intuition about what the conditional distribution
+ of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is given 
+\begin_inset Formula $X_{\left(1\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Case 2]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X_{\left(1\right)}=j$
+\end_inset
+
+ for some 
+\begin_inset Formula $j\in\left\{ 1,2,3,4\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $X_{i}=k=j$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $x_{1}=x_{2}$
+\end_inset
+
+.
+ Hence
+\begin_inset Formula 
+\[
+P\left(X_{i}=j,X_{\left(1\right)}=k\right)=P\left(X_{i}=j,X_{\left(1\right)}=j\right)=P\left(X_{1}=j\right)P\left(X_{2}=j\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are 2 places where this gets complicated for more variables: 
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset Formula $j\neq k$
+\end_inset
+
+ case can now be 
+\begin_inset Formula $j\neq k=l$
+\end_inset
+
+ and every 
+\begin_inset Formula $\binom{3}{2}$
+\end_inset
+
+ combination, but it can also be 
+\begin_inset Formula $j\neq k\neq l$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+What's the correct 
+\begin_inset Formula $P\left(X_{i}=k\big|X_{\left(1\right)}=j\right)$
+\end_inset
+
+ now?
+\end_layout
+
+\begin_layout Standard
+So it gets combinatorially more complicated.
+ How about for the continuous case? Well in the continuous case the probability
+ that 
+\begin_inset Formula $j=k$
+\end_inset
+
+ or anything like that is zero.
+ So that problem disappears but how do we compute the density since all
+ the 
+\begin_inset Formula $P$
+\end_inset
+
+ are evaluated at points? Well maybe compute the CDFs? So let's try that:
+ let 
+\begin_inset Formula $X_{1},X_{2}$
+\end_inset
+
+ both be discrete uniformly distributed on 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+.
+ Compute the joint distribution of 
+\begin_inset Formula $\left(X_{i},X_{\left(1\right)}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $i$
+\end_inset
+
+ can be either 1 or 2.
+ There are two cases and one of the cases has two subcases.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Case 1]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X_{\left(1\right)}=x_{\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{i}=x_{i}\neq x_{\left(1\right)}$
+\end_inset
+
+ then the other random variable has to be larger, i.e.
+ 
+\begin_inset Formula $x_{i}>x_{\left(1\right)}$
+\end_inset
+
+, so the two aren't independent.
+ Hence 
+\begin_inset Formula 
+\begin{eqnarray*}
+f_{X_{i},X_{\left(1\right)}}\left(x_{i},x_{\left(1\right)}\right) & = & f_{X_{i}|X_{\left(1\right)}}\left(x_{i}|x_{\left(1\right)}\right)f_{X_{\left(1\right)}}\left(x_{\left(1\right)}\right)\\
+ & = & \frac{f_{X_{i}}\left(x_{i}\right)}{\int_{x_{\left(1\right)}}^{1}f_{X_{i}}\left(x_{i}\right)dx}f_{X_{\left(1\right)}}\left(x_{\left(1\right)}\right)
+\end{eqnarray*}
+
+\end_inset
+
+This part I'm unsure about because I'm unsure if 
+\begin_inset Formula 
+\[
+f_{X_{i}|X_{\left(1\right)}}\left(x_{i}|x_{\left(1\right)}\right)=\frac{f_{X_{i}}\left(x_{i}\right)}{\int_{x_{\left(1\right)}}^{1}f_{X_{i}}\left(x_{i}\right)dx}
+\]
+
+\end_inset
+
+although it seems correct
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Case 2]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X_{\left(1\right)}=x_{\left(1\right)}$
+\end_inset
+
+ then the probability that 
+\begin_inset Formula $X_{i}=x_{\left(1\right)}$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $x_{1}=x_{2}$
+\end_inset
+
+ is zero.
+ Hence
+\begin_inset Formula 
+\[
+f_{X_{i},X_{\left(1\right)}}\left(x_{i},x_{\left(1\right)}\right)=f_{X_{i},X_{\left(1\right)}}\left(x_{i},x_{i}\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

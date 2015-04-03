@@ -1843,7 +1843,7 @@ The test that rejects if
  Then 
 \begin_inset Formula 
 \begin{align*}
-p\left(3\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq3\right)
+p\left(9\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq9\right)
 \end{align*}
 
 \end_inset
@@ -1855,8 +1855,8 @@ Since
 
 \begin_inset Formula 
 \begin{align*}
-p\left(3\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq3\right)\\
- & =\sup_{\theta\in\Theta_{0}}\left(1-e^{-3\lambda}\sum_{i=0}^{3-1}\frac{\left(3\lambda\right)^{i}}{i!}\right)
+p\left(9\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X_{1}+X_{2}+X_{3}\geq9\right)\\
+ & =\sup_{\theta\in\Theta_{0}}\left(1-e^{-3\lambda}\sum_{i=0}^{9-1}\frac{\left(3\lambda\right)^{i}}{i!}\right)
 \end{align*}
 
 \end_inset
@@ -1868,8 +1868,8 @@ Similarly to part (b) this function is increasing in
  
 \begin_inset Formula 
 \begin{align*}
-p\left(3\right) & =1-e^{-3}\sum_{i=0}^{3-1}\frac{3{}^{i}}{i!}\\
- & =.57681
+p\left(3\right) & =1-e^{-3}\sum_{i=0}^{8}\frac{3{}^{i}}{i!}\\
+ & =.00380299
 \end{align*}
 
 \end_inset
