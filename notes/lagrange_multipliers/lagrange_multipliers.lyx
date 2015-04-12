@@ -4475,7 +4475,7 @@ H_{L}\left(\mathbf{x},\boldsymbol{\lambda}\right) & =\begin{bmatrix}\nabla_{\mat
 \nabla_{\mathbf{\boldsymbol{\lambda}x}}L\left(\mathbf{x},\boldsymbol{\lambda}\right) & \nabla_{\boldsymbol{\lambda}\boldsymbol{\lambda}}L\left(\mathbf{x},\boldsymbol{\lambda}\right)
 \end{bmatrix}\\
  & =\begin{bmatrix}H_{f}\left(\mathbf{x}\right)+\sum_{i=1}^{m}\lambda_{i}H_{g}\left(\mathbf{x}\right) & \sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\\
-\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right) & \mathbf{0}
+\left(\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\right)^{T} & \mathbf{0}
 \end{bmatrix}
 \end{align*}
 
@@ -4491,6 +4491,82 @@ Note that
 \end_inset
 
  block.
+ This isn't very obvious so let me show that it's the case.
+ I claim I can always find a vectors 
+\begin_inset Formula $\left(\mathbf{a},\mathbf{b}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\mathbf{a}',\mathbf{b}'\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left(\mathbf{a},\mathbf{b}\right)H_{L}\left(\mathbf{a},\mathbf{b}\right)^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\mathbf{a}',\mathbf{b}'\right)H_{L}\left(\mathbf{a}',\mathbf{b}'\right)^{T}$
+\end_inset
+
+ are different signs, where 
+\begin_inset Formula $\left(\mathbf{a},\mathbf{b}\right)$
+\end_inset
+
+ is the correct dimension vector such that 
+\begin_inset Formula $\left(\mathbf{a},\mathbf{b}\right)H_{L}\left(\mathbf{a},\mathbf{b}\right)^{T}$
+\end_inset
+
+ makes sense.
+ Let 
+\begin_inset Formula $\left(\mathbf{a},\mathbf{b}\right)$
+\end_inset
+
+ be an arbitrary vector.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\left(\mathbf{a},\mathbf{b}\right)H_{L}\left(\mathbf{a},\mathbf{b}\right)^{T} & =\left(\mathbf{a},\mathbf{b}\right)\begin{bmatrix}H_{f}\left(\mathbf{x}\right)+\sum_{i=1}^{m}\lambda_{i}H_{g}\left(\mathbf{x}\right) & \sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\\
+\left(\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\right)^{T} & \mathbf{0}
+\end{bmatrix}\left(\mathbf{a},\mathbf{b}\right)^{T}\\
+ & =\left(\mathbf{a},\mathbf{b}\right)\left(\begin{bmatrix}H & G\\
+G^{T} & \mathbf{0}
+\end{bmatrix}\right)\left(\mathbf{a},\mathbf{b}\right)^{T}\\
+ & =\left(\mathbf{a},\mathbf{b}\right)\left(\begin{bmatrix}H & G\\
+G^{T} & H
+\end{bmatrix}-\begin{bmatrix}\mathbf{0} & \mathbf{0}\\
+\mathbf{0} & H
+\end{bmatrix}\right)\left(\mathbf{a},\mathbf{b}\right)^{T}\\
+ & =\left[\left(\mathbf{a}H+bG^{T},\mathbf{a}G+bH\right)-\left(0,bH\right)\right]\left(\mathbf{a},\mathbf{b}\right)^{T}\\
+ & =\mathbf{a}H\mathbf{a}^{T}+\mathbf{b}G^{T}\mathbf{a}^{T}+\mathbf{a}G\mathbf{b}^{T}+\mathbf{b}H\mathbf{b}^{T}-\mathbf{b}H\mathbf{b}^{T}\\
+ & =\left(\mathbf{a}H\mathbf{a}^{T}+2\mathbf{a}G\mathbf{b}^{T}+\mathbf{b}H\mathbf{b}^{T}\right)-\mathbf{b}H\mathbf{b}^{T}\\
+ & =\mathbf{a}\mathbf{a}^{T}+\mathbf{b}\left(\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\right)^{T}\mathbf{a}^{T}+\mathbf{a}\left(\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\right)\mathbf{b}^{T}\\
+ & =\mathbf{a}\left[H_{f}\left(\mathbf{x}\right)+\sum_{i=1}^{m}\lambda_{i}H_{g}\left(\mathbf{x}\right)\right]\mathbf{a}^{T}+2\mathbf{a}\left(\sum_{i=1}^{m}\nabla g_{i}\left(\mathbf{x}\right)\right)\mathbf{b}^{T}+\mathbf{b}\left(\right)\mathbf{b}^{T}
+\end{align*}
+
+\end_inset
+
+If the Hessians of the objective and the constraints aren't positive definite
+ then quantities 
+\begin_inset Formula $\left(\mathbf{a}\left[H_{f}\left(\mathbf{x}\right)\right]\mathbf{a}^{T}\right)$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\left(\mathbf{a}\left[H_{g}\left(\mathbf{x}\right)\right]\mathbf{a}^{T}\right)$
+\end_inset
+
+
 \end_layout
 
 \end_body

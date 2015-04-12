@@ -132,7 +132,12 @@ P\left(X=j\right)=\theta_{j}
 
 \end_inset
 
-And alternative way to write this is using the Iversion bracket 
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+An alternative way to write this is using the Iversion bracket 
 \begin_inset Formula 
 \[
 \left[x=j\right]=\begin{cases}
@@ -164,6 +169,10 @@ P\left(\mathbf{X}=\mathbf{x}\right) & =\prod_{i=1}^{N}\prod_{j=1}^{K}\theta_{j}^
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Enumerate
 Then to find the MLE we maximize the log-likelihood
 \begin_inset Formula 
 \begin{align*}
@@ -216,10 +225,95 @@ implies
  Then the requirement that
 \begin_inset Formula 
 \begin{align*}
-\left(\sum_{j=1}^{K}\theta_{j}-1\right) & =0\\
- & \left(\sum_{j=1}^{K}\frac{N_{j}}{\lambda}-1\right)\\
- & =\left(\sum_{j=1}^{K}\theta_{j}-1\right)=\left(\sum_{j=1}^{K}\frac{N_{j}}{\lambda}-1\right)
+\sum_{j=1}^{K}\theta_{j} & =1\\
+ & \Rightarrow\\
+\sum_{j=1}^{K}\frac{N_{j}}{\lambda} & =1\\
+ & \Rightarrow\\
+\lambda & =\sum_{j=1}^{K}N_{j}
 \end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula 
+\[
+\hat{\theta_{k}}=\frac{N_{k}}{\sum_{j=1}^{K}N_{j}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\mu_{0},\sigma^{2}\right)$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $\mu_{0}$
+\end_inset
+
+ indicates that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is a fixed, known quantity.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is distributed
+\begin_inset Formula 
+\[
+f_{X_{i}}\left(x_{i}\right)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{1}{2\sigma^{2}}\left(x_{i}-\mu_{0}\right)^{2}}
+\]
+
+\end_inset
+
+and so the joint distribution of all the 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{\mathbf{X}}\left(\mathbf{x}\right)=\left(\frac{1}{\sqrt{2\pi\sigma^{2}}}\right)^{n}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}}
+\]
+
+\end_inset
+
+Then the log-likelihood is
+\begin_inset Formula 
+\begin{align*}
+\log\left(f_{\mathbf{X}}\left(\mathbf{x}\right)\right) & =-n\log\left(\sqrt{2\pi\sigma^{2}}\right)-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}\\
+ & =-n\left(\log\left(\sqrt{2\pi}\right)+\frac{1}{2}\log\left(\sigma^{2}\right)\right)-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Differentiating and solving for 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\sigma^{2}}\log\left(f_{\mathbf{X}}\left(\mathbf{x}\right)\right)=-\frac{n}{2\sigma^{2}}+\frac{1}{2\left(\sigma^{2}\right)^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}=0
+\]
+
+\end_inset
+
+implies
+\begin_inset Formula 
+\[
+\hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}
+\]
 
 \end_inset
 
@@ -227,18 +321,57 @@ implies
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
+An estimator 
+\begin_inset Formula $T$
+\end_inset
 
-\begin_layout Plain Layout
+ is unbiased for a parameter 
+\begin_inset Formula $\theta$
+\end_inset
 
-\end_layout
+ if 
+\begin_inset Formula $E\left(T\right)=\theta$
+\end_inset
+
+.
+ The MLE for model above is in fact biased 
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\sigma^{2}}\right) & =E\left(\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\mu_{0}\right)^{2}\right)\\
+ & =\frac{1}{n}\sum_{i=1}^{n}E\left[\left(X_{i}-\mu_{0}\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\mu_{0}$
+\end_inset
+
+ is the true mean the random variable 
+\begin_inset Formula $Z_{i}=X_{i}-\mu_{0}$
+\end_inset
+
+ is distributed 
+\begin_inset Formula $\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+ and so by 
+\begin_inset Formula $\text{Var}\left(Z_{i}\right)=EZ_{i}^{2}-\left(EZ_{i}\right)^{2}$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\sigma^{2}}\right) & =E\left(\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\mu_{0}\right)^{2}\right)\\
+ & =\frac{1}{n}\sum_{i=1}^{n}E\left[\left(X_{i}-\mu_{0}\right)^{2}\right]
+\end{align*}
 
 \end_inset
 
 
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open

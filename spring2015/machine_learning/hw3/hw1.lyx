@@ -271,8 +271,106 @@ Let
  is distributed
 \begin_inset Formula 
 \[
-f_{X_{i}}\left(x_{i}\right)=\frac{1}{\sqrt{2\pi}\sigma^{2}}e^{-\frac{1}{2\sigma^{2}}\left(x_{i}-\mu_{0}\right)^{2}}
+f_{X_{i}}\left(x_{i}\right)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{1}{2\sigma^{2}}\left(x_{i}-\mu_{0}\right)^{2}}
 \]
+
+\end_inset
+
+and so the joint distribution of all the 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{\mathbf{X}}\left(\mathbf{x}\right)=\left(\frac{1}{\sqrt{2\pi\sigma^{2}}}\right)^{n}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}}
+\]
+
+\end_inset
+
+Then the log-likelihood is
+\begin_inset Formula 
+\begin{align*}
+\log\left(f_{\mathbf{X}}\left(\mathbf{x}\right)\right) & =-n\log\left(\sqrt{2\pi\sigma^{2}}\right)-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}\\
+ & =-n\left(\log\left(\sqrt{2\pi}\right)+\frac{1}{2}\log\left(\sigma^{2}\right)\right)-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Differentiating and solving for 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\sigma^{2}}\log\left(f_{\mathbf{X}}\left(\mathbf{x}\right)\right)=-\frac{n}{2\sigma^{2}}+\frac{1}{2\left(\sigma^{2}\right)^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}=0
+\]
+
+\end_inset
+
+implies
+\begin_inset Formula 
+\[
+\hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(x_{i}-\mu_{0}\right)^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+An estimator 
+\begin_inset Formula $T$
+\end_inset
+
+ is unbiased for a parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ if 
+\begin_inset Formula $E\left(T\right)=\theta$
+\end_inset
+
+.
+ The MLE for model above is in fact unbiased 
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\sigma^{2}}\right) & =E\left(\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\mu_{0}\right)^{2}\right)\\
+ & =\frac{1}{n}\sum_{i=1}^{n}E\left[\left(X_{i}-\mu_{0}\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\mu_{0}$
+\end_inset
+
+ is the true mean of the 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ the random variables 
+\begin_inset Formula $Z_{i}=X_{i}-\mu_{0}$
+\end_inset
+
+ are distributed 
+\begin_inset Formula $\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+ and so by 
+\begin_inset Formula $\text{Var}\left(Z_{i}\right)=EZ_{i}^{2}-\left(EZ_{i}\right)^{2}$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\sigma^{2}}\right) & =\frac{1}{n}\sum_{i=1}^{n}EZ_{i}^{2}\\
+ & =\frac{1}{n}\sum_{i=1}^{n}\left(\text{Var}\left(Z_{i}\right)+\left(EZ_{i}\right)\right)\\
+ & =\frac{1}{n}\sum_{i=1}^{n}\left(\sigma^{2}+0\right)\\
+ & =\sigma^{2}
+\end{align*}
 
 \end_inset
 
@@ -281,18 +379,27 @@ f_{X_{i}}\left(x_{i}\right)=\frac{1}{\sqrt{2\pi}\sigma^{2}}e^{-\frac{1}{2\sigma^
 
 \end_deeper
 \begin_layout Enumerate
-\begin_inset ERT
-status open
+Let 
+\begin_inset Formula $X_{i}\sim\text{Poisson}\left(\lambda\right)$
+\end_inset
 
-\begin_layout Plain Layout
 
 \end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The distribution is 
+\begin_inset Formula 
+\[
+f_{X}\left(x\right)=e^{-\lambda}\frac{\lambda^{x}}{x!}
+\]
 
 \end_inset
 
 
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
