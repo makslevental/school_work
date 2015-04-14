@@ -107,18 +107,183 @@ today
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset ERT
-status open
+The primal form of the soft margin SVM for 
+\begin_inset Formula $i=1,\dots,n$
+\end_inset
 
-\begin_layout Plain Layout
+ and 
+\begin_inset Formula $\xi_{i}\geq0$
+\end_inset
 
-\end_layout
+ is
+\begin_inset Formula 
+\[
+\arg\min_{\mathbf{w},\boldsymbol{\xi},b}\left\{ \frac{1}{2}\left\Vert \mathbf{w}\right\Vert ^{2}+C\sum_{i=1}^{n}\xi_{i}\right\} 
+\]
 
 \end_inset
 
+where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
+\begin_inset Formula $C\sum_{i=1}^{n}\xi_{i}$
+\end_inset
+
+ is a penalty term form large amounts of slack, 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+subject to
+\begin_inset Formula 
+\[
+y_{i}\left(\mathbf{w}\cdot\mathbf{x}_{i}-b\right)\geq1-\xi_{i}
+\]
+
+\end_inset
+
+Solving this using Lagrange multipliers; 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ for enforcing the above constraints and 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+ for for enforcing the 
+\begin_inset Formula $\xi_{i}\ge0$
+\end_inset
+
+ constraint we have
+\begin_inset Formula 
+\[
+\arg\min_{\mathbf{w},\boldsymbol{\xi},b}\max_{\boldsymbol{\alpha},\boldsymbol{\beta}}\left\{ \frac{1}{2}\left\Vert \mathbf{w}\right\Vert ^{2}+C\sum_{i=1}^{n}\xi_{i}-\sum_{i=1}^{n}\alpha_{i}\left(y_{i}\left(\mathbf{w}\cdot\mathbf{x}_{i}-b\right)-1+\xi_{i}\right)-\boldsymbol{\beta}\cdot\boldsymbol{\xi}\right\} 
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\alpha_{i},\beta_{i}\geq0$
+\end_inset
+
+.
+ 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+The dual transforms this 
+\begin_inset Formula $\min_{\mathbf{w},\boldsymbol{\xi},b}\max_{\boldsymbol{\alpha},\boldsymbol{\beta}}$
+\end_inset
+
+ problem into a 
+\begin_inset Formula $\max_{\boldsymbol{\alpha},\boldsymbol{\beta}}\min_{\mathbf{w},\boldsymbol{\xi},b}$
+\end_inset
+
+ problem.
+ Let the Lagrangian be 
+\begin_inset Formula 
+\[
+L=\frac{1}{2}\left\Vert \mathbf{w}\right\Vert ^{2}+C\sum_{i=1}^{n}\xi_{i}-\sum_{i=1}^{n}\alpha_{i}\left(y_{i}\left(\mathbf{w}\cdot\mathbf{x}_{i}-b\right)-1+\xi_{i}\right)-\boldsymbol{\beta}\cdot\boldsymbol{\xi}
+\]
+
+\end_inset
+
+Hence minimizing over 
+\begin_inset Formula $\mathbf{w},\boldsymbol{\xi},b$
+\end_inset
+
+ by taking derivatives of 
+\begin_inset Formula $L$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial b}L & =\sum_{i=1}^{n}\alpha_{i}y_{i}=0\\
+\frac{\partial}{\partial\mathbf{w}}L & =\mathbf{w}-\sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}=0\\
+\frac{\partial}{\partial\xi_{i}}L & =C-\sum_{i=1}^{n}\alpha_{i}-\beta_{i}=0
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+L & =\frac{1}{2}\left\Vert \sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right\Vert ^{2}+C\sum_{i=1}^{n}\xi_{i}-\sum_{i=1}^{n}\left(\alpha_{i}y_{i}\left(\mathbf{w}\cdot\mathbf{x}_{i}-b\right)-\alpha_{i}+\alpha_{i}\xi_{i}\right)-\boldsymbol{\beta}\cdot\boldsymbol{\xi}\\
+ & =\frac{1}{2}\left\Vert \sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right\Vert ^{2}+\left(\sum_{i=1}^{n}\alpha_{i}+\beta_{i}\right)\sum_{i=1}^{n}\xi_{i}-\sum_{i=1}^{n}\left(\alpha_{i}y_{i}\left(\mathbf{w}\cdot\mathbf{x}_{i}-b\right)-\alpha_{i}+\alpha_{i}\xi_{i}\right)-\boldsymbol{\beta}\cdot\boldsymbol{\xi}\\
+ & =\frac{1}{2}\left\Vert \sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right\Vert ^{2}+\left(\boldsymbol{\alpha}\cdot\boldsymbol{\xi}+\boldsymbol{\beta}\cdot\boldsymbol{\xi}\right)-\sum_{i=1}^{n}\left(\alpha_{i}y_{i}\left(\mathbf{w}\cdot\mathbf{x}_{i}-b\right)-\alpha_{i}\right)-\boldsymbol{\alpha}\cdot\boldsymbol{\xi}-\boldsymbol{\beta}\cdot\boldsymbol{\xi}\\
+ & =\frac{1}{2}\left\Vert \sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right\Vert ^{2}-\sum_{i=1}^{n}\left(\alpha_{i}y_{i}\left(\left[\sum_{j=1}^{n}\alpha_{j}y_{j}\mathbf{x}_{j}\right]\cdot\mathbf{x}_{i}-b\right)-\alpha_{i}\right)\\
+ & =\frac{1}{2}\left\Vert \sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right\Vert ^{2}-\sum_{i=1}^{n}\left(\alpha_{i}y_{i}\left(\left[\sum_{j=1}^{n}\alpha_{j}y_{j}\mathbf{x}_{j}\right]\cdot\mathbf{x}_{i}\right)\right)+b\sum_{i=1}^{n}\alpha_{i}y_{i}+\sum_{i=1}^{n}\alpha_{i}\\
+ & =\frac{1}{2}\left\Vert \sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right\Vert ^{2}-\sum_{i,j=1}^{n}\left(\alpha_{i}y_{i}\alpha_{j}y_{j}\mathbf{x}_{j}\cdot\mathbf{x}_{i}\right)+\sum_{i=1}^{n}\alpha_{i}\\
+ & =\frac{1}{2}\left(\sum_{i=1}^{n}\alpha_{i}y_{i}\mathbf{x}_{i}\right)\left(\sum_{j=1}^{n}\alpha_{j}y_{j}\mathbf{x}_{j}\right)-\sum_{i,j=1}^{n}\left(\alpha_{i}\alpha_{j}y_{i}y_{j}\mathbf{x}_{j}\cdot\mathbf{x}_{i}\right)+\sum_{i=1}^{n}\alpha_{i}\\
+ & =\sum_{i=1}^{n}\alpha_{i}-\sum_{i,j=1}^{n}\left(\alpha_{i}\alpha_{j}y_{i}y_{j}\mathbf{x}_{j}\cdot\mathbf{x}_{i}\right)
+\end{align*}
+
+\end_inset
+
+Hence the dual problem is 
+\begin_inset Formula 
+\[
+\arg\max_{\boldsymbol{\alpha}}\left\{ \sum_{i=1}^{n}\alpha_{i}-\sum_{i,j=1}^{n}\left(\alpha_{i}\alpha_{j}y_{i}y_{j}\mathbf{x}_{j}\cdot\mathbf{x}_{i}\right)\right\} 
+\]
+
+\end_inset
+
+subject to 
+\begin_inset Formula $0\leq\alpha_{i}\leq C$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{n}\alpha_{i}y_{i}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Clearly the dual problem is amenable to the kernel trick since 
+\begin_inset Formula $\mathbf{x}_{j}\cdot\mathbf{x}_{i}$
+\end_inset
+
+ appears in the second sum.
+ Therefore the general Kernel slack SVM
+\begin_inset Formula 
+\[
+\arg\max_{\boldsymbol{\alpha}}\left\{ \sum_{i=1}^{n}\alpha_{i}-\sum_{i,j=1}^{n}\left(\alpha_{i}\alpha_{j}y_{i}y_{j}K\left(\mathbf{x}_{j}\cdot\mathbf{x}_{i}\right)\right)\right\} 
+\]
+
+\end_inset
+
+subject to 
+\begin_inset Formula $0\leq\alpha_{i}\leq C$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{n}\alpha_{i}y_{i}=0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 The distribution of 
 \begin_inset Formula $X$
@@ -391,7 +556,23 @@ Let
 The distribution is 
 \begin_inset Formula 
 \[
-f_{X}\left(x\right)=e^{-\lambda}\frac{\lambda^{x}}{x!}
+f_{X}\left(x|\lambda\right)=e^{-\lambda}\frac{\lambda^{x}}{x!}
+\]
+
+\end_inset
+
+Therefore the conjugate prior is the gamma distribution on 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ with hyperparameters 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\pi\left(\lambda\right)=\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\lambda^{\alpha-1}e^{-\frac{\lambda}{\beta}}
 \]
 
 \end_inset
@@ -399,14 +580,385 @@ f_{X}\left(x\right)=e^{-\lambda}\frac{\lambda^{x}}{x!}
 
 \end_layout
 
-\end_deeper
 \begin_layout Enumerate
-\begin_inset ERT
-status open
+So
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\lambda|x\right) & =\frac{f_{X}\left(x|\lambda\right)\pi\left(\lambda\right)}{\int f_{X}\left(x|\lambda\right)\pi\left(\lambda\right)d\lambda}\\
+ & =\frac{1}{x!\Gamma\left(\alpha\right)\beta^{\alpha}}\frac{e^{-\lambda}\lambda^{x}\lambda^{\alpha-1}e^{-\frac{\lambda}{\beta}}}{\int\left(e^{-\lambda}\frac{\lambda^{x}}{x!}\frac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}\lambda^{\alpha-1}e^{-\frac{\lambda}{\beta}}\right)d\lambda}\\
+ & =\frac{\lambda^{x+\alpha-1}e^{-\lambda\left(1+\frac{1}{\beta}\right)}}{\int\left(e^{-\lambda}\lambda^{x}\lambda^{\alpha-1}e^{-\frac{\lambda}{\beta}}\right)d\lambda}
+\end{align*}
 
-\begin_layout Plain Layout
+\end_inset
+
+Therefore nessarily 
+\begin_inset Formula 
+\[
+\int\left(e^{-\lambda}\lambda^{x}\lambda^{\alpha-1}e^{-\frac{\lambda}{\beta}}\right)d\lambda=\frac{1}{\Gamma\left(x+\alpha\right)\left(1+\frac{1}{\beta}\right)^{x+\alpha}}
+\]
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\lambda|x\right) & =\frac{\lambda^{x+\alpha-1}e^{-\lambda\left(1+\frac{1}{\beta}\right)}}{\Gamma\left(x+\alpha\right)\left(1+\frac{1}{\beta}\right)^{x+\alpha}}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
+
+\begin_layout Enumerate
+In general
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\lambda|\mathbf{x}\right) & =\frac{\lambda^{\sum_{i=1}^{n}x_{i}+\alpha-1}e^{-\lambda\left(1+\frac{1}{\beta}\right)}}{\Gamma\left(\sum_{i=1}^{n}x_{i}+\alpha\right)\left(1+\frac{1}{\beta}\right)^{\sum_{i=1}^{n}x_{i}+\alpha}}
+\end{align*}
+
+\end_inset
+
+and as 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+ then 
+\begin_inset Formula $\sum_{i=1}^{n}x_{i}\rightarrow\infty$
+\end_inset
+
+ and it's the case that 
+\begin_inset Formula $\sum_{i=1}^{n}x_{i}\gg\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(1+\frac{1}{\beta}\right)^{\sum_{i=1}^{n}x_{i}+\alpha}\rightarrow\infty$
+\end_inset
+
+ regardless of 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The naive model is 
+\begin_inset Formula 
+\[
+P\left(X=x\right)=p_{0}g_{0}\left(X=x\right)+p_{1}g_{1}\left(X=x\right)
+\]
+
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+g_{0}\left(X=x\right)=\begin{cases}
+p_{0a} & \text{if }x=a\\
+p_{0b} & \text{if }x=b\\
+p_{0c} & \text{if }x=c
+\end{cases}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+g_{1}\left(X=x\right)=\begin{cases}
+p_{1a} & \text{if }x=a\\
+p_{1b} & \text{if }x=b\\
+p_{1c} & \text{if }x=c
+\end{cases}
+\]
+
+\end_inset
+
+The log-likelihood of a sample 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ is then
+\begin_inset Formula 
+\begin{align*}
+\log\left(L\left(\theta|\mathbf{X}\right)\right) & =\log\left(\prod_{i=1}^{n}f\left(X_{i}=x_{i}\right)\right)\\
+ & =\sum_{i=1}^{n}\log\left(p_{0}g_{0}\left(X_{i}=x_{i}\right)+p_{1}g\left(X_{i}=x_{i}\right)\right)
+\end{align*}
+
+\end_inset
+
+If we posit another random variable 
+\begin_inset Formula $Y$
+\end_inset
+
+ distributed such that 
+\begin_inset Formula 
+\begin{align*}
+P\left(Y=y\right) & =p_{0}^{y}p_{1}^{1-y}I\left(y\right)_{\left\{ 0,1\right\} }
+\end{align*}
+
+\end_inset
+
+then the joint likelihood of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $Y_{i}\sim Y$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, is 
+\begin_inset Formula 
+\begin{align*}
+P\left(X=x,Y=y\right) & =P\left(X=x|Y=y\right)P\left(Y=y\right)\\
+ & =g_{y}\left(x\right)p_{0}^{y}p_{1}^{1-y}I\left(y\right)_{\left\{ 0,1\right\} }
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+g_{y}\left(x\right) & =\begin{cases}
+p_{ya} & \text{if }x=a\\
+p_{yb} & \text{if }x=b\\
+p_{yc} & \text{if }x=c
+\end{cases}\\
+ & =\left(p_{ya}\right)^{\left[x=a\right]}\left(p_{yb}\right)^{\left[x=b\right]}\left(p_{yc}\right)^{\left[x=c\right]}\\
+ & =\prod_{j\in\left\{ a,b,c\right\} }\left(p_{yj}\right)^{\left[x=j\right]}
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\alpha_{y_{i}}=p_{0}^{y_{i}}p_{1}^{1-y_{i}}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\alpha_{y_{i}}=p_{0}$
+\end_inset
+
+ or 
+\begin_inset Formula $\alpha_{y_{i}}=p_{1}$
+\end_inset
+
+ depending on whether 
+\begin_inset Formula $y_{i}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $y_{i}=1$
+\end_inset
+
+.
+ The log-likelihood is then 
+\begin_inset Formula 
+\begin{align*}
+\log\left(L\left(\boldsymbol{\theta}|\mathbf{X},\mathbf{Y}\right)\right) & =\log\left(\prod_{i=1}^{n}g_{y_{i}}\left(x_{i}\right)\alpha_{y_{i}}\right)\\
+ & =\sum_{i=1}^{n}\log\left(g_{y_{i}}\left(x_{i}\right)\alpha_{y_{i}}\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\theta}=\left\{ \alpha_{0},\alpha_{1},p_{0a},p_{0b},p_{0c},p_{1a},p_{1b},p_{1c}\right\} $
+\end_inset
+
+.
+ To compute 
+\begin_inset Formula $E_{\mathbf{Y}|\mathbf{X};\boldsymbol{\theta}^{\left(k-1\right)}}\left(\log\left[P\left(\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)\right]\right)$
+\end_inset
+
+ we need the conditional density of 
+\begin_inset Formula $\mathbf{Y}|\mathbf{X};\boldsymbol{\theta}^{\left(k-1\right)}$
+\end_inset
+
+.
+ So by Bayes' Theorem
+\begin_inset Formula 
+\begin{align*}
+P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right) & =\frac{g_{y_{i}}\left(x_{i}\right)\alpha_{y_{i}}^{\left(k-1\right)}}{\sum_{y_{i}\in\left\{ 0,1\right\} }g_{y_{i}}\left(x_{i}\right)\alpha_{y_{i}}^{\left(k-1\right)}}\\
+ & =\frac{g_{y_{i}}\left(x_{i}\right)\alpha_{y_{i}}^{\left(k-1\right)}}{g_{0}\left(x_{i}\right)\alpha_{0}^{\left(k-1\right)}+g_{1}\left(x_{i}\right)\alpha_{1}^{\left(k-1\right)}}
+\end{align*}
+
+\end_inset
+
+Then the joint over all of the samples is 
+\begin_inset Formula 
+\[
+\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)=\prod_{i=1}^{n}\frac{g_{y_{i}}\left(x_{i}\right)\alpha_{y_{i}}^{\left(k-1\right)}}{g_{0}\left(x_{i}\right)\alpha_{0}^{\left(k-1\right)}+g_{1}\left(x_{i}\right)\alpha_{1}^{\left(k-1\right)}}
+\]
+
+\end_inset
+
+Hence
+\begin_inset Formula 
+\begin{align*}
+E_{\mathbf{Y}|\mathbf{X};\boldsymbol{\theta}^{\left(k-1\right)}}\left(\log\left[P\left(\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)\right]\right) & =\sum_{\mathbf{y}}\left[\log\left(P\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)\right)\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right]\\
+ & =\sum_{\mathbf{y}}\left[\sum_{j=1}^{n}\log\left(g_{y_{j}}\left(x_{j}\right)\alpha_{y_{i}}\right)\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right]\\
+ & =\sum_{y_{1}=0}^{1}\cdots\sum_{y_{n}=0}^{1}\left[\sum_{j=1}^{n}\log\left(g_{y_{j}}\left(x_{j}\right)\alpha_{y_{i}}\right)\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right]\\
+ & =\sum_{y_{1}=0}^{1}\cdots\sum_{y_{n}=0}^{1}\left[\sum_{j=1}^{n}\sum_{l=0}^{1}\delta_{l,y_{j}}\log\left(g_{y_{j}}\left(x_{j}\right)\alpha_{y_{i}}\right)\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right]\\
+ & =\sum_{l=0}^{1}\sum_{j=1}^{n}\log\left(g_{l}\left(x_{j}\right)\alpha_{l}\right)\sum_{y_{1}=0}^{1}\cdots\sum_{y_{n}=0}^{1}\delta_{l,y_{j}}\left[\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right]
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula 
+\begin{align*}
+\sum_{y_{1}=0}^{1}\cdots\sum_{y_{n}=0}^{1}\delta_{l,y_{j}}\left[\prod_{i=1}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right] & =\left(\sum_{y_{1}=0}^{1}\cdots\sum_{y_{j-1}=0}^{1}\sum_{y_{j+1}=0}^{1}\cdots\sum_{y_{n}=0}^{1}\prod_{\underset{i\neq j}{i=1}}^{n}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)\\
+ & =\prod_{\underset{i\neq j}{i=1}}^{n}\left(\sum_{y_{i}=0}^{1}P\left(y_{i}|x_{i},\boldsymbol{\theta}^{\left(k-1\right)}\right)\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)\\
+ & =P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\sum_{j=0}^{1}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)=1$
+\end_inset
+
+.
+ Hence
+\begin_inset Formula 
+\begin{align*}
+E_{\mathbf{Y}|\mathbf{X};\boldsymbol{\theta}^{\left(k-1\right)}}\left(\log\left[P\left(\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)\right]\right) & =\sum_{l=0}^{1}\sum_{j=1}^{n}\log\left(g_{l}\left(x_{j}\right)\alpha_{l}\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)\\
+ & =\sum_{l=0}^{1}\sum_{j=1}^{n}\log\left(g_{l}\left(x_{j}\right)\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\sum_{l=0}^{1}\sum_{j=1}^{n}\log\left(\alpha_{l}\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)
+\end{align*}
+
+\end_inset
+
+Note that the first term is a function of only the parameters
+\begin_inset Formula $\left\{ p_{0a},p_{0b},p_{0c},p_{1a},p_{1b},p_{1c}\right\} $
+\end_inset
+
+ and the second term is only a function of the parameters 
+\begin_inset Formula $\left\{ \alpha_{0},\alpha_{1}\right\} $
+\end_inset
+
+.
+ Therefore we can maximize them independently.
+ Minimizing the second wrt 
+\begin_inset Formula $\alpha_{l}$
+\end_inset
+
+ using Lagrange multipliers to enforce 
+\begin_inset Formula $\sum_{l}\alpha_{l}-1=0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\alpha_{l}}\left[\sum_{l=0}^{1}\sum_{j=1}^{n}\log\left(\alpha_{l}\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda\left(\sum_{l}\alpha_{l}-1\right)\right]=0
+\]
+
+\end_inset
+
+implies
+\begin_inset Formula 
+\begin{align*}
+\sum_{j=1}^{n}\frac{1}{\alpha_{l}}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda & =0\\
+\sum_{j=1}^{n}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right) & =-\alpha_{l}\lambda
+\end{align*}
+
+\end_inset
+
+Summing both sides over 
+\begin_inset Formula $l$
+\end_inset
+
+ implies 
+\begin_inset Formula 
+\begin{align*}
+\alpha_{l} & =\frac{1}{n}\sum_{j=1}^{n}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)\\
+ & =\frac{1}{n}\sum_{j=1}^{n}\frac{g_{l}\left(x_{j}\right)\alpha_{l}^{\left(k-1\right)}}{g_{0}\left(x_{j}\right)\alpha_{0}^{\left(k-1\right)}+g_{1}\left(x_{j}\right)\alpha_{1}^{\left(k-1\right)}}
+\end{align*}
+
+\end_inset
+
+Hence
+\size footnotesize
+
+\begin_inset Formula 
+\begin{align*}
+\alpha_{0} & =\frac{1}{n}\sum_{j=1}^{n}\frac{g_{0}\left(x_{j}\right)\alpha_{0}^{\left(k-1\right)}}{g_{0}\left(x_{j}\right)\alpha_{0}^{\left(k-1\right)}+g_{1}\left(x_{j}\right)\alpha_{1}^{\left(k-1\right)}}\\
+ & =\frac{1}{n}\sum_{j=1}^{n}\frac{g_{0}\left(x_{j}\right)p_{0}^{\left(k-1\right)}}{g_{0}\left(x_{j}\right)p_{0}^{\left(k-1\right)}+g_{1}\left(x_{j}\right)p_{1}^{\left(k-1\right)}}\\
+ & =\frac{1}{n}\sum_{j=1}^{n}\frac{\left(p_{0a}^{\left(k-1\right)}\right)^{\left[x_{j}=a\right]}\left(p_{0b}^{\left(k-1\right)}\right)^{\left[x_{j}=b\right]}\left(p_{0c}^{\left(k-1\right)}\right)^{\left[x_{j}=c\right]}p_{0}^{\left(k-1\right)}}{\left(p_{0a}^{\left(k-1\right)}\right)^{\left[x_{j}=a\right]}\left(p_{0b}^{\left(k-1\right)}\right)^{\left[x_{j}=b\right]}\left(p_{0c}^{\left(k-1\right)}\right)^{\left[x_{j}=c\right]}p_{0}^{\left(k-1\right)}+\left(p_{1a}^{\left(k-1\right)}\right)^{\left[x_{j}=a\right]}\left(p_{1b}^{\left(k-1\right)}\right)^{\left[x_{j}=b\right]}\left(p_{1c}^{\left(k-1\right)}\right)^{\left[x_{j}=c\right]}p_{1}^{\left(k-1\right)}}
+\end{align*}
+
+\end_inset
+
+
+\size default
+and 
+\size footnotesize
+
+\begin_inset Formula 
+\begin{align*}
+\alpha_{1} & =\frac{1}{n}\sum_{j=1}^{n}\frac{\left(p_{1a}^{\left(k-1\right)}\right)^{\left[x_{j}=a\right]}\left(p_{1b}^{\left(k-1\right)}\right)^{\left[x_{j}=b\right]}\left(p_{1c}^{\left(k-1\right)}\right)^{\left[x_{j}=c\right]}p_{1}^{\left(k-1\right)}}{\left(p_{0a}^{\left(k-1\right)}\right)^{\left[x_{j}=a\right]}\left(p_{0b}^{\left(k-1\right)}\right)^{\left[x_{j}=b\right]}\left(p_{0c}^{\left(k-1\right)}\right)^{\left[x_{j}=c\right]}p_{0}^{\left(k-1\right)}+\left(p_{1a}^{\left(k-1\right)}\right)^{\left[x_{j}=a\right]}\left(p_{1b}^{\left(k-1\right)}\right)^{\left[x_{j}=b\right]}\left(p_{1c}^{\left(k-1\right)}\right)^{\left[x_{j}=c\right]}p_{1}^{\left(k-1\right)}}
+\end{align*}
+
+\end_inset
+
+
+\size default
+Maximizing the first wrt 
+\begin_inset Formula $\left\{ p_{la},p_{lb},p_{lc}\right\} $
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial p_{ly}}\left[\sum_{l=0}^{1}\sum_{j=1}^{n}\log\left(g_{l}\left(x_{j}\right)\right)P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda\left(\sum_{y}p_{ly}-1\right)\right] & =0\\
+\sum_{j=1}^{n}\frac{\frac{\partial}{\partial p_{ly}}g_{l}\left(x_{j}\right)}{g_{l}\left(x_{j}\right)}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda & =0\\
+\sum_{j=1}^{n}\frac{\frac{\partial}{\partial p_{ly}}\left[\left(p_{la}\right)^{\left[x_{j}=a\right]}\left(p_{lb}\right)^{\left[x_{j}=b\right]}\left(p_{lc}\right)^{\left[x_{j}=c\right]}\right]}{g_{l}\left(x_{j}\right)}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda & =0\\
+\sum_{j=1}^{n}\frac{\left[x_{j}=y\right]}{\left(p_{la}\right)^{\left[x_{j}=a\right]}\left(p_{lb}\right)^{\left[x_{j}=b\right]}\left(p_{lc}\right)^{\left[x_{j}=c\right]}}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda & =0
+\end{align*}
+
+\end_inset
+
+For example for 
+\begin_inset Formula $y=a$
+\end_inset
+
+ we get
+\begin_inset Formula 
+\begin{align*}
+\sum_{j=1}^{n}\frac{\left[x_{j}=a\right]}{\left(p_{la}\right)}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)+\lambda & =0\\
+\sum_{j=1}^{n}\left[x_{j}=a\right]P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right) & =-p_{la}\lambda
+\end{align*}
+
+\end_inset
+
+Summing both sides over 
+\begin_inset Formula $l$
+\end_inset
+
+ we get that 
+\begin_inset Formula 
+\begin{align*}
+-\lambda & =\sum_{l=0}^{1}\sum_{j=1}^{n}\left[x_{j}=a\right]P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)\\
+ & =\sum_{j=1}^{n}\left[x_{j}=a\right]
+\end{align*}
+
+\end_inset
+
+Therefore finally 
+\begin_inset Formula 
+\begin{align*}
+p_{ly} & =\frac{\sum_{j=1}^{n}P\left(l|x_{j},\boldsymbol{\theta}^{\left(k-1\right)}\right)}{\sum_{j=1}^{n}\left[x_{j}=y\right]}\\
+ & =\frac{n\alpha_{l}}{\sum_{j=1}^{n}\left[x_{j}=y\right]}
+\end{align*}
 
 \end_inset
 
