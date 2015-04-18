@@ -1,0 +1,1302 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+STA 6327 Homework 2 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.19]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y_{1},\dots,Y_{n}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+Y_{i}=\beta x_{i}+E_{i}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ are fixed constants and 
+\begin_inset Formula $E_{i}\sim\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Y_{i}\sim\text{n}\left(\beta x_{i},\sigma^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+f\left(y_{i}|\beta,\sigma^{2}\right) & =\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{\left(y_{i}-\beta x_{i}\right)^{2}}{2\sigma^{2}}}\\
+ & =\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\left(\frac{y_{i}^{2}}{2\sigma^{2}}+\frac{\left(\beta x_{i}\right)^{2}}{2\sigma^{2}}+\frac{y_{i}\beta x_{i}}{\sigma^{2}}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By Thm 6.2.10 
+\begin_inset Formula $\left(\sum_{i=1}^{n}Y_{i}^{2},\sum_{i=1}^{n}Y_{i}x_{i}\right)$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\left(\sigma^{2},\beta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For fixed 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ maximizing
+\begin_inset Formula 
+\[
+\log L\left(\beta,\sigma^{2}|\mathbf{y}\right)=n\log\left(\frac{1}{\sqrt{2\pi\sigma^{2}}}\right)^{n}-\left(\sum_{i=1}^{n}\frac{\left(y_{i}-\beta x_{i}\right)^{2}}{2\sigma^{2}}\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\beta}\log L\left(\beta,\sigma^{2}|\mathbf{y}\right) & =0\\
+\left(\sum_{i=1}^{n}\frac{\left(y_{i}-\beta x_{i}\right)x_{i}}{\sigma^{2}}\right) & =0\\
+\sum_{i=1}^{n}y_{i}x_{i} & =\sum_{i=1}^{n}\beta\left(x_{i}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\beta=\frac{1}{\sum_{i=1}^{n}\left(x_{i}\right)^{2}}\sum_{i=1}^{n}y_{i}x_{i}$
+\end_inset
+
+.
+ Then checking the second derivative 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\frac{\partial^{2}}{\partial\beta^{2}}\log L\left(\beta,\sigma^{2}|\mathbf{y}\right)=-\sum_{i=1}^{n}\frac{x_{i}^{2}}{\sigma^{2}}<0
+\]
+
+\end_inset
+
+Hence
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula 
+\[
+\hat{\beta}=\frac{1}{\mathbf{x}^{2}}\sum_{i=1}^{n}Y_{i}x_{i}
+\]
+
+\end_inset
+
+For the bias of 
+\begin_inset Formula $\hat{\beta}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E_{\beta}\hat{\beta}=\frac{1}{\mathbf{x}^{2}}E_{\beta}\left(\sum_{i=1}^{n}Y_{i}x_{i}\right)=\frac{1}{\mathbf{x}^{2}}\sum_{i=1}^{n}x_{i}E_{\beta}\left(Y_{i}\right)=\frac{\beta}{\mathbf{x}^{2}}\sum_{i=1}^{n}x_{i}x_{i}=\beta
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\text{Bias}_{\beta}\hat{\beta}=\beta-\beta=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In general 
+\begin_inset Formula $Y_{i}x_{i}\sim\text{n}\left(\beta x_{i},\left(\sigma x_{i}\right)^{2}\right)$
+\end_inset
+
+ and by corollary 4.6.10 
+\begin_inset Formula $\sum_{i}Y_{i}\frac{x_{i}}{\sum x_{i}}\sim\text{n}\left(\sum_{i}\frac{x_{i}}{\sum x_{i}^{2}}\left(\beta x_{i}\right),\sigma^{2}\sum_{i}\left(\frac{x_{i}}{\sum_{i}x_{i}^{2}}\right)^{2}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{align*}
+\hat{\beta} & \sim\text{n}\left(\beta,\frac{\sigma^{2}}{\sum_{i}x_{i}^{2}}\right)\\
+ & \sim\text{n}\left(\beta,\frac{\sigma^{2}}{\sum_{i}x_{i}^{2}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.20]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y_{1},\dots,Y_{n}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+Y_{i}=\beta x_{i}+E_{i}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ are fixed constants and 
+\begin_inset Formula $E_{i}\sim\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Y_{i}\sim\text{n}\left(\beta x_{i},\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula 
+\[
+Z=\sum_{i=1}^{n}\left(\frac{1}{\sum_{i=1}^{n}x_{i}}\right)Y_{i}
+\]
+
+\end_inset
+
+ Then by corollary 4.6.10
+\begin_inset Formula 
+\begin{align*}
+Z & \sim\text{n}\left(\sum_{i=1}^{n}\left(\frac{1}{\sum_{i=1}^{n}x_{i}}\right)\beta x_{i},\sum_{i=1}^{n}\left(\frac{1}{\sum_{i=1}^{n}x_{i}}\right)^{2}\sigma^{2}\right)\\
+ & \sim\text{n}\left(\beta,n\left(\frac{\sigma}{\sum_{i=1}^{n}x_{i}}\right)^{2}\right)\\
+ & \sim\text{n}\left(\beta,n\left(\frac{\sigma}{n\bar{x}}\right)^{2}\right)\\
+ & \sim\text{n}\left(\beta,\frac{1}{n}\left(\frac{\sigma}{\bar{x}}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $EZ=\beta$
+\end_inset
+
+ and so it is an unbiased estimator for 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The variance 
+\begin_inset Formula 
+\[
+\text{Var}\left(\hat{\beta}\right)=\frac{1}{n}\left(\frac{\sigma}{\bar{x}}\right)^{2}
+\]
+
+\end_inset
+
+and by Jensen's inequality, since 
+\begin_inset Formula $\left(\cdot\right)^{2}$
+\end_inset
+
+ is convex 
+\begin_inset Formula 
+\begin{align*}
+E\left(x^{2}\right) & \geq\left(Ex\right)^{2}\\
+\frac{1}{n}\sum x_{i}^{2} & \geq\left(\frac{1}{n}\sum x_{i}\right)^{2}\\
+ & \Rightarrow\\
+\frac{1}{\frac{1}{n}\sum x_{i}^{2}} & \leq\frac{1}{\left(\frac{1}{n}\sum x_{i}\right)^{2}}\\
+\frac{\sigma^{2}}{\sum x_{i}^{2}} & \leq\frac{\sigma^{2}}{n\bar{x}^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.24]
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $X_{1},\dots,X_{n}\sim\text{Poisson}$
+\end_inset
+
+
+\begin_inset Formula $\left(\lambda\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi\left(\lambda\right)\sim\text{gamma}\left(\alpha,\beta\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Then
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\lambda|\mathbf{x}\right) & =\frac{f\left(\mathbf{x}|\lambda\right)\pi\left(\lambda\right)}{m\left(\mathbf{x}\right)}\\
+ & =\left(\prod_{i=1}^{n}\frac{e^{-\lambda}\lambda^{x_{i}}}{x_{i}}\right)\left(\frac{\lambda^{\alpha-1}e^{-\lambda/\beta}}{\Gamma\left(\alpha\right)\beta^{\alpha}}\right)\Bigg/m\left(\mathbf{x}\right)\\
+ & =\left(\frac{e^{-n\lambda}\lambda^{\sum_{i=1}^{n}x_{i}}}{\prod_{i=1}^{n}x_{i}}\right)\left(\frac{\lambda^{\alpha-1}e^{-\lambda/\beta}}{\Gamma\left(\alpha\right)\beta^{\alpha}}\right)\Bigg/m\left(\mathbf{x}\right)\\
+ & =e^{-\lambda\left(n+\frac{1}{\beta}\right)}\lambda^{\alpha+n\bar{x}-1}\Bigg/h\left(\mathbf{x}\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $m\left(\mathbf{x}\right)=\int_{0}^{\infty}f\left(\mathbf{x}|\lambda\right)\pi\left(\lambda\right)d\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $h\left(\mathbf{x}\right)=m\left(\mathbf{x}\right)\Gamma\left(\alpha\right)\beta^{\alpha}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\[
+\pi\left(\lambda|\mathbf{x}\right)\sim\text{gamma}\left(\alpha+n\bar{x},\frac{1}{n+1/\beta}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since
+\begin_inset Formula 
+\[
+\pi\left(\lambda|\mathbf{x}\right)\sim\text{gamma}\left(\alpha+n\bar{x},\frac{1}{n+1/\beta}\right)
+\]
+
+\end_inset
+
+it's the case that 
+\begin_inset Formula 
+\begin{align*}
+E\left(\pi|\mathbf{x}\right) & =\frac{\alpha+n\bar{x}}{n+1/\beta}\\
+\text{Var}\left(\pi|\mathbf{x}\right) & =\frac{\alpha+n\bar{x}}{\left(n+1/\beta\right)^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.25]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}|\theta_{i}\sim\text{n}\left(\theta_{i},\sigma^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta_{i}\sim\text{n}\left(\mu,\tau^{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By Ex 7.2.16, since normal is self-conjugate 
+\begin_inset Formula 
+\begin{align*}
+\pi\left(\theta|x\right) & =\frac{\sigma^{2}+\tau^{2}}{\sqrt{2\pi}\sigma^{2}\tau^{2}}e^{-\frac{1}{2}\frac{\left(\sigma^{2}+\tau^{2}\right)}{\sigma^{2}\tau^{2}}\left(\theta-\left(\frac{\tau^{2}x+\sigma^{2}\mu}{\sigma^{2}+\tau^{2}}\right)\right)^{2}}
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x\right) & =\frac{f_{X|\theta}\left(x|\theta\right)\pi\left(\theta\right)}{\pi\left(\theta|x\right)}\\
+ & =\frac{\frac{1}{2\pi\sigma^{2}\tau^{2}}e^{-\frac{1}{2\sigma^{2}}\left(x-\theta\right)^{2}-\frac{1}{2\tau^{2}}\left(\theta-\mu\right)^{2}}}{\frac{\sigma^{2}+\tau^{2}}{\sqrt{2\pi}\sigma^{2}\tau^{2}}e^{-\frac{1}{2}\frac{\left(\sigma^{2}+\tau^{2}\right)}{\sigma^{2}\tau^{2}}\left(\theta-\left(\frac{\tau^{2}x+\sigma^{2}\mu}{\sigma^{2}+\tau^{2}}\right)\right)^{2}}}\\
+ & =\frac{1}{\sqrt{2\pi}\left(\sigma^{2}+\tau^{2}\right)}e^{-\frac{\left(x-\mu\right)^{2}}{2\left(\sigma^{2}+\tau^{2}\right)}}
+\end{align*}
+
+\end_inset
+
+and since each 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is marginally normal and the joint normal distribution factors they're
+ i.i.d.
+\end_layout
+
+\begin_layout Enumerate
+The joint distribution of 
+\begin_inset Formula $\mathbf{X}=\left(X_{1},\dots,X_{n}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}\right) & =\int f_{\mathbf{X},\boldsymbol{\Theta}}\left(\mathbf{x},\boldsymbol{\theta}\right)d\boldsymbol{\theta}\\
+ & =\int f_{\mathbf{X}|\boldsymbol{\Theta}}\left(\mathbf{x}|\boldsymbol{\theta}\right)\pi\left(\boldsymbol{\theta}|\tau\right)d\boldsymbol{\theta}\\
+ & =\frac{f_{\mathbf{X}|\boldsymbol{\Theta}}\left(\mathbf{x}|\boldsymbol{\theta}\right)\pi\left(\boldsymbol{\theta}|\tau\right)}{\pi\left(\boldsymbol{\theta}|\mathbf{x},\tau\right)}
+\end{align*}
+
+\end_inset
+
+by Baye's Theorem.
+ But 
+\begin_inset Formula $X_{i}|\theta_{i}$
+\end_inset
+
+ are i.i.d and 
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+ are also i.i.d from the same distribution 
+\begin_inset Formula $\pi\left(\theta|\tau\right)$
+\end_inset
+
+ so
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}\right) & =\frac{f_{\mathbf{X}|\boldsymbol{\Theta}}\left(\mathbf{x}|\boldsymbol{\theta}\right)\pi\left(\boldsymbol{\theta}|\tau\right)}{\pi\left(\boldsymbol{\theta}|\mathbf{x},\tau\right)}\\
+ & =\frac{\prod_{i=1}^{n}f_{X_{i}|\theta_{i}}\left(x_{i}|\theta_{i}\right)\prod_{i=1}^{n}\pi\left(\theta|\tau\right)}{\pi\left(\boldsymbol{\theta}|\mathbf{x},\tau\right)}\\
+ & =???
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.37]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ be distributed with pdf
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\frac{1}{2\theta}I\left(x\right)_{\left(-\theta,\theta\right)}
+\]
+
+\end_inset
+
+Then the joint distribution 
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}|\theta\right) & =\frac{1}{2\theta^{n}}I\left(x_{\left(1\right)}\right)_{\left(-\theta,\infty\right)}I\left(x_{\left(n\right)}\right)_{\left(-\infty,\theta\right)}\\
+ & =\frac{1}{2\theta^{n}}I\left(\max_{i}\left|x_{i}\right|\right)_{\left[0,\theta\right)}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\max_{i}\left|X_{i}\right|$
+\end_inset
+
+ is a sufficient statistic.
+ First of all by Thm 2.1.8 the distribution of 
+\begin_inset Formula $Y_{i}=g\left(X_{i}\right)=\left|X_{i}\right|$
+\end_inset
+
+ with 
+\begin_inset Formula 
+\begin{align*}
+A_{0} & =\left\{ 0\right\} \\
+A_{1} & =\left(-\theta,0\right)\; g_{1}\left(x\right)=\left|x\right|\; g_{1}^{-1}\left(y\right)=-y\;\left|\frac{d}{dy}g_{1}^{-1}\left(y\right)\right|=1\\
+A_{2} & =\left(0,\theta\right)\; g_{2}\left(x\right)=\left|x\right|\; g_{2}^{-1}\left(y\right)=y\;\left|\frac{d}{dy}g_{2}^{-1}\left(y\right)\right|=1
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\mathcal{Y}=\left(0,\theta\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+f_{Y}\left(y\right) & =\begin{cases}
+\sum_{i=1}^{k}f_{X}\left(g_{i}^{-1}\left(y\right)\right)\left|\frac{d}{dy}g_{i}^{-1}\left(y\right)\right| & y\in\mathcal{Y}\\
+0 & \text{o/w}
+\end{cases}\\
+ & =\left(\frac{1}{2\theta}+\frac{1}{2\theta}\right)I\left(y\right)_{\left(0,\theta\right)}\\
+ & =\frac{1}{\theta}I\left(y\right)_{\left(0,\theta\right)}
+\end{align*}
+
+\end_inset
+
+ and then by Ex 5.4.5 
+\begin_inset Formula $\max_{i}\left|X_{i}\right|$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{\left|X\right|_{\left(n\right)}}\left(x\right)=\frac{n}{\theta^{n}}x^{n-1}I\left(x\right)_{\left(0,\theta\right)}
+\]
+
+\end_inset
+
+Then verifying completeness
+\begin_inset Formula 
+\begin{align*}
+E\left(g\left(\left|X\right|_{\left(n\right)}\right)\right) & =\int_{0}^{\theta}g\left(\left|x\right|_{\left(n\right)}\right)\frac{n}{\theta^{n}}x^{n-1}dx\\
+ & =0\\
+ & \Rightarrow\\
+\frac{d}{d\theta}\int_{0}^{\theta}g\left(\left|x\right|_{\left(n\right)}\right)\frac{n}{\theta^{n}}x^{n-1}dx & =0\\
+g\left(\left|\theta\right|_{\left(n\right)}\right)\frac{1}{\theta} & =0\\
+ & \Rightarrow\\
+g\left(\left|\theta\right|_{\left(n\right)}\right) & =0
+\end{align*}
+
+\end_inset
+
+Testing for unbiasedness 
+\begin_inset Formula 
+\begin{align*}
+E\left(\left|\theta\right|_{\left(n\right)}\right) & =\int_{0}^{\theta}x\frac{n}{\theta^{n}}x^{n-1}dx\\
+ & =\frac{n}{\theta^{n}}\int_{0}^{\theta}x^{n}dx\\
+ & =\frac{n}{n+1}\frac{\theta^{n+1}}{\theta^{n}}\\
+ & =\frac{n}{n+1}\theta
+\end{align*}
+
+\end_inset
+
+Therefore 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $E\left(\frac{n+1}{n}\left|\theta\right|_{\left(n\right)}\right)=\theta$
+\end_inset
+
+ and so by Thm 7.3.23 
+\begin_inset Formula $\frac{n+1}{n}\max_{i}\left|X_{i}\right|$
+\end_inset
+
+ is the unique uniformly minimium variance unbiased estimator 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.38]
+\end_layout
+
+\end_inset
+
+For there to be a function that attains the Cramer-Rao lower bound we must
+ have that
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\theta}\log\left(f_{\mathbf{X}}\left(\mathbf{X}|\theta\right)\right)=a\left(\theta\right)\left(W\left(\mathbf{X}\right)-\tau\left(\theta\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+For 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\theta x^{\theta-1}I\left(x\right)_{\left(0,1\right)}
+\]
+
+\end_inset
+
+we have that 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta}\log\left(f_{\mathbf{X}}\left(\mathbf{X}|\theta\right)\right) & =\frac{\partial}{\partial\theta}\log\left(\theta^{n}\left(\prod_{i=1}^{n}X_{i}\right)^{\theta-1}\right)\\
+ & =\frac{\partial}{\partial\theta}\left(n\log\left(\theta\right)+\left(\theta-1\right)\sum_{i=1}^{n}\log\left(X_{i}\right)\right)\\
+ & =\frac{n}{\theta}+\sum_{i=1}^{n}\log\left(X_{i}\right)\\
+ & =-n\left(-\frac{1}{n}\sum_{i=1}^{n}\log\left(X_{i}\right)-\left(\frac{1}{\theta}\right)\right)
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $W\left(\mathbf{X}\right)=-\frac{1}{n}\sum_{i=1}^{n}\log\left(X_{i}\right)$
+\end_inset
+
+ is a potential UMVUE for 
+\begin_inset Formula $1/\theta$
+\end_inset
+
+.
+ We need only test that it is unbiased.
+ By Exercise 7.11 
+\begin_inset Formula $W\sim\text{gamma}\left(n,\frac{1}{n\theta}\right)$
+\end_inset
+
+ and so 
+\begin_inset Formula $E\left(W\right)=1/\theta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f_{X}\left(x|\theta\right)=\frac{\log\left(\theta\right)}{\theta-1}\theta^{x}
+\]
+
+\end_inset
+
+we have that 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta}\log\left(f_{\mathbf{X}}\left(\mathbf{X}|\theta\right)\right) & =\frac{\partial}{\partial\theta}\log\left(\left(\frac{\log\left(\theta\right)}{\theta-1}\right)^{n}\theta^{\sum_{i=1}^{n}X_{i}}\right)\\
+ & =\frac{\partial}{\partial\theta}\left(n\left(\log\log\left(\theta\right)-\log\left(\theta-1\right)\right)+\log\left(\theta\right)\sum_{i=1}^{n}X_{i}\right)\\
+ & =\frac{n}{\theta\log\left(\theta\right)}-\frac{n}{\theta-1}+\frac{1}{\theta}\sum_{i=1}^{n}X_{i}\\
+ & =\frac{n}{\theta}\left(\frac{1}{n}\sum_{i=1}^{n}X_{i}-\left(\frac{\theta}{\left(\theta-1\right)}-\frac{1}{\log\left(\theta\right)}\right)\right)
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $W\left(\mathbf{X}\right)=\bar{X}$
+\end_inset
+
+ is a potential UMVUE for 
+\begin_inset Formula 
+\[
+\frac{\theta}{\left(\theta-1\right)}-\frac{1}{\log\left(\theta\right)}
+\]
+
+\end_inset
+
+We need only test that it is unbiased.
+ 
+\begin_inset Formula 
+\begin{align*}
+E\left(\bar{X}\right) & =E\left(X\right)\\
+ & =\int_{0}^{1}x\frac{\log\left(\theta\right)}{\theta-1}\theta^{x}dx\\
+ & =\frac{\theta}{\theta-1}-\frac{1}{\log\left(\theta\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.46]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{1},X_{2},X_{3}$
+\end_inset
+
+ be a random sample from a 
+\begin_inset Formula $\text{uniform}\left(\theta,2\theta\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\theta>0$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The method of moments estimator for 
+\begin_inset Formula $\theta$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{x_{1}+x_{2}+x_{3}}{3} & =\frac{\theta+2\theta}{2}\\
+ & \Rightarrow\\
+\frac{2}{9}\left(x_{1}+x_{2}+x_{3}\right) & =\hat{\theta}_{MOM}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The likelihood
+\begin_inset Formula 
+\begin{align*}
+f_{\mathbf{X}}\left(\mathbf{x}\right) & =\frac{1}{\theta^{3}}I\left(x_{1}\right)_{\left(\theta,2\theta\right)}I\left(x_{2}\right)_{\left(\theta,2\theta\right)}I\left(x_{3}\right)_{\left(\theta,2\theta\right)}\\
+ & =\frac{1}{\theta^{3}}I\left(x_{\left(1\right)}\right)_{\left(\theta,\infty\right)}I\left(x_{\left(3\right)}\right)_{\left(-\infty,2\theta\right)}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $x_{\left(3\right)}<2\theta$
+\end_inset
+
+ and since 
+\begin_inset Formula $1/\theta^{3}$
+\end_inset
+
+ is decreasing function of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ the MLE is 
+\begin_inset Formula $\hat{\theta}=x_{\left(3\right)}/2$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+E\left(\hat{\theta}\right) & =\int_{\theta}^{2\theta}x\frac{3!}{\left(3-1\right)!\left(3-3\right)!}\frac{1}{\theta}\left(\frac{x}{\theta}\right)^{3-1}d\theta\\
+ & =\frac{3}{2\theta^{3}}\int_{\theta}^{2\theta}x^{3}dx\\
+ & =\frac{45}{8}\theta
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula $E\left(\frac{8}{45}\hat{\theta}\right)=\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\hat{\theta}_{MLE}$
+\end_inset
+
+ is not an unbiased estimator the Rao-Blackwell theorem doesn't apply but
+ 
+\begin_inset Formula $\hat{\theta}_{MOM}$
+\end_inset
+
+ is by definition unbiased so it can be improved conditioning on the sufficient
+ statistic 
+\begin_inset Formula $\left(X_{\left(1\right)},X_{\left(3\right)}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Using data 
+\begin_inset Formula $\left(1.29,.86,1.33\right)$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\begin{align*}
+\hat{\theta}_{MLE} & =\frac{1.33}{2}=.665\\
+\hat{\theta}_{MOM} & =\frac{2}{9}\left(1.29+.86+1.33\right)=.77\bar{3}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.52]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\begin{align*}
+f_{X}\left(x\right) & =\frac{e^{-\lambda}\lambda^{x}}{x!}\\
+ & =\frac{e^{-\lambda}e^{x\log\lambda}}{x!}
+\end{align*}
+
+\end_inset
+
+with joint distribution
+\begin_inset Formula 
+\[
+f_{\mathbf{X}}\left(\mathbf{x}\right)=\left(\frac{1}{\prod_{i=1}^{n}x_{i}}\right)e^{-n\lambda}e^{\log\lambda\sum_{i=1}^{n}x_{i}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+By Thm 6.2.25 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is a complete sufficient statistic and by the SLLN it is an unbiased estimator
+ for 
+\begin_inset Formula $E\left(X\right)=\lambda$
+\end_inset
+
+ and so by Thm 7.3.23, with 
+\begin_inset Formula $\phi\left(T\right)=T$
+\end_inset
+
+, it is the UMVUE for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $E\left(S^{2}\right)=\lambda$
+\end_inset
+
+ the sample variance is an unbiased estimator for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and therefore by Thm 7.3.17 conditioning on a complete sufficient statistic
+ of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ produces the UMVUE.
+ But 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is the complete sufficient statistic for this and by Thm 7.3.23 it is the
+ UMVUE.
+ Therefore
+\begin_inset Formula 
+\[
+E\left(S^{2}|\bar{X}\right)=\bar{X}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(S^{2}\right) & =\text{Var}\left(E\left(S^{2}|\bar{X}\right)\right)+E\left(\text{Var}\left(S^{2}|\bar{X}\right)\right)\\
+ & =\text{Var}\left(\bar{X}\right)
+\end{align*}
+
+\end_inset
+
+and since 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\text{Var}\left(\cdot\right)>0\Rightarrow\text{Var}\left(S^{2}|\bar{X}\right)>0\Rightarrow E\left(\text{Var}\left(S^{2}|\bar{X}\right)\right)$
+\end_inset
+
+ and so 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(S^{2}\right) & =\text{Var}\left(E\left(S^{2}|\bar{X}\right)\right)+E\left(\text{Var}\left(S^{2}|\bar{X}\right)\right)\\
+ & \geq\text{Var}\left(\bar{X}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.58]
+\end_layout
+
+\end_inset
+
+For 
+\begin_inset Formula $0\leq\theta\leq1$
+\end_inset
+
+ let 
+\begin_inset Formula $X$
+\end_inset
+
+ be such that
+\begin_inset Formula 
+\begin{align*}
+f\left(x|\theta\right) & =\left(\frac{\theta}{2}\right)^{\left|x\right|}\left(1-\theta\right)^{1-\left|x\right|}I\left(x\right)_{\left\{ -1,0,1\right\} }\\
+ & =\left(\frac{1}{2}\right)^{\left|x\right|}\left(\theta^{\left|x\right|}\left(1-\theta\right)^{1-\left|x\right|}\right)I\left(x\right)_{\left\{ -1,0,1\right\} }
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The MLE by inspection of the plot of 
+\begin_inset Formula $f\left(x|\theta\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in\left\{ -1,0,1\right\} $
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\hat{\theta}_{MLE}=\begin{cases}
+0 & \text{if }x=0\\
+1 & \text{o/w}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The expectation
+\begin_inset Formula 
+\begin{align*}
+E\left(T\left(X\right)\right) & =2\cdot P\left(X=1\right)+0\cdot P\left(X\neq1\right)\\
+ & =2\cdot\left(\frac{1}{2}\right)^{\left|1\right|}\left(\theta^{\left|1\right|}\left(1-\theta\right)^{1-\left|1\right|}\right)\\
+ & =\theta
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula 
+\[
+T'=\begin{cases}
+a & \text{if }x=1\\
+b & \text{if }x=-1\\
+c & \text{if }x=0
+\end{cases}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+E\left(T'\left(X\right)\right) & =a\cdot P\left(X=1\right)+b\cdot P\left(X=-1\right)+c\cdot P\left(X=0\right)\\
+ & =a\cdot\left(\frac{1}{2}\right)^{\left|1\right|}\left(\theta^{\left|1\right|}\left(1-\theta\right)^{1-\left|1\right|}\right)+b\cdot\left(\frac{1}{2}\right)^{\left|-1\right|}\left(\theta^{\left|-1\right|}\left(1-\theta\right)^{1-\left|-1\right|}\right)\\
+ & +c\cdot\left(\frac{1}{2}\right)^{\left|0\right|}\left(\theta^{\left|0\right|}\left(1-\theta\right)^{1-\left|0\right|}\right)\\
+ & =\left(a+b\right)\left(\frac{\theta}{2}\right)+c\cdot\left(1-\theta\right)\\
+ & =c+\left(\frac{a+b}{2}-c\right)\theta
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $a+b=2$
+\end_inset
+
+ and 
+\begin_inset Formula $c=0$
+\end_inset
+
+ then 
+\begin_inset Formula $T'$
+\end_inset
+
+ is unbiased for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ The variance of 
+\begin_inset Formula $T'\left(X\right)=T'\left(X\right)-c$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(T'\left(X\right)\right) & =E\left(T'^{2}\right)-\left(E\left(T'\right)\right)^{2}\\
+ & =\left(\frac{a^{2}+b^{2}}{2}\right)\theta-\left(\left(\frac{a+b}{2}\right)\theta\right)^{2}
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $a=b=1$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(T'\left(X\right)\right) & =\left(\frac{a^{2}+b^{2}}{2}\right)\theta-\left(\left(\frac{a+b}{2}\right)\theta\right)^{2}\\
+ & =\theta-\theta^{2}
+\end{align*}
+
+\end_inset
+
+The variance of 
+\begin_inset Formula $T\left(X\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\left(T\left(X\right)\right) & =E\left(T^{2}\right)+\left(E\left(T\right)\right)^{2}\\
+ & =2^{2}\cdot P\left(X=1\right)+0^{2}\cdot P\left(X\neq1\right)+\theta^{2}\\
+ & =2\theta+\theta^{2}
+\end{align*}
+
+\end_inset
+
+Hence for 
+\begin_inset Formula 
+\[
+T'=\begin{cases}
+1 & \text{if }x=1\\
+1 & \text{if }x=-1\\
+0 & \text{if }x=0
+\end{cases}
+\]
+
+\end_inset
+
+it's the case that
+\begin_inset Formula $\text{Var}\left(T'\left(X\right)\right)\leq\text{Var}\left(T\left(X\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.59]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ is complete sufficient for 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ By Thm 5.3.1
+\begin_inset Formula 
+\[
+\frac{n-1}{\sigma^{2}}S^{2}\sim\chi_{n-1}^{2}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $Z=\frac{n-1}{\sigma^{2}}S^{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+E\left(Z^{p/2}\right) & =\frac{1}{2^{\frac{n-1}{2}}\Gamma\left(\frac{n-1}{2}\right)}\int_{0}^{\infty}z^{\frac{p}{2}}z^{\frac{n-1}{2}-1}e^{-\frac{z}{2}}dz\\
+ & =\frac{1}{2^{\frac{n-1}{2}}\Gamma\left(\frac{n-1}{2}\right)}\int_{0}^{\infty}z^{\frac{p}{2}+\frac{n-1}{2}-1}e^{-\frac{z}{2}}dz\\
+ & =\frac{2^{\frac{p}{2}+\frac{n-1}{2}}\Gamma\left(\frac{p}{2}+\frac{n-1}{2}\right)}{2^{\frac{n-1}{2}}\Gamma\left(\frac{n-1}{2}\right)}\int_{0}^{\infty}\frac{z^{\frac{p}{2}+\frac{n-1}{2}-1}}{2^{\frac{p}{2}+\frac{n-1}{2}}\Gamma\left(\frac{p}{2}+\frac{n-1}{2}\right)}e^{-\frac{z}{2}}dz\\
+ & =\frac{2^{\frac{p}{2}}\Gamma\left(p+\frac{n-1}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\[
+E\left(\left(\frac{2^{\frac{p}{2}}\Gamma\left(p+\frac{n-1}{2}\right)}{\Gamma\left(\frac{n-1}{2}\right)}\right)^{-1}\left(\left(n-1\right)S^{2}\right)^{p/2}\right)=\sigma^{p/2}
+\]
+
+\end_inset
+
+and so is an unbiased estimator and by Thm 7.3.23 is the best unbiased estimator.
+\end_layout
+
+\end_body
+\end_document

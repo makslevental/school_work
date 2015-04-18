@@ -1,0 +1,69 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\section*{p=2}
+
+\begin{eqnarray*}
+x_{n+1} & = & \frac{1}{2}x_{n}+\frac{\alpha}{2x_{n}}
+\end{eqnarray*}
+assuming $x_{0}>\sqrt{\alpha}$ we have 
+\begin{eqnarray*}
+x_{1}-\sqrt{\alpha} & = & \frac{1}{2}x_{0}+\frac{\alpha}{2x_{0}}-\sqrt{\alpha}\\
+ & = & \frac{1}{2x_{0}}\left(x_{0}^{2}+\alpha-2x_{0}\sqrt{\alpha}\right)\\
+ & = & \frac{1}{2x_{0}}\left(x_{0}-\sqrt{\alpha}\right)^{2}>0
+\end{eqnarray*}
+\begin{eqnarray*}
+x_{n+1}-\sqrt{\alpha} & = & \frac{1}{2x_{n}}\left(x_{n}-\sqrt{\alpha}\right)^{2}>0
+\end{eqnarray*}
+and 
+\begin{eqnarray*}
+x_{n+1}-x_{n} & = & \frac{1}{2}x_{n}+\frac{\alpha}{2x_{n}}-x_{n}\\
+ & = & \frac{\alpha}{2x_{n}}-\frac{1}{2}x_{n}\\
+ & = & \frac{1}{2}\left(\frac{\alpha}{x_{n}}-x_{n}\right)\\
+ & = & \frac{1}{2x_{n}}\left(\alpha-x_{n}^{2}\right)<0
+\end{eqnarray*}
+Therefore monotonic decreasing and bounded below by $\sqrt{\alpha}$
+
+
+\section*{Arbitrary p}
+
+\begin{eqnarray*}
+x_{n+1} & = & \frac{p-1}{p}x_{n}+\frac{\alpha}{px_{n}^{p-1}}
+\end{eqnarray*}
+Let $\beta=\sqrt[p]{\alpha}$. Assume $x_{0}>\beta$ then 
+\begin{eqnarray*}
+x_{1}-\beta & = & \frac{p-1}{p}x_{0}+\frac{\beta^{p}}{px_{0}^{p-1}}-\beta\\
+ & = & \frac{1}{px_{0}^{p-1}}\left(\left(p-1\right)x_{0}^{p}+\beta^{p}-px_{0}^{p-1}\beta\right)\\
+ & = & \frac{1}{\beta^{p}px_{0}^{p-1}}\left(\left(p-1\right)\left(\frac{x_{0}}{\beta}\right)^{p}-p\left(\frac{x_{0}}{\beta}\right)^{p-1}+1\right)
+\end{eqnarray*}
+Let $\gamma=x_{0}/\beta$ and $\xi=1/\left(\beta^{p}px_{0}^{p-1}\right)$.
+\begin{eqnarray*}
+x_{1}-\beta & = & \xi\left(\left(p-1\right)\gamma^{p}-p\gamma^{p-1}+1\right)
+\end{eqnarray*}
+Let $f\left(\gamma\right)=\left(p-1\right)\gamma^{p}-p\gamma^{p-1}+1$.
+Then $f\left(1\right)=0$ and 
+\begin{eqnarray*}
+f'\left(\gamma\right) & = & p\left(p-1\right)\left(\gamma^{p-1}-\gamma^{p-2}\right)\\
+ & = & \frac{p\left(p-1\right)}{\gamma^{p-2}}\left(\gamma-1\right)>0
+\end{eqnarray*}
+since $\gamma>1$. In general
+\begin{eqnarray*}
+x_{n+1}-\beta & = & \frac{1}{\beta^{p}px_{n}^{p-1}}\left(\left(p-1\right)\left(\frac{x_{n}}{\beta}\right)^{p}-p\left(\frac{x_{n}}{\beta}\right)^{p-1}+1\right)
+\end{eqnarray*}
+ and so 
+\[
+x_{n}>\beta=\sqrt[p]{\alpha}
+\]
+Then
+\begin{eqnarray*}
+x_{n+1}-x_{n} & = & \frac{p-1}{p}x_{n}+\frac{\alpha}{px_{n}^{p-1}}-x_{n}\\
+ & = & \frac{\alpha}{px_{n}^{p-1}}-\frac{x_{n}}{p}\\
+ & = & \frac{1}{px_{n}^{p-1}}\left(\alpha-x_{n}^{p}\right)<0
+\end{eqnarray*}
+Therefore monotonic decreasing and bounded below by $\sqrt[p]{\alpha}$.
+\end{document}

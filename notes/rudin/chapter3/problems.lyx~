@@ -158,72 +158,51 @@ x_{1}-\beta & = & \xi\left(\left(p-1\right)\gamma^{p}-p\gamma^{p-1}+1\right)
 
 \end_inset
 
-Is
-\begin_inset Formula 
-\[
-\left(p-1\right)\gamma^{p}-p\gamma^{p-1}+1>0
-\]
-
+Let 
+\begin_inset Formula $f\left(\gamma\right)=\left(p-1\right)\gamma^{p}-p\gamma^{p-1}+1$
 \end_inset
 
-? Definitely if 
+.
+ Then 
+\begin_inset Formula $f\left(1\right)=0$
+\end_inset
+
+ and 
 \begin_inset Formula 
 \begin{eqnarray*}
-\left(p-1\right)\gamma^{p}-p\gamma^{p-1} & > & 0\\
-\left(p-1\right)\gamma^{p} & > & p\gamma^{p-1}\\
-\frac{p-1}{p}\gamma & > & 1\\
-\frac{p-1}{p}\frac{x_{0}}{\sqrt{\alpha}} & > & 1
+f'\left(\gamma\right) & = & p\left(p-1\right)\left(\gamma^{p-1}-\gamma^{p-2}\right)\\
+ & = & \frac{p\left(p-1\right)}{\gamma^{p-2}}\left(\gamma-1\right)>0
 \end{eqnarray*}
 
 \end_inset
 
 since 
-\begin_inset Formula $\left(x_{0}+\sqrt[p]{\alpha}\right)^{p}=x_{0}^{p}+\cdots+px_{0}^{p-1}\sqrt[p]{\alpha}+\alpha$
-\end_inset
-
- and so 
-\begin_inset Formula $\left(x_{0}+\sqrt[p]{\alpha}\right)^{p}\leq x_{0}^{p}+px_{0}^{p-1}\sqrt[p]{\alpha}+\alpha$
+\begin_inset Formula $\gamma>1$
 \end_inset
 
 .
- And so
-\begin_inset Formula 
-\[
-\left(x_{0}+\left(-\sqrt[p]{\alpha}\right)\right)^{p}\leq x_{0}^{p}+px_{0}^{p-1}\left(-\sqrt[p]{\alpha}\right)+\left(-\sqrt[p]{\alpha}\right)^{p}
-\]
-
-\end_inset
-
-If 
-\begin_inset Formula $p$
-\end_inset
-
- is odd then 
-\begin_inset Formula 
-\[
-\left(x_{0}+\left(-\sqrt[p]{\alpha}\right)\right)^{p}\leq x_{0}^{p}-px_{0}^{p-1}\sqrt[p]{\alpha}-\alpha
-\]
-
-\end_inset
-
-If 
-\begin_inset Formula $p$
-\end_inset
-
- is even then
-\begin_inset Formula 
-\[
-\left(x_{0}+\left(-\sqrt[p]{\alpha}\right)\right)^{p}\leq x_{0}^{p}-px_{0}^{p-1}\sqrt[p]{\alpha}+\alpha
-\]
-
-\end_inset
-
-
+ In general
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{x_{1}}{\sqrt[p]{\alpha}} & = & \frac{p-1}{p}\frac{x_{0}}{\sqrt[p]{\alpha}}+\frac{\alpha}{\sqrt[p]{\alpha}px_{0}^{p-1}}\\
- & = & \frac{1}{x_{0}^{p-1}p\sqrt[p]{\alpha}}\left(\left(p-1\right)x_{0}^{p}+\alpha\right)\\
- & > & \frac{1}{px_{0}^{p-1}}\left(x_{0}-\sqrt[p]{\alpha}\right)^{p}>0
+x_{n+1}-\beta & = & \frac{1}{\beta^{p}px_{n}^{p-1}}\left(\left(p-1\right)\left(\frac{x_{n}}{\beta}\right)^{p}-p\left(\frac{x_{n}}{\beta}\right)^{p-1}+1\right)
+\end{eqnarray*}
+
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+x_{n}>\beta=\sqrt[p]{\alpha}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{n+1}-x_{n} & = & \frac{p-1}{p}x_{n}+\frac{\alpha}{px_{n}^{p-1}}-x_{n}\\
+ & = & \frac{\alpha}{px_{n}^{p-1}}-\frac{x_{n}}{p}\\
+ & = & \frac{1}{px_{n}^{p-1}}\left(\alpha-x_{n}^{p}\right)<0
 \end{eqnarray*}
 
 \end_inset
