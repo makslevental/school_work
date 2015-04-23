@@ -2259,7 +2259,1912 @@ Therefore test 2 is more powerful at
 \end_inset
 
  than test 1.
+ You could reverse the argument, starting with test 2 and showing that test
+ 1 is more powerful at 
+\begin_inset Formula $\theta_{1}$
+\end_inset
+
+.
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Made up]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X_{i}\sim\Gamma\left(\alpha_{0},\beta\right)$
+\end_inset
+
+.
+ Suppose we want to test 
+\begin_inset Formula $H_{0}:\beta=\beta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\beta=\beta_{1}>\beta_{0}$
+\end_inset
+
+.
+ Step 1 is to check the likelihood ratio
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x};\beta_{1}\right)}{f\left(\mathbf{x};\beta_{0}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-\sum x_{i}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\beta_{1}>\beta_{0}$
+\end_inset
+
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}<0$
+\end_inset
+
+ so the ratio is increasing in 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+.
+ Therefore the test 
+\begin_inset Quotes eld
+\end_inset
+
+reject iff
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\bar{X}>c
+\]
+
+\end_inset
+
+is UMP by Karlin-Rubin with 
+\begin_inset Formula 
+\begin{align*}
+s & =P_{\beta_{0}}\left(\bar{X}>c\right)
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\bar{X}\sim\text{Gamma}\left(n\alpha,\beta/n\right)$
+\end_inset
+
+.
+ So s
+\begin_inset Formula 
+\begin{align*}
+s & =\frac{n^{\alpha}}{\Gamma\left(\alpha\right)\beta_{0}^{\alpha}}\int_{c}^{\infty}x^{\alpha-1}e^{-nx/\beta}dx
+\end{align*}
+
+\end_inset
+
+What about if 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+to test 
+\begin_inset Formula $H_{0}:\beta=\beta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\beta=\beta_{1}<\beta_{0}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x};\beta_{1}\right)}{f\left(\mathbf{x};\beta_{0}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-\sum x_{i}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\beta_{1}<\beta_{0}$
+\end_inset
+
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}>0$
+\end_inset
+
+ so the ratio is increasing in 
+\begin_inset Formula $-\bar{X}$
+\end_inset
+
+.
+ Therefore the test 
+\begin_inset Quotes eld
+\end_inset
+
+reject iff
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\bar{X}>c
+\]
+
+\end_inset
+
+is UMP by Karlin-Rubin with 
+\begin_inset Formula 
+\begin{align*}
+s & =P_{\beta_{0}}\left(-\bar{X}>c\right)\\
+ & =P_{\beta_{0}}\left(\bar{X}<-c\right)
+\end{align*}
+
+\end_inset
+
+Apparently 
+\begin_inset Formula $c$
+\end_inset
+
+ should be negative? 
+\begin_inset Formula 
+\begin{align*}
+\frac{\beta_{0}}{\beta_{1}}e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)} & >k\\
+e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)} & >\frac{\beta_{1}}{\beta_{0}}k\\
+-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right) & >\log\left(\frac{\beta_{1}}{\beta_{0}}k\right)\\
+\bar{x} & <-\frac{\log\left(\frac{\beta_{1}}{\beta_{0}}k\right)}{n\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\frac{\beta_{1}}{\beta_{0}}k<1$
+\end_inset
+
+ then the right hand side will be positive, otherwise it will be negative.
+ Note that 
+\begin_inset Formula $\bar{X}\sim\text{Gamma}\left(n\alpha,\beta/n\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[McGill]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X\sim\text{Exp}\left(1/\theta\right)$
+\end_inset
+
+.
+ Consider testing 
+\begin_inset Formula $H_{0}:\theta=2$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta>2$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\theta_{0}=2$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta_{1}>\theta$
+\end_inset
+
+.
+ The Neyman-Pearson lemma state that the likelihood ratio 
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x};\theta_{1}\right)}{f\left(\mathbf{x};\theta_{0}\right)}=\left(\frac{\theta_{0}}{\theta_{1}}\right)^{n}e^{-\left(\frac{1}{\theta_{1}}-\frac{1}{\theta_{0}}\right)\sum_{i=1}^{n}x_{i}}>k
+\]
+
+\end_inset
+
+ is UMP with 
+\begin_inset Formula 
+\[
+\alpha=P_{\theta_{0}}\left(\left(\frac{\theta_{0}}{\theta_{1}}\right)^{n}e^{-\left(\theta_{1}-\theta_{0}\right)\sum_{i=1}^{n}x_{i}}>k\right)
+\]
+
+\end_inset
+
+The sufficient statistic is 
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\theta_{1}>\theta_{0}$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(\frac{1}{\theta_{1}}-\frac{1}{\theta_{0}}\right)<0$
+\end_inset
+
+ and so the LR statistic is increasing in the sufficient statistic so we
+ use 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ for the Karlin-Rubin theorem.
+ An exponential is a special case of Gamma, it's Gamma
+\begin_inset Formula $\left(1,\theta\right)$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is distributed Gamma
+\begin_inset Formula $\left(n,\theta/n\right)$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =P_{\theta_{0}}\left(\bar{X}>c\right)\\
+ & =\frac{1}{\theta^{n}}\int_{c}^{\infty}e^{-nt/\theta_{0}}dt\\
+ & =\frac{e^{-cn/\theta_{0}}}{n\theta_{0}^{n-1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.31]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{Poisson}\left(\lambda\right)$
+\end_inset
+
+.
+ Test 
+\begin_inset Formula $\lambda\leq\lambda_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $\lambda>\lambda_{0}$
+\end_inset
+
+.
+ 
+\series bold
+GOTTA CHECK MLR
+\series default
+ Neyman-Pearson states that for 
+\begin_inset Formula $\lambda_{1}>\lambda_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x};\lambda_{1}\right)}{f\left(\mathbf{x};\lambda_{0}\right)}=e^{-n\left(\lambda_{1}-\lambda_{0}\right)}\left(\frac{\lambda_{1}}{\lambda_{0}}\right)^{\sum_{i=1}^{n}x_{i}}>k
+\]
+
+\end_inset
+
+which is equivalent to 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{n}X_{i}>c
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =P_{\lambda_{0}}\left(\sum_{i=1}^{n}X_{i}>c\right)
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\sum_{i=1}^{n}X_{i}$
+\end_inset
+
+ is distributed Poisson
+\begin_inset Formula $\left(n\lambda\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\alpha & =P_{\lambda_{0}}\left(\sum_{i=1}^{n}X_{i}>c\right)\\
+ & =e^{-n\lambda_{0}}\sum_{i=c}^{\infty}\left(\frac{\lambda_{0}}{n}\right)^{i}\frac{1}{i!}\\
+ & =e^{-n\lambda_{0}}\left(1-\sum_{i=0}^{c}\left(\frac{\lambda_{0}}{n}\right)^{i}\frac{1}{i!}\right)
+\end{align*}
+
+\end_inset
+
+The Karlin-Ruben theorem states that 
+\begin_inset Formula $\sum_{i=1}^{n}X_{i}>c$
+\end_inset
+
+ is UMP for 
+\begin_inset Formula $\lambda\leq\lambda_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $\lambda>\lambda_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =P_{\lambda_{0}}\left(\sum_{i=1}^{n}X_{i}>c\right)\\
+ & =e^{-n\lambda_{0}}\sum_{i=c}^{\infty}\left(\frac{\lambda_{0}}{n}\right)^{i}\frac{1}{i!}\\
+ & =e^{-n\lambda_{0}}\left(1-\sum_{i=0}^{c}\left(\frac{\lambda_{0}}{n}\right)^{i}\frac{1}{i!}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The Karlin-Ruben theorem states that 
+\begin_inset Formula $\sum_{i=1}^{n}X_{i}>c$
+\end_inset
+
+ is UMP for 
+\begin_inset Formula $\lambda\leq1$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $\lambda>1$
+\end_inset
+
+.
+ The power function for this test statistics is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\lambda\right) & =P_{\lambda}\left(\sum_{i=1}^{n}X_{i}>c\right)
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ is large then 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\lambda\right) & =P_{\lambda}\left(\left(\frac{1}{n}\sum_{i=1}^{n}X_{i}\right)>\frac{c}{n}\right)\\
+ & =P_{\lambda}\left(\left(\frac{1}{n}\sum_{i=1}^{n}X_{i}\right)-\lambda>\frac{c}{n}-\lambda\right)\\
+ & =P_{\lambda}\left(\sqrt{\frac{n}{\lambda}}\left[\left(\frac{1}{n}\sum_{i=1}^{n}X_{i}\right)-\lambda\right]>\sqrt{\frac{n}{\lambda}}\left(\frac{c}{n}-\lambda\right)\right)\\
+ & =P_{Z}\left(Z>\sqrt{\frac{n}{\lambda}}\left(\frac{c}{n}-\lambda\right)\right)\\
+ & =1-\Phi\left(\sqrt{\frac{n}{\lambda}}\left(\frac{c}{n}-\lambda\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.33]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{Uniform}\left(\theta,\theta+1\right)$
+\end_inset
+
+.
+ Test 
+\begin_inset Formula $H_{0}:\theta=0$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta=1$
+\end_inset
+
+.
+ Use the test reject iff 
+\begin_inset Formula $X_{\left(n\right)}\geq1$
+\end_inset
+
+ or 
+\begin_inset Formula $X_{\left(1\right)}\geq k$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The power function 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P_{\theta}\left(X_{\left(n\right)}\geq1\right)+P_{\theta}\left(X_{\left(1\right)}\geq k\right)-P_{\theta}\left(X_{\left(1\right)}\geq k,X_{\left(n\right)}\geq1\right)\\
+ & =\int_{1}^{\theta+1}n\left(F_{X}\left(x\right)\right)^{n-1}f_{X}\left(x\right)dx+\int_{k}^{\theta+1}n\left(1-F_{X}\left(x\right)\right)^{n-1}f_{X}\left(x\right)dx-\int\int\frac{n!}{\left(n-2\right)}\left(F_{X}\left(y\right)-F_{X}\left(x\right)\right)^{n-1-1}f_{X}\left(x\right)f_{X}\left(y\right)I\left(x,y\right)_{\left\{ x\leq y\right\} }dxdy\\
+ & =\int_{1}^{\theta+1}n\left(x-\theta\right)^{n-1}dx+\int_{k}^{\theta+1}n\left(1-\left(x-\theta\right)\right)^{n-1}dx-\int\int\left(n\left(n-1\right)\right)\left(\left(y-\theta\right)-\left(x-\theta\right)\right)^{n-2}I\left(x,y\right)_{\left\{ x\leq y\right\} }dxdy\\
+ & =\int_{\theta}^{\theta+1}n\left(x-\theta\right)^{n-1}dx+\int_{k}^{\theta+1}n\left(1-\left(x-\theta\right)\right)^{n-1}dx-\int_{\theta}^{\theta+1}\int_{k}^{y}\left(n\left(n-1\right)\right)\left(y-x\right)^{n-2}I\left(x,y\right)_{\left\{ x\leq y\right\} }dxdy\\
+ & =\left(\left.x-\theta\right|_{\theta}^{\theta+1}\right)-\left(\left.1-x+\theta\right|_{k}^{\theta+1}\right)+\int_{\theta}^{\theta+1}\left.\left(y-x\right)^{n-1}\right|_{k}^{y}dy\\
+ & =\left(\left(\theta+1-\theta\right)\right)-\left(\left(1-\left(\theta+1\right)+\theta\right)-\left(1-k+\theta\right)\right)-\int_{\theta}^{\theta+1}\left(y-k\right)^{n-1}dy\\
+ & =1+\left(1-k+\theta\right)-\left.\left(y-k\right)^{n}\right|_{\theta}^{\theta+1}\\
+ & =1+\left(1-k+\theta\right)-\left(\left(\left(\theta+1\right)-k\right)^{n}-\left(\theta-k\right)^{n}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.39]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\left(X_{i},Y_{i}\right)\sim\mbox{BiN}\left(\mu_{X},\mu_{Y},\sigma_{X}^{2},\sigma_{y}^{2},\rho\right)$
+\end_inset
+
+.
+ Test 
+\begin_inset Formula $H_{0}:\mu_{X}=\mu_{Y}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\mu_{X}\neq\mu_{Y}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The density of a BiN is 
+\begin_inset Formula 
+\[
+f_{\left(X,Y\right)}\left(x,y\right)=\frac{1}{2\pi\sigma_{X}\sigma_{Y}\sqrt{1-\rho^{2}}}e^{-\frac{1}{2\left(1-\rho^{2}\right)}\left[\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)^{2}-2\rho\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)+\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)^{2}\right]}
+\]
+
+\end_inset
+
+Define 
+\begin_inset Formula $U=aX+bY$
+\end_inset
+
+ and 
+\begin_inset Formula $V=Y$
+\end_inset
+
+ where 
+\begin_inset Formula $X,Y$
+\end_inset
+
+ are standard normals (I'll put the means and stdevs in after).
+ Then 
+\begin_inset Formula $x=\frac{1}{a}\left(u-bv\right),y=v$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+J=\begin{vmatrix}1/a & -b/a\\
+0 & 1
+\end{vmatrix}=\frac{1}{a}
+\]
+
+\end_inset
+
+So 
+\begin_inset Formula 
+\[
+f_{\left(U,V\right)}\left(u,v\right)=\frac{1}{2\pi a\sqrt{1-\rho^{2}}}e^{-\frac{1}{2\left(1-\rho^{2}\right)}\left[\left(\frac{1}{a}\left(u-bv\right)\right)^{2}-2\rho\left(\frac{1}{a}\left(u-bv\right)\right)v+v^{2}\right]}
+\]
+
+\end_inset
+
+Factor the exponent to be 
+\begin_inset Formula 
+\[
+-\frac{1}{2\left(1-\rho^{2}\right)}\left[\frac{b^{2}+2\rho ab+a^{2}}{a^{2}}\right]\left[\frac{u^{2}}{\left(b^{2}+2\rho ab+a^{2}\right)}-2uv\left(\frac{b+a\rho}{b^{2}+2\rho ab+a^{2}}\right)+v^{2}\right]
+\]
+
+\end_inset
+
+This is BiN with 
+\begin_inset Formula 
+\[
+\rho^{*}=\frac{\text{Cov}\left(U,V\right)}{\sigma_{U}\sigma_{V}}=\frac{E\left(aXY+bY^{2}\right)}{\sigma_{U}\sigma_{V}}=\frac{a\rho+b}{\sqrt{a^{2}+b^{2}+ab\rho}}
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula 
+\[
+1-\left(\rho^{*}\right)^{2}=1-\frac{\left(a\rho+b\right)}{a^{2}+b^{2}+ab\rho}=\frac{a^{2}\left(1-\rho^{2}\right)}{a^{2}+b^{2}+ab\rho}=\frac{a^{2}\left(1-\rho^{2}\right)}{\sigma_{U}^{2}}
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\[
+f_{\left(U,V\right)}\left(u,v\right)=\frac{1}{2\pi\sigma_{U}\sigma_{V}\sqrt{1-\left(\rho^{*}\right)^{2}}}e^{-\frac{1}{2\sqrt{1-\left(\rho^{*}\right)^{2}}}\left[\frac{u^{2}}{\sigma_{U}^{2}}-2\rho\frac{uv}{\sigma_{U}\sigma_{V}}+\frac{v^{2}}{\sigma_{V}^{2}}\right]}
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $U$
+\end_inset
+
+ is normal with mean 
+\begin_inset Formula $a\mu_{X}+b\mu_{Y}$
+\end_inset
+
+ and variance 
+\begin_inset Formula $\sigma_{U}^{2}=\text{Var}\left(aX+bY\right)=a^{2}\sigma_{X}^{2}+b^{2}\sigma_{Y}^{2}+2ab\text{\text{Cov}}\left(X,Y\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Therefore we should test 
+\begin_inset Formula $H_{0}:\mu_{W}=0$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{0}:\mu_{W}\neq0$
+\end_inset
+
+ on 
+\begin_inset Formula $W_{i}=X_{i}-Y_{i}$
+\end_inset
+
+ .
+ By exercise 8.38 the test 
+\begin_inset Formula 
+\begin{align*}
+\left|\bar{W}-0\right| & >t_{n-1,\alpha/2}\sqrt{\frac{S^{2}}{n}}\\
+ & \Rightarrow\\
+\frac{\bar{W}}{\sqrt{S^{2}/n}} & >t_{n-1,\alpha/2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9.1]
+\end_layout
+
+\end_inset
+
+Let the set 
+\begin_inset Formula $A=\left\{ x:L\left(x\right)\leq\theta\right\} $
+\end_inset
+
+ and the set 
+\begin_inset Formula $B=\left\{ x:U\left(x\right)\geq\theta\right\} $
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A\cap B=\left\{ x:L\left(x\right)\leq\theta\leq U\left(x\right)\right\} $
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula 
+\[
+1\geq P\left\{ A\cup B\right\} =P\left(L\left(x\right)\leq\theta\text{ or }\theta\leq U\left(x\right)\right)\geq P\left(L\left(x\right)\leq\theta\text{ or }\theta\leq L\left(x\right)\right)
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $L\left(x\right)\leq U\left(x\right)$
+\end_inset
+
+, so 
+\begin_inset Formula $L\left(x\right)\geq\theta$
+\end_inset
+
+ definitely implies 
+\begin_inset Formula $U\left(x\right)\geq\theta$
+\end_inset
+
+.
+ And 
+\begin_inset Formula $P\left(L\left(x\right)\leq\theta\text{ or }\theta\leq L\left(x\right)\right)=1$
+\end_inset
+
+ So
+\begin_inset Formula 
+\[
+1\geq P\left\{ A\cup B\right\} =P\left(L\left(x\right)\leq\theta\text{ or }\theta\leq U\left(x\right)\right)\geq P\left(L\left(x\right)\leq\theta\text{ or }\theta\leq L\left(x\right)\right)=1
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $P\left(A\cup B\right)=1$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\begin{align*}
+P\left(L\left(x\right)\leq\theta\leq U\left(x\right)\right) & =P\left(L\left(x\right)\leq\theta\right)+P\left(\theta\leq U\left(x\right)\right)-1\\
+ & =\left(1-\alpha_{1}\right)+\left(1-\alpha_{2}\right)-1\\
+ & =1-\alpha_{1}-\alpha_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9.13]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be single observation from a beta
+\begin_inset Formula $\left(\theta,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $Y=-\left(\log X\right)^{-1}.$
+\end_inset
+
+ Evaluate the confidence coefficient of the set 
+\begin_inset Formula $\left[y/2,y\right]$
+\end_inset
+
+.
+ I.e.
+ compute 
+\begin_inset Formula 
+\begin{align*}
+\inf_{\theta}P_{\theta}\left(\theta\in\left[y/2,y\right]\right) & =\inf_{\theta}P_{\theta}\left(y/2\leq\theta\leq y\right)\\
+ & =\inf_{\theta}P_{\theta}\left(\frac{Y}{2\theta}\leq1\leq\frac{Y}{\theta}\right)\\
+ & =\inf_{\theta}P_{\theta}\left(\frac{Y}{2\theta}\leq\right)\\
+ & =\inf_{\theta}\left[P_{\theta}\left(1\leq\frac{Y}{\theta}\leq2\right)\right]
+\end{align*}
+
+\end_inset
+
+The distribution of 
+\begin_inset Formula $Y$
+\end_inset
+
+ though? 
+\begin_inset Formula $\log X$
+\end_inset
+
+ is distributed 
+\begin_inset Formula 
+\[
+f\left(u\right)=\theta e^{u\theta}I\left(u\right)_{\left(-\infty,0\right)}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $1/\log X$
+\end_inset
+
+ is distributed 
+\begin_inset Formula 
+\[
+f\left(v\right)=\theta e^{\theta/v}v^{-2}I\left(v\right)_{\left(0,-\infty\right)}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $-1/\log X$
+\end_inset
+
+ is distributed 
+\begin_inset Formula 
+\begin{align*}
+f\left(y\right) & =\theta e^{-\theta/v}v^{-2}I\left(v\right)_{\left(0,\infty\right)}
+\end{align*}
+
+\end_inset
+
+This is InvGamma
+\begin_inset Formula $\left(1,\theta\right)$
+\end_inset
+
+ which is a scale family so 
+\begin_inset Formula $Y/\theta$
+\end_inset
+
+ is InvGamma
+\begin_inset Formula $\left(1,1\right)$
+\end_inset
+
+.
+ Finally 
+\begin_inset Formula 
+\begin{align*}
+\inf_{\theta}P_{\theta}\left(\theta\in\left[y/2,y\right]\right) & =\inf_{\theta}\left[P_{\theta}\left(1\leq\frac{Y}{\theta}\leq2\right)\right]\\
+ & =\Gamma\left(1,1/2\right)-\Gamma\left(1,1\right)\\
+ & =\frac{1}{\sqrt{e}}-\frac{1}{e}\approx0.238651
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Find a pivotal quantity and use it to set up a confidence interval having
+ the same confidence coefficient as the interval in part (a).
+ The density of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f\left(x\right)=\theta x^{\theta-1}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $T=X^{\theta}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q\left(x\right)=X^{\theta}$
+\end_inset
+
+.
+ Then with 
+\begin_inset Formula $g\left(t\right)=1$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(t\right)=1\cdot\left|\frac{\partial}{\partial_{t}}T\right|
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+\inf_{\theta}\left[P_{\theta}\left(a\leq X^{\theta}\leq b\right)\right]=\inf_{\theta}\left[P_{\theta}\left(a\leq X^{\theta}\leq b\right)\right]
+\]
+
+\end_inset
+
+The distribution of 
+\begin_inset Formula $X^{\theta}$
+\end_inset
+
+? Let 
+\begin_inset Formula $Y=X^{\theta}$
+\end_inset
+
+ and then 
+\begin_inset Formula $X=Y^{\frac{1}{\theta}}$
+\end_inset
+
+ and 
+\begin_inset Formula $X'=\frac{1}{\theta}Y^{\frac{1}{\theta}-1}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{align*}
+f\left(y\right) & =\theta\left(y^{\frac{1}{\theta}}\right)^{\theta-1}\frac{1}{\theta}y^{\frac{1}{\theta}-1}\\
+ & =1
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula 
+\[
+\inf_{\theta}\left[P_{\theta}\left(a\leq X^{\theta}\leq b\right)\right]=b-a
+\]
+
+\end_inset
+
+and the pivotal interval is 
+\begin_inset Formula 
+\[
+\left\{ \theta:a\leq X^{\theta}\leq b\right\} =\left\{ \theta:\frac{\log b}{\log X}\leq\theta\leq\frac{\log a}{\log X}\right\} 
+\]
+
+\end_inset
+
+Don't forget that what's really important is that we need an interval for
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Also don't forget to check MLR for Karlin-Ruben.
+\end_layout
+
+\begin_layout Enumerate
+The length of the confidence interval is basically 
+\begin_inset Formula $\log b-\log a$
+\end_inset
+
+.
+ So to get the tightest interval we need to minimize this difference subject
+ to 
+\begin_inset Formula $b-a=1-\alpha$
+\end_inset
+
+, since that's the confidence coefficient.
+ Well 
+\begin_inset Formula $b-a=1-\alpha\Rightarrow b=1+a-\alpha$
+\end_inset
+
+.
+ Thus we minimize 
+\begin_inset Formula 
+\[
+\log\left(1+a-\alpha\right)-\log a=\log\left(1+\frac{1-\alpha}{a}\right)
+\]
+
+\end_inset
+
+ which is minimized by largest 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ So to match the confidence coefficient let 
+\begin_inset Formula $b=1$
+\end_inset
+
+ and 
+\begin_inset Formula $a=\alpha$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\left\{ \theta:\frac{\log1}{\log X}\leq\theta\leq\frac{\log\alpha}{\log X}\right\} =\left\{ \theta:0\leq\theta\leq\frac{\log a}{\log X}\right\} 
+\]
+
+\end_inset
+
+is the optimal confidence interval with confidence coefficient 
+\begin_inset Formula $1-\alpha$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9.16]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\theta,\sigma_{0}^{2}\right)$
+\end_inset
+
+.
+ For each test write out the acceptance region of a level 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test and the 
+\begin_inset Formula $1-\alpha$
+\end_inset
+
+ confidence interval of the inversion of the test.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $H_{0}:\theta=\theta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta\neq\theta_{0}$
+\end_inset
+
+.
+ The LRT size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test is reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+\left|\bar{X}-\theta_{0}\right|>t_{n-1,\alpha/2}\sqrt{\frac{S^{2}}{n}}
+\]
+
+\end_inset
+
+with confidence coefficient 
+\begin_inset Formula 
+\begin{align*}
+P\left(\left|\bar{X}-\theta_{0}\right|>t_{n-1,\alpha/2}\sqrt{\frac{S^{2}}{n}}\right) & =1-P\left(\left|\bar{X}-\theta_{0}\right|\leq t_{n-1,\alpha/2}\sqrt{\frac{S^{2}}{n}}\right)\\
+ & =1-P\left(\frac{\left|\bar{X}-\theta_{0}\right|}{\sqrt{S^{2}/n}}\leq t_{n-1,\alpha/2}\right)\\
+ & =1-P\left(-t_{n-1,\alpha/2}\leq\frac{\bar{X}-\theta_{0}}{\sqrt{S^{2}/n}}\leq t_{n-1,\alpha/2}\right)\\
+ & =1-P\left(-t_{n-1,\alpha/2}\leq T\leq t_{n-1,\alpha/2}\right)\\
+ & =1-\alpha
+\end{align*}
+
+\end_inset
+
+The confidence interval is 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\left(\sqrt{\frac{S^{2}}{n}}\left(\bar{X}-t_{n-1,\alpha/2}\right)\leq\theta\leq\sqrt{\frac{S^{2}}{n}}\left(\bar{X}+t_{n-1,\alpha/2}\right)\right)
+\]
+
+\end_inset
+
+Idiot! Sigma known!
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+The LRT size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test is reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+\left|\bar{X}-\theta_{0}\right|>z_{\alpha/2}\sqrt{\frac{\sigma_{0}^{2}}{n}}
+\]
+
+\end_inset
+
+with confidence coefficient The confidence interval is 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\left(\sqrt{\frac{\sigma_{0}^{2}}{n}}\left(\bar{X}-z_{\alpha/2}\right)\leq\theta\leq\sqrt{\frac{\sigma_{0}^{2}}{n}}\left(\bar{X}+z_{\alpha/2}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $H_{0}:\theta\geq\theta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta<\theta_{0}$
+\end_inset
+
+.
+ The test is 
+\begin_inset Formula 
+\[
+\bar{X}-\theta_{0}<-z_{\alpha}\sqrt{\frac{\sigma^{2}}{n}}
+\]
+
+\end_inset
+
+with size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ INVERT THIS!!! The acceptance region! The confidence interval is 
+\begin_inset Formula $\left(-\infty,\bar{X}+z_{\alpha}\sqrt{\frac{\sigma^{2}}{n}}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $H_{0}:\theta\leq\theta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta>\theta_{0}$
+\end_inset
+
+.
+ The test is 
+\begin_inset Formula 
+\[
+\bar{X}-\theta_{0}>z_{\alpha}\sqrt{\frac{\sigma^{2}}{n}}
+\]
+
+\end_inset
+
+with size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ The acceptance region == The confidence interval is 
+\begin_inset Formula $\left[\bar{X}-z_{\alpha}\sqrt{\frac{\sigma^{2}}{n}},\infty\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9.14]
+\end_layout
+
+\end_inset
+
+ Bonferroni's inequality is 
+\begin_inset Formula 
+\[
+P\left(A\cap B\right)\geq P\left(A\right)+P\left(B\right)-1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A=\left\{ \mu:\bar{x}-\frac{ks}{\sqrt{n}}\leq\mu\leq\bar{x}+\frac{ks}{\sqrt{n}}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $B=\left\{ \sigma^{2}:\frac{\left(n-1\right)s^{2}}{b}\leq\sigma^{2}\leq\frac{\left(n-1\right)s^{2}}{a}\right\} $
+\end_inset
+
+.
+ Then if 
+\begin_inset Formula $k=t_{n-1,\alpha/4}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+P\left(\left\{ \mu:\bar{x}-\frac{ks}{\sqrt{n}}\leq\mu\leq\bar{x}+\frac{ks}{\sqrt{n}}\right\} \right) & =P\left(-t_{n-1,\alpha/4}\leq\frac{\bar{x}-\mu}{s/\sqrt{n}}\leq t_{n-1,\alpha/4}\right)\\
+ & =\\
+ & 1-\alpha/2\\
+\end{align*}
+
+\end_inset
+
+and if 
+\begin_inset Formula $a=\chi_{n-1,1-\alpha/4}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $b=\chi_{n-1,\alpha/4}^{2}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+P\left(\left\{ \sigma^{2}:\frac{\left(n-1\right)s^{2}}{b}\leq\sigma^{2}\leq\frac{\left(n-1\right)s^{2}}{a}\right\} \right) & =P\left(\chi_{n-1,1-\alpha/4}^{2}\leq\frac{\left(n-1\right)S^{2}}{\sigma^{2}}\leq\chi_{n-1,\alpha/4}^{2}\right)\\
+ & =1-\alpha/2\\
+P\left(a\leq\Xi\leq b\right) & =1-\alpha/2
+\end{align*}
+
+\end_inset
+
+Where 
+\begin_inset Formula $\Xi\sim\chi_{n-1}^{2}$
+\end_inset
+
+.
+ Then by Bonferroni's
+\begin_inset Formula 
+\[
+P\left(\left\{ \mu:\bar{x}-t_{n-1,\alpha/4}\frac{s}{\sqrt{n}}\leq\mu\leq\bar{x}+t_{n-1,\alpha/4}\frac{s}{\sqrt{n}}\right\} \cap\left\{ \sigma^{2}:\frac{\left(n-1\right)s^{2}}{\chi_{n-1,1-\alpha/4}^{2}}\leq\sigma^{2}\leq\frac{\left(n-1\right)s^{2}}{\chi_{n-1,\alpha/4}^{2}}\right\} \right)\geq1-\alpha
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The confidence region is 
+\begin_inset Formula 
+\[
+C\left(\mu,\sigma^{2}:\bar{x}-z_{\alpha/4}\frac{s}{\sqrt{n}}\leq\mu\leq\bar{x}+z_{\alpha/4}\frac{s}{\sqrt{n}}\text{ and }\frac{\left(n-1\right)s^{2}}{\chi_{n-1,1-\alpha/4}^{2}}\leq\sigma^{2}\leq\frac{\left(n-1\right)s^{2}}{\chi_{n-1,\alpha/4}^{2}}\right)\geq1-\alpha
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9.5]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X_{i}\sim\text{Bernoulli}\left(p\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Is the 
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+ family MLR? For 
+\begin_inset Formula $\theta_{1}>\theta_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{f\left(t|\theta_{1}\right)}{f\left(t|\theta_{0}\right)} & =\frac{\left(\theta_{1}\right)^{t}\left(1-\theta_{1}\right)^{n-t}}{\left(\theta_{0}\right)^{t}\left(1-\theta_{0}\right)^{n-t}}\\
+ & =\left[\frac{\theta_{1}}{\theta_{0}}\left(\frac{1-\theta_{0}}{1-\theta_{1}}\right)\right]^{t}\left(\frac{1-\theta_{1}}{1-\theta_{0}}\right)^{n}
+\end{align*}
+
+\end_inset
+
+ Since 
+\begin_inset Formula $\theta_{1}/\theta_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\frac{1-\theta_{0}}{1-\theta_{1}}\right)$
+\end_inset
+
+ are 
+\begin_inset Formula $>1$
+\end_inset
+
+ the family is increasing in 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Therefore by Karlin-Rubin the UMP level-
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test for 
+\begin_inset Formula $H_{0}:p=p_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:p<p_{0}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\bar{X}<k
+\]
+
+\end_inset
+
+ 
+\begin_inset Formula $k$
+\end_inset
+
+ is chosen such that 
+\begin_inset Formula 
+\begin{align*}
+P_{\theta_{0}}\left(\bar{X}<k\right) & =\alpha
+\end{align*}
+
+\end_inset
+
+This is the rejection region (and I check MLR), therefore the acceptance
+ region is 
+\begin_inset Formula 
+\[
+A\left(\mathbf{x}\right)=\left\{ \mathbf{x}:\bar{x}\geq k\right\} 
+\]
+
+\end_inset
+
+Inverting this on 
+\begin_inset Formula $p$
+\end_inset
+
+ produces 
+\begin_inset Formula 
+\begin{align*}
+C\left(p\right) & =\left\{ p:\bar{x}\geq k\right\} \\
+ & =\left\{ p:1-\sum_{t=k}^{n}\binom{n}{t}\theta^{t}\left(1-\theta\right)^{n-t}\geq k\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[9.3]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+P\left(X_{i}\leq x\right)=\begin{cases}
+0 & \text{if }x\leq0\\
+\left(\frac{x}{\beta}\right)^{\alpha} & \text{if }0<x<\beta\\
+1 & \text{if }x>\beta
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The MLEs for 
+\begin_inset Formula $\left(\alpha,\beta\right)$
+\end_inset
+
+.
+ The density is 
+\begin_inset Formula 
+\begin{align*}
+f\left(x;\alpha,\beta\right) & =\frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}I\left(x\right)_{\left(0,\beta\right)}\\
+ & =\frac{\alpha}{\beta^{\alpha}}x^{\alpha-1}I\left(x\right)_{\left(0,\beta\right)}
+\end{align*}
+
+\end_inset
+
+he joint is 
+\begin_inset Formula 
+\[
+f\left(\mathbf{x};\alpha,\beta\right)=\left(\frac{\alpha}{\beta^{\alpha}}\right)^{n}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}I\left(x_{\left(n\right)}\right)_{\left(0,\beta\right)}
+\]
+
+\end_inset
+
+For any fixed 
+\begin_inset Formula $\beta$
+\end_inset
+
+ if 
+\begin_inset Formula $\beta<X_{\left(n\right)}$
+\end_inset
+
+ then 
+\begin_inset Formula $L=0$
+\end_inset
+
+ and if 
+\begin_inset Formula $\beta>X_{\left(n\right)}$
+\end_inset
+
+ then 
+\begin_inset Formula $f\left(\mathbf{x};\alpha,\beta\right)$
+\end_inset
+
+ is a decreasing function of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ .
+ Therefore 
+\begin_inset Formula $\hat{\beta}=X_{\left(n\right)}$
+\end_inset
+
+.
+ Upper confidence limit means acceptance region is below some number means
+ rejection region is greater than some number so I need a test that rejects
+ for 
+\begin_inset Formula $c<Q\left(\mathbf{X}\right)$
+\end_inset
+
+.
+ Let's test 
+\begin_inset Formula $H_{0}:\beta=\beta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\beta>\beta_{0}$
+\end_inset
+
+.
+ So reject iff 
+\begin_inset Formula 
+\begin{align*}
+\frac{L\left(\beta_{0};x\right)}{L\left(\hat{\beta};x\right)} & \leq c\\
+\frac{\left(\frac{\alpha}{\beta_{0}^{\alpha}}\right)^{n}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}I\left(x_{\left(n\right)}\right)_{\left(0,\beta_{0}\right)}}{\left(\frac{\alpha}{\left(x_{\left(n\right)}\right)^{\alpha}}\right)^{n}\left(\prod_{i=1}^{n}x_{i}\right)^{\alpha-1}I\left(x_{\left(n\right)}\right)_{\left(0,\left(x_{\left(n\right)}\right)\right)}} & \leq c\\
+\frac{\left(\frac{1}{\beta_{0}^{\alpha}}\right)^{n}}{\left(\frac{1}{\left(x_{\left(n\right)}\right)^{\alpha}}\right)^{n}} & \leq c\\
+\left(\frac{x_{\left(n\right)}}{\beta_{0}}\right) & \leq\sqrt[\alpha n]{c}
+\end{align*}
+
+\end_inset
+
+The rejection region is 
+\begin_inset Formula 
+\[
+A\left(\beta_{0}\right)=\left\{ x:\frac{x_{\left(n\right)}}{\beta_{0}}\leq c'\right\} 
+\]
+
+\end_inset
+
+The confidence region is 
+\begin_inset Formula 
+\[
+C\left(\mathbf{x}\right)=\left\{ \beta:\frac{x_{\left(n\right)}}{\beta}\leq c'\right\} 
+\]
+
+\end_inset
+
+The correlation coefficient is 
+\begin_inset Formula 
+\begin{align*}
+\inf_{\beta}P_{\beta}\left(\frac{X_{\left(n\right)}}{\beta}\leq c'\right) & =\inf_{\beta}P_{\beta}\left(X_{\left(n\right)}\leq\beta c'\right)\\
+ & =\inf_{\beta}\left[\prod_{i=1}^{n}P_{\beta}\left(X_{i}\leq\beta c'\right)\right]\\
+ & =\inf_{\beta}\left[\left(\frac{\beta c'}{\beta}\right)^{n\alpha}\right]\\
+ & =\inf_{\beta}\left[c'^{n\alpha}\right]\\
+ & =c^{'n\alpha}
+\end{align*}
+
+\end_inset
+
+Letting 
+\begin_inset Formula $c=.05^{1/\alpha n}$
+\end_inset
+
+ gives us a 
+\begin_inset Formula $\alpha=.05$
+\end_inset
+
+ test.
+ Note this is rejection region.
+ Therefore the acceptance region is 
+\begin_inset Formula 
+\[
+X_{\left(n\right)}>\beta c'
+\]
+
+\end_inset
+
+Therefore the confidence interval is 
+\begin_inset Formula 
+\[
+\left(-\infty,X_{\left(n\right)}\right]
+\]
+
+\end_inset
+
+ and the correlation coefficient is .95.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X_{i}\sim\text{n}\left(0,\sigma_{X}^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{i}\sim\text{n}\left(0,\sigma_{Y}^{2}\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\lambda=\sigma_{Y}^{2}/\sigma_{X}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Level 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ LRT of 
+\begin_inset Formula $H_{0}:\lambda=\lambda_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\lambda\neq\lambda_{0}$
+\end_inset
+
+.
+ Equivalent to testing 
+\begin_inset Formula $H_{0}:\sigma_{Y}^{2}=\lambda_{0}\sigma_{X}^{2}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\sigma_{Y}^{2}\neq\lambda_{0}\sigma_{X}^{2}$
+\end_inset
+
+.
+ The likelihood ratio for the joint distribution of 
+\begin_inset Formula $\mathbf{X},\mathbf{Y}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{L\left(\hat{\sigma}_{X}^{2},\lambda_{0}\hat{\sigma}_{X}^{2};\mathbf{x}\right)}{L\left(\hat{\sigma}_{Y}^{2},\hat{\sigma}_{X}^{2};\mathbf{x}\right)}=\frac{\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}\hat{\sigma}_{X}^{2}\lambda_{0}}}\right)^{n}exp\left(-\frac{1}{2}\left(\frac{\sum_{i}x_{i}^{2}}{\hat{\sigma}_{X}^{2}}+\frac{\sum_{i}y_{i}^{2}}{\lambda_{0}\hat{\sigma}_{X}^{2}}\right)\right)}{\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}\hat{\sigma}_{Y}^{2}}}\right)^{n}exp\left(-\frac{1}{2}\left(\frac{\sum_{i}x_{i}^{2}}{\hat{\sigma}_{X}^{2}}+\frac{\sum_{i}y_{i}^{2}}{\hat{\sigma}_{Y}^{2}}\right)\right)}
+\]
+
+\end_inset
+
+In the denominator the MLEs are 
+\begin_inset Formula 
+\[
+\hat{\sigma}_{X}^{2}=\frac{\sum_{i=1}^{n}X_{i}^{2}}{n},\hat{\sigma}_{Y}^{2}=\frac{\sum_{i=1}^{m}Y_{i}^{2}}{m}
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\begin{align*}
+\frac{L\left(\hat{\sigma}_{X}^{2},\lambda_{0}\hat{\sigma}_{X}^{2};\mathbf{x}\right)}{L\left(\hat{\sigma}_{Y}^{2},\hat{\sigma}_{X}^{2};\mathbf{x}\right)} & =\frac{\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}}}\right)^{n}\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}\lambda_{0}}}\right)^{m}exp\left(-\frac{1}{2}\left(\frac{\sum_{i}x_{i}^{2}}{\hat{\sigma}_{X}^{2}}+\frac{\sum_{i}y_{i}^{2}}{\lambda_{0}\hat{\sigma}_{X}^{2}}\right)\right)}{\left(\frac{1}{\sqrt{2\pi\left(\frac{\sum_{i=1}^{n}X_{i}^{2}}{n}\right)}}\right)^{n}\left(\frac{1}{\sqrt{2\pi\left(\frac{\sum_{i=1}^{m}Y_{i}^{2}}{m}\right)}}\right)^{m}exp\left(-\frac{1}{2}\left(\frac{\sum_{i}x_{i}^{2}}{\frac{\sum_{i=1}^{n}X_{i}^{2}}{n}}+\frac{\sum_{i}y_{i}^{2}}{\frac{\sum_{i=1}^{m}Y_{i}^{2}}{m}}\right)\right)}\\
+ & =\frac{\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}}}\right)^{n}\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}\lambda_{0}}}\right)^{m}exp\left(-\frac{1}{2}\left(\frac{\sum_{i}x_{i}^{2}}{\hat{\sigma}_{X}^{2}}+\frac{\sum_{i}y_{i}^{2}}{\lambda_{0}\hat{\sigma}_{X}^{2}}\right)\right)}{\left(\frac{1}{\sqrt{2\pi\left(\frac{\sum_{i=1}^{n}X_{i}^{2}}{n}\right)}}\right)^{n}\left(\frac{1}{\sqrt{2\pi\left(\frac{\sum_{i=1}^{m}Y_{i}^{2}}{m}\right)}}\right)^{m}exp\left(-\frac{1}{2}\left(n+m\right)\right)}
+\end{align*}
+
+\end_inset
+
+Finding the sup of the likelihood over the null hypothesis is equivalent
+ to finding the sup wrt 
+\begin_inset Formula $\sigma_{X}^{2}$
+\end_inset
+
+ .
+ Why??? Maximizing the log-likelihood:
+\begin_inset Formula 
+\begin{align*}
+\log\left[\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}}}\right)^{n}\left(\frac{1}{\sqrt{2\pi\hat{\sigma}_{X}^{2}\lambda_{0}}}\right)^{m}exp\left(-\frac{1}{2}\left(\frac{\sum_{i}x_{i}^{2}}{\hat{\sigma}_{X}^{2}}+\frac{\sum_{i}y_{i}^{2}}{\lambda_{0}\hat{\sigma}_{X}^{2}}\right)\right)\right] & =-\frac{n+m}{2}\left(\log\left(2\pi\right)+\log\hat{\sigma}_{X}^{2}\right)-\frac{m}{2}\log\lambda_{0}-\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{2\lambda_{0}\hat{\sigma}_{X}^{2}}
+\end{align*}
+
+\end_inset
+
+Differentiationg wrt 
+\begin_inset Formula $\hat{\sigma}_{X}^{2}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\left(\hat{\sigma}_{X}^{2}\right)}\left[-\frac{n+m}{2}\left(\log\left(2\pi\right)+\log\hat{\sigma}_{X}^{2}\right)-\frac{m}{2}\log\lambda_{0}-\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{2\lambda_{0}\hat{\sigma}_{X}^{2}}\right]=-\frac{n+m}{2\hat{\sigma}_{X}^{2}}+\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{2\lambda_{0}\left(\hat{\sigma}_{X}^{2}\right)^{2}}
+\]
+
+\end_inset
+
+Which implies 
+\begin_inset Formula 
+\[
+\hat{\sigma}_{X}^{2}=\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}
+\]
+
+\end_inset
+
+Substituting into the LRT
+\begin_inset Formula 
+\begin{align*}
+\frac{L\left(\hat{\sigma}_{X}^{2},\lambda_{0}\hat{\sigma}_{X}^{2};\mathbf{x}\right)}{L\left(\hat{\sigma}_{Y}^{2},\hat{\sigma}_{X}^{2};\mathbf{x}\right)} & =\frac{\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-n/2}\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\left(m+n\right)}\right)^{-m/2}exp\left(-\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{2\lambda_{0}\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)}\right)}{\left(\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-n/2}\left(\frac{\sum_{i=1}^{m}y_{i}^{2}}{m}\right)^{-m/2}exp\left(-\frac{1}{2}\left(n+m\right)\right)}\\
+ & =\frac{\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-n/2}\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-m/2}\left(\frac{1}{\lambda_{0}}\right)^{m/2}}{\left(\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-n/2}\left(\frac{\sum_{i=1}^{m}y_{i}^{2}}{m}\right)^{-m/2}}\\
+ & =\frac{\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-\frac{m+n}{2}}\left(\frac{1}{\lambda_{0}}\right)^{m/2}}{\left(\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-n/2}\left(\frac{\sum_{i=1}^{m}y_{i}^{2}}{m}\right)^{-m/2}}\\
+ & =\frac{\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-\frac{m+n}{2}}\left(\frac{1}{\lambda_{0}}\right)^{m/2}}{\left(\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-n/2}\left(\frac{\sum_{i=1}^{m}y_{i}^{2}}{m}\right)^{-m/2}}
+\end{align*}
+
+\end_inset
+
+Therefore reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ iff 
+\begin_inset Formula 
+\[
+\frac{\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-\frac{m+n}{2}}}{\left(\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-n/2}\left(\frac{\sum_{i=1}^{m}y_{i}^{2}}{\lambda_{0}m}\right)^{-m/2}}<k
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Under the null hypothesis 
+\begin_inset Formula $\sigma_{X}^{2}=\lambda_{0}\sigma_{Y}^{2}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\frac{\sum_{i=1}^{m}y_{i}^{2}}{\lambda_{0}m}\sim\chi_{m}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\sim\chi_{n}^{2}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-\frac{m}{2}}\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\right)^{-\frac{n}{2}}}{\left(\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-n/2}\left(\frac{\sum_{i=1}^{m}y_{i}^{2}}{\lambda_{0}m}\right)^{-m/2}} & <k\\
+\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\left(m+n\right)}\bigg/\frac{\sum_{i=1}^{m}y_{i}^{2}}{m}\right)^{-\frac{m}{2}}\left(\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\left(m+n\right)}\bigg/\frac{\sum_{i=1}^{n}x_{i}^{2}}{n}\right)^{-\frac{n}{2}} & <k\\
+\left(\frac{m}{m+n}\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\sum_{i=1}^{m}y_{i}^{2}}\right)^{-\frac{m}{2}}\left(\frac{n}{m+n}\frac{\lambda_{0}\sum_{i}x_{i}^{2}+\sum_{i}y_{i}^{2}}{\lambda_{0}\sum_{i=1}^{n}x_{i}^{2}}\right)^{-\frac{n}{2}} & <k\\
+\left(\frac{m}{m+n}\left(\frac{\sum_{i}x_{i}^{2}}{\sum_{i=1}^{m}y_{i}^{2}/\lambda_{0}}+1\right)\right)^{-\frac{m}{2}}\left(\frac{n}{m+n}\left(\frac{\sum_{i}y_{i}^{2}/\lambda_{0}}{\sum_{i=1}^{n}x_{i}^{2}}+1\right)\right)^{-\frac{n}{2}} & <k\\
+\left(\frac{m}{m+n}\left(\frac{\sum_{i}x_{i}^{2}/\sigma_{X}^{2}}{\sum_{i=1}^{m}y_{i}^{2}/\lambda_{0}\sigma_{X}^{2}}+1\right)\right)^{-\frac{m}{2}}\left(\frac{n}{m+n}\left(\frac{\sum_{i}y_{i}^{2}/\sigma_{X}^{2}\lambda_{0}}{\sum_{i=1}^{n}x_{i}^{2}/\sigma_{X}^{2}}+1\right)\right)^{-\frac{n}{2}} & <k\\
+\left(\frac{1}{m+n}\left(n\frac{\sum_{i}x_{i}^{2}/n\sigma_{X}^{2}}{\sum_{i=1}^{m}y_{i}^{2}/m\lambda_{0}\sigma_{X}^{2}}+1\right)\right)^{-\frac{m}{2}}\left(\frac{1}{m+n}\left(m\frac{\sum_{i}y_{i}^{2}/m\sigma_{X}^{2}\lambda_{0}}{\sum_{i=1}^{n}x_{i}^{2}/n\sigma_{X}^{2}}+1\right)\right)^{-\frac{n}{2}} & <k
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[11.35]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y_{i}=\theta x_{i}^{2}+\epsilon_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $\epsilon_{i}\sim\text{n}\left(0,\sigma^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Y_{i}\sim\text{n}\left(\theta x_{i}^{2},\sigma^{2}\right)$
+\end_inset
+
+ and therefore 
+\begin_inset Formula 
+\[
+f\left(\mathbf{y};\theta\right)=\left(\frac{1}{\sqrt{2\pi\sigma^{2}}}\right)^{n}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\theta x_{i}^{2}\right)^{2}}
+\]
+
+\end_inset
+
+The log-likelihood is 
+\begin_inset Formula 
+\[
+\log f\left(\mathbf{y};\theta\right)=-\frac{n}{2}\log\left(2\pi\sigma^{2}\right)-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\theta x_{i}^{2}\right)^{2}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta}\log f\left(\mathbf{y};\theta\right) & =\frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\theta x_{i}^{2}\right)x_{i}^{2}\\
+ & =\frac{x_{i}^{2}}{\sigma^{2}}\left(\sum_{i=1}^{n}y_{i}x_{i}^{2}-\theta\sum_{i=1}^{n}x_{i}^{2}x_{i}^{2}\right)=0
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\[
+\hat{\theta}=\frac{\sum_{i}Y_{i}x_{i}^{2}}{\sum_{i}x_{i}^{4}}=\sum_{i}\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)Y_{i}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $Z_{i}=\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)Y_{i}$
+\end_inset
+
+.
+ First note that 
+\begin_inset Formula 
+\[
+E\left[Z_{i}\right]=\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)EY_{i}=0
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+\sigma_{Z_{i}}^{2} & =\text{Var}\left(Z_{i}\right)=\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)^{2}\text{Var}\left(Y_{i}\right)\\
+ & =\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)^{2}\sigma^{2}
+\end{align*}
+
+\end_inset
+
+that Have to verify 
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\frac{1}{s_{n}^{2+\delta}}\sum_{i=1}^{n}E\left[\left|Z_{i}-E\left[Z_{i}\right]\right|^{2+\delta}\right]=0
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+s_{n}^{2}=\sum_{i=1}^{n}\sigma_{Z_{i}}^{2}=\sum_{i=1}^{n}\sigma^{2}\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)^{2}=\frac{\sigma^{2}}{\left(\sum_{i}x_{i}^{4}\right)}
+\]
+
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\frac{1}{s_{n}^{2+\delta}}\sum_{i=1}^{n}E\left[\left|Z_{i}-E\left[Z_{i}\right]\right|^{2+\delta}\right]=\lim_{n\to\infty}\frac{1}{s_{n}^{2+\delta}}\sum_{i=1}^{n}E\left[\left|Z_{i}\right|^{2+\delta}\right]=0
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\delta=2$
+\end_inset
+
+ then we need to check that 
+\begin_inset Formula $\lim_{n\to\infty}\frac{1}{s_{n}^{4}}\sum_{i=1}^{n}E\left[\left(Z_{i}\right)^{4}\right]=0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{s_{n}^{4}}\sum_{i=1}^{n}E\left[\left(Z_{i}\right)^{4}\right] & =\frac{1}{\left(\frac{\sigma^{2}}{\left(\sum_{i}x_{i}^{4}\right)}\right)^{2}}\sum_{i=1}^{n}E\left[\left(\left(\frac{x_{i}^{2}}{\sum_{i}x_{i}^{4}}\right)Y_{i}\right)^{4}\right]\\
+ & =\frac{1}{\left(\frac{\sigma^{2}}{\left(\sum_{i}x_{i}^{4}\right)}\right)^{2}\left(\sum_{i}x_{i}^{4}\right)^{4}}\sum_{i=1}^{n}E\left[\left(x_{i}^{2}Y_{i}\right)^{4}\right]\\
+ & =\frac{1}{\left(\sigma^{2}\right)^{2}\left(\sum_{i}x_{i}^{4}\right)^{2}}\sum_{i=1}^{n}E\left[\left(x_{i}^{2}Y_{i}\right)^{4}\right]\\
+ & \leq\frac{\left(\max_{i}x_{i}^{8}\right)}{\left(\sigma^{2}\right)^{2}\left(\sum_{i}x_{i}^{4}\right)^{2}}\sum_{i=1}^{n}E\left[\left(Y_{i}\right)^{4}\right]\\
+ & \leq\frac{\left(\max_{i}x_{i}^{8}\right)}{\left(\sigma^{2}\right)^{2}\left(n\min_{i}x_{i}^{4}\right)^{2}}\sum_{i=1}^{n}E\left[\left(Y_{i}\right)^{4}\right]\\
+ & =\frac{1}{n^{2}\left(\sigma^{2}\right)^{2}}\sum_{i=1}^{n}E\left[\left(Y_{i}\right)^{4}\right]
+\end{align*}
+
+\end_inset
+
+And because 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ has a finite 4th moment the last quantity is 
+\begin_inset Formula $O\left(1/n\right)$
+\end_inset
+
+ and hence goes to zero.
+ Therefore by Lyapunov CLT 
+\begin_inset Formula 
+\[
+\frac{\sum_{i}\left(Z_{i}-\mu_{Z_{i}}\right)}{s_{n}}=\frac{\sum_{i}\left(Z_{i}-\mu_{Z_{i}}\right)}{s_{n}}\rightarrow\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
