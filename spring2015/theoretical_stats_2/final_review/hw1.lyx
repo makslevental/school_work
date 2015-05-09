@@ -2267,5 +2267,383 @@ Therefore test 2 is more powerful at
 .
 \end_layout
 
+\begin_layout Standard
+Note that for 
+\begin_inset Formula $X_{i}\sim\text{n}\left(\mu,\sigma^{2}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{n-1}{\sigma^{2}}S^{2}\sim\chi_{n-1}^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Shao 48]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $X_{i}\sim\text{Cauchy}\left(\mu,\sigma_{0}\right)$
+\end_inset
+
+.
+ Consider 
+\begin_inset Formula $H_{0}:\mu\le\mu_{0}$
+\end_inset
+
+ 
+\begin_inset Formula $H_{1}:\mu>\mu_{0}$
+\end_inset
+
+.
+ Let the test be reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+\bar{X}>c
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\[
+\sum_{i}\left(X_{i}-\mu\right)=\sum_{i}\text{Cauchy}\left(0,\sigma_{0}\right)=
+\]
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\bar{X}\sim\text{Cauchy}\left(\mu,\sigma_{0}\right)
+\]
+
+\end_inset
+
+So The power is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\mu\right) & =P_{\mu}\left(\bar{X}>c\right)\\
+ & =1-\left(\frac{1}{\pi}\arctan\left(\frac{c-\mu}{\sigma_{0}}\right)+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\frac{1}{\pi}\arctan\left(\frac{c-\mu}{\sigma_{0}}\right)+\frac{1}{2}$
+\end_inset
+
+ is an increasing function of 
+\begin_inset Formula $c$
+\end_inset
+
+, a decreasing function 
+\begin_inset Formula $\mu$
+\end_inset
+
+, and hence 
+\begin_inset Formula $\beta\left(\theta\right)$
+\end_inset
+
+ is an increasing function of 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =\sup_{\mu\in\Theta_{0}}\beta\left(\mu\right)\\
+ & =\sup_{\mu\leq\mu_{0}}\left[1-\left(\frac{1}{\pi}\arctan\left(\frac{c-\mu}{\sigma_{0}}\right)+\frac{1}{2}\right)\right]\\
+ & =1-\left(\frac{1}{\pi}\arctan\left(\frac{c-\mu_{0}}{\sigma_{0}}\right)+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+So if
+\begin_inset Formula 
+\[
+c=\sigma_{0}\tan\left(\frac{\pi}{2}-\pi\alpha\right)+\mu_{0}
+\]
+
+\end_inset
+
+then reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ iff 
+\begin_inset Formula $\bar{X}>c$
+\end_inset
+
+ is a size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ test.
+ The p-value correspnding to this test is
+\begin_inset Formula 
+\begin{align*}
+p\left(\mathbf{x}\right) & =\sup_{\theta\in\Theta_{0}}P\left(\bar{X}>\bar{x}\right)\\
+ & =1-\left(\frac{1}{\pi}\arctan\left(\frac{c-\bar{x}}{\sigma_{0}}\right)+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Shao 49]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X_{i}\sim\text{truncExp}\left(a,\theta\right)$
+\end_inset
+
+.
+ Note
+\begin_inset Formula 
+\[
+f\left(x;a,\theta\right)=\frac{\frac{1}{\theta}e^{-x/\theta}}{1-e^{-a/\theta}}I\left(x\right)_{\left(a,\infty\right)}
+\]
+
+\end_inset
+
+Using 
+\begin_inset Formula $T_{1}\left(\mathbf{X}\right)=\bar{X}-X_{\left(1\right)}$
+\end_inset
+
+ construct a confidence interval with confidence coefficient 
+\begin_inset Formula $1-\alpha$
+\end_inset
+
+.
+ Pivotal quantity? Function of the data and the parameter that's independent
+ of all parameters.
+ Certainly 
+\begin_inset Formula $X_{\left(1\right)}$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is sufficient for 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Okay fuck it.
+ The distribution of 
+\begin_inset Formula $X_{\left(1\right)}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+f_{X_{\left(1\right)}}\left(x_{1}\right) & =n\left(1-F_{X}\left(x_{1}\right)\right)^{n-1}f_{X}\left(x_{1}\right)\\
+ & =\frac{ne^{\frac{a-x_{1}}{\theta}}\left(1+\frac{1-e^{\frac{a-x_{1}}{\theta}}}{1-e^{a/\theta}}\right)^{n-1}}{\theta\left(e^{a/\theta}-1\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.49]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+For testing 
+\begin_inset Formula $H_{0}:\theta\leq\frac{1}{2}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta>\frac{1}{2}$
+\end_inset
+
+ for a Bernoulli model.
+ Since 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ is left tail it's reasonable to use the mean to test.
+ Let the test be reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ iff 
+\begin_inset Formula 
+\[
+n\bar{X}>c
+\]
+
+\end_inset
+
+ for some 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ The power function for this test is 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(\theta\right) & =P\left(n\bar{X}>c\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is distributed Binomial
+\begin_inset Formula $\left(n,\theta\right)$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula 
+\begin{align*}
+\beta\left(p\right) & =P_{\theta}\left(n\bar{X}>c\right)\\
+ & =1-P_{\theta}\left(n\bar{X}\leq c\right)\\
+ & =1-\left(\sum_{i=0}^{c}\binom{n}{i}\theta^{i}\left(1-\theta\right)^{n-i}\right)
+\end{align*}
+
+\end_inset
+
+This is an increasing function of 
+\begin_inset Formula $p$
+\end_inset
+
+ hence 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =\sup_{\theta\leq\frac{1}{2}}\left[1-\left(\sum_{i=0}^{c}\binom{n}{i}\theta^{i}\left(1-\theta\right)^{n-i}\right)\right]\\
+ & =\left[1-\left(\sum_{i=0}^{c}\binom{n}{i}\left(\frac{1}{2}\right)^{i}\left(\frac{1}{2}\right)^{n-i}\right)\right]\\
+ & =\left[1-\left(\sum_{i=0}^{c}\binom{n}{i}\left(\frac{1}{2}\right)^{n}\right)\right]
+\end{align*}
+
+\end_inset
+
+Hence for some 
+\begin_inset Formula $c$
+\end_inset
+
+ this test will be size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ Therefore this statistic is a fitting statistic to be used as a p-value.
+ 
+\begin_inset Formula 
+\begin{align*}
+p\left(\mathbf{x}\right) & =\sup_{\theta\leq\frac{1}{2}}P_{\theta}\left(W\left(\mathbf{X}\right)\geq W\left(\mathbf{x}\right)\right)\\
+ & =P_{1/2}\left(n\bar{X}\geq7\right)\\
+ & =\left(\binom{10}{7}+\binom{10}{8}+\binom{10}{9}+\binom{10}{10}\right)\left(\frac{1}{2}\right)^{10}\\
+ & =.171875
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For testing 
+\begin_inset Formula $H_{0}:\lambda\leq1$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\lambda>1$
+\end_inset
+
+ for a Poisson
+\begin_inset Formula $\left(\lambda\right)$
+\end_inset
+
+ model.
+ We have one measurement, just 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ The test reject 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ iff 
+\begin_inset Formula $X>c$
+\end_inset
+
+ for some 
+\begin_inset Formula $c$
+\end_inset
+
+ is a fitting test to use to construct a p-value.
+ Hence
+\begin_inset Formula 
+\begin{align*}
+p\left(x\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X>x\right)\\
+p\left(x\right) & =\sup_{\theta\in\Theta_{0}}P_{\theta}\left(X>3\right)\\
+p\left(x\right) & =\inf_{\theta\in\Theta_{0}}\left(1-P_{\theta}\left(X\leq3\right)\right)\\
+ & =1-\sum_{i=0}^{3}e^{-1}\frac{1^{i}}{i!}\\
+ & =1-\sum_{i=0}^{3}\frac{1}{e}\frac{1}{i!}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
