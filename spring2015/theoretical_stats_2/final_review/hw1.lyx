@@ -2267,20 +2267,208 @@ Therefore test 2 is more powerful at
 .
 \end_layout
 
-\begin_layout Standard
-Note that for 
-\begin_inset Formula $X_{i}\sim\text{n}\left(\mu,\sigma^{2}\right)$
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Made up]
+\end_layout
+
 \end_inset
 
+ Let 
+\begin_inset Formula $X_{i}\sim\Gamma\left(\alpha_{0},\beta\right)$
+\end_inset
+
+.
+ Suppose we want to test 
+\begin_inset Formula $H_{0}:\beta=\beta_{0}$
+\end_inset
+
+ vs.
  
+\begin_inset Formula $H_{1}:\beta=\beta_{1}>\beta_{0}$
+\end_inset
+
+.
+ Step 1 is to check the likelihood ratio
 \begin_inset Formula 
 \[
-\frac{n-1}{\sigma^{2}}S^{2}\sim\chi_{n-1}^{2}
+\frac{f\left(\mathbf{x};\beta_{1}\right)}{f\left(\mathbf{x};\beta_{0}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-\sum x_{i}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}
 \]
 
 \end_inset
 
+Since 
+\begin_inset Formula $\beta_{1}>\beta_{0}$
+\end_inset
 
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}<0$
+\end_inset
+
+ so the ratio is increasing in 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+.
+ Therefore the test 
+\begin_inset Quotes eld
+\end_inset
+
+reject iff
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\bar{X}>c
+\]
+
+\end_inset
+
+is UMP by Karlin-Rubin with 
+\begin_inset Formula 
+\begin{align*}
+s & =P_{\beta_{0}}\left(\bar{X}>c\right)
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\bar{X}\sim\text{Gamma}\left(n\alpha,\beta/n\right)$
+\end_inset
+
+.
+ So s
+\begin_inset Formula 
+\begin{align*}
+s & =\frac{n^{\alpha}}{\Gamma\left(\alpha\right)\beta_{0}^{\alpha}}\int_{c}^{\infty}x^{\alpha-1}e^{-nx/\beta}dx
+\end{align*}
+
+\end_inset
+
+What about if 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+to test 
+\begin_inset Formula $H_{0}:\beta=\beta_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\beta=\beta_{1}<\beta_{0}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x};\beta_{1}\right)}{f\left(\mathbf{x};\beta_{0}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-\sum x_{i}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}=\frac{\beta_{0}}{\beta_{1}}e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\beta_{1}<\beta_{0}$
+\end_inset
+
+ it's the case that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}>0$
+\end_inset
+
+ so the ratio is increasing in 
+\begin_inset Formula $-\bar{X}$
+\end_inset
+
+.
+ Therefore the test 
+\begin_inset Quotes eld
+\end_inset
+
+reject iff
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\bar{X}>c
+\]
+
+\end_inset
+
+is UMP by Karlin-Rubin with 
+\begin_inset Formula 
+\begin{align*}
+s & =P_{\beta_{0}}\left(-\bar{X}>c\right)\\
+ & =P_{\beta_{0}}\left(\bar{X}<-c\right)
+\end{align*}
+
+\end_inset
+
+Apparently 
+\begin_inset Formula $c$
+\end_inset
+
+ should be negative? 
+\begin_inset Formula 
+\begin{align*}
+\frac{\beta_{0}}{\beta_{1}}e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)} & >k\\
+e^{-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)} & >\frac{\beta_{1}}{\beta_{0}}k\\
+-n\bar{x}\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right) & >\log\left(\frac{\beta_{1}}{\beta_{0}}k\right)\\
+\bar{x} & <-\frac{\log\left(\frac{\beta_{1}}{\beta_{0}}k\right)}{n\left(\frac{1}{\beta_{1}}-\frac{1}{\beta_{0}}\right)}
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\frac{\beta_{1}}{\beta_{0}}k<1$
+\end_inset
+
+ then the right hand side will be positive, otherwise it will be negative.
+ Note that 
+\begin_inset Formula $\bar{X}\sim\text{Gamma}\left(n\alpha,\beta/n\right)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -2289,51 +2477,140 @@ status open
 
 \begin_layout Plain Layout
 
-[Shao 48]
+[McGill]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X\sim\text{Exp}\left(1/\theta\right)$
+\end_inset
+
+.
+ Consider testing 
+\begin_inset Formula $H_{0}:\theta=2$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{1}:\theta>2$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\theta_{0}=2$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta_{1}>\theta$
+\end_inset
+
+.
+ The Neyman-Pearson lemma state that the likelihood ratio 
+\begin_inset Formula 
+\[
+\frac{f\left(\mathbf{x};\theta_{1}\right)}{f\left(\mathbf{x};\theta_{0}\right)}=\left(\frac{\theta_{0}}{\theta_{1}}\right)^{n}e^{-\left(\frac{1}{\theta_{1}}-\frac{1}{\theta_{0}}\right)\sum_{i=1}^{n}x_{i}}>k
+\]
+
+\end_inset
+
+ is UMP with 
+\begin_inset Formula 
+\[
+\alpha=P_{\theta_{0}}\left(\left(\frac{\theta_{0}}{\theta_{1}}\right)^{n}e^{-\left(\theta_{1}-\theta_{0}\right)\sum_{i=1}^{n}x_{i}}>k\right)
+\]
+
+\end_inset
+
+The sufficient statistic is 
+\begin_inset Formula $n\bar{X}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\theta_{1}>\theta_{0}$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(\frac{1}{\theta_{1}}-\frac{1}{\theta_{0}}\right)<0$
+\end_inset
+
+ and so the LR statistic is increasing in the sufficient statistic so we
+ use 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ for the Karlin-Rubin theorem.
+ An exponential is a special case of Gamma, it's Gamma
+\begin_inset Formula $\left(1,\theta\right)$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is distributed Gamma
+\begin_inset Formula $\left(n,\theta/n\right)$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{align*}
+\alpha & =P_{\theta_{0}}\left(\bar{X}>c\right)\\
+ & =\frac{1}{\theta^{n}}\int_{c}^{\infty}e^{-nt/\theta_{0}}dt\\
+ & =\frac{e^{-cn/\theta_{0}}}{n\theta_{0}^{n-1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.31]
 \end_layout
 
 \end_inset
 
 Let 
-\begin_inset Formula $X_{i}\sim\text{Cauchy}\left(\mu,\sigma_{0}\right)$
+\begin_inset Formula $X_{i}\sim\text{Poisson}\left(\lambda\right)$
 \end_inset
 
 .
- Consider 
-\begin_inset Formula $H_{0}:\mu\le\mu_{0}$
+ Test 
+\begin_inset Formula $\lambda\leq\lambda_{0}$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $\lambda>\lambda_{0}$
+\end_inset
+
+.
+ 
+\series bold
+GOTTA CHECK MLR
+\series default
+ Neyman-Pearson states that for 
+\begin_inset Formula $\lambda_{1}>\lambda_{0}$
 \end_inset
 
  
-\begin_inset Formula $H_{1}:\mu>\mu_{0}$
-\end_inset
-
-.
- Let the test be reject 
-\begin_inset Formula $H_{0}$
-\end_inset
-
- if 
 \begin_inset Formula 
 \[
-\bar{X}>c
+\frac{f\left(\mathbf{x};\lambda_{1}\right)}{f\left(\mathbf{x};\lambda_{0}\right)}=e^{-n\left(\lambda_{1}-\lambda_{0}\right)}\left(\frac{\lambda_{1}}{\lambda_{0}}\right)^{\sum_{i=1}^{n}x_{i}}>k
 \]
 
 \end_inset
 
-for some 
-\begin_inset Formula $c$
-\end_inset
-
-.
- Note that
-\begin_inset Formula 
-\[
-\sum_{i}\left(X_{i}-\mu\right)=\sum_{i}\text{Cauchy}\left(0,\sigma_{0}\right)=
-\]
-
-\end_inset
-
- 
+which is equivalent to 
 \begin_inset Formula 
 \[
 \bar{X}\sim\text{Cauchy}\left(\mu,\sigma_{0}\right)
