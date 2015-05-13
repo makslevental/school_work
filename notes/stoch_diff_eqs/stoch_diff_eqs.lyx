@@ -1014,6 +1014,249 @@ are all measurable.
 exists and is measurable.
 \end_layout
 
+\begin_layout Standard
+We 
+\begin_inset Quotes eld
+\end_inset
+
+build up
+\begin_inset Quotes erd
+\end_inset
+
+ the Lebesgue integral piece by piece.
+ Let 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ be a measure space with (probability) measure finite positive measure 
+\begin_inset Formula $P$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Indicator functions.
+ For 
+\begin_inset Formula $S\in\mathcal{F}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\int1_{S}\left(\omega\right)dP:=P\left(S\right)
+\]
+
+\end_inset
+
+
+\series bold
+Note the argument is purely symoblic - the indicator isn't evaluted.
+\end_layout
+
+\begin_layout Enumerate
+Simple functions.
+ Let 
+\begin_inset Formula $S\left(\omega\right)=\sum_{k}a_{k}1_{S_{k}}$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{k}\geq0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\int S\left(\omega\right)dP:=\sum_{k}\int1_{S_{k}}\left(\omega\right)dP=\sum_{k}a_{k}P\left(S_{k}\right)
+\]
+
+\end_inset
+
+Note this defintion is independent of representation of 
+\begin_inset Formula $f$
+\end_inset
+
+ (can be proven using additive property of measures).
+\end_layout
+
+\begin_layout Enumerate
+Non-negative functions.
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a non-negative measurable function defined on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\int_{\Omega}X\left(\omega\right)dP:=\sup_{s}\left\{ \int_{\Omega}S\left(\omega\right)dP;\,0\leq S\leq X,\:S\text{ simple}\right\} 
+\]
+
+\end_inset
+
+Why is this reasonable? 
+\end_layout
+
+\begin_deeper
+\begin_layout Lemma*
+Any positive measurable function 
+\begin_inset Formula $X$
+\end_inset
+
+ is the pointwise limit of simple functions 
+\begin_inset Formula $S_{j}\left(\omega\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Fix 
+\begin_inset Formula $j\in\mathbb{N}$
+\end_inset
+
+ and let 
+\begin_inset Formula 
+\[
+A_{k}^{j}=\begin{cases}
+\left\{ \omega;k2^{-j}\leq X\left(\omega\right)\leq\left(k+1\right)2^{-j}\right\}  & k=0,1,\dots,j2^{j}-1\\
+\left\{ \omega;X\left(\omega\right)\geq j\right\}  & k=j2^{j}
+\end{cases}
+\]
+
+\end_inset
+
+I.e.
+ slice up the graph of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+S_{j}\left(\omega\right)=\sum_{k=1}^{j2^{j}}k2^{-j}1_{A_{k}^{j}}\left(\omega\right)
+\]
+
+\end_inset
+
+Then 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\left|S_{j}\left(\omega\right)-X\left(\omega\right)\right|\leq2^{-j}\text{ for fixed }\omega\text{ and }X\left(\omega\right)<j$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A_{k}^{j}=\left\{ \omega;k2^{-j}\leq X\left(\omega\right)\right\} \cap\left\{ \omega;X\left(\omega\right)<\left(k+1\right)2^{-j}\right\} \in\mathcal{F}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\left\{ \omega;X\left(\omega\right)\geq j\right\} \in\mathcal{F}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $0\leq S_{j}\left(\omega\right)\leq X\left(\omega\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{j}\left(\omega\right)\uparrow X\left(\omega\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Signed functions.
+ Any signed function 
+\begin_inset Formula $X$
+\end_inset
+
+ can be written as 
+\begin_inset Formula 
+\[
+X\left(\omega\right)=X^{+}\left(\omega\right)-X^{-}\left(\omega\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+X^{+}\left(\omega\right) & =\begin{cases}
+X\left(\omega\right) & \text{if }X\left(\omega\right)>0\\
+0 & \text{otherwise}
+\end{cases}\\
+X^{-}\left(\omega\right) & =\begin{cases}
+-X\left(\omega\right) & \text{if }X\left(\omega\right)<0\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Note that both 
+\begin_inset Formula $X^{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $X^{-}$
+\end_inset
+
+ are non-negative measurable functions and that 
+\begin_inset Formula 
+\[
+\left|X\right|=X^{+}+X^{-}
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula 
+\[
+\min\left\{ \int_{\Omega}X^{+}dP,\int_{\Omega}X^{+}dP\right\} <\infty
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\[
+\int XdP:=\int X^{+}dP-\int X^{-}dP
+\]
+
+\end_inset
+
+and if 
+\begin_inset Formula 
+\[
+\int\left|X\right|dP=\int X^{+}dP+\int X^{-}dP<\infty
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula $X$
+\end_inset
+
+ is Lebesgue integrable.
+\end_layout
+
 \begin_layout Definition
 If 
 \begin_inset Formula $\int_{\Omega}\left|X\left(\omega\right)\right|dP\left(\omega\right)<\infty$
