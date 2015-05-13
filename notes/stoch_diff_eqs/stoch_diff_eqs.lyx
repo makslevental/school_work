@@ -66,969 +66,73 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Expectation Maximization: From the Horse's Mouth
-\end_layout
-
-\begin_layout Standard
-Expectation
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-These notes are basically a transcription of a 2-3 lecture notes (taken
- dutifully by Chris Gianelli) from lectures given by Dr.
- Kshitij Khare at UF in Spring 15.
- He's not a horse - it's just an expression.
-\end_layout
-
-\end_inset
-
-maximization (EM) is a way to iteratively approximate the maximum likelihood
- estimators (MLEs) for a parametric family when solving the MLE equations
- analytically is intractable.
- 
-\end_layout
-
-\begin_layout Standard
-Recall that finding the MLEs for a parametric family 
-\begin_inset Formula 
-\[
-\mathbf{Y}\sim f_{\mathbf{Y}}\left(\cdot;\boldsymbol{\theta}\right)\,\boldsymbol{\theta}\in\Theta
-\]
-
-\end_inset
-
-is tantamount to maximizing the likelihood function
-\begin_inset Formula 
-\[
-L\left(\boldsymbol{\theta};\mathbf{y}\right)=f_{\mathbf{Y}}\left(\mathbf{y};\boldsymbol{\theta}\right)
-\]
-
-\end_inset
-
-as a function of 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
-.
- The maximum likelihood estimators are estimators of/for 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
-, usually denoted 
-\begin_inset Formula $\hat{\boldsymbol{\theta}}$
-\end_inset
-
-.
- The actual maximization is effected by finding critical points of 
-\begin_inset Formula $L$
-\end_inset
-
- wrt 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
- and testing concavity, i.e.
- solving 
-\begin_inset Formula 
-\[
-\frac{\partial}{\partial\theta_{i}}L\left(\boldsymbol{\theta};\mathbf{y}\right)=0
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $i$
-\end_inset
-
- and checking the negative definiteness of Hessian of 
-\begin_inset Formula $L$
-\end_inset
-
-.
- In general 
-\begin_inset Formula $\partial_{\theta_{i}}L\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
- might be highly non-linear in 
-\begin_inset Formula $\theta_{i}$
-\end_inset
-
- and hence finding each might be very difficult.
- What to do?
+SDEs
 \end_layout
 
 \begin_layout Section
-Expectation Maximization Beta
+Examples/Applications
 \end_layout
 
 \begin_layout Standard
-Suppose
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Suppose!
+Some convincing
 \end_layout
 
-\end_inset
-
- there exists another random, unobserved, vector 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- such that were 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- in fact observed, maximizing the joint likelihood for 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-L\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)=f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)
-\]
-
-\end_inset
-
-is easier than the original problem.
- 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- is called a latent or hidden variable.
- Now a priori there's absolutely no reason to assume that having more informatio
-n in hand and complicating the model should make things easier.
- On the contrary, for example, a good physical model makes simplifying assumptio
-ns and thereby becomes tractable.
- But indeed for some very useful models such as Hidden Markov Models and
- Gaussian Mixture Models this ansatz does simplify computing the MLEs.
+\begin_layout Subsection
+Noisey LRC Circuit
 \end_layout
 
 \begin_layout Standard
-All is going swimmingly except 
-\begin_inset Formula $\mathbf{X}$
+The charge 
+\begin_inset Formula $Q\left(t\right)$
 \end_inset
 
- is unobserved - the only observed data are 
-\begin_inset Formula $\mathbf{Y}$
+ at time 
+\begin_inset Formula $t$
 \end_inset
 
-.
- What to do? Estimate 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- of course.
- How? Using the best estimator of 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
-, based on observed
-\series bold
- 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
-
-\series default
-, that minimizes the risk for the quadratic loss function
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Formula $l\left(\mathbf{X},\hat{\mathbf{X}}\right)=\left(\mathbf{X}-\hat{\mathbf{X}}\right)^{2}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-, i.e.
- minimizes the mean square error, i.e.
- , 
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right]$
-\end_inset
-
-.
- Note two things.
- Firstly it's important that you can actually compute 
-\emph on
-this
-\emph default
- in closed form, otherwise you've traded one intractable problem for another.
- Secondly, since 
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right]$
-\end_inset
-
- is implicitly a function of 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
-, which is unknown to begin with
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Don't forget the point of all this is actually to estimate 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- you need some initial guess for it too, otherwise you can't compute the
- expectation.
- Hence the expectation computed is actually 
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right]$
-\end_inset
-
- where 
-\begin_inset Formula $\boldsymbol{\theta}'$
-\end_inset
-
- is the current guess for 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
-.
- Then once you have this estimate for 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- just maximize 
-\begin_inset Formula 
-\[
-L\left(\boldsymbol{\theta};E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right],\mathbf{y}\right)=f_{\mathbf{X},\mathbf{Y}}\left(E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right],\mathbf{y};\boldsymbol{\theta}\right)
-\]
-
-\end_inset
-
-The procedure alternates between estimating 
-\series bold
-x 
-\series default
-using 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right]$
-\end_inset
-
- and maximizing 
-\begin_inset Formula $L\left(\boldsymbol{\theta};E\left[\mathbf{x}|\mathbf{y};\boldsymbol{\theta}'\right],\mathbf{y}\right)$
-\end_inset
-
- .
- Compute expectation, then perform maxization, compute expectation, then
- perform maximization, compute expectation,...
- hence 
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Expectation Maximization
-\series default
- algorithm.
- Just to be clear 
-\end_layout
-
-\begin_layout Definition
-
-\series bold
-Expectation Algorithm Beta.
- 
-\series default
-Given some observed data 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
-, in order to perform the intractable maximization of 
-\begin_inset Formula $L\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
-, posit the existence of some latent 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- such that 
-\begin_inset Formula $L\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)$
-\end_inset
-
- is easier.
- Set 
-\begin_inset Formula $\boldsymbol{\theta}^{\left(0\right)}$
-\end_inset
-
- to be some initial guess for 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
- then
-\series bold
- 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-E-step: Set 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\mathbf{x}^{\left(r\right)}=E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-M-step: Set 
-\begin_inset Formula $\boldsymbol{\theta}^{\left(r+1\right)}=\arg\max_{\boldsymbol{\theta}}L\left(\boldsymbol{\theta};\mathbf{x}^{\left(r\right)},\mathbf{y}\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Go to step 1 unless 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\left|\boldsymbol{\theta}^{\left(r+1\right)}-\boldsymbol{\theta}^{\left(r\right)}\right|<\varepsilon$
-\end_inset
-
- for some 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- of your choosing.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-The equations in step 1 and 2 are called update equations because specify
- how to update the current estimate for 
-\begin_inset Formula $\mathbf{x}^{\left(i\right)}$
-\end_inset
-
- and 
-\begin_inset Formula $\boldsymbol{\theta}^{\left(i\right)}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Example
-Here's an example: let 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- be iid such that 
-\begin_inset Formula 
-\[
-f_{Y_{i}}\left(y_{i};\theta\right)=\theta g_{1}\left(y_{i}\right)+\left(1-\theta\right)g_{0}\left(y_{i}\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\theta\in\left(0,1\right)$
-\end_inset
-
- and 
-\begin_inset Formula $g_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $g_{1}$
-\end_inset
-
- are Gaussians with known means 
-\begin_inset Formula $\left(\mu_{0},\mu_{1}\right)$
-\end_inset
-
-and variances 
-\begin_inset Formula $\left(\sigma_{0}^{2},\sigma_{1}^{2}\right)$
-\end_inset
-
-.
- We want the MLE for 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
- Note that 
-\begin_inset Formula 
-\[
-L\left(\theta;\mathbf{y}\right)=\prod_{i=1}^{n}\left(\theta g_{1}\left(y_{i}\right)+\left(1-\theta\right)g_{0}\left(y_{i}\right)\right)
-\]
-
-\end_inset
-
-Quite messy
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Even if you think you're clever and try to maximize log-likelihood you're
- still going to have a rough go at it.
-\end_layout
-
-\end_inset
-
-.
- What to do? EM to the rescue! Suppose the 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- are drawn by a process where a 
-\begin_inset Formula $\theta$
-\end_inset
-
--biased coin is flipped and either 
-\begin_inset Formula $g_{0}$
-\end_inset
-
- or 
-\begin_inset Formula $g_{1}$
-\end_inset
-
- generates the 
-\begin_inset Formula $y_{i}$
-\end_inset
-
- depending on whether the coin lands heads up or down.
- The latent variable here then is which Gaussian generated 
-\begin_inset Formula $y_{i}$
-\end_inset
-
-.
- Hence let 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- be Bernoulli random variables where 
-\begin_inset Formula 
-\begin{eqnarray*}
-P\left(X_{i}=x_{i}\right) & = & \begin{cases}
-\theta & \text{ if }x_{i}=1\\
-1-\theta & \text{ if }x_{i}=0
-\end{cases}\\
- & = & \theta^{x_{i}}\left(1-\theta\right)^{1-x_{i}}
-\end{eqnarray*}
-
-\end_inset
-
-and 
-\begin_inset Formula $f_{Y_{i}|X_{i}}\left(y_{i}|x_{i}=1;\theta\right)=g_{1}\left(y_{i}\right)$
-\end_inset
-
- and 
-\begin_inset Formula $f_{Y_{i}|X_{i}}\left(y_{i}|x_{i}=0;\theta\right)=g_{0}\left(y_{i}\right)$
-\end_inset
-
-.
- Then 
-\begin_inset Formula 
-\[
-f_{X_{i},Y_{i}}\left(x_{i},y_{i};\theta\right)=f_{Y_{i}|X_{i}}\left(y_{i}|x_{i};\theta\right)P\left(X_{i}=x_{i}\right)
-\]
-
-\end_inset
-
-and so
-\begin_inset Formula 
-\begin{eqnarray*}
-L\left(\theta;\mathbf{x},\mathbf{y}\right) & = & \prod_{i=1}^{n}f_{Y_{i}|X_{i}}\left(y_{i}|x_{i};\theta\right)P\left(X_{i}=x_{i}\right)\\
- & = & \prod_{i=1}^{n}\left(g_{1}\left(y_{i}\right)\right)^{x_{i}}\left(g_{0}\left(y_{i}\right)\right)^{1-x_{i}}\theta^{x_{i}}\left(1-\theta\right)^{1-x_{i}}\\
- & = & \theta^{\sum_{i}x_{i}}\left(1-\theta\right)^{n-\sum_{i}x_{i}}\prod_{i=1}^{n}\left(g_{1}\left(y_{i}\right)\right)^{x_{i}}\left(g_{0}\left(y_{i}\right)\right)^{1-x_{i}}
-\end{eqnarray*}
-
-\end_inset
-
-Note the trick in writing 
-\begin_inset Formula $f_{Y_{i}|X_{i}}\left(y_{i}|x_{i};\theta\right)=\left(g_{1}\right)^{x_{i}}\left(g_{0}\right)^{1-x_{i}}$
-\end_inset
-
- - it comes up a lot for a class of models called Mixture models.
- For the E-step, to compute 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\theta'\right]$
-\end_inset
-
- we use iid-ness and compute 
-\begin_inset Formula $E\left[X_{i}|y_{i};\theta'\right]$
-\end_inset
-
- instead, which will hold for each 
-\begin_inset Formula $i$
-\end_inset
-
-.
- To compute the conditional expectation 
-\begin_inset Formula $E\left[X_{i}|y_{i};\theta\right]$
-\end_inset
-
- we need the conditional distribution 
-\begin_inset Formula $f_{X_{i}|Y_{i}}\left(x_{i}|y_{i}\right)$
-\end_inset
-
-.
- By Bayes' Theorem
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\begin_inset Formula 
-\begin{eqnarray*}
-f_{X_{i}|Y_{i}}\left(x_{i}|y_{i};\theta\right) & = & \frac{f_{X_{i},Y_{i}}\left(x_{i},y_{i};\theta\right)}{f_{Y_{i}}\left(y_{i};\theta\right)}\\
- & = & \frac{f_{X_{i},Y_{i}}\left(x_{i},y_{i};\theta\right)}{\sum_{x_{i}}f_{X_{i},Y_{i}}\left(x_{i},y_{i};\theta\right)}\\
- & = & \frac{\left(g_{1}\left(y_{i}\right)\right)^{x_{i}}\left(g_{0}\left(y_{i}\right)\right)^{1-x_{i}}\theta^{x_{i}}\left(1-\theta\right)^{1-x_{i}}}{\sum_{x_{i}}\left(g_{1}\left(y_{i}\right)\right)^{x_{i}}\left(g_{0}\left(y_{i}\right)\right)^{1-x_{i}}\theta^{x_{i}}\left(1-\theta\right)^{1-x_{i}}}\\
- & = & \frac{\left(g_{1}\left(y_{i}\right)\right)^{x_{i}}\left(g_{0}\left(y_{i}\right)\right)^{1-x_{i}}\theta^{x_{i}}\left(1-\theta\right)^{1-x_{i}}}{g_{1}\left(y_{i}\right)\theta+g_{0}\left(y_{i}\right)\left(1-\theta\right)}\\
- & = & \left(\frac{g_{1}\left(y_{i}\right)\theta}{g_{1}\left(y_{i}\right)\theta+g_{0}\left(y_{i}\right)\left(1-\theta\right)}\right)^{x_{i}}\left(\frac{g_{0}\left(y_{i}\right)\left(1-\theta\right)}{g_{1}\left(y_{i}\right)\theta+g_{0}\left(y_{i}\right)\left(1-\theta\right)}\right)^{1-x_{i}}
-\end{eqnarray*}
-
-\end_inset
-
-So 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $X_{i}|Y_{i}$
-\end_inset
-
- is still Bernoulli just renormalized.
- Hence 
-\begin_inset Formula 
-\[
-E\left[X_{i}|y_{i};\theta\right]=\frac{g_{1}\left(y_{i}\right)\theta}{g_{1}\left(y_{i}\right)\theta+g_{0}\left(y_{i}\right)\left(1-\theta\right)}
-\]
-
-\end_inset
-
-For the M-step since 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula 
-\begin{eqnarray*}
-L\left(\theta;\mathbf{x},\mathbf{y}\right) & = & \left[\theta^{\sum_{i}x_{i}}\left(1-\theta\right)^{n-\sum_{i}x_{i}}\right]\left[\prod_{i=1}^{n}\left(g_{1}\left(y_{i}\right)\right)^{x_{i}}\left(g_{0}\left(y_{i}\right)\right)^{1-x_{i}}\right]
-\end{eqnarray*}
-
-\end_inset
-
-and the second term is independent of 
-\begin_inset Formula $\theta$
-\end_inset
-
- we can just maximize the first term.
- But this is just the the joint distribution for 
-\begin_inset Formula $n$
-\end_inset
-
- iid Bernoulli random variables and the MLE 
-\begin_inset Formula $\theta$
-\end_inset
-
- is 
-\begin_inset Formula 
-\[
-\hat{\theta}=\frac{\sum_{i}x_{i}}{n}
-\]
-
-\end_inset
-
-Therefore, finally, the update equations are 
-\begin_inset Formula 
-\begin{eqnarray*}
-x_{i}^{\left(r\right)} & = & \frac{g_{1}\left(y_{i}\right)\theta^{\left(r\right)}}{g_{1}\left(y_{i}\right)\theta^{\left(r\right)}+g_{0}\left(y_{i}\right)\left(1-\theta^{\left(r\right)}\right)}\\
-\theta^{\left(r+1\right)} & = & \frac{1}{n}\sum_{i=1}^{n}x_{i}^{\left(r\right)}
-\end{eqnarray*}
-
-\end_inset
-
-
-\begin_inset Formula $\blacksquare$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-So why did dub it 
-\series bold
-Expectation Maximization Beta
-\series default
- instead of just 
-\series bold
-Expectation Maximization
-\series default
-? Because this isn't the standard EM algorithm.
- But why alter this algorithm at all? What's wrong with it as is? Well there
- are no convergence guarantees.
- Indeed the iterates in Example 1 don't converge to the right answer: figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "embetaiterates"
-
-\end_inset
-
- shows the first 100 iterates for 
-\begin_inset Formula $g_{1}\sim\text{n}\left(1,2\right),g_{0}\sim\text{n}\left(3,4\right),\theta=2/3$
-\end_inset
-
-.
- 
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename embetaiterates.jpeg
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "embetaiterates"
-
-\end_inset
-
-EM Beta
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-So they converge but to 
-\begin_inset Formula $1\neq2/3$
-\end_inset
-
-.
- Why did I present this algorithm first? Standard EM is slightly more complicate
-d and much less intuitive but legend has it that it was in fact conceived
- in this way first and then manipulated to get converge.
- 
-\end_layout
-
-\begin_layout Section
-Expectation Maximization for Real
-\end_layout
-
-\begin_layout Standard
-Recall that the whole point of this procedure is to actually maximize the
- likelihood for 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
-.
- This is equivalent to maximizing the log-likelihood for 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-l\left(\boldsymbol{\theta};\mathbf{y}\right)=\log L\left(\boldsymbol{\theta};\mathbf{y}\right)=\log f_{\mathbf{Y}}\left(\mathbf{y};\boldsymbol{\theta}\right)
-\]
-
-\end_inset
-
-The ansatz here is the same: suppose there exists another random, unobserved,
- vector 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- such that were 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- in fact observed, maximizing the joint log-likelihood for 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-l\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)=\log L\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)=\log f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)
-\]
-
-\end_inset
-
-is easier than the original problem.
- Where the ease of maximizing 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)$
-\end_inset
-
- over 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
- isn't immediately apparent but first using Bayes' theorem we see that
-\begin_inset Formula 
-\begin{eqnarray}
-l\left(\boldsymbol{\theta};\mathbf{y}\right) & = & \log f_{\mathbf{Y}}\left(\mathbf{y};\boldsymbol{\theta}\right)\\
- & = & \log\left(\frac{f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)}{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}\right)}\right)\\
- & = & \log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)\right)-\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}\right)\right)\label{eq:2.3}
-\end{eqnarray}
-
-\end_inset
-
-It's now that it becomes obvious that if we can easily maximize the first
- term in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:2.3"
-
-\end_inset
-
-, with respect to 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
- and the second term in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:2.3"
-
-\end_inset
-
- doesn't spoil things somehow, then we'll maximize 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
-.
- This seems like a workflow different from that of the beta algorithm (here
- we're explicitly maximizing a function of the likelihood for 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
- by maximizing a lowerbound) but the analogy follows.
- Since 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- is unobserved we face the same difficulty as in the beta algorithm: the
- terms in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:2.3"
-
-\end_inset
-
- can't be computed and must be estimated.
- We use the same estimator as before 
-\begin_inset Formula $E\left[\cdot|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
-\end_inset
-
-
+ in a capacitor an LRC circuit satisfies 
 \begin_inset Formula 
 \begin{equation}
-l\left(\boldsymbol{\theta};\mathbf{y}\right)=E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]-E\left[\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]\label{eq:2.4}
+LQ''\left(t\right)+RQ'\left(t\right)+\frac{1}{C}Q\left(t\right)=F\left(t\right),\; Q\left(0\right)=Q_{0},\; Q'\left(0\right)=I_{0}\label{eq:lrc}
 \end{equation}
 
 \end_inset
 
-Note some subtle things: 
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $\mathbf{x}\rightarrow\mathbf{X}$
+where 
+\begin_inset Formula $F\left(t\right)$
 \end_inset
 
- because each of the terms on the right-hand side of 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:2.4"
-
-\end_inset
-
- are estimates of the random variable 
-\series bold
-X 
-\series default
-as a function of observed data 
-\series bold
-y.
-\end_layout
-
-\begin_layout Itemize
-The expectations are again computed with respect to the conditional distribution
- of 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- given 
-\series bold
-Y
-\series default
- for fixed (iterate) values of 
-\begin_inset Formula $\boldsymbol{\theta}^{\left(r\right)}$
-\end_inset
-
-, i.e.
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)$
+ emf driving the circuit at time 
+\begin_inset Formula $t$
 \end_inset
 
 .
-
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\end_layout
-
-\begin_layout Itemize
-The estimators, for which the expectations are computed, are functions of
- 
-\begin_inset Formula $\boldsymbol{\theta}$
+ Suppose 
+\begin_inset Formula $F\left(t\right)=G\left(t\right)+\text{"noise"}$
 \end_inset
 
 .
+ How to solve for 
+\begin_inset Formula $Q\left(t\right)$
+\end_inset
+
+?
 \end_layout
 
-\begin_layout Itemize
-Equality is maintained because since 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
+\begin_layout Subsection
+Noisey Measurement
+\end_layout
+
+\begin_layout Standard
+Suppose that you take measurements of 
+\begin_inset Formula $Q\left(t\right)$
 \end_inset
 
- is independent of 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- 
+ but there's inherent noise in those measurements as well, so you're actually
+ measuring 
 \begin_inset Formula 
 \[
-E\left[l\left(\boldsymbol{\theta};\mathbf{y}\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]=l\left(\boldsymbol{\theta};\mathbf{y}\right)
+Z\left(s\right)=Q\left(s\right)+\text{"noise"}
 \]
 
 \end_inset
@@ -1037,652 +141,361 @@ E\left[l\left(\boldsymbol{\theta};\mathbf{y}\right)|\mathbf{y};\boldsymbol{\thet
 \end_layout
 
 \begin_layout Standard
-The algorithm then is
+What is the best estimate of 
+\begin_inset Formula $Q\left(t\right)$
+\end_inset
+
+ satisfying eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lrc"
+
+\end_inset
+
+ based on 
+\begin_inset Formula $Z\left(s\right)$
+\end_inset
+
+? Filter the noise away using a Kalman-Bucy filter.
 \end_layout
 
-\begin_layout Definition
+\begin_layout Subsection
+Optimal Stopping
+\end_layout
 
-\series bold
-Expectation Algorithm.
+\begin_layout Standard
+Suppose an asset (stock, commodities, real estate) is such that its price
  
-\series default
-Given some observed data 
-\begin_inset Formula $\mathbf{y}$
+\begin_inset Formula $X_{t}$
 \end_inset
 
-, in order to perform the intractable maximization of 
-\begin_inset Formula $L\left(\boldsymbol{\theta};\mathbf{y}\right)$
+ on the open market varies according to a stochastic differential equation
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{dX_{t}}{dt} & = & X_{t}\left(r+\alpha\right)X_{t}\cdot\text{"noise"}\\
+ & = & X_{t}\left(r+\alpha\cdot\text{"noise"}\right)
+\end{eqnarray*}
+
 \end_inset
 
-, posit the existence of some latent 
-\begin_inset Formula $\mathbf{x}$
+where 
+\begin_inset Formula $r,\alpha$
+\end_inset
+
+ are known constants and the discount rate 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is also a known constant (present value of future cash flows - money today
+ is worth more than money tomorrow because of inflation and etc.).
+ Given that you know 
+\begin_inset Formula $X_{s}$
+\end_inset
+
+ up to present time 
+\begin_inset Formula $t$
+\end_inset
+
+ and taking into consideration that the rate of change is noisey, at what
+ time should you sell this asset? Since noisey we can only hope for optimal
+ stopping strategy that maximizes expected returns (when inflation is taken
+ into account).
+ Can be solved by solving a corresponding semielliptic second order PDE
+ with Dirichlet boundary conditions (function is specified on boundary,
+ as opposed to derivatives specified on boundary [Von Neumann bvp])
+\end_layout
+
+\begin_layout Subsection
+Stochastic Control
+\end_layout
+
+\begin_layout Standard
+Consider the risky investment from problem 3 
+\begin_inset Formula 
+\[
+\frac{dp_{1}}{dt}=\left(a+\alpha\cdot\text{"noise"}\right)p_{1}
+\]
+
+\end_inset
+
+and consider a safe investment whose values grows exponentially
+\begin_inset Formula 
+\[
+\frac{dp_{2}}{dt}=bp_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zero-sum capital: at each 
+\begin_inset Formula $t$
+\end_inset
+
+ you can invest a fraction 
+\begin_inset Formula $u_{t}$
+\end_inset
+
+ of total capital 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ in 
+\begin_inset Formula $p_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(1-u_{t}\right)X_{t}$
+\end_inset
+
+ in 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+.
+ Given a utitlity function 
+\begin_inset Formula $U$
+\end_inset
+
+ and stopping time 
+\begin_inset Formula $T$
+\end_inset
+
+ how to find the optimal portfolio 
+\begin_inset Formula $u_{t}\in\left[0,1\right]$
 \end_inset
 
  such that 
-\begin_inset Formula $L\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)$
+\begin_inset Formula 
+\[
+\max_{u_{t}\in\left[0,1\right]}\left\{ E\left[U\left(X_{T}^{\left(u\right)}\right)\right]\right\} 
+\]
+
 \end_inset
 
- is easier.
- Set 
-\begin_inset Formula $\boldsymbol{\theta}^{\left(0\right)}$
+
+\end_layout
+
+\begin_layout Subsection
+Options Pricing
+\end_layout
+
+\begin_layout Standard
+Suppose at some time 
+\begin_inset Formula $t$
 \end_inset
 
- to be some initial guess for 
-\begin_inset Formula $\boldsymbol{\theta}$
+ the person in problem 4 is offered the right (without obligation) to buy
+ one unit of the risky asset at a specified price 
+\begin_inset Formula $K$
 \end_inset
 
- then
-\series bold
- 
+ at a specified future date 
+\begin_inset Formula $t=T$
+\end_inset
+
+.
+ Such a right/asset is called a 
+\emph on
+European call option
+\emph default
+.
+ How much should they be willing to pay for the option? Problem solved by
+ Fischer Black and Myron Scholes - called the Black-Scholes equation for
+ option pricing
+\begin_inset Formula 
+\[
+\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}+rS\frac{\partial V}{\partial S}-rV=0
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $V$
+\end_inset
+
+ is the price of the option as a function of the price of the asset, 
+\begin_inset Formula $r$
+\end_inset
+
+ is the risk-free interest rate (free money - tbills for example), and 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is the volatility of the stock.
+\end_layout
+
+\begin_layout Section
+Measure Theory Refresher
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is a set called the sample/event space.
+ A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a family 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with the following properties
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-E-step: Compute 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
+\begin_inset Formula $\emptyset\in\mathcal{F}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-M-step: Set 
-\begin_inset Formula $\boldsymbol{\theta}^{\left(r+1\right)}=\arg\max_{\boldsymbol{\theta}}E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
+\begin_inset Formula $F\in\mathcal{F}\Rightarrow F^{C}\in\mathcal{F}$
 \end_inset
 
+ i.e.
+ 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
 
+ is closed under complementation.
 \end_layout
 
 \begin_layout Enumerate
-Go to step 1 unless 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\left|\boldsymbol{\theta}^{\left(r+1\right)}-\boldsymbol{\theta}^{\left(r\right)}\right|<\varepsilon$
+\begin_inset Formula $A_{i}\in\mathcal{F}\Rightarrow\bigcup_{i=1}^{\infty}A_{i}\in\mathcal{F}$
 \end_inset
 
- for some 
-\begin_inset Formula $\varepsilon$
+ i.e.
+ 
+\begin_inset Formula $\mathcal{F}$
 \end_inset
 
- of your choosing.
+ is closed countable unions.
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-The only thing to remains is to prove that maximizing 
-\begin_inset Formula $E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
-\end_inset
+\begin_layout --Separator--
 
- is sufficient to maximize 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
-.
- I won't but I'll prove a thing on the way to that result, namely that 
-\begin_inset Formula $l\left(\boldsymbol{\theta}^{\left(r\right)};\mathbf{y}\right)\geq l\left(\boldsymbol{\theta}^{\left(r-1\right)};\mathbf{y}\right)$
-\end_inset
-
- and since 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
- is bounded above (it's a density) the sequence of 
-\begin_inset Formula $l\left(\boldsymbol{\theta}^{\left(r\right)};\mathbf{y}\right)$
-\end_inset
-
- must converge.
- The last hurdle would be proving that convergence of 
-\begin_inset Formula $l\left(\boldsymbol{\theta}^{\left(r\right)};\mathbf{y}\right)$
-\end_inset
-
- implies the convergence of the iterates 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\boldsymbol{\theta}^{\left(r\right)}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- themselves.
- I leave this to the paper
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://web.stanford.edu/class/ee378b/papers/wu-em.pdf
 \end_layout
 
+\begin_layout Definition
+The pair 
+\begin_inset Formula $\left(\Omega,\mathcal{F}\right)$
 \end_inset
 
-.
+ is called a measurable space and the subsets 
+\begin_inset Formula $F$
+\end_inset
+
+ of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ which belond to 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ are called 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+-measurable sets.
 \end_layout
 
-\begin_layout Theorem
-(Monotonic EM Sequence) The sequence 
-\begin_inset Formula $\left\{ \boldsymbol{\theta}^{\left(r\right)}\right\} $
-\end_inset
+\begin_layout --Separator--
 
- satisfies 
-\begin_inset Formula $l\left(\boldsymbol{\theta}^{\left(r+1\right)};\mathbf{y}\right)\geq l\left(\boldsymbol{\theta}^{\left(r\right)};\mathbf{y}\right)$
-\end_inset
-
-.
 \end_layout
 
-\begin_layout Proof
-Start with
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula 
-\[
-l\left(\boldsymbol{\theta};\mathbf{y}\right)=\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)\right)-\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}\right)\right)
-\]
-
+\begin_layout Definition
+A probability measure 
+\begin_inset Formula $P$
 \end_inset
 
-Take conditional expectation with respect to 
-\begin_inset Formula $\mathbf{X}|\mathbf{Y};\boldsymbol{\theta}^{\left(r\right)}$
+ on a measurable space 
+\begin_inset Formula $\left(\Omega,\mathcal{F}\right)$
 \end_inset
 
- of both sides
-\begin_inset Formula 
-\begin{eqnarray*}
-\int l\left(\boldsymbol{\theta};\mathbf{y}\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x} & = & \int\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\\
- &  & -\int\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}\right)\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}
-\end{eqnarray*}
-
+ is a function 
+\begin_inset Formula $P:\mathcal{F}\rightarrow\left[0,1\right]$
 \end_inset
 
-Since 
-\begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
+ such that
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $P\left(\emptyset\right)=0,\; P\left(\Omega\right)=1$
 \end_inset
 
- is independent of 
-\begin_inset Formula $\mathbf{x}$
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{i}\cap A_{j}=\emptyset$
+\end_inset
+
+ for 
+\begin_inset Formula $i\neq j$
 \end_inset
 
  
-\begin_inset Formula 
-\begin{eqnarray*}
-\int l\left(\boldsymbol{\theta};\mathbf{y}\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x} & = & l\left(\boldsymbol{\theta};\mathbf{y}\right)\int f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\\
- & = & l\left(\boldsymbol{\theta};\mathbf{y}\right)
-\end{eqnarray*}
-
+\begin_inset Formula $P\left(\bigcup_{i=1}^{\infty}A_{i}\right)=\sum_{i=1}^{n}P\left(A_{i}\right)$
 \end_inset
 
-and so 
-\begin_inset Formula 
-\begin{eqnarray*}
-l\left(\boldsymbol{\theta};\mathbf{y}\right) & = & \int\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{x},\mathbf{y};\boldsymbol{\theta}\right)\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\\
- &  & -\int\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}\right)\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\\
- & = & E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]-E\left[\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]
-\end{eqnarray*}
-
-\end_inset
-
-Let 
-\begin_inset Formula 
-\[
-Q\left(\mathbf{\boldsymbol{\theta}},\boldsymbol{\theta}^{\left(r\right)}\right)=E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]
-\]
-
-\end_inset
-
-and 
-\begin_inset Formula $K\left(\boldsymbol{\theta},\boldsymbol{\theta}^{\left(r\right)}\right)=E\left[\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\[
-l\left(\boldsymbol{\theta};\mathbf{y}\right)=Q\left(\mathbf{\boldsymbol{\theta}},\boldsymbol{\theta}^{\left(r\right)}\right)-K\left(\boldsymbol{\theta},\boldsymbol{\theta}^{\left(r\right)}\right)
-\]
-
-\end_inset
-
-If we can show that 
-\begin_inset Formula 
-\begin{eqnarray*}
-Q\left(\boldsymbol{\theta}^{\left(r\right)},\boldsymbol{\theta}^{\left(r\right)}\right) & \leq & Q\left(\boldsymbol{\theta}^{\left(r+1\right)},\boldsymbol{\theta}^{\left(r\right)}\right)\\
- & \text{and}\\
-K\left(\boldsymbol{\theta}^{\left(r\right)},\boldsymbol{\theta}^{\left(r\right)}\right) & \geq & K\left(\boldsymbol{\theta}^{\left(r+1\right)},\boldsymbol{\theta}^{\left(r\right)}\right)
-\end{eqnarray*}
-
-\end_inset
-
-then it will follow that 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula $l\left(\boldsymbol{\theta}^{\left(r+1\right)};\mathbf{y}\right)\geq l\left(\boldsymbol{\theta}^{\left(r\right)};\mathbf{y}\right)$
-\end_inset
-
-.
- Well by definition of 
-\begin_inset Formula 
-\[
-\boldsymbol{\theta}^{\left(r+1\right)}=\arg\max_{\boldsymbol{\theta}}E\left[\log\left(f_{\mathbf{X},\mathbf{Y}}\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]=\arg\max_{\boldsymbol{\theta}}Q\left(\mathbf{\boldsymbol{\theta}},\boldsymbol{\theta}^{\left(r\right)}\right)
-\]
-
-\end_inset
-
-so 
-\begin_inset Formula 
-\[
-Q\left(\mathbf{\boldsymbol{\theta}},\boldsymbol{\theta}^{\left(r\right)}\right)\leq Q\left(\mathbf{\boldsymbol{\theta}},\arg\max_{\boldsymbol{\theta}}Q\left(\mathbf{\boldsymbol{\theta}},\boldsymbol{\theta}^{\left(r\right)}\right)\right)=Q\left(\mathbf{\boldsymbol{\theta}},\boldsymbol{\theta}^{\left(r+1\right)}\right)
-\]
-
-\end_inset
-
-To see that 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $K\left(\boldsymbol{\theta}^{\left(r\right)},\boldsymbol{\theta}^{\left(r\right)}\right)\geq K\left(\boldsymbol{\theta}^{\left(r+1\right)},\boldsymbol{\theta}^{\left(r\right)}\right)$
-\end_inset
-
- inspect 
-\begin_inset Formula 
-\[
-\int\log\left(\frac{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r+1\right)}\right)}{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)}\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}
-\]
-
-\end_inset
-
-On the one hand 
-\begin_inset Formula 
-\begin{eqnarray*}
-\int\log\left(\frac{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r+1\right)}\right)}{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)}\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x} & = & \int\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r+1\right)}\right)\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\\
- &  & -\int\log\left(f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\\
- & = & K\left(\boldsymbol{\theta}^{\left(r+1\right)},\boldsymbol{\theta}^{\left(r\right)}\right)-K\left(\boldsymbol{\theta}^{\left(r\right)},\boldsymbol{\theta}^{\left(r\right)}\right)
-\end{eqnarray*}
-
-\end_inset
-
-on the other hand, by Jensen's
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Pronounce Yen-sen you uncultured boor!
+, called countable additivity.
 \end_layout
 
-\end_inset
+\end_deeper
+\begin_layout --Separator--
 
- inequality
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-For convex 
-\begin_inset Formula $g\left(X\right)$
-\end_inset
-
- it's the case that 
-\begin_inset Formula $g\left(E\left(X\right)\right)\leq Eg\left(X\right)$
-\end_inset
-
- and for concave 
-\begin_inset Formula $g\left(X\right)$
-\end_inset
-
- the inequality is reversed.
 \end_layout
 
+\begin_layout Definition
+The triple 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
 \end_inset
 
-
-\begin_inset Formula 
-\begin{eqnarray*}
-\int\log\left(\frac{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r+1\right)}\right)}{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)}\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x} & \leq & \log\left[\int\left(\frac{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r+1\right)}\right)}{f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)}\right)f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)d\mathbf{x}\right]\\
- & = & \log\left[\int f_{\mathbf{X}|\mathbf{Y}}\left(\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r+1\right)}\right)d\mathbf{x}\right]\\
- & = & 0
-\end{eqnarray*}
-
-\end_inset
-
-Hence 
-\begin_inset Formula 
-\[
-K\left(\boldsymbol{\theta}^{\left(r+1\right)},\boldsymbol{\theta}^{\left(r\right)}\right)-K\left(\boldsymbol{\theta}^{\left(r\right)},\boldsymbol{\theta}^{\left(r\right)}\right)\leq0
-\]
-
-\end_inset
-
-which completes the proof.
+ is appropriately called a measure space.
 \end_layout
 
-\begin_layout Section
-Applications
+\begin_layout --Separator--
+
 \end_layout
 
-\begin_layout Standard
-EM works really well for mixture models, e.g.
- 
-\begin_inset Formula $\mathbf{Y}_{i}$
+\begin_layout Definition
+Given any family 
+\begin_inset Formula $\mathcal{U}$
 \end_inset
 
- is distributed iid such that 
-\begin_inset Formula 
-\[
-f_{\mathbf{Y}_{1}}\left(\mathbf{y}_{1}\right)=\sum_{j=1}^{m}\alpha_{j}g_{j}\left(\mathbf{y}_{1};\boldsymbol{\theta}_{j}\right)
-\]
-
+ of subsets of 
+\begin_inset Formula $\Omega$
 \end_inset
 
-where 
-\begin_inset Formula $g_{j}$
+ there is a smallest 
+\begin_inset Formula $\sigma$
 \end_inset
 
- are (in general multivariate) densities parameters 
-\begin_inset Formula $\boldsymbol{\theta}_{j}$
-\end_inset
-
- (in general distinct for distinct 
-\begin_inset Formula $j$
-\end_inset
-
-) and 
-\begin_inset Formula $\sum_{j}\alpha_{j}=1$
-\end_inset
-
-.
- Naively if you wanted to find the MLEs you would maximize
-\begin_inset Formula 
-\[
-L\left(\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)=\prod_{i=1}^{n}f_{\mathbf{Y}_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}\right)=\prod_{i=1}^{n}\sum_{j=1}^{m}\alpha_{j}g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)
-\]
-
-\end_inset
-
-Even taking the log won't help you because of the interior sum.
- EM to the rescue again! Let 
-\begin_inset Formula $\mathbf{X}=\left(X_{1},\dots,X_{n}\right)$
-\end_inset
-
- be the mixture components, i.e.
- each 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- is a categorical random variable that indicates which component of the
- mixture density produced the correspondent 
-\begin_inset Formula $\mathbf{Y}_{i}$
-\end_inset
-
-
-\begin_inset Formula 
-\begin{eqnarray*}
-P\left(X_{i}=x_{i}\right) & = & \begin{cases}
-\alpha_{0} & \text{ if }x_{i}=0\\
-\alpha_{1} & \text{ if }x_{i}=1\\
-\vdots\\
-\alpha_{m} & \text{ if }x_{i}=m
-\end{cases}
-\end{eqnarray*}
-
-\end_inset
-
-A really cute way to write the density is 
-\begin_inset Formula 
-\begin{eqnarray*}
-P\left(X_{i}=x_{i}\right) & = & \prod_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}
-\end{eqnarray*}
-
-\end_inset
-
-where 
-\begin_inset Formula $\delta\left(x_{i},j\right)=1$
-\end_inset
-
-iff 
-\begin_inset Formula $x_{i}=j$
-\end_inset
-
- and 0 otherwise.
- And the 
-\begin_inset Formula $\mathbf{Y}_{i}|X_{i}$
-\end_inset
-
- takes the form 
-\begin_inset Formula 
-\[
-f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)=g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)
-\]
-
-\end_inset
-
-The 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- in 
-\begin_inset Formula $g_{x_{i}}\left(y_{i};\boldsymbol{\theta}_{x_{i}}\right)$
-\end_inset
-
- 
-\begin_inset Quotes eld
-\end_inset
-
-picks
-\begin_inset Quotes erd
-\end_inset
-
- which mixture component the 
-\begin_inset Formula $\mathbf{y}_{i}$
-\end_inset
-
- is generated from.
- Then the log-likelihood becomes
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-problem here with joint.
- compare khares and page 11 of washington
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\begin{eqnarray*}
-l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right) & = & \log\left[\prod_{i=1}^{n}f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]\\
- & = & \log\left[\prod_{i=1}^{n}f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)P\left(X_{i}=x_{i}\right)\right]\\
- & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\log\left(\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}\right)\\
- & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\delta\left(x_{i},j\right)\left[\log\alpha_{j}+\log\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]
-\end{eqnarray*}
-
-\end_inset
-
-There are a lot of indices and subscripts and superscripts to keep track
- of - 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
- is all of the parameters, 
-\begin_inset Formula $\mathbf{y}_{i}$
-\end_inset
-
- are observed samples (
-\begin_inset Formula $n$
-\end_inset
-
- of them), the 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- are the unobserved data (the mixture components, the 
-\begin_inset Formula $\boldsymbol{\theta}_{x_{i}}$
-\end_inset
-
- are the parameters of the 
-\begin_inset Formula $x_{i}$
-\end_inset
-
-th mixture density, and the 
-\begin_inset Formula $\alpha_{j}^{\delta\left(x_{i},j\right)}$
-\end_inset
-
- are the mixture coefficients (in what proportion the 
-\begin_inset Formula $j$
-\end_inset
-
-th density contributes) contingent on 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- coming up equal to 
-\begin_inset Formula $j$
-\end_inset
-
-.
- Much as we did for Example 1 we need to compute 
-\begin_inset Formula $f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)$
-\end_inset
-
- in order to compute the conditional expectations 
-\begin_inset Formula 
-\begin{eqnarray*}
-f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right) & = & \frac{f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}\right)}{f_{\mathbf{Y}_{i}}\left(\mathbf{y}_{i};\theta\right)}\\
- & = & \frac{\prod_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\right)^{\delta\left(x_{i},j\right)}}{\sum_{x_{i}}\left(\prod_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\right)^{\delta\left(x_{i},j\right)}\right)}\\
- & = & \prod_{j=1}^{m}\left(\frac{\alpha_{j}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)}{\sum_{x_{i}}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}}\right)^{\delta\left(x_{i},j\right)}
-\end{eqnarray*}
-
-\end_inset
-
-So again 
-\begin_inset Formula $X_{i}|\mathbf{Y}_{i}$
-\end_inset
-
- is categorical random variable.
- Then 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula 
-\[
-E\left[l\left(x_{i},\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{x_{i}}\left(\sum_{i=1}^{n}\sum_{j=1}^{m}\delta\left(x_{i},j\right)\left[\log\alpha_{j}+\log\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]\right)\prod_{j=1}^{m}\left(\frac{\alpha_{j}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)}{\sum_{x_{i}}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}}\right)^{\delta\left(x_{i},j\right)}
-\]
-
+-algebra 
+\begin_inset Formula $\mathcal{H_{U}}$
 \end_inset
 
 
