@@ -574,12 +574,63 @@ Borel sets.
 \end_layout
 
 \begin_layout Definition
-For a measure space 
+Let 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\Omega',\mathcal{F}',P'\right)$
+\end_inset
+
+ be measure spaces.
+ Then a function 
+\begin_inset Formula $X:\Omega\rightarrow\Omega'$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{F}-\mathcal{F}'$
+\end_inset
+
+-
+\emph on
+measurable
+\emph default
+ if for every 
+\begin_inset Formula $U\in\mathcal{F}'$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+X^{-1}\left(U\right)=\left\{ \omega\in\Omega;X\left(\omega\right)\in U\right\} \in\mathcal{F}
+\]
+
+\end_inset
+
+I.e.
+ pre-images of measurable sets in the 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\emph default
+ associated with the codomain are measurable sets in the 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\emph default
+ associated with the domain.
+ For a measure space 
 \begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
 \end_inset
 
  an 
-\begin_inset Formula $\mathcal{F}$
+\begin_inset Formula $\mathcal{F}-\mathcal{B}$
 \end_inset
 
 -
@@ -598,7 +649,19 @@ X^{-1}\left(U\right)=\left\{ \omega\in\Omega;X\left(\omega\right)\in U\right\} \
 
 \end_inset
 
+for all open sets 
+\begin_inset Formula $U\in\mathbb{R}^{n}$
+\end_inset
 
+(this is because the open sets are the elements of the Borel 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\emph default
+).
 \end_layout
 
 \begin_layout --Separator--
@@ -700,7 +763,7 @@ Every random variable induces a probability measure
 \begin_inset Formula $\mathbb{R}^{n}$
 \end_inset
 
-, defined by
+, defined byin
 \begin_inset Formula 
 \[
 \mu_{X}\left(B\right)=P\left(X^{-1}\left(B\right)\right)
@@ -741,6 +804,214 @@ or
 
 .
  
+\end_layout
+
+\begin_layout Subsection
+Lebesgue Integration aside
+\end_layout
+
+\begin_layout Fact
+If for a function 
+\begin_inset Formula $X:\Omega\rightarrow\Omega'$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+X^{-1}\left(U\right)\in\mathcal{F}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $U\in\mathcal{G}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is the collection of sets that generate 
+\begin_inset Formula $\mathcal{F}'$
+\end_inset
+
+ then 
+\begin_inset Formula $X$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{F}-\mathcal{F}'$
+\end_inset
+
+-measurable.
+ I.e.
+ measurability only needs to be verified on generating sets.
+\end_layout
+
+\begin_layout Standard
+One way to generate the Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ to take all intervals of form 
+\begin_inset Formula $\left(c,\infty\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ Therefore if 
+\begin_inset Formula 
+\[
+X^{-1}\left(\left(c,\infty\right)\right)=\left\{ \omega\in\Omega;X\left(\Omega\right)>c\right\} \in\mathcal{F}
+\]
+
+\end_inset
+
+Now you can think of this as whatever you want (counting how much a function
+ gets thrown into a bin but it's purely a result of the fact that measurability
+ of a function need only be verified on the generating set of sets of codomain
+ 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra, i.e.
+ there are alternative characterizations due to the same fact like that
+ any of 
+\begin_inset Formula 
+\begin{multline*}
+\left\{ \omega\in\Omega;X\left(\Omega\right)\geq c\right\} \\
+\left\{ \omega\in\Omega;X\left(\Omega\right)<c\right\} \\
+\left\{ \omega\in\Omega;X\left(\Omega\right)\leq c\right\} 
+\end{multline*}
+
+\end_inset
+
+should be measurable.
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Formula $\liminf$
+\end_inset
+
+ and 
+\begin_inset Formula $\limsup$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For real numbers 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\liminf_{k\rightarrow\infty}\,x_{k} & :=\sup_{k\geq0}\left(\inf_{m\geq k}x_{m}\right)\\
+\limsup_{k\rightarrow\infty}\,x_{k} & :=\inf_{k\rightarrow\infty}\left(\sup_{m\geq k}x_{m}\right)
+\end{align*}
+
+\end_inset
+
+Refer to fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:limsupinf"
+
+\end_inset
+
+.
+ For functions 
+\begin_inset Formula $f_{k}\left(y\right)$
+\end_inset
+
+ let 
+\begin_inset Formula $x_{k}=f_{k}\left(y_{0}\right)$
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Lim_sup_example_5.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:limsupinf"
+
+\end_inset
+
+
+\begin_inset Formula $\liminf$
+\end_inset
+
+ and 
+\begin_inset Formula $\limsup$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Fact
+The set of measurable functions is closed under algebraic operations and
+ pointwise limits, i.e.
+ if 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ is measurable for every 
+\begin_inset Formula $k$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{multline*}
+\sup_{k\in\mathbb{N}}f_{k}\\
+\limsup_{k\in\mathbb{N}}f_{k}\\
+\liminf_{k\in\mathbb{N}}f_{k}
+\end{multline*}
+
+\end_inset
+
+are all measurable.
+ And if the last two coincide then 
+\begin_inset Formula 
+\[
+\lim_{k\rightarrow\infty}f_{k}=f
+\]
+
+\end_inset
+
+exists and is measurable.
 \end_layout
 
 \begin_layout Definition
