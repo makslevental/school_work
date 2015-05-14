@@ -393,7 +393,7 @@ Measure Theory Refresher
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- is closed countable unions.
+ is closed under countable unions.
 \end_layout
 
 \end_deeper
@@ -1257,6 +1257,13 @@ then
  is Lebesgue integrable.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Formula $\twonotes$
+\end_inset
+
+
+\end_layout
+
 \begin_layout Definition
 If 
 \begin_inset Formula $\int_{\Omega}\left|X\left(\omega\right)\right|dP\left(\omega\right)<\infty$
@@ -1267,55 +1274,6 @@ If
 expectation 
 \emph default
 is defined as 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-I should include here the progression from indicator functions to integration
- but only briefly mention it if wilson asks
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
- 
 \begin_inset Formula 
 \[
 E\left[X\right]:=\int_{\Omega}X\left(\omega\right)dP\left(\omega\right)=\int_{\mathbb{R}^{n}}xd\mu_{X}\left(x\right)
@@ -1349,6 +1307,810 @@ and note that the first integral is over the sample/event space (hence both
 \end_inset
 
 ).
+ And generally if 
+\begin_inset Formula $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(\mathcal{B}^{n},\mathcal{B}\right)$
+\end_inset
+
+ measurable and 
+\begin_inset Formula $\int_{\Omega}\left|f\left(X\left(\omega\right)\right)\right|dP\left(\omega\right)<\infty$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+E\left[f\left(X\right)\right]:=\int_{\Omega}f\left(X\left(\omega\right)\right)dP\left(\omega\right)=\int_{\mathbb{R}^{n}}f\left(x\right)d\mu_{X}\left(x\right)
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Independence is defined in terms of measurable sets.
+\end_layout
+
+\begin_layout Definition
+Two subsets 
+\begin_inset Formula $A,B\in\mathcal{F}$
+\end_inset
+
+ are called 
+\emph on
+independent
+\emph default
+ if 
+\begin_inset Formula 
+\[
+P\left(A\cap B\right)=P\left(A\right)\cdot P\left(B\right)
+\]
+
+\end_inset
+
+A collection 
+\begin_inset Formula $\mathcal{A}=\left\{ \mathcal{H}_{i};i\in I\right\} $
+\end_inset
+
+(where 
+\begin_inset Formula $I$
+\end_inset
+
+ is some index set [of any cardinality]) of families 
+\begin_inset Formula $\mathcal{H}_{i}$
+\end_inset
+
+ of measurable sets is independent if for all choices of the index tuple
+ 
+\begin_inset Formula $\left(i_{j},\dots,i_{k}\right)$
+\end_inset
+
+ and for all choices of 
+\begin_inset Formula $H$
+\end_inset
+
+ in each 
+\begin_inset Formula $\mathcal{H}_{i_{j}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P\left(H_{i_{j}}\cap\cdots\cap H_{i_{k}}\right)=P\left(H_{i_{j}}\right)\cdots P\left(H_{i_{k}}\right)
+\]
+
+\end_inset
+
+
+\series bold
+A collection of random variables 
+\begin_inset Formula $\left\{ X_{i};i\in I\right\} $
+\end_inset
+
+ is independent 
+\series default
+if the collection of generated 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\mathcal{H}_{X_{i}}$
+\end_inset
+
+ (generated! not induced! domain 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra!) is independent.
+\end_layout
+
+\begin_layout Exercise
+If two random variables 
+\begin_inset Formula $X,Y:\Omega\rightarrow\mathbb{R}$
+\end_inset
+
+ are independent and 
+\begin_inset Formula $\left(E\left[\left|X\right|\right],E\left[\left|Y\right|\right],E\left[\left|XY\right|\right]\right)\prec\left(\infty,\infty\infty\right)$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+E\left[XY\right]=E\left[X\right]E\left[Y\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+A stochastic process is a parameterized collection of random variables 
+\begin_inset Formula $\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ with each 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ defined on the same measure space (probability space) 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{t}:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The parameter space for 
+\begin_inset Formula $T$
+\end_inset
+
+ and the range of 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ determine taxonomical classifiction of the process with each possibly being
+ either continuous or discrete.
+\end_layout
+
+\begin_layout Standard
+For fixed 
+\begin_inset Formula $t$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X_{t}\left(\omega\right)$
+\end_inset
+
+ is just a plain random variable 
+\begin_inset Formula 
+\[
+X_{t}\left(\omega\right):\Omega\rightarrow\mathbb{R}^{n}
+\]
+
+\end_inset
+
+and for fixed 
+\begin_inset Formula $\omega$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X_{\omega}\left(t\right)$
+\end_inset
+
+ is just a function on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{\omega}\left(t\right):T\rightarrow\mathbb{R}^{n}
+\]
+
+\end_inset
+
+called a 
+\emph on
+path
+\emph default
+.
+ Note that this gives a way to identify a function with each 
+\begin_inset Formula $\omega\in\Omega$
+\end_inset
+
+ and therefore we may treat 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ as a subset of 
+\begin_inset Formula $\tilde{\Omega}\subset\left(\mathbb{R}^{n}\right)^{T}$
+\end_inset
+
+ the space of 
+\emph on
+all 
+\emph default
+functions from 
+\begin_inset Formula $T$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Warning: it becomes a little muddled here when I talk about the standard
+ topology on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, which I call 
+\begin_inset Formula $\mathcal{B}^{n}$
+\end_inset
+
+, and the topological 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, which I also call 
+\begin_inset Formula $\mathcal{B}^{n}$
+\end_inset
+
+.
+ I will have to come back to this and clear it up.
+\end_layout
+
+\begin_layout Subsection
+Product Topology aside
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a set and 
+\begin_inset Formula $Y$
+\end_inset
+
+ a topological space.
+ Given 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ and any open set 
+\begin_inset Formula $U\subset Y$
+\end_inset
+
+, define 
+\begin_inset Formula 
+\[
+S\left(x,U\right)=\left\{ f\in Y^{X};f\left(x\right)\in U\right\} 
+\]
+
+\end_inset
+
+This is a set of functions! And the universal quantifier is over 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ The 
+\emph on
+product topology
+\emph default
+ on 
+\begin_inset Formula $Y^{X}$
+\end_inset
+
+ is the topology generated by the subbasis consisting of the sets 
+\begin_inset Formula $S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\left\{ S\right\} $
+\end_inset
+
+ are subbasis not a basis.
+ To form basic sets you take finite intersections of subbasic sets (and
+ then to form sets in the topology you take arbitrary unions of basic sets).
+\end_layout
+
+\begin_layout Fact
+\begin_inset CommandInset label
+LatexCommand label
+name "fact:sufbasictop"
+
+\end_inset
+
+It is sufficient to only consider basis sets 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ I.e.
+\begin_inset Formula 
+\[
+\left\{ S\left(x,U\right);x\in X,U\in\tau\right\} 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is a basis for the topology on 
+\begin_inset Formula $Y$
+\end_inset
+
+, is a subbasis for the product topology on 
+\begin_inset Formula $Y^{X}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This definition coincides with the product topology on the Cartesian product
+ of two topological spaces (hence the name)
+\end_layout
+
+\begin_layout Example
+If 
+\begin_inset Formula $Y$
+\end_inset
+
+ is a topological space, then the product 
+\begin_inset Formula $Y\times Y$
+\end_inset
+
+ can be viewed as a function fome 
+\begin_inset Formula $Y^{X}$
+\end_inset
+
+, where 
+\begin_inset Formula $X=\left\{ 1,2\right\} $
+\end_inset
+
+.
+ If 
+\begin_inset Formula $U\subset Y$
+\end_inset
+
+ is open, then 
+\begin_inset Formula $S\left(1,U\right)$
+\end_inset
+
+ is the set of all functions from 
+\begin_inset Formula $X$
+\end_inset
+
+ to 
+\begin_inset Formula $Y$
+\end_inset
+
+ that map 1 to an element of 
+\begin_inset Formula $U$
+\end_inset
+
+ and map 2 to some element of 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Clearly then 
+\begin_inset Formula $S\left(1,U\right)$
+\end_inset
+
+ can identified with all tuples 
+\begin_inset Formula $\left(a,b\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in U$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in Y$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula 
+\[
+S\left(1,U\right)\cong U\times Y
+\]
+
+\end_inset
+
+Similarly 
+\begin_inset Formula 
+\[
+S\left(2,U\right)\cong Y\times U
+\]
+
+\end_inset
+
+These sets form a subbasis for the product topology on the Cartesian product
+ 
+\begin_inset Formula $Y\times Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\twonotes$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Given that we've identified 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+ can we identify 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ with some 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\tilde{\mathcal{F}}$
+\end_inset
+
+ on 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+? Recall that the topological 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra on a set is just the collection of all open subsets of that set.
+ Hence the sets
+\begin_inset Formula 
+\[
+\left\{ \omega_{X};\omega_{X}\left(t_{1}\right)\in B_{1},\dots,\omega_{X}\left(t_{k}\right)\in B_{k}\right\} ,\ B\in\mathcal{B}^{n}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\omega_{X}\left(t\right)=X_{\omega}\left(t\right)$
+\end_inset
+
+, generate the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\tilde{\mathcal{F}}$
+\end_inset
+
+ on 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+.
+ Why? The sets 
+\begin_inset Formula 
+\[
+S\left(t,B\right)=\left\{ \omega_{X}\in\tilde{\Omega}=\left(\mathbb{R}^{n}\right)^{T};\omega_{X}\left(t\right)\in B\right\} ,\:B\in\mathcal{B}^{n}
+\]
+
+\end_inset
+
+form a subbasis for the product topology on 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+ (by fact 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:sufbasictop"
+
+\end_inset
+
+ since 
+\begin_inset Formula $B\in\mathcal{B}^{n}$
+\end_inset
+
+ are basic sets for the topology [topological 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is generated by basic sets in the topology]) and so finite intersection
+s
+\begin_inset Formula 
+\[
+S\left(t_{1},B_{1}\right)\cap\cdots\cap S\left(t_{k},B_{k}\right)=\left\{ \omega_{X}\in\tilde{\Omega}=\left(\mathbb{R}^{n}\right)^{T};\omega_{X}\left(t_{1}\right)\in B_{1},\dots,\omega_{X}\left(t_{k}\right)\in B_{k}\right\} 
+\]
+
+\end_inset
+
+form a basis for the product topology on 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+ and unions of those then form the actual elements of the product topology
+ and hence generate the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\tilde{\mathcal{F}}$
+\end_inset
+
+ on 
+\begin_inset Formula $\tilde{\Omega}$
+\end_inset
+
+ (is the basis for a topology also the generator for the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra for the topological 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra?).
+ 
+\series bold
+Hence
+\series default
+ it's reasonable to say that a stochastic process is a probability measure
+ 
+\begin_inset Formula $\tilde{P}$
+\end_inset
+
+ on the measurable space
+\begin_inset Formula $\left(\tilde{\Omega}=\left(\mathbb{R}^{n}\right)^{T},\tilde{\mathcal{F}}\right)$
+\end_inset
+
+, called the 
+\emph on
+law
+\emph default
+ 
+\emph on
+of the process
+\emph default
+.
+ If 
+\begin_inset Formula $\Phi_{X}:\Omega\rightarrow\tilde{\Omega}$
+\end_inset
+
+, where 
+\begin_inset Formula $X$
+\end_inset
+
+ is the process, defined by currying 
+\begin_inset Formula $X\left(t,\omega\right)=X_{t}\left(\omega\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left(\Phi_{X}\left(\cdot\right)\right)\left(t\right)=X\left(t,\cdot\right)=X_{t}\left(\cdot\right)
+\]
+
+\end_inset
+
+then the law
+\begin_inset Formula $\mathcal{L}_{X}$
+\end_inset
+
+ is the 
+\emph on
+pushforward
+\emph default
+ of the measure on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mathcal{L}_{X}\coloneqq\left(\Phi_{X}\right)_{*}\left(P\right)=P\circ\Phi_{X}^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The process also induces induces a set of measures on its range
+\end_layout
+
+\begin_layout Definition
+The 
+\emph on
+finite-dimensional distributions
+\emph default
+ of the process 
+\begin_inset Formula $X=\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ are the measures 
+\begin_inset Formula 
+\[
+\mu_{t_{1},\dots,t_{k}}\left(F_{1}\times F_{2}\times\cdots\times F_{k}\right)=P\left(X_{t_{1}}\in F_{1},\dots,X_{t_{k}}\in F_{k}\right)
+\]
+
+\end_inset
+
+on 
+\begin_inset Formula $\underbrace{\mathbb{R}^{n}\times\cdots\times\mathbb{R}^{n}}_{k}$
+\end_inset
+
+ (cartesian product), with 
+\begin_inset Formula $F_{i}\in\mathcal{B}^{n}$
+\end_inset
+
+ being the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras for each 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that these are measures on the product ranges of 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+, not on the domains (different from
+\begin_inset Formula $\tilde{\mathcal{F}}$
+\end_inset
+
+ discussed above).
+\end_layout
+
+\begin_layout Standard
+These measures determine many, but not all (and in some important cases
+ crucially), properties the process 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Conversely given a family of measures 
+\begin_inset Formula $\left\{ \mu_{t_{1},\dots,t_{k}};k\in\mathbb{N},t_{i}\in T\right\} $
+\end_inset
+
+(all finite product measures indexed by all finite subsets of 
+\begin_inset Formula $T$
+\end_inset
+
+) on 
+\begin_inset Formula $\underbrace{\mathbb{R}^{n}\times\cdots\times\mathbb{R}^{n}}_{k}$
+\end_inset
+
+ one can construct a stochastic process 
+\begin_inset Formula $X=\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ which will have 
+\begin_inset Formula $\left\{ \mu_{t_{1},\dots,t_{k}};k\in\mathbb{N},t_{i}\in T\right\} $
+\end_inset
+
+ as its finite-dimensional distributions given some 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ consistency conditions.
+\end_layout
+
+\begin_layout Theorem
+Kolmogorov's extension theorem.
+ For all finite tuples 
+\begin_inset Formula $\left(t_{1},\dots,t_{k}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $t_{i}\in T$
+\end_inset
+
+ let 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ be the probability measures defined above.
+ If 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ satisfy the consistency conditions
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Invariance under permutation: for all permutations 
+\begin_inset Formula $p$
+\end_inset
+
+ on 
+\begin_inset Formula $\left\{ 1,2,\dots,k\right\} $
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mu_{p\left(t_{1}\right),\dots,p\left(t_{k}\right)}\left(F_{1}\times\cdots\times F_{k}\right)=\mu_{t_{1},\dots,t_{k}}\left(F_{p^{-1}\left(1\right)}\times\cdots\times F_{p^{-1}\left(k\right)}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Invariance under marginalization over probability 1 events: 
+\begin_inset Formula 
+\[
+\mu_{t_{1},\dots,t_{k}}\left(F_{1}\times\cdots\times F_{k}\right)=\mu_{t_{1},\dots,t_{k},t_{k+1},\dots,t_{k+m}}\left(F_{1}\times\cdots\times F_{k}\times\underbrace{\mathbb{R}^{n}\times\cdots\times\mathbb{R}^{n}}_{m}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+then there exists a probability space 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ and a stochastic process 
+\begin_inset Formula $X=\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ as its finite-dimensional distributions.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Canonical Brownian Motion
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
