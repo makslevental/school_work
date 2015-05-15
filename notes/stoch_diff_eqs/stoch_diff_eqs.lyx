@@ -33,7 +33,7 @@ figs-within-sections
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -2110,6 +2110,262 @@ Canonical Brownian Motion
 \end_layout
 
 \begin_layout Standard
+In 1828 Robert Brown observed pollen in a suspension exhibiting irregular
+ motion.
+ Einstein later modeled the motion as random collisions with the molecules
+ of water.
+ Here is a heuristic construction: let 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ be iid Bernoulli random variable such that 
+\begin_inset Formula $P\left(S=1\right)=P\left(S=-1\right)=.5$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $ES=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Var}\left(S\right)=1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $R_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+R_{n}=\sum_{i=1}^{n}S_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $R_{n}$
+\end_inset
+
+ is a random walk on the integers since each 
+\begin_inset Formula $R_{n}:\mathbb{N}\rightarrow\mathbb{Z}$
+\end_inset
+
+.
+ Let's scale the random walk: pick 
+\begin_inset Formula $k,t$
+\end_inset
+
+ such that 
+\begin_inset Formula $kt=n$
+\end_inset
+
+.
+ Then set 
+\begin_inset Formula 
+\[
+B_{k}\left(t\right)=\sum_{i=1}^{tk}\frac{S_{i}}{\sqrt{k}}=\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}S_{i}
+\]
+
+\end_inset
+
+In this model the particle takes a step of size 
+\begin_inset Formula $1/\sqrt{k}$
+\end_inset
+
+ every 
+\begin_inset Formula $1/k$
+\end_inset
+
+ units of time (
+\begin_inset Formula $k$
+\end_inset
+
+ per unit time) and after time 
+\begin_inset Formula $t$
+\end_inset
+
+ it will have taken 
+\begin_inset Formula $tk$
+\end_inset
+
+ steps.
+ As 
+\begin_inset Formula $k\rightarrow\infty$
+\end_inset
+
+ the step sizes become smaller and smaller and for any fixed 
+\begin_inset Formula $t$
+\end_inset
+
+ 
+\begin_inset Formula $B_{k}\left(t\right)$
+\end_inset
+
+ the process becomes continuous.
+ Note that by iid 
+\begin_inset Formula 
+\[
+EB_{k}\left(t\right)=E\left(\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}S_{i}\right)=\frac{1}{\sqrt{k}}E\left(\sum_{i=1}^{tk}S_{i}\right)=\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}ES_{i}=0
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\text{Var}\left(B_{k}\left(t\right)\right)=\text{Var}\left(\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}S_{i}\right)=\frac{1}{k}\sum_{i=1}^{tk}\text{Var}\left(S_{i}\right)=\frac{1}{k}tk=t
+\]
+
+\end_inset
+
+Since by the CLT
+\begin_inset Formula 
+\[
+\frac{\frac{1}{kt}\sum_{i=1}^{tk}S_{i}-0}{1/\sqrt{kt}}=\frac{1}{\sqrt{kt}}\sum_{i=1}^{tk}S_{i}-0\rightarrow\text{n}\left(0,1\right)
+\]
+
+\end_inset
+
+it's the case that 
+\begin_inset Formula 
+\[
+B_{k}\left(t\right)=\sqrt{t}\left(\frac{1}{\sqrt{kt}}\sum_{i=1}^{tk}S_{i}-0\right)\rightarrow\text{n}\left(0,t\right)
+\]
+
+\end_inset
+
+Note also that 
+\begin_inset Formula 
+\[
+B_{k}\left(t\right)-B_{k}\left(s\right)=\text{n}\left(0,t-s\right)
+\]
+
+\end_inset
+
+i.e.
+ any increment only depends on the difference 
+\begin_inset Formula $t-s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+But this is only a heuristic construction.
+ To really construct Brownian motion we need to use Kolmogorov Extension
+ and specify its finite-dimensional distributions.
+ 
+\series bold
+Fix
+\series default
+ 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+ and define 
+\begin_inset Formula 
+\[
+p\left(t,x,y\right)=\frac{1}{\sqrt{2\pi t}}e^{-\frac{1}{2t}\left(x-y\right)^{2}},\;t>0
+\]
+
+\end_inset
+
+Interpret this as the probability that a pollen grain is propagated from
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ to 
+\begin_inset Formula $y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+THIS MIGHT NOT BE THE CORRECT INTEPRETATION.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Then for 
+\begin_inset Formula $0\leq t_{1}\leq t_{2}\leq\cdots\leq t_{k}$
+\end_inset
+
+ define a measure 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{k}$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\begin{eqnarray*}
+\mu_{t_{1},\dots,t_{k}}\left(F_{1}\times\cdots\times F_{k}\right) & = & \int_{F_{1}}\cdots\int_{F_{k}}p\left(t_{1},x,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\\
+ &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}
+\end{eqnarray*}
+
+\end_inset
+
+for 
+\begin_inset Formula $F_{i}\subset\mathbb{R}$
+\end_inset
+
+ with the convention that 
+\begin_inset Formula $p\left(0,x,y\right)dx$
+\end_inset
+
+ is a point mass at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Extend to all finite sequences 
+\begin_inset Formula $t_{1},\dots,t_{n}$
+\end_inset
+
+ and since 
+\begin_inset Formula $\int_{F_{i}}p\left(t,x,y\right)dx=1$
+\end_inset
+
+ Kolmogorov's Extension theorem says there exists 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P^{x}\right)$
+\end_inset
+
+ and a stochastic process 
+\begin_inset Formula $B=\left\{ B_{t}\right\} _{t\geq0}$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ such that the finite-dimensional distributions of 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ are 
+\begin_inset Formula 
+\begin{eqnarray*}
+P^{x}\left(B_{t_{1}}\in F_{1}\times\cdots\times B_{t_{k}}\in F_{k}\right) & = & \int_{F_{1}}\cdots\int_{F_{k}}p\left(t_{1},x,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\\
+ &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}
+\end{eqnarray*}
+
+\end_inset
+
 
 \end_layout
 
