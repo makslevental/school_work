@@ -1509,7 +1509,7 @@ P\left(X_{i}=x_{i}\right) & = & \begin{cases}
 A really cute way to write the density is 
 \begin_inset Formula 
 \begin{eqnarray*}
-P\left(X_{i}=x_{i}\right) & = & \prod_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}
+P\left(X_{i}=x_{i}\right) & = & a_{x_{i}}
 \end{eqnarray*}
 
 \end_inset
@@ -1540,7 +1540,7 @@ The
 \end_inset
 
  in 
-\begin_inset Formula $g_{x_{i}}\left(y_{i};\boldsymbol{\theta}_{x_{i}}\right)$
+\begin_inset Formula $g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)$
 \end_inset
 
  
@@ -1557,12 +1557,50 @@ picks
 
  is generated from.
  Then the log-likelihood becomes
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+problem here with joint.
+ compare khares and page 11 of washington
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula 
 \begin{eqnarray*}
 l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right) & = & \log\left[\prod_{i=1}^{n}f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]\\
  & = & \log\left[\prod_{i=1}^{n}f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)P\left(X_{i}=x_{i}\right)\right]\\
- & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\log\left(\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}\right)\\
- & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\delta\left(x_{i},j\right)\left[\log\alpha_{j}+\log\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]
+ & = & \log\left[\prod_{i=1}^{n}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\alpha_{x_{i}}\right)\right]\\
+ & = & \sum_{i=1}^{n}\log\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\alpha_{x_{i}}\right)\\
+ & = & \sum_{i=1}^{n}\left[\log\alpha_{x_{i}}+\log\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]
 \end{eqnarray*}
 
 \end_inset
@@ -1593,32 +1631,24 @@ There are a lot of indices and subscripts and superscripts to keep track
 \end_inset
 
 th mixture density, and the 
-\begin_inset Formula $\alpha_{j}^{\delta\left(x_{i},j\right)}$
+\begin_inset Formula $\alpha_{x_{i}}$
 \end_inset
 
- are the mixture coefficients (in what proportion the 
-\begin_inset Formula $j$
+ are the mixture coefficients (i.e.
+ in what proportion the 
+\begin_inset Formula $x_{i}$
 \end_inset
 
-th density contributes) contingent on 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- coming up equal to 
-\begin_inset Formula $j$
-\end_inset
-
-.
+th density contributes).
  Much as we did for Example 1 we need to compute 
-\begin_inset Formula $f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)$
+\begin_inset Formula $f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)$
 \end_inset
 
  in order to compute the conditional expectations 
 \begin_inset Formula 
 \begin{eqnarray*}
-f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right) & = & \frac{f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}\right)}{f_{\mathbf{Y}_{i}}\left(\mathbf{y}_{i};\theta\right)}\\
- & = & \frac{\prod_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}}{\sum_{x_{i}}\prod_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}}\\
- & = & \prod_{j=1}^{m}\left(\frac{\alpha_{j}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)}{\sum_{x_{i}}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}}\right)^{\delta\left(x_{i},j\right)}
+f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right) & = & \frac{f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)}{f_{\mathbf{Y}_{i}}\left(\mathbf{y}_{i};\theta\right)}\\
+ & = & \frac{g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}^{\left(r\right)}\right)\alpha_{x_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
 \end{eqnarray*}
 
 \end_inset
@@ -1628,7 +1658,36 @@ So again
 \end_inset
 
  is categorical random variable.
- Then 
+ Let 
+\begin_inset Formula 
+\[
+\gamma_{ij}^{\left(r\right)}\coloneqq P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
+\]
+
+\end_inset
+
+be the probabilities of the atoms of this new categorical random variable.
+ Before proceeding, first a helpful lemma
+\end_layout
+
+\begin_layout Lemma
+For i.i.d incomples samples 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+, with co
+\begin_inset Formula 
+\[
+E\left[l\left(X_{i},\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then 
 \family roman
 \series medium
 \shape up
@@ -1642,9 +1701,10 @@ So again
 \color none
 
 \begin_inset Formula 
-\[
-E\left[l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{x_{i}}\left(\sum_{i=1}^{n}\sum_{j=1}^{m}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}\right)\prod_{j=1}^{m}\left(\frac{\alpha_{j}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)}{\sum_{x_{i}}\alpha_{j}^{\delta\left(x_{i},j\right)}\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)^{\delta\left(x_{i},j\right)}}\right)^{\delta\left(x_{i},j\right)}
-\]
+\begin{eqnarray*}
+E\left[l\left(X_{i},\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & E\left[\right]\\
+ &  & \sum_{j}\left(\sum_{i=1}^{n}\left[\log\alpha_{x_{i}}+\log\left(g_{x_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
+\end{eqnarray*}
 
 \end_inset
 
