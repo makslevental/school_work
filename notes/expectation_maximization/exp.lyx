@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass amsart
@@ -17,13 +17,13 @@ figs-within-sections
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -34,15 +34,24 @@ figs-within-sections
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_amsmath 1
-\use_esint 1
-\use_mhchem 1
-\use_mathdots 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -785,7 +794,7 @@ status open
 \end_inset
 
 
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 \begin_inset CommandInset label
@@ -1551,10 +1560,10 @@ picks
 \begin_inset Formula 
 \begin{eqnarray*}
 l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right) & = & \log\left[\prod_{i=1}^{n}f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]\\
- & = & \log\left[\prod_{i=1}^{n}\left[f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)P\left(X_{i}=j_{i}\right)\right]\right]\\
- & = & \log\left[\prod_{i=1}^{n}\left[g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\alpha_{j_{i}}\right]\right]\\
- & = & \sum_{i=1}^{n}\log\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\alpha_{j_{i}}\right)\\
- & = & \sum_{i=1}^{n}\left[\log\alpha_{j_{i}}+\log\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\right)\right]
+ & = & \log\left[\prod_{i=1}^{n}\left[f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)P\left(X_{i}=j\right)\right]\right]\\
+ & = & \log\left[\prod_{i=1}^{n}\left[g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\alpha_{j}\right]\right]\\
+ & = & \sum_{i=1}^{n}\log\left(g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\alpha_{j}\right)\\
+ & = & \sum_{i=1}^{n}\left[\log\alpha_{j}+\log\left(g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\right)\right]
 \end{eqnarray*}
 
 \end_inset
@@ -1577,7 +1586,7 @@ There are a lot of indices and subscripts and superscripts to keep track
 \end_inset
 
 , which have realizations 
-\begin_inset Formula $j_{i}$
+\begin_inset Formula $j$
 \end_inset
 
 , i.e.
@@ -1586,36 +1595,36 @@ There are a lot of indices and subscripts and superscripts to keep track
 \end_inset
 
  comes up 
-\begin_inset Formula $j_{i}$
+\begin_inset Formula $j$
 \end_inset
 
 , are the unobserved data (the mixture components), the 
-\begin_inset Formula $\boldsymbol{\theta}_{j_{i}}$
+\begin_inset Formula $\boldsymbol{\theta}_{j}$
 \end_inset
 
  are the parameters of the 
-\begin_inset Formula $j_{i}$
+\begin_inset Formula $j$
 \end_inset
 
 th mixture density, and the 
-\begin_inset Formula $\alpha_{j_{i}}$
+\begin_inset Formula $\alpha_{j}$
 \end_inset
 
  are the mixture coefficients (i.e.
  in what proportion the 
-\begin_inset Formula $j_{i}$
+\begin_inset Formula $j$
 \end_inset
 
 th density contributes).
  Much as we did for Example 1 we need to compute 
-\begin_inset Formula $f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=P\left(X_{i}=j_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)$
+\begin_inset Formula $f_{X_{i}|\mathbf{Y}_{i}}\left(x_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)$
 \end_inset
 
  in order to compute the conditional expectations 
 \begin_inset Formula 
 \begin{eqnarray*}
-P\left(X_{i}=j_{i}|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right) & = & \frac{f_{X_{i},\mathbf{Y}_{i}}\left(j_{i},\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)}{f_{\mathbf{Y}_{i}}\left(\mathbf{y}_{i};\theta\right)}\\
- & = & \frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
+P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right) & = & \frac{f_{X_{i},\mathbf{Y}_{i}}\left(j,\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)}{f_{\mathbf{Y}_{i}}\left(\mathbf{y}_{i};\theta\right)}\\
+ & = & \frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}
 \end{eqnarray*}
 
 \end_inset
@@ -1625,19 +1634,10 @@ So again
 \end_inset
 
  is categorical random variable.
- Let 
-\begin_inset Formula 
-\[
-\gamma_{ij_{i}}^{\left(r\right)}\coloneqq\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
-\]
-
-\end_inset
-
-be the probabilities of the atoms of this new categorical random variable.
  By i.i.d 
 \begin_inset Formula 
 \[
-P\left(\left(X_{1}=j_{1},\dots,X_{n}=j_{n}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right)=\prod_{i=1}^{n}\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
+P\left(\left(X_{1}=j_{1},\dots,X_{n}=j_{n}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right)=\prod_{i=1}^{n}\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j_{i}}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}
 \]
 
 \end_inset
@@ -1646,15 +1646,16 @@ Now we just need to take the expectation of the log-likelihood against this
  conditional density
 \begin_inset Formula 
 \[
-E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{j_{1}=1}^{m}\sum_{j_{2}=1}^{m}\cdots\sum_{j_{n}=1}^{m}\left(\left[\sum_{k=1}^{n}\left\{ \log\alpha_{j_{k}}+\log\left[g_{j_{k}}\left(\mathbf{y}_{k};\boldsymbol{\theta}_{j_{k}}\right)\right]\right\} \right]\prod_{i=1}^{n}\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}\right)
+E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{j_{1}=1}^{m}\sum_{j_{2}=1}^{m}\cdots\sum_{j_{n}=1}^{m}\left(\left[\sum_{k=1}^{n}\left\{ \log\alpha_{j_{k}}+\log\left[g_{j_{k}}\left(\mathbf{y}_{k};\boldsymbol{\theta}_{j_{k}}\right)\right]\right\} \right]\prod_{i=1}^{n}\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}\right)
 \]
 
 \end_inset
 
-Pretty ugly right? Let 
+Pretty ugly right? Suffice it to say you're not actually taking this expectation.
+ So let 
 \begin_inset Formula 
 \[
-\gamma_{ij_{i}}^{\left(r\right)}\coloneqq\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
+\gamma_{ij}^{\left(r\right)}\coloneqq P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j_{i}}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}
 \]
 
 \end_inset
@@ -1782,8 +1783,102 @@ E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|y_{i};\boldsymbol{\theta}^{
 Then 
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|y_{i};\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(y_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
- & = & \sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)
+E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(y_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
+ & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Define 
+\begin_inset Formula 
+\[
+n_{j}^{\left(r\right)}=\sum_{i=1}^{n}\gamma_{ij}^{\left(r\right)}=\sum_{i=1}^{n}P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)
+\]
+
+\end_inset
+
+This is something like the portion of the samples that were generated by
+ the 
+\begin_inset Formula $j$
+\end_inset
+
+th component of the density
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+It's not normalized though so not exactly.
+\end_layout
+
+\end_inset
+
+.
+ The expectation becomes 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
+ & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\log\alpha_{j}\gamma_{ij}^{\left(r\right)}-\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)\gamma_{ij}^{\left(r\right)}-\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\gamma_{ij}^{\left(r\right)}\\
+ & = & \sum_{j=1}^{m}n_{j}^{\left(r\right)}\log\alpha_{j}-\frac{1}{2}\sum_{j=1}^{m}n_{j}^{\left(r\right)}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{\left(y_{i}-\mu_{j}\right)^{2}}{\sigma_{j}^{2}}\gamma_{ij}^{\left(r\right)}
+\end{eqnarray*}
+
+\end_inset
+
+This is the expression that needs to be maximized.
+ The fully specified maximization problem is 
+\begin_inset Formula 
+\begin{align*}
+\max_{\alpha_{j},\mu_{j},\sigma_{j}^{2}} & E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
+ & \iff\\
+\max_{\alpha_{j},\mu_{j},\sigma_{j}^{2}} & \sum_{j=1}^{m}n_{j}^{\left(r\right)}\log\alpha_{j}-\frac{1}{2}\sum_{j=1}^{m}n_{j}^{\left(r\right)}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{\left(y_{i}-\mu_{j}\right)^{2}}{\sigma_{j}^{2}}\gamma_{ij}^{\left(r\right)}\\
+\text{subject to} & \sum_{j=1}^{m}\alpha_{j}=1,\:\alpha_{j}\geq0
+\end{align*}
+
+\end_inset
+
+This looks tough but because it's a bunch of different terms summed together
+ it's easy that the original log-likelihood 
+\begin_inset Formula 
+\[
+\log\left[\sum_{j=1}^{m}\alpha_{j}g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\right]
+\]
+
+\end_inset
+
+To perform the constrained maximization (only the 
+\begin_inset Formula $\alpha_{j}$
+\end_inset
+
+) we use Lagrange multipliers; form the Lagrangian
+\begin_inset Formula 
+\[
+\mathcal{L}\left(\boldsymbol{\alpha},\lambda\right)=\sum_{j=1}^{m}n_{j}^{\left(r\right)}\log\alpha_{j}+\lambda\left(\sum_{j=1}^{m}\alpha_{j}-1\right)
+\]
+
+\end_inset
+
+Then computing derivatives and setting to zero to find 
+\begin_inset Formula $\alpha_{j}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial\mathcal{L}}{\partial\alpha_{j}} & = & \frac{n_{j}^{\left(r\right)}}{\alpha_{j}}+\lambda\\
+ & \Rightarrow\\
+\frac{n_{j}^{\left(r\right)}}{\alpha_{j}}+\lambda & = & 0\\
+\sum_{j=1}^{m}n_{j}^{\left(r\right)} & = & -\lambda\sum_{j=1}^{m}\alpha_{j}
 \end{eqnarray*}
 
 \end_inset
