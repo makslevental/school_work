@@ -1551,10 +1551,10 @@ picks
 \begin_inset Formula 
 \begin{eqnarray*}
 l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right) & = & \log\left[\prod_{i=1}^{n}f_{X_{i},\mathbf{Y}_{i}}\left(x_{i},\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]\\
- & = & \log\left[\prod_{i=1}^{n}f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)P\left(X_{i}=j_{i}\right)\right]\\
- & = & \log\left[\prod_{i=1}^{n}\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\alpha_{j_{i}}\right)\right]\\
+ & = & \log\left[\prod_{i=1}^{n}\left[f_{\mathbf{Y}_{i}|X_{i}}\left(\mathbf{y}_{i}|x_{i};\boldsymbol{\theta}\right)P\left(X_{i}=j_{i}\right)\right]\right]\\
+ & = & \log\left[\prod_{i=1}^{n}\left[g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\alpha_{j_{i}}\right]\right]\\
  & = & \sum_{i=1}^{n}\log\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\alpha_{j_{i}}\right)\\
- & = & \sum_{i=1}^{n}\left[\log\alpha_{j_{i}}+\log\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]
+ & = & \sum_{i=1}^{n}\left[\log\alpha_{j_{i}}+\log\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}\right)\right)\right]
 \end{eqnarray*}
 
 \end_inset
@@ -1589,7 +1589,7 @@ There are a lot of indices and subscripts and superscripts to keep track
 \begin_inset Formula $j_{i}$
 \end_inset
 
-, are the unobserved data (the mixture components, the 
+, are the unobserved data (the mixture components), the 
 \begin_inset Formula $\boldsymbol{\theta}_{j_{i}}$
 \end_inset
 
@@ -1634,16 +1634,32 @@ So again
 \end_inset
 
 be the probabilities of the atoms of this new categorical random variable.
- Now we just need to take the expectation of the log-likelihood against
- this conditional density
+ By i.i.d 
 \begin_inset Formula 
 \[
-E\left[l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{j=1}^{m}\left(\sum_{i=1}^{n}\left[\log\alpha_{j_{i}}+\log\left(g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{x_{i}}\right)\right)\right]\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}\right)
+P\left(\left(X_{1}=j_{1},\dots,X_{n}=j_{n}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right)=\prod_{i=1}^{n}\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
 \]
 
 \end_inset
 
-Pretty ugly right? A helpful lemma:
+Now we just need to take the expectation of the log-likelihood against this
+ conditional density
+\begin_inset Formula 
+\[
+E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{j_{1}=1}^{m}\sum_{j_{2}=1}^{m}\cdots\sum_{j_{n}=1}^{m}\left(\left[\sum_{k=1}^{n}\left\{ \log\alpha_{j_{k}}+\log\left[g_{j_{k}}\left(\mathbf{y}_{k};\boldsymbol{\theta}_{j_{k}}\right)\right]\right\} \right]\prod_{i=1}^{n}\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}\right)
+\]
+
+\end_inset
+
+Pretty ugly right? Let 
+\begin_inset Formula 
+\[
+\gamma_{ij_{i}}^{\left(r\right)}\coloneqq\frac{g_{j_{i}}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j_{i}}^{\left(r\right)}\right)\alpha_{j_{i}}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}\right)}
+\]
+
+\end_inset
+
+and a helpful lemma:
 \end_layout
 
 \begin_layout Lemma
@@ -1658,32 +1674,27 @@ For i.i.d incomples samples
 
 \begin_inset Formula 
 \[
-E\left[l\left(\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{i=1}^{n}E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]
+E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{i=1}^{n}E\left[l\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $y_{i}$
+\begin_inset Formula $\mathbf{y}_{i}$
 \end_inset
 
- is the ith sample, possibly from a multidimensional distribution (in which
- case it would also be 
-\series bold
-bold
-\series default
-).
+ is the ith sample.
 \end_layout
 
 \begin_layout Proof
 By i.i.d
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[l\left(\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & E\left[\log\left[\prod_{i=1}^{n}f\left(X_{i}|\mathbf{y};\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
- & = & E\left[\sum_{i=1}^{n}\log\left[f\left(X_{i}|\mathbf{y};\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
- & = & \sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\mathbf{y};\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\text{ since }X_{i}\perp X_{j}\text{ for }i\neq j\\
- & = & \sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|y_{i};\boldsymbol{\theta}\right)\right]|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]\text{ since }P\left(X_{i}=x_{i}|\mathbf{Y}\right)=P\left(X_{i}=x_{i}|Y_{i}\right)\\
- & = & \sum_{i=1}^{n}E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]
+E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & E\left[\log\left[\prod_{i=1}^{n}f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
+ & = & E\left[\sum_{i=1}^{n}\log\left[f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
+ & = & \sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\text{ since }X_{i}\perp X_{j}\text{ for }i\neq j\\
+ & = & \sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]\text{ since }P\left(X_{i}=x_{i}|\left(\mathbf{Y}_{1},\dots,\mathbf{Y}_{n}\right)\right)=P\left(X_{i}=x_{i}|\mathbf{Y}_{i}\right)\\
+ & = & \sum_{i=1}^{n}E\left[l\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]
 \end{eqnarray*}
 
 \end_inset
@@ -1706,15 +1717,48 @@ status open
 
 \begin_layout Standard
 Therefore we only need to compute 
-\begin_inset Formula $E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]$
+\begin_inset Formula $E\left[l\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]$
 \end_inset
 
  to perform the E-step.
- So (letting 
+ So letting 
 \begin_inset Formula $j_{i}\rightarrow j$
 \end_inset
 
- for convenience) 
+ for convenience and 
+\begin_inset Formula $\left(\mu_{j},\Sigma_{j}\right)$
+\end_inset
+
+ be the parameters for the 
+\begin_inset Formula $j$
+\end_inset
+
+th Gaussian.
+ Actually let's take the 1 dimensional Gaussian case
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+https://www.ee.washington.edu/techsite/papers/documents/UWEETR-2010-0002.pdf
+ is a good place for the general 
+\begin_inset Formula $n$
+\end_inset
+
+ case.
+\end_layout
+
+\end_inset
+
+ so 
+\begin_inset Formula $\left(\mu_{j},\Sigma_{j}\right)=\left(\mu_{j},\sigma_{j}^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}_{i}\rightarrow y_{i}$
+\end_inset
+
+.
+ 
 \family roman
 \series medium
 \shape up
@@ -1729,7 +1773,17 @@ Therefore we only need to compute
 
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{j}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)
+E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|y_{i};\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(y_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
+ & = & \sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|y_{i};\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(y_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
+ & = & \sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)
 \end{eqnarray*}
 
 \end_inset
