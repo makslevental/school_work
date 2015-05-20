@@ -1448,6 +1448,10 @@ which completes the proof.
 Applications
 \end_layout
 
+\begin_layout Subsection
+Gaussian Mixture Models
+\end_layout
+
 \begin_layout Standard
 EM works really well for mixture models, e.g.
  
@@ -1466,7 +1470,7 @@ where
 \begin_inset Formula $g_{j}$
 \end_inset
 
- are (in general multivariate) densities parameters 
+ are (in general multivariate) densities with parameters 
 \begin_inset Formula $\boldsymbol{\theta}_{j}$
 \end_inset
 
@@ -1479,6 +1483,11 @@ where
 \end_inset
 
 .
+ If 
+\begin_inset Formula $g_{j}\sim\text{n}\left(\mu_{j},\sigma_{j}^{2}\right)$
+\end_inset
+
+ then the mixture model is called a Gaussian mixture model (GMM).
  Naively if you wanted to find the MLEs you would maximize
 \begin_inset Formula 
 \[
@@ -1645,9 +1654,10 @@ P\left(\left(X_{1}=j_{1},\dots,X_{n}=j_{n}\right)|\left(\mathbf{y}_{1},\dots,\ma
 Now we just need to take the expectation of the log-likelihood against this
  conditional density
 \begin_inset Formula 
-\[
-E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{j_{1}=1}^{m}\sum_{j_{2}=1}^{m}\cdots\sum_{j_{n}=1}^{m}\left(\left[\sum_{k=1}^{n}\left\{ \log\alpha_{j_{k}}+\log\left[g_{j_{k}}\left(\mathbf{y}_{k};\boldsymbol{\theta}_{j_{k}}\right)\right]\right\} \right]\prod_{i=1}^{n}\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}\right)
-\]
+\begin{eqnarray*}
+E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\\
+\sum_{j_{1}=1}^{m}\sum_{j_{2}=1}^{m}\cdots\sum_{j_{n}=1}^{m}\left(\left[\sum_{k=1}^{n}\left\{ \log\alpha_{j_{k}}+\log\left[g_{j_{k}}\left(\mathbf{y}_{k};\boldsymbol{\theta}_{j_{k}}\right)\right]\right\} \right]\prod_{i=1}^{n}\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}\right)
+\end{eqnarray*}
 
 \end_inset
 
@@ -1655,7 +1665,7 @@ Pretty ugly right? Suffice it to say you're not actually taking this expectation
  So let 
 \begin_inset Formula 
 \[
-\gamma_{ij}^{\left(r\right)}\coloneqq P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j_{i}}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}
+\gamma_{ij}^{\left(r\right)}\coloneqq P\left(X_{i}=j|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right)=\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}
 \]
 
 \end_inset
@@ -1687,23 +1697,22 @@ where
  is the ith sample.
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 By i.i.d
 \begin_inset Formula 
-\begin{eqnarray*}
-E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & E\left[\log\left[\prod_{i=1}^{n}f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
- & = & E\left[\sum_{i=1}^{n}\log\left[f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\\
- & = & \sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]\text{ since }X_{i}\perp X_{j}\text{ for }i\neq j\\
- & = & \sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]\text{ since }P\left(X_{i}=x_{i}|\left(\mathbf{Y}_{1},\dots,\mathbf{Y}_{n}\right)\right)=P\left(X_{i}=x_{i}|\mathbf{Y}_{i}\right)\\
- & = & \sum_{i=1}^{n}E\left[l\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]
-\end{eqnarray*}
+\begin{align*}
+E\left[l\left(\left(X_{1},\dots,X_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & =\\
+E\left[\log\left[\prod_{i=1}^{n}f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & =\\
+E\left[\sum_{i=1}^{n}\log\left[f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & =\left(\text{ since }X_{i}\perp X_{j}\text{ for }i\neq j\right)\\
+\sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\right)\right]|\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & =\left(\text{ since }P\left(X_{i}=x_{i}|\left(\mathbf{Y}_{1},\dots,\mathbf{Y}_{n}\right)\right)=P\left(X_{i}=x_{i}|\mathbf{Y}_{i}\right)\right)\\
+\sum_{i=1}^{n}E\left[\log\left[f\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)\right]|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right] & =\\
+\sum_{i=1}^{n}E\left[l\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]
+\end{align*}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Proof
 \begin_inset ERT
 status open
 
@@ -1716,6 +1725,7 @@ status open
 
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 Therefore we only need to compute 
 \begin_inset Formula $E\left[l\left(X_{i}|\mathbf{y}_{i};\boldsymbol{\theta}\right)|\mathbf{y}_{i};\boldsymbol{\theta}^{\left(r\right)}\right]$
@@ -1740,7 +1750,12 @@ th Gaussian.
 status open
 
 \begin_layout Plain Layout
-https://www.ee.washington.edu/techsite/papers/documents/UWEETR-2010-0002.pdf
+\begin_inset CommandInset citation
+LatexCommand cite
+key "chen2010demystified"
+
+\end_inset
+
  is a good place for the general 
 \begin_inset Formula $n$
 \end_inset
@@ -1783,8 +1798,9 @@ E\left[l\left(X_{i}|y_{i};\boldsymbol{\theta}\right)|y_{i};\boldsymbol{\theta}^{
 Then 
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(y_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
- & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)
+E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & =\\
+\sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\log\left(g_{j}\left(y_{i};\boldsymbol{\theta}_{j}\right)\right)\right]\gamma_{ij}^{\left(r\right)}\right) & =\\
+\sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)
 \end{eqnarray*}
 
 \end_inset
@@ -1819,7 +1835,11 @@ status open
 \uwave off
 \noun off
 \color none
-It's not normalized though so not exactly.
+Why? Because 
+\begin_inset Formula $\sum_{j=1}^{m}n_{j}=\sum_{j=1}^{m}\sum_{i=1}^{n}\gamma_{ij}=\sum_{i=1}^{n}1=n$
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1828,14 +1848,40 @@ It's not normalized though so not exactly.
  The expectation becomes 
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right)\\
- & = & \sum_{i=1}^{n}\sum_{j=1}^{m}\log\alpha_{j}\gamma_{ij}^{\left(r\right)}-\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)\gamma_{ij}^{\left(r\right)}-\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\gamma_{ij}^{\left(r\right)}\\
- & = & \sum_{j=1}^{m}n_{j}^{\left(r\right)}\log\alpha_{j}-\frac{1}{2}\sum_{j=1}^{m}n_{j}^{\left(r\right)}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{\left(y_{i}-\mu_{j}\right)^{2}}{\sigma_{j}^{2}}\gamma_{ij}^{\left(r\right)}
+E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right] & =\\
+\sum_{i=1}^{n}\sum_{j=1}^{m}\left(\left[\log\alpha_{j}+\left(-\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\right)\right]\gamma_{ij}^{\left(r\right)}\right) & =\\
+\sum_{i=1}^{n}\sum_{j=1}^{m}\log\alpha_{j}\gamma_{ij}^{\left(r\right)}-\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{1}{2}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)\gamma_{ij}^{\left(r\right)}-\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{1}{2\sigma_{j}^{2}}\left(y_{i}-\mu_{j}\right)^{2}\gamma_{ij}^{\left(r\right)} & =\\
+\sum_{j=1}^{m}n_{j}^{\left(r\right)}\log\alpha_{j}-\frac{1}{2}\sum_{j=1}^{m}n_{j}^{\left(r\right)}\left(\log\left(\sigma_{j}^{2}\right)+\log\left(2\pi\right)\right)-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{m}\frac{\left(y_{i}-\mu_{j}\right)^{2}}{\sigma_{j}^{2}}\gamma_{ij}^{\left(r\right)}
 \end{eqnarray*}
 
 \end_inset
 
-This is the expression that needs to be maximized.
+This is the expression that needs to be maximized with respect to 
+\begin_inset Formula $\alpha_{j},\mu_{j},\sigma_{j}^{2}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Pay attention to the difference between the arguments that come from the
+ log 
+\begin_inset Formula $\alpha_{j},\mu_{j},\sigma_{j}^{2}$
+\end_inset
+
+ and the current estimates of the parameters, those with iterate scripts
+ 
+\begin_inset Formula $\left(r\right)$
+\end_inset
+
+ that come from conditional density, with respect to which the expectation
+ was taken.
+\end_layout
+
+\end_inset
+
+ .
  The fully specified maximization problem is 
 \begin_inset Formula 
 \begin{align*}
@@ -1847,8 +1893,8 @@ This is the expression that needs to be maximized.
 
 \end_inset
 
-This looks tough but because it's a bunch of different terms summed together
- it's easy that the original log-likelihood 
+This looks tough but because it's a bunch of uncoupled (somewhat) terms
+ summed together so it's easier than the original log-likelihood 
 \begin_inset Formula 
 \[
 \log\left[\sum_{j=1}^{m}\alpha_{j}g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}\right)\right]
@@ -1856,7 +1902,17 @@ This looks tough but because it's a bunch of different terms summed together
 
 \end_inset
 
-To perform the constrained maximization (only the 
+The local maxima for 
+\begin_inset Formula $\alpha_{j},\mu_{j},\sigma_{j}^{2}$
+\end_inset
+
+ become the new iterates, ie.
+ 
+\begin_inset Formula $\alpha_{j}^{\left(r+1\right)},\mu_{j}^{\left(r+1\right)},\left(\sigma_{j}^{2}\right)^{\left(r+1\right)}$
+\end_inset
+
+.
+ To perform the constrained maximization (only the 
 \begin_inset Formula $\alpha_{j}$
 \end_inset
 
@@ -1875,11 +1931,607 @@ Then computing derivatives and setting to zero to find
 
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\partial\mathcal{L}}{\partial\alpha_{j}} & = & \frac{n_{j}^{\left(r\right)}}{\alpha_{j}}+\lambda\\
- & \Rightarrow\\
-\frac{n_{j}^{\left(r\right)}}{\alpha_{j}}+\lambda & = & 0\\
-\sum_{j=1}^{m}n_{j}^{\left(r\right)} & = & -\lambda\sum_{j=1}^{m}\alpha_{j}
+\frac{\partial\mathcal{L}}{\partial\alpha_{j}} & = & \frac{n_{j}^{\left(r\right)}}{\alpha_{j}}+\lambda
 \end{eqnarray*}
+
+\end_inset
+
+Therefore the critical
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You need to do the convex analysis (second-deriative test) to determine
+ whether 
+\begin_inset Formula $\alpha_{j}$
+\end_inset
+
+ are maxima but they are and I'm not going to.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\alpha_{j}$
+\end_inset
+
+ satisfy 
+\begin_inset Formula 
+\[
+\alpha_{j}=-\frac{n_{j}^{\left(r\right)}}{\lambda}
+\]
+
+\end_inset
+
+To eliminate 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ use the equality constraint, i.e.
+ 
+\begin_inset Formula $\sum_{j=1}^{m}\alpha_{j}=1$
+\end_inset
+
+ implies 
+\begin_inset Formula $\lambda=-\sum_{j=1}^{m}n_{j}^{\left(r\right)}$
+\end_inset
+
+ and hence
+\begin_inset Formula 
+\[
+\alpha_{j}^{\left(r+1\right)}=\frac{n_{j}^{\left(r\right)}}{\sum_{j=1}^{m}n_{j}^{\left(r\right)}}=\frac{n_{j}^{\left(r\right)}}{n}
+\]
+
+\end_inset
+
+So 
+\begin_inset Formula $\alpha_{j}^{\left(r+1\right)}$
+\end_inset
+
+ is just the current best estimate for how many of the samples were generated
+ by the 
+\begin_inset Formula $j$
+\end_inset
+
+th component of the mixture density
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Pretty much the epitome of the MLE for a parameter.
+\end_layout
+
+\end_inset
+
+.
+ To compute the updates 
+\begin_inset Formula $\mu_{j}^{\left(r+1\right)}$
+\end_inset
+
+ we just need to do the standard maximization of 
+\begin_inset Formula $E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]$
+\end_inset
+
+ since the 
+\begin_inset Formula $\mu_{j}$
+\end_inset
+
+ are unconstrained.
+ Therefore
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\mu_{j}}E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{i=1}^{n}\frac{\left(y_{i}-\mu_{j}\right)}{\sigma_{j}^{2}}\gamma_{ij}^{\left(r\right)}=0
+\]
+
+\end_inset
+
+Note the sum of 
+\begin_inset Formula $j$
+\end_inset
+
+ disappears because only the 
+\begin_inset Formula $j$
+\end_inset
+
+th term is non-zero.
+ Then simplifying further
+\begin_inset Formula 
+\begin{eqnarray*}
+\sum_{i=1}^{n}\frac{\left(y_{i}-\mu_{j}\right)}{\sigma_{j}^{2}}\gamma_{ij}^{\left(r\right)} & = & \frac{1}{\sigma_{j}^{2}}\left(\sum_{i=1}^{n}\gamma_{ij}^{\left(r\right)}y_{i}-\mu_{j}\sum_{i=1}\gamma_{ij}^{\left(r\right)}\right)\\
+ & = & \frac{1}{\sigma_{j}^{2}}\left(\sum_{i=1}^{n}\gamma_{ij}^{\left(r\right)}y_{i}-\mu_{j}n_{j}^{\left(r\right)}\right)=0\\
+ & \Rightarrow\\
+\mu_{j}^{\left(r+1\right)} & = & \frac{1}{n_{j}^{\left(r\right)}}\sum_{i=1}^{n}\gamma_{ij}^{\left(r\right)}y_{i}
+\end{eqnarray*}
+
+\end_inset
+
+Finally doing the same kind of thing for 
+\begin_inset Formula $\left(\sigma_{j}^{2}\right)^{\left(r+1\right)}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial\sigma_{j}^{2}}E\left[l\left(\left(X_{1},\dots,X_{n}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}\right)|\left(y_{1},\dots,y_{n}\right);\boldsymbol{\theta}^{\left(r\right)}\right]=-\frac{1}{2}\frac{n_{j}^{\left(r\right)}}{\sigma_{j}^{2}}+\frac{1}{2}\sum_{i=1}^{n}\frac{\left(y_{i}-\mu_{j}^{\left(r+1\right)}\right)^{2}}{\left(\sigma_{j}^{2}\right)^{2}}\gamma_{ij}^{\left(r\right)}=0
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mu_{j}$
+\end_inset
+
+ now gets a superscript because it's already been updated.
+ Hence 
+\begin_inset Formula 
+\[
+\left(\sigma_{j}^{2}\right)^{\left(r+1\right)}=\frac{1}{n_{j}^{\left(r+1\right)}}\sum_{i=1}^{n}\left(y_{i}-\mu_{j}^{\left(r+1\right)}\right)^{2}\gamma_{ij}^{\left(r\right)}
+\]
+
+\end_inset
+
+In summary the update equations for a univariate GMM 
+\begin_inset Formula 
+\begin{align*}
+\alpha_{j}^{\left(r+1\right)} & =\frac{n_{j}^{\left(r\right)}}{n}\\
+\mu_{j}^{\left(r+1\right)} & =\frac{1}{n_{j}^{\left(r\right)}}\sum_{i=1}^{n}\gamma_{ij}^{\left(r\right)}y_{i}\\
+\left(\sigma_{j}^{2}\right)^{\left(r+1\right)} & =\frac{1}{n_{j}^{\left(r+1\right)}}\sum_{i=1}^{n}\left(y_{i}-\mu_{j}^{\left(r+1\right)}\right)^{2}\gamma_{ij}^{\left(r\right)}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+\gamma_{ij}^{\left(r\right)} & =\frac{g_{j}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{j}^{\left(r\right)}\right)\alpha_{j}^{\left(r\right)}}{\sum_{k=1}^{m}\left(g_{k}\left(\mathbf{y}_{i};\boldsymbol{\theta}_{k}^{\left(r\right)}\right)\alpha_{k}^{\left(r\right)}\right)}\\
+n_{j}^{\left(r\right)} & =\sum_{i}\gamma_{ij}^{\left(r\right)}
+\end{align*}
+
+\end_inset
+
+For multivariate GMM the only difference is 
+\begin_inset Formula $\sigma_{j}^{2}\rightarrow\Sigma_{j}$
+\end_inset
+
+ and so you need to use matrix derivatives.
+ Consult 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "chen2010demystified"
+
+\end_inset
+
+ for the full derivation 
+\begin_inset Formula 
+\[
+\Sigma_{j}^{\left(r+1\right)}=\frac{1}{n_{j}^{\left(r+1\right)}}\sum_{i=1}^{n}\left(\mathbf{y}_{i}-\boldsymbol{\mu}_{j}^{\left(r+1\right)}\right)\left(\mathbf{y}_{i}-\boldsymbol{\mu}_{j}^{\left(r+1\right)}\right)^{T}\gamma_{ij}^{\left(r\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Hidden Markov Model
+\end_layout
+
+\begin_layout Standard
+A stochastic process is a sequence of random variables 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ drawn-from/distribited-according-to a common distribution 
+\begin_inset Formula $f_{X}$
+\end_inset
+
+.
+ A Hidden Markov model (HMM) is a model driven by a 
+\begin_inset Quotes eld
+\end_inset
+
+hidden
+\begin_inset Quotes erd
+\end_inset
+
+ stochastic process 
+\begin_inset Formula $\left(X_{1},X_{2}\dots\right)$
+\end_inset
+
+, with observations 
+\begin_inset Formula $\left(Y_{1},Y_{2},\dots\right)$
+\end_inset
+
+.
+ The subscripts can be interpreted to mean time.
+ So at each unit time step 
+\begin_inset Formula $i$
+\end_inset
+
+ a draw 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is made from the distribution 
+\begin_inset Formula $f_{X}$
+\end_inset
+
+.
+ Hidden is in the sense that at any given time the result of the draw is
+ unknown.
+ The Markov qualifier indicates that the process obeys the Markov property,
+ specifically the conditional independence of the next draw given the far
+ past, i.e.
+\begin_inset Formula 
+\[
+P\left(X_{i+1}|X_{i},X_{i-1},\dots,X_{1}\right)=P\left(X_{i+1}|X_{i}\right)
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $f_{X}$
+\end_inset
+
+ is discrete then the process is called a 
+\series bold
+chain
+\series default
+ and the value from 
+\begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
+\end_inset
+
+ that 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ takes on at time step 
+\begin_inset Formula $i$
+\end_inset
+
+ is called the 
+\emph on
+state
+\emph default
+ of the process at time 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ The set of observables 
+\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
+\end_inset
+
+ is such that at each time step 
+\begin_inset Formula $i$
+\end_inset
+
+ another draw is made from a 
+\series bold
+different
+\series default
+ distribution that's dependent on which state the Markov chain is in.
+ That is to say, at each time step 
+\begin_inset Formula $i$
+\end_inset
+
+ a draw 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ is made from a distribution on 
+\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
+\end_inset
+
+ which is a function of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $X_{i}=x_{i}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $Y_{i}\sim f_{x_{i}}$
+\end_inset
+
+.
+ The set of observables is common to all states of the Markov chain but
+ the probabilities with which each Markov chain state generates observables
+ differ.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename HiddenMarkovModel.svg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+3 state - 4 observable HMM
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:3s4ohmm"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+So the distribution of 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ is implicitly a function of time step 
+\begin_inset Formula $i$
+\end_inset
+
+, but only insofar as the hidden Markov process changes state at each time
+ step.
+ For example figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:3s4ohmm"
+
+\end_inset
+
+ is a state transition diagram for an HMM with 3 hidden states and 4 observable
+ states.
+ The Markov process iterates through, for example, 
+\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{n}=x_{3}\right)$
+\end_inset
+
+ and generates observations 
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\end_inset
+
+.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is a rather uninteresting Markov chain because there are no self-transition
+s and no transition from 
+\begin_inset Formula $X_{3}$
+\end_inset
+
+ to 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ is possible.
+ In general all transitions could be allowed.
+ 
+\end_layout
+
+\end_inset
+
+The parameters 
+\begin_inset Formula $a_{ij}$
+\end_inset
+
+ are the probabilities for the Markov chain transitions, i.e.
+ 
+\begin_inset Formula 
+\[
+P\left(X_{k+1}=x_{j}|X_{k}=x_{i}\right)=a_{ij}
+\]
+
+\end_inset
+
+and the parameters 
+\begin_inset Formula $b_{qr}$
+\end_inset
+
+ are the probabilities of each state 
+\begin_inset Formula $x_{q}$
+\end_inset
+
+ emitting a 
+\begin_inset Formula $Y_{k}=y_{r}$
+\end_inset
+
+ observable, i.e.
+\begin_inset Formula 
+\[
+P\left(Y_{k}=y_{r}|X_{k}=x_{q}\right)=b_{qr}
+\]
+
+\end_inset
+
+The fundamental assumption of the HMM
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Aside from the Markov property.
+\end_layout
+
+\end_inset
+
+ is the conditional independence of the observable given the far past history
+ of the process states and observables, i.e.
+ 
+\begin_inset Formula 
+\[
+P\left(Y_{i+1}|Y_{i},X_{i},Y_{i-1},X_{i-1},\dots,Y_{1},X_{1}\right)=P\left(Y_{i+1}|X_{i}\right)
+\]
+
+\end_inset
+
+Suppose 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ can take 
+\begin_inset Formula $n$
+\end_inset
+
+ distinct values and 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ each take 
+\begin_inset Formula $m$
+\end_inset
+
+ distinct values.
+ Then let 
+\begin_inset Formula $A=\left\{ a_{ij}\right\} $
+\end_inset
+
+ be the 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix of transition probabilities, 
+\begin_inset Formula $B=\left\{ b_{q}\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $b_{q}=\left\{ b_{q0},b_{q1},\dots,b_{qm}\right\} $
+\end_inset
+
+ be the discrete distribution on 
+\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
+\end_inset
+
+ if the chain is in state 
+\begin_inset Formula $x_{q}$
+\end_inset
+
+, and 
+\begin_inset Formula $\pi$
+\end_inset
+
+ be the initial distribution
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $A$
+\end_inset
+
+ specifies what states the chain is likely to iterate through but it doesn't
+ say anything about where the chain starts; 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is that set of initial probabilities.
+\end_layout
+
+\end_inset
+
+ on 
+\begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
+\end_inset
+
+.
+ There are three possible problems one can solve in the context of an HMM
+\end_layout
+
+\begin_layout Enumerate
+Compute the probabilities for some sequence of observations 
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\end_inset
+
+ given that the 
+\begin_inset Formula $\left(A,B,\pi\right)$
+\end_inset
+
+ are known.
+\end_layout
+
+\begin_layout Enumerate
+Compute the most likely sequence of hidden states 
+\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{n}=x_{3}\right)$
+\end_inset
+
+ given some sequence of observations 
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\end_inset
+
+ and some known 
+\begin_inset Formula $\left(A,B,\pi\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Find the MLE for 
+\begin_inset Formula $\left(A,B,\pi\right)$
+\end_inset
+
+ given some sequence of 
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Problem 1 is a matter of direct evaluate (just lots of products and sums),
+ problem 2 is solved using the Viterbi algorithm, and problem 3 is solved
+ using the Baum-Welch algorithm, also known as the forward backward algorithm,
+ or EM for HMMs.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "gentle"
+options "plain"
 
 \end_inset
 
