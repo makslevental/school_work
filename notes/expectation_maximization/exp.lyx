@@ -2348,13 +2348,13 @@ The parameters
  
 \begin_inset Formula 
 \[
-P\left(X_{k+1}=x_{j}|X_{k}=x_{i}\right)=a_{ij}
+P\left(X_{k+1}=x_{j}|X_{k}=x_{i}\right)=a_{i,j}
 \]
 
 \end_inset
 
 and the parameters 
-\begin_inset Formula $b_{qr}$
+\begin_inset Formula $b_{q}\left(y_{r}\right)$
 \end_inset
 
  are the probabilities of each state 
@@ -2368,7 +2368,7 @@ and the parameters
  observable, i.e.
 \begin_inset Formula 
 \[
-P\left(Y_{k}=y_{r}|X_{k}=x_{q}\right)=b_{qr}
+P\left(Y_{k}=y_{r}|X_{k}=x_{q}\right)=b_{q}\left(y_{r}\right)
 \]
 
 \end_inset
@@ -2423,7 +2423,7 @@ Suppose
 \end_inset
 
  where 
-\begin_inset Formula $b_{q}=\left\{ b_{q0},b_{q1},\dots,b_{qm}\right\} $
+\begin_inset Formula $b_{q}=\left\{ b_{q}\left(y_{0}\right),b_{q}\left(y_{1}\right),\dots,b_{q}\left(y_{m}\right)\right\} $
 \end_inset
 
  be the discrete distribution on 
@@ -2456,17 +2456,36 @@ status open
 
 \end_inset
 
- on 
+on 
 \begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
 \end_inset
 
 .
- There are three possible problems one can solve in the context of an HMM
+ where 
+\begin_inset Formula $\boldsymbol{\theta}=\left(A,B,\pi\right)$
+\end_inset
+
+.
+ And so, tellingly, we see a likelihood
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hint hint!
+\end_layout
+
+\end_inset
+
+ written as an explicit function of parameters.
+\end_layout
+
+\begin_layout Standard
+There are three possible problems one can solve in the context of an HMM
 \end_layout
 
 \begin_layout Enumerate
 Compute the probabilities for some sequence of observations 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{k}=y_{4}\right)$
 \end_inset
 
  given that the 
@@ -2478,11 +2497,11 @@ Compute the probabilities for some sequence of observations
 
 \begin_layout Enumerate
 Compute the most likely sequence of hidden states 
-\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{n}=x_{3}\right)$
+\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{k}=x_{3}\right)$
 \end_inset
 
  given some sequence of observations 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{k}=y_{4}\right)$
 \end_inset
 
  and some known 
@@ -2498,7 +2517,7 @@ Find the MLE for
 \end_inset
 
  given some sequence of 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{k}=y_{4}\right)$
 \end_inset
 
 .
@@ -2509,6 +2528,90 @@ Problem 1 is a matter of direct evaluate (just lots of products and sums),
  problem 2 is solved using the Viterbi algorithm, and problem 3 is solved
  using the Baum-Welch algorithm, also known as the forward backward algorithm,
  or EM for HMMs.
+ This last one is what I'll cover.
+\end_layout
+
+\begin_layout Standard
+The likelihood 
+\begin_inset Formula 
+\[
+L\left(\boldsymbol{\theta};\mathbf{y}\right)=P\left(\mathbf{y};\boldsymbol{\theta}\right)
+\]
+
+\end_inset
+
+is complicated because 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ are not i.i.d; for example if we have a 2 state 2 observable HMM and 
+\begin_inset Formula $P\left(Y=y_{0}|X=X_{1}\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(Y=y_{1}|X=X_{0}\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(X_{1}=x_{0}|X_{0}=x_{0}\right)=0$
+\end_inset
+
+ and the first observation is 
+\begin_inset Formula $y_{0}$
+\end_inset
+
+ then we know the second must be 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ are dependent through 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+, and the 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+, in general, are dependent.
+ Maximization of 
+\begin_inset Formula $L\left(\boldsymbol{\theta};\mathbf{y}\right)$
+\end_inset
+
+ essentially has to be done over all 
+\begin_inset Formula $k$
+\end_inset
+
+-length sequences 
+\begin_inset Formula $\left(X_{1},\dots,X_{k}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In general the probability of seeing any sequence of 
+\begin_inset Formula $\left(X_{1},X_{2}\dots,X_{k}\right)$
+\end_inset
+
+, with observations 
+\begin_inset Formula $\left(Y_{1},Y_{2},\dots,Y_{k}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+P\left(\mathbf{X},\mathbf{Y};\boldsymbol{\theta}\right)=\pi_{x_{1}}\prod_{i=2}^{k-1}a_{x_{i},x_{i+1}}\prod_{i=1}^{k}b_{x_{i}}\left(y_{i}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout --Separator--
