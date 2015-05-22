@@ -1674,7 +1674,7 @@ and a helpful lemma:
 \end_layout
 
 \begin_layout Lemma
-For i.i.d incomples samples 
+For i.i.d incomplete samples 
 \begin_inset Formula $Y_{i}$
 \end_inset
 
@@ -2320,11 +2320,11 @@ reference "fig:3s4ohmm"
  using a state transition diagram for an HMM with 3 hidden states and 4
  observable states.
  For example the Markov process iterates through 
-\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{n}=x_{3}\right)$
+\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{K}=x_{3}\right)$
 \end_inset
 
  and generates observations 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{n}=y_{4}\right)$
+\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{K}=y_{4}\right)$
 \end_inset
 
 .
@@ -2407,7 +2407,7 @@ For convience define
 \end_layout
 
 \begin_layout Standard
-The fundamental assumption of the HMM
+A fundamental assumption of HMMs
 \begin_inset Foot
 status open
 
@@ -2418,33 +2418,16 @@ Aside from the Markov property.
 \end_inset
 
  is the conditional independence of the observable given the far past history
- of the process states and observables, i.e.
+ of the hidden process and observables, i.e.
  
 \begin_inset Formula 
 \[
-P\left(Y_{k+1}|Y_{k},X_{k},Y_{k-1},X_{k-1},\dots,Y_{1},X_{1}\right)=P\left(Y_{k+1}|X_{k}\right)
+P\left(Y_{k}|X_{k},Y_{k-1},X_{k-1},\dots,Y_{1},X_{1}\right)=P\left(Y_{k}|X_{k}\right)
 \]
 
 \end_inset
 
-Suppose 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- can take 
-\begin_inset Formula $n$
-\end_inset
-
- distinct values and 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
- each take 
-\begin_inset Formula $m$
-\end_inset
-
- distinct values.
- Then let 
+Let 
 \begin_inset Formula $A=\left\{ a_{ij}\right\} $
 \end_inset
 
@@ -2456,12 +2439,12 @@ Suppose
 \begin_inset Formula $B=\left\{ b_{q}\right\} $
 \end_inset
 
- where be the discrete distribution on 
-\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
+ be the 
+\begin_inset Formula $m\times n$
 \end_inset
 
- if the chain is in state 
-\begin_inset Formula $x_{q}$
+ matrix of distributions on the 
+\begin_inset Formula $Y_{k}$
 \end_inset
 
 , and 
@@ -2491,35 +2474,16 @@ on
 \end_inset
 
 .
- where 
-\begin_inset Formula $\boldsymbol{\theta}=\left(A,B,\pi\right)$
-\end_inset
-
-.
- And so, tellingly, we see a likelihood
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Hint hint!
-\end_layout
-
-\end_inset
-
- written as an explicit function of parameters.
-\end_layout
-
-\begin_layout Standard
-There are three possible problems one can solve in the context of an HMM
+ There are three possible problems one can solve in the context of an HMM
 \end_layout
 
 \begin_layout Enumerate
 Compute the probabilities for some sequence of observations 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{k}=y_{4}\right)$
+\begin_inset Formula $\mathbf{Y}=\left(Y_{1},Y_{2},\dots,Y_{K}\right)$
 \end_inset
 
  given that the 
-\begin_inset Formula $\left(A,B,\pi\right)$
+\begin_inset Formula $\boldsymbol{\theta}\coloneqq\left(A,B,\pi\right)$
 \end_inset
 
  are known.
@@ -2527,15 +2491,15 @@ Compute the probabilities for some sequence of observations
 
 \begin_layout Enumerate
 Compute the most likely sequence of hidden states 
-\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{k}=x_{3}\right)$
+\begin_inset Formula $\mathbf{X=}\left(X_{1},X_{2},\dots,X_{K}\right)$
 \end_inset
 
  given some sequence of observations 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{k}=y_{4}\right)$
+\begin_inset Formula $\mathbf{Y}$
 \end_inset
 
  and some known 
-\begin_inset Formula $\left(A,B,\pi\right)$
+\begin_inset Formula $\boldsymbol{\theta}$
 \end_inset
 
 .
@@ -2543,18 +2507,18 @@ Compute the most likely sequence of hidden states
 
 \begin_layout Enumerate
 Find the MLE for 
-\begin_inset Formula $\left(A,B,\pi\right)$
+\begin_inset Formula $\boldsymbol{\theta}$
 \end_inset
 
  given some sequence of 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{k}=y_{4}\right)$
+\begin_inset Formula $\mathbf{Y}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-Problem 1 is a matter of direct evaluate (just lots of products and sums),
+Problem 1 is a matter of direct evaluation (just lots of products and sums),
  problem 2 is solved using the Viterbi algorithm, and problem 3 is solved
  using the Baum-Welch algorithm, also known as the forward backward algorithm,
  or EM for HMMs.
@@ -2562,78 +2526,133 @@ Problem 1 is a matter of direct evaluate (just lots of products and sums),
 \end_layout
 
 \begin_layout Standard
-The likelihood 
+The task is to compute 
 \begin_inset Formula 
 \[
-L\left(\boldsymbol{\theta};\mathbf{y}\right)=P\left(\mathbf{y};\boldsymbol{\theta}\right)
+\boldsymbol{\theta}^{*}=\arg\max_{\boldsymbol{\theta}}\left(P\left(\mathbf{X},\mathbf{Y};\boldsymbol{\theta}\right)\right)
 \]
 
 \end_inset
 
-is complicated because 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- are not i.i.d; for example if we have a 2 state 2 observable HMM and 
-\begin_inset Formula $P\left(Y=y_{0}|X=X_{1}\right)=0$
-\end_inset
-
- and 
-\begin_inset Formula $P\left(Y=y_{1}|X=X_{0}\right)=0$
-\end_inset
-
- and 
-\begin_inset Formula $P\left(X_{1}=x_{0}|X_{0}=x_{0}\right)=0$
-\end_inset
-
- and the first observation is 
-\begin_inset Formula $y_{0}$
-\end_inset
-
- then we know the second must be 
-\begin_inset Formula $y_{1}$
-\end_inset
-
-.
- So 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- are dependent through 
-\begin_inset Formula $X_{i}$
-\end_inset
-
-, and the 
-\begin_inset Formula $X_{i}$
-\end_inset
-
-, in general, are dependent.
- Maximization of 
-\begin_inset Formula $L\left(\boldsymbol{\theta};\mathbf{y}\right)$
-\end_inset
-
- essentially has to be done over all 
-\begin_inset Formula $k$
-\end_inset
-
--length sequences 
-\begin_inset Formula $\left(X_{1},\dots,X_{k}\right)$
-\end_inset
-
-.
+but it's complicated, and amenable to EM, by the fact that the hidden states
  
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ are unknown.
+ One could try to compute
 \end_layout
 
 \begin_layout Standard
-In general the probability of seeing any sequence of 
-\begin_inset Formula $\left(X_{1},X_{2}\dots,X_{k}\right)$
+\begin_inset Formula 
+\[
+\boldsymbol{\theta}^{*}=\arg\max_{\boldsymbol{\theta}}\left(P\left(\mathbf{Y};\boldsymbol{\theta}\right)\right)
+\]
+
 \end_inset
 
-, with observations 
-\begin_inset Formula $\left(Y_{1},Y_{2},\dots,Y_{k}\right)$
+Since 
+\begin_inset Formula $P\left(\mathbf{Y};\boldsymbol{\theta}\right)=\sum_{\mathbf{x}}P\left(\mathbf{X}=\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)$
 \end_inset
 
- is 
+ one could try to compute
+\begin_inset Formula 
+\[
+\boldsymbol{\theta}^{*}=\arg\max_{\boldsymbol{\theta}}\left(P\left(\mathbf{Y};\boldsymbol{\theta}\right)\right)=\arg\max_{\boldsymbol{\theta}}\left(\sum_{\mathbf{x}}P\left(\mathbf{X}=\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)\right)
+\]
+
+\end_inset
+
+but there are two problems with this.
+ Firstly, in summing over 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ we might lose the dependence on one of the parameters 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Intuitively 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+ might independent of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ and therefore computing this maximum might still leave the MLE underdetermined.
+ Secondly, there are 
+\begin_inset Formula $n^{K}$
+\end_inset
+
+ different sequences 
+\begin_inset Formula $\left(X_{1},X_{2},\dots,X_{K}\right)$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $n^{K}$
+\end_inset
+
+ terms in the interior sum in the maximization.
+ Just as before we need to compute 
+\begin_inset Formula $E\left[\log P\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+E\left[\log P\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{\mathbf{x}}\log P\left(\mathbf{x},\mathbf{y}|\mathbf{y};\boldsymbol{\theta}\right)P\left(\mathbf{X}=\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)
+\]
+
+\end_inset
+
+and we need 
+\begin_inset Formula $P\left(\mathbf{X}=\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)$
+\end_inset
+
+.
+ The probability of one sequence of 
+\begin_inset Formula $\left(\left(X_{1},Y_{1}\right),\left(X_{2},Y_{2}\right),\dots,\left(X_{K},Y_{K}\right)\right)$
+\end_inset
+
+ is just the product of the probabilities associated with the sequence 
+\begin_inset Formula $\left(X_{1},X_{2},\dots,X_{K}\right)$
+\end_inset
+
+ and at each time step drawing from the distribution of 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+ given 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+.
+ .
+ 
+\begin_inset Formula 
+\[
+P\left(\left(X_{1},Y_{1}\right),\left(X_{2},Y_{2}\right),\dots,\left(X_{K},Y_{K}\right)\right)=\pi_{X_{1}}b_{X_{1}}\left(Y_{1}\right)\prod_{k=1}^{K-1}a_{k,k+1}b_{X_{k+1}}\left(Y_{k+1}\right)
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(\mathbf{X}|\mathbf{Y};\boldsymbol{\theta}^{\left(r\right)}\right) & = & \frac{\left(\pi_{X_{1}}^{\left(r\right)}\prod_{k=2}^{K-1}a_{k,k+1}^{\left(r\right)}\right)\left(\prod_{k=1}^{K}b_{X_{1}}^{\left(r\right)}\left(Y_{k}\right)\right)}{P\left(\mathbf{Y};\boldsymbol{\theta}^{\left(r\right)}\right)}\\
+ & = & \frac{\left(\pi_{X_{1}}^{\left(r\right)}\prod_{k=2}^{K-1}a_{k,k+1}^{\left(r\right)}\right)\left(\prod_{k=1}^{K}b_{X_{1}}^{\left(r\right)}\left(Y_{k}\right)\right)}{\sum_{\mathbf{x}}\left(\pi_{X_{1}}^{\left(r\right)}\prod_{k=2}^{K-1}a_{k,k+1}^{\left(r\right)}\right)\left(\prod_{k=1}^{K}b_{X_{1}}^{\left(r\right)}\left(Y_{k}\right)\right)}
+\end{eqnarray*}
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
 P\left(\mathbf{X},\mathbf{Y};\boldsymbol{\theta}\right)=\pi_{x_{1}}\prod_{i=2}^{k-1}a_{x_{i},x_{i+1}}\prod_{i=1}^{k}b_{x_{i}}\left(y_{i}\right)
