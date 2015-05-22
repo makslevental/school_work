@@ -33,7 +33,7 @@ figs-within-sections
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -78,28 +78,28 @@ figs-within-sections
 Expectation Maximization: From the Horse's Mouth
 \end_layout
 
+\begin_layout Author
+Maksim Levental
+\end_layout
+
 \begin_layout Standard
 Expectation
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-These notes are basically a transcription of a 2-3 lecture notes (taken
- dutifully by Chris Gianelli) from lectures given by Dr.
+These notes are basically a transcription of notes (taken dutifully by Chris
+ Gianelli) from lectures given by Dr.
  Kshitij Khare at UF in Spring 15.
  He's not a horse - it's just an expression.
 \end_layout
 
 \end_inset
 
-maximization (EM) is a way to iteratively approximate the maximum likelihood
+ maximization (EM) is a way to iteratively approximate the maximum likelihood
  estimators (MLEs) for a parametric family when solving the MLE equations
  analytically is intractable.
- 
-\end_layout
-
-\begin_layout Standard
-Recall that finding the MLEs for a parametric family 
+ Recall that finding the MLEs for a parametric family 
 \begin_inset Formula 
 \[
 \mathbf{Y}\sim f_{\mathbf{Y}}\left(\cdot;\boldsymbol{\theta}\right)\,\boldsymbol{\theta}\in\Theta
@@ -133,7 +133,7 @@ as a function of
 \begin_inset Formula $L$
 \end_inset
 
- wrt 
+ with respect to 
 \begin_inset Formula $\boldsymbol{\theta}$
 \end_inset
 
@@ -141,16 +141,12 @@ as a function of
  solving 
 \begin_inset Formula 
 \[
-\frac{\partial}{\partial\theta_{i}}L\left(\boldsymbol{\theta};\mathbf{y}\right)=0
+\nabla L\left(\boldsymbol{\theta};\mathbf{y}\right)=0
 \]
 
 \end_inset
 
-for all 
-\begin_inset Formula $i$
-\end_inset
-
- and checking the negative definiteness of Hessian of 
+and checking the negative definiteness of Hessian of 
 \begin_inset Formula $L$
 \end_inset
 
@@ -235,8 +231,12 @@ All is going swimmingly except
 \end_inset
 
  of course.
- How? Using the best estimator of 
-\begin_inset Formula $\mathbf{x}$
+ How? Using the best estimator 
+\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right]$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{X}$
 \end_inset
 
 , based on observed
@@ -261,14 +261,9 @@ status open
 \end_inset
 
 , i.e.
- minimizes the mean square error, i.e.
- , 
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}\right]$
-\end_inset
-
-.
+ minimizes the mean square error.
  Note two things.
- Firstly it's important that you can actually compute 
+ Firstly, it's important that you can actually compute 
 \emph on
 this
 \emph default
@@ -310,11 +305,11 @@ Don't forget the point of all this is actually to estimate
  you need some initial guess for it too, otherwise you can't compute the
  expectation.
  Hence the expectation computed is actually 
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right]$
+\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
 \end_inset
 
  where 
-\begin_inset Formula $\boldsymbol{\theta}'$
+\begin_inset Formula $\boldsymbol{\theta}^{\left(r\right)}$
 \end_inset
 
  is the current guess for 
@@ -329,7 +324,7 @@ Don't forget the point of all this is actually to estimate
  just maximize 
 \begin_inset Formula 
 \[
-L\left(\boldsymbol{\theta};E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right],\mathbf{y}\right)=f_{\mathbf{X},\mathbf{Y}}\left(E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right],\mathbf{y};\boldsymbol{\theta}\right)
+L\left(\boldsymbol{\theta};E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right],\mathbf{y}\right)=f_{\mathbf{X},\mathbf{Y}}\left(E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right],\mathbf{y};\boldsymbol{\theta}\right)
 \]
 
 \end_inset
@@ -351,14 +346,14 @@ using
 \noun off
 \color none
 
-\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}'\right]$
+\begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
 \end_inset
 
  and maximizing 
-\begin_inset Formula $L\left(\boldsymbol{\theta};E\left[\mathbf{x}|\mathbf{y};\boldsymbol{\theta}'\right],\mathbf{y}\right)$
+\begin_inset Formula $L\left(\boldsymbol{\theta};E\left[\mathbf{X}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right],\mathbf{y}\right)$
 \end_inset
 
- .
+.
  Compute expectation, then perform maxization, compute expectation, then
  perform maximization, compute expectation,...
  hence 
@@ -614,7 +609,7 @@ Note the trick in writing
 \begin_inset Formula $f_{Y_{i}|X_{i}}\left(y_{i}|x_{i};\theta\right)=\left(g_{1}\right)^{x_{i}}\left(g_{0}\right)^{1-x_{i}}$
 \end_inset
 
- - it comes up a lot for a class of models called Mixture models.
+ - it comes up a lot for a class of models called mixture models.
  For the E-step, to compute 
 \family roman
 \series medium
@@ -631,7 +626,7 @@ Note the trick in writing
 \begin_inset Formula $E\left[\mathbf{X}|\mathbf{y};\theta'\right]$
 \end_inset
 
- we use iid-ness and compute 
+ we use i.i.d-ness and compute 
 \begin_inset Formula $E\left[X_{i}|y_{i};\theta'\right]$
 \end_inset
 
@@ -698,7 +693,7 @@ E\left[X_{i}|y_{i};\theta\right]=\frac{g_{1}\left(y_{i}\right)\theta}{g_{1}\left
 
 \end_inset
 
-For the M-step since 
+For the M-step, since 
 \family default
 \series default
 \shape default
@@ -727,8 +722,8 @@ and the second term is independent of
 \begin_inset Formula $n$
 \end_inset
 
- iid Bernoulli random variables and the MLE 
-\begin_inset Formula $\theta$
+ i.i.d Bernoulli random variables and the MLE 
+\begin_inset Formula $\hat{\theta}$
 \end_inset
 
  is 
@@ -756,15 +751,11 @@ x_{i}^{\left(r\right)} & = & \frac{g_{1}\left(y_{i}\right)\theta^{\left(r\right)
 \end_layout
 
 \begin_layout Standard
-So why did dub it 
+So why did I dub it EM
 \series bold
-Expectation Maximization Beta
+ Beta
 \series default
- instead of just 
-\series bold
-Expectation Maximization
-\series default
-? Because this isn't the standard EM algorithm.
+ instead of just EM? Because this isn't the standard EM algorithm.
  But why alter this algorithm at all? What's wrong with it as is? Well there
  are no convergence guarantees.
  Indeed the iterates in Example 1 don't converge to the right answer: figure
@@ -820,7 +811,7 @@ So they converge but to
 .
  Why did I present this algorithm first? Standard EM is slightly more complicate
 d and much less intuitive but legend has it that it was in fact conceived
- in this way first and then manipulated to get converge.
+ in this way first and then manipulated to get convergence.
  
 \end_layout
 
@@ -873,7 +864,7 @@ l\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)=\log L\left(\boldsymbol{
 \end_inset
 
 is easier than the original problem.
- Where the ease of maximizing 
+ The ease of maximizing 
 \begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{x},\mathbf{y}\right)$
 \end_inset
 
@@ -891,8 +882,7 @@ l\left(\boldsymbol{\theta};\mathbf{y}\right) & = & \log f_{\mathbf{Y}}\left(\mat
 
 \end_inset
 
-It's now that it becomes obvious that if we can easily maximize the first
- term in 
+If we can easily maximize the first term in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:2.3"
@@ -910,17 +900,26 @@ reference "eq:2.3"
 
 \end_inset
 
- doesn't spoil things somehow, then we'll maximize 
+ doesn't spoil things somehow, then we'll indeed maximize 
 \begin_inset Formula $l\left(\boldsymbol{\theta};\mathbf{y}\right)$
 \end_inset
 
 .
- This seems like a workflow different from that of the beta algorithm (here
- we're explicitly maximizing a function of the likelihood for 
+ This seems like a workflow different from that of the beta algorithm
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Here we're explicitly maximizing a function of the likelihood for 
 \begin_inset Formula $\mathbf{Y}$
 \end_inset
 
- by maximizing a lowerbound) but the analogy follows.
+ by maximizing a lowerbound.
+\end_layout
+
+\end_inset
+
+ but the analogy follows.
  Since 
 \begin_inset Formula $\mathbf{X}$
 \end_inset
@@ -1064,7 +1063,7 @@ Given some observed data
 \end_inset
 
 , posit the existence of some latent 
-\begin_inset Formula $\mathbf{x}$
+\begin_inset Formula $\mathbf{X}$
 \end_inset
 
  such that 
@@ -1194,14 +1193,10 @@ The only thing to remains is to prove that maximizing
 \uwave default
 \noun default
 \color inherit
- themselves.
- I leave this to the paper
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-http://web.stanford.edu/class/ee378b/papers/wu-em.pdf
-\end_layout
+ themselves
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wu1983convergence"
 
 \end_inset
 
@@ -1470,11 +1465,11 @@ where
 \begin_inset Formula $g_{j}$
 \end_inset
 
- are (in general multivariate) densities with parameters 
+ are (in general multivariate) densities with parameter vectors 
 \begin_inset Formula $\boldsymbol{\theta}_{j}$
 \end_inset
 
- (in general distinct for distinct 
+ (in general, distinct for distinct 
 \begin_inset Formula $j$
 \end_inset
 
@@ -1497,7 +1492,7 @@ L\left(\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\right);\boldsymbol{\theta}\righ
 \end_inset
 
 Even taking the log won't help you because of the interior sum.
- EM to the rescue again! Let 
+ EM to the rescue! Let 
 \begin_inset Formula $\mathbf{X}=\left(X_{1},\dots,X_{n}\right)$
 \end_inset
 
@@ -1564,7 +1559,7 @@ picks
 \begin_inset Formula $\mathbf{y}_{i}$
 \end_inset
 
- is generated from.
+ is generated by.
  Then the log-likelihood becomes
 \begin_inset Formula 
 \begin{eqnarray*}
@@ -1578,11 +1573,11 @@ l\left(\left(x_{1},\dots,x_{n}\right),\left(\mathbf{y}_{1},\dots,\mathbf{y}_{n}\
 \end_inset
 
 There are a lot of indices and subscripts and superscripts to keep track
- of - 
+ of: 
 \begin_inset Formula $\boldsymbol{\theta}$
 \end_inset
 
- is all of the parameters, 
+ is all of the parameters of all of the mixture components, 
 \begin_inset Formula $\mathbf{y}_{i}$
 \end_inset
 
@@ -1594,20 +1589,7 @@ There are a lot of indices and subscripts and superscripts to keep track
 \begin_inset Formula $X_{i}$
 \end_inset
 
-, which have realizations 
-\begin_inset Formula $j$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- comes up 
-\begin_inset Formula $j$
-\end_inset
-
-, are the unobserved data (the mixture components), the 
+ are the unobserved data (the mixture components), the 
 \begin_inset Formula $\boldsymbol{\theta}_{j}$
 \end_inset
 
@@ -1732,7 +1714,7 @@ Therefore we only need to compute
 \end_inset
 
  to perform the E-step.
- So letting 
+ Let 
 \begin_inset Formula $j_{i}\rightarrow j$
 \end_inset
 
@@ -1756,11 +1738,7 @@ key "chen2010demystified"
 
 \end_inset
 
- is a good place for the general 
-\begin_inset Formula $n$
-\end_inset
-
- case.
+ is a good place for the general case.
 \end_layout
 
 \end_inset
@@ -1870,7 +1848,7 @@ Pay attention to the difference between the arguments that come from the
 \begin_inset Formula $\alpha_{j},\mu_{j},\sigma_{j}^{2}$
 \end_inset
 
- and the current estimates of the parameters, those with iterate scripts
+ and the current estimates of the parameters, those with iterate superscripts
  
 \begin_inset Formula $\left(r\right)$
 \end_inset
@@ -1881,7 +1859,7 @@ Pay attention to the difference between the arguments that come from the
 
 \end_inset
 
- .
+.
  The fully specified maximization problem is 
 \begin_inset Formula 
 \begin{align*}
@@ -2117,545 +2095,6 @@ key "chen2010demystified"
 \begin_inset Formula 
 \[
 \Sigma_{j}^{\left(r+1\right)}=\frac{1}{n_{j}^{\left(r+1\right)}}\sum_{i=1}^{n}\left(\mathbf{y}_{i}-\boldsymbol{\mu}_{j}^{\left(r+1\right)}\right)\left(\mathbf{y}_{i}-\boldsymbol{\mu}_{j}^{\left(r+1\right)}\right)^{T}\gamma_{ij}^{\left(r\right)}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Hidden Markov Model
-\end_layout
-
-\begin_layout Standard
-Hidden Markov models (HMMs) are a variation on the theme of manufacturing
- 
-\begin_inset Quotes eld
-\end_inset
-
-missing
-\begin_inset Quotes erd
-\end_inset
-
- data in order to simplify the maximization of the likelihood - in HMMs
- there is actually missing data! But first some definitions for the uninitiated.
-\end_layout
-
-\begin_layout Standard
-A stochastic process is a sequence of random variables 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- drawn-from/distribited-according-to a common distribution 
-\begin_inset Formula $f_{X}$
-\end_inset
-
-.
- A Hidden Markov model (HMM) is a model comprised of a 
-\begin_inset Quotes eld
-\end_inset
-
-hidden
-\begin_inset Quotes erd
-\end_inset
-
- stochastic process 
-\begin_inset Formula $\left(X_{1},X_{2}\dots\right)$
-\end_inset
-
- and an observable stochastic process 
-\begin_inset Formula $\left(Y_{1},Y_{2},\dots\right)$
-\end_inset
-
-.
- The subscripts can be interpreted to mean time; at each unit time step
- 
-\begin_inset Formula $k$
-\end_inset
-
- a draw 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- is made from the distribution 
-\begin_inset Formula $f_{X}$
-\end_inset
-
- and then another draw 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
- is made from a distribution that depends on what 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- was drawn to be.
- Hidden is in the sense that at any given time the result of the draw 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- is unknown.
- The Markov qualifier indicates that the process 
-\begin_inset Formula $\left(X_{1},X_{2}\dots\right)$
-\end_inset
-
- obeys the Markov property, specifically the conditional independence of
- the next draw given the far past, i.e.
-\begin_inset Formula 
-\[
-P\left(X_{k+1}|X_{k},X_{k-1},\dots,X_{1}\right)=P\left(X_{k+1}|X_{k}\right)
-\]
-
-\end_inset
-
-If 
-\begin_inset Formula $f_{X}$
-\end_inset
-
- is discrete then the process is called a 
-\series bold
-chain
-\series default
- and the support of 
-\begin_inset Formula $X_{i}$
-\end_inset
-
-, i.e.
- the range of values 
-\begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
-\end_inset
-
- that the 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- can take, is called the 
-\emph on
-state space 
-\emph default
-of the process.
- While the distribution on the set of observables differs as a function
- of what 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- was drawn to be, the support of all 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
-, i.e.
- the values 
-\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
-\end_inset
-
- that the 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
- can take, is always the same.
- 
-\begin_inset Float figure
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename HiddenMarkovModel.svg
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-3 state - 4 observable HMM
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:3s4ohmm"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-So the distribution of 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
- is implicitly a function of time step 
-\begin_inset Formula $k$
-\end_inset
-
-, but only insofar as the hidden Markov process changes state at each time
- step.
- The canonical example is rolling an arbitrarily weighted, six-sided die,
- then flipping one of six different coins where the weighting of the coins
- depends on which number came up on the die.
- 
-\end_layout
-
-\begin_layout Standard
-Another example is described in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:3s4ohmm"
-
-\end_inset
-
- using a state transition diagram for an HMM with 3 hidden states and 4
- observable states.
- For example the Markov process iterates through 
-\begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{K}=x_{3}\right)$
-\end_inset
-
- and generates observations 
-\begin_inset Formula $\left(Y_{1}=y_{4},Y_{2}=y_{3},\dots,Y_{K}=y_{4}\right)$
-\end_inset
-
-.
- 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-This is a rather uninteresting Markov chain because there are no self-transition
-s and no transition from 
-\begin_inset Formula $X_{3}$
-\end_inset
-
- to 
-\begin_inset Formula $X_{2}$
-\end_inset
-
- is possible.
- In general all transitions could be allowed.
- 
-\end_layout
-
-\end_inset
-
-The parameters 
-\begin_inset Formula $a_{ij}$
-\end_inset
-
- are the probabilities for the Markov chain transitions, i.e.
- 
-\begin_inset Formula 
-\[
-P\left(X_{k+1}=x_{j}|X_{k}=x_{i}\right)=a_{ij}
-\]
-
-\end_inset
-
-and the parameters 
-\begin_inset Formula $b_{qr}$
-\end_inset
-
- are the probabilities of state 
-\begin_inset Formula $x_{q}$
-\end_inset
-
- emitting a 
-\begin_inset Formula $Y_{k}=y_{r}$
-\end_inset
-
- observable, i.e.
-\begin_inset Formula 
-\[
-P\left(Y_{k}=y_{r}|X_{k}=x_{q}\right)=b_{qr}
-\]
-
-\end_inset
-
-For convience define 
-\begin_inset Formula $b_{q}\left(y_{r}\right)\coloneqq b_{qr}$
-\end_inset
-
-, and consequently 
-\begin_inset Formula $b_{q}=\left\{ b_{q}\left(y_{0}\right),b_{q}\left(y_{1}\right),\dots,b_{q}\left(y_{m}\right)\right\} $
-\end_inset
-
- is the distribution on the observables when 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- is drawn to be some 
-\begin_inset Formula $x$
-\end_inset
-
- in its support (the support of 
-\begin_inset Formula $X_{k}$
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-A fundamental assumption of HMMs
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Aside from the Markov property.
-\end_layout
-
-\end_inset
-
- is the conditional independence of the observable given the far past history
- of the hidden process and observables, i.e.
- 
-\begin_inset Formula 
-\[
-P\left(Y_{k}|X_{k},Y_{k-1},X_{k-1},\dots,Y_{1},X_{1}\right)=P\left(Y_{k}|X_{k}\right)
-\]
-
-\end_inset
-
-Let 
-\begin_inset Formula $A=\left\{ a_{ij}\right\} $
-\end_inset
-
- be the 
-\begin_inset Formula $n\times n$
-\end_inset
-
- matrix of transition probabilities, 
-\begin_inset Formula $B=\left\{ b_{q}\right\} $
-\end_inset
-
- be the 
-\begin_inset Formula $m\times n$
-\end_inset
-
- matrix of distributions on the 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
-, and 
-\begin_inset Formula $\pi$
-\end_inset
-
- be the initial distribution
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Formula $A$
-\end_inset
-
- specifies what states the chain is likely to iterate through but it doesn't
- say anything about where the chain starts; 
-\begin_inset Formula $\pi$
-\end_inset
-
- is that set of initial probabilities.
-\end_layout
-
-\end_inset
-
-on 
-\begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
-\end_inset
-
-.
- There are three possible problems one can solve in the context of an HMM
-\end_layout
-
-\begin_layout Enumerate
-Compute the probabilities for some sequence of observations 
-\begin_inset Formula $\mathbf{Y}=\left(Y_{1},Y_{2},\dots,Y_{K}\right)$
-\end_inset
-
- given that the 
-\begin_inset Formula $\boldsymbol{\theta}\coloneqq\left(A,B,\pi\right)$
-\end_inset
-
- are known.
-\end_layout
-
-\begin_layout Enumerate
-Compute the most likely sequence of hidden states 
-\begin_inset Formula $\mathbf{X=}\left(X_{1},X_{2},\dots,X_{K}\right)$
-\end_inset
-
- given some sequence of observations 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
- and some known 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Find the MLE for 
-\begin_inset Formula $\boldsymbol{\theta}$
-\end_inset
-
- given some sequence of 
-\begin_inset Formula $\mathbf{Y}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Problem 1 is a matter of direct evaluation (just lots of products and sums),
- problem 2 is solved using the Viterbi algorithm, and problem 3 is solved
- using the Baum-Welch algorithm, also known as the forward backward algorithm,
- or EM for HMMs.
- This last one is what I'll cover.
-\end_layout
-
-\begin_layout Standard
-The task is to compute 
-\begin_inset Formula 
-\[
-\boldsymbol{\theta}^{*}=\arg\max_{\boldsymbol{\theta}}\left(P\left(\mathbf{X},\mathbf{Y};\boldsymbol{\theta}\right)\right)
-\]
-
-\end_inset
-
-but it's complicated, and amenable to EM, by the fact that the hidden states
- 
-\begin_inset Formula $X_{k}$
-\end_inset
-
- are unknown.
- One could try to compute
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\boldsymbol{\theta}^{*}=\arg\max_{\boldsymbol{\theta}}\left(P\left(\mathbf{Y};\boldsymbol{\theta}\right)\right)
-\]
-
-\end_inset
-
-Since 
-\begin_inset Formula $P\left(\mathbf{Y};\boldsymbol{\theta}\right)=\sum_{\mathbf{x}}P\left(\mathbf{X}=\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)$
-\end_inset
-
- one could try to compute
-\begin_inset Formula 
-\[
-\boldsymbol{\theta}^{*}=\arg\max_{\boldsymbol{\theta}}\left(P\left(\mathbf{Y};\boldsymbol{\theta}\right)\right)=\arg\max_{\boldsymbol{\theta}}\left(\sum_{\mathbf{x}}P\left(\mathbf{X}=\mathbf{x},\mathbf{Y};\boldsymbol{\theta}\right)\right)
-\]
-
-\end_inset
-
-but there are two problems with this.
- Firstly, in summing over 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- we might lose the dependence on one of the parameters 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Intuitively 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
- might independent of 
-\begin_inset Formula $A$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- and therefore computing this maximum might still leave the MLE underdetermined.
- Secondly, there are 
-\begin_inset Formula $n^{K}$
-\end_inset
-
- different sequences 
-\begin_inset Formula $\left(X_{1},X_{2},\dots,X_{K}\right)$
-\end_inset
-
- and therefore 
-\begin_inset Formula $n^{K}$
-\end_inset
-
- terms in the interior sum in the maximization.
- Just as before we need to compute 
-\begin_inset Formula $E\left[\log P\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]$
-\end_inset
-
- so 
-\begin_inset Formula 
-\[
-E\left[\log P\left(\mathbf{X},\mathbf{y};\boldsymbol{\theta}\right)|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right]=\sum_{\mathbf{x}}\log P\left(\mathbf{x},\mathbf{y}|\mathbf{y};\boldsymbol{\theta}\right)P\left(\mathbf{X}=\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)
-\]
-
-\end_inset
-
-and we need 
-\begin_inset Formula $P\left(\mathbf{X}=\mathbf{x}|\mathbf{y};\boldsymbol{\theta}^{\left(r\right)}\right)$
-\end_inset
-
-.
- The probability of one sequence of 
-\begin_inset Formula $\left(\left(X_{1},Y_{1}\right),\left(X_{2},Y_{2}\right),\dots,\left(X_{K},Y_{K}\right)\right)$
-\end_inset
-
- is just the product of the probabilities associated with the sequence 
-\begin_inset Formula $\left(X_{1},X_{2},\dots,X_{K}\right)$
-\end_inset
-
- and at each time step drawing from the distribution of 
-\begin_inset Formula $Y_{k}$
-\end_inset
-
- given 
-\begin_inset Formula $X_{k}$
-\end_inset
-
-.
- .
- 
-\begin_inset Formula 
-\[
-P\left(\left(X_{1},Y_{1}\right),\left(X_{2},Y_{2}\right),\dots,\left(X_{K},Y_{K}\right)\right)=\pi_{X_{1}}b_{X_{1}}\left(Y_{1}\right)\prod_{k=1}^{K-1}a_{k,k+1}b_{X_{k+1}}\left(Y_{k+1}\right)
-\]
-
-\end_inset
-
-Therefore 
-\begin_inset Formula 
-\begin{eqnarray*}
-P\left(\mathbf{X}|\mathbf{Y};\boldsymbol{\theta}^{\left(r\right)}\right) & = & \frac{\left(\pi_{X_{1}}^{\left(r\right)}\prod_{k=2}^{K-1}a_{k,k+1}^{\left(r\right)}\right)\left(\prod_{k=1}^{K}b_{X_{1}}^{\left(r\right)}\left(Y_{k}\right)\right)}{P\left(\mathbf{Y};\boldsymbol{\theta}^{\left(r\right)}\right)}\\
- & = & \frac{\left(\pi_{X_{1}}^{\left(r\right)}\prod_{k=2}^{K-1}a_{k,k+1}^{\left(r\right)}\right)\left(\prod_{k=1}^{K}b_{X_{1}}^{\left(r\right)}\left(Y_{k}\right)\right)}{\sum_{\mathbf{x}}\left(\pi_{X_{1}}^{\left(r\right)}\prod_{k=2}^{K-1}a_{k,k+1}^{\left(r\right)}\right)\left(\prod_{k=1}^{K}b_{X_{1}}^{\left(r\right)}\left(Y_{k}\right)\right)}
-\end{eqnarray*}
-
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-P\left(\mathbf{X},\mathbf{Y};\boldsymbol{\theta}\right)=\pi_{x_{1}}\prod_{i=2}^{k-1}a_{x_{i},x_{i+1}}\prod_{i=1}^{k}b_{x_{i}}\left(y_{i}\right)
 \]
 
 \end_inset
