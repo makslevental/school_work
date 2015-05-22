@@ -2129,8 +2129,22 @@ Hidden Markov Model
 \end_layout
 
 \begin_layout Standard
+Hidden Markov models (HMMs) are a variation on the theme of manufacturing
+ 
+\begin_inset Quotes eld
+\end_inset
+
+missing
+\begin_inset Quotes erd
+\end_inset
+
+ data in order to simplify the maximization of the likelihood - in HMMs
+ there is actually missing data! But first some definitions for the uninitiated.
+\end_layout
+
+\begin_layout Standard
 A stochastic process is a sequence of random variables 
-\begin_inset Formula $X_{i}$
+\begin_inset Formula $X_{k}$
 \end_inset
 
  drawn-from/distribited-according-to a common distribution 
@@ -2138,7 +2152,7 @@ A stochastic process is a sequence of random variables
 \end_inset
 
 .
- A Hidden Markov model (HMM) is a model driven by a 
+ A Hidden Markov model (HMM) is a model comprised of a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2150,33 +2164,47 @@ hidden
 \begin_inset Formula $\left(X_{1},X_{2}\dots\right)$
 \end_inset
 
-, with observations 
+ and an observable stochastic process 
 \begin_inset Formula $\left(Y_{1},Y_{2},\dots\right)$
 \end_inset
 
 .
- The subscripts can be interpreted to mean time.
- So at each unit time step 
-\begin_inset Formula $i$
+ The subscripts can be interpreted to mean time; at each unit time step
+ 
+\begin_inset Formula $k$
 \end_inset
 
  a draw 
-\begin_inset Formula $X_{i}$
+\begin_inset Formula $X_{k}$
 \end_inset
 
  is made from the distribution 
 \begin_inset Formula $f_{X}$
 \end_inset
 
-.
- Hidden is in the sense that at any given time the result of the draw is
- unknown.
- The Markov qualifier indicates that the process obeys the Markov property,
- specifically the conditional independence of the next draw given the far
- past, i.e.
+ and then another draw 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+ is made from a distribution that depends on what 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ was drawn to be.
+ Hidden is in the sense that at any given time the result of the draw 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ is unknown.
+ The Markov qualifier indicates that the process 
+\begin_inset Formula $\left(X_{1},X_{2}\dots\right)$
+\end_inset
+
+ obeys the Markov property, specifically the conditional independence of
+ the next draw given the far past, i.e.
 \begin_inset Formula 
 \[
-P\left(X_{i+1}|X_{i},X_{i-1},\dots,X_{1}\right)=P\left(X_{i+1}|X_{i}\right)
+P\left(X_{k+1}|X_{k},X_{k-1},\dots,X_{1}\right)=P\left(X_{k+1}|X_{k}\right)
 \]
 
 \end_inset
@@ -2189,69 +2217,43 @@ If
 \series bold
 chain
 \series default
- and the value from 
-\begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
-\end_inset
-
- that 
+ and the support of 
 \begin_inset Formula $X_{i}$
 \end_inset
 
- takes on at time step 
-\begin_inset Formula $i$
+, i.e.
+ the range of values 
+\begin_inset Formula $\left\{ x_{1},\dots,x_{n}\right\} $
 \end_inset
 
- is called the 
+ that the 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ can take, is called the 
 \emph on
-state
+state space 
 \emph default
- of the process at time 
-\begin_inset Formula $i$
+of the process.
+ While the distribution on the set of observables differs as a function
+ of what 
+\begin_inset Formula $X_{k}$
 \end_inset
 
-.
- The set of observables 
-\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
-\end_inset
-
- is such that at each time step 
-\begin_inset Formula $i$
-\end_inset
-
- another draw is made from a 
-\series bold
-different
-\series default
- distribution that's dependent on which state the Markov chain is in.
- That is to say, at each time step 
-\begin_inset Formula $i$
-\end_inset
-
- a draw 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- is made from a distribution on 
-\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
-\end_inset
-
- which is a function of 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- where 
-\begin_inset Formula $X_{i}=x_{i}$
+ was drawn to be, the support of all 
+\begin_inset Formula $Y_{k}$
 \end_inset
 
 , i.e.
- 
-\begin_inset Formula $Y_{i}\sim f_{x_{i}}$
+ the values 
+\begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
 \end_inset
 
-.
- The set of observables is common to all states of the Markov chain but
- the probabilities with which each Markov chain state generates observables
- differ.
+ that the 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+ can take, is always the same.
  
 \begin_inset Float figure
 placement h
@@ -2292,25 +2294,32 @@ name "fig:3s4ohmm"
 \end_inset
 
 So the distribution of 
-\begin_inset Formula $Y_{i}$
+\begin_inset Formula $Y_{k}$
 \end_inset
 
  is implicitly a function of time step 
-\begin_inset Formula $i$
+\begin_inset Formula $k$
 \end_inset
 
 , but only insofar as the hidden Markov process changes state at each time
  step.
- For example figure 
+ The canonical example is rolling an arbitrarily weighted, six-sided die,
+ then flipping one of six different coins where the weighting of the coins
+ depends on which number came up on the die.
+ 
+\end_layout
+
+\begin_layout Standard
+Another example is described in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:3s4ohmm"
 
 \end_inset
 
- is a state transition diagram for an HMM with 3 hidden states and 4 observable
- states.
- The Markov process iterates through, for example, 
+ using a state transition diagram for an HMM with 3 hidden states and 4
+ observable states.
+ For example the Markov process iterates through 
 \begin_inset Formula $\left(X_{1}=x_{2},X_{2}=x_{1},X_{3}=x_{2},\dots,X_{n}=x_{3}\right)$
 \end_inset
 
@@ -2348,16 +2357,16 @@ The parameters
  
 \begin_inset Formula 
 \[
-P\left(X_{k+1}=x_{j}|X_{k}=x_{i}\right)=a_{i,j}
+P\left(X_{k+1}=x_{j}|X_{k}=x_{i}\right)=a_{ij}
 \]
 
 \end_inset
 
 and the parameters 
-\begin_inset Formula $b_{q}\left(y_{r}\right)$
+\begin_inset Formula $b_{qr}$
 \end_inset
 
- are the probabilities of each state 
+ are the probabilities of state 
 \begin_inset Formula $x_{q}$
 \end_inset
 
@@ -2368,11 +2377,36 @@ and the parameters
  observable, i.e.
 \begin_inset Formula 
 \[
-P\left(Y_{k}=y_{r}|X_{k}=x_{q}\right)=b_{q}\left(y_{r}\right)
+P\left(Y_{k}=y_{r}|X_{k}=x_{q}\right)=b_{qr}
 \]
 
 \end_inset
 
+For convience define 
+\begin_inset Formula $b_{q}\left(y_{r}\right)\coloneqq b_{qr}$
+\end_inset
+
+, and consequently 
+\begin_inset Formula $b_{q}=\left\{ b_{q}\left(y_{0}\right),b_{q}\left(y_{1}\right),\dots,b_{q}\left(y_{m}\right)\right\} $
+\end_inset
+
+ is the distribution on the observables when 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ is drawn to be some 
+\begin_inset Formula $x$
+\end_inset
+
+ in its support (the support of 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
 The fundamental assumption of the HMM
 \begin_inset Foot
 status open
@@ -2388,13 +2422,13 @@ Aside from the Markov property.
  
 \begin_inset Formula 
 \[
-P\left(Y_{i+1}|Y_{i},X_{i},Y_{i-1},X_{i-1},\dots,Y_{1},X_{1}\right)=P\left(Y_{i+1}|X_{i}\right)
+P\left(Y_{k+1}|Y_{k},X_{k},Y_{k-1},X_{k-1},\dots,Y_{1},X_{1}\right)=P\left(Y_{k+1}|X_{k}\right)
 \]
 
 \end_inset
 
 Suppose 
-\begin_inset Formula $X_{i}$
+\begin_inset Formula $X_{k}$
 \end_inset
 
  can take 
@@ -2402,7 +2436,7 @@ Suppose
 \end_inset
 
  distinct values and 
-\begin_inset Formula $Y_{i}$
+\begin_inset Formula $Y_{k}$
 \end_inset
 
  each take 
@@ -2422,11 +2456,7 @@ Suppose
 \begin_inset Formula $B=\left\{ b_{q}\right\} $
 \end_inset
 
- where 
-\begin_inset Formula $b_{q}=\left\{ b_{q}\left(y_{0}\right),b_{q}\left(y_{1}\right),\dots,b_{q}\left(y_{m}\right)\right\} $
-\end_inset
-
- be the discrete distribution on 
+ where be the discrete distribution on 
 \begin_inset Formula $\left\{ y_{1},y_{2},\dots,y_{m}\right\} $
 \end_inset
 
