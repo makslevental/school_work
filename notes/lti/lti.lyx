@@ -33,7 +33,7 @@ figs-within-sections
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 2
@@ -78,6 +78,311 @@ figs-within-sections
 
 \series bold
 LTI Systems
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Section
+Systems
+\end_layout
+
+\begin_layout Standard
+A Linear Time Invariant (LTI) system is one which is linear in the inputs
+ and whose response to inputs is independent of time, i.e.
+ given some input the response will be same regardless of when that input
+ is applied.
+ Here is an example of a discrete time LTI system.
+\end_layout
+
+\begin_layout Example
+Let 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ denote the net deposit to a bank account during month number 
+\begin_inset Formula $n$
+\end_inset
+
+ (the input) and let 
+\begin_inset Formula $y\left[n\right]$
+\end_inset
+
+ denote the balance in the account at the end of month number 
+\begin_inset Formula $n$
+\end_inset
+
+ (the output).
+ If the account pays 
+\begin_inset Formula $r$
+\end_inset
+
+ % interest per month compounded monthly, then the interest paid is 
+\begin_inset Formula $\frac{r}{100}y\left[n-1\right]$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+y\left[n\right]=\left(1+\frac{r}{100}\right)y\left[n-1\right]+x\left[n\right]
+\]
+
+\end_inset
+
+If the initial balance 
+\begin_inset Formula $y\left[0\right]=0$
+\end_inset
+
+ then this is an LTI system since 
+\begin_inset Formula 
+\begin{eqnarray*}
+y_{1}\left[n\right] & = & \left(1+\frac{r}{100}\right)y_{1}\left[n-1\right]+x_{1}\left[n\right]\\
+y_{2}\left[n\right] & = & \left(1+\frac{r}{100}\right)y_{2}\left[n-1\right]+x_{2}\left[n\right]\\
+ & \Rightarrow\\
+\left(y_{1}\left[n\right]+y_{2}\left[n\right]\right) & = & \left(1+\frac{r}{100}\right)\left(y_{1}\left[n-1\right]+y_{2}\left[n-1\right]\right)+\left(x_{1}\left[n\right]+x_{2}\left[n\right]\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here is an example of a continuous time LTI system.
+\end_layout
+
+\begin_layout Example
+The electrical circuit in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Lowpass-Filter"
+
+\end_inset
+
+ is a lowpass
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It only lets low frequency signals pass through.
+\end_layout
+
+\end_inset
+
+ filter.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename contltilowpass.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lowpass Filter
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Lowpass-Filter"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+By Kirchhoff's voltage law 
+\begin_inset Formula 
+\[
+Ri\left(t\right)+y\left(t\right)=x\left(t\right)
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $i\left(t\right)=\dot{q}\left(t\right)=C\dot{y}\left(t\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+RC\dot{y}\left(t\right)+y\left(t\right)=x\left(t\right)
+\]
+
+\end_inset
+
+If the initial charge on the capacitor is 0 then this is an LTI system since
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+RC\dot{y}_{1}\left(t\right)+y_{1}\left(t\right) & = & x_{1}\left(t\right)\\
+RC\dot{y}_{2}\left(t\right)+y_{2}\left(t\right) & = & x_{2}\left(t\right)\\
+ & \Rightarrow\\
+RC\left(\dot{y}_{1}\left(t\right)+\dot{y}_{2}\left(t\right)\right)+\left(y_{1}\left(t\right)+y_{2}\left(t\right)\right) & = & \left(x_{1}\left(t\right)+x_{2}\left(t\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Impulses
+\end_layout
+
+\begin_layout Standard
+Any discrete input can be represented using the discrete unit impulse
+\begin_inset Formula 
+\[
+\delta\left[n\right]\coloneqq\begin{cases}
+1 & \text{if }n=0\\
+0 & \text{if }n\neq0
+\end{cases}
+\]
+
+\end_inset
+
+by shifting 
+\begin_inset Formula $\delta\left[n\right]$
+\end_inset
+
+ to 
+\begin_inset Formula $\delta\left[n-k\right]$
+\end_inset
+
+.
+ For example 
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left[-1\right]\delta\left[n-\left(-1\right)\right] & = & \begin{cases}
+x\left[-1\right] & \text{if }n=-1\\
+0 & \text{if }n\neq-1
+\end{cases}\\
+x\left[0\right]\delta\left[n-0\right] & = & \begin{cases}
+x\left[0\right] & \text{if }n=0\\
+0 & \text{if }n\neq0
+\end{cases}\\
+x\left[1\right]\delta\left[n-1\right] & = & \begin{cases}
+x\left[1\right] & \text{if }n=1\\
+0 & \text{if }n\neq1
+\end{cases}
+\end{eqnarray*}
+
+\end_inset
+
+Therefore the input sequence 
+\begin_inset Formula $x\left[-1\right]=a,x\left[0\right]=b,x\left[1\right]=c$
+\end_inset
+
+ and zero otherwise can be represented
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left[n\right] & = & x\left[-1\right]\delta\left[n-\left(-1\right)\right]+x\left[0\right]\delta\left[n\right]+x\left[1\right]\delta\left[n-1\right]
+\end{eqnarray*}
+
+\end_inset
+
+In general 
+\begin_inset Formula 
+\[
+x\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]\delta\left[n-k\right]
+\]
+
+\end_inset
+
+You can picture this as an infinite number of unit impulses
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Note that 
+\begin_inset Formula $\delta\left[n\right]$
+\end_inset
+
+ is a function defined on 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ shifted to the integers and scaled by the value of the sequence 
+\begin_inset Formula $x\left[k\right]$
+\end_inset
+
+ at that integer; for 
+\begin_inset Formula $k$
+\end_inset
+
+ where 
+\begin_inset Formula $x\left[k\right]$
+\end_inset
+
+ is non-zero the function 
+\begin_inset Formula $x\left[n\right]=x\left[k\right]\delta\left[n-k\right]$
+\end_inset
+
+ is non-zero only at 
+\begin_inset Formula $k$
+\end_inset
+
+ and 
+\begin_inset Formula $x\left[k\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Suppose we know the response 
+\begin_inset Formula $h_{k}\left[n\right]$
+\end_inset
+
+ of a linear system to a shifted unit impulse 
+\begin_inset Formula $\delta\left[n-k\right]$
+\end_inset
+
+, i.e.
+ 
+\end_layout
+
+\begin_layout Standard
+Any continuous input can also be represented using the continuous unit impulse
+ 
+\begin_inset Formula $\delta\left(t\right)$
+\end_inset
+
+, which is defined implicitly as the functions such that 
+\begin_inset Formula 
+\[
+x\left(t\right)=\int_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\tau\right)d\tau
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
