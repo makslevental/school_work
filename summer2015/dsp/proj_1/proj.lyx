@@ -1,0 +1,494 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 2cm
+\rightmargin 1cm
+\bottommargin 2cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Sampling and Aliasing
+\begin_inset Newline newline
+\end_inset
+
+EEE 5502 Summer '15
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+The task is to study sampling and its inherent limitations.
+ There are two self-contained portions to the study consisting of 1) spectrum
+ resolution for a synthetic signal and 2) filtering and spectrum resolution
+ for a chirp signal.
+\end_layout
+
+\begin_layout Subsection
+Synthetic Signal
+\end_layout
+
+\begin_layout Standard
+The synthetic signal consists of a superposition five pure signals with
+ frequencies 
+\begin_inset Formula 
+\[
+f_{0}=689\text{Hz},\,f_{1}=10.002\text{kHz},\,f_{2}=1.716\text{kHz},\,f_{3}=2.589\text{kHz},\,f_{4}=12.088\text{kHz}
+\]
+
+\end_inset
+
+The superposition coefficients are 
+\begin_inset Formula 
+\[
+\alpha_{0}=1,\,\alpha_{1}=\frac{1}{2},\,\alpha_{2}=\frac{1}{3},\,\alpha_{3}=\frac{1}{4},\,\alpha_{4}=\frac{1}{5}
+\]
+
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\[
+x\left(t\right)=\sum_{i=0}^{4}\alpha_{i}\sin\left(2\pi f_{i}t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sampling at 
+\begin_inset Formula $44.1$
+\end_inset
+
+kHz is effected by point sampling at rate 
+\begin_inset Formula $44.1$
+\end_inset
+
+ thousand samples per second, i.e.
+ 
+\begin_inset Formula 
+\begin{equation}
+x\left[n\right]=x\left(nT\right)=x\left(\left(\frac{1}{44,100}\right)n\right)=\sum_{i=0}^{4}\alpha_{i}\sin\left(2\pi\left(\frac{f_{i}}{44,100}\right)n\right)
+\end{equation}
+
+\end_inset
+
+To conserve space 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ is further downsampled by a factor of 4 to produce
+\begin_inset Formula 
+\begin{equation}
+y\left[n\right]=x\left[4n\right]=x\left(\left(\frac{1}{44,100}\right)4n\right)=\sum_{i=0}^{4}\alpha_{i}\sin\left(2\pi\left(\frac{f_{i}}{11,025}\right)n\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Chirp Signal
+\end_layout
+
+\begin_layout Standard
+A chirp signal consists a cosinusoid pure signal with a time-varying frequency,
+ i.e.
+ 
+\begin_inset Formula 
+\[
+x\left(t\right)=\cos\left(2\pi\phi\left(t\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\phi\left(t\right)=f_{0}+\beta t$
+\end_inset
+
+.
+ The chirp signal is sampled at 
+\begin_inset Formula $44.1$
+\end_inset
+
+kHz to yield 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ and the spectrum of the sampled chirp signal is 
+\begin_inset Formula 
+\[
+X\left(j\omega\right)=\mathcal{DF}\left\{ x\left[n\right]\right\} 
+\]
+
+\end_inset
+
+For this study 
+\begin_inset Formula $f_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=8$
+\end_inset
+
+kHz with 
+\begin_inset Formula $t\in\left[0,1\right]$
+\end_inset
+
+.
+ We seek to attenuate all components in the chirp signal with 
+\begin_inset Formula $f>2756.25$
+\end_inset
+
+.
+ To this end we convolve 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ with a fifth order Chebyshev type II filter with gain 
+\begin_inset Formula 
+\[
+G_{5}\left(\omega\right)=\left|H_{5}\left(j\omega\right)\right|=\frac{1}{\sqrt{1+\frac{1}{\varepsilon^{2}T_{5}^{2}\left(\omega_{0}/\omega\right)}}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $T_{5}$
+\end_inset
+
+ is the fifth order Chebyshev polynomial 
+\begin_inset Formula 
+\[
+T_{5}\left(x\right)=16x^{5}-20x^{3}+5x
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is related to the stopband attentuation 
+\begin_inset Formula $\gamma=40$
+\end_inset
+
+dB by 
+\begin_inset Formula 
+\[
+\varepsilon=\frac{1}{\sqrt{10^{\gamma/10}-1}}=\frac{1}{\sqrt{10^{4}-1}}\approx\frac{1}{100}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\omega_{0}=2756.25$
+\end_inset
+
+Hz is the cutoff frequency.
+ The filtered signal is then 
+\begin_inset Formula 
+\[
+z\left[n\right]=\mathcal{DF}^{-1}\left\{ X\left(j\omega\right)\cdot H_{5}\left(j\omega\right)\right\} 
+\]
+
+\end_inset
+
+To conserve space both 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $z\left[n\right]$
+\end_inset
+
+ are downsampled to produce 
+\begin_inset Formula $y\left[n\right]=x\left[4n\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $w\left[n\right]=z\left[4n\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Analysis
+\end_layout
+
+\begin_layout Subsection
+Synthetic Signal
+\end_layout
+
+\begin_layout Standard
+MATLAB was used to simulate 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y\left[n\right]$
+\end_inset
+
+.
+ The results appear in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Synthetic-Signal"
+
+\end_inset
+
+
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename part1.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Synthetic Signal
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Synthetic-Signal"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Chirp Signal
+\end_layout
+
+\begin_layout Standard
+MATLAB was used to simulate 
+\begin_inset Formula $x\left(t\right),y\left[n\right],w\left[n\right],z\left[n\right]$
+\end_inset
+
+.
+ The results appear in figure
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename part2.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Chirp Signal
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Chirp-Signal"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Subsection
+Synthetic Signal
+\end_layout
+
+\begin_layout Standard
+The spectrum of the of the synthetic signal is as expected; high power at
+ the expected frequencies 
+\begin_inset Formula 
+\[
+f_{0}=689\text{Hz},\,f_{1}=10.002\text{kHz},\,f_{2}=1.716\text{kHz},\,f_{3}=2.589\text{kHz},\,f_{4}=12.088\text{kHz}
+\]
+
+\end_inset
+
+In the case of the down-sampled signal and its spectrum we a shift due to
+ aliasing effects.
+ For a down-sampling rate of 4 the effective sampling frequency is 11,025kHz.
+ At this sampling frequency the Nyquist frequency is 
+\begin_inset Formula $f_{s}=11,025/2\text{kHz}=5512.5\text{kHz}$
+\end_inset
+
+.
+ Therefore frequencies 
+\begin_inset Formula $f_{1},f_{4}$
+\end_inset
+
+ become aliased as 
+\begin_inset Formula 
+\[
+f_{1}\mod\frac{5512.5}{2}=1733\text{kHz}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+f_{4}\mod\frac{5512.5}{2}=1063\text{kHz}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Chirp Signal
+\end_layout
+
+\begin_layout Standard
+The filter operates as expected in for the case where there is no down-sampling,
+ since the sampling frequency 44.1kHz induces a Nyquist frequency of 
+\begin_inset Formula $22.05\text{kHz}\gg8\text{kHz}$
+\end_inset
+
+ the largest frequency in the chirp signal.
+ But just as for the synthetic signal the down-sampling causes aliasing
+ for all 
+\begin_inset Formula $f>5512.5\text{kHz}$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document
