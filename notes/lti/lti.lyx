@@ -90,13 +90,19 @@ Systems
 
 \begin_layout Standard
 A Linear Time Invariant (LTI) system is one which is linear in the inputs
- and whose response to inputs is independent of time, i.e.
+ and whose response(output) to inputs is independent of time, i.e.
  given some input the response will be same regardless of when that input
  is applied.
  Here is an example of a discrete time LTI system.
 \end_layout
 
 \begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:ltidisc"
+
+\end_inset
+
 Let 
 \begin_inset Formula $x\left[n\right]$
 \end_inset
@@ -304,9 +310,9 @@ x\left[n\right] & = & x\left[-1\right]\delta\left[n-\left(-1\right)\right]+x\lef
 
 In general 
 \begin_inset Formula 
-\[
-x\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]\delta\left[n-k\right]
-\]
+\begin{equation}
+x\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]\delta\left[n-k\right]\label{eq:repimp}
+\end{equation}
 
 \end_inset
 
@@ -364,8 +370,66 @@ Suppose we know the response
 \begin_inset Formula $\delta\left[n-k\right]$
 \end_inset
 
-, i.e.
- 
+, e.g.
+ for the system in example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:ltidisc"
+
+\end_inset
+
+ we've computed 
+\begin_inset Formula $h_{k}\left[n\right]$
+\end_inset
+
+ such that 
+\begin_inset Formula $h_{k}\left[n\right]$
+\end_inset
+
+ satisfies 
+\begin_inset Formula 
+\[
+h_{k}\left[n\right]=\left(1+\frac{r}{100}\right)h_{k}\left[n-1\right]+\delta\left[n-k\right]
+\]
+
+\end_inset
+
+Then since the system is linear
+\begin_inset Formula 
+\begin{eqnarray*}
+h_{k}\left[n\right] & = & \left(1+\frac{r}{100}\right)h_{k}\left[n-1\right]+\delta\left[n-k\right]\\
+ & \Rightarrow\\
+x\left[k\right]h_{k}\left[n\right] & = & \left(1+\frac{r}{100}\right)x\left[k\right]h_{k}\left[n-1\right]+x\left[k\right]\delta\left[n-k\right]\\
+ & \Rightarrow\\
+\sum_{k=-\infty}^{\infty}x\left[k\right]h_{k}\left[n\right] & = & \left(1+\frac{r}{100}\right)\sum_{k=-\infty}^{\infty}x\left[k\right]h_{k}\left[n-1\right]+\sum_{k=-\infty}^{\infty}x\left[k\right]\delta\left[n-k\right]
+\end{eqnarray*}
+
+\end_inset
+
+Letting 
+\begin_inset Formula 
+\[
+y_{h}\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]h_{k}\left[n\right]
+\]
+
+\end_inset
+
+and using representation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:repimp"
+
+\end_inset
+
+ we see that 
+\begin_inset Formula 
+\[
+y_{h}\left[n\right]=\left(1+\frac{r}{100}\right)y_{h}\left[n-1\right]+x\left[n\right]
+\]
+
+\end_inset
+
+is the response of the system.
 \end_layout
 
 \begin_layout Standard
