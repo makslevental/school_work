@@ -476,15 +476,35 @@ Chirp Signal
 \end_layout
 
 \begin_layout Standard
-The filter operates as expected in for the case where there is no down-sampling,
- since the sampling frequency 44.1kHz induces a Nyquist frequency of 
-\begin_inset Formula $22.05\text{kHz}\gg8\text{kHz}$
+The filter operates as expected, before and after down-sampling.
+ Down-sampling induces a new Nyquist cutoff of 
+\begin_inset Formula 
+\[
+f_{q}=\frac{44,100}{4}\Bigg/2=5512.5\text{Hz}
+\]
+
 \end_inset
 
- the largest frequency in the chirp signal.
- But just as for the synthetic signal the down-sampling causes aliasing
- for all 
-\begin_inset Formula $f>5512.5\text{kHz}$
+Since the passband of the filter 
+\begin_inset Formula $2756.25$
+\end_inset
+
+Hz is below the Nyquist cutoff 
+\begin_inset Formula $5512.5\text{Hz}$
+\end_inset
+
+ induced by the down-sampling there is no effect on the filtered and 
+\emph on
+then
+\emph default
+ down-sampled spectrum.
+ When the chirp signal itself is down-sampled, just as for the synthetic
+ signal, the down-sampling causes aliasing for all 
+\begin_inset Formula 
+\[
+f>f_{q}
+\]
+
 \end_inset
 
 .
