@@ -446,6 +446,170 @@ x\left(t\right)=\int_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\tau\righ
 
 \end_inset
 
+Consider the almost tautological result that 
+\begin_inset Formula 
+\[
+x\left(t-t_{0}\right)=x\left(t\right)\star\delta\left(t-t_{0}\right)
+\]
+
+\end_inset
+
+There are two ways to see this: firstly
+\begin_inset Formula 
+\[
+x\left(t\right)\star\delta\left(t-t_{0}\right)=\int_{-\infty}^{\infty}x\left(\tau\right)\delta\left(\left(t-t_{0}\right)-\tau\right)d\tau
+\]
+
+\end_inset
+
+which integrates 
+\begin_inset Formula $x\left(\tau\right)$
+\end_inset
+
+ evaluated at first term in the difference 
+\begin_inset Formula $\left(\left(t-t_{0}\right)-\tau\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $x\left(t-t_{0}\right)$
+\end_inset
+
+.
+ Alternatively consider the LTI system consisting of purely a shift in time:
+\begin_inset Formula 
+\[
+y\left(t\right)=x\left(t-t_{0}\right)
+\]
+
+\end_inset
+
+So 
+\begin_inset Formula $y$
+\end_inset
+
+ takes on the value that 
+\begin_inset Formula $x$
+\end_inset
+
+ did at the earlier time 
+\begin_inset Formula $\left(t-t_{0}\right)$
+\end_inset
+
+.
+ Then what is the impulse responce of this system? Almost tautologically
+ if 
+\begin_inset Formula $x\left(t\right)=\delta\left(t\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+h\left(t\right)=y\left(t\right)=\delta\left(t-t_{0}\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+x\left(t-t_{0}\right)=y\left(t\right)=x\left(t\right)\star h\left(t\right)=x\left(t\right)\star\delta\left(t-t_{0}\right)
+\]
+
+\end_inset
+
+What about an LTI systems responce to the unit step? Well that's just the
+ convolution of the unit-step input with the impulse response 
+\begin_inset Formula 
+\begin{eqnarray*}
+s\left[n\right]\coloneqq y\left[n\right] & = & u\left[n\right]\star h\left[n\right]\\
+ & = & \sum_{k=-\infty}^{\infty}u\left[k\right]h\left[n-k\right]\\
+ & = & \sum_{k=-\infty}^{\infty}u\left[n-k\right]h\left[k\right]\\
+ & = & \sum_{k=-\infty}^{n}h\left[k\right]
+\end{eqnarray*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $u\left[n-k\right]=0$
+\end_inset
+
+ for 
+\begin_inset Formula $n-k<0$
+\end_inset
+
+.
+ Using this 
+\begin_inset Formula $h\left[n\right]$
+\end_inset
+
+ can be recovered easily
+\begin_inset Formula 
+\[
+h\left[n\right]=s\left[n\right]-s\left[n-1\right]
+\]
+
+\end_inset
+
+Analogously 
+\begin_inset Formula 
+\[
+s\left(t\right)=\int_{-\infty}^{t}h\left(\tau\right)d\tau
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+h\left(t\right)=\lim_{h\rightarrow0}\frac{s\left(t+h\right)-s\left(t\right)}{h}=s'\left(t\right)
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Sampling
+\end_layout
+
+\begin_layout Standard
+If a signal is band limited - its spectrum is zero outside some finite range
+ of frequencies - and if it's sampled at a high enough rate
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Twice the highest frequency component.
+\end_layout
+
+\end_inset
+
+ then the signal can be reconstructed faithfully from just the samples.
+ This is the Shannon sampling theorem.
+ The frequency at which the signal should be sampled is called the Nyquist
+ sampling frequency.
+ 
+\end_layout
+
+\begin_layout Standard
+Define the impulse-train 
+\begin_inset Formula 
+\[
+p\left(t\right)=\sum_{n=-\infty}^{\infty}\delta\left(t-nT\right)
+\]
+
+\end_inset
+
+Then the sampled 
+\begin_inset Formula 
+\[
+x_{p}\left(t\right)
+\]
+
+\end_inset
+
 
 \end_layout
 
