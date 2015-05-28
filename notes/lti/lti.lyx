@@ -96,6 +96,10 @@ A Linear Time Invariant (LTI) system is one which is linear in the inputs
  Here is an example of a discrete time LTI system.
 \end_layout
 
+\begin_layout Subsection
+Discrete Systems
+\end_layout
+
 \begin_layout Example
 \begin_inset CommandInset label
 LatexCommand label
@@ -153,6 +157,10 @@ y_{2}\left[n\right] & = & \left(1+\frac{r}{100}\right)y_{2}\left[n-1\right]+x_{2
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Continuous Systems
 \end_layout
 
 \begin_layout Standard
@@ -254,6 +262,10 @@ RC\left(\dot{y}_{1}\left(t\right)+\dot{y}_{2}\left(t\right)\right)+\left(y_{1}\l
 
 \begin_layout Section
 Impulses
+\end_layout
+
+\begin_layout Subsection
+Discrete Impulses
 \end_layout
 
 \begin_layout Standard
@@ -359,6 +371,11 @@ Note that
 \end_inset
 
 .
+ This is called the sifting property of 
+\begin_inset Formula $\delta\left[n\right]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -406,15 +423,11 @@ x\left[k\right]h_{k}\left[n\right] & = & \left(1+\frac{r}{100}\right)x\left[k\ri
 
 \end_inset
 
-Letting 
-\begin_inset Formula 
-\[
-y_{h}\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]h_{k}\left[n\right]
-\]
-
+Let 
+\begin_inset Formula $y\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]h_{k}\left[n\right]$
 \end_inset
 
-and using representation 
+ and using representation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:repimp"
@@ -424,12 +437,285 @@ reference "eq:repimp"
  we see that 
 \begin_inset Formula 
 \[
-y_{h}\left[n\right]=\left(1+\frac{r}{100}\right)y_{h}\left[n-1\right]+x\left[n\right]
+y\left[n\right]=\left(1+\frac{r}{100}\right)y_{h}\left[n-1\right]+x\left[n\right]
 \]
 
 \end_inset
 
 is the response of the system.
+ 
+\end_layout
+
+\begin_layout Standard
+Schematically we can express how the responce of a system can be computed
+ using just the impulse response: let 
+\begin_inset Formula $L$
+\end_inset
+
+ be the transformation on the input that produces the output
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is not non-standard - typically 
+\begin_inset Formula $L$
+\end_inset
+
+ is the operator on output that relates it to the input.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+y\left[n\right]=L\left(x\left[n\right]\right)
+\]
+
+\end_inset
+
+Then by linearity 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & L\left(x\left[n\right]\right)\\
+ & = & \sum_{k=-\infty}^{\infty}L\left(x\left[k\right]\delta\left[n-k\right]\right)\\
+ & = & \sum_{k=-\infty}^{\infty}x\left[k\right]L\left(\delta\left[n-k\right]\right)\\
+ & = & \sum_{k=-\infty}^{\infty}x\left[k\right]h_{k}\left[n\right]
+\end{eqnarray*}
+
+\end_inset
+
+Suppose further that the system is time-invariant, i.e.
+ the impulse response for an impulse applied at time 
+\begin_inset Formula $k$
+\end_inset
+
+ is just the responce to an impulse applied at 
+\begin_inset Formula $k=0$
+\end_inset
+
+ shifted by 
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+h_{k}\left[n\right]=h_{0}\left[n-k\right]\coloneqq h\left[n-k\right]
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{equation}
+y\left[n\right]=\sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]\coloneqq x\left[n\right]\star h\left[n\right]\label{eq:convolution}
+\end{equation}
+
+\end_inset
+
+where the 
+\begin_inset Formula $\star$
+\end_inset
+
+ operator is called the 
+\emph on
+convolution
+\emph default
+ operator.
+ Note that the argument to summand is 
+\begin_inset Formula $k$
+\end_inset
+
+ and the parameter 
+\begin_inset Formula $y$
+\end_inset
+
+ is 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ What is this really saying? 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]\\
+ & = & \cdots+x\left[-1\right]h\left[n-\left(-1\right)\right]+x\left[0\right]h\left[n-0\right]+x\left[1\right]h\left[n-1\right]+\cdots
+\end{eqnarray*}
+
+\end_inset
+
+The first visible term is 
+\begin_inset Formula $h\left[n\right]$
+\end_inset
+
+ shifted back 1 unit and scaled by 
+\begin_inset Formula $x\left[-1\right]$
+\end_inset
+
+, the second is just the unit impulse response scaled by 
+\begin_inset Formula $x\left[0\right]$
+\end_inset
+
+, and then third is 
+\begin_inset Formula $h\left[n\right]$
+\end_inset
+
+ shifted forward 1 unit scaled by 
+\begin_inset Formula $x\left[1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+Consider input and unit impulse responce 
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left[n\right] & = & \alpha^{n}u\left[n\right]\\
+h\left[n\right] & = & u\left[n\right]
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $u\left[n\right]$
+\end_inset
+
+ is the discrete unit step function defined by 
+\begin_inset Formula 
+\[
+u\left[n\right]=\begin{cases}
+1 & n\geq0\\
+0 & n<0
+\end{cases}
+\]
+
+\end_inset
+
+Then each term in the convolution 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:convolution"
+
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+x\left[k\right]h\left[n-k\right]=\left(\alpha^{k}u\left[k\right]\right)u\left[n-k\right]
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $k<0$
+\end_inset
+
+ then 
+\begin_inset Formula $u\left[k\right]$
+\end_inset
+
+ kills the term.
+ If 
+\begin_inset Formula $n-k<0\Rightarrow n<k$
+\end_inset
+
+ then 
+\begin_inset Formula $u\left[n-k\right]$
+\end_inset
+
+ kills the term.
+ Hence for 
+\begin_inset Formula $0\le k\leq n$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left[k\right]h\left[n-k\right]=\alpha^{k}
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\[
+y\left[n\right]=\sum_{k=0}^{n}\alpha^{k}=\frac{1-\alpha^{n+1}}{1-\alpha}u\left[n\right]
+\]
+
+\end_inset
+
+You might as well consider it that for all 
+\begin_inset Formula $n<0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $x\left[n\right]=0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]=\sum_{k=0}^{\infty}\alpha^{k}u\left[n-k\right]\\
+ & = & \alpha^{1}u\left[n-0\right]+\alpha^{2}u\left[n-1\right]+\alpha^{3}u\left[n-2\right]+\cdots
+\end{eqnarray*}
+
+\end_inset
+
+This is equivalent to the picture of shifting the responce and scaling by
+ 
+\begin_inset Formula $x\left[k\right]$
+\end_inset
+
+.
+ Another way to interpret the convolution is to fix 
+\begin_inset Formula $n$
+\end_inset
+
+ in 
+\begin_inset Formula $x\left[k\right]h\left[n-k\right]$
+\end_inset
+
+ and treat it as a function of 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{eqnarray*}
+k'\left[k\right] & = & h\left[-k\right]\\
+h''\left[k-n\right] & = & h\left[-\left(k-n\right)\right]=h\left[n-k\right]
+\end{eqnarray*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]$
+\end_inset
+
+ just amounts to flipping 
+\begin_inset Formula $h$
+\end_inset
+
+ over, shifting it right 
+\begin_inset Formula $n$
+\end_inset
+
+ units, then summing all the non-zero products.
+ For the next value of 
+\begin_inset Formula $n$
+\end_inset
+
+ just shift up one more etc.
+ In general it's like sweeping the flipped impulse responce by the signal.
+ 
+\end_layout
+
+\begin_layout Subsection
+Continuous Impulses
 \end_layout
 
 \begin_layout Standard
@@ -446,6 +732,42 @@ x\left(t\right)=\int_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\tau\righ
 
 \end_inset
 
+Analogously if 
+\begin_inset Formula $h_{\tau}\left(t\right)$
+\end_inset
+
+ is the impulse responce of a linear system then the responce to an arbitrary
+ signal is 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & L\left(x\left(t\right)\right)\\
+ & = & \int_{-\infty}^{\infty}L\left(x\left(\tau\right)\delta\left(t-\tau\right)\right)d\tau\\
+ & = & \int_{-\infty}^{\infty}x\left(\tau\right)L\left(\delta\left(t-\tau\right)\right)d\tau\\
+ & = & \int_{-\infty}^{\infty}x\left(\tau\right)h_{\tau}\left(t\right)d\tau
+\end{eqnarray*}
+
+\end_inset
+
+If the system is also time-invariant then 
+\begin_inset Formula 
+\[
+h_{\tau}\left(t\right)=h_{0}\left(t-\tau\right)\coloneqq h\left(t-\tau\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+y\left(t\right)=\int_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\coloneqq x\left(t\right)\star h\left(t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
 Consider the almost tautological result that 
 \begin_inset Formula 
 \[
@@ -567,7 +889,58 @@ h\left(t\right)=\lim_{h\rightarrow0}\frac{s\left(t+h\right)-s\left(t\right)}{h}=
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+Another trivial example.
+\end_layout
+
+\begin_layout Example
+Consider input and unit impulse responce 
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left(t\right) & = & e^{-at}u\left(t\right)\\
+h\left(t\right) & = & u\left(t\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $u\left(t\right)$
+\end_inset
+
+ is the unit step function defined by 
+\begin_inset Formula 
+\[
+u\left(t\right)=\begin{cases}
+1 & t\geq0\\
+0 & t<0
+\end{cases}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+x\left(\tau\right)h\left(t-\tau\right)=\begin{cases}
+e^{-a\tau} & 0<\tau<t\\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+y\left(t\right)=\int_{0}^{t}e^{-a\tau}d\tau=\frac{1}{a}\left(1-e^{-at}\right)u\left(t\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
