@@ -834,9 +834,9 @@ h\left(t\right)=y\left(t\right)=\delta\left(t-t_{0}\right)
 
 and so 
 \begin_inset Formula 
-\[
-x\left(t-t_{0}\right)=y\left(t\right)=x\left(t\right)\star h\left(t\right)=x\left(t\right)\star\delta\left(t-t_{0}\right)
-\]
+\begin{equation}
+x\left(t-t_{0}\right)=y\left(t\right)=x\left(t\right)\star h\left(t\right)=x\left(t\right)\star\delta\left(t-t_{0}\right)\label{eq:convimpshift}
+\end{equation}
 
 \end_inset
 
@@ -949,7 +949,11 @@ Sampling
 
 \begin_layout Standard
 If a signal is band limited - its spectrum is zero outside some finite range
- of frequencies - and if it's sampled at a high enough rate
+ of frequencies - and if it's sampled, with sampling period 
+\begin_inset Formula $T_{s}$
+\end_inset
+
+, at a high enough rate
 \begin_inset Foot
 status open
 
@@ -970,20 +974,181 @@ Twice the highest frequency component.
 Define the impulse-train 
 \begin_inset Formula 
 \[
-p\left(t\right)=\sum_{n=-\infty}^{\infty}\delta\left(t-nT\right)
+p\left(t\right)=\sum_{k=-\infty}^{\infty}\delta\left(t-kT_{s}\right)
 \]
 
 \end_inset
 
-Then the sampled 
+Then the sampled signal is 
 \begin_inset Formula 
 \[
-x_{p}\left(t\right)
+x_{p}\left(t\right)=x\left(t\right)p\left(t\right)\approxeq\sum_{k=-\infty}^{\infty}x\left(kT_{s}\right)\delta\left(t-kT_{s}\right)
 \]
 
 \end_inset
 
+The 
+\begin_inset Formula $\approxeq$
+\end_inset
 
+ is because we all know this isn't really true - the 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is only defined under the integral.
+ But by the multiplcation property of continuous signals
+\begin_inset Formula 
+\[
+X_{p}\left(j\omega\right)\coloneqq\mathcal{F}\left\{ x\left(t\right)p\left(t\right)\right\} =\mathcal{F}\left\{ x_{p}\left(t\right)\right\} =\frac{1}{2\pi}\left(\mathcal{F}\left\{ x\left(t\right)\right\} \star\mathcal{F}\left\{ p\left(t\right)\right\} \right)=\frac{1}{2\pi}\left(X\left(j\omega\right)\star P\left(j\omega\right)\right)
+\]
+
+\end_inset
+
+Now what is 
+\begin_inset Formula $P\left(j\omega\right)$
+\end_inset
+
+? This is the real sampling mechanism.
+ Let 
+\begin_inset Formula 
+\[
+p_{n}\left(t\right)=\sum_{k=-n}^{n}\delta\left(t-kT_{s}\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+P_{n}\left(j\omega\right) & = & \int_{-\infty}^{\infty}p_{k}\left(t\right)e^{-j\omega t}dt\\
+ & = & \int_{-\infty}^{\infty}\sum_{k=-n}^{n}\delta\left(t-kT_{s}\right)e^{-j\omega t}dt\\
+ & = & \sum_{k=-n}^{n}\int_{-\infty}^{\infty}\delta\left(t-kT_{s}\right)e^{-j\omega t}dt\\
+ & = & \sum_{k=-n}^{n}e^{-j\omega kT_{s}}
+\end{eqnarray*}
+
+\end_inset
+
+As 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+ then 
+\begin_inset Formula $P_{n}\left(j\omega\right)\rightarrow P\left(j\omega\right)$
+\end_inset
+
+.
+ But
+\begin_inset Formula 
+\begin{eqnarray*}
+\sum_{k=-n}^{n}e^{-j\omega kT_{s}} & = & e^{j\omega T_{s}}\left(1+e^{-j\omega T_{s}}+\left(e^{-j\omega T_{s}}\right)^{2}+\cdots+\left(e^{-j\omega T_{s}}\right)^{2n}\right)\\
+ & = & e^{j\omega T_{s}}\left(\frac{1-e^{-j\omega\left(2n+1\right)T_{s}}}{1-e^{-j\omega T_{s}}}\right)\\
+ & = & \frac{e^{j\omega T_{s}}e^{-j\omega\left(n+\frac{1}{2}\right)T_{s}}}{e^{-j\omega T_{s}/2}}\left(\frac{e^{j\omega\left(n+\frac{1}{2}\right)T_{s}}-e^{-j\omega\left(n+\frac{1}{2}\right)T_{s}}}{e^{j\omega T_{s}/2}-e^{-j\omega T_{s}/2}}\right)\\
+ & = & \frac{2j\sin\left(\omega\left(n+\frac{1}{2}\right)T_{s}\right)}{2j\sin\left(\omega T_{s}/2\right)}=\frac{\sin\left(\omega\left(n+\frac{1}{2}\right)T_{s}\right)}{\sin\left(\omega T_{s}/2\right)}
+\end{eqnarray*}
+
+\end_inset
+
+This is a function that is a series of sinc functions with peaks of magnitude
+ 
+\begin_inset Formula $\left(2n+1\right)$
+\end_inset
+
+ at multiples of 
+\begin_inset Formula $2\pi/T_{s}$
+\end_inset
+
+, and as 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+ it approaches a series of impulses with area equal to 
+\begin_inset Formula $2\pi/T_{s}$
+\end_inset
+
+, since
+\begin_inset Formula 
+\[
+\int_{-\pi/T_{s}}^{\pi/T_{s}}\sum_{k=-n}^{n}e^{-j\omega kT_{s}}d\omega=\sum_{k=-n}^{n}\underbrace{\int_{-\pi/T_{s}}^{\pi/T_{s}}e^{-j\omega kT_{s}}d\omega}_{0\text{ unless }k=0}=\int_{-\pi/T_{s}}^{\pi/T_{s}}d\omega=\frac{2\pi}{T_{s}}
+\]
+
+\end_inset
+
+where the integral is over 
+\begin_inset Formula $\left(-\frac{\pi}{T_{s}},\frac{\pi}{T_{s}}\right)$
+\end_inset
+
+ because integrating around the 0th sinc is the same as integrating around
+ any other.
+ Hence 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(j\omega\right) & = & \frac{2\pi}{T_{s}}\sum_{k=-\infty}^{\infty}\delta\left(\omega-\frac{2\pi k}{T_{s}}\right)\\
+ & = & \frac{2\pi}{T_{s}}\sum_{k=-\infty}^{\infty}\delta\left(\omega-k\omega_{s}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\begin{eqnarray*}
+X_{p}\left(j\omega\right) & = & \frac{1}{2\pi}\left(X\left(j\omega\right)\star P\left(j\omega\right)\right)\\
+ & \text{\Rightarrow} & \text{by \ref{eq:convimpshift}}\\
+ & = & \frac{1}{T_{s}}\sum_{k=-\infty}^{\infty}X\left(j\left(\omega-k\omega_{s}\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+So 
+\begin_inset Formula $X_{p}\left(j\omega\right)$
+\end_inset
+
+ is just the original 
+\begin_inset Formula $X\left(j\omega\right)$
+\end_inset
+
+ replicated at every multiple of 
+\begin_inset Formula $\omega_{s}$
+\end_inset
+
+ and scaled by 
+\begin_inset Formula $1/T_{s}$
+\end_inset
+
+.
+ Notice that the distance between adjacent replications is 
+\begin_inset Formula $\left(\omega_{s}-\omega_{M}\right)-\omega_{M}=\omega_{s}-2\omega_{M}$
+\end_inset
+
+, where 
+\begin_inset Formula $\omega_{M}$
+\end_inset
+
+ is the highest frequency in 
+\begin_inset Formula $X\left(j\omega\right)$
+\end_inset
+
+.
+ So if 
+\begin_inset Formula $\omega_{s}-2\omega_{M}<0\iff\omega_{s}<2\omega_{M}$
+\end_inset
+
+ then the replications will overlap and using a bandpass filter will pick
+ up extra power for the frequencies in the overlap region.
+ This is called aliasing.
+ If you want to avoid aliasing then 
+\begin_inset Formula $\omega_{s}>2\omega_{M}$
+\end_inset
+
+.
+ This is Shannon sampling theorem and 
+\begin_inset Formula $2\omega_{M}$
+\end_inset
+
+ is the Nyquist rate, while 
+\begin_inset Formula $\omega_{M}$
+\end_inset
+
+ is the Nyquiest, or folding, frequency.
 \end_layout
 
 \end_body
