@@ -1,0 +1,329 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Practice Exam
+\end_layout
+
+\begin_layout Enumerate
+Challenge problem.
+ Invert 
+\begin_inset Formula $X\left(z\right)=\frac{1+.4\sqrt{2}/z}{1-\frac{.8\sqrt{2}}{z}+\frac{.64}{z^{2}}}$
+\end_inset
+
+.
+ Using mathematica
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f\in\left[0,3.5\text{kHz}\right]$
+\end_inset
+
+.
+ Listener's hearing 
+\begin_inset Formula $f\in\left[0,8\text{kHz}\right]$
+\end_inset
+
+.
+ ADC operates at multiples of 
+\begin_inset Formula $8$
+\end_inset
+
+kHz, i.e 
+\begin_inset Formula $f_{s}=n8$
+\end_inset
+
+kHz.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+What is the lowest sampling frequency 
+\begin_inset Formula $f_{s}$
+\end_inset
+
+ that will insure that the original audio signal 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ can be (theoretically) reconstructed from its time-series samples 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ without aliasing? 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Lowest frequency would be 7kHz but lowest possible sampling frequency is
+ 8kHz with 
+\begin_inset Formula $n=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Sampling at 8kHz, the cutoff and folding frequency is 4kHz.
+ The unheard sound should be over 8kHz.
+ 10kHz wraps around to 2kHz.
+ 
+\end_layout
+
+\begin_layout Enumerate
+7kHz 
+\series bold
+Whoops.
+ Cutoff frequency should be equal to largest frequency in signal, i.e.
+ 3.5kHz
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $20/2^{8}=5/64$
+\end_inset
+
+V
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Formula $X\left(z\right)=\left(z+1\right)^{2}/\left(\left(z-1\right)\left(z-\frac{1}{2}\right)^{2}\right)$
+\end_inset
+
+, causal signal
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Find a,b,c,d such that 
+\begin_inset Formula 
+\[
+X\left(z\right)=a+\frac{bz}{z-1}+\frac{cz}{z-\frac{1}{2}}+\frac{dz}{\left(z-\frac{1}{2}\right)^{2}}
+\]
+
+\end_inset
+
+Clearing fraction and setting both sides equal 
+\begin_inset Formula 
+\[
+z^{2}+2z+1=a\left(z-1\right)\left(z-\frac{1}{2}\right)^{2}+bz\left(z-1\right)^{2}+cz\left(z-1\right)\left(z-\frac{1}{2}\right)+dz\left(z-1\right)
+\]
+
+\end_inset
+
+Comparing coefficients 
+\begin_inset Formula $a=-4,b=16,c=-12,d=-9$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Using mathematica 
+\begin_inset Formula 
+\[
+x\left[n\right]=\left(16-\frac{12}{2^{n}}-\frac{18}{2^{n}}n\right)u\left[n\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Final value theorem only applies if 
+\begin_inset Formula $X\left(z\right)$
+\end_inset
+
+ has at most one pole on the unit circle.
+ Does it? Looks like it? Then
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}x\left[n\right]=\lim_{z\rightarrow1}\left(z-1\right)X\left(z\right)=\lim_{z\rightarrow1}\frac{\left(z+1\right)^{2}}{\left(z-\frac{1}{2}\right)^{2}}=\frac{2^{2}}{\left(1/2\right)^{2}}=16
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Initial value theorem only applies if input is causal (which it is).
+ Then 
+\begin_inset Formula 
+\[
+x\left[0\right]=\lim_{z\rightarrow\infty}X\left(z\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Formula $x\left(t\right)=\sin\left(2\pi\left(10^{3}\right)t\right)+\sin\left(2\pi\left(6\times10^{3}\right)t\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The Nyquist sampling rate is 12kHz
+\end_layout
+
+\begin_layout Enumerate
+If the sampling rate is 8kHz then the largest freq recovered is 4kHz.
+ So 1kHz signal will be recovered and a -2kHz signal will be recovered.
+ So the recovered signal will be 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & \sin\left(2\pi\left(10^{3}\right)t\right)+\sin\left(2\pi\left(-2\times10^{3}\right)t\right)\\
+ & = & \sin\left(2\pi10^{3}t\right)-\sin\left(2\pi\left(2\times10^{3}\right)t\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $10/2^{8}=5/128$
+\end_inset
+
+V
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\log_{2}\left(10/2^{8}\right)-1.79\approx-6.47$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset Formula $f\in\left[0,4\text{kHz}\right]$
+\end_inset
+
+.
+ 
+\begin_inset Formula $f_{s}=12$
+\end_inset
+
+kHz
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Nyquist cutoff frequency is 6kHz.
+ 8kHz is aliased to -4kHz so 
+\begin_inset Formula 
+\[
+y\left(t\right)=\sin\left(2\pi\left(-4\times10^{3}\right)t\right)=-\sin\left(2\pi\left(4\times10^{3}\right)t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+So 
+\begin_inset Formula 
+\[
+x\left(t\right)=\frac{2}{\pi}\sin\left(2\pi\left(\left(4\times10^{3}\right)t\right)\right)+\frac{2}{3\pi}\sin\left(2\pi\left(12\times10^{3}\right)t\right)+\frac{2}{5\pi}\sin\left(2\pi\left(20\times10^{3}\right)t\right)
+\]
+
+\end_inset
+
+So 12kHz wraps around to 0kHz, i.e.
+ DC and 20kHz wraps around -4kHZ.
+ So reconstructed signal is 
+\begin_inset Formula 
+\[
+y\left(t\right)=\left(\frac{2}{\pi}-\frac{2}{5\pi}\right)\sin\left(2\pi\left(\left(4\times10^{3}\right)t\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+I need to go over the stupid bit notation and check my function on inverting
+ more inverse Z-transforms
+\end_layout
+
+\end_body
+\end_document
