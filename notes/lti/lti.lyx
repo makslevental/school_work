@@ -1048,8 +1048,7 @@ As
 
 \end_inset
 
-This is a function that is a series of sinc functions with peaks of magnitude
- 
+This is a function that is a series of peaks of magnitude 
 \begin_inset Formula $\left(2n+1\right)$
 \end_inset
 
@@ -1149,6 +1148,120 @@ So
 \end_inset
 
  is the Nyquiest, or folding, frequency.
+\end_layout
+
+\begin_layout Section
+Z-Transform
+\end_layout
+
+\begin_layout Standard
+The z-transform is an extension of the discrete time Fourier transform.
+ What is the response of a discrete time LTI system with impulse response
+ 
+\begin_inset Formula $h\left[n\right]$
+\end_inset
+
+ to input 
+\begin_inset Formula $x\left[n\right]=z^{n}$
+\end_inset
+
+?
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]\\
+ & = & \sum_{k=-\infty}^{\infty}x\left[n-k\right]h\left[k\right]\\
+ & = & \sum_{k=-\infty}^{\infty}z^{n-k}h\left[k\right]\\
+ & = & z^{n}\sum_{k=-\infty}^{\infty}z^{-k}h\left[k\right]\\
+ & = & x\left[n\right]H\left(z\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $H\left(z\right)\coloneqq\sum_{k=-\infty}^{\infty}z^{-k}h\left[k\right]$
+\end_inset
+
+ is called the 
+\emph on
+z-transform
+\emph default
+ of the the impulse response.
+ In essense 
+\begin_inset Formula $z^{n}$
+\end_inset
+
+ is an eigenfunction of discrete LTI systems with 
+\begin_inset Quotes eld
+\end_inset
+
+eigenvalue
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $H\left(z\right)$
+\end_inset
+
+.
+ Therefore, in general, if 
+\begin_inset Formula 
+\[
+x\left[n\right]=\sum_{k}a_{k}z_{k}^{n}
+\]
+
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+y\left[n\right]=\sum_{k}a_{k}H\left(z_{k}\right)z_{k}^{n}
+\]
+
+\end_inset
+
+In general 
+\begin_inset Formula 
+\[
+X\left(z\right)\coloneqq\mathcal{Z}\left\{ x\left[n\right]\right\} \coloneqq\sum_{k=-\infty}^{\infty}x\left[n\right]z^{-n}
+\]
+
+\end_inset
+
+What's the relationship of the 
+\emph on
+z-
+\emph default
+transform to the discrete time Fourier transform? Let 
+\begin_inset Formula $z=re^{j\omega}$
+\end_inset
+
+ and then 
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left(re^{j\omega}\right) & = & \sum_{k=-\infty}^{\infty}x\left[n\right]\left(re^{j\omega}\right)^{-n}\\
+ & = & \sum_{k=-\infty}^{\infty}\left(\frac{x\left[n\right]}{r^{n}}\right)e^{-jn\omega}
+\end{eqnarray*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\mathcal{Z}\left\{ x\left[n\right]\right\} =\mathcal{F}\left\{ x\left[n\right]r^{-n}\right\} $
+\end_inset
+
+.
+ Specifically is 
+\begin_inset Formula $\left|z\right|=1$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\left.X\left(z\right)\right|_{z=e^{j\omega}}=X\left(e^{j\omega}\right)=\mathcal{F}\left\{ x\left[n\right]\right\} 
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
