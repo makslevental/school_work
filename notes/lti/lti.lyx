@@ -2033,12 +2033,17 @@ y\left[n\right]=H\left(z\right)x\left[n\right]=\sum_{k=\left\langle N\right\rang
 
 \end_inset
 
-Hence LTI systems only scale frequencies 
+Hence LTI systems only multiplies frequencies 
 \begin_inset Formula $k\omega_{0}$
 \end_inset
 
  by 
 \begin_inset Formula $H$
+\end_inset
+
+, which can in general be complex, and therefore LTI systems can manipulate
+ the magnitude and phase of the coefficients 
+\begin_inset Formula $a_{k}$
 \end_inset
 
 .
@@ -2235,6 +2240,236 @@ and so
 \[
 y\left[n\right]=\frac{1}{\sqrt{1+\alpha^{2}}}\cos\left(\frac{\pi n}{2}-\arctan\left(\alpha\right)\right)
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Filterting
+\end_layout
+
+\begin_layout Standard
+Since the frequency response of an LTI system 
+\begin_inset Formula $H\left(j\omega\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $H\left(e^{j\omega}\right)$
+\end_inset
+
+ potentially changes the phase and amplitude of the frequency coefficients
+ 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ of a single 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ represented as a Fourier series it can be used to construct filters, i.e.
+ squelch(possibly to zero) or amplify certain frequencies.
+ 
+\emph on
+Frequency shaping
+\emph default
+ filters are those that only change the shape of the spectrum of a signal,
+ for example such as those used in audio equalizer systems.
+ Another interesting class of frequency-shaping filters are differentiators,
+ for example a filter corresponding to a system where the output
+\begin_inset Formula 
+\[
+y\left(t\right)=\frac{d}{dt}x\left(t\right)
+\]
+
+\end_inset
+
+With 
+\begin_inset Formula $x\left(t\right)=e^{j\omega t}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+y\left(t\right)=j\omega x\left(t\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $H\left(j\omega\right)=j\omega$
+\end_inset
+
+.
+ This filter applies high gain to high frequencies and squelches low frequencies.
+ A class of discrete time filters that are useful are moving average filters,
+ for example a filter corresponding to a system where the output 
+\begin_inset Formula 
+\[
+y\left[n\right]=\frac{1}{2}\left(x\left[n\right]+x\left[n-1\right]\right)
+\]
+
+\end_inset
+
+The impulse response that produces this output is 
+\begin_inset Formula $h\left[n\right]=\frac{1}{2}\left(\delta\left[n\right]+\delta\left[n-1\right]\right)$
+\end_inset
+
+ and so the frequency response
+\begin_inset Formula 
+\[
+H\left(e^{j\omega}\right)=\frac{1}{2}\left(1+e^{-j\omega}\right)=e^{-j\omega/2}\cos\left(\omega/2\right)
+\]
+
+\end_inset
+
+
+\emph on
+Frequency-selective
+\emph default
+ filters are those that completely eliminate some frequencies and leave
+ others unaffected, distortion free.
+ A 
+\emph on
+lowpass 
+\emph default
+filter passes only frequencies lower than some 
+\emph on
+cutoff
+\emph default
+ frequency, a 
+\emph on
+highpass
+\emph default
+ filter passes only frequencies above some cutoff frequency, a 
+\emph on
+bandpass
+\emph default
+ filter passes only frequencies only with a contiguous range of frequencies
+ called the 
+\emph on
+passband
+\emph default
+ and eliminates all others, collectively called the 
+\emph on
+stopband
+\emph default
+.
+ For example the continuous-time ideal lowpass filter is
+\begin_inset Formula 
+\[
+H\left(j\omega\right)=\begin{cases}
+1 & \left|\omega\right|\leq\omega_{c}\\
+0 & \left|\omega\right|>\omega_{c}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Continuous-time filters from ODEs
+\end_layout
+
+\begin_layout Standard
+How would you actually implement a continuous-time filter? Well a continuous-tim
+e LTI system is captured by an ODE.
+ So an electrical circuit whose behavior is described by the solution (ouput!)
+ of the ODE given some forcing function would be an implementation of such
+ a filter.
+ Indeed an RC circuit can function as a lowpass filter: the voltage drop
+ across the capacitor in the RC circuit in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RC-Circuit"
+
+\end_inset
+
+ is 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename RCcircuit.gif
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+RC Circuit
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RC-Circuit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+described by the ordinary, constant coefficient, differential equation
+\begin_inset Formula 
+\begin{equation}
+RC\frac{dv_{c}}{dt}+v_{c}\left(t\right)=v_{s}\left(t\right)\label{eq:rcode}
+\end{equation}
+
+\end_inset
+
+Assuming that there is no current flowing through the system at 
+\begin_inset Formula $t=0$
+\end_inset
+
+ the system is LTI.
+ To determine the frequency response let the forcing function be an exponential,
+ i.e.
+ 
+\begin_inset Formula $v_{s}\left(t\right)=e^{j\omega t}$
+\end_inset
+
+.
+ Then since the system is LTI the output 
+\begin_inset Formula $v_{c}\left(t\right)$
+\end_inset
+
+ must obey
+\begin_inset Formula 
+\[
+v_{c}\left(t\right)=H\left(j\omega\right)e^{j\omega t}
+\]
+
+\end_inset
+
+Substituting into eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rcode"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+RC\left(j\omega H\left(j\omega\right)e^{j\omega t}\right)+H\left(j\omega\right)e^{j\omega t} & = & e^{j\omega t}\\
+ & \Rightarrow\\
+H\left(j\omega\right) & = & \frac{1}{1+RCj\omega}
+\end{eqnarray*}
 
 \end_inset
 
