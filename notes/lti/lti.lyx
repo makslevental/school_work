@@ -1255,6 +1255,633 @@ a_{n} & = & \frac{1}{T_{0}}\int_{0}^{T_{0}}x\left(t\right)e^{-jn\omega_{0}t}dt=\
 
 \end_inset
 
+For periodic discrete time signals and almost all periodic continuous time
+ signals Fourier series representations exist.
+ Recapitulating: for continuous time
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left(t\right) & = & \sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\left(2\pi/T\right)t}\\
+a_{k} & = & \frac{1}{T}\int_{T}x\left(t\right)e^{-j\omega_{0}t}dt=\frac{1}{T}\int_{T}x\left(t\right)e^{-j\left(2\pi/T\right)t}dt
+\end{eqnarray*}
+
+\end_inset
+
+for discrete time
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left[n\right] & = & \sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\left(2\pi/N\right)t}\\
+a_{k} & = & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\omega_{0}n}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\left(2\pi/N\right)n}
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\left\langle N\right\rangle $
+\end_inset
+
+ indicates that the sum should be taken over any 
+\begin_inset Formula $N$
+\end_inset
+
+ consecutive of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Recall also that the responce of an LTI system to complex exponentials
+ is simple: in continuous time if the input 
+\begin_inset Formula $x_{s}\left(t\right)=e^{st}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+y\left(t\right)=H\left(s\right)x_{s}\left(t\right)=\left(\int_{-\infty}^{\infty}h\left(\tau\right)e^{-s\tau}d\tau\right)x_{s}\left(t\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $h\left(\tau\right)$
+\end_inset
+
+ is the impulse response of the system, and in discrete time if the input
+ 
+\begin_inset Formula $x_{z}\left[n\right]=z^{n}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+y\left[n\right]=H\left(z\right)x_{z}\left[n\right]=\left(\sum_{k=-\infty}^{\infty}h\left[k\right]z^{-k}\right)x_{z}\left[n\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $h\left[k\right]$
+\end_inset
+
+ is the impulse response of the system.
+ In general 
+\begin_inset Formula $H$
+\end_inset
+
+, in either case, the 
+\emph on
+transfer 
+\emph default
+function or the 
+\emph on
+system
+\emph default
+ function of the system.
+ If 
+\begin_inset Formula $s$
+\end_inset
+
+ is pure complex, i.e.
+ 
+\begin_inset Formula $s=j\omega$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+H\left(j\omega\right)=\int_{-\infty}^{\infty}h\left(\tau\right)e^{-j\omega\tau}d\tau
+\]
+
+\end_inset
+
+is called the 
+\emph on
+frequency
+\emph default
+ 
+\emph on
+response 
+\emph default
+of the system.
+ Similarly if 
+\begin_inset Formula $\left|z\right|=1$
+\end_inset
+
+, so that 
+\begin_inset Formula $z=e^{j\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $z^{-n}=e^{-j\omega n}$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+H\left(e^{j\omega}\right)=\sum_{k=-\infty}^{\infty}h\left[k\right]e^{-j\omega k}
+\]
+
+\end_inset
+
+The response of an LTI system to pure complex exponential inputs is therefore
+ expressed in terms of the frequency response of the system: if 
+\begin_inset Formula $x_{s}\left(t\right)=e^{st}=x_{j\omega_{0}}=e^{j\omega_{0}t}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & H\left(s\right)x_{s}\left(t\right)\\
+ & = & H\left(j\omega_{0}\right)x_{j\omega_{0}}\left(t\right)
+\end{eqnarray*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & H\left(z\right)x_{z}\left[n\right]\\
+ & = & H\left(e^{j\omega}\right)x_{e^{j\omega}}\left[n\right]
+\end{eqnarray*}
+
+\end_inset
+
+This is useful when the input signal is expressed as a Fourier series: if
+ 
+\begin_inset Formula 
+\[
+x\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}
+\]
+
+\end_inset
+
+then by linearity
+\begin_inset Formula 
+\[
+y\left(t\right)=H\left(s\right)x\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}H\left(jk\omega_{0}\right)e^{jk\omega_{0}t}
+\]
+
+\end_inset
+
+In the discrete case, where 
+\begin_inset Formula $\omega_{0}=2\pi/N$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left[n\right]=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}
+\]
+
+\end_inset
+
+then by linearity
+\begin_inset Formula 
+\[
+y\left[n\right]=H\left(z\right)x\left[n\right]=\sum_{k=\left\langle N\right\rangle }a_{k}H\left(e^{jk\omega_{0}}\right)e^{jk\omega_{0}n}
+\]
+
+\end_inset
+
+Hence LTI systems only multiplies frequencies 
+\begin_inset Formula $k\omega_{0}$
+\end_inset
+
+ by 
+\begin_inset Formula $H$
+\end_inset
+
+, which can in general be complex, and therefore LTI systems can manipulate
+ the magnitude and phase of the coefficients 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+Suppose that 
+\begin_inset Formula $x\left(t\right)=\sum_{k=-3}^{3}a_{k}e^{j2\pi kt}$
+\end_inset
+
+ is the input to a system with impulse response 
+\begin_inset Formula $h\left(t\right)=e^{-t}u\left(t\right)$
+\end_inset
+
+.
+ First of all the coefficients 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ are 
+\begin_inset Formula 
+\begin{eqnarray*}
+a_{0} & = & 1\\
+a_{\pm1} & = & \frac{1}{4}\\
+a_{\pm2} & = & \frac{1}{2}\\
+a_{\pm3} & = & \frac{1}{3}
+\end{eqnarray*}
+
+\end_inset
+
+Note that the fundamental period 
+\begin_inset Formula $T=1$
+\end_inset
+
+ and therefore the fundamental frquency of the input 
+\begin_inset Formula $\omega_{0}=2\pi$
+\end_inset
+
+.
+ The frequency response of the system is 
+\begin_inset Formula 
+\begin{eqnarray*}
+H\left(j\omega\right) & = & \int_{-\infty}^{\infty}h\left(\tau\right)e^{-j\omega\tau}d\tau\\
+ & = & \int_{-\infty}^{\infty}e^{-\tau}u\left(t\right)e^{-j\omega\tau}d\tau\\
+ & = & \int_{0}^{\infty}e^{-\tau}e^{-j\omega\tau}d\tau\\
+ & = & \left.-\frac{1}{1+j\omega}e^{-\tau}e^{-j\omega\tau}\right|_{0}^{\infty}\\
+ & = & \frac{1}{1+j\omega}
+\end{eqnarray*}
+
+\end_inset
+
+Then since 
+\begin_inset Formula $\omega_{0}=2\pi$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & \sum_{k=-3}^{3}a_{k}H\left(j\omega_{0}k\right)e^{j\omega_{0}k}\\
+ & = & \sum_{k=-3}^{3}b_{k}e^{j\omega_{0}k}
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{eqnarray*}
+b_{0} & = & a_{0}H\left(0\right)=a_{0}=1\\
+b_{\pm1} & = & a_{\pm1}H\left(j\omega_{0}\left(\pm1\right)\right)=\frac{1}{4}\left(\frac{1}{1\pm j\omega_{0}}\right)\\
+b_{\pm2} & = & a_{\pm2}H\left(j\omega_{0}\left(\pm2\right)\right)=\frac{1}{2}\left(\frac{1}{1\pm j2\omega_{0}}\right)\\
+b_{\pm3} & = & a_{\pm3}H\left(j\omega_{0}\left(\pm3\right)\right)=\frac{1}{3}\left(\frac{1}{1\pm j3\omega_{0}}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $y\left(t\right)$
+\end_inset
+
+ must be real since both the input and the impulse response are real (and
+ the convolution of two real functions is again real).
+ Therefore 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & 1+2\sum_{k=1}^{3}D_{k}\cos\left(\omega_{0}kt+\theta_{k}\right)\\
+ & = & 1+2\sum_{k=1}^{3}\left(E_{k}\cos\left(\omega_{0}2kt\right)+F_{k}\sin\left(\omega_{0}2kt\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{k}=D_{k}e^{j\theta_{k}}=E_{k}+jF_{k}$
+\end_inset
+
+.
+ For example
+\begin_inset Formula 
+\begin{eqnarray*}
+D_{1} & = & \left|b_{1}\right|=\frac{1}{4\sqrt{1+4\pi^{2}}}\;\theta_{1}=\varangle b_{1}=-\arctan\left(2\pi\right)\\
+E_{1} & = & \Re\left\{ b_{1}\right\} =\frac{1}{4\left(1+4\pi^{2}\right)}\;F_{1}=\Im\left\{ b_{1}\right\} =-\frac{\pi}{2\left(1+4\pi^{2}\right)}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example
+Let the impulse response of a system be 
+\begin_inset Formula $h\left[n\right]=\alpha^{n}u\left[n\right]$
+\end_inset
+
+ with 
+\begin_inset Formula $-1<\alpha<1$
+\end_inset
+
+ and input be 
+\begin_inset Formula 
+\[
+x\left[n\right]=\cos\left(\frac{2\pi n}{N}\right)
+\]
+
+\end_inset
+
+Then simply expanding 
+\begin_inset Formula $\cos$
+\end_inset
+
+ using Euler's formula we get 
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left[n\right] & = & \frac{1}{2}\left(e^{j\left(2\pi/N\right)n}+e^{-j\left(2\pi/N\right)n}\right)\\
+ & = & \frac{1}{2}e^{j\left(2\pi/N\right)n}+\frac{1}{2}e^{-j\left(2\pi/N\right)n}
+\end{eqnarray*}
+
+\end_inset
+
+as the fourier series.
+ The frequency response 
+\begin_inset Formula 
+\begin{eqnarray*}
+H\left(e^{j\omega}\right) & = & \sum_{k=-\infty}^{\infty}\alpha^{n}u\left[n\right]e^{-j\omega n}=\sum_{k=0}^{\infty}\left(\alpha e^{-j\omega}\right)^{n}\\
+ & = & \frac{1}{1-\alpha e^{-j\omega}}
+\end{eqnarray*}
+
+\end_inset
+
+and hence the output 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \frac{1}{2}H\left(e^{j\left(2\pi/N\right)}\right)e^{j\left(2\pi/N\right)}+\frac{1}{2}H\left(e^{-j\left(2\pi/N\right)}\right)e^{-j\left(2\pi/N\right)}\\
+ & = & \frac{1}{2}\left(\frac{e^{j\left(2\pi/N\right)n}}{1-\alpha e^{-j\left(2\pi/N\right)}}\right)+\frac{1}{2}\left(\frac{e^{-j\left(2\pi/N\right)n}}{1-\alpha e^{j\left(2\pi/N\right)}}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Letting 
+\begin_inset Formula 
+\[
+re^{j\theta}=\frac{1}{1-\alpha e^{-j\left(2\pi/N\right)}}
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \frac{1}{2}\left(re^{j\theta}e^{j\left(2\pi/N\right)n}\right)+\frac{1}{2}\left(re^{-j\theta}e^{-j\left(2\pi/N\right)n}\right)\\
+ & = & \frac{r}{2}\left(e^{j\left[\left(2\pi/N\right)n+\theta\right]}+e^{-j\left[\left(2\pi/N\right)n+\theta\right]}\right)\\
+ & = & r\cos\left(\frac{2\pi}{N}n+\theta\right)
+\end{eqnarray*}
+
+\end_inset
+
+So there's a scaling and phase shift incurred.
+ For example for 
+\begin_inset Formula $N=4$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\frac{1}{1-\alpha e^{-j\left(2\pi/4\right)}}=\frac{1}{1+\alpha j}=\frac{1}{\sqrt{1+\alpha^{2}}}e^{j\left(-\arctan\left(\alpha\right)\right)}
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+y\left[n\right]=\frac{1}{\sqrt{1+\alpha^{2}}}\cos\left(\frac{\pi n}{2}-\arctan\left(\alpha\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Filterting
+\end_layout
+
+\begin_layout Standard
+Since the frequency response of an LTI system 
+\begin_inset Formula $H\left(j\omega\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $H\left(e^{j\omega}\right)$
+\end_inset
+
+ potentially changes the phase and amplitude of the frequency coefficients
+ 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ of a single 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ represented as a Fourier series it can be used to construct filters, i.e.
+ squelch(possibly to zero) or amplify certain frequencies.
+ 
+\emph on
+Frequency shaping
+\emph default
+ filters are those that only change the shape of the spectrum of a signal,
+ for example such as those used in audio equalizer systems.
+ Another interesting class of frequency-shaping filters are differentiators,
+ for example a filter corresponding to a system where the output
+\begin_inset Formula 
+\[
+y\left(t\right)=\frac{d}{dt}x\left(t\right)
+\]
+
+\end_inset
+
+With 
+\begin_inset Formula $x\left(t\right)=e^{j\omega t}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+y\left(t\right)=j\omega x\left(t\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $H\left(j\omega\right)=j\omega$
+\end_inset
+
+.
+ This filter applies high gain to high frequencies and squelches low frequencies.
+ A class of discrete time filters that are useful are moving average filters,
+ for example a filter corresponding to a system where the output 
+\begin_inset Formula 
+\[
+y\left[n\right]=\frac{1}{2}\left(x\left[n\right]+x\left[n-1\right]\right)
+\]
+
+\end_inset
+
+The impulse response that produces this output is 
+\begin_inset Formula $h\left[n\right]=\frac{1}{2}\left(\delta\left[n\right]+\delta\left[n-1\right]\right)$
+\end_inset
+
+ and so the frequency response
+\begin_inset Formula 
+\[
+H\left(e^{j\omega}\right)=\frac{1}{2}\left(1+e^{-j\omega}\right)=e^{-j\omega/2}\cos\left(\omega/2\right)
+\]
+
+\end_inset
+
+
+\emph on
+Frequency-selective
+\emph default
+ filters are those that completely eliminate some frequencies and leave
+ others unaffected, distortion free.
+ A 
+\emph on
+lowpass 
+\emph default
+filter passes only frequencies lower than some 
+\emph on
+cutoff
+\emph default
+ frequency, a 
+\emph on
+highpass
+\emph default
+ filter passes only frequencies above some cutoff frequency, a 
+\emph on
+bandpass
+\emph default
+ filter passes only frequencies only with a contiguous range of frequencies
+ called the 
+\emph on
+passband
+\emph default
+ and eliminates all others, collectively called the 
+\emph on
+stopband
+\emph default
+.
+ For example the continuous-time ideal lowpass filter is
+\begin_inset Formula 
+\[
+H\left(j\omega\right)=\begin{cases}
+1 & \left|\omega\right|\leq\omega_{c}\\
+0 & \left|\omega\right|>\omega_{c}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Continuous-time filters from ODEs
+\end_layout
+
+\begin_layout Standard
+How would you actually implement a continuous-time filter? Well a continuous-tim
+e LTI system is captured by an ODE.
+ So an electrical circuit whose behavior is described by the solution (ouput!)
+ of the ODE given some forcing function would be an implementation of such
+ a filter.
+ Indeed an RC circuit can function as a lowpass filter: the voltage drop
+ across the capacitor in the RC circuit in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RC-Circuit"
+
+\end_inset
+
+ is 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename RCcircuit.gif
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+RC Circuit
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RC-Circuit"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+described by the ordinary, constant coefficient, differential equation
+\begin_inset Formula 
+\begin{equation}
+RC\frac{dv_{c}}{dt}+v_{c}\left(t\right)=v_{s}\left(t\right)\label{eq:rcode}
+\end{equation}
+
+\end_inset
+
+Assuming that there is no current flowing through the system at 
+\begin_inset Formula $t=0$
+\end_inset
+
+ the system is LTI.
+ To determine the frequency response let the forcing function be an exponential,
+ i.e.
+ 
+\begin_inset Formula $v_{s}\left(t\right)=e^{j\omega t}$
+\end_inset
+
+.
+ Then since the system is LTI the output 
+\begin_inset Formula $v_{c}\left(t\right)$
+\end_inset
+
+ must obey
+\begin_inset Formula 
+\[
+v_{c}\left(t\right)=H\left(j\omega\right)e^{j\omega t}
+\]
+
+\end_inset
+
+Substituting into eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rcode"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+RC\left(j\omega H\left(j\omega\right)e^{j\omega t}\right)+H\left(j\omega\right)e^{j\omega t} & = & e^{j\omega t}\\
+ & \Rightarrow\\
+H\left(j\omega\right) & = & \frac{1}{1+RCj\omega}
+\end{eqnarray*}
+
+\end_inset
+
 
 \end_layout
 
@@ -2112,641 +2739,6 @@ An LTI system is stable iff the ROC of its transfer function includes the
  unit circle.
  For causal systems with rational transfer functions this is equivalent
  to all of the poles of the transfer function lying inside the unit circle.
-\end_layout
-
-\begin_layout Section
-Fourier Series-Scratch
-\end_layout
-
-\begin_layout Standard
-For periodic discrete time signals and almost all periodic continuous time
- signals Fourier series representations exist.
- Recapitulating: for continuous time
-\begin_inset Formula 
-\begin{eqnarray*}
-x\left(t\right) & = & \sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\left(2\pi/T\right)t}\\
-a_{k} & = & \frac{1}{T}\int_{T}x\left(t\right)e^{-j\omega_{0}t}dt=\frac{1}{T}\int_{T}x\left(t\right)e^{-j\left(2\pi/T\right)t}dt
-\end{eqnarray*}
-
-\end_inset
-
-for discrete time
-\begin_inset Formula 
-\begin{eqnarray*}
-x\left[n\right] & = & \sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\left(2\pi/N\right)t}\\
-a_{k} & = & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\omega_{0}n}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\left(2\pi/N\right)n}
-\end{eqnarray*}
-
-\end_inset
-
-where 
-\begin_inset Formula $\left\langle N\right\rangle $
-\end_inset
-
- indicates that the sum should be taken over any 
-\begin_inset Formula $N$
-\end_inset
-
- consecutive of 
-\begin_inset Formula $n$
-\end_inset
-
-.
- Recall also that the responce of an LTI system to complex exponentials
- is simple: in continuous time if the input 
-\begin_inset Formula $x_{s}\left(t\right)=e^{st}$
-\end_inset
-
- then 
-\begin_inset Formula 
-\[
-y\left(t\right)=H\left(s\right)x_{s}\left(t\right)=\left(\int_{-\infty}^{\infty}h\left(\tau\right)e^{-s\tau}d\tau\right)x_{s}\left(t\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $h\left(\tau\right)$
-\end_inset
-
- is the impulse response of the system, and in discrete time if the input
- 
-\begin_inset Formula $x_{z}\left[n\right]=z^{n}$
-\end_inset
-
- then
-\begin_inset Formula 
-\[
-y\left[n\right]=H\left(z\right)x_{z}\left[n\right]=\left(\sum_{k=-\infty}^{\infty}h\left[k\right]z^{-k}\right)x_{z}\left[n\right]
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $h\left[k\right]$
-\end_inset
-
- is the impulse response of the system.
- In general 
-\begin_inset Formula $H$
-\end_inset
-
-, in either case, the 
-\emph on
-transfer 
-\emph default
-function or the 
-\emph on
-system
-\emph default
- function of the system.
- If 
-\begin_inset Formula $s$
-\end_inset
-
- is pure complex, i.e.
- 
-\begin_inset Formula $s=j\omega$
-\end_inset
-
- then 
-\begin_inset Formula 
-\[
-H\left(j\omega\right)=\int_{-\infty}^{\infty}h\left(\tau\right)e^{-j\omega\tau}d\tau
-\]
-
-\end_inset
-
-is called the 
-\emph on
-frequency
-\emph default
- 
-\emph on
-response 
-\emph default
-of the system.
- Similarly if 
-\begin_inset Formula $\left|z\right|=1$
-\end_inset
-
-, so that 
-\begin_inset Formula $z=e^{j\omega}$
-\end_inset
-
- and 
-\begin_inset Formula $z^{-n}=e^{-j\omega n}$
-\end_inset
-
- then 
-\begin_inset Formula 
-\[
-H\left(e^{j\omega}\right)=\sum_{k=-\infty}^{\infty}h\left[k\right]e^{-j\omega k}
-\]
-
-\end_inset
-
-The response of an LTI system to pure complex exponential inputs is therefore
- expressed in terms of the frequency response of the system: if 
-\begin_inset Formula $x_{s}\left(t\right)=e^{st}=x_{j\omega_{0}}=e^{j\omega_{0}t}$
-\end_inset
-
- then
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left(t\right) & = & H\left(s\right)x_{s}\left(t\right)\\
- & = & H\left(j\omega_{0}\right)x_{j\omega_{0}}\left(t\right)
-\end{eqnarray*}
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left[n\right] & = & H\left(z\right)x_{z}\left[n\right]\\
- & = & H\left(e^{j\omega}\right)x_{e^{j\omega}}\left[n\right]
-\end{eqnarray*}
-
-\end_inset
-
-This is useful when the input signal is expressed as a Fourier series: if
- 
-\begin_inset Formula 
-\[
-x\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}
-\]
-
-\end_inset
-
-then by linearity
-\begin_inset Formula 
-\[
-y\left(t\right)=H\left(s\right)x\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}H\left(jk\omega_{0}\right)e^{jk\omega_{0}t}
-\]
-
-\end_inset
-
-In the discrete case, where 
-\begin_inset Formula $\omega_{0}=2\pi/N$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-x\left[n\right]=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}
-\]
-
-\end_inset
-
-then by linearity
-\begin_inset Formula 
-\[
-y\left[n\right]=H\left(z\right)x\left[n\right]=\sum_{k=\left\langle N\right\rangle }a_{k}H\left(e^{jk\omega_{0}}\right)e^{jk\omega_{0}n}
-\]
-
-\end_inset
-
-Hence LTI systems only multiplies frequencies 
-\begin_inset Formula $k\omega_{0}$
-\end_inset
-
- by 
-\begin_inset Formula $H$
-\end_inset
-
-, which can in general be complex, and therefore LTI systems can manipulate
- the magnitude and phase of the coefficients 
-\begin_inset Formula $a_{k}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Example
-Suppose that 
-\begin_inset Formula $x\left(t\right)=\sum_{k=-3}^{3}a_{k}e^{j2\pi kt}$
-\end_inset
-
- is the input to a system with impulse response 
-\begin_inset Formula $h\left(t\right)=e^{-t}u\left(t\right)$
-\end_inset
-
-.
- First of all the coefficients 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- are 
-\begin_inset Formula 
-\begin{eqnarray*}
-a_{0} & = & 1\\
-a_{\pm1} & = & \frac{1}{4}\\
-a_{\pm2} & = & \frac{1}{2}\\
-a_{\pm3} & = & \frac{1}{3}
-\end{eqnarray*}
-
-\end_inset
-
-Note that the fundamental period 
-\begin_inset Formula $T=1$
-\end_inset
-
- and therefore the fundamental frquency of the input 
-\begin_inset Formula $\omega_{0}=2\pi$
-\end_inset
-
-.
- The frequency response of the system is 
-\begin_inset Formula 
-\begin{eqnarray*}
-H\left(j\omega\right) & = & \int_{-\infty}^{\infty}h\left(\tau\right)e^{-j\omega\tau}d\tau\\
- & = & \int_{-\infty}^{\infty}e^{-\tau}u\left(t\right)e^{-j\omega\tau}d\tau\\
- & = & \int_{0}^{\infty}e^{-\tau}e^{-j\omega\tau}d\tau\\
- & = & \left.-\frac{1}{1+j\omega}e^{-\tau}e^{-j\omega\tau}\right|_{0}^{\infty}\\
- & = & \frac{1}{1+j\omega}
-\end{eqnarray*}
-
-\end_inset
-
-Then since 
-\begin_inset Formula $\omega_{0}=2\pi$
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left(t\right) & = & \sum_{k=-3}^{3}a_{k}H\left(j\omega_{0}k\right)e^{j\omega_{0}k}\\
- & = & \sum_{k=-3}^{3}b_{k}e^{j\omega_{0}k}
-\end{eqnarray*}
-
-\end_inset
-
-where 
-\begin_inset Formula 
-\begin{eqnarray*}
-b_{0} & = & a_{0}H\left(0\right)=a_{0}=1\\
-b_{\pm1} & = & a_{\pm1}H\left(j\omega_{0}\left(\pm1\right)\right)=\frac{1}{4}\left(\frac{1}{1\pm j\omega_{0}}\right)\\
-b_{\pm2} & = & a_{\pm2}H\left(j\omega_{0}\left(\pm2\right)\right)=\frac{1}{2}\left(\frac{1}{1\pm j2\omega_{0}}\right)\\
-b_{\pm3} & = & a_{\pm3}H\left(j\omega_{0}\left(\pm3\right)\right)=\frac{1}{3}\left(\frac{1}{1\pm j3\omega_{0}}\right)
-\end{eqnarray*}
-
-\end_inset
-
-Note that 
-\begin_inset Formula $y\left(t\right)$
-\end_inset
-
- must be real since both the input and the impulse response are real (and
- the convolution of two real functions is again real).
- Therefore 
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left(t\right) & = & 1+2\sum_{k=1}^{3}D_{k}\cos\left(\omega_{0}kt+\theta_{k}\right)\\
- & = & 1+2\sum_{k=1}^{3}\left(E_{k}\cos\left(\omega_{0}2kt\right)+F_{k}\sin\left(\omega_{0}2kt\right)\right)
-\end{eqnarray*}
-
-\end_inset
-
-where 
-\begin_inset Formula $b_{k}=D_{k}e^{j\theta_{k}}=E_{k}+jF_{k}$
-\end_inset
-
-.
- For example
-\begin_inset Formula 
-\begin{eqnarray*}
-D_{1} & = & \left|b_{1}\right|=\frac{1}{4\sqrt{1+4\pi^{2}}}\;\theta_{1}=\varangle b_{1}=-\arctan\left(2\pi\right)\\
-E_{1} & = & \Re\left\{ b_{1}\right\} =\frac{1}{4\left(1+4\pi^{2}\right)}\;F_{1}=\Im\left\{ b_{1}\right\} =-\frac{\pi}{2\left(1+4\pi^{2}\right)}
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Example
-Let the impulse response of a system be 
-\begin_inset Formula $h\left[n\right]=\alpha^{n}u\left[n\right]$
-\end_inset
-
- with 
-\begin_inset Formula $-1<\alpha<1$
-\end_inset
-
- and input be 
-\begin_inset Formula 
-\[
-x\left[n\right]=\cos\left(\frac{2\pi n}{N}\right)
-\]
-
-\end_inset
-
-Then simply expanding 
-\begin_inset Formula $\cos$
-\end_inset
-
- using Euler's formula we get 
-\begin_inset Formula 
-\begin{eqnarray*}
-x\left[n\right] & = & \frac{1}{2}\left(e^{j\left(2\pi/N\right)n}+e^{-j\left(2\pi/N\right)n}\right)\\
- & = & \frac{1}{2}e^{j\left(2\pi/N\right)n}+\frac{1}{2}e^{-j\left(2\pi/N\right)n}
-\end{eqnarray*}
-
-\end_inset
-
-as the fourier series.
- The frequency response 
-\begin_inset Formula 
-\begin{eqnarray*}
-H\left(e^{j\omega}\right) & = & \sum_{k=-\infty}^{\infty}\alpha^{n}u\left[n\right]e^{-j\omega n}=\sum_{k=0}^{\infty}\left(\alpha e^{-j\omega}\right)^{n}\\
- & = & \frac{1}{1-\alpha e^{-j\omega}}
-\end{eqnarray*}
-
-\end_inset
-
-and hence the output 
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left[n\right] & = & \frac{1}{2}H\left(e^{j\left(2\pi/N\right)}\right)e^{j\left(2\pi/N\right)}+\frac{1}{2}H\left(e^{-j\left(2\pi/N\right)}\right)e^{-j\left(2\pi/N\right)}\\
- & = & \frac{1}{2}\left(\frac{e^{j\left(2\pi/N\right)n}}{1-\alpha e^{-j\left(2\pi/N\right)}}\right)+\frac{1}{2}\left(\frac{e^{-j\left(2\pi/N\right)n}}{1-\alpha e^{j\left(2\pi/N\right)}}\right)
-\end{eqnarray*}
-
-\end_inset
-
-Letting 
-\begin_inset Formula 
-\[
-re^{j\theta}=\frac{1}{1-\alpha e^{-j\left(2\pi/N\right)}}
-\]
-
-\end_inset
-
-then
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left[n\right] & = & \frac{1}{2}\left(re^{j\theta}e^{j\left(2\pi/N\right)n}\right)+\frac{1}{2}\left(re^{-j\theta}e^{-j\left(2\pi/N\right)n}\right)\\
- & = & \frac{r}{2}\left(e^{j\left[\left(2\pi/N\right)n+\theta\right]}+e^{-j\left[\left(2\pi/N\right)n+\theta\right]}\right)\\
- & = & r\cos\left(\frac{2\pi}{N}n+\theta\right)
-\end{eqnarray*}
-
-\end_inset
-
-So there's a scaling and phase shift incurred.
- For example for 
-\begin_inset Formula $N=4$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\frac{1}{1-\alpha e^{-j\left(2\pi/4\right)}}=\frac{1}{1+\alpha j}=\frac{1}{\sqrt{1+\alpha^{2}}}e^{j\left(-\arctan\left(\alpha\right)\right)}
-\]
-
-\end_inset
-
-and so 
-\begin_inset Formula 
-\[
-y\left[n\right]=\frac{1}{\sqrt{1+\alpha^{2}}}\cos\left(\frac{\pi n}{2}-\arctan\left(\alpha\right)\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Filterting
-\end_layout
-
-\begin_layout Standard
-Since the frequency response of an LTI system 
-\begin_inset Formula $H\left(j\omega\right)$
-\end_inset
-
- or 
-\begin_inset Formula $H\left(e^{j\omega}\right)$
-\end_inset
-
- potentially changes the phase and amplitude of the frequency coefficients
- 
-\begin_inset Formula $a_{k}$
-\end_inset
-
- of a single 
-\begin_inset Formula $x\left(t\right)$
-\end_inset
-
- represented as a Fourier series it can be used to construct filters, i.e.
- squelch(possibly to zero) or amplify certain frequencies.
- 
-\emph on
-Frequency shaping
-\emph default
- filters are those that only change the shape of the spectrum of a signal,
- for example such as those used in audio equalizer systems.
- Another interesting class of frequency-shaping filters are differentiators,
- for example a filter corresponding to a system where the output
-\begin_inset Formula 
-\[
-y\left(t\right)=\frac{d}{dt}x\left(t\right)
-\]
-
-\end_inset
-
-With 
-\begin_inset Formula $x\left(t\right)=e^{j\omega t}$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-y\left(t\right)=j\omega x\left(t\right)
-\]
-
-\end_inset
-
-and so 
-\begin_inset Formula $H\left(j\omega\right)=j\omega$
-\end_inset
-
-.
- This filter applies high gain to high frequencies and squelches low frequencies.
- A class of discrete time filters that are useful are moving average filters,
- for example a filter corresponding to a system where the output 
-\begin_inset Formula 
-\[
-y\left[n\right]=\frac{1}{2}\left(x\left[n\right]+x\left[n-1\right]\right)
-\]
-
-\end_inset
-
-The impulse response that produces this output is 
-\begin_inset Formula $h\left[n\right]=\frac{1}{2}\left(\delta\left[n\right]+\delta\left[n-1\right]\right)$
-\end_inset
-
- and so the frequency response
-\begin_inset Formula 
-\[
-H\left(e^{j\omega}\right)=\frac{1}{2}\left(1+e^{-j\omega}\right)=e^{-j\omega/2}\cos\left(\omega/2\right)
-\]
-
-\end_inset
-
-
-\emph on
-Frequency-selective
-\emph default
- filters are those that completely eliminate some frequencies and leave
- others unaffected, distortion free.
- A 
-\emph on
-lowpass 
-\emph default
-filter passes only frequencies lower than some 
-\emph on
-cutoff
-\emph default
- frequency, a 
-\emph on
-highpass
-\emph default
- filter passes only frequencies above some cutoff frequency, a 
-\emph on
-bandpass
-\emph default
- filter passes only frequencies only with a contiguous range of frequencies
- called the 
-\emph on
-passband
-\emph default
- and eliminates all others, collectively called the 
-\emph on
-stopband
-\emph default
-.
- For example the continuous-time ideal lowpass filter is
-\begin_inset Formula 
-\[
-H\left(j\omega\right)=\begin{cases}
-1 & \left|\omega\right|\leq\omega_{c}\\
-0 & \left|\omega\right|>\omega_{c}
-\end{cases}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Continuous-time filters from ODEs
-\end_layout
-
-\begin_layout Standard
-How would you actually implement a continuous-time filter? Well a continuous-tim
-e LTI system is captured by an ODE.
- So an electrical circuit whose behavior is described by the solution (ouput!)
- of the ODE given some forcing function would be an implementation of such
- a filter.
- Indeed an RC circuit can function as a lowpass filter: the voltage drop
- across the capacitor in the RC circuit in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:RC-Circuit"
-
-\end_inset
-
- is 
-\begin_inset Float figure
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename RCcircuit.gif
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-RC Circuit
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:RC-Circuit"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-described by the ordinary, constant coefficient, differential equation
-\begin_inset Formula 
-\begin{equation}
-RC\frac{dv_{c}}{dt}+v_{c}\left(t\right)=v_{s}\left(t\right)\label{eq:rcode}
-\end{equation}
-
-\end_inset
-
-Assuming that there is no current flowing through the system at 
-\begin_inset Formula $t=0$
-\end_inset
-
- the system is LTI.
- To determine the frequency response let the forcing function be an exponential,
- i.e.
- 
-\begin_inset Formula $v_{s}\left(t\right)=e^{j\omega t}$
-\end_inset
-
-.
- Then since the system is LTI the output 
-\begin_inset Formula $v_{c}\left(t\right)$
-\end_inset
-
- must obey
-\begin_inset Formula 
-\[
-v_{c}\left(t\right)=H\left(j\omega\right)e^{j\omega t}
-\]
-
-\end_inset
-
-Substituting into eqn.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:rcode"
-
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{eqnarray*}
-RC\left(j\omega H\left(j\omega\right)e^{j\omega t}\right)+H\left(j\omega\right)e^{j\omega t} & = & e^{j\omega t}\\
- & \Rightarrow\\
-H\left(j\omega\right) & = & \frac{1}{1+RCj\omega}
-\end{eqnarray*}
-
-\end_inset
-
-
 \end_layout
 
 \end_body
