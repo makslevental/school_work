@@ -944,6 +944,321 @@ y\left(t\right)=\int_{0}^{t}e^{-a\tau}d\tau=\frac{1}{a}\left(1-e^{-at}\right)u\l
 \end_layout
 
 \begin_layout Section
+Complex Exponentials
+\end_layout
+
+\begin_layout Standard
+Complex exponentials (
+\begin_inset Formula $e^{st}$
+\end_inset
+
+ with 
+\begin_inset Formula $s=a+jb$
+\end_inset
+
+ in continuous time and 
+\begin_inset Formula $z^{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $z=c+jd$
+\end_inset
+
+ in discrete time) are 
+\begin_inset Quotes eld
+\end_inset
+
+eigenvectors
+\begin_inset Quotes erd
+\end_inset
+
+ of LTI systems: with 
+\begin_inset Formula $x\left(t\right)=e^{st}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & \int_{-\infty}^{\infty}h\left(\tau\right)x\left(t-\tau\right)d\tau\\
+ & = & \int_{-\infty}^{\infty}h\left(\tau\right)e^{s\left(t-\tau\right)}d\tau\\
+ & = & e^{st}\int_{-\infty}^{\infty}h\left(\tau\right)e^{-s\tau}d\tau\\
+ & = & e^{st}H\left(s\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $H\left(s\right)\coloneqq\int_{-\infty}^{\infty}h\left(\tau\right)e^{-s\tau}d\tau$
+\end_inset
+
+ the Laplace transform of the impulse response.
+ 
+\begin_inset Formula $H\left(s\right)$
+\end_inset
+
+ is called the transfer function of the system.
+ In essense 
+\begin_inset Formula $e^{st}$
+\end_inset
+
+ is an eigenfunction of discrete LTI systems with 
+\begin_inset Quotes eld
+\end_inset
+
+eigenvalue
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $H\left(s\right)$
+\end_inset
+
+: since linearity also holds if 
+\begin_inset Formula 
+\[
+x\left(t\right)=\sum_{k}a_{k}e^{s_{k}t}
+\]
+
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+y\left(t\right)=\sum_{k}a_{k}H\left(s_{k}\right)e^{s_{k}t}
+\]
+
+\end_inset
+
+ Similarly with 
+\begin_inset Formula $x\left[n\right]=e^{n\log z}=z^{n}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \sum_{k=-\infty}^{\infty}h\left[n\right]x\left[n-k\right]\\
+ & = & \sum_{k=-\infty}^{\infty}h\left[n\right]z^{n-k}\\
+ & = & z^{n}\sum_{k=-\infty}^{\infty}h\left[n\right]z^{-k}\\
+ & = & z^{n}H\left(z\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $H\left(z\right)\coloneqq\sum_{k=-\infty}^{\infty}h\left[n\right]z^{-k}$
+\end_inset
+
+ is the 
+\emph on
+Z
+\emph default
+-transform of the impulse response, also called the transfer function of
+ the system.
+ In essense 
+\begin_inset Formula $z^{n}$
+\end_inset
+
+ is an eigenfunction of discrete LTI systems with 
+\begin_inset Quotes eld
+\end_inset
+
+eigenvalue
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $H\left(z\right)$
+\end_inset
+
+: since linearity also holds if 
+\begin_inset Formula 
+\[
+x\left[n\right]=\sum_{k}a_{k}z_{k}^{n}
+\]
+
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+y\left[n\right]=\sum_{k}a_{k}H\left(z_{k}\right)z_{k}^{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Harmonically related Complex Exponentials
+\end_layout
+
+\begin_layout Standard
+A signal 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ is periodic with period 
+\begin_inset Formula $T$
+\end_inset
+
+ if 
+\begin_inset Formula $x\left(t+T\right)=x\left(t\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\omega_{0}=2\pi/T_{0}$
+\end_inset
+
+ be the fundamental frequency of the signal.
+ For example 
+\begin_inset Formula $x\left(t\right)=e^{j\omega_{0}t}$
+\end_inset
+
+ is periodic for any 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+.
+ The set of exponentials 
+\begin_inset Formula $\left\{ e^{j\left(\pm\omega_{0}\right)t},e^{j\left(\pm2\omega_{0}\right)t},e^{j\left(\pm3\omega_{0}\right)t},e^{j\left(\pm4\omega_{0}\right)t},\dots\right\} $
+\end_inset
+
+ are called harmonically related: they all have fundamental frequency equal
+ to a multiple of 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ and fundamental period an integral fraction of 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ but are also 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ periodic
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{j\left(\pm k\omega_{0}\right)\left(t+T_{0}\right)}=e^{j\left(\pm k\omega_{0}\right)t}e^{j\left(\pm k\omega_{0}\right)T_{0}}=e^{j\left(\pm k\omega_{0}\right)t}e^{j\left(\pm k\right)\frac{2\pi}{T_{0}}T_{0}}=e^{j\left(\pm k\omega_{0}\right)t}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Therefore any sum
+\begin_inset Formula 
+\begin{equation}
+x\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}\label{eq:fourierseries}
+\end{equation}
+
+\end_inset
+
+is also periodic with period 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Fourier Series
+\end_layout
+
+\begin_layout Standard
+Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fourierseries"
+
+\end_inset
+
+ is the Fourier series representation of a continuous-time periodi signal
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Just assume this is possible.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+.
+ How to determine the coefficients? Tricks:
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left(t\right)e^{-jn\omega_{0}t} & = & \sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}e^{-jn\omega_{0}t}\\
+ & \Rightarrow\\
+\int_{0}^{T_{0}}x\left(t\right)e^{-jn\omega_{0}t}dt & = & \int_{0}^{T_{0}}\left(\sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}e^{-jn\omega_{0}t}\right)dt\\
+ &  & \sum_{k=-\infty}^{\infty}a_{k}\left(\int_{0}^{T_{0}}e^{j\left(k-n\right)\omega_{0}t}dt\right)
+\end{eqnarray*}
+
+\end_inset
+
+We integrate from 0 to 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ because each of the exponentials is periodic in 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ and so the integral is the same over any interval of length 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+.
+ Why integrate over the period of the harmonic exponentials? Because it
+ will kill all of the exponentials in the sum except for one: 
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{0}^{T_{0}}x\left(t\right)e^{-jn\omega_{0}t}dt & = & \sum_{k=-\infty}^{\infty}a_{k}\left(\int_{0}^{T_{0}}e^{j\left(k-n\right)\omega_{0}t}dt\right)\\
+ &  & \sum_{k=-\infty}^{\infty}a_{k}\left(\int_{0}^{T_{0}}\left(\cos\left(\left(k-n\right)\omega_{0}t\right)+j\sin\left(\left(k-n\right)\omega_{0}\right)\right)dt\right)\\
+ & = & \sum_{k=-\infty}^{\infty}a_{k}\left(\int_{0}^{T_{0}}\cos\left(\left(k-n\right)\omega_{0}t\right)dt+j\int_{0}^{T_{0}}\sin\left(\left(k-n\right)\omega_{0}t\right)dt\right)
+\end{eqnarray*}
+
+\end_inset
+
+Since each of 
+\begin_inset Formula $\cos\left(\left(k-n\right)\omega_{0}t\right),\sin\left(\left(k-n\right)\omega_{0}t\right)$
+\end_inset
+
+ are periodic in 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ the integrals are 0 for 
+\begin_inset Formula $n\neq k$
+\end_inset
+
+.
+ Hence
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{0}^{T_{0}}x\left(t\right)e^{-jn\omega_{0}t}dt & = & a_{n}\int_{0}^{T_{0}}e^{j\left(n-n\right)\omega_{0}t}dt\\
+ & = & a_{n}\int_{0}^{T_{0}}dt\\
+ & = & a_{n}T_{0}\\
+ & \Rightarrow\\
+a_{n} & = & \frac{1}{T_{0}}\int_{0}^{T_{0}}x\left(t\right)e^{-jn\omega_{0}t}dt=\frac{1}{T_{0}}\int_{0}^{T_{0}}x\left(t\right)e^{-jn\left(\frac{2\pi}{T_{0}}\right)t}dt
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Sampling
 \end_layout
 
@@ -1151,76 +1466,25 @@ So
  is the Nyquiest, or folding, frequency.
 \end_layout
 
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Section
+Fourier Series
+\end_layout
+
 \begin_layout Section
 Z-Transform
 \end_layout
 
 \begin_layout Standard
-The z-transform is an extension of the discrete time Fourier transform.
- What is the response of a discrete time LTI system with impulse response
- 
-\begin_inset Formula $h\left[n\right]$
-\end_inset
-
- to input 
+The response of an LTI system to an input of 
 \begin_inset Formula $x\left[n\right]=z^{n}$
 \end_inset
 
-?
-\begin_inset Formula 
-\begin{eqnarray*}
-y\left[n\right] & = & \sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]\\
- & = & \sum_{k=-\infty}^{\infty}x\left[n-k\right]h\left[k\right]\\
- & = & \sum_{k=-\infty}^{\infty}z^{n-k}h\left[k\right]\\
- & = & z^{n}\sum_{k=-\infty}^{\infty}z^{-k}h\left[k\right]\\
- & = & x\left[n\right]H\left(z\right)
-\end{eqnarray*}
-
-\end_inset
-
-where 
-\begin_inset Formula $H\left(z\right)\coloneqq\sum_{k=-\infty}^{\infty}z^{-k}h\left[k\right]$
-\end_inset
-
- is called the 
-\emph on
-z-transform
-\emph default
- of the the impulse response.
- In essense 
-\begin_inset Formula $z^{n}$
-\end_inset
-
- is an eigenfunction of discrete LTI systems with 
-\begin_inset Quotes eld
-\end_inset
-
-eigenvalue
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $H\left(z\right)$
-\end_inset
-
-.
- Therefore, in general, if 
-\begin_inset Formula 
-\[
-x\left[n\right]=\sum_{k}a_{k}z_{k}^{n}
-\]
-
-\end_inset
-
- then
-\begin_inset Formula 
-\[
-y\left[n\right]=\sum_{k}a_{k}H\left(z_{k}\right)z_{k}^{n}
-\]
-
-\end_inset
-
-In general 
+ was described in the section on complex exponentials.
+ In general 
 \begin_inset Formula 
 \[
 X\left(z\right)\coloneqq\mathcal{Z}\left\{ x\left[n\right]\right\} \coloneqq\sum_{n=-\infty}^{\infty}x\left[n\right]z^{-n}
@@ -1228,7 +1492,16 @@ X\left(z\right)\coloneqq\mathcal{Z}\left\{ x\left[n\right]\right\} \coloneqq\sum
 
 \end_inset
 
-By the convolution property the response of a system is 
+is called the 
+\emph on
+Z-transform 
+\emph default
+of 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+.
+ By the convolution property the response of a system is 
 \begin_inset Formula 
 \[
 Y\left(z\right)=H\left(z\right)X\left(z\right)
