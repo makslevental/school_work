@@ -1259,19 +1259,19 @@ For periodic discrete time signals and almost all periodic continuous time
  signals Fourier series representations exist.
  Recapitulating: for continuous time
 \begin_inset Formula 
-\begin{eqnarray*}
-x\left(t\right) & = & \sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\left(2\pi/T\right)t}\\
-a_{k} & = & \frac{1}{T}\int_{T}x\left(t\right)e^{-j\omega_{0}t}dt=\frac{1}{T}\int_{T}x\left(t\right)e^{-j\left(2\pi/T\right)t}dt
-\end{eqnarray*}
+\begin{eqnarray}
+x\left(t\right) & = & \sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\left(2\pi/T\right)t}\nonumber \\
+a_{k} & = & \frac{1}{T}\int_{T}x\left(t\right)e^{-j\omega_{0}t}dt=\frac{1}{T}\int_{T}x\left(t\right)e^{-j\left(2\pi/T\right)t}dt\label{eq:fouriercoefficients}
+\end{eqnarray}
 
 \end_inset
 
 for discrete time
 \begin_inset Formula 
-\begin{eqnarray*}
-x\left[n\right] & = & \sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\left(2\pi/N\right)t}\\
-a_{k} & = & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\omega_{0}n}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\left(2\pi/N\right)n}
-\end{eqnarray*}
+\begin{eqnarray}
+x\left[n\right] & = & \sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\left(2\pi/N\right)t}\label{eq:discfs}\\
+a_{k} & = & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\omega_{0}n}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]e^{-j\left(2\pi/N\right)n}\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -2149,6 +2149,905 @@ H\left(e^{j\omega}\right) & = & \frac{1}{N+M+1}\sum_{k=-N}^{M}e^{-j\omega k}\\
 \end_inset
 
 which has a much sharper transition.
+\end_layout
+
+\begin_layout Section
+Fourier Transform
+\end_layout
+
+\begin_layout Standard
+Fourier series only exist for periodic signals (discrete-time or continuous-time
+).
+ 
+\end_layout
+
+\begin_layout Subsection
+Fourier transform for aperiodic signals
+\end_layout
+
+\begin_layout Standard
+Consider the periodic square wave with width 
+\begin_inset Formula $2T_{1}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+x\left(t\right)=\begin{cases}
+1 & \left|t\right|<T_{1}\\
+0 & T_{1}<\left|t\right|<T
+\end{cases}
+\]
+
+\end_inset
+
+The Fourier series coefficients 
+\begin_inset Formula 
+\[
+a_{k}=\frac{2\sin\left(k\omega_{0}T_{1}\right)}{k\omega_{0}T}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\omega_{0}=2\pi/T$
+\end_inset
+
+.
+ An alternative perspective on these coefficients is 
+\begin_inset Formula 
+\[
+Ta_{k}=\left.\frac{2\sin\left(\omega T_{1}\right)}{\omega}\right|_{\omega=k\omega_{0}}
+\]
+
+\end_inset
+
+I.e.
+ the 
+\begin_inset Formula $Ta_{k}$
+\end_inset
+
+ are equally spaced samples of the function 
+\begin_inset Formula $2\sin\left(\omega T_{1}\right)/\omega$
+\end_inset
+
+ at multiples of 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $T\rightarrow\infty,\omega_{0}\rightarrow0$
+\end_inset
+
+ and the envelope function is sampled more finely, and the scaled Fourier
+ coefficients 
+\emph on
+become
+\emph default
+ the function.
+ What else happens as a 
+\begin_inset Formula $T\rightarrow\infty$
+\end_inset
+
+? The square-wave becomes aperiodic
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The periodic repetitions move off to infinity.
+\end_layout
+
+\end_inset
+
+.
+ This is the general methodology for studying aperiodic signals: approximate
+ them by a sequence of periodic signals with ever increasing period.
+ Let 
+\begin_inset Formula $\tilde{x}_{T}\left(t\right)$
+\end_inset
+
+ be the periodic approximation to the aperiodic signal 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+.
+ The FS representation is 
+\begin_inset Formula 
+\[
+\tilde{x}_{T}\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{T}\int_{-T/2}^{T/2}\tilde{x}_{T}\left(t\right)e^{-jk\omega_{0}t}dt
+\]
+
+\end_inset
+
+Now since 
+\begin_inset Formula $\tilde{x}_{T}\left(t\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ agree on 
+\begin_inset Formula $-T/2<t<T/2$
+\end_inset
+
+ and 
+\begin_inset Formula $x\left(t\right)=0$
+\end_inset
+
+ otherwise 
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{T}\int_{-T/2}^{T/2}x_{T}\left(t\right)e^{-jk\omega_{0}t}dt=\frac{1}{T}\int_{-\infty}^{\infty}x_{T}\left(t\right)e^{-jk\omega_{0}t}dt
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+Ta_{k}=\int_{-\infty}^{\infty}x_{T}\left(t\right)e^{-jk\omega_{0}t}dt
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $X\left(j\omega\right)=\int_{-\infty}^{\infty}x_{T}\left(t\right)e^{-j\omega t}dt$
+\end_inset
+
+ be the envelope function.then 
+\begin_inset Formula 
+\begin{eqnarray*}
+Ta_{k} & = & \left.X\left(j\omega\right)\right|_{\omega=k\omega_{0}}\\
+ & \iff\\
+a_{k} & = & \frac{1}{T}\left.X\left(j\omega\right)\right|_{\omega=k\omega_{0}}
+\end{eqnarray*}
+
+\end_inset
+
+Keep in mind the meaningful quantity is 
+\begin_inset Formula $Ta_{k}$
+\end_inset
+
+, not just 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+: 
+\begin_inset Formula $Ta_{k}$
+\end_inset
+
+ are equispaced samples from the Fourier transform of 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+, not 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+ The synthesis equation for the periodic 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+ becomes
+\begin_inset Formula 
+\begin{eqnarray*}
+\tilde{x}\left(t\right) & = & \sum_{k=-\infty}^{\infty}\frac{1}{T}X\left(jk\omega_{0}\right)e^{jk\omega_{0}t}\\
+ & = & \frac{1}{2\pi}\sum_{k=-\infty}^{\infty}X\left(jk\omega_{0}\right)e^{jk\omega_{0}t}\omega_{0}
+\end{eqnarray*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\omega_{0}\rightarrow0$
+\end_inset
+
+ 
+\begin_inset Formula $k\omega_{0}$
+\end_inset
+
+ becomes the continuous 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{eqnarray*}
+\tilde{x}\left(t\right) & \rightarrow & x\left(t\right)\\
+ & \text{and}\\
+\tilde{x}\left(t\right) & \rightarrow & \frac{1}{2\pi}\int_{-\infty}^{\infty}X\left(j\omega\right)e^{j\omega t}d\omega
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Consider the signal 
+\begin_inset Formula $x\left(t\right)=e^{-at}u\left(t\right),\;a>0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left(j\omega\right) & = & \int_{-\infty}^{\infty}x\left(t\right)e^{-j\omega t}dt\\
+ & = & \int_{-\infty}^{\infty}e^{-at}u\left(t\right)e^{-j\omega t}dt\\
+ & = & \int_{0}^{\infty}e^{-\left(a+j\omega\right)t}dt\\
+ & = & \left.-\frac{1}{a+j\omega}e^{-\left(a+j\omega\right)t}\right|_{0}^{\infty}\\
+ & = & \frac{1}{a+j\omega}
+\end{eqnarray*}
+
+\end_inset
+
+This is of course the frequency response for the lowpass RC filter with
+ 
+\begin_inset Formula $a=1/RC$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This whole process can be inverted: let 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ be a finite-duration signal that is equal to 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+ over exactly one period, e.g.
+ 
+\begin_inset Formula $s\leq t\leq s+T$
+\end_inset
+
+.
+ Then since generally the Fourier coefficients for the Fourier series representa
+tion of 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+ can be computed by integrating over one period
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fouriercoefficients"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+a_{k} & = & \frac{1}{T}\int_{s}^{s+T}\tilde{x}\left(t\right)e^{-jk\omega_{0}t}dt\\
+ & = & \frac{1}{T}\int_{s}^{s+T}x\left(t\right)e^{-jk\omega_{0}t}dt
+\end{eqnarray*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $x\left(t\right)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $t$
+\end_inset
+
+ out side of 
+\begin_inset Formula $\left(s,s+T\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+a_{k} & = & \frac{1}{T}\int_{-\infty}^{\infty}x\left(t\right)e^{-jk\omega_{0}t}dt\\
+ & = & \frac{1}{T}\left.X\left(j\omega\right)\right|_{\omega=k\omega_{0}}
+\end{eqnarray*}
+
+\end_inset
+
+A very useful fact in practice.
+\end_layout
+
+\begin_layout Subsection
+Fourier transforms for periodic signals
+\end_layout
+
+\begin_layout Standard
+A periodic signal is just a superposition of pure frequencies.
+ What kind of signal 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ has fourier transform 
+\begin_inset Formula 
+\[
+X\left(j\omega\right)=2\pi\delta\left(\omega-\omega_{0}\right)
+\]
+
+\end_inset
+
+Using the synthesis equation
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left(t\right) & = & \frac{1}{2\pi}\int_{-\infty}^{\infty}2\pi\delta\left(\omega-\omega_{0}\right)e^{j\omega t}d\omega\\
+ & = & e^{j\omega_{0}t}
+\end{eqnarray*}
+
+\end_inset
+
+Therefore the Fourier transform of any periodic signal which has Fourier
+ representation 
+\begin_inset Formula 
+\[
+x\left(t\right)=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}
+\]
+
+\end_inset
+
+is
+\begin_inset Formula 
+\[
+X\left(j\omega\right)=\sum_{k=-\infty}^{\infty}2\pi a_{k}\delta\left(\omega-k\omega_{0}\right)
+\]
+
+\end_inset
+
+which makes sense since then sampling from this Fourier transform
+\begin_inset Formula 
+\begin{eqnarray*}
+a_{k} & = & \frac{1}{T}\left.X\left(j\omega\right)\right|_{\omega=k\omega_{0}}\\
+ & = & \frac{1}{T}\sum_{k'=-\infty}^{\infty}2\pi a_{k'}\delta\left(k\omega_{0}-k'\omega_{0}\right)\\
+ & \approx & \frac{2\pi}{T}a_{k}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Convolution property
+\end_layout
+
+\begin_layout Standard
+Recall that if a periodic signal has a Fourier series representation then
+ the response of an LTI system is again a Fourier series, with coefficients
+ multiplied by the frequency response of the system.
+ The Fourier transform enables this same sort of analysis for aperiodic
+ signals.
+ Remeber the interpretation of the Fourier transform as
+\begin_inset Formula 
+\[
+x\left(t\right)=\frac{1}{2\pi}\int_{-\infty}^{\infty}X\left(j\omega\right)e^{j\omega t}=\lim_{\omega_{0}\rightarrow0}\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}X\left(jk\omega_{0}\right)e^{jk\omega_{0}t}\omega_{0}
+\]
+
+\end_inset
+
+Being very sloppy with limits: the response of an LTI system is then
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & \lim_{\omega_{0}\rightarrow0}\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}X\left(jk\omega_{0}\right)H\left(jk\omega_{0}\right)e^{jk\omega_{0}t}\omega_{0}\\
+ &  & =\frac{1}{2\pi}\int_{-\infty}^{\infty}X\left(j\omega\right)H\left(j\omega\right)e^{j\omega t}
+\end{eqnarray*}
+
+\end_inset
+
+Then since 
+\begin_inset Formula 
+\[
+y\left(t\right)=\frac{1}{2\pi}\int_{-\infty}^{\infty}Y\left(j\omega\right)e^{j\omega t}d\omega
+\]
+
+\end_inset
+
+it turns out that 
+\begin_inset Formula 
+\begin{equation}
+Y\left(j\omega\right)=X\left(j\omega\right)H\left(j\omega\right)\label{eq:prodfreqspace}
+\end{equation}
+
+\end_inset
+
+A little more formally: since 
+\begin_inset Formula 
+\[
+y\left(t\right)=\int_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau
+\]
+
+\end_inset
+
+it's the case that 
+\begin_inset Formula 
+\begin{eqnarray*}
+Y\left(j\omega\right) & = & \mathfrak{F}\left\{ y\left(t\right)\right\} =\int_{-\infty}^{\infty}\left[\int_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\right]e^{-j\omega t}dt
+\end{eqnarray*}
+
+\end_inset
+
+Interchanging the order of integration
+\begin_inset Formula 
+\begin{eqnarray*}
+Y\left(j\omega\right) & = & \int_{-\infty}^{\infty}x\left(\tau\right)\left[\int_{-\infty}^{\infty}h\left(t-\tau\right)e^{-j\omega t}dt\right]d\tau
+\end{eqnarray*}
+
+\end_inset
+
+By the time-shifting property of the Fourier transform
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathfrak{F}\left\{ x\left(t-t_{0}\right)\right\} =e^{-j\omega t_{0}}\mathfrak{F}\left\{ x\left(t\right)\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+Y\left(j\omega\right) & = & H\left(j\omega\right)\int_{-\infty}^{\infty}x\left(\tau\right)e^{-j\omega\tau}d\tau\\
+ & = & H\left(j\omega\right)X\left(j\omega\right)
+\end{eqnarray*}
+
+\end_inset
+
+Therefore if 
+\begin_inset Formula 
+\[
+y\left(t\right)=h\left(t\right)\star x\left(t\right)
+\]
+
+\end_inset
+
+then
+\begin_inset Formula 
+\[
+Y\left(j\omega\right)=H\left(j\omega\right)X\left(j\omega\right)
+\]
+
+\end_inset
+
+This is useful for computing the responses of LTI systems
+\end_layout
+
+\begin_layout Example
+Consider the RC circuit system with 
+\begin_inset Formula 
+\[
+h\left(t\right)=e^{-at}u\left(t\right)
+\]
+
+\end_inset
+
+with input 
+\begin_inset Formula 
+\[
+x\left(t\right)=e^{-bt}u\left(t\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+Y\left(j\omega\right) & = & \frac{1}{\left(a+j\omega\right)\left(b+j\omega\right)}\\
+ & = & \frac{A}{a+j\omega}+\frac{B}{b+j\omega}\\
+ & = & \frac{1}{b-a}\left[\frac{1}{a+j\omega}-\frac{1}{b+j\omega}\right]
+\end{eqnarray*}
+
+\end_inset
+
+and then 
+\begin_inset Formula 
+\[
+y\left(t\right)=\frac{\left(e^{-at}-e^{-bt}\right)}{b-a}u\left(t\right)
+\]
+
+\end_inset
+
+But if 
+\begin_inset Formula $b=a$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{eqnarray*}
+Y\left(j\omega\right) & = & \frac{1}{\left(a+j\omega\right)^{2}}\\
+ & = & j\frac{d}{d\omega}\left(\frac{1}{a+j\omega}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Then the dual differentiation property
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathfrak{F}\left\{ x^{'}\left(t\right)\right\} =j\omega X\left(j\omega\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{F}^{-1}\left\{ X'\left(j\omega\right)\right\} =-jtx\left(t\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left(t\right) & = & j\mathfrak{F}^{-1}\left\{ \frac{d}{d\omega}\left(\frac{1}{a+j\omega}\right)\right\} \\
+ & = & j\left(-jtx\left(t\right)\right)\\
+ & = & te^{-at}u\left(t\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Modulation property
+\end_layout
+
+\begin_layout Standard
+By duality
+\begin_inset Formula 
+\[
+\mathfrak{F}\left\{ s\left(t\right)p\left(t\right)\right\} =\frac{1}{2\pi}\left(S\left(j\omega\right)\star P\left(j\omega\right)\right)
+\]
+
+\end_inset
+
+This will be useful for sampling.
+\end_layout
+
+\begin_layout Subsection
+Overkill
+\end_layout
+
+\begin_layout Standard
+Consider the continuous-time LTI system
+\begin_inset Formula 
+\[
+\sum_{k=0}^{N}a_{k}\frac{d^{k}y\left(t\right)}{dt^{k}}=\sum_{k=0}^{M}b_{k}\frac{d^{k}x\left(t\right)}{dt^{k}}
+\]
+
+\end_inset
+
+This is an 
+\begin_inset Formula $N$
+\end_inset
+
+th-order ordinary differential equation.
+ What's the frequency response of this system? Take the FT of both sides
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathfrak{F}\left\{ \sum_{k=0}^{N}a_{k}\frac{d^{k}y\left(t\right)}{dt^{k}}\right\}  & = & \mathfrak{F}\left\{ \sum_{k=0}^{M}b_{k}\frac{d^{k}x\left(t\right)}{dt^{k}}\right\} 
+\end{eqnarray*}
+
+\end_inset
+
+By linearity of the FT
+\begin_inset Formula 
+\begin{eqnarray*}
+\sum_{k=0}^{N}a_{k}\mathfrak{F}\left\{ \frac{d^{k}y\left(t\right)}{dt^{k}}\right\}  & = & \sum_{k=0}^{M}b_{k}\mathfrak{F}\left\{ \frac{d^{k}x\left(t\right)}{dt^{k}}\right\} 
+\end{eqnarray*}
+
+\end_inset
+
+By the differentiation property of the FT
+\begin_inset Formula 
+\begin{eqnarray*}
+\sum_{k=0}^{N}a_{k}\left(j\omega\right)^{k}Y\left(j\omega\right) & = & \sum_{k=0}^{M}b_{k}\left(j\omega\right)^{k}X\left(j\omega\right)\\
+Y\left(j\omega\right)\sum_{k=0}^{N}a_{k}\left(j\omega\right)^{k} & = & X\left(j\omega\right)\sum_{k=0}^{M}b_{k}\left(j\omega\right)^{k}
+\end{eqnarray*}
+
+\end_inset
+
+Therefore by eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:prodfreqspace"
+
+\end_inset
+
+ the frequency response
+\begin_inset Formula 
+\[
+H\left(j\omega\right)=\frac{\sum_{k=0}^{M}b_{k}\left(j\omega\right)^{k}}{\sum_{k=0}^{N}a_{k}\left(j\omega\right)^{k}}
+\]
+
+\end_inset
+
+Note that the coefficients of this rational polynomial in 
+\begin_inset Formula $j\omega$
+\end_inset
+
+ are those of the original differential equation, and so the frequency response
+ can be simply read off from the same DE.
+\end_layout
+
+\begin_layout Example
+Consider the ODE
+\begin_inset Formula 
+\[
+\frac{d^{2}y\left(t\right)}{dt^{2}}+4\frac{dy\left(t\right)}{dt}+3y\left(t\right)=\frac{dx\left(t\right)}{dt}+2x\left(t\right)
+\]
+
+\end_inset
+
+The frequency response is 
+\begin_inset Formula 
+\begin{eqnarray*}
+H\left(j\omega\right) & = & \frac{\left(j\omega\right)+2}{\left(j\omega\right)^{2}+4\left(j\omega\right)+3}\\
+ & = & \frac{\left(j\omega\right)+2}{\left(j\omega+1\right)\left(j\omega+3\right)}\\
+ & = & \frac{1/2}{j\omega+1}+\frac{1/2}{j\omega+3}
+\end{eqnarray*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\[
+h\left(t\right)=\frac{1}{2}\left(e^{-t}+e^{-3t}\right)u\left(t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discrete-time Fourier Transform
+\end_layout
+
+\begin_layout Standard
+Just like there exists a Fourier transform for continuous-time aperiodic
+ signals which fortifies the Fourier series (which only exists for periodic
+ signals) there exists a Discrete-time Fourier transform for discrete-time
+ aperiodic signal which fortifies the Discrete-time Fourier series
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Which has the same nice properties as the continuous time Fourier series.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Discrete-time Fourier transform aperiodic signals
+\end_layout
+
+\begin_layout Standard
+Consider a general finite-duration sequence 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ which has support 
+\begin_inset Formula $-N_{1}\leq n\leq N_{2}$
+\end_inset
+
+ and its periodic analog 
+\begin_inset Formula $\tilde{x}\left[n\right]$
+\end_inset
+
+ with period 
+\begin_inset Formula $N>N_{1}+N_{2}+1$
+\end_inset
+
+.
+ By eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:discfs"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{x}\left[n\right]=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }\tilde{x}\left[n\right]e^{-jk\omega_{0}n}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $x\left[n\right]=\tilde{x}\left[n\right]$
+\end_inset
+
+ over a period that includes the support of 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+, and 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ is zero outside of its support
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{N}\sum_{n=-N_{1}}^{N_{2}}x\left[n\right]e^{-jk\omega_{0}n}=\frac{1}{N}\sum_{n=-\infty}^{\infty}x\left[n\right]e^{-jk\omega_{0}n}
+\]
+
+\end_inset
+
+Define 
+\begin_inset Formula $X\left(e^{j\omega}\right)=\sum_{n=-\infty}^{\infty}x\left[n\right]e^{-j\omega n}$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{N}X\left(e^{jk\omega_{0}}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\omega_{0}=2\pi/N$
+\end_inset
+
+ is the spacing the frequency domain.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\tilde{x}\left[n\right] & = & \frac{1}{N}\sum_{k=\left\langle N\right\rangle }X\left(e^{jk\omega_{0}}\right)e^{jk\omega_{0}n}\\
+ & = & \frac{1}{2\pi}\sum_{k=\left\langle N\right\rangle }X\left(e^{jk\omega_{0}}\right)e^{jk\omega_{0}n}\omega_{0}
+\end{eqnarray*}
+
+\end_inset
+
+As 
+\begin_inset Formula $N\rightarrow\infty$
+\end_inset
+
+ 
+\begin_inset Formula $\omega_{0}\rightarrow0$
+\end_inset
+
+ and since 
+\begin_inset Formula $\omega_{0}N=2\pi$
+\end_inset
+
+ and 
+\begin_inset Formula $k\omega_{0}$
+\end_inset
+
+ becomes the continuous 
+\begin_inset Formula $\omega$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\begin{eqnarray*}
+\tilde{x}\left[n\right] & \rightarrow & x\left[n\right]\\
+ & \text{and}\\
+\tilde{x}\left[n\right] & \rightarrow & \frac{1}{2\pi}\int_{2\pi}X\left(e^{j\omega}\right)e^{j\omega n}d\omega
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discrete-time Fourier transform periodic signals
+\end_layout
+
+\begin_layout Standard
+As in the continuous case periodic signals can be represented using the
+ DTFT.
+ Consider the signal 
+\begin_inset Formula 
+\[
+x\left[n\right]=e^{j\omega_{0}n}
+\]
+
+\end_inset
+
+The DTFT of this signal is 
+\begin_inset Formula 
+\[
+X\left(e^{j\omega}\right)=\sum_{l=-\infty}^{\infty}2\pi\delta\left(\omega-\omega_{0}-2\pi l\right)
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $X\left(e^{j\omega}\right)$
+\end_inset
+
+ must be periodic in 
+\begin_inset Formula $\omega$
+\end_inset
+
+ with period 
+\begin_inset Formula $2\pi$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is because complex exponentials are 
+\begin_inset Formula $2\pi$
+\end_inset
+
+ periodic.
+\end_layout
+
+\end_inset
+
+.
+ Now consider the periodic sequence 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ with period 
+\begin_inset Formula $N$
+\end_inset
+
+ with Fourier series representation
+\begin_inset Formula 
+\[
+x\left[n\right]=\sum_{k=\left\langle N\right\rangle }a_{k}e^{jk\omega_{0}n}
+\]
+
+\end_inset
+
+Then the DTFT is 
+\begin_inset Formula 
+\[
+X\left(e^{j\omega}\right)=\sum_{k=-\infty}^{\infty}2\pi a_{k}\delta\left(\omega-\omega_{0}k\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
