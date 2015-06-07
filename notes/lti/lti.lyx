@@ -1832,53 +1832,144 @@ name "fig:RC-Circuit"
 
 \end_inset
 
-described by the ordinary, constant coefficient, differential equation
-\begin_inset Formula 
-\begin{equation}
-RC\frac{dv_{c}}{dt}+v_{c}\left(t\right)=v_{s}\left(t\right)\label{eq:rcode}
-\end{equation}
-
-\end_inset
-
-Assuming that there is no current flowing through the system at 
-\begin_inset Formula $t=0$
-\end_inset
-
- the system is LTI.
- To determine the frequency response let the forcing function be an exponential,
- i.e.
- 
-\begin_inset Formula $v_{s}\left(t\right)=e^{j\omega t}$
-\end_inset
-
-.
- Then since the system is LTI the output 
-\begin_inset Formula $v_{c}\left(t\right)$
-\end_inset
-
- must obey
+described by the Kirchoff Voltage Law 
 \begin_inset Formula 
 \[
-v_{c}\left(t\right)=H\left(j\omega\right)e^{j\omega t}
+RI\left(t\right)+\frac{1}{C}Q\left(t\right)=V\left(t\right)
 \]
 
 \end_inset
 
-Substituting into eqn.
+This then becomes an ordinary differential equation through a series of
+ transformation: since this is a one loop circuit the current passing through
+ the resistor is the charge being discharged by the capacitor 
+\begin_inset Formula 
+\begin{eqnarray}
+RI\left(t\right)+\frac{1}{C}Q\left(t\right) & = & V\left(t\right)\nonumber \\
+ & \Rightarrow\nonumber \\
+RQ^{'}\left(t\right)+V_{C}\left(t\right) & = & V\left(t\right)\nonumber \\
+RCV_{C}^{'}\left(t\right)+V_{C}\left(t\right) & = & V\left(t\right)\nonumber \\
+V_{C}^{'}\left(t\right)+\frac{1}{RC}V_{C}\left(t\right) & = & \frac{1}{RC}V\left(t\right)\label{eq:rccircuit}
+\end{eqnarray}
+
+\end_inset
+
+Solving this first order ODE is easy.
+ The solution is the sum of the solution to the homogeneous ODE
+\begin_inset Formula 
+\begin{eqnarray*}
+V_{C}^{'}\left(t\right)+\frac{1}{RC}V_{C}\left(t\right) & = & 0\\
+ & \Rightarrow\\
+V_{C}\left(t\right) & = & V_{C}\left(0\right)e^{-\frac{t}{RC}}
+\end{eqnarray*}
+
+\end_inset
+
+plus the particular solution, using integrating factors: if you multiply
+ both sides of eqn.
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:rcode"
+reference "eq:rccircuit"
 
+\end_inset
+
+ by a function 
+\begin_inset Formula $\mu\left(t\right)$
 \end_inset
 
  
 \begin_inset Formula 
+\[
+\mu\left(t\right)V_{C}^{'}\left(t\right)+\frac{1}{RC}\mu\left(t\right)V_{C}\left(t\right)=\frac{1}{RC}\mu\left(t\right)V\left(t\right)
+\]
+
+\end_inset
+
+such that
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{d}{dt}\left(\mu\left(t\right)V_{C}\left(t\right)\right) & = & \mu\left(t\right)V_{C}^{'}\left(t\right)+\mu^{'}\left(t\right)V_{C}\left(t\right)\label{eq:intgfac}\\
+ & = & \mu\left(t\right)V_{C}^{'}\left(t\right)+\frac{1}{RC}\mu\left(t\right)V_{C}\left(t\right)\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+then 
+\begin_inset Formula 
+\[
+\frac{d}{dt}\left(\mu\left(t\right)V_{C}\left(t\right)\right)=\frac{1}{RC}\mu\left(t\right)V\left(t\right)
+\]
+
+\end_inset
+
+and you can just integrate both sides.
+ Eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:intgfac"
+
+\end_inset
+
+ holds if 
+\begin_inset Formula $\mu^{'}\left(t\right)=\frac{1}{RC}\mu\left(t\right)$
+\end_inset
+
+ which necessitates that 
+\begin_inset Formula $\mu\left(t\right)=e^{t/RC}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\frac{d}{dt}\left(e^{t/RC}V_{C}\left(t\right)\right)=\frac{1}{RC}e^{t/RC}V\left(t\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
 \begin{eqnarray*}
-RC\left(j\omega H\left(j\omega\right)e^{j\omega t}\right)+H\left(j\omega\right)e^{j\omega t} & = & e^{j\omega t}\\
+e^{t/RC}V_{C}\left(t\right) & = & \frac{1}{RC}\int e^{t/RC}V\left(t\right)dt\\
  & \Rightarrow\\
-H\left(j\omega\right) & = & \frac{1}{1+RCj\omega}
+V_{C}\left(t\right) & = & \frac{e^{-t/RC}}{RC}\int e^{t/RC}V\left(t\right)dt
 \end{eqnarray*}
+
+\end_inset
+
+Finally if 
+\begin_inset Formula $V\left(t\right)=e^{j\omega t}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+V_{C}\left(t\right) & = & e^{-t/RC}V_{C}\left(0\right)+\frac{e^{-t/RC}}{RC}\int e^{t/RC}e^{j\omega t}dt\\
+ & = & e^{-t/RC}V_{C}\left(0\right)+\frac{e^{j\omega t}}{1+RCj\omega}
+\end{eqnarray*}
+
+\end_inset
+
+If 
+\begin_inset Formula $V\left(0\right)=0$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{eqnarray*}
+V_{C}\left(t\right) & = & \frac{1}{1+RCj\omega}e^{j\omega t}\\
+ & = & \frac{1}{1+RCj\omega}V\left(t\right)
+\end{eqnarray*}
+
+\end_inset
+
+Thus the frequency response 
+\begin_inset Formula 
+\[
+H\left(j\omega\right)=\frac{1}{1+RCj\omega}
+\]
 
 \end_inset
 
