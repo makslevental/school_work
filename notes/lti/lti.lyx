@@ -1973,7 +1973,182 @@ H\left(j\omega\right)=\frac{1}{1+RCj\omega}
 
 \end_inset
 
+If one plots the amplitude of the frequency response versus frequency it's
+ a mountain around 
+\begin_inset Formula $\omega=0$
+\end_inset
 
+ and slopes down steadily as 
+\begin_inset Formula $\left|\omega\right|$
+\end_inset
+
+ increases.
+ So it scales down high frequencies.
+ There are trade-offs though.
+ The impulse response of this system is 
+\begin_inset Formula 
+\[
+h\left(t\right)=\frac{1}{RC}e^{-t/RC}u\left(t\right)
+\]
+
+\end_inset
+
+and the step response is 
+\begin_inset Formula 
+\[
+s\left(t\right)=\left(1-e^{-t/RC}\right)u\left(t\right)
+\]
+
+\end_inset
+
+For the filter to functio as expected 
+\begin_inset Formula $RC$
+\end_inset
+
+ should be high.
+ But then the step response takes a very long time to reach its steady state.
+ 
+\end_layout
+
+\begin_layout Standard
+Note that the voltage drop across the resistor in the RC circuit function
+ as a high-pass filter.
+\end_layout
+
+\begin_layout Subsubsection
+Discrete-time filters from Difference equations
+\end_layout
+
+\begin_layout Standard
+Discrete-time filters correspond to difference equations, just like how
+ continuous-time filters correspond to ODEs.
+ Nevermind implementation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+FPGAs?
+\end_layout
+
+\end_inset
+
+.
+ There are several types of LTI systems described by difference equations:
+ recursive difference equations are considered infinite impulse response
+ (IIR) systems because the ouput is dependent on the entire past of the
+ input, non-recursive difference equations are considered finite impulse
+ response (FIR) systems because the output is dependent on only the finite
+ past of the input.
+ 
+\end_layout
+
+\begin_layout Standard
+The general form of an FIR nonrecursive difference equation is 
+\begin_inset Formula 
+\[
+y\left[n\right]=\sum_{k=-N}^{M}b_{k}x\left[n-k\right]
+\]
+
+\end_inset
+
+This resembles a moving average: 
+\begin_inset Formula $\left(M+N+1\right)$
+\end_inset
+
+ contiguous values of 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ are weighted by 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ and summed; for 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ it's the 
+\begin_inset Formula $M$
+\end_inset
+
+ values preceding 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ and the 
+\begin_inset Formula $N$
+\end_inset
+
+ values proceeding 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+.
+ Take for example 
+\begin_inset Formula 
+\[
+y\left[n\right]=\frac{1}{3}\left(x\left[n-1\right]+x\left[n\right]+x\left[n+1\right]\right)
+\]
+
+\end_inset
+
+The impulse response of this system is 
+\begin_inset Formula 
+\[
+h\left[n\right]=\frac{1}{3}\left(\delta\left[n+1\right]+\delta\left[n\right]+\delta\left[n-1\right]\right)
+\]
+
+\end_inset
+
+Why? By the properties of impulse response and convolution
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & x\left[n\right]\star h\left[n\right]\\
+ & = & \sum_{k=-\infty}^{\infty}x\left[k\right]h\left[n-k\right]\\
+ & = & \frac{1}{3}\sum_{k=-\infty}^{\infty}x\left[k\right]\left(\delta\left[n-\left(k+1\right)\right]+\delta\left[n-\left(k\right)\right]+\delta\left[n-\left(k-1\right)\right]\right)\\
+ & = & \frac{1}{3}\sum_{k=-\infty}^{\infty}x\left[k\right]\left(\delta\left[\left(n-1\right)-k\right]+\delta\left[n-k\right]+\delta\left[\left(n+1\right)-k\right]\right)\\
+ & = & \frac{1}{3}\left(x\left[n-1\right]+x\left[n\right]+x\left[n+1\right]\right)
+\end{eqnarray*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula 
+\begin{eqnarray*}
+H\left(e^{j\omega}\right) & = & \sum_{k=-\infty}^{\infty}h\left[k\right]e^{-jk\omega}\\
+ &  & \frac{1}{3}\sum_{k=-\infty}^{\infty}\left(\delta\left[k+1\right]+\delta\left[k\right]+\delta\left[k-1\right]\right)e^{-jk\omega}\\
+ & = & \frac{1}{3}\left(e^{j\omega}+1+e^{-j\omega}\right)=\frac{1}{3}\left(1+2\cos\left(\omega\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+which when plotted looks like a low-pass filter but it does not have a sharp
+ transition from passband to stopband, and without parameters to tweak there's
+ nothing that can be done.
+ Alternatively
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[n\right] & = & \frac{1}{N+M+1}\sum_{k=-N}^{M}x\left[n-k\right]\\
+ & \Rightarrow\\
+h\left[n\right] & = & \frac{1}{N+M+1}\sum_{k=-N}^{M}\delta\left[n+k\right]
+\end{eqnarray*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula 
+\begin{eqnarray*}
+H\left(e^{j\omega}\right) & = & \frac{1}{N+M+1}\sum_{k=-N}^{M}e^{-j\omega k}\\
+ & = & \frac{1}{N+M+1}e^{j\omega\left(\frac{N-M}{2}\right)}\frac{\sin\left(\frac{N+M+1}{2}\omega\right)}{\sin\left(\omega/2\right)}
+\end{eqnarray*}
+
+\end_inset
+
+which has a much sharper transition.
 \end_layout
 
 \begin_layout Section
@@ -2182,14 +2357,6 @@ So
 \end_inset
 
  is the Nyquiest, or folding, frequency.
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Section
-Fourier Series
 \end_layout
 
 \begin_layout Section
