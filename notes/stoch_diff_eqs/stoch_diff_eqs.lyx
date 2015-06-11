@@ -57,6 +57,13 @@ figs-within-sections
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -2030,6 +2037,12 @@ natural
 \end_layout
 
 \begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:Kolmogorov's-extension-theorem."
+
+\end_inset
+
 Kolmogorov's extension theorem.
  For all finite tuples 
 \begin_inset Formula $\left(t_{1},\dots,t_{k}\right)$
@@ -2461,13 +2474,126 @@ So again
 .
 \end_layout
 
-\begin_layout --Separator--
+\begin_layout Standard
+Motivated by all this a reason definition of Brownian motion might be
+\end_layout
 
+\begin_layout Definition
+A real-valued stochastic process 
+\begin_inset Formula $B\left(\cdot\right)$
+\end_inset
+
+ is called a 
+\emph on
+Brownian motion
+\emph default
+ or 
+\emph on
+Wiener process
+\emph default
+ if
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $B\left(0\right)=0$
+\end_inset
+
+ almost surely, i.e.
+ 
+\begin_inset Formula $P\left(B\left(0\right)=0\right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $B\left(t\right)-B\left(s\right)\sim\text{n}\left(0,t-s\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $0\leq s\leq t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+for all 
+\begin_inset Formula $0<t_{1}<t_{2}<\cdots<t_{n}$
+\end_inset
+
+ the random variables 
+\begin_inset Formula $B\left(t_{1}\right),B\left(t_{2}\right)-B\left(t_{1}\right),\dots,B\left(t_{n}\right)-B\left(t_{n-1}\right)$
+\end_inset
+
+ are independent, i.e.
+ increments of the process are independent.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Note that 
+\begin_inset Formula $B\left(t\right)=B\left(t\right)-B\left(0\right)\sim\text{n}\left(0,t-0\right)\sim\text{n}\left(0,t\right)$
+\end_inset
+
+ so for a Wiener process 
+\begin_inset Formula $B\left(t\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+E\left(B\left(t\right)\right)=0
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left(\left(B\left(t\right)\right)^{2}\right) & = & \text{Var}\left(B\left(t\right)\right)+E\left(B\left(t\right)\right)^{2}\\
+ & = & \text{Var}\left(B\left(t\right)\right)+0\\
+ & = & \text{Var}\left(\text{n}\left(0,t\right)\right)\\
+ & = & t
+\end{eqnarray*}
+
+\end_inset
+
+But the real test of Brownian motion is whether we can use Kolmogorov's
+ extension theorem to specify a family of probability measures satisfying
+ properties 1 and 2 of thm.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Kolmogorov's-extension-theorem."
+
+\end_inset
+
+.
+ The measures will be chosen in particular to agree with the above results
 \end_layout
 
 \begin_layout Standard
-Then for 
-\begin_inset Formula $0\leq t_{1}\leq t_{2}\leq\cdots\leq t_{k}$
+Fix 
+\begin_inset Formula $\mathbf{x}\in\mathbb{R}^{n}$
+\end_inset
+
+ and define 
+\begin_inset Formula 
+\[
+p\left(t,\mathbf{x},\mathbf{y}\right)=\frac{1}{\sqrt[n]{2\pi t}}e^{-\frac{\left(\mathbf{x}-\mathbf{y}\right)^{2}}{2t}}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $\mathbf{y}\in\mathbb{R}^{n}$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $0<t_{1}<t_{2}<\cdots<t_{n}$
 \end_inset
 
  define a measure 
@@ -2492,10 +2618,10 @@ for
 \end_inset
 
  with the convention that 
-\begin_inset Formula $p\left(0,x,y\right)dx$
+\begin_inset Formula $p\left(0,x,y\right)dx=\delta_{x}\left(y\right)$
 \end_inset
 
- is a point mass at 
+ a unit point mass at 
 \begin_inset Formula $x$
 \end_inset
 
@@ -2533,7 +2659,393 @@ P^{x}\left(B_{t_{1}}\in F_{1}\times\cdots\times B_{t_{k}}\in F_{k}\right) & = & 
 
 \end_inset
 
+Such a process
+\begin_inset Foot
+status open
 
+\begin_layout Plain Layout
+One that has these finite-dimensional distributions.
+\end_layout
+
+\end_inset
+
+ is called a Brownian motion.
+ The paths of a Brownian motion happen to almost surely continuous
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Wiener's theorem.
+\end_layout
+
+\end_inset
+
+ so with each 
+\begin_inset Formula $\omega\in\Omega$
+\end_inset
+
+ you can identify a continuous function 
+\begin_inset Formula $t\rightarrow B_{t}\left(\omega\right)$
+\end_inset
+
+ from 
+\begin_inset Formula $\left[0,\infty\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ Thus a perspective on Brownian motion is that it's the space of continuous
+ functions 
+\begin_inset Formula $C\left(\left[0,\infty\right),\mathbb{R}^{n}\right)$
+\end_inset
+
+ equipped with the measures 
+\begin_inset Formula $P^{x}$
+\end_inset
+
+ above
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Which as discussed are product measures on a function space.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Normal Random Variables Interlude
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ be a probability space.
+ An rv 
+\begin_inset Formula $X:\Omega\rightarrow\mathbb{R}$
+\end_inset
+
+ is 
+\begin_inset Formula $\text{n}\left(m,\sigma^{2}\right)$
+\end_inset
+
+ if the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ has a density of the form
+\begin_inset Formula 
+\[
+p_{X}\left(x\right)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{\left(x-m\right)^{2}}{2\sigma^{2}}}
+\]
+
+\end_inset
+
+In other words 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left[X\in G\right] & = & \int_{G}p_{X}\left(x\right)dx\\
+ & = & \int_{G}I_{G}dP
+\end{eqnarray*}
+
+\end_inset
+
+for all Borel sets 
+\begin_inset Formula $G\subset\mathbb{R}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+Then 
+\begin_inset Formula 
+\[
+E\left[X\right]=\int_{\Omega}XdP=\int_{\mathbb{R}}xp_{X}\left(x\right)dx=m
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\text{Var}\left(X\right)=E\left[\left(X-m\right)^{2}\right]=\int_{\mathbb{R}}\left(x-m\right)^{2}p_{X}\left(x\right)dx=\sigma^{2}
+\]
+
+\end_inset
+
+In general an rv 
+\begin_inset Formula $X:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+ is called 
+\emph on
+multinormal
+\emph default
+ 
+\begin_inset Formula $\text{n}\left(\mathbf{m},\Sigma\right)$
+\end_inset
+
+ if the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+p_{X}\left(x_{1},\dots,x_{n}\right)=\frac{1}{\sqrt[n]{2\pi\left|\Sigma^{-1}\right|}}e^{-\frac{1}{2}\left(\mathbf{x}-\mathbf{m}\right)^{T}\Sigma^{-1}\left(\mathbf{x}-\mathbf{m}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $E\left[X\right]=\mathbf{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Sigma_{jk}^{-1}=E\left[\left(X_{j}-m_{j}\right)\left(X_{k}-m_{k}\right)\right]$
+\end_inset
+
+ is the covariance matrix of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+The characteristic function of 
+\begin_inset Formula $X\sim\text{n}\left(\mathbf{m},\Sigma\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $X:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\phi_{X}\left(u_{1},\dots,u_{n}\right)=\exp\left(-\frac{1}{2}\left(\mathbf{u}^{T}\Sigma^{-1}\mathbf{u}\right)+i\mathbf{u}\cdot\mathbf{m}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem
+Let 
+\begin_inset Formula $X_{j}:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+ then 
+\begin_inset Formula $X=\left(X_{1},\dots,X_{n}\right)$
+\end_inset
+
+ is normal iff
+\begin_inset Formula 
+\[
+Y=\sum_{j=1}^{l}\lambda_{j}X_{j}
+\]
+
+\end_inset
+
+ is normal for all 
+\begin_inset Formula $\boldsymbol{\lambda}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem
+Let 
+\begin_inset Formula $Y_{0},Y_{1},\dots,Y_{l}$
+\end_inset
+
+ be real, rvs on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $X=\left(Y_{0},\dots,Y_{l}\right)$
+\end_inset
+
+ is normal and 
+\begin_inset Formula $Y_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{j}$
+\end_inset
+
+ are uncorrelated for each 
+\begin_inset Formula $j\geq1$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+E\left[\left(Y_{0}-EY_{0}\right)\left(Y_{j}-EY_{j}\right)\right]=0
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula $Y_{0}$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $\left\{ Y_{1},\dots,Y_{n}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem
+Suppose 
+\begin_inset Formula $X_{k}:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+ is normal and 
+\begin_inset Formula $\lim_{k}X_{k}=X\in L^{2}\left(\Omega\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+\lim_{k\rightarrow\infty}E\left[\left|X_{k}-X\right|^{2}\right]\rightarrow0
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $X$
+\end_inset
+
+ is normal.
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $\left|e^{i\mathbf{u}\cdot\mathbf{x}}-e^{i\mathbf{u}\cdot\mathbf{y}}\right|<\left|\mathbf{u}\right|\cdot\left|\mathbf{x}-\mathbf{y}\right|$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+E\left[\left(e^{i\mathbf{u}\cdot X_{k}}-e^{i\mathbf{u}\cdot X}\right)^{2}\right]\leq\left|\mathbf{u}\right|^{2}E\left[\left|X_{k}-X\right|^{2}\right]\rightarrow0
+\]
+
+\end_inset
+
+and hence 
+\begin_inset Formula 
+\[
+\lim_{k\rightarrow\infty}E\left[e^{i\mathbf{u}\cdot X_{k}}\right]\rightarrow e^{i\mathbf{u}\cdot X}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $E\left[X\right]=\lim_{k\rightarrow\infty}E\left[X_{k}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\Sigma^{-1}=\lim_{k\rightarrow\infty}\Sigma_{k}^{-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Here are some basic properties 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ is a 
+\emph on
+Gaussian process, 
+\emph default
+i.e.
+ for all 
+\begin_inset Formula $0<t_{1}<t_{2}<\cdots<t_{k}$
+\end_inset
+
+ the random vector 
+\begin_inset Formula $Z=\left(B_{t_{1}},\dots,B_{t_{k}}\right)\in\left(\mathbb{R}^{n}\right)^{k}$
+\end_inset
+
+ is distributed multinormal.
+ That means there exists a mean vector 
+\begin_inset Formula $\mathbf{m}\in\left(\mathbb{R}^{n}\right)^{k}$
+\end_inset
+
+ and covariance matrix 
+\begin_inset Formula $\Sigma=\left[c_{jm}\right]\in\mathbb{R}^{nk\times nk}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{eqnarray}
+E^{x}\left(e^{i\sum_{j=1}^{nk}u_{j}Z_{j}}\right) & \coloneqq & \int e^{i\sum_{j=1}^{nk}u_{j}Z_{j}}dP^{x}\nonumber \\
+ & = & e^{-\frac{1}{2}\sum_{j,m}u_{j}c_{jm}um+i\sum_{j}u_{j}m_{j}}\label{eq:charmulti}
+\end{eqnarray}
+
+\end_inset
+
+for all 
+\begin_inset Formula $\mathbf{u}\in\left(\mathbb{R}^{n}\right)^{k}$
+\end_inset
+
+.
+ Note this is the definition of multinormal
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+That any linear combination of the coordinates have characteristic function
+ equal to the right side of eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:charmulti"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \end_body
