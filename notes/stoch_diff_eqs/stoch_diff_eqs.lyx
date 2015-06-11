@@ -2109,189 +2109,356 @@ then there exists a probability space
 Canonical Brownian Motion
 \end_layout
 
+\begin_layout Subsubsection
+Heuristic
+\end_layout
+
 \begin_layout Standard
 In 1828 Robert Brown observed pollen in a suspension exhibiting irregular
  motion.
  Einstein later modeled the motion as random collisions with the molecules
  of water.
- Here is a heuristic construction: let 
-\begin_inset Formula $S_{i}$
-\end_inset
-
- be iid Bernoulli random variable such that 
-\begin_inset Formula $P\left(S=1\right)=P\left(S=-1\right)=.5$
-\end_inset
-
-.
- Thus 
-\begin_inset Formula $ES=0$
+ Here is a refined version of an argument that leads to the same model (1
+ dimensional model): envisage a 2 dimensional lattice indexed by 
+\begin_inset Formula $m=0,\pm1,\pm2,\dots$
 \end_inset
 
  and 
-\begin_inset Formula $\text{Var}\left(S\right)=1$
+\begin_inset Formula $n=0,1,2,\dots$
+\end_inset
+
+ with spacings 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ in the 
+\begin_inset Formula $m$
+\end_inset
+
+ direction and 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ in the 
+\begin_inset Formula $n$
+\end_inset
+
+ direction (for some small fixed 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+).
+ The 
+\begin_inset Formula $m$
+\end_inset
+
+ direction is spatial (the pollen particle moves either left or right on
+ a line) and the 
+\begin_inset Formula $n$
+\end_inset
+
+ direction is time (time evolves forward).
+ Consider the pollen particle starting at 
+\begin_inset Formula $\left(m,n\right)=\left(0,0\right)$
+\end_inset
+
+.
+ At each 
+\begin_inset Formula $n\Delta t$
+\end_inset
+
+ time 
+\begin_inset Formula $m$
+\end_inset
+
+ increases by 1 with probability 
+\begin_inset Formula $1/2$
+\end_inset
+
+ or decreases by 1 with probability 
+\begin_inset Formula $1/2$
+\end_inset
+
+ (moves left or right on the 
+\begin_inset Formula $m$
+\end_inset
+
+ axis).
+ Let 
+\begin_inset Formula $p\left(m\Delta x,n\Delta t\right)$
+\end_inset
+
+ be the probability that the particle is at position 
+\begin_inset Formula $m\Delta x$
+\end_inset
+
+ at time 
+\begin_inset Formula $n\Delta t$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+p\left(m\Delta x,0\right)=\begin{cases}
+0 & m\Delta x\neq0\\
+1 & m\Delta x=0
+\end{cases}
+\]
+
+\end_inset
+
+This time type of process is called a random walk on 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ or just a one dimensional random walk.
+ Recursively 
+\begin_inset Formula 
+\[
+p\left(m\Delta x,\left(n+1\right)\Delta t\right)=\frac{1}{2}p\left(\left(m+1\right)\Delta x,n\Delta t\right)+\frac{1}{2}p\left(\left(m-1\right)\Delta x,n\Delta t\right)
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\begin{eqnarray*}
+p\left(m\Delta x,\left(n+1\right)\Delta t\right)-p\left(m\Delta x,n\Delta t\right) & = & \frac{1}{2}p\left(\left(m+1\right)\Delta x,n\Delta t\right)+\frac{1}{2}p\left(\left(m-1\right)\Delta x,n\Delta t\right)-p\left(m\Delta x,n\Delta t\right)\\
+ & = & \frac{1}{2}\left(p\left(\left(m+1\right)\Delta x,n\Delta t\right)-2p\left(m\Delta x,n\Delta t\right)+p\left(\left(m-1\right)\Delta x,n\Delta t\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+Now let 
+\begin_inset Formula $D\coloneqq\left(\Delta x\right)^{2}/\Delta t$
+\end_inset
+
+ and then
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{p\left(m\Delta x,\left(n+1\right)\Delta t\right)-p\left(m\Delta x,n\Delta t\right)}{\Delta t} & = & \frac{D}{2}\left(\frac{p\left(\left(m+1\right)\Delta x,n\Delta t\right)-2p\left(m\Delta x,n\Delta t\right)+p\left(\left(m-1\right)\Delta x,n\Delta t\right)}{\left(\Delta x\right)^{2}}\right)
+\end{eqnarray*}
+
+\end_inset
+
+As 
+\begin_inset Formula $\left(\Delta t,\Delta x,m\Delta x,n\Delta t\right)\rightarrow\left(0,0,x,t\right)$
+\end_inset
+
+ at a rate such that 
+\begin_inset Formula $D$
+\end_inset
+
+ is preserved then
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{p\left(m\Delta x,\left(n+1\right)\Delta t\right)-p\left(m\Delta x,n\Delta t\right)}{\Delta t} & \rightarrow & \frac{\partial}{\partial t}p\left(x,t\right)\\
+\frac{p\left(\left(m+1\right)\Delta x,n\Delta t\right)-2p\left(m\Delta x,n\Delta t\right)+p\left(\left(m-1\right)\Delta x,n\Delta t\right)}{\left(\Delta x\right)^{2}} & \rightarrow & \frac{\partial^{2}}{\partial x^{2}}p\left(x,t\right)\\
+ & \Rightarrow\\
+\frac{\partial}{\partial t}p\left(x,t\right) &  & \frac{D}{2}\frac{\partial^{2}}{\partial x^{2}}p\left(x,t\right)
+\end{eqnarray*}
+
+\end_inset
+
+This is a well studied Partial Differential Equation called the diffusion
+ equation (or heat equation) with diffusion constant 
+\begin_inset Formula $D$
+\end_inset
+
+ and solution
+\begin_inset Formula 
+\[
+p\left(x,t\right)=\frac{1}{\sqrt{2\pi Dt}}e^{-\frac{1}{2}\frac{x^{2}}{Dt}}
+\]
+
+\end_inset
+
+Therefore the interpretation is that for a particle starting 
+\begin_inset Formula $x=0$
+\end_inset
+
+ at 
+\begin_inset Formula $t=0$
+\end_inset
+
+ the distribution on positions at time 
+\begin_inset Formula $t=t_{0}$
+\end_inset
+
+ is Normal 
+\begin_inset Formula $\text{n}\left(0,Dt_{0}\right)$
+\end_inset
+
+ distributed.
+ Einstein calculated 
+\begin_inset Formula 
+\[
+D=\frac{RT}{N_{A}f}
+\]
+
+\end_inset
+
+where 
+\end_layout
+
+\begin_layout Itemize
+R is the ideal, or universal, gas constant, equal to the product of the
+ Boltzmann constant and the Avogadro constant.
+\end_layout
+
+\begin_layout Itemize
+T is the temperature of gas/fluid in Kelvin
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $f$
+\end_inset
+
+ is the friction coefficient between particle and fluid
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N_{A}$
+\end_inset
+
+ is Avogadro's number
+\end_layout
+
+\begin_layout Subsubsection
+Rigorous
+\end_layout
+
+\begin_layout Standard
+Envisage the same one dimensional random walk on 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+, with spatial increments 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ and time increments 
+\begin_inset Formula $\Delta t$
 \end_inset
 
 .
  Let 
-\begin_inset Formula $R_{0}=0$
+\begin_inset Formula $X_{i}$
 \end_inset
 
- and 
+ be Bernoulli random variables iid with 
 \begin_inset Formula 
 \[
-R_{n}=\sum_{i=1}^{n}S_{i}
+P\left(X_{i}=0\right)=\frac{1}{2}\:\text{and}\:P\left(X_{i}=1\right)=\frac{1}{2}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\text{Var}\left(X_{i}\right)=\frac{1}{4}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula 
+\[
+S_{n}\coloneqq\sum_{i=1}^{n}X_{i}
 \]
 
 \end_inset
 
 
-\begin_inset Formula $R_{n}$
+\begin_inset Formula $S_{n}$
 \end_inset
 
- is a random walk on the integers since each 
-\begin_inset Formula $R_{n}:\mathbb{N}\rightarrow\mathbb{Z}$
-\end_inset
-
-.
- Let's scale the random walk: pick 
-\begin_inset Formula $k,t$
-\end_inset
-
- such that 
-\begin_inset Formula $kt=n$
-\end_inset
-
-.
- Then set 
-\begin_inset Formula 
-\[
-B_{k}\left(t\right)=\sum_{i=1}^{tk}\frac{S_{i}}{\sqrt{k}}=\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}S_{i}
-\]
-
-\end_inset
-
-In this model the particle takes a step of size 
-\begin_inset Formula $1/\sqrt{k}$
-\end_inset
-
- every 
-\begin_inset Formula $1/k$
-\end_inset
-
- units of time (
-\begin_inset Formula $k$
-\end_inset
-
- per unit time) and after time 
-\begin_inset Formula $t$
-\end_inset
-
- it will have taken 
-\begin_inset Formula $tk$
-\end_inset
-
- steps.
- As 
-\begin_inset Formula $k\rightarrow\infty$
-\end_inset
-
- the step sizes become smaller and smaller and for any fixed 
-\begin_inset Formula $t$
-\end_inset
-
- 
-\begin_inset Formula $B_{k}\left(t\right)$
-\end_inset
-
- the process becomes continuous.
+ is the number of steps to the right (not the distance but just the number
+ of steps).
  Note that by iid 
 \begin_inset Formula 
 \[
-EB_{k}\left(t\right)=E\left(\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}S_{i}\right)=\frac{1}{\sqrt{k}}E\left(\sum_{i=1}^{tk}S_{i}\right)=\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}ES_{i}=0
+ES_{n}=\sum_{i=1}^{n}EX_{i}=\frac{n}{2}
 \]
 
 \end_inset
 
-and 
+Then let 
 \begin_inset Formula 
 \[
-\text{Var}\left(B_{k}\left(t\right)\right)=\text{Var}\left(\frac{1}{\sqrt{k}}\sum_{i=1}^{tk}S_{i}\right)=\frac{1}{k}\sum_{i=1}^{tk}\text{Var}\left(S_{i}\right)=\frac{1}{k}tk=t
-\]
-
-\end_inset
-
-Since by the CLT
-\begin_inset Formula 
-\[
-\frac{\frac{1}{kt}\sum_{i=1}^{tk}S_{i}-0}{1/\sqrt{kt}}=\frac{1}{\sqrt{kt}}\sum_{i=1}^{tk}S_{i}-0\rightarrow\text{n}\left(0,1\right)
-\]
-
-\end_inset
-
-it's the case that 
-\begin_inset Formula 
-\[
-B_{k}\left(t\right)=\sqrt{t}\left(\frac{1}{\sqrt{kt}}\sum_{i=1}^{tk}S_{i}-0\right)\rightarrow\text{n}\left(0,t\right)
-\]
-
-\end_inset
-
-Note also that 
-\begin_inset Formula 
-\[
-B_{k}\left(t\right)-B_{k}\left(s\right)=\text{n}\left(0,t-s\right)
+X\left(n\Delta t\right)\coloneqq\underbrace{S_{n}\Delta x}_{\text{positive dist}}-\underbrace{\left(n-S_{n}\right)\left(-\Delta x\right)}_{\text{negative dist}}=\left(2S_{n}-n\right)\Delta x
 \]
 
 \end_inset
 
 i.e.
- any increment only depends on the difference 
-\begin_inset Formula $t-s$
+ the position of the particle at time 
+\begin_inset Formula $n\Delta t$
 \end_inset
 
 .
-\end_layout
+ Then
+\begin_inset Formula 
+\begin{eqnarray*}
+\text{Var}\left(X\left(n\Delta t\right)\right) & = & \text{Var}\left(\left(2S_{n}-n\right)\Delta x\right)\\
+ & = & \left(\Delta x\right)^{2}\text{Var}\left(\left(2S_{n}-n\right)\right)\\
+ & = & 4\left(\Delta x\right)^{2}\text{Var}\left(S_{n}\right)\\
+ & = & 4\left(\Delta x\right)^{2}\text{Var}\left(\sum_{i=1}^{n}X_{i}\right)\\
+X_{i}\text{ iid} & \text{\Rightarrow}\\
+ & = & 4\left(\Delta x\right)^{2}n\text{Var}\left(X_{i}\right)\\
+ & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
+\end{eqnarray*}
 
-\begin_layout Standard
-But this is only a heuristic construction.
- To really construct Brownian motion we need to use Kolmogorov Extension
- and specify its finite-dimensional distributions.
- 
-\series bold
-Fix
-\series default
- 
-\begin_inset Formula $x\in\mathbb{R}$
 \end_inset
 
- and define 
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left(n\Delta t\right) & = & \left(2S_{n}-n\right)\Delta x\\
+ & = & \sqrt{n}\Delta x\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left(\frac{\sum_{i=1}^{n}X_{i}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}n\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
+\end{eqnarray*}
+
+\end_inset
+
+The CLT
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Actually a weaker theorem called Laplace-De Moivre.
+\end_layout
+
+\end_inset
+
+ with 
 \begin_inset Formula 
 \[
-p\left(t,x,y\right)=\frac{1}{\sqrt{2\pi t}}e^{-\frac{1}{2t}\left(x-y\right)^{2}},\;t>0
+\sqrt{Dt}\left[\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]=\sqrt{Dt}\left[\left(\frac{\bar{X}-EX_{i}}{\sigma_{X}/\sqrt{n}}\right)\right]
 \]
 
 \end_inset
 
-Interpret this as the probability that a pollen grain is propagated from
- 
-\begin_inset Formula $x$
+implies that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\rightarrow\infty}P\left(\frac{a}{\sqrt{Dt}}\leq X\left(t\right)\leq\frac{b}{\sqrt{Dt}}\right) & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
+ & = & \frac{1}{\sqrt{2\pi Dt}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2Dt}}dx
+\end{eqnarray*}
+
 \end_inset
 
- to 
-\begin_inset Formula $y$
+So again 
+\begin_inset Formula $X\left(t\right)\sim\text{n}\left(0,Dt\right)$
 \end_inset
 
-
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-THIS MIGHT NOT BE THE CORRECT INTEPRETATION.
+.
 \end_layout
 
 \begin_layout --Separator--
