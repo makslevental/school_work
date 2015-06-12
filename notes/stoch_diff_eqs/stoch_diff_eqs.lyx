@@ -2474,6 +2474,10 @@ So again
 .
 \end_layout
 
+\begin_layout Subsubsection
+Defining Brownian motion
+\end_layout
+
 \begin_layout Standard
 Motivated by all this a reason definition of Brownian motion might be
 \end_layout
@@ -2576,19 +2580,19 @@ reference "thm:Kolmogorov's-extension-theorem."
 
 \begin_layout Standard
 Fix 
-\begin_inset Formula $\mathbf{x}\in\mathbb{R}^{n}$
+\begin_inset Formula $x\in\mathbb{R}$
 \end_inset
 
  and define 
 \begin_inset Formula 
 \[
-p\left(t,\mathbf{x},\mathbf{y}\right)=\frac{1}{\sqrt[n]{2\pi t}}e^{-\frac{\left(\mathbf{x}-\mathbf{y}\right)^{2}}{2t}}
+p\left(t,x,y\right)=\frac{1}{\sqrt{2\pi t}}e^{-\frac{\left(x-y\right)^{2}}{2t}}
 \]
 
 \end_inset
 
 for 
-\begin_inset Formula $\mathbf{y}\in\mathbb{R}^{n}$
+\begin_inset Formula $y\in\mathbb{R}$
 \end_inset
 
 .
@@ -2652,10 +2656,10 @@ for
 
  are 
 \begin_inset Formula 
-\begin{eqnarray*}
-P^{x}\left(B_{t_{1}}\in F_{1}\times\cdots\times B_{t_{k}}\in F_{k}\right) & = & \int_{F_{1}}\cdots\int_{F_{k}}p\left(t_{1},x,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\\
- &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}
-\end{eqnarray*}
+\begin{eqnarray}
+P^{x}\left(B_{t_{1}}\in F_{1}\times\cdots\times B_{t_{k}}\in F_{k}\right) & = & \int_{F_{1}}\cdots\int_{F_{k}}p\left(t_{1},x,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\label{eq:brownianmotiondef}\\
+ &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -2693,13 +2697,13 @@ Wiener's theorem.
 \end_inset
 
  to 
-\begin_inset Formula $\mathbb{R}^{n}$
+\begin_inset Formula $\mathbb{R}$
 \end_inset
 
 .
  Thus a perspective on Brownian motion is that it's the space of continuous
  functions 
-\begin_inset Formula $C\left(\left[0,\infty\right),\mathbb{R}^{n}\right)$
+\begin_inset Formula $C\left(\left[0,\infty\right),\mathbb{R}\right)$
 \end_inset
 
  equipped with the measures 
@@ -2981,11 +2985,28 @@ with
 .
 \end_layout
 
+\begin_layout Subsubsection
+Brownian motion basic properties 
+\end_layout
+
 \begin_layout Standard
-Here are some basic properties 
+Here are some of the basic properties of Brownian motion as defined by defn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:brownianmotiondef"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Enumerate
+For 
+\begin_inset Formula $x=0$
+\end_inset
+
+ 
 \begin_inset Formula $B_{t}$
 \end_inset
 
@@ -2999,53 +3020,48 @@ i.e.
 \end_inset
 
  the random vector 
-\begin_inset Formula $Z=\left(B_{t_{1}},\dots,B_{t_{k}}\right)\in\left(\mathbb{R}^{n}\right)^{k}$
+\begin_inset Formula $Z=\left(B_{t_{1}},\dots,B_{t_{k}}\right)\in\left(\mathbb{R}\right)^{k}$
 \end_inset
 
  is distributed multinormal.
  That means there exists a mean vector 
-\begin_inset Formula $\mathbf{m}\in\left(\mathbb{R}^{n}\right)^{k}$
+\begin_inset Formula $\mathbf{m}\in\left(\mathbb{R}\right)^{k}$
 \end_inset
 
  and covariance matrix 
-\begin_inset Formula $\Sigma=\left[c_{jm}\right]\in\mathbb{R}^{nk\times nk}$
+\begin_inset Formula $\Sigma=\left[c_{jm}\right]\in\mathbb{R}^{k\times k}$
 \end_inset
 
  such that 
 \begin_inset Formula 
-\begin{eqnarray}
-E^{x}\left(e^{i\sum_{j=1}^{nk}u_{j}Z_{j}}\right) & \coloneqq & \int e^{i\sum_{j=1}^{nk}u_{j}Z_{j}}dP^{x}\nonumber \\
- & = & e^{-\frac{1}{2}\sum_{j,m}u_{j}c_{jm}um+i\sum_{j}u_{j}m_{j}}\label{eq:charmulti}
-\end{eqnarray}
+\begin{eqnarray*}
+E^{x}\left[\exp\left(i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right)\right] & \coloneqq & \int\exp\left(-i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right)dP^{x}\\
+ & = & \int_{\mathbb{R}}\cdots\int_{\mathbb{R}}\exp\left(-i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right)p\left(t_{1},0,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\\
+ &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}\\
+ & = & \frac{1}{\sqrt[k]{2\pi}}\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}\exp\left(-i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right)e^{-\frac{\left(x_{1}\right)^{2}}{2t_{1}}}e^{-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}}\cdots\\
+ &  & e^{-\frac{\left(x_{k-1}-x_{k}\right)^{2}}{2\left(t_{k}-t_{k-1}\right)}}dx_{1}dx_{2}\cdots dx_{k}
+\end{eqnarray*}
 
 \end_inset
 
-for all 
-\begin_inset Formula $\mathbf{u}\in\left(\mathbb{R}^{n}\right)^{k}$
+Let's try this for 
+\begin_inset Formula $k=2$
 \end_inset
 
-.
- Note this is the definition of multinormal
-\begin_inset Foot
-status open
 
-\begin_layout Plain Layout
-That any linear combination of the coordinates have characteristic function
- equal to the right side of eqn.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:charmulti"
-
-\end_inset
-
-.
-\end_layout
+\begin_inset Formula 
+\begin{eqnarray*}
+E^{x}\left[\exp\left(i\sum_{j=1}^{2}u_{j}B_{t_{j}}\right)\right] & = & \frac{1}{2\pi}\int_{\mathbb{R}}\int_{\mathbb{R}}\exp\left(i\sum_{j=1}^{2}u_{j}x_{t_{j}}\right)e^{-\frac{\left(x_{1}\right)^{2}}{2t_{1}}}e^{-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}}dx_{1}dx_{2}\\
+ & = & \frac{1}{2\pi}\int_{\mathbb{R}}\int_{\mathbb{R}}e^{iu_{1}x_{1}}e^{iu_{2}x_{2}}e^{-\frac{\left(x_{1}\right)^{2}}{2t_{1}}}e^{-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}}dx_{1}dx_{2}\\
+ & = & \frac{1}{2\pi}\int_{\mathbb{R}}\int_{\mathbb{R}}\exp\left(iu_{1}x_{1}+iu_{2}x_{2}-\frac{\left(x_{1}\right)^{2}}{2t_{1}}-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}\right)dx_{1}dx_{2}\\
+ & = & \frac{1}{2\pi}\int_{\mathbb{R}}\int_{\mathbb{R}}\exp\left(iu_{1}x_{1}+iu_{2}x_{2}-\frac{\left(x_{1}\right)^{2}}{2t_{1}}-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}\right)dx_{1}dx_{2}\\
+\\
+ & =\\
+\end{eqnarray*}
 
 \end_inset
 
-.
- 
+
 \end_layout
 
 \end_body
