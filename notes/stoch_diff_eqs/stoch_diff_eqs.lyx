@@ -892,11 +892,9 @@ Now you can think of this as whatever you want (counting how much a function
  there are alternative characterizations due to the same fact like that
  any of 
 \begin_inset Formula 
-\begin{multline*}
-\left\{ \omega\in\Omega;X\left(\Omega\right)\geq c\right\} \\
-\left\{ \omega\in\Omega;X\left(\Omega\right)<c\right\} \\
-\left\{ \omega\in\Omega;X\left(\Omega\right)\leq c\right\} 
-\end{multline*}
+\[
+\left\{ \omega\in\Omega;X\left(\Omega\right)\geq c\right\} ,\left\{ \omega\in\Omega;X\left(\Omega\right)<c\right\} ,\left\{ \omega\in\Omega;X\left(\Omega\right)\leq c\right\} 
+\]
 
 \end_inset
 
@@ -999,13 +997,11 @@ The set of measurable functions is closed under algebraic operations and
 \begin_inset Formula $k$
 \end_inset
 
- then 
+ then
 \begin_inset Formula 
-\begin{multline*}
-\sup_{k\in\mathbb{N}}f_{k}\\
-\limsup_{k\in\mathbb{N}}f_{k}\\
-\liminf_{k\in\mathbb{N}}f_{k}
-\end{multline*}
+\[
+\sup_{k\in\mathbb{N}}f_{k},\limsup_{k\in\mathbb{N}}f_{k},\liminf_{k\in\mathbb{N}}f_{k}
+\]
 
 \end_inset
 
@@ -1264,11 +1260,8 @@ then
  is Lebesgue integrable.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula $\twonotes$
-\end_inset
-
-
+\begin_layout Section
+Probability
 \end_layout
 
 \begin_layout Definition
@@ -1757,11 +1750,8 @@ These sets form a subbasis for the product topology on the Cartesian product
 .
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula $\twonotes$
-\end_inset
-
-
+\begin_layout Subsection
+Stochastic Processes
 \end_layout
 
 \begin_layout Standard
@@ -2118,11 +2108,11 @@ then there exists a probability space
 \end_layout
 
 \end_deeper
-\begin_layout Subsection
+\begin_layout Section
 Canonical Brownian Motion
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Heuristic
 \end_layout
 
@@ -2342,7 +2332,7 @@ T is the temperature of gas/fluid in Kelvin
  is Avogadro's number
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Rigorous
 \end_layout
 
@@ -2474,7 +2464,7 @@ So again
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Defining Brownian motion
 \end_layout
 
@@ -2985,7 +2975,7 @@ with
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Brownian motion basic properties 
 \end_layout
 
