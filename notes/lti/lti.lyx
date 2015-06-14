@@ -3332,7 +3332,7 @@ family
  Let 
 \begin_inset Formula 
 \[
-W_{N}\coloneqq e^{j2\pi/N}
+W_{N}\coloneqq e^{-j2\pi/N}
 \]
 
 \end_inset
@@ -3352,8 +3352,8 @@ discrete-time complex exponential
  basis
 \begin_inset Formula 
 \begin{eqnarray}
-x\left[n\right] & = & \sum_{n=\left\langle N\right\rangle }a_{k}\left(W_{N}\right)^{kn}\label{eq:synthdtfs}\\
-a_{k} & \coloneqq & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]\left(W_{N}\right)^{-kn}\label{eq:analdtfs}
+\tilde{x}\left[n\right] & = & \sum_{n=\left\langle N\right\rangle }a_{k}\left(W_{N}\right)^{-kn}\label{eq:synthdtfs}\\
+a_{k} & \coloneqq & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }\tilde{x}\left[n\right]\left(W_{N}\right)^{kn}\label{eq:analdtfs}
 \end{eqnarray}
 
 \end_inset
@@ -3443,6 +3443,109 @@ reference "eq:synthdtfs"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The discrete-time Fourier transform can also be employed on periodic signals
+ as well.
+ Suppose we wanted to compute the Fourier series coefficients 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ for an 
+\begin_inset Formula $N$
+\end_inset
+
+ periodic signal 
+\begin_inset Formula $\tilde{x}\left[n\right]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ be an finite duration (aperiodic) signal that agrees with 
+\begin_inset Formula $\tilde{x}\left[n\right]$
+\end_inset
+
+ over one period, e.g.
+ 
+\begin_inset Formula $0\leq n\leq N-1$
+\end_inset
+
+, and is zero elsewhere.
+ 
+\begin_inset Formula $X\left(e^{j\omega}\right)$
+\end_inset
+
+ is the Fourier transform of 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ but since 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ is zero outside of 
+\begin_inset Formula $0\leq n\leq N-1$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X\left(e^{j\omega}\right)=\sum_{n=-\infty}^{\infty}x\left[n\right]e^{-j\omega n}=\sum_{n=0}^{N-1}x\left[n\right]e^{-j\omega n}
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\tilde{x}\left[n\right]=x\left[n\right]$
+\end_inset
+
+ on this interval
+\begin_inset Formula 
+\[
+X\left(e^{j\omega}\right)=\sum_{n=0}^{N-1}x\left[n\right]e^{-j\omega n}=\sum_{n=0}^{N-1}\tilde{x}\left[n\right]e^{-j\omega n}
+\]
+
+\end_inset
+
+Comparing with eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:analdtfs"
+
+\end_inset
+
+ we see that 
+\begin_inset Formula 
+\begin{equation}
+a_{k}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }\tilde{x}\left[n\right]\left(W_{N}\right)^{kn}=\frac{1}{N}\sum_{n=0}^{N-1}\tilde{x}\left[n\right]\left(e^{-j2\pi/N}\right)^{kn}=\frac{1}{N}\left.\sum_{n=0}^{N-1}\tilde{x}\left[n\right]e^{-j\omega n}\right|_{\omega=\frac{2\pi k}{N}}=\frac{1}{N}\left.X\left(e^{j\omega}\right)\right|_{\omega=\frac{2\pi k}{N}}\label{eq:dtfssample}
+\end{equation}
+
+\end_inset
+
+So the Fourier series coefficients for a periodic signal 
+\begin_inset Formula $\tilde{x}\left[n\right]$
+\end_inset
+
+ can be computed by sampling the Fourier transform of 
+\series bold
+one period
+\series default
+ of 
+\begin_inset Formula $\tilde{x}\left[n\right]$
+\end_inset
+
+, i.e.
+ the Fourier transform of the finite duration version of 
+\begin_inset Formula $\tilde{x}\left[n\right]$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -3571,8 +3674,312 @@ one period
 \begin_inset Formula $\tilde{x}\left(t\right)$
 \end_inset
 
+, i.e.
+ the Fourier transform of the finite duration version of 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
 .
+\end_layout
+
+\begin_layout Subsection
+Discrete Fourier Transform
+\end_layout
+
+\begin_layout Standard
+When the eqn.
  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dtfssample"
+
+\end_inset
+
+ process is inverted, and the the coefficients 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ are computed for an aperiodic finite duration signal, i.e.
+ 
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{N}\sum_{n=\left\langle N\right\rangle }\tilde{x}\left[n\right]\left(W_{N}\right)^{kn}=\frac{1}{N}\left.X\left(e^{j\omega}\right)\right|_{\omega=\frac{2\pi k}{N}}=\frac{1}{N}\left.\sum_{n=0}^{N-1}x\left[n\right]e^{-j\omega n}\right|_{\omega=\frac{2\pi k}{N}}=\frac{1}{N}\sum_{n=0}^{N-1}x\left[n\right]\left(W_{N}\right)^{kn}
+\]
+
+\end_inset
+
+then they are usually denoted 
+\begin_inset Formula $\tilde{X}\left[k\right]$
+\end_inset
+
+ and called the discrete Fourier transform.
+ Using the orthogonality of 
+\begin_inset Formula 
+\[
+\left(W_{N}\right)^{kn}=e^{-j\left(\frac{2\pi}{N}\right)kn}
+\]
+
+\end_inset
+
+the sequence 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ can be recovered from 
+\begin_inset Formula $\tilde{X}\left[k\right]$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{eqnarray*}
+f\left[n\right] & = & \sum_{k=0}^{N-1}\tilde{X}\left[k\right]e^{j\left(\frac{2\pi}{N}\right)kn}\\
+ & = & \sum_{k=0}^{N-1}\left(\frac{1}{N}\sum_{m=0}^{N-1}x\left[m\right]e^{-j\left(\frac{2\pi}{N}\right)km}\right)e^{j\left(\frac{2\pi}{N}\right)kn}\\
+ & = & \frac{1}{N}\sum_{k=0}^{N-1}\sum_{m=0}^{N-1}x\left[m\right]\left(e^{-j2\pi/N}\right)^{k\left(n-m\right)}\\
+ & = & \frac{1}{N}\sum_{m=0}^{N-1}x\left[m\right]\left(\sum_{k=0}^{N-1}e^{-j\frac{2\pi}{N}k\left(n-m\right)}\right)\\
+ & = & \frac{1}{N}\sum_{m=0}^{N-1}x\left[m\right]\frac{1-e^{j2\pi\left(m-n\right)}}{1-e^{j2\pi\frac{\left(m-n\right)}{N}}}
+\end{eqnarray*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{equation}
+\lim_{m\rightarrow n}\frac{1-e^{j2\pi\left(m-n\right)}}{1-e^{j2\pi\frac{\left(m-n\right)}{N}}}=N\label{eq:orthogdft}
+\end{equation}
+
+\end_inset
+
+and for 
+\begin_inset Formula $m\neq n$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $e^{j2\pi\left(m-n\right)}=1$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\frac{1-e^{j2\pi\left(m-n\right)}}{1-e^{j2\pi\frac{\left(m-n\right)}{N}}}=0
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $f\left[n\right]=x\left[n\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An equivalent convention for the 
+\begin_inset Formula $N$
+\end_inset
+
+-point DFT and 
+\begin_inset Formula $N$
+\end_inset
+
+-point IDFT pair is 
+\begin_inset Formula 
+\begin{eqnarray}
+X\left[k\right] & = & \sum_{n=0}^{N-1}x\left[n\right]W_{N}^{kn}\label{eq:DFT}\\
+x\left[n\right] & = & \frac{1}{N}\sum_{k=0}^{N-1}X\left[k\right]W_{N}^{-kn}\label{eq:idft}
+\end{eqnarray}
+
+\end_inset
+
+Note that the computation of each 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $X\left[k\right]$
+\end_inset
+
+ takes 
+\begin_inset Formula $N$
+\end_inset
+
+ complex multiplies and 
+\begin_inset Formula $N-1$
+\end_inset
+
+ complex additions.
+ Hence computing the entire DFT takes 
+\begin_inset Formula $N\times N$
+\end_inset
+
+ complex multiplies and 
+\begin_inset Formula $N\times\left(N-1\right)$
+\end_inset
+
+ complex additions.
+ Using the 
+\begin_inset Formula $W_{N}$
+\end_inset
+
+ notation the DFT and IDFT can be expressed using matrix multiplication:
+ let 
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathbf{x}_{N} & = & \begin{pmatrix}x\left[0\right]\\
+x\left[1\right]\\
+\vdots\\
+x\left[n\right]
+\end{pmatrix},\ \mathbf{X}_{N}=\begin{pmatrix}X\left[0\right]\\
+X\left[1\right]\\
+\vdots\\
+X\left[n\right]
+\end{pmatrix}\\
+\mathbf{W}_{N} & = & \begin{pmatrix}W_{N}^{00} & W_{N}^{01} & \cdots & W_{N}^{0\left(N-1\right)}\\
+W_{N}^{10} & W_{N}^{11} & \ddots & W_{N}^{1\left(N-1\right)}\\
+\vdots & \ddots & \ddots & \vdots\\
+W_{N}^{\left(N-1\right)0} & W_{N}^{\left(N-1\right)1} & \cdots & W_{N}^{\left(N-1\right)\left(N-1\right)}
+\end{pmatrix}\\
+ & = & \begin{pmatrix}1 & 1 & \cdots & 1\\
+1 & e^{j\frac{2\pi}{N}} & \ddots & e^{j\frac{2\pi}{N}\left(N-1\right)}\\
+\vdots & \ddots & \ddots & \vdots\\
+1 & e^{j\frac{2\pi}{N}\left(N-1\right)} & \cdots & e{}^{j\frac{2\pi}{N}\left(N-1\right)\left(N-1\right)}
+\end{pmatrix}
+\end{eqnarray*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $\mathbf{X}_{N}=\mathbf{W}_{N}\mathbf{x}_{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{x}_{N}=\mathbf{W}_{N}^{-1}\mathbf{X}_{N}$
+\end_inset
+
+.
+ What is 
+\begin_inset Formula $\mathbf{W}_{N}^{-1}$
+\end_inset
+
+? Well since by eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:orthogdft"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mathbf{W}_{N}^{-1}=\frac{1}{N}\mathbf{W}_{N}^{*}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{W}_{N}^{*}$
+\end_inset
+
+ is just the adjoint
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Conjugate transpose.
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbf{W}_{N}$
+\end_inset
+
+ but because 
+\begin_inset Formula $\mathbf{W}_{N}$
+\end_inset
+
+ is symmetric it's just the conjugate.
+ 
+\end_layout
+
+\begin_layout Example
+Compute the DFT of 
+\begin_inset Formula $x=\left(0,1,2,3\right)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula 
+\begin{eqnarray*}
+W_{N}^{k+N/2} & = & e^{-j\left(\frac{2\pi}{N}\right)\left(k+\frac{N}{2}\right)}\\
+ & = & e^{-j\left(\frac{2\pi}{N}\right)k}e^{-j\left(\frac{2\pi}{N}\right)\frac{N}{2}}\\
+ & = & e^{-j\left(\frac{2\pi}{N}\right)k}e^{-j\pi}\\
+ & = & -e^{-j\left(\frac{2\pi}{N}\right)k}=-W_{N}^{k}
+\end{eqnarray*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+W_{N}^{k+N}=e^{-j\left(\frac{2\pi}{N}\right)k}e^{-j\left(\frac{2\pi}{N}\right)N}=e^{-j\left(\frac{2\pi}{N}\right)k}
+\]
+
+\end_inset
+
+so really it should be 
+\begin_inset Formula $W_{N}^{k\mod N}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathbf{W}_{N} & = & \begin{pmatrix}W_{4}^{00} & W_{4}^{01} & W_{4}^{02} & W_{4}^{03}\\
+W_{4}^{10} & W_{4}^{11} & W_{4}^{12} & W_{4}^{13}\\
+W_{4}^{20} & W_{4}^{21} & W_{4}^{22} & W_{4}^{23}\\
+W_{4}^{30} & W_{4}^{31} & W_{4}^{32} & W_{4}^{33}
+\end{pmatrix}=\begin{pmatrix}W_{4}^{0} & W_{4}^{0} & W_{4}^{0} & W_{4}^{0}\\
+W_{4}^{0} & W_{4}^{1} & W_{4}^{2} & W_{4}^{3}\\
+W_{4}^{0} & W_{4}^{2} & W_{4}^{4} & W_{4}^{6}\\
+W_{4}^{0} & W_{4}^{3} & W_{4}^{6} & W_{4}^{9}
+\end{pmatrix}\\
+ & = & \begin{pmatrix}W_{4}^{0} & W_{4}^{0} & W_{4}^{0} & W_{4}^{0}\\
+W_{4}^{0} & W_{4}^{1} & W_{4}^{2} & W_{4}^{3}\\
+W_{4}^{0} & W_{4}^{2} & W_{4}^{0} & W_{4}^{2}\\
+W_{4}^{0} & W_{4}^{3} & W_{4}^{2} & W_{4}^{1}
+\end{pmatrix}=\begin{pmatrix}W_{4}^{0} & W_{4}^{0} & W_{4}^{0} & W_{4}^{0}\\
+W_{4}^{0} & W_{4}^{1} & W_{4}^{0+\frac{4}{2}} & W_{4}^{1+\frac{4}{2}}\\
+W_{4}^{0} & W_{4}^{0+\frac{4}{2}} & W_{4}^{0} & W_{4}^{0+\frac{4}{2}}\\
+W_{4}^{0} & W_{4}^{1+\frac{4}{2}} & W_{4}^{0+\frac{4}{2}} & W_{4}^{1}
+\end{pmatrix}\\
+ & = & \begin{pmatrix}W_{4}^{0} & W_{4}^{0} & W_{4}^{0} & W_{4}^{0}\\
+W_{4}^{0} & W_{4}^{1} & -W_{4}^{0} & -W_{4}^{1}\\
+W_{4}^{0} & -W_{4}^{0} & W_{4}^{0} & -W_{4}^{0}\\
+W_{4}^{0} & -W_{4}^{1} & -W_{4}^{0} & W_{4}^{1}
+\end{pmatrix}=\begin{pmatrix}1 & 1 & 1 & 1\\
+1 & -j & -1 & j\\
+1 & -1 & 1 & -1\\
+1 & j & -1 & -j
+\end{pmatrix}
+\end{eqnarray*}
+
+\end_inset
+
+Note that the 
+\begin_inset Formula $W_{N}^{j}$
+\end_inset
+
+ spin anti-clockwise.
+ 
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
