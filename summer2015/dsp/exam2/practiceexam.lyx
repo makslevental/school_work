@@ -129,6 +129,33 @@ lineary
 
 \end_layout
 
+\begin_layout Enumerate
+parseval's theorem says sum of squares in time space equals sum squares
+ in freq space divided by N so (9+9)/3=6
+\end_layout
+
+\begin_layout Enumerate
+who knows what this means? but the DFT of 
+\begin_inset Formula $x^{*}\left[n\right]$
+\end_inset
+
+ is 
+\begin_inset Formula $X*\left[N-k\right]$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left[0\right] & = & X^{*}\left[3-0\right]=X^{*}\left[3\right]=0\\
+X\left[1\right] & = & X^{*}\left[3-1\right]=X^{*}\left[2\right]=0\\
+X\left[2\right] & = & X^{*}\left[3-2\right]=X^{*}\left[1\right]=
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \end_body
 \end_document
