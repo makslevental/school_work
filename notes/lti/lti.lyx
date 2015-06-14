@@ -3259,6 +3259,323 @@ So
 \end_layout
 
 \begin_layout Section
+DFT
+\end_layout
+
+\begin_layout Subsection
+Recapitulation
+\end_layout
+
+\begin_layout Subsubsection
+Discrete time
+\end_layout
+
+\begin_layout Standard
+The set of all discrete-time complex exponential signal that are periodic
+ with period fundamental period 
+\begin_inset Formula $N$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\phi_{k}\left[n\right]=e^{jk\omega_{0}n}=e^{jk\left(\frac{2\pi}{N}\right)n}
+\]
+
+\end_inset
+
+Note there are only 
+\begin_inset Formula $N$
+\end_inset
+
+ distinct signals in this set because 
+\begin_inset Formula 
+\[
+\phi_{k+N}\left[n\right]=e^{j\left(k+N\right)\omega_{0}n}=e^{j\left(k+N\right)\left(\frac{2\pi}{N}\right)n}=e^{jk\left(\frac{2\pi}{N}\right)n}e^{jN\left(\frac{2\pi}{N}\right)n}=\phi_{k}\left[n\right]e^{j2\pi n}=\phi_{k}\left[n\right]\times1
+\]
+
+\end_inset
+
+and so in general 
+\begin_inset Formula 
+\[
+\phi_{k+rN}\left[n\right]=\phi_{k}\left[n\right]
+\]
+
+\end_inset
+
+So the 
+\begin_inset Formula $k$
+\end_inset
+
+ index indexes the 
+\begin_inset Quotes eld
+\end_inset
+
+family
+\begin_inset Quotes erd
+\end_inset
+
+ of exponentials represented and the 
+\begin_inset Formula $n$
+\end_inset
+
+ index indexes the values that that 
+\begin_inset Quotes eld
+\end_inset
+
+family
+\begin_inset Quotes erd
+\end_inset
+
+ takes on.
+ Let 
+\begin_inset Formula 
+\[
+W_{N}\coloneqq e^{j2\pi/N}
+\]
+
+\end_inset
+
+A 
+\begin_inset Formula $N$
+\end_inset
+
+-periodic discrete-time signal can be expanded in the 
+\begin_inset Quotes eld
+\end_inset
+
+discrete-time complex exponential
+\begin_inset Quotes erd
+\end_inset
+
+ basis
+\begin_inset Formula 
+\begin{eqnarray}
+x\left[n\right] & = & \sum_{n=\left\langle N\right\rangle }a_{k}\left(W_{N}\right)^{kn}\label{eq:synthdtfs}\\
+a_{k} & \coloneqq & \frac{1}{N}\sum_{n=\left\langle N\right\rangle }x\left[n\right]\left(W_{N}\right)^{-kn}\label{eq:analdtfs}
+\end{eqnarray}
+
+\end_inset
+
+Note also that since 
+\begin_inset Formula $\phi_{k}\left[n\right]$
+\end_inset
+
+ is 
+\begin_inset Formula $N$
+\end_inset
+
+ periodic in 
+\begin_inset Formula $k$
+\end_inset
+
+ so are the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+.
+ The sum index notation 
+\begin_inset Formula $n=\left\langle N\right\rangle $
+\end_inset
+
+ means the sum should be carried out over any 
+\begin_inset Formula $N$
+\end_inset
+
+ sequential values of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An aperiodic discrete-time signal be represented as a continuous sum (integral)
+ of exponentials
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left[n\right] & = & \frac{1}{2\pi}\int_{2\pi}X\left(e^{j\omega}\right)e^{j\omega n}d\omega\\
+X\left(e^{j\omega}\right) & = & \sum_{n=-\infty}^{\infty}x\left[n\right]e^{-j\omega n}
+\end{eqnarray*}
+
+\end_inset
+
+There are analogues here to the discrete case.
+ Note that 
+\begin_inset Formula $X\left(e^{j\omega}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $2\pi$
+\end_inset
+
+ periodic just like 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ in eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:analdtfs"
+
+\end_inset
+
+ are 
+\begin_inset Formula $N$
+\end_inset
+
+ periodic.
+ The integral over an interval of length 
+\begin_inset Formula $2\pi$
+\end_inset
+
+ is analogous to the sum of 
+\begin_inset Formula $N$
+\end_inset
+
+ sequential values for the synthesis equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:synthdtfs"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Continuous time
+\end_layout
+
+\begin_layout Standard
+Periodic continuous-time signals can be decomposed into Fourier components.
+ Suppose 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+ is a 
+\begin_inset Formula $T$
+\end_inset
+
+ periodic signal.
+ Then
+\begin_inset Formula 
+\begin{eqnarray}
+\tilde{x}\left(t\right) & = & \sum_{k=-\infty}^{\infty}a_{k}e^{jk\omega_{0}t}=\sum_{k=-\infty}^{\infty}a_{k}e^{jk\left(\frac{2\pi}{T}\right)t}\label{eq:ctfssyn}\\
+a_{k} & = & \frac{1}{T}\int_{T}\tilde{x}\left(t\right)e^{-jk\omega_{0}t}dt=\frac{1}{T}\int_{T}\tilde{x}\left(t\right)e^{-jk\left(\frac{2\pi}{T}\right)t}dt\label{eq:ctfsanal}
+\end{eqnarray}
+
+\end_inset
+
+Aperiodic continuous-time signal can are also amenable to Fourier analysis
+\begin_inset Formula 
+\begin{eqnarray*}
+x\left(t\right) & = & \frac{1}{2\pi}\int_{-\infty}^{\infty}X\left(j\omega\right)e^{j\omega t}d\omega\\
+X\left(j\omega\right) & = & \int_{-\infty}^{\infty}x\left(t\right)e^{-j\omega t}dt
+\end{eqnarray*}
+
+\end_inset
+
+The continuous-time Fourier transform can be employed on periodic signals
+ as well.
+ Suppose we wanted to compute the Fourier series coefficients 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ for a 
+\begin_inset Formula $T$
+\end_inset
+
+ periodic signal 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ be an finite duration (aperiodic) signal that agrees with 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+ over one period, e.g.
+ 
+\begin_inset Formula $s\leq t\leq s+T$
+\end_inset
+
+, and is zero elsewhere.
+ 
+\begin_inset Formula $X\left(j\omega\right)$
+\end_inset
+
+ is the Fourier transform of 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ but since 
+\begin_inset Formula $x\left(t\right)$
+\end_inset
+
+ is zero outside of 
+\begin_inset Formula $s\leq t\leq s+T$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X\left(j\omega\right)=\int_{-\infty}^{\infty}x\left(t\right)e^{-j\omega t}dt=\int_{s}^{s+T}x\left(t\right)e^{-j\omega t}dt
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\tilde{x}\left(t\right)=x\left(t\right)$
+\end_inset
+
+ on this interval
+\begin_inset Formula 
+\[
+X\left(j\omega\right)=\int_{s}^{s+T}x\left(t\right)e^{-j\omega t}dt=\int_{s}^{s+T}\tilde{x}\left(t\right)e^{-j\omega t}dt
+\]
+
+\end_inset
+
+Comparing with eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ctfsanal"
+
+\end_inset
+
+ we see that 
+\begin_inset Formula 
+\[
+a_{k}=\frac{1}{T}\int_{T}\tilde{x}\left(t\right)e^{-jk\left(\frac{2\pi}{T}\right)t}=\frac{1}{T}\left.\int_{s}^{s+T}\tilde{x}\left(t\right)e^{-j\omega t}dt\right|_{\omega=\frac{2\pi k}{T}}=\frac{1}{T}\left.X\left(j\omega\right)\right|_{\omega=\frac{2\pi k}{T}}
+\]
+
+\end_inset
+
+So the Fourier series coefficients for a periodic signal 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+ can be computed by sampling the Fourier transform of 
+\series bold
+one period
+\series default
+ of 
+\begin_inset Formula $\tilde{x}\left(t\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
 Z-Transform
 \end_layout
 
