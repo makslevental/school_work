@@ -78,7 +78,7 @@ sdfsd
 
 \begin_deeper
 \begin_layout Enumerate
-GCD(330,60)=30 so N=30 point DFT would have a spike at second tick.
+330/GCD(330,60)=11 so N=11 point DFT would have a spike at second tick.
 \end_layout
 
 \begin_layout Enumerate
@@ -98,10 +98,7 @@ GCD(330,60)=30 so N=30 point DFT would have a spike at second tick.
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\left(\left(\left(\left(\left(\left(1+2\right)+3\right)+4\right)+5\right)+6\right)+7\right)$
-\end_inset
-
- so 6x7
+there are 3 levels and 49 7 point DFTs and each DFT costs 49 MAC so 3*49*7*49
 \end_layout
 
 \end_deeper
@@ -112,30 +109,32 @@ sdfsdf
 \begin_deeper
 \begin_layout Enumerate
 using mathematica 
-\begin_inset Formula $\left(2\sqrt{3},0,0\right)$
+\begin_inset Formula $\left(3,0,0\right)$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\left(2\sqrt{3}j,0,0\right)$
+\begin_inset Formula $\left(3j,0,0\right)$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Enumerate
-lineary 
-\begin_inset Formula $\left(2\sqrt{3}\left(j+1\right),0,0\right)$
+linearly 
+\begin_inset Formula $\left(3\left(j+1\right),0,0\right)$
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Enumerate
 parseval's theorem says sum of squares in time space equals sum squares
- in freq space divided by N so (9+9)/3=6
+ in freq space divided by N so (9+9)/3=6.
+ but that's energy.
+ power is that divided by time so 2.
 \end_layout
 
 \begin_layout Enumerate
@@ -167,7 +166,7 @@ sdfdsf
 
 \begin_deeper
 \begin_layout Enumerate
-0
+FT({1,1,1})={3,0,0} then FT({3,0,0}) = {3,3,3}
 \end_layout
 
 \end_deeper
@@ -193,7 +192,7 @@ sdfds
 \end_layout
 
 \begin_layout Enumerate
-100
+1010/8000=101/800
 \end_layout
 
 \begin_layout Enumerate
