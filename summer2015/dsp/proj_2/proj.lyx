@@ -312,7 +312,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename scatter.jpg
-	scale 50
+	scale 30
 
 \end_inset
 
@@ -337,7 +337,8 @@ name "fig:Received-Signals"
 
 \end_inset
 
-The results appear in fig.
+The system was simulated using the below MATLAB code.
+ The results appear in fig.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -346,7 +347,7 @@ reference "fig:Received-Signals"
 \end_inset
 
 .
- The Bit-error rates were computed using the MATLAB commands
+ 
 \begin_inset Newline newline
 \end_inset
 
@@ -357,17 +358,165 @@ status open
 
 \begin_layout Plain Layout
 
-hError = comm.ErrorRate; 
+data = randi([0 3],64,64); modSignal = []; 
 \end_layout
 
 \begin_layout Plain Layout
 
-errorStats1 = step(hError, reshape(data,2^12,1), receivedData5db);
+receivedData5db = []; receivedData15db = []; receivedData25db = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+fftSignal5db = []; fftSignal15db = []; fftSignal25db = []; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+hMod = comm.QPSKModulator('PhaseOffset',pi/4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+hDemod = comm.QPSKDemodulator('PhaseOffset',pi/4);
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:64
+\end_layout
+
+\begin_layout Plain Layout
+
+    modSignal = [modSignal;step(hMod, data(:,i))];
+\end_layout
+
+\begin_layout Plain Layout
+
+    ifftSignal = ifft(step(hMod, data(:,i)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    noisySignal25db = ifftSignal + (1/10^(25/10))*exp(1i *2*pi*(randn(2^6,1)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    noisySignal15db = ifftSignal + (1/10^(15/10))*exp(1i *2*pi*(randn(2^6,1)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    noisySignal5db = ifftSignal + (1/10^(5/10))*exp(1i *2*pi*(randn(2^6,1)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    fftSignal5db = [fftSignal5db;fft(noisySignal5db)];
+\end_layout
+
+\begin_layout Plain Layout
+
+    fftSignal15db = [fftSignal15db;fft(noisySignal15db)];
+\end_layout
+
+\begin_layout Plain Layout
+
+    fftSignal25db = [fftSignal25db;fft(noisySignal25db)];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData5db = step(hDemod, fftSignal5db);
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData15db = step(hDemod, fftSignal15db);
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData25db = step(hDemod, fftSignal25db);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%Create an error rate calculator
+\end_layout
+
+\begin_layout Plain Layout
+
+hError = comm.ErrorRate; errorStats1 = step(hError, reshape(data,2^12,1),
+ receivedData5db);
+\end_layout
+
+\begin_layout Plain Layout
+
+fprintf('Error rate = %f
+\backslash
+nNumber of errors for 5dB = %d
+\backslash
+n',errorStats1(1), errorStats1(2))
+\end_layout
+
+\begin_layout Plain Layout
+
+%Create an error rate calculator
+\end_layout
+
+\begin_layout Plain Layout
+
+hError = comm.ErrorRate; errorStats2 = step(hError, reshape(data,2^12,1),
+ receivedData15db);
+\end_layout
+
+\begin_layout Plain Layout
+
+fprintf('Error rate = %f
+\backslash
+nNumber of errors for 15dB = %d
+\backslash
+n',errorStats2(1), errorStats2(2))
+\end_layout
+
+\begin_layout Plain Layout
+
+%Create an error rate calculator
+\end_layout
+
+\begin_layout Plain Layout
+
+hError = comm.ErrorRate; errorStats3 = step(hError, reshape(data,2^12,1),
+ receivedData25db); 
+\end_layout
+
+\begin_layout Plain Layout
+
+fprintf('Error rate = %f
+\backslash
+nNumber of errors for 25dB = %d
+\backslash
+n',errorStats3(1), errorStats3(2))
 \end_layout
 
 \end_inset
 
-The reported results are summarized in table 
+The reported bit error rates are summarized in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Bit-error-rates"
@@ -506,7 +655,7 @@ Energy-per-bit,
 
  is related to the complementary Gaussian error function.
  Approximating 
-\begin_inset Formula $\frac{E_{s}}{N_{0}}$
+\begin_inset Formula $\frac{E_{b}}{N_{0}}$
 \end_inset
 
  by the log ratio 
