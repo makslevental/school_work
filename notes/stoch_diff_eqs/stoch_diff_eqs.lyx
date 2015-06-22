@@ -3425,5 +3425,161 @@ With
 \end_layout
 
 \end_deeper
+\begin_layout Section
+Ito Integral
+\end_layout
+
+\begin_layout Standard
+Return to the original problem of finding a reasonable interpretation of
+ 
+\begin_inset Formula 
+\[
+\frac{dx}{dt}=b\left(t,x\right)+\sigma\left(t,x\right)\cdot\text{"noise"}
+\]
+
+\end_inset
+
+ITurns out it's reasonable to model 
+\begin_inset Quotes eld
+\end_inset
+
+noise
+\begin_inset Quotes erd
+\end_inset
+
+ as some stochastic process 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{equation}
+\frac{dX_{t}}{dt}=b\left(t,X_{t}\right)+\sigma\left(t,X_{t}\right)\cdot W_{t}\label{eq:sde}
+\end{equation}
+
+\end_inset
+
+The response 
+\begin_inset Formula $x$
+\end_inset
+
+ has become an 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+, connoting stochastic process, because, as it will turn out, this is short
+ hand for a relationship between the response and the input that necessitates
+ that the reponse be a stochastic process itself.
+ Based on empricial fact (experience) one expects that 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ have these properties:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $t_{1}\neq t_{2}\Rightarrow W_{t_{1}}\perp W_{t_{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left\{ W_{t}\right\} $
+\end_inset
+
+ is stationary, i.e.
+ the joint distribution of 
+\begin_inset Formula $\left\{ W_{t_{1}+\tau},\dots,W_{t_{k}+\tau}\right\} $
+\end_inset
+
+ does not depend on 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left[W_{t}\right]=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Turns out, unfortunately, there's no continuous
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A strict requirement.
+\end_layout
+
+\end_inset
+
+ process that satisfies 1 and 2.
+ It is possible to represent 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ as a 
+\emph on
+generalized 
+\emph default
+process, meaning it can be constructed as a measure on the space of 
+\emph on
+tempered distributions
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Todo
+\series default
+...
+\end_layout
+
+\end_inset
+
+
+\emph default
+ on 
+\begin_inset Formula $\left[0,\infty\right)$
+\end_inset
+
+.
+ That notwithstanding let's rewrite eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sde"
+
+\end_inset
+
+ that lends itself to having 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ replaced by a proper stochastic process: for 
+\begin_inset Formula $0=t_{0}<t_{1}<\cdots<t_{m}=t$
+\end_inset
+
+ discretize 
+\begin_inset Formula 
+\[
+X_{k+1}-X_{k}=b\left(t_{k},X_{k}\right)\Delta t_{k}+\sigma\left(t_{k},X_{k}\right)W_{k}\Delta t_{k}
+\]
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
