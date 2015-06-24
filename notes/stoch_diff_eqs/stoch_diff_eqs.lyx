@@ -3429,6 +3429,10 @@ With
 Ito Integral
 \end_layout
 
+\begin_layout Subsection
+Motivation
+\end_layout
+
 \begin_layout Standard
 Return to the original problem of finding a reasonable interpretation of
  
@@ -3522,8 +3526,17 @@ A strict requirement.
 
 \end_inset
 
- process that satisfies 1 and 2.
- It is possible to represent 
+ process that satisfies 1 and 2 that works in a model like eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sde"
+
+\end_inset
+
+.
+ What I think this means is that there's no process that will work in a
+ real ODE? It is possible to represent 
 \begin_inset Formula $W_{t}$
 \end_inset
 
@@ -3575,6 +3588,256 @@ reference "eq:sde"
 \[
 X_{k+1}-X_{k}=b\left(t_{k},X_{k}\right)\Delta t_{k}+\sigma\left(t_{k},X_{k}\right)W_{k}\Delta t_{k}
 \]
+
+\end_inset
+
+where 
+\begin_inset Formula $X_{k}\coloneqq X_{t_{k}}$
+\end_inset
+
+.
+ Restated the question is does there exist some 
+\begin_inset Formula $V_{t}$
+\end_inset
+
+ such that for 
+\begin_inset Formula $\Delta V_{k}\coloneqq V_{k+1}-V_{k}\coloneqq V_{t_{k+1}}-V_{t_{k}}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+X_{k+1}-X_{k} & = & b\left(t_{k},X_{k}\right)\Delta t_{k}+\sigma\left(t_{k},X_{k}\right)\left(V_{k+1}-V_{k}\right)\\
+ & = & b\left(t_{k},X_{k}\right)\Delta t_{k}+\sigma\left(t_{k},X_{k}\right)\Delta V_{k}
+\end{eqnarray*}
+
+\end_inset
+
+Assumptions 1,2,3 above suggest that stationary, independent, and mean 0
+ increments.
+ Turns out the only such process with continuous paths is Brownian motion
+ 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+.
+ This is different from the remark above because this is for a discretized
+ model.
+ Putting 
+\begin_inset Formula $V_{t}=B_{t}$
+\end_inset
+
+ and taking sums we get 
+\begin_inset Formula 
+\[
+\sum_{j=0}^{k-1}\left(X_{k+1}-X_{k}\right)=X_{k}-X_{0}=\sum_{j=0}^{k-1}\left(b\left(t_{j},X_{j}\right)\Delta t_{j}+\sigma\left(t_{j},X_{j}\right)\Delta B_{j}\right)
+\]
+
+\end_inset
+
+Given that 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ satisfies assumptions 1,2,3 does a limit (in some sense) as 
+\begin_inset Formula $\Delta t_{j}\rightarrow0$
+\end_inset
+
+ and get something like
+\begin_inset Formula 
+\begin{equation}
+X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(s,X_{s}\right)dB_{s}\text{"}\label{eq:stochint}
+\end{equation}
+
+\end_inset
+
+and adopt the convention that what eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sde"
+
+\end_inset
+
+ really means is that the response 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ satisfies eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:stochint"
+
+\end_inset
+
+.
+ Thus it remains to prove existence for a wide class of function 
+\begin_inset Formula $f:\left[0,\infty\right)\times\Omega\rightarrow\mathbb{R}$
+\end_inset
+
+, in some sense, of 
+\begin_inset Formula 
+\[
+\text{"}\int_{0}^{t}f\left(s,\omega\right)dB_{s}\left(\omega\right)\text{"}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $B_{t}\left(\omega\right)$
+\end_inset
+
+ is a 1-dimensional Brownian motion.
+\end_layout
+
+\begin_layout Subsection
+Construction of the Ito Integral
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $0\leq Q<T$
+\end_inset
+
+ and start by defining 
+\begin_inset Formula 
+\[
+\int_{Q}^{T}\left[\cdot\right]dB_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+for simple functions
+\begin_inset Formula 
+\[
+S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)
+\]
+
+\end_inset
+
+You can imagine that 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is defined for all 
+\begin_inset Formula $t\in\left[0,\infty\right)$
+\end_inset
+
+ by defining the 
+\begin_inset Formula $a_{j}=0$
+\end_inset
+
+ appropriately.
+ So basically chop the real line into intervals of length 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+ and define 
+\begin_inset Formula $S_{t}\left(\omega\right)$
+\end_inset
+
+ piecewise constant on that mesh.
+ Then define
+\begin_inset Formula 
+\[
+\int_{Q}^{T}S_{n}\left(s,\omega\right)dB_{s}\coloneqq\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+s_{j}^{\left(n\right)}\coloneqq\begin{cases}
+j\cdot2^{-n} & \text{if }Q\leq j\cdot2^{-n}\leq T\\
+Q & \text{if }j\cdot2^{-n}<Q\\
+T & \text{if }j\cdot2^{-n}>T
+\end{cases}
+\]
+
+\end_inset
+
+which just truncates the sum outside of 
+\begin_inset Formula $\left[Q,T\right]$
+\end_inset
+
+ since for 
+\begin_inset Formula $s_{j}^{\left(n\right)}>T$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)=B_{T}\left(\omega\right)-B_{T}\left(\omega\right)=0
+\]
+
+\end_inset
+
+and 
+\begin_inset Quotes eld
+\end_inset
+
+around the edges
+\begin_inset Quotes erd
+\end_inset
+
+ the error becomes neglibile as 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+.
+ But without further constraining the functions 
+\begin_inset Formula $a_{j}\left(\omega\right)$
+\end_inset
+
+ we run into problems
+\end_layout
+
+\begin_layout Example
+Let
+\begin_inset Formula 
+\begin{eqnarray*}
+S_{n}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}B_{j\cdot2^{-n}}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)\\
+S_{n}^{'}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}B_{\left(j+1\right)\cdot2^{-n}}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)
+\end{eqnarray*}
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[\int_{0}^{T}S_{n}\left(s,\omega\right)dB_{s}\left(\omega\right)\right] & = & E\left[\sum_{j=0}^{\infty}B_{s_{j}^{\left(n\right)}}\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
+ & = & \sum_{j=0}^{\infty}E\left[B_{s_{j}^{\left(n\right)}}\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
+ & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\left(B_{s_{j}^{\left(n\right)}}-0\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(B_{s_{j+1}^{\left(n\right)}}-B_{s_{j}^{\left(n\right)}}\right)$
+\end_inset
+
+ are independent increments and 
+\begin_inset Formula $E\left[B_{s_{j}^{\left(n\right)}}\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]=0$
+\end_inset
+
+ is the definition of independent RVs.
+ But 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[\int_{0}^{T}S_{n}^{'}\left(s,\omega\right)dB_{s}\left(\omega\right)\right] & = & \sum_{j=0}^{\infty}E\left[B_{s_{j+1}^{\left(n\right)}}\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
+ & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)\right)^{2}-2B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)B_{s_{j}^{\left(n\right)}}\left(\omega\right)+B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)B_{s_{j}^{\left(n\right)}}\left(\omega\right)+\left(B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}-\left(B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}\right]\\
+ & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}+B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)B_{s_{j}^{\left(n\right)}}\left(\omega\right)-\left(B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}\right]\\
+ & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}+B_{s_{j}^{\left(n\right)}}\left(\omega\right)\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
+ & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}\right]+E\left[B_{s_{j}^{\left(n\right)}}\left(\omega\right)\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
+ & = & \sum_{j=0}^{\infty}\left(\left(j+1\right)\cdot2^{-n}-j\cdot2^{-n}\right)\\
+ & = & \sum_{j=0}^{\infty}\frac{T}{2^{n}}=T
+\end{eqnarray*}
 
 \end_inset
 
