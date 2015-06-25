@@ -3261,12 +3261,12 @@ are independent random variables.
 
 
 \begin_inset Formula 
-\begin{eqnarray*}
-E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\right] & = & E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\right]\\
- & = & E^{x}\left[B_{t_{j}}B_{t_{i}}-B_{t_{j}}B_{t_{i-1}}-B_{t_{j-1}}B_{t_{i}}+B_{t_{j-1}}B_{t_{i-1}}\right]\\
- & = & E^{x}\left[\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)-\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i-1}}-x_{0}\right)-\left(B_{t_{j-1}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)+\left(B_{t_{j-1}}-x_{0}\right)\left(B_{t_{i-1}}-x_{0}\right)\right]\\
- & = & n\left(t_{i}-t_{i-1}-t_{i}+t_{i-1}\right)=0
-\end{eqnarray*}
+\begin{eqnarray}
+E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\right] & = & E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\right]\nonumber \\
+ & = & E^{x}\left[B_{t_{j}}B_{t_{i}}-B_{t_{j}}B_{t_{i-1}}-B_{t_{j-1}}B_{t_{i}}+B_{t_{j-1}}B_{t_{i-1}}\right]\nonumber \\
+ & = & E^{x}\left[\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)-\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i-1}}-x_{0}\right)-\left(B_{t_{j-1}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)+\left(B_{t_{j-1}}-x_{0}\right)\left(B_{t_{i-1}}-x_{0}\right)\right]\label{eq:indepincre}\\
+ & = & n\left(t_{i}-t_{i-1}-t_{i}+t_{i-1}\right)=0\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -3859,7 +3859,7 @@ This shows that despite both
 \end_inset
 
  being reasonable approximations for 
-\begin_inset Formula $f\left(t,\omega\right)=B_{t}\left(\omega\right)$
+\begin_inset Formula $f\left(s,\omega\right)=B_{s}\left(\omega\right)$
 \end_inset
 
  their integrals are not even remotely close no matter how fine the mesh
@@ -3885,35 +3885,40 @@ Intuitively the integrals of
 \end_inset
 
  don't agree is because 
-\begin_inset Formula $f\left(t,\omega\right)=B_{t}\left(\omega\right)$
+\begin_inset Formula $f\left(s,\omega\right)=B_{t}\left(\omega\right)$
 \end_inset
 
- has infinite total variation: 
+ has infinite total variation; 
 \begin_inset Formula 
 \[
-TV\left(f\right)\coloneqq\sup_{\Pi\in\mathcal{P}}\sum_{j=1}^{\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|
+TV\left(f\right)\coloneqq\lim_{n\rightarrow\infty}\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $\mathcal{P}$
+over some 
+\begin_inset Formula $\left[Q,T\right]$
 \end_inset
 
- is the set of partitions and 
-\begin_inset Formula $\Pi$
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Recall that 
+\begin_inset Formula $T-Q=m\cdot2^{-n}$
 \end_inset
 
- is a partition.
- Here's a short proof that 
-\begin_inset Formula $B_{t}\left(\omega\right)$
+.
+\end_layout
+
 \end_inset
 
- has infinite total variation.
- First define quadratic variation
+.
+ Here's a short proof of this: first define quadratic variation
 \begin_inset Formula 
 \[
-QV\left(f\right)\coloneqq\sup_{\Pi\in\mathcal{P}}\sum_{j=1}^{\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|^{2}
+QV\left(f\right)\coloneqq\lim_{n\rightarrow\infty}\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|^{2}
 \]
 
 \end_inset
@@ -3925,7 +3930,7 @@ and notice that if
  is continuous then
 \begin_inset Formula 
 \[
-\sum_{j=1}^{\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|^{2}\leq\left(\max_{1\leq j\leq\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|\right)\sum_{j=1}^{\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|
+\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|^{2}\leq\left(\max_{1\leq j\leq m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|\right)\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|
 \]
 
 \end_inset
@@ -3933,12 +3938,12 @@ and notice that if
 and so
 \begin_inset Formula 
 \[
-\frac{\sum_{j=1}^{\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|^{2}}{\max_{1\leq j\leq\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|}\leq\sum_{j=1}^{\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|
+\frac{\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|^{2}}{\max_{1\leq j\leq m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|}\leq\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|
 \]
 
 \end_inset
 
-and hence any 
+and hence any continuous 
 \begin_inset Formula $f$
 \end_inset
 
@@ -3948,15 +3953,19 @@ status open
 
 \begin_layout Plain Layout
 Since 
-\begin_inset Formula $\max_{1\leq j\leq\left|\Pi\right|}\left|f\left(t_{j}\right)-f\left(t_{j-1}\right)\right|\rightarrow0$
+\begin_inset Formula $\max_{1\leq j\leq m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|\rightarrow0$
 \end_inset
 
  as 
 \begin_inset Formula $\left|\Pi\right|\rightarrow\infty$
 \end_inset
 
- and your only for the left side of the inequality not blowing up is if
- the numerator, 
+ for any continuous 
+\begin_inset Formula $f$
+\end_inset
+
+ and your only hope for the left side of the inequality not blowing up is
+ if the numerator, 
 \begin_inset Formula $QV\left(f\right)$
 \end_inset
 
@@ -3968,122 +3977,237 @@ Since
 
 .
  So all we need to prove is that 
-\begin_inset Formula $B_{t}$
+\begin_inset Formula $B_{s}$
 \end_inset
 
  has non-zero quadratic variation.
- In fact we basically already proved it in eqn.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:infqvar"
+ First some lemmas.
+\end_layout
 
+\begin_layout Lemma
+If 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\text{Var}\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]=0
+\]
+
+\end_inset
+
+then
+\begin_inset Formula $\lim_{n\rightarrow\infty}QV\left(f\right)=T-Q$
+\end_inset
+
+ in 
+\begin_inset Formula $L^{2}$
 \end_inset
 
 .
- By eqn.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:infqvar"
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\Delta B_{j}^{2}=\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}$
+\end_inset
+
+.
+ Then if the variance goes to 0 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Since
+\begin_inset Formula $\text{Var}\left(X\right)=EX^{2}-\left(EX\right)^{2}$
+\end_inset
+
+.
+\end_layout
 
 \end_inset
 
- 
-\begin_inset Formula 
-\[
-E\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]=\sum_{j=1}^{\left|\Pi\right|}E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]=\sum_{j=1}^{\left|\Pi\right|}t_{j}-t_{j-1}=t
-\]
 
-\end_inset
-
-It remains to prove that 
-\begin_inset Formula 
-\[
-\text{Var}\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\rightarrow0
-\]
-
-\end_inset
-
-Why? Let 
-\begin_inset Formula $\Sigma\left(\Delta B\right)^{2}=\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}$
-\end_inset
-
- then
-\begin_inset Formula 
-\[
-\text{Var}\left[\Sigma\left(\Delta B\right)^{2}\right]=0=E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-\left(E\left[\Sigma\left(\Delta B\right)^{2}\right]\right)^{2}
-\]
-
-\end_inset
-
-implies
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right] & = & \left(E\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\right)^{2}\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right] & = & t^{2}\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-t^{2} & = & 0\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-2t^{2}+t^{2} & = & 0\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-2tE\left[\Sigma\left(\Delta B\right)^{2}\right]+t^{2} & = & 0\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}-t\right)^{2}\right] & = & 0
+\lim_{n\rightarrow\infty}E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}\right)^{2}\right] & = & \lim_{n\rightarrow\infty}\left(E\left[\sum_{j=1}^{m}\Delta B_{j}^{2}\right]\right)^{2}\\
+ & = & \lim_{n\rightarrow\infty}\left(\sum_{j=1}^{m}E\left[\Delta B_{j}^{2}\right]\right)^{2}\\
+ & = & \lim_{n\rightarrow\infty}\left(\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)\right)^{2}\text{ by eqn. \ref{eq:infqvar}}\\
+ & = & \lim_{n\rightarrow\infty}\left(T-Q\right)^{2}
 \end{eqnarray*}
 
 \end_inset
 
-which is the definition of 
+and so
+\begin_inset Formula 
+\begin{eqnarray*}
+0 & = & \lim_{n\rightarrow\infty}\left(E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}\right)^{2}\right]-\left(T-Q\right)^{2}\right)\\
+ & = & \lim_{n\rightarrow\infty}\left(E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}\right)^{2}\right]-2\left(T-Q\right)^{2}+\left(T-Q\right)^{2}\right)\\
+ & = & \lim_{n\rightarrow\infty}\left(E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}\right)^{2}\right]-2\left(T-Q\right)E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}\right)\right]+\left(T-Q\right)^{2}\right)\\
+ & = & \lim_{n\rightarrow\infty}\left(E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}-\left(T-Q\right)\right)^{2}\right]\right)
+\end{eqnarray*}
+
+\end_inset
+
+which is the definition of convergence in 
 \begin_inset Formula $L^{2}$
 \end_inset
 
- convergence and so 
+.
+\end_layout
+
+\begin_layout Lemma
+On refinement of the mesh
 \begin_inset Formula 
 \[
-\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\rightarrow t
+\lim_{n\rightarrow\infty}\text{Var}\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]=0
 \]
 
 \end_inset
 
-in 
-\begin_inset Formula $L^{2}$
-\end_inset
 
- which implies 
-\series bold
-convergence in probability and so almost surely 
-\series default
-the quadratic variation of 
-\begin_inset Formula $B_{t}$
-\end_inset
-
- is 
-\begin_inset Formula $t$
-\end_inset
-
- and so 
-\begin_inset Formula $B_{t}$
-\end_inset
-
- has unbounded total variation.
- Now the proof that 
-\begin_inset Formula $\text{Var}\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\rightarrow0$
-\end_inset
-
-:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Proof
+The proof
 \begin_inset Formula 
 \begin{eqnarray*}
-\text{Var}\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right] & = & \sum_{j=1}^{\left|\Pi\right|}\text{Var}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\\
- & = & \sum_{j=1}^{\left|\Pi\right|}\left(E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{4}\right]-\left(E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\right)^{2}\right)\\
- & = & \sum_{j=1}^{\left|\Pi\right|}\left(E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{4}\right]-\left(t_{j}-t_{j-1}\right)^{2}\right)\\
+\text{Var}\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right] & = & \sum_{j=1}^{m}\text{Var}\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]\\
+ & = & \sum_{j=1}^{m}\left(E\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]-\left(E\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]\right)^{2}\right)\\
+ & = & \sum_{j=1}^{m}\left(E\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}\right)\\
  &  & \text{by Kolmogorov continuity}\\
- & = & \sum_{j=1}^{\left|\Pi\right|}\left(1\left(1+2\right)\left(t_{j}-t_{j-1}\right)^{2}-\left(t_{j}-t_{j-1}\right)^{2}\right)\\
- & = & 2\sum_{j=1}^{\left|\Pi\right|}\left(t_{j}-t_{j-1}\right)^{2}
+ & = & \sum_{j=1}^{m}\left(1\left(1+2\right)\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}\right)\\
+ & = & 2\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}
 \end{eqnarray*}
 
 \end_inset
 
 which goes to 0 as the mesh is refined.
+\end_layout
+
+\begin_layout Theorem
+For 
+\begin_inset Formula $f=B_{s}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\lim_{n\rightarrow\infty}QV\left(f\right)=T-Q$
+\end_inset
+
+ almost surely.
+\end_layout
+
+\begin_layout Proof
+Let
+\begin_inset Formula 
+\[
+X_{i}^{\left(n\right)}=\Delta B_{j}^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+Y_{n}\coloneqq\sum_{j=1}^{m}X_{i}^{\left(n\right)}=\sum_{j=1}^{m}\left(\Delta B_{j}^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)\right)=\sum_{j=1}^{m}\Delta B_{j}^{2}-\left(T-Q\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+EY_{n} & = & E\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]-E\left(T-Q\right)\\
+ & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+EY_{n}^{2}=E\left(\sum_{j=1}^{m}\left(X_{i}^{\left(n\right)}\right)^{2}+\sum_{i<j}X_{i}^{\left(n\right)}X_{j}^{\left(n\right)}\right)=\sum_{j=1}^{m}E\left[\left(X_{i}^{\left(n\right)}\right)^{2}\right]+\sum_{i<j}E\left[X_{i}^{\left(n\right)}X_{j}^{\left(n\right)}\right]
+\]
+
+\end_inset
+
+but by eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:indepincre"
+
+\end_inset
+
+ 
+\begin_inset Formula $E\left[X_{i}^{\left(n\right)}X_{j}^{\left(n\right)}\right]=0$
+\end_inset
+
+ so
+\begin_inset Formula 
+\[
+EY_{n}^{2}=\sum_{j=1}^{m}E\left[\left(X_{i}^{\left(n\right)}\right)^{2}\right]
+\]
+
+\end_inset
+
+and so by Chebyshev's inequality
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $P\left(\left|X-\mu\right|\geq k\sigma\right)\leq\frac{1}{k^{2}}\frac{E\left[\left(X-\mu\right)^{2}\right]}{\sigma^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(\left|Y_{n}\right|\geq\epsilon\right) & \leq & \frac{E\left[\left(Y_{n}\right)^{2}\right]}{\epsilon^{2}}\\
+ & = & \frac{1}{\epsilon^{2}}\sum_{j=1}^{m}E\left[\left(X_{i}^{\left(n\right)}\right)^{2}\right]\\
+ & = & \frac{1}{\epsilon^{2}}\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}\\
+ & \leq & \frac{1}{\epsilon^{2}}\frac{1}{2^{n}}\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)\\
+ & = & \frac{T-Q}{2^{n}\epsilon^{2}}
+\end{eqnarray*}
+
+\end_inset
+
+and finally using Borel-Cantelli
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If 
+\begin_inset Formula $\sum_{n=1}^{\infty}P\left(E_{n}\right)<\infty$
+\end_inset
+
+ for some sequence of events 
+\begin_inset Formula $E_{n}$
+\end_inset
+
+ then 
+\begin_inset Formula $P\left(\limsup_{n\rightarrow\infty}E_{n}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}P\left(\left|Y_{n}\right|\geq\epsilon\right)\leq\sum_{n=1}^{\infty}\frac{T-Q}{2^{n}\epsilon^{2}}=\frac{T-Q}{\epsilon^{2}}
+\]
+
+\end_inset
+
+which implies almost sure convergence of 
+\begin_inset Formula $Y_{n}\rightarrow0$
+\end_inset
+
+.
 \end_layout
 
 \end_body
