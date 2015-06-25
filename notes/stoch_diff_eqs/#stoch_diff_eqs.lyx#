@@ -3999,91 +3999,13 @@ E\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right
 
 It remains to prove that 
 \begin_inset Formula 
-\[
-\text{Var}\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\rightarrow0
-\]
-
-\end_inset
-
-Why? Let 
-\begin_inset Formula $\Sigma\left(\Delta B\right)^{2}=\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}$
-\end_inset
-
- then
-\begin_inset Formula 
-\[
-\text{Var}\left[\Sigma\left(\Delta B\right)^{2}\right]=0=E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-\left(E\left[\Sigma\left(\Delta B\right)^{2}\right]\right)^{2}
-\]
-
-\end_inset
-
-implies
-\begin_inset Formula 
-\begin{eqnarray*}
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right] & = & \left(E\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\right)^{2}\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right] & = & t^{2}\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-t^{2} & = & 0\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-2t^{2}+t^{2} & = & 0\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}\right)^{2}\right]-2tE\left[\Sigma\left(\Delta B\right)^{2}\right]+t^{2} & = & 0\\
-E\left[\left(\Sigma\left(\Delta B\right)^{2}-t\right)^{2}\right] & = & 0
-\end{eqnarray*}
-
-\end_inset
-
-which is the definition of 
-\begin_inset Formula $L^{2}$
-\end_inset
-
- convergence and so 
-\begin_inset Formula 
-\[
-\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\rightarrow t
-\]
-
-\end_inset
-
-in 
-\begin_inset Formula $L^{2}$
-\end_inset
-
- which implies 
-\series bold
-convergence in probability and so almost surely 
-\series default
-the quadratic variation of 
-\begin_inset Formula $B_{t}$
-\end_inset
-
- is 
-\begin_inset Formula $t$
-\end_inset
-
- and so 
-\begin_inset Formula $B_{t}$
-\end_inset
-
- has unbounded total variation.
- Now the proof that 
-\begin_inset Formula $\text{Var}\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\rightarrow0$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
 \begin{eqnarray*}
 \text{Var}\left[\sum_{j=1}^{\left|\Pi\right|}\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right] & = & \sum_{j=1}^{\left|\Pi\right|}\text{Var}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\\
- & = & \sum_{j=1}^{\left|\Pi\right|}\left(E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{4}\right]-\left(E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{2}\right]\right)^{2}\right)\\
- & = & \sum_{j=1}^{\left|\Pi\right|}\left(E\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)^{4}\right]-\left(t_{j}-t_{j-1}\right)^{2}\right)\\
- &  & \text{by Kolmogorov continuity}\\
- & = & \sum_{j=1}^{\left|\Pi\right|}\left(1\left(1+2\right)\left(t_{j}-t_{j-1}\right)^{2}-\left(t_{j}-t_{j-1}\right)^{2}\right)\\
- & = & 2\sum_{j=1}^{\left|\Pi\right|}\left(t_{j}-t_{j-1}\right)^{2}
 \end{eqnarray*}
 
 \end_inset
 
-which goes to 0 as the mesh is refined.
+
 \end_layout
 
 \end_body
