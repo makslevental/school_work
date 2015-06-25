@@ -3750,7 +3750,7 @@ where
 \begin_inset Formula 
 \[
 s_{j}^{\left(n\right)}\coloneqq\begin{cases}
-j\cdot2^{-n} & \text{if }Q\leq j\cdot2^{-n}\leq T\\
+\frac{j}{2^{n}} & \text{if }Q\leq j\cdot2^{-n}\leq T\\
 Q & \text{if }j\cdot2^{-n}<Q\\
 T & \text{if }j\cdot2^{-n}>T
 \end{cases}
@@ -3775,6 +3775,14 @@ B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(
 \end_inset
 
 and 
+\begin_inset Formula $T-Q=m\cdot2^{-n}$
+\end_inset
+
+ for some 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3835,10 +3843,19 @@ E\left[\int_{0}^{T}S_{n}^{'}\left(s,\omega\right)dB_{s}\left(\omega\right)\right
  & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}+B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)B_{s_{j}^{\left(n\right)}}\left(\omega\right)-\left(B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}\right]\\
  & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}+B_{s_{j}^{\left(n\right)}}\left(\omega\right)\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
  & = & \sum_{j=0}^{\infty}E\left[\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)^{2}\right]+E\left[B_{s_{j}^{\left(n\right)}}\left(\omega\right)\left(B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right)\right]\\
- & = & \sum_{j=0}^{\infty}\left(\left(j+1\right)\cdot2^{-n}-j\cdot2^{-n}\right)\\
- & = & \sum_{j=0}^{\infty}\frac{T}{2^{n}}=T
+ & = & \sum_{j=0}^{\infty}\left(\frac{\left(j+1\right)}{2^{n}}-\frac{j}{2^{n}}\right)\\
+ & = & T\sum_{j=0}^{m-1}\frac{1}{2^{n}}+\sum_{j=m}^{\infty}\left(T-T\right)\\
+ & = & T
 \end{eqnarray*}
 
+\end_inset
+
+This shows that despite both 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $S'$
 \end_inset
 
 
