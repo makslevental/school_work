@@ -2108,12 +2108,31 @@ then there exists a probability space
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+Kolmogorov's extension is actually an if and only if: any stochastic process
+ trivially has these properties.
+ The power of Kolmogorov extension is that the typical workflow is to define
+ a stochastic process by its finite-dimensional distributions and that is
+ completely sufficient
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Kolmogorov extension guarnatees there is a correspondent probability space
+ and process.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Canonical Brownian Motion
 \end_layout
 
 \begin_layout Subsection
-Heuristic
+Heuristic PDE
 \end_layout
 
 \begin_layout Standard
@@ -2122,7 +2141,7 @@ In 1828 Robert Brown observed pollen in a suspension exhibiting irregular
  Einstein later modeled the motion as random collisions with the molecules
  of water.
  Here is a refined version of an argument that leads to the same model (1
- dimensional model): envisage a 2 dimensional lattice indexed by 
+ dimensional model): imagine a 2 dimensional lattice indexed by 
 \begin_inset Formula $m=0,\pm1,\pm2,\dots$
 \end_inset
 
@@ -2164,7 +2183,15 @@ In 1828 Robert Brown observed pollen in a suspension exhibiting irregular
 \begin_inset Formula $n$
 \end_inset
 
- direction is time (time evolves forward).
+ direction is time (time moves 
+\begin_inset Quotes eld
+\end_inset
+
+forward
+\begin_inset Quotes erd
+\end_inset
+
+).
  Consider the pollen particle starting at 
 \begin_inset Formula $\left(m,n\right)=\left(0,0\right)$
 \end_inset
@@ -2208,14 +2235,14 @@ In 1828 Robert Brown observed pollen in a suspension exhibiting irregular
 \begin_inset Formula 
 \[
 p\left(m\Delta x,0\right)=\begin{cases}
-0 & m\Delta x\neq0\\
-1 & m\Delta x=0
+0 & \text{if }m\Delta x\neq0\\
+1 & \text{if }m\Delta x=0
 \end{cases}
 \]
 
 \end_inset
 
-This time type of process is called a random walk on 
+This type of process is called a random walk on 
 \begin_inset Formula $\mathbb{Z}$
 \end_inset
 
@@ -2263,7 +2290,7 @@ As
 \frac{p\left(m\Delta x,\left(n+1\right)\Delta t\right)-p\left(m\Delta x,n\Delta t\right)}{\Delta t} & \rightarrow & \frac{\partial}{\partial t}p\left(x,t\right)\\
 \frac{p\left(\left(m+1\right)\Delta x,n\Delta t\right)-2p\left(m\Delta x,n\Delta t\right)+p\left(\left(m-1\right)\Delta x,n\Delta t\right)}{\left(\Delta x\right)^{2}} & \rightarrow & \frac{\partial^{2}}{\partial x^{2}}p\left(x,t\right)\\
  & \Rightarrow\\
-\frac{\partial}{\partial t}p\left(x,t\right) &  & \frac{D}{2}\frac{\partial^{2}}{\partial x^{2}}p\left(x,t\right)
+\frac{\partial}{\partial t}p\left(x,t\right) & = & \frac{D}{2}\frac{\partial^{2}}{\partial x^{2}}p\left(x,t\right)
 \end{eqnarray*}
 
 \end_inset
@@ -2333,7 +2360,7 @@ T is the temperature of gas/fluid in Kelvin
 \end_layout
 
 \begin_layout Subsection
-Rigorous
+Rigorous Distribution
 \end_layout
 
 \begin_layout Standard
@@ -2410,22 +2437,22 @@ i.e.
  & = & \left(\Delta x\right)^{2}\text{Var}\left(\left(2S_{n}-n\right)\right)\\
  & = & 4\left(\Delta x\right)^{2}\text{Var}\left(S_{n}\right)\\
  & = & 4\left(\Delta x\right)^{2}\text{Var}\left(\sum_{i=1}^{n}X_{i}\right)\\
-X_{i}\text{ iid} & \text{\Rightarrow}\\
+ & \text{} & X_{i}\text{ iid }\Rightarrow\\
  & = & 4\left(\Delta x\right)^{2}n\text{Var}\left(X_{i}\right)\\
  & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
 \end{eqnarray*}
 
 \end_inset
 
-Then 
+and 
 \begin_inset Formula 
 \begin{eqnarray*}
 X\left(n\Delta t\right) & = & \left(2S_{n}-n\right)\Delta x\\
  & = & \sqrt{n}\Delta x\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
  & = & \sqrt{Dt}\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}\left(\frac{\sum_{i=1}^{n}X_{i}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}n\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
+ & = & \sqrt{Dt}\left(\frac{\left(\sum_{i=1}^{n}X_{i}\right)-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}n\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
 \end{eqnarray*}
 
 \end_inset
@@ -2451,8 +2478,9 @@ Actually a weaker theorem called Laplace-De Moivre.
 implies that 
 \begin_inset Formula 
 \begin{eqnarray*}
-\lim_{n\rightarrow\infty}P\left(\frac{a}{\sqrt{Dt}}\leq X\left(t\right)\leq\frac{b}{\sqrt{Dt}}\right) & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
- & = & \frac{1}{\sqrt{2\pi Dt}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2Dt}}dx
+\lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
+ & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
+ & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
 \end{eqnarray*}
 
 \end_inset
@@ -2469,7 +2497,7 @@ Defining Brownian motion
 \end_layout
 
 \begin_layout Standard
-Motivated by all this a reason definition of Brownian motion might be
+Motivated by all this a reasonable definition of Brownian motion might be
 \end_layout
 
 \begin_layout Definition
@@ -2664,7 +2692,7 @@ One that has these finite-dimensional distributions.
 \end_inset
 
  is called a Brownian motion.
- The paths of a Brownian motion happen to almost surely continuous
+ The paths of a Brownian motion happen to be almost surely continuous
 \begin_inset Foot
 status open
 
@@ -2674,7 +2702,7 @@ Wiener's theorem.
 
 \end_inset
 
- so with each 
+ (but nowhere differentiable!) so with each 
 \begin_inset Formula $\omega\in\Omega$
 \end_inset
 
@@ -3206,8 +3234,7 @@ and because of the cascading
 status open
 
 \begin_layout Plain Layout
-Just think about running your finger down and down and across the covariance
- matrix.
+Just think about running your finger down and across the covariance matrix.
 \end_layout
 
 \end_inset
@@ -3220,7 +3247,7 @@ Just think about running your finger down and down and across the covariance
 
 \end_inset
 
-and since 
+and 
 \begin_inset Formula 
 \begin{eqnarray}
 E^{x}\left[\left(B_{t_{j}}-B_{t_{i}}\right)^{2}\right] & = & E^{x}\left[\left(B_{t_{j}}-x_{0}\right)^{2}-2\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)+\left(B_{t_{i}}-x_{0}\right)^{2}\right]\nonumber \\
@@ -3228,7 +3255,8 @@ E^{x}\left[\left(B_{t_{j}}-B_{t_{i}}\right)^{2}\right] & = & E^{x}\left[\left(B_
  & = & \begin{cases}
 n\left(t_{j}-t_{i}\right) & \text{if }t_{j}\geq t_{i}\\
 n\left(t_{i}-t_{j}\right) & \text{otherwise}
-\end{cases}\label{eq:infqvar}
+\end{cases}\label{eq:infqvar}\\
+ & = & n\left|t_{i}-t_{j}\right|
 \end{eqnarray}
 
 \end_inset
@@ -3535,8 +3563,27 @@ reference "eq:sde"
 \end_inset
 
 .
- What I think this means is that there's no process that will work in a
- real ODE? It is possible to represent 
+ The important property unsatisfiable by a continuous process on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ is property 1: for 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ to be independent at arbitrary times would require the process to have
+ infinite variance
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Citation needed.
+\end_layout
+
+\end_inset
+
+.
+ It is possible to represent 
 \begin_inset Formula $W_{t}$
 \end_inset
 
@@ -3556,6 +3603,7 @@ status open
 Todo
 \series default
 ...
+ but this makes sense given the previous line.
 \end_layout
 
 \end_inset
@@ -3596,7 +3644,7 @@ where
 \end_inset
 
 .
- Restated the question is does there exist some 
+ Restated the question is: does there exist some 
 \begin_inset Formula $V_{t}$
 \end_inset
 
@@ -3614,16 +3662,19 @@ X_{k+1}-X_{k} & = & b\left(t_{k},X_{k}\right)\Delta t_{k}+\sigma\left(t_{k},X_{k
 \end_inset
 
 Assumptions 1,2,3 above suggest that stationary, independent, and mean 0
- increments.
+ 
+\series bold
+increments
+\series default
+.
+ Why? Because what appears in the discretized model are the increments.
  Turns out the only such process with continuous paths is Brownian motion
  
 \begin_inset Formula $B_{t}$
 \end_inset
 
 .
- This is different from the remark above because this is for a discretized
- model.
- Putting 
+ Thus putting 
 \begin_inset Formula $V_{t}=B_{t}$
 \end_inset
 
@@ -3643,7 +3694,7 @@ Given that
 \begin_inset Formula $\Delta t_{j}\rightarrow0$
 \end_inset
 
- and get something like
+ exist? Does it produce something like
 \begin_inset Formula 
 \begin{equation}
 X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(s,X_{s}\right)dB_{s}\text{"}\label{eq:stochint}
@@ -3651,7 +3702,7 @@ X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(
 
 \end_inset
 
-and adopt the convention that what eqn.
+such that we can adopt the convention that what eqn.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3688,11 +3739,11 @@ where
 \begin_inset Formula $B_{t}\left(\omega\right)$
 \end_inset
 
- is a 1-dimensional Brownian motion.
+ is a Brownian motion (1-dimensional for the time being).
 \end_layout
 
 \begin_layout Subsection
-Construction of the Ito Integral
+A first attempt at the construction of the Ito integral
 \end_layout
 
 \begin_layout Standard
@@ -3703,7 +3754,7 @@ Let
  and start by defining 
 \begin_inset Formula 
 \[
-\int_{Q}^{T}\left[\cdot\right]dB_{s}\left(\omega\right)
+\int_{Q}^{T}\left\{ \cdot\right\} dB_{s}\left(\omega\right)
 \]
 
 \end_inset
@@ -3738,7 +3789,7 @@ You can imagine that
 \end_inset
 
  piecewise constant on that mesh.
- Then define
+ Then define 
 \begin_inset Formula 
 \[
 \int_{Q}^{T}S_{n}\left(s,\omega\right)dB_{s}\coloneqq\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right]
@@ -3795,19 +3846,32 @@ around the edges
 \end_inset
 
 .
- But without further constraining the functions 
-\begin_inset Formula $a_{j}\left(\omega\right)$
-\end_inset
-
- we run into problems
+ This is manifestly reasonable but the next natural step, approximating
+ arbitrary functions by these simple functions, when done carelessly leads
+ to problems.
 \end_layout
 
 \begin_layout Example
-Let
+Let 
+\begin_inset Formula $B_{j\cdot2^{-n}}\left(\omega\right)$
+\end_inset
+
+ be samples of a 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ process and define 
+\begin_inset Formula $a_{j}\left(\omega\right)=B_{j\cdot2^{-n}}\left(\omega\right)$
+\end_inset
+
+.
+ Then construct the simple functions
 \begin_inset Formula 
 \begin{eqnarray*}
-S_{n}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}B_{j\cdot2^{-n}}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)\\
-S_{n}^{'}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}B_{\left(j+1\right)\cdot2^{-n}}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)
+S_{n}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)\\
+ & = & \sum_{j=0}^{\infty}B_{j\cdot2^{-n}}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)\\
+S_{n}^{'}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}a_{j+1}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)\\
+ & = & \sum_{j=0}^{\infty}B_{\left(j+1\right)\cdot2^{-n}}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)
 \end{eqnarray*}
 
 \end_inset
@@ -3885,13 +3949,13 @@ Intuitively the integrals of
 \end_inset
 
  don't agree is because 
-\begin_inset Formula $f\left(s,\omega\right)=B_{t}\left(\omega\right)$
+\begin_inset Formula $f\left(t\right)=f\left(t,\omega\right)=B_{t}\left(\omega\right)$
 \end_inset
 
  has infinite total variation; 
 \begin_inset Formula 
 \[
-TV\left(f\right)\coloneqq\lim_{n\rightarrow\infty}\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|
+TV\left(f\right)\coloneqq\lim_{n\rightarrow\infty}\sum_{j=1}^{m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|
 \]
 
 \end_inset
@@ -3918,7 +3982,7 @@ Recall that
  Here's a short proof of this: first define quadratic variation
 \begin_inset Formula 
 \[
-QV\left(f\right)\coloneqq\lim_{n\rightarrow\infty}\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|^{2}
+QV\left(f\right)\coloneqq\lim_{n\rightarrow\infty}\sum_{j=1}^{m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|^{2}
 \]
 
 \end_inset
@@ -3930,7 +3994,7 @@ and notice that if
  is continuous then
 \begin_inset Formula 
 \[
-\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|^{2}\leq\left(\max_{1\leq j\leq m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|\right)\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|
+\sum_{j=1}^{m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|^{2}\leq\left(\max_{1\leq j\leq m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|\right)\sum_{j=1}^{m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|
 \]
 
 \end_inset
@@ -3938,7 +4002,7 @@ and notice that if
 and so
 \begin_inset Formula 
 \[
-\frac{\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|^{2}}{\max_{1\leq j\leq m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|}\leq\sum_{j=1}^{m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|
+\frac{\sum_{j=1}^{m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|^{2}}{\max_{1\leq j\leq m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|}\leq\sum_{j=1}^{m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|
 \]
 
 \end_inset
@@ -3953,7 +4017,7 @@ status open
 
 \begin_layout Plain Layout
 Since 
-\begin_inset Formula $\max_{1\leq j\leq m}\left|f\left(s_{j}^{\left(n\right)}\right)-f\left(s_{j-1}^{\left(n\right)}\right)\right|\rightarrow0$
+\begin_inset Formula $\max_{1\leq j\leq m}\left|f\left(t_{j}^{\left(n\right)}\right)-f\left(t_{j-1}^{\left(n\right)}\right)\right|\rightarrow0$
 \end_inset
 
  as 
@@ -3988,7 +4052,7 @@ Since
 If 
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}\text{Var}\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]=0
+\lim_{n\rightarrow\infty}\text{Var}\left[\sum_{j=1}^{m}\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]=0
 \]
 
 \end_inset
@@ -4006,7 +4070,7 @@ then
 
 \begin_layout Proof
 Let 
-\begin_inset Formula $\Delta B_{j}^{2}=\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}$
+\begin_inset Formula $\Delta B_{j}^{2}=\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}$
 \end_inset
 
 .
@@ -4029,7 +4093,7 @@ Since
 \begin{eqnarray*}
 \lim_{n\rightarrow\infty}E\left[\left(\sum_{j=1}^{m}\Delta B_{j}^{2}\right)^{2}\right] & = & \lim_{n\rightarrow\infty}\left(E\left[\sum_{j=1}^{m}\Delta B_{j}^{2}\right]\right)^{2}\\
  & = & \lim_{n\rightarrow\infty}\left(\sum_{j=1}^{m}E\left[\Delta B_{j}^{2}\right]\right)^{2}\\
- & = & \lim_{n\rightarrow\infty}\left(\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)\right)^{2}\text{ by eqn. \ref{eq:infqvar}}\\
+ & = & \lim_{n\rightarrow\infty}\left(\sum_{j=1}^{m}\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)\right)^{2}\text{ by eqn. \ref{eq:infqvar}}\\
  & = & \lim_{n\rightarrow\infty}\left(T-Q\right)^{2}
 \end{eqnarray*}
 
@@ -4057,7 +4121,7 @@ which is the definition of convergence in
 On refinement of the mesh
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}\text{Var}\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]=0
+\lim_{n\rightarrow\infty}\text{Var}\left[\sum_{j=1}^{m}\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]=0
 \]
 
 \end_inset
@@ -4069,12 +4133,12 @@ On refinement of the mesh
 The proof
 \begin_inset Formula 
 \begin{eqnarray*}
-\text{Var}\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right] & = & \sum_{j=1}^{m}\text{Var}\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]\\
- & = & \sum_{j=1}^{m}\left(E\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]-\left(E\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]\right)^{2}\right)\\
- & = & \sum_{j=1}^{m}\left(E\left[\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}\right)\\
+\text{Var}\left[\sum_{j=1}^{m}\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right] & = & \sum_{j=1}^{m}\text{Var}\left[\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]\\
+ & = & \sum_{j=1}^{m}\left(E\left[\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]-\left(E\left[\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]\right)^{2}\right)\\
+ & = & \sum_{j=1}^{m}\left(E\left[\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]-\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)^{2}\right)\\
  &  & \text{by Kolmogorov continuity}\\
- & = & \sum_{j=1}^{m}\left(1\left(1+2\right)\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}\right)\\
- & = & 2\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}
+ & = & \sum_{j=1}^{m}\left(1\left(1+2\right)\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)^{2}-\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)^{2}\right)\\
+ & = & 2\sum_{j=1}^{m}\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)^{2}
 \end{eqnarray*}
 
 \end_inset
@@ -4084,7 +4148,7 @@ which goes to 0 as the mesh is refined.
 
 \begin_layout Theorem
 For 
-\begin_inset Formula $f=B_{s}$
+\begin_inset Formula $f=B_{t}$
 \end_inset
 
  it's the case that 
@@ -4098,7 +4162,7 @@ For
 Let
 \begin_inset Formula 
 \[
-X_{i}^{\left(n\right)}=\Delta B_{j}^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)
+X_{i}^{\left(n\right)}=\Delta B_{j}^{2}-\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)
 \]
 
 \end_inset
@@ -4106,7 +4170,7 @@ X_{i}^{\left(n\right)}=\Delta B_{j}^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\l
 and
 \begin_inset Formula 
 \[
-Y_{n}\coloneqq\sum_{j=1}^{m}X_{i}^{\left(n\right)}=\sum_{j=1}^{m}\left(\Delta B_{j}^{2}-\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)\right)=\sum_{j=1}^{m}\Delta B_{j}^{2}-\left(T-Q\right)
+Y_{n}\coloneqq\sum_{j=1}^{m}X_{i}^{\left(n\right)}=\sum_{j=1}^{m}\left(\Delta B_{j}^{2}-\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)\right)=\sum_{j=1}^{m}\Delta B_{j}^{2}-\left(T-Q\right)
 \]
 
 \end_inset
@@ -4114,7 +4178,7 @@ Y_{n}\coloneqq\sum_{j=1}^{m}X_{i}^{\left(n\right)}=\sum_{j=1}^{m}\left(\Delta B_
 Then 
 \begin_inset Formula 
 \begin{eqnarray*}
-EY_{n} & = & E\left[\sum_{j=1}^{m}\left(B_{s_{j}^{\left(n\right)}}-B_{s_{j-1}^{\left(n\right)}}\right)^{2}\right]-E\left(T-Q\right)\\
+EY_{n} & = & E\left[\sum_{j=1}^{m}\left(B_{t_{j}^{\left(n\right)}}-B_{t_{j-1}^{\left(n\right)}}\right)^{2}\right]-E\left(T-Q\right)\\
  & = & 0
 \end{eqnarray*}
 
@@ -4153,7 +4217,7 @@ and so by Chebyshev's inequality
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $P\left(\left|X-\mu\right|\geq k\sigma\right)\leq\frac{1}{k^{2}}\frac{E\left[\left(X-\mu\right)^{2}\right]}{\sigma^{2}}$
+\begin_inset Formula $P\left(\left|X-\mu\right|\geq\epsilon\right)\leq\frac{E\left[\left(X-\mu\right)^{2}\right]}{\epsilon^{2}}$
 \end_inset
 
 
@@ -4166,8 +4230,8 @@ status open
 \begin{eqnarray*}
 P\left(\left|Y_{n}\right|\geq\epsilon\right) & \leq & \frac{E\left[\left(Y_{n}\right)^{2}\right]}{\epsilon^{2}}\\
  & = & \frac{1}{\epsilon^{2}}\sum_{j=1}^{m}E\left[\left(X_{i}^{\left(n\right)}\right)^{2}\right]\\
- & = & \frac{1}{\epsilon^{2}}\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)^{2}\\
- & \leq & \frac{1}{\epsilon^{2}}\frac{1}{2^{n}}\sum_{j=1}^{m}\left(s_{j}^{\left(n\right)}-s_{j-1}^{\left(n\right)}\right)\\
+ & = & \frac{1}{\epsilon^{2}}\sum_{j=1}^{m}\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)^{2}\\
+ & \leq & \frac{1}{\epsilon^{2}}\frac{1}{2^{n}}\sum_{j=1}^{m}\left(t_{j}^{\left(n\right)}-t_{j-1}^{\left(n\right)}\right)\\
  & = & \frac{T-Q}{2^{n}\epsilon^{2}}
 \end{eqnarray*}
 
@@ -4203,8 +4267,857 @@ If
 
 \end_inset
 
-which implies almost sure convergence of 
+which implies almost sure convergence
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $P\left(\liminf_{n\rightarrow\infty}\left|X_{n}-X\right|<\epsilon\right)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ Naturally this is to equivalent 
+\begin_inset Formula $P\left(\liminf_{n\rightarrow\infty}\left|X_{n}-X\right|>\epsilon\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ Why? 
+\begin_inset Formula $\liminf$
+\end_inset
+
+ is the set of points 
+\begin_inset Formula $\omega$
+\end_inset
+
+ that is ultimately in all of the sets and 
+\begin_inset Formula $\limsup$
+\end_inset
+
+ is the set of points 
+\begin_inset Formula $\omega$
+\end_inset
+
+ appear infinitely often.
+ So if the set of 
+\begin_inset Formula $\omega$
+\end_inset
+
+ for which 
+\begin_inset Formula $\left|Y_{n}\right|\geq\epsilon$
+\end_inset
+
+ occur infinitely often has measure 0 then set of 
+\begin_inset Formula $\omega$
+\end_inset
+
+ for which 
+\begin_inset Formula $\left|Y_{n}\right|\leq\epsilon$
+\end_inset
+
+ eventually always is almost all of them (otherwise 
+\begin_inset Formula $\left|Y_{n}\right|\geq\epsilon$
+\end_inset
+
+ would keep happening once in a while).
+\end_layout
+
+\end_inset
+
+ of 
 \begin_inset Formula $Y_{n}\rightarrow0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Back to the attempt
+\end_layout
+
+\begin_layout Standard
+Recall that the difference between 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $S'$
+\end_inset
+
+ was that for 
+\begin_inset Formula $S$
+\end_inset
+
+ the samples of 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ were taken at the left side of the interval 
+\begin_inset Formula $\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)$
+\end_inset
+
+ and for 
+\begin_inset Formula $S'$
+\end_inset
+
+ the samples were taken at the right side.
+ In general
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+At least the Riemann-Stieltjes integral.
+\end_layout
+
+\end_inset
+
+ you approximate a function 
+\begin_inset Formula $f\left(t,\omega\right)$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+\sum_{j}f\left(t_{j}^{*},\omega\right)\cdot1_{\left[t_{j},t_{j+1}\right)}
+\]
+
+\end_inset
+
+where the only requirement on 
+\begin_inset Formula $t_{j}^{*}\in\left[t_{j},t_{j+1}\right)$
+\end_inset
+
+ but it's apparent that for defining an integral of a stochastic process
+ the choice matters.
+ There are two standard choices:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $t_{j}^{*}=t_{j}$
+\end_inset
+
+ the left endpoint characterizes the Ito integral denoted
+\begin_inset Formula 
+\[
+\int_{Q}^{T}f\left(t,\omega\right)dB_{t}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $t_{j}^{*}=\left(t_{j}+t_{j+1}\right)/2$
+\end_inset
+
+ the midpoint characterizes the 
+\emph on
+Stratonovich
+\emph default
+ integral denoted
+\begin_inset Formula 
+\[
+\int_{Q}^{T}f\left(t,\omega\right)\circ dB_{t}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Choosing one resolves the problem of unbounded variation but still, in either
+ case, one must restrict the class of integrand functions to a special class.
+ Defining this class necessitates defining some properties.
+ Heuristically these properties capture the quality that the special functions
+ 
+\emph on
+only depend on the behavior of 
+\begin_inset Formula $B_{t}\left(\omega\right)$
+\end_inset
+
+ up to time 
+\begin_inset Formula $t_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+A 
+\emph on
+filtration
+\emph default
+ is a sequence of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+ of a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ over a sample sample space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+t_{1}\leq t_{2}\Rightarrow\mathcal{F}_{t_{1}}\subset\mathcal{F}_{t_{2}}
+\]
+
+\end_inset
+
+Then a 
+\emph on
+stochastic basis
+\emph default
+ is a probability space 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ equipped with a filtration 
+\begin_inset Formula $\left\{ \mathcal{F}_{t}\right\} _{t\geq0}$
+\end_inset
+
+, written
+\emph on
+ 
+\emph default
+
+\begin_inset Formula $\left(\Omega,\mathcal{F},\left\{ \mathcal{F}_{t}\right\} _{t\geq0},P\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\left\{ \mathcal{F}_{t}\right\} _{t\geq0}$
+\end_inset
+
+ be filtration.
+ A process 
+\begin_inset Formula $g:\mathbb{R}\times\Omega\rightarrow\mathbb{R}$
+\end_inset
+
+ is called 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+-
+\emph on
+adapted
+\emph default
+ if for each 
+\begin_inset Formula $t\geq0$
+\end_inset
+
+ the curried function 
+\begin_inset Formula 
+\[
+\omega\rightarrow g\left(t,\omega\right)
+\]
+
+\end_inset
+
+is 
+\begin_inset Formula $\mathcal{N}_{t}$
+\end_inset
+
+-measureable.
+ 
+\end_layout
+
+\begin_layout Standard
+The filtration that a process is adapted to, heuristically, contains all
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+history of the process up to time 
+\begin_inset Formula $t$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Another name for adapted process is non-anticipating (because it doesn't
+ depend on future).
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Subsection
+The construction of the Ito integral in earnest
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+ be the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra that 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ is adapted to and 
+\begin_inset Formula $\mathcal{F}=\cup_{t\geq0}\mathcal{F}_{t}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\mathcal{V}=\mathcal{V}\left(Q,T\right)$
+\end_inset
+
+ to be the class of functions
+\begin_inset Formula 
+\[
+g\left(t,\omega\right):\left[0,\infty\right)\times\Omega\rightarrow\mathbb{R}
+\]
+
+\end_inset
+
+such that
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\left(t,\omega\right)\rightarrow g\left(t,\omega\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{B}\times\mathcal{F}$
+\end_inset
+
+-measurable, where 
+\begin_inset Formula $\mathcal{B}=\sigma\left(\left[0,\infty\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g\left(t,\omega\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+-adapted.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]<\infty$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Parts 1 and 2 of defn.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "def:itointegrable"
+
+\end_inset
+
+ are fairly obvious but part 3 is mysterious.
+ This property is necessary for the 
+\emph on
+Ito
+\emph default
+ 
+\emph on
+isometry
+\emph default
+ which will be discussed shortly.
+\end_layout
+
+\begin_layout Standard
+For function 
+\begin_inset Formula $g\in\mathcal{V}$
+\end_inset
+
+ we now define the Ito integral
+\begin_inset Formula 
+\[
+\mathcal{I}\left[g\right]\left(\omega\right)=\int_{Q}^{T}g\left(s,\omega\right)dB_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+Note that the Ito integral 
+\begin_inset Formula $\mathcal{I}\left[g\right]\left(\omega\right)$
+\end_inset
+
+ is itself a random variable.
+ We will define the integral on simple functions and then use the next lemma
+ to extend it.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:itoisometry"
+
+\end_inset
+
+(Ito isometry) If 
+\begin_inset Formula $S$
+\end_inset
+
+ is simple and bounded then
+\begin_inset Formula 
+\[
+E\left[\left(\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\right)^{2}\right]=E\left[\int_{Q}^{T}\left(S\left(s,\omega\right)\right)^{2}ds\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+First for 
+\begin_inset Formula $i<j$
+\end_inset
+
+ by independence of increments 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right] & = & E\left[a_{i}a_{j}\right]E\left[\left(B_{s_{j+1}}-B_{s_{j}}\right)\left(B_{s_{j+1}}-B_{s_{j}}\right)\right]\\
+ & = & \begin{cases}
+0 & \text{if }i\neq j\\
+E\left[a_{j}^{2}\right]\left(s_{j+1}-s_{j}\right) & \text{if }i=j
+\end{cases}
+\end{eqnarray*}
+
+\end_inset
+
+Thus
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[\left(\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\right)^{2}\right] & = & E\left[\sum_{i,j}^{\infty}\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right]\right]\\
+ & = & \sum_{i,j}^{\infty}E\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right]\\
+ & = & \sum_{j=1}^{\infty}E\left[a_{j}^{2}\right]\left(s_{j+1}-s_{j}\right)\\
+ & = & E\sum_{j=1}^{\infty}a_{j}^{2}\left(s_{j+1}-s_{j}\right)\\
+ & = & E\left[\int_{Q}^{T}\left(S\left(s,\omega\right)\right)^{2}ds\right]
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+The rest of the construction proceeds in 3 steps:
+\end_layout
+
+\begin_layout Enumerate
+First we define the integral for simple functions 
+\begin_inset Formula 
+\[
+S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[t_{j},t_{j+1}\right)}\left(t\right)
+\]
+
+\end_inset
+
+(which are in 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{j}\left(\omega\right)$
+\end_inset
+
+ are 
+\begin_inset Formula $\mathcal{F}_{t_{j}}$
+\end_inset
+
+-measurable, so that the whole simple function is adapted to 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+) to be 
+\begin_inset Formula 
+\[
+\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\coloneqq\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}}\left(\omega\right)-B_{s_{j}}\left(\omega\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $g\in\mathcal{V}$
+\end_inset
+
+ be bounded and 
+\begin_inset Formula $g\left(\cdot,\omega\right)$
+\end_inset
+
+ continuous for each 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
+ Then there exist simple functions 
+\begin_inset Formula $S_{n}\in\mathcal{V}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(g-S_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Continuous function can be arbitrarily approximating by simple functions
+ and by DCT
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If 
+\begin_inset Formula $\left|g_{n}\left(x\right)\right|\leq g\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ then 
+\begin_inset Formula $\int\left|g_{n}-g\right|d\mu\rightarrow0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $h\in\mathcal{V}$
+\end_inset
+
+ be bounded.
+ Then there exist bounded functions 
+\begin_inset Formula $g_{n}\in\mathcal{V}$
+\end_inset
+
+ such that 
+\begin_inset Formula $g_{n}$
+\end_inset
+
+ is continuous for all 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(h-g_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $\left|h\left(t,\omega\right)\right|\leq M$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n$
+\end_inset
+
+ let 
+\begin_inset Formula $\psi_{n}$
+\end_inset
+
+ be nonnegative, continuous function on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ such that 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\psi_{n}\left(x\right)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $x\leq-\frac{1}{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $x\geq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\int_{-\infty}^{\infty}\psi_{n}\left(x\right)dx=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula 
+\[
+g_{n}\left(t,\omega\right)=\int_{0}^{t}\psi_{n}\left(s-t\right)h\left(s,\omega\right)ds
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $g_{n}\left(\cdot,\omega\right)$
+\end_inset
+
+ is continuous for each 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|g_{n}\right|\leq M$
+\end_inset
+
+, and since 
+\begin_inset Formula $h\in\mathcal{V}$
+\end_inset
+
+ 
+\begin_inset Formula $g_{n}\left(t,\cdot\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+ measurable for all 
+\begin_inset Formula $t$
+\end_inset
+
+ (use sums to approximate the integral defning 
+\begin_inset Formula $g_{n}$
+\end_inset
+
+).
+ Finally 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\int_{Q}^{T}\left(g_{n}\left(s,\omega\right)-h\left(s,\omega\right)\right)^{2}ds=0
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\left\{ \psi_{n}\right\} $
+\end_inset
+
+ constitute an approximate identity??? 
+\series bold
+Hoffman 1962 p 22.
+ 
+\series default
+Then finally by DCT
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(h-g_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $f\in\mathcal{V}$
+\end_inset
+
+.
+ Then there exist bounded functions 
+\begin_inset Formula $h_{n}\in\mathcal{V}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-h_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula 
+\[
+h_{n}=\begin{cases}
+-n & \text{if }f<-n\\
+f & \text{if }-n\leq f\leq n\\
+n & \text{if }f>n
+\end{cases}
+\]
+
+\end_inset
+
+Then by DCT 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-h_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+That concludes the approximation procedure.
+ Finally the definition
+\end_layout
+
+\begin_layout Definition
+(The Ito integral).
+ Let 
+\begin_inset Formula $f\in\mathcal{V}\left(Q,T\right)$
+\end_inset
+
+.
+ Then the 
+\emph on
+Ito integral
+\emph default
+ is defined
+\begin_inset Formula 
+\[
+\mathcal{I}\left[f\right]\left(\omega\right)\coloneqq\int_{Q}^{T}f\left(t,\omega\right)dB_{s}\left(\omega\right)\coloneqq\lim_{n\rightarrow\infty}\int_{Q}^{T}S_{n}\left(t,\omega\right)dB_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is a sequence of simple functions such that 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-S_{n}\right)^{2}dt\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\mathcal{I}\left[f\right]\left(\omega\right)$
+\end_inset
+
+ as a limit exists as an element of 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Square Lebesgue integrable functions over the measure 
+\begin_inset Formula $P$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ since 
+\begin_inset Formula $\left\{ \int_{Q}^{T}S_{n}dB_{s}\right\} $
+\end_inset
+
+ forms a Cauchy-sequence in 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+ by lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:itoisometry"
+
 \end_inset
 
 .
