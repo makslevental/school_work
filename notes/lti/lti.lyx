@@ -714,6 +714,167 @@ implies
  
 \end_layout
 
+\begin_layout Subsubsection
+Convolution
+\end_layout
+
+\begin_layout Standard
+An 
+\begin_inset Formula $\left(M+1\right)$
+\end_inset
+
+th order FIR system is modeled as (where 
+\begin_inset Formula $x\left[k\right]$
+\end_inset
+
+ is an 
+\begin_inset Formula $N$
+\end_inset
+
+ length signal) 
+\begin_inset Formula 
+\[
+y\left[k\right]=\sum_{m=0}^{M}b_{m}x\left[k-m\right]
+\]
+
+\end_inset
+
+The impulse response convolved with the input that produces this output
+ is 
+\begin_inset Formula 
+\[
+h\left[k\right]=\sum_{m=0}^{M}b_{m}\delta\left[k-m\right]
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[k\right] & = & x\left[k\right]\star h\left[k\right]\\
+ & = & \sum_{m=0}^{M}x\left[m\right]h\left[k-m\right]\\
+ & = & \sum_{m=0}^{M}x\left[m\right]\left(\sum_{l=0}^{M}b_{l}\delta\left[\left(k-m\right)-l\right]\right)\\
+ & = & \sum_{l=0}^{M}b_{l}\left(\sum_{m=0}^{M}x\left[m\right]\delta\left[\left(k-m\right)-l\right]\right)\\
+ & = & \sum_{l=0}^{M}b_{l}x\left[k-l\right]\\
+ & = & \sum_{m=0}^{M}b_{m}x\left[k-m\right]
+\end{eqnarray*}
+
+\end_inset
+
+For example
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[0\right] & = & \sum_{m=0}^{M}x\left[m\right]h\left[0-m\right]\\
+ & = & x\left[0\right]h\left[0\right]+x\left[1\right]h\left[-1\right]+\cdots+x\left[m\right]h\left[0-N\right]
+\end{eqnarray*}
+
+\end_inset
+
+but if 
+\begin_inset Formula $h\left[k\right]$
+\end_inset
+
+ is zero for 
+\begin_inset Formula $k<0$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+y\left[0\right]=x\left[0\right]h\left[0\right]
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{eqnarray*}
+y\left[1\right] & = & \sum_{m=0}^{M}x\left[m\right]h\left[1-m\right]\\
+ & = & x\left[0\right]h\left[1\right]+x\left[1\right]h\left[0\right]
+\end{eqnarray*}
+
+\end_inset
+
+So flip the impulse and drag it past the input.
+ This can all be represented by the matrix equation.
+ For example for 
+\begin_inset Formula $M=N=3$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{pmatrix}y\left[0\right]\\
+y\left[1\right]\\
+y\left[2\right]\\
+y\left[3\right]\\
+y\left[4\right]
+\end{pmatrix}=\begin{pmatrix}h\left[0\right] & 0 & 0\\
+h\left[1\right] & h\left[0\right] & 0\\
+h\left[2\right] & h\left[1\right] & h\left[0\right]\\
+0 & h\left[2\right] & h\left[1\right]\\
+0 & 0 & h\left[2\right]
+\end{pmatrix}\begin{pmatrix}x\left[0\right]\\
+x\left[1\right]\\
+x\left[2\right]
+\end{pmatrix}
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $y\left[k\right]$
+\end_inset
+
+ is defined for 
+\begin_inset Formula $k=0,\dots,M+N-1$
+\end_inset
+
+.
+ The values 
+\begin_inset Formula $y\left[0\right],y\left[1\right],\dots,y\left[M-1\right]$
+\end_inset
+
+ is the transient buildup
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Because there is not complete overlap between the impulse response and the
+ input.
+\end_layout
+
+\end_inset
+
+.
+ The values 
+\begin_inset Formula $y\left[M\right],\dots,y\left[N-1\right]$
+\end_inset
+
+ are called the steady state response
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Because there is complete overlap between the impulse response and the input.
+\end_layout
+
+\end_inset
+
+.
+ Finally the values 
+\begin_inset Formula $y\left[N\right],\dots,y\left[N+M-1\right]$
+\end_inset
+
+ are called the transient builddown.
+ The length of the steady state response is 
+\begin_inset Formula $N-M$
+\end_inset
+
+.
+ 
+\end_layout
+
 \begin_layout Subsection
 Continuous Impulses
 \end_layout
@@ -4357,6 +4518,96 @@ Let
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Circular convolution
+\end_layout
+
+\begin_layout Standard
+Take two signals 
+\begin_inset Formula $x_{1},x_{2}$
+\end_inset
+
+ who 
+\begin_inset Formula $N$
+\end_inset
+
+-point DFTs are 
+\begin_inset Formula 
+\begin{eqnarray*}
+X_{1}\left[k\right] & = & \sum_{n=0}^{N-1}x_{1}\left[n\right]e^{-j2\pi nk/N}\\
+X_{2}\left[k\right] & = & \sum_{n=0}^{N-1}x_{2}\left[n\right]e^{-j2\pi nk/N}
+\end{eqnarray*}
+
+\end_inset
+
+The inverse DFT of their product is
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{3}\left[m\right] & = & \frac{1}{N}\sum_{k=0}^{N-1}\left[\left(\sum_{n=0}^{N-1}x_{1}\left[n\right]e^{-j2\pi nk/N}\right)\left(\sum_{l=0}^{N-1}x_{2}\left[l\right]e^{-j2\pi lk/N}\right)\right]e^{j2\pi km/N}\\
+ & = & \frac{1}{N}\left(\sum_{n=0}^{N-1}x_{1}\left[n\right]\right)\left(\sum_{l=0}^{N-1}x_{2}\left[l\right]\right)\sum_{k=0}^{N-1}e^{j2\pi k\left(m-n-l\right)/N}
+\end{eqnarray*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula 
+\[
+\sum_{k=0}^{N-1}e^{j2\pi k\left(m-n-l\right)/N}=\begin{cases}
+N & \text{if }m-n-l=0\mod N\\
+\frac{1-e^{j2\pi k\left(m-n-l\right)}}{1-e^{j2\pi k\left(m-n-l\right)/N}} & \text{o/w}
+\end{cases}=\begin{cases}
+N & \text{if }m-n-l=0\mod N\\
+0 & \text{o/w}
+\end{cases}
+\]
+
+\end_inset
+
+Thus
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{3}\left[m\right] & = & \begin{cases}
+\sum_{n=0}^{N-1}x_{1}\left[n\right]\sum_{l=0}^{N-1}x_{2}\left[l\right] & \text{where }l=m-n\mod N\\
+0 & \text{o/w}
+\end{cases}\\
+ & = & \sum_{n=0}^{N-1}x_{1}\left[n\right]x_{2}\left[\left(m-n\right)\mod N\right]\\
+ & \coloneqq & \sum_{n=0}^{N-1}x_{1}\left[n\right]x_{2}\left[\left(\left(m-n\right)\right)_{N}\right]
+\end{eqnarray*}
+
+\end_inset
+
+for 
+\begin_inset Formula $m=0,1,\dots,N-1$
+\end_inset
+
+.
+ This is called the 
+\emph on
+circular convolution
+\emph default
+.
+ So multiplication of two DFT sequences is the circular convolution in the
+ time domain of the time domain signals.
+ Imagine sequences as a circle with the 0th entry at 0 degrees and wrapping
+ counter clockwise.
+ Then reflect the second sequence about the diameter parallel to the x-axis
+ and multiply correspondent entries; that's 
+\begin_inset Formula $x_{3}\left[0\right]$
+\end_inset
+
+.
+ To compute 
+\begin_inset Formula $x_{3}\left[1\right]$
+\end_inset
+
+ rotate the second seqeuence circle counter clockwise by one and multiply.
+ Repeat 
+\begin_inset Formula $N-1$
+\end_inset
+
+ times.
 \end_layout
 
 \begin_layout Section

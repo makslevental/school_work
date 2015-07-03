@@ -1,0 +1,519 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Collard Greens Functions
+\end_layout
+
+\begin_layout Section
+Motivation
+\end_layout
+
+\begin_layout Standard
+Green's functions are a way to solve certain PDEs.
+ Consider a PDE 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial u}{\partial t}-k\frac{\partial^{2}u}{\partial x^{2}} & = & \left(\frac{\partial}{\partial t}-k\frac{\partial^{2}}{\partial x^{2}}\right)u\nonumber \\
+ & = & Lu\label{eq:pdesystem}\\
+u\left(x,0\right) & = & f\left(x\right)\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+as a 
+\emph on
+linear system 
+\emph default
+
+\begin_inset Formula $L$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $L$
+\end_inset
+
+ is a linear differential operator (maps functions to functions).
+\end_layout
+
+\end_inset
+
+ with 
+\emph on
+input
+\emph default
+ 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ and 
+\emph on
+response
+\emph default
+ 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ This is appropriate because 
+\begin_inset Formula $u\left(x,t\right)$
+\end_inset
+
+ is completely characterized
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Kind of obvious because that's the only thing given.
+\end_layout
+
+\end_inset
+
+ by 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+.
+ The 
+\emph on
+Green's function
+\emph default
+ 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ of system defined by eqns.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pdesystem"
+
+\end_inset
+
+ is the solution of system that satisfies 
+\begin_inset Formula 
+\[
+\lim_{t\downarrow0}G\left(x,t\right)=\delta\left(x\right)
+\]
+
+\end_inset
+
+Note that this is the impulse response of the system.
+ Why is the Green's function useful? Because
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Given some regularity conditions that satisfy the hypotheses of DCT.
+\end_layout
+
+\end_inset
+
+ for input 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+L\left(\int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\right) & = & \int_{-\infty}^{\infty}\left[LG\left(x-s,t\right)\right]f\left(s\right)ds\\
+ & = & \int_{-\infty}^{\infty}\left[\frac{\partial G}{\partial t}-k\frac{\partial^{2}G}{\partial x^{2}}\right]f\left(s\right)ds\\
+ & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{t\downarrow0}\left(\int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\right) & = & \int_{-\infty}^{\infty}\left[\lim_{t\downarrow0}G\left(x-s,t\right)\right]f\left(s\right)ds\\
+ & = & \int_{-\infty}^{\infty}\delta\left(x-s\right)f\left(s\right)ds\\
+ & = & f\left(x\right)
+\end{eqnarray*}
+
+\end_inset
+
+So 
+\begin_inset Formula 
+\begin{eqnarray*}
+u\left(x,t\right) & = & \int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\\
+ & = & G\left(x,t\right)\star f\left(x\right)
+\end{eqnarray*}
+
+\end_inset
+
+is a general solution of the system defined by eqns.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pdesystem"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Diffusion equation
+\end_layout
+
+\begin_layout Standard
+The system in eqns.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pdesystem"
+
+\end_inset
+
+ is called the Diffusion equation because it diffuses the initial concentration
+ of mass 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ as time evolves.
+ We seek a general solution to the system and therefore we seek the Green's
+ function 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ for the system.
+ For reasons that will become clearer in the 3rd section 
+\begin_inset Formula 
+\[
+G\left(x,t\right)=\frac{1}{t^{\alpha}}\phi\left(\frac{x}{t^{\alpha}}\right)
+\]
+
+\end_inset
+
+for any smooth
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+, i.e.
+ derivatives to all orders.
+\end_layout
+
+\end_inset
+
+ function 
+\begin_inset Formula $\phi\left(y\right)$
+\end_inset
+
+.
+ Indeed we will construct 
+\begin_inset Formula $G$
+\end_inset
+
+ by finding a suitable 
+\begin_inset Formula $\phi$
+\end_inset
+
+.
+ Substituting this 
+\begin_inset Formula $G$
+\end_inset
+
+ into the diffusion equation 
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial G}{\partial t}-k\frac{\partial^{2}G}{\partial x^{2}}=\left(-\frac{\alpha}{t^{\alpha+1}}\phi-\frac{\alpha x}{t^{2\alpha+1}}\phi'\right)-k\left(\frac{1}{t^{3\alpha}}\phi''\right)\label{eq:greeneqn}
+\end{equation}
+
+\end_inset
+
+ To simplify the notation a little define 
+\begin_inset Formula $\eta\left(x\right)=\phi\left(\frac{x}{t^{\alpha}}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\eta'\left(x\right) & = & \frac{1}{t^{\alpha}}\phi'\left(x\right)\\
+\eta''\left(x\right) & = & \frac{1}{t^{2\alpha}}\phi''\left(x\right)
+\end{eqnarray*}
+
+\end_inset
+
+and eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:greeneqn"
+
+\end_inset
+
+ becomes
+\begin_inset Formula 
+\[
+\left(-\frac{\alpha}{t^{\alpha+1}}\eta\left(x\right)-\frac{\alpha x}{t^{\alpha+1}}\eta'\left(x\right)\right)-k\left(\frac{1}{t^{\alpha}}\eta''\left(x\right)\right)=0
+\]
+
+\end_inset
+
+or (by multiplying both sides by 
+\begin_inset Formula $-t^{\alpha}/k$
+\end_inset
+
+ and moving 
+\begin_inset Formula $\eta''\left(x\right)$
+\end_inset
+
+ over)
+\begin_inset Formula 
+\begin{equation}
+\frac{\alpha}{kt}\eta\left(x\right)+\frac{\alpha x}{kt}\eta'\left(x\right)=-\eta''\left(x\right)\label{eq:odegreen}
+\end{equation}
+
+\end_inset
+
+This is now a linear second order ordinary differential equation that's
+ easy to solve.
+ The first trick is recognizing the left side an exact differential, i.e.
+\begin_inset Formula 
+\[
+\frac{\alpha}{kt}\eta\left(x\right)+\frac{\alpha x}{kt}\eta'\left(x\right)=\frac{\alpha}{kt}\frac{d}{dx}\left(x\eta\left(x\right)\right)
+\]
+
+\end_inset
+
+and hence eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:odegreen"
+
+\end_inset
+
+ can be integrated once easily
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\alpha}{kt}\int\frac{d}{dx}\left(x\eta\left(x\right)\right) & = & -\int\eta''\left(x\right)dx\\
+\frac{\alpha x}{kt}\eta\left(x\right) & = & -n'\left(x\right)+c_{1}
+\end{eqnarray*}
+
+\end_inset
+
+which is itself a linear first order ordinary differential equation more
+ commonly written
+\begin_inset Formula 
+\[
+n'\left(x\right)+\frac{\alpha x}{kt}\eta\left(x\right)=c_{1}
+\]
+
+\end_inset
+
+which is solved by a similar sort of trick.
+ The left side is almost an exact differential
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice that the first term has first derivative of 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and the second has no derivative.
+\end_layout
+
+\end_inset
+
+ except the 
+\begin_inset Formula $x$
+\end_inset
+
+ spoils it.
+ But we can hack it to indeed be an exact differential by multiplying both
+ sides by some function 
+\begin_inset Formula $h\left(x\right)$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+\left[h\left(x\right)\right]n'\left(x\right)+\left[h\left(x\right)\frac{\alpha x}{kt}\right]\eta\left(x\right)=h\left(x\right)c_{1}
+\]
+
+\end_inset
+
+so that now the second term becomes the natural first derivative of 
+\begin_inset Formula $h$
+\end_inset
+
+ What kind of function is such that 
+\begin_inset Formula 
+\[
+h\left(x\right)n'\left(x\right)+h'\left(x\right)\eta\left(x\right)=\frac{d}{dx}\left(h\left(x\right)\eta\left(x\right)\right)
+\]
+
+\end_inset
+
+Which function has the property that it's first derivative is equal to itself
+ times 
+\begin_inset Formula $\alpha x/kt$
+\end_inset
+
+? Well that's just another differential equation in disguise
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It's DEs all the way down.
+\end_layout
+
+\end_inset
+
+! 
+\begin_inset Formula 
+\[
+\frac{dh}{dx}=h\frac{\alpha x}{kt}\Rightarrow\frac{dh}{h}=dx\frac{\alpha x}{kt}\Rightarrow\log\left(h\right)=\frac{\alpha}{t}\frac{1}{2}x^{2}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula $h\left(x\right)=e^{\alpha x^{2}/kt}$
+\end_inset
+
+.
+ So
+\begin_inset Formula 
+\[
+\frac{d}{dx}\left(e^{\alpha x^{2}/kt}\eta\left(x\right)\right)=e^{\alpha x^{2}/kt}c_{1}
+\]
+
+\end_inset
+
+and finally 
+\begin_inset Formula 
+\begin{eqnarray*}
+e^{\frac{\alpha x^{2}}{2kt}}\eta\left(x\right) & = & c_{1}\int e^{\alpha x^{2}/kt}dx+c_{2}\\
+ & \text{or}\\
+\phi\left(\frac{x}{t^{\alpha}}\right)=\eta\left(x\right) & = & c_{1}e^{-\frac{\alpha x^{2}}{2kt}}\int e^{\alpha x^{2}/kt}dx+c_{2}e^{-\frac{\alpha x^{2}}{2kt}}
+\end{eqnarray*}
+
+\end_inset
+
+Now to reconcile that 
+\begin_inset Formula $\phi\left(\frac{x}{t^{\alpha}}\right)$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $\frac{x}{t^{\alpha}}$
+\end_inset
+
+ we need to pick the right 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ Inspect that for 
+\begin_inset Formula $\alpha=1/2$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\phi\left(\frac{x}{\sqrt{t}}\right)=c_{1}e^{-\frac{1}{4k}\left(\frac{x}{\sqrt{t}}\right)^{2}}\int e^{\frac{1}{4k}\left(\frac{x}{\sqrt{t}}\right)^{2}}dx+c_{2}e^{-\frac{1}{4k}\left(\frac{x}{\sqrt{t}}\right)^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
