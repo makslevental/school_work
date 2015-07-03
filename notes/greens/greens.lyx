@@ -82,7 +82,11 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Collard Greens Functions
+Collard Green's Functions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
 \end_layout
 
 \begin_layout Section
@@ -94,7 +98,7 @@ Green's functions are a way to solve certain PDEs.
  Consider a PDE 
 \begin_inset Formula 
 \begin{eqnarray}
-\frac{\partial u}{\partial t}-k\frac{\partial^{2}u}{\partial x^{2}} & = & \left(\frac{\partial}{\partial t}-k\frac{\partial^{2}}{\partial x^{2}}\right)u\nonumber \\
+\frac{\partial u}{\partial t}-\frac{D}{2}\frac{\partial^{2}u}{\partial x^{2}} & = & \left(\frac{\partial}{\partial t}-\frac{D}{2}\frac{\partial^{2}}{\partial x^{2}}\right)\label{eq:diffeqn}\\
  & = & Lu\label{eq:pdesystem}\\
 u\left(x,0\right) & = & f\left(x\right)\nonumber 
 \end{eqnarray}
@@ -103,15 +107,11 @@ u\left(x,0\right) & = & f\left(x\right)\nonumber
 
 as a 
 \emph on
-linear system 
+linear system
 \emph default
 
-\begin_inset Formula $L$
-\end_inset
-
-
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Formula $L$
@@ -120,6 +120,14 @@ status open
  is a linear differential operator (maps functions to functions).
 \end_layout
 
+\end_inset
+
+
+\emph on
+ 
+\emph default
+
+\begin_inset Formula $L$
 \end_inset
 
  with 
@@ -170,42 +178,80 @@ Green's function
 \begin_inset Formula $G\left(x,t\right)$
 \end_inset
 
- of system defined by eqns.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:pdesystem"
-
-\end_inset
-
- is the solution of system that satisfies 
+ of the system is the solution that satisfies 
 \begin_inset Formula 
-\[
-\lim_{t\downarrow0}G\left(x,t\right)=\delta\left(x\right)
-\]
+\begin{equation}
+\lim_{t\downarrow0}G\left(x,t\right)=\delta\left(x\right)\label{eq:initcondimpul}
+\end{equation}
 
 \end_inset
 
-Note that this is the impulse response of the system.
- Why is the Green's function useful? Because
+Note that this is the 
+\emph on
+impulse response
+\emph default
+ of the system because it is the response/solution of the system whose input/ini
+tial conditions 
+\begin_inset Formula $u\left(x,0\right)=G\left(x,0\right)$
+\end_inset
+
+ are in a sense
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Given some regularity conditions that satisfy the hypotheses of DCT.
+In what sense? In the sense of eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:initcondimpul"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
 
- for input 
+ the unit impulse 
+\begin_inset Formula $\delta\left(x\right)$
+\end_inset
+
+.
+ Why is the Green's function useful? For arbitrary
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In fact 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ can be very ugly, e.g.
+ unbounded, non-differentiable, etc.
+ All that is required is some regularity conditions that satisfy the hypotheses
+ of Lebesgue's dominated convergence theorem.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fn:Given-some-regularity"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ input 
 \begin_inset Formula $f\left(x\right)$
 \end_inset
 
  
 \begin_inset Formula 
 \begin{eqnarray*}
-L\left(\int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\right) & = & \int_{-\infty}^{\infty}\left[LG\left(x-s,t\right)\right]f\left(s\right)ds\\
- & = & \int_{-\infty}^{\infty}\left[\frac{\partial G}{\partial t}-k\frac{\partial^{2}G}{\partial x^{2}}\right]f\left(s\right)ds\\
+L\left(\int_{-\infty}^{\infty}G\left(s-x,t\right)f\left(s\right)ds\right) & = & \int_{-\infty}^{\infty}\left[LG\left(s-x,t\right)\right]f\left(s\right)ds\\
+ & = & \int_{-\infty}^{\infty}\left[\frac{\partial G}{\partial t}-\frac{D}{2}\frac{\partial^{2}G}{\partial x^{2}}\right]f\left(s\right)ds\\
  & = & 0
 \end{eqnarray*}
 
@@ -213,18 +259,18 @@ L\left(\int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\right) & = & 
 
 and
 \begin_inset Formula 
-\begin{eqnarray*}
-\lim_{t\downarrow0}\left(\int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\right) & = & \int_{-\infty}^{\infty}\left[\lim_{t\downarrow0}G\left(x-s,t\right)\right]f\left(s\right)ds\\
- & = & \int_{-\infty}^{\infty}\delta\left(x-s\right)f\left(s\right)ds\\
- & = & f\left(x\right)
-\end{eqnarray*}
+\begin{eqnarray}
+\lim_{t\downarrow0}\left(\int_{-\infty}^{\infty}G\left(s-x,t\right)f\left(s\right)ds\right) & = & \int_{-\infty}^{\infty}\left[\lim_{t\downarrow0}G\left(s-x,t\right)\right]f\left(s\right)ds\nonumber \\
+ & = & \int_{-\infty}^{\infty}\delta\left(s-x\right)f\left(s\right)ds\label{eq:siftprop}\\
+ & = & f\left(x\right)\nonumber 
+\end{eqnarray}
 
 \end_inset
 
 So 
 \begin_inset Formula 
 \begin{eqnarray*}
-u\left(x,t\right) & = & \int_{-\infty}^{\infty}G\left(x-s,t\right)f\left(s\right)ds\\
+u\left(x,t\right) & = & \int_{-\infty}^{\infty}G\left(s-x,t\right)f\left(s\right)ds\\
  & = & G\left(x,t\right)\star f\left(x\right)
 \end{eqnarray*}
 
@@ -242,20 +288,40 @@ reference "eq:pdesystem"
 \end_layout
 
 \begin_layout Section
-Diffusion equation
+Green's function for the Diffusion equation
 \end_layout
 
 \begin_layout Standard
-The system in eqns.
+The PDE in eqn.
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:pdesystem"
+reference "eq:diffeqn"
 
 \end_inset
 
- is called the Diffusion equation because it diffuses the initial concentration
- of mass 
+ is called the 
+\emph on
+Diffusion
+\emph default
+ equation and the system I'll call a 
+\emph on
+Diffusion system
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is nonstandard.
+ Typically this is just called a Diffusion boundary value problem with Dirichlet
+ boundary conditions (the values of the solution are specified as opposed
+ to the values of the derivatives, which is a Neumann boundary condition).
+\end_layout
+
+\end_inset
+
+: it diffuses the initial concentration of mass 
 \begin_inset Formula $f\left(x\right)$
 \end_inset
 
@@ -268,9 +334,9 @@ reference "eq:pdesystem"
  for the system.
  For reasons that will become clearer in the 3rd section 
 \begin_inset Formula 
-\[
-G\left(x,t\right)=\frac{1}{t^{\alpha}}\phi\left(\frac{x}{t^{\alpha}}\right)
-\]
+\begin{equation}
+G\left(x,t\right)=\frac{1}{t^{\alpha}}\phi\left(\frac{x}{t^{\alpha}}\right)\label{eq:greenprototype}
+\end{equation}
 
 \end_inset
 
@@ -279,20 +345,21 @@ for any smooth
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $C^{\infty}$
+At least 
+\begin_inset Formula $C^{1}$
 \end_inset
 
 , i.e.
- derivatives to all orders.
+ the first derivative exists.
 \end_layout
 
 \end_inset
 
- function 
+ and integrable function 
 \begin_inset Formula $\phi\left(y\right)$
 \end_inset
 
-.
+ is a good guess for the form of a Green's function.
  Indeed we will construct 
 \begin_inset Formula $G$
 \end_inset
@@ -309,7 +376,7 @@ status open
  into the diffusion equation 
 \begin_inset Formula 
 \begin{equation}
-\frac{\partial G}{\partial t}-k\frac{\partial^{2}G}{\partial x^{2}}=\left(-\frac{\alpha}{t^{\alpha+1}}\phi-\frac{\alpha x}{t^{2\alpha+1}}\phi'\right)-k\left(\frac{1}{t^{3\alpha}}\phi''\right)\label{eq:greeneqn}
+\frac{\partial G}{\partial t}-\frac{D}{2}\frac{\partial^{2}G}{\partial x^{2}}=\left(-\frac{\alpha}{t^{\alpha+1}}\phi-\frac{\alpha x}{t^{2\alpha+1}}\phi'\right)-\frac{D}{2}\left(\frac{1}{t^{3\alpha}}\phi''\right)\label{eq:greeneqn}
 \end{equation}
 
 \end_inset
@@ -339,13 +406,13 @@ reference "eq:greeneqn"
  becomes
 \begin_inset Formula 
 \[
-\left(-\frac{\alpha}{t^{\alpha+1}}\eta\left(x\right)-\frac{\alpha x}{t^{\alpha+1}}\eta'\left(x\right)\right)-k\left(\frac{1}{t^{\alpha}}\eta''\left(x\right)\right)=0
+\left(-\frac{\alpha}{t^{\alpha+1}}\eta\left(x\right)-\frac{\alpha x}{t^{\alpha+1}}\eta'\left(x\right)\right)-\frac{D}{2}\left(\frac{1}{t^{\alpha}}\eta''\left(x\right)\right)=0
 \]
 
 \end_inset
 
 or (by multiplying both sides by 
-\begin_inset Formula $-t^{\alpha}/k$
+\begin_inset Formula $-t^{\alpha}/\left(D/2\right)$
 \end_inset
 
  and moving 
@@ -355,17 +422,18 @@ or (by multiplying both sides by
  over)
 \begin_inset Formula 
 \begin{equation}
-\frac{\alpha}{kt}\eta\left(x\right)+\frac{\alpha x}{kt}\eta'\left(x\right)=-\eta''\left(x\right)\label{eq:odegreen}
+\frac{\alpha}{\left(D/2\right)t}\eta\left(x\right)+\frac{\alpha x}{\left(D/2\right)t}\eta'\left(x\right)=-\eta''\left(x\right)\label{eq:odegreen}
 \end{equation}
 
 \end_inset
 
 This is now a linear second order ordinary differential equation that's
  easy to solve.
- The first trick is recognizing the left side an exact differential, i.e.
+ The first trick is recognizing the left side is an exact differential,
+ i.e.
 \begin_inset Formula 
 \[
-\frac{\alpha}{kt}\eta\left(x\right)+\frac{\alpha x}{kt}\eta'\left(x\right)=\frac{\alpha}{kt}\frac{d}{dx}\left(x\eta\left(x\right)\right)
+\frac{\alpha}{\left(D/2\right)t}\eta\left(x\right)+\frac{\alpha x}{\left(D/2\right)t}\eta'\left(x\right)=\frac{\alpha}{\left(D/2\right)t}\frac{d}{dx}\left(x\eta\left(x\right)\right)
 \]
 
 \end_inset
@@ -381,17 +449,17 @@ reference "eq:odegreen"
  can be integrated once easily
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\alpha}{kt}\int\frac{d}{dx}\left(x\eta\left(x\right)\right) & = & -\int\eta''\left(x\right)dx\\
-\frac{\alpha x}{kt}\eta\left(x\right) & = & -n'\left(x\right)+c_{1}
+\frac{\alpha}{\left(D/2\right)t}\int\frac{d}{dx}\left(x\eta\left(x\right)\right) & = & -\int\eta''\left(x\right)dx\\
+\frac{\alpha}{\left(D/2\right)t}x\eta\left(x\right) & = & -n'\left(x\right)+c_{1}
 \end{eqnarray*}
 
 \end_inset
 
-which is itself a linear first order ordinary differential equation more
- commonly written
+This again is a linear first order ordinary differential equation more commonly
+ written
 \begin_inset Formula 
 \[
-n'\left(x\right)+\frac{\alpha x}{kt}\eta\left(x\right)=c_{1}
+n'\left(x\right)+\frac{\alpha x}{\left(D/2\right)t}\eta\left(x\right)=c_{1}
 \]
 
 \end_inset
@@ -402,11 +470,15 @@ which is solved by a similar sort of trick.
 status open
 
 \begin_layout Plain Layout
-Notice that the first term has first derivative of 
+Notice that the first term has a first derivative of 
 \begin_inset Formula $\eta$
 \end_inset
 
- and the second has no derivative.
+ and the second has just an 
+\begin_inset Formula $\eta$
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -416,24 +488,25 @@ Notice that the first term has first derivative of
 \end_inset
 
  spoils it.
- But we can hack it to indeed be an exact differential by multiplying both
- sides by some function 
+ We can hack it to indeed be an exact differential by multiplying both sides
+ by some function 
 \begin_inset Formula $h\left(x\right)$
 \end_inset
 
- so 
+ 
 \begin_inset Formula 
-\[
-\left[h\left(x\right)\right]n'\left(x\right)+\left[h\left(x\right)\frac{\alpha x}{kt}\right]\eta\left(x\right)=h\left(x\right)c_{1}
-\]
+\begin{equation}
+\left[h\left(x\right)\right]n'\left(x\right)+\left[h\left(x\right)\frac{\alpha x}{\left(D/2\right)t}\right]\eta\left(x\right)=h\left(x\right)c_{1}\label{eq:integfac}
+\end{equation}
 
 \end_inset
 
-so that now the second term becomes the natural first derivative of 
+such that the second term becomes the first derivative of 
 \begin_inset Formula $h$
 \end_inset
 
- What kind of function is such that 
+, i.e.
+ 
 \begin_inset Formula 
 \[
 h\left(x\right)n'\left(x\right)+h'\left(x\right)\eta\left(x\right)=\frac{d}{dx}\left(h\left(x\right)\eta\left(x\right)\right)
@@ -443,10 +516,10 @@ h\left(x\right)n'\left(x\right)+h'\left(x\right)\eta\left(x\right)=\frac{d}{dx}\
 
 Which function has the property that it's first derivative is equal to itself
  times 
-\begin_inset Formula $\alpha x/kt$
+\begin_inset Formula $\alpha x/\left(D/2\right)t$
 \end_inset
 
-? Well that's just another differential equation in disguise
+? Well that's just another
 \begin_inset Foot
 status open
 
@@ -456,23 +529,35 @@ It's DEs all the way down.
 
 \end_inset
 
-! 
+ differential equation in disguise! 
 \begin_inset Formula 
 \[
-\frac{dh}{dx}=h\frac{\alpha x}{kt}\Rightarrow\frac{dh}{h}=dx\frac{\alpha x}{kt}\Rightarrow\log\left(h\right)=\frac{\alpha}{t}\frac{1}{2}x^{2}
+\frac{dh}{dx}=h\cdot\frac{\alpha x}{\left(D/2\right)t}\Rightarrow\frac{dh}{h}=dx\frac{\alpha x}{\left(D/2\right)t}\Rightarrow\log\left(h\right)=\frac{\alpha}{Dt}x^{2}
 \]
 
 \end_inset
 
 or 
-\begin_inset Formula $h\left(x\right)=e^{\alpha x^{2}/kt}$
+\begin_inset Formula $h\left(x\right)=e^{\alpha x^{2}/Dt}$
 \end_inset
 
 .
- So
+ So substituting 
+\begin_inset Formula $h$
+\end_inset
+
+ into eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:integfac"
+
+\end_inset
+
+
 \begin_inset Formula 
 \[
-\frac{d}{dx}\left(e^{\alpha x^{2}/kt}\eta\left(x\right)\right)=e^{\alpha x^{2}/kt}c_{1}
+\frac{d}{dx}\left(e^{\alpha x^{2}/Dt}\eta\left(x\right)\right)=e^{\alpha x^{2}/Dt}c_{1}
 \]
 
 \end_inset
@@ -480,9 +565,9 @@ or
 and finally 
 \begin_inset Formula 
 \begin{eqnarray*}
-e^{\frac{\alpha x^{2}}{2kt}}\eta\left(x\right) & = & c_{1}\int e^{\alpha x^{2}/kt}dx+c_{2}\\
+e^{\frac{\alpha x^{2}}{Dt}}\eta\left(x\right) & = & c_{1}\int e^{\alpha x^{2}/Dt}dx+c_{2}\\
  & \text{or}\\
-\phi\left(\frac{x}{t^{\alpha}}\right)=\eta\left(x\right) & = & c_{1}e^{-\frac{\alpha x^{2}}{2kt}}\int e^{\alpha x^{2}/kt}dx+c_{2}e^{-\frac{\alpha x^{2}}{2kt}}
+\phi\left(\frac{x}{t^{\alpha}}\right)=\eta\left(x\right) & = & c_{1}e^{-\frac{\alpha x^{2}}{Dt}}\int e^{\alpha x^{2}/Dt}dx+c_{2}e^{-\frac{\alpha x^{2}}{Dt}}
 \end{eqnarray*}
 
 \end_inset
@@ -491,11 +576,11 @@ Now to reconcile that
 \begin_inset Formula $\phi\left(\frac{x}{t^{\alpha}}\right)$
 \end_inset
 
- is a function of 
+ should be a function of only 
 \begin_inset Formula $\frac{x}{t^{\alpha}}$
 \end_inset
 
- we need to pick the right 
+ we need to pick the appropriate 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -507,8 +592,585 @@ Now to reconcile that
 
 \begin_inset Formula 
 \[
-\phi\left(\frac{x}{\sqrt{t}}\right)=c_{1}e^{-\frac{1}{4k}\left(\frac{x}{\sqrt{t}}\right)^{2}}\int e^{\frac{1}{4k}\left(\frac{x}{\sqrt{t}}\right)^{2}}dx+c_{2}e^{-\frac{1}{4k}\left(\frac{x}{\sqrt{t}}\right)^{2}}
+\phi\left(\frac{x}{\sqrt{t}}\right)=c_{1}e^{-\frac{1}{2D}\left(\frac{x}{\sqrt{t}}\right)^{2}}\int e^{\frac{1}{2D}\left(\frac{x}{\sqrt{t}}\right)^{2}}dx+c_{2}e^{-\frac{1}{2D}\left(\frac{x}{\sqrt{t}}\right)^{2}}
 \]
+
+\end_inset
+
+So 
+\begin_inset Formula $\phi\left(\frac{x}{\sqrt{t}}\right)$
+\end_inset
+
+ is the Green's function of the diffusion equation.
+ Well almost.
+ The regularity conditions mentioned in footnote 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fn:Given-some-regularity"
+
+\end_inset
+
+ require that 
+\begin_inset Formula $\phi\rightarrow0$
+\end_inset
+
+ as 
+\begin_inset Formula $x\rightarrow\infty$
+\end_inset
+
+ and for the calculation in eqns.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:siftprop"
+
+\end_inset
+
+ to work 
+\begin_inset Formula $G$
+\end_inset
+
+ should be normalized to integrate to 1.
+ To satisfy the first requirement it's clear that 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ should be 0.
+ To meet the second requirement we set 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{eqnarray*}
+1 & = & \int_{-\infty}^{\infty}G\left(x,t\right)dx\\
+ & = & c_{2}\int_{-\infty}^{\infty}\frac{1}{\sqrt{t}}e^{-\frac{1}{2D}\left(\frac{x}{\sqrt{t}}\right)^{2}}dx\\
+ & = & c_{2}\int_{-\infty}^{\infty}\frac{1}{\sqrt{t}}e^{-\frac{1}{2}\left(\frac{x}{\sqrt{Dt}}\right)^{2}}dx\\
+ &  & \text{let }u=x/\sqrt{Dt}\\
+ & = & c_{2}\sqrt{D}\int_{-\infty}^{\infty}e^{-\frac{1}{2}u^{2}}du\\
+ & = & c_{2}\sqrt{2D\pi}
+\end{eqnarray*}
+
+\end_inset
+
+Therefore the normalization factor 
+\begin_inset Formula $c_{2}=1/\sqrt{D\pi}$
+\end_inset
+
+ and the complete Green's function is 
+\begin_inset Formula 
+\begin{equation}
+G\left(x,t\right)=\frac{1}{\sqrt{2\pi Dt}}e^{-\frac{1}{2}\frac{x^{2}}{Dt}}\label{eq:gaussian}
+\end{equation}
+
+\end_inset
+
+Indeed a very recognizable function! And hence the general solution to the
+ diffusion equation is 
+\begin_inset Formula 
+\begin{eqnarray*}
+u\left(x,t\right) & = & \int_{-\infty}^{\infty}G\left(s-x,t\right)f\left(s\right)ds\\
+ & = & \frac{1}{\sqrt{2\pi t}}\int_{-\infty}^{\infty}\frac{1}{\sqrt{t}}e^{-\frac{1}{2}\frac{\left(s-x\right)^{2}}{Dt}}f\left(s\right)ds
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Smoothing
+\end_layout
+
+\begin_layout Standard
+A Green's function is a smoother
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+And convolution is a smoothing process.
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Formula $u\left(x,t\right)$
+\end_inset
+
+ is the smoothed version of 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Smoothing"
+
+\end_inset
+
+ shows initial conditions 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula 
+\[
+f\left(x\right)=\begin{cases}
+0 & x<-1\\
+x+1 & -1\leq x<0\\
+1 & 0\leq x<1\\
+2 & 1\leq x<2\\
+0 & 2\leq x
+\end{cases}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ convolved with 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $t=.01,.1,1$
+\end_inset
+
+, i.e.
+ the solution 
+\begin_inset Formula $u\left(x,t\right)$
+\end_inset
+
+ to the diffusion equation at those times.
+ As you can see as 
+\begin_inset Formula $t$
+\end_inset
+
+ increases the initial distribution of mass 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is diffused out 
+\series bold
+and 
+\series default
+the points where 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is nondifferentiable
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $x=-1,0,1,2$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ vanish, i.e.
+ 
+\begin_inset Formula $u\left(x,t\right)$
+\end_inset
+
+ is differentiable at those points.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename smoother.jpeg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Smoothing"
+
+\end_inset
+
+Smoothing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Actually 
+\begin_inset Formula $u\left(x,t\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ for any 
+\begin_inset Formula $t>0$
+\end_inset
+
+, so 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is instaneously smoothed out.
+ How smooth? Perfectly smooth:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial^{n}}{\partial x^{n}}u\left(x,t\right) & = & \int_{-\infty}^{\infty}\left(\frac{\partial^{n}}{\partial x^{n}}G\left(s-x,t\right)\right)f\left(s\right)ds\\
+ & = & \int_{-\infty}^{\infty}\left(-1\right)^{n}G^{\left(n\right)}\left(s-x,t\right)f\left(s\right)ds
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $G^{\left(n\right)}$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $n$
+\end_inset
+
+th partial deriviative of 
+\begin_inset Formula $G$
+\end_inset
+
+ with respect to its first argument.
+ And since 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The 
+\begin_inset Formula $n$
+\end_inset
+
+th derivative of 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\left(\frac{-1}{\sqrt{2Dt}}\right)^{n}H_{n}\left(\frac{x}{\sqrt{2Dt}}\right)G\left(x,t\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $H_{n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $n$
+\end_inset
+
+th Hermite polynomial defined by
+\begin_inset Formula 
+\[
+H_{n}\left(x\right)=\left(2x-\frac{d}{dx}\right)^{n}\cdot1
+\]
+
+\end_inset
+
+The 1 is necessary because the differential operator must be applied to
+ a function.
+ 
+\end_layout
+
+\end_inset
+
+ this integral converges for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Even more shockingly 
+\begin_inset Formula $u\left(x,t\right)$
+\end_inset
+
+ is non-zero everywhere on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ for any 
+\begin_inset Formula $t>0$
+\end_inset
+
+, so 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is diffused everywhere instaneously.
+\end_layout
+
+\begin_layout Standard
+Why is that eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:greenprototype"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+G\left(x,t\right)=\frac{1}{t^{\alpha}}\phi\left(\frac{x}{t^{\alpha}}\right)
+\]
+
+\end_inset
+
+is a good guess for the form a Green's function? First of all first of all
+ since 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is integrable we can normalize it such that 
+\begin_inset Formula 
+\[
+\int_{-\infty}^{\infty}\phi\left(y\right)dy=1
+\]
+
+\end_inset
+
+and then by a change of variables 
+\begin_inset Formula 
+\[
+\int_{-\infty}^{\infty}\frac{1}{t^{\alpha}}\phi\left(\frac{x}{t^{\alpha}}\right)dx=1
+\]
+
+\end_inset
+
+which as already mentioned is necessary for the calcuation in eqns.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:siftprop"
+
+\end_inset
+
+ to work.
+ 
+\end_layout
+
+\begin_layout Standard
+But more intuitively eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:greenprototype"
+
+\end_inset
+
+ is the right form for a Green's function because it has the behavior of
+ a smoother as 
+\begin_inset Formula $t\rightarrow0$
+\end_inset
+
+ and as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $t\rightarrow0$
+\end_inset
+
+ the the factor of 
+\begin_inset Formula $1/t^{\alpha}$
+\end_inset
+
+ increases the value of 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ around 
+\begin_inset Formula $x=0$
+\end_inset
+
+ and shrinks the base because the 
+\begin_inset Formula $1/t^{\alpha}$
+\end_inset
+
+ in the argument of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ functions as a scale parameter
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+And the scale increases, is made coarser, as 
+\begin_inset Formula $t\rightarrow0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ So initially (at 
+\begin_inset Formula $t\approx0$
+\end_inset
+
+) a 
+\begin_inset Formula $G$
+\end_inset
+
+ of this form will preserve the initial distribution of mass 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset
+
+ the inverse effect on 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ is observed: the factor 
+\begin_inset Formula $1/t^{\alpha}$
+\end_inset
+
+ will flatten 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ and therefore spread/smear/smooth out 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+.
+ It's also critical that 
+\begin_inset Formula $G\left(x,t\right)$
+\end_inset
+
+ always integrates to the same constant (i.e.
+ 1) because otherwise it would diffuse mass out unevenly
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You have to look at 
+\begin_inset Formula $G$
+\end_inset
+
+ in Fourier space to rigorously define and prove this notion but suffice
+ it to say that if 
+\begin_inset Formula $G$
+\end_inset
+
+ didn't have a constant integral it would apply positive gain to certain
+ frequencies in 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ and negative gain to others, i.e.
+ redistribute power amongst the frequency components of 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+.
+ My point here is that if you wanted to construct a smoothing function de-noveau
+ you would want these properties and the 
+\begin_inset Formula $1/t^{\alpha}$
+\end_inset
+
+ trick would be an easy way to effect them..
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gaussian-progresion-for"
+
+\end_inset
+
+ shows what the Green's function for the diffusion equation, eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gaussian"
+
+\end_inset
+
+, looks like as 
+\begin_inset Formula $t$
+\end_inset
+
+ increases.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename gaussian.jpeg
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gaussian progresion for 
+\begin_inset Formula $t=.001,.01,.1$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gaussian-progresion-for"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
