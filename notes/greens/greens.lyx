@@ -1074,8 +1074,7 @@ And the scale increases, is made coarser, as
 \begin_inset Formula $G\left(x,t\right)$
 \end_inset
 
- always integrates to the same constant (i.e.
- 1) because otherwise it would diffuse mass out unevenly
+ integrates to 1 because otherwise it would add mass to the initial distribution
 \begin_inset Foot
 status open
 
@@ -1084,28 +1083,22 @@ You have to look at
 \begin_inset Formula $G$
 \end_inset
 
- in Fourier space to rigorously define and prove this notion but suffice
- it to say that if 
+ in Fourier space to rigorously define and prove this notion.
+ Suffice it to say that if 
 \begin_inset Formula $G$
 \end_inset
 
- didn't have a constant integral it would apply positive gain to certain
- frequencies in 
+ didn't integrate to 1, by Parseval's theorem, it wouldn't just redistribute
+ power amongst the frequency components of 
 \begin_inset Formula $f\left(x\right)$
 \end_inset
 
- and negative gain to others, i.e.
- redistribute power amongst the frequency components of 
-\begin_inset Formula $f\left(x\right)$
-\end_inset
-
-.
- 
+, it would add power too.
 \end_layout
 
 \end_inset
 
-.
+and that's not.
  My point here is that if you wanted to construct a smoothing function de-noveau
  you would want these properties and the 
 \begin_inset Formula $1/t^{\alpha}$
