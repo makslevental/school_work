@@ -52,11 +52,35 @@ y2=conv(p1,h2);
 %no noise correctly matched
 m1=y1(abs(y1) >= max(y1))/max(y1);
 %no noise incorreectly matched
-m2=y2(abs(y2) >= max(y2))/max(y2);
+m2=y2(abs(y2) >= 3)/3;
 
 % M=[m;m1;m2];
 
 %noise
-powerp1=sum(p1.^2);
-awgn=10*randn(100);
-p1=S1.*d;
+awgnoise = struct();
+awgnoise.reqSNR = 10;
+%power in watts, i.e. energy divided by time
+awgnoise.sigPower = sum(abs(p1(:)).^2)/length(p1(:));
+%convert to dBW; dBW is ratio of power of signal relative to 1 watt
+awgnoise.sigPower = 10*log10(awgnoise.sigPower);
+%because both in db log(S/N)=logS-logN
+awgnoise.noisePowerdBW = awgnoise.sigPower-awgnoise.reqSNR;
+%invert
+awgnoise.noisePowerW = 10^(awgnoise.noisePowerdBW/10);
+%because the variance should be noise, hence sqrt
+awgnoise.noise = (sqrt(awgnoise.noisePowerW))*randn(1, 100);
+
+
+np1 = awgn(p1,10,'measured');
+% nnp1 = p1+awgnoise.noise;
+% plot(x,np1,'b',x,nnp1,'r')
+
+ny1 = conv(np1,h1);
+% plot(1:104,ny1)
+
+%what happens when the threshholding produces too few values?
+threshed = ny1(abs(ny1) >= 4);
+hold on;
+stem(threshed(1:20),'r')
+stem(m)
+hold off;
