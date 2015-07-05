@@ -1,0 +1,677 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 2cm
+\rightmargin 1cm
+\bottommargin 2cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Orthogonal Frequency-Division Multiplexing
+\begin_inset Newline newline
+\end_inset
+
+EEE 5502 Summer '15
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+The task is to simulate an Orthogonal Frequency-Division Multiplexing (OFDM)
+ system which uses Quaternary Phase-Shift Keying (QPSK).
+\end_layout
+
+\begin_layout Subsection
+OFDM
+\end_layout
+
+\begin_layout Standard
+Orthogonal Frequency-Divsion Multiplexing is a multi-carrier modulation
+ scheme - it employs subcarrier signals that are orthogonal in frequency
+ space and therefore minimizes narrowband interference.
+ Take for example an implementation that uses the real Fourier basis: the
+ subcarriers are harmonically related sinusoids 
+\begin_inset Formula $\sin\left(n\omega_{0}t\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\sin\left(m\omega_{0}t\right)$
+\end_inset
+
+, related by common fundamental frequency 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+.
+ The correlation between two such harmonically related subcarriers is 
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{-\pi}^{\pi}\left(\sin\left(m\omega_{0}t\right)\sin\left(n\omega_{0}t\right)\right)dt & = & \frac{1}{2}\int_{-\pi}^{\pi}\left(\cos\left(\left(m+n\right)\omega_{0}t\right)-\cos\left(\left(m-n\right)\omega_{0}t\right)\right)dt\\
+ & = & \frac{1}{2}\int_{-\pi}^{\pi}\cos\left(\left(m+n\right)\omega_{0}t\right)-\frac{1}{2}\int_{-\pi}^{\pi}\cos\left(\left(m-n\right)\omega_{0}t\right)dt
+\end{eqnarray*}
+
+\end_inset
+
+and since 
+\begin_inset Formula $\cos\left(\theta\right)$
+\end_inset
+
+ is an even function 
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{-\pi}^{\pi}\left(\sin\left(m\omega_{0}t\right)\sin\left(n\omega_{0}t\right)\right)dt & = & \frac{1}{2}\int_{-\pi}^{\pi}\cos\left(\left(m+n\right)\omega_{0}t\right)-\frac{1}{2}\int_{-\pi}^{\pi}\cos\left(\left(m-n\right)\omega_{0}t\right)dt\\
+ & = & \frac{1}{2}\times0-\frac{1}{2}\times0
+\end{eqnarray*}
+
+\end_inset
+
+This is the sense in which the subcarriers are orthogonal
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The inner product on the Hilbert space of 
+\begin_inset Formula $2\pi$
+\end_inset
+
+ periodic function is 
+\begin_inset Formula $\left\langle f,g\right\rangle =\int_{-\pi}^{\pi}f\cdot g$
+\end_inset
+
+ and orthogonality is when 
+\begin_inset Formula $\left\langle f,g\right\rangle =0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ In the case of FFT implementation some number 
+\begin_inset Formula $N$
+\end_inset
+
+ complex subcarriers 
+\begin_inset Formula $\left\{ e^{in\omega_{0}}:\,n=0,\dots,N-1\right\} $
+\end_inset
+
+ are used.
+ In our simulation we employ a 64 point FFT-IFFT pair so 
+\begin_inset Formula $N=64$
+\end_inset
+
+.
+ Namely the data 
+\begin_inset Formula $x\left[n\right]$
+\end_inset
+
+ is transformed into 
+\begin_inset Formula 
+\[
+X\left[k\right]=\sum_{n=0}^{N-1}x\left[n\right]e^{-i\omega_{0}kn}
+\]
+
+\end_inset
+
+and then recovered by 
+\begin_inset Formula 
+\[
+x\left[n\right]=\frac{1}{N}\sum_{k=0}^{N-1}X\left[n\right]e^{i\omega_{0}kn}
+\]
+
+\end_inset
+
+where the basis functions 
+\begin_inset Formula $e^{i\omega_{0}kn}$
+\end_inset
+
+ obey the orthogonality property.
+\end_layout
+
+\begin_layout Subsection
+QPSK
+\end_layout
+
+\begin_layout Standard
+Phase Key Shifting (PSK) is a digital modulation scheme that encodes bits
+ of information by shifting the phase of the signal (carrier wave).
+ Quaternary PSK encodes 2 bits of information by shifting the phase of the
+ carrier wave to one of 4 phases 
+\begin_inset Formula $\phi$
+\end_inset
+
+.
+ For this simulation we use the complex representation of the phase shifted
+ carrier wave with 
+\begin_inset Formula 
+\[
+\phi=0,\frac{\pi}{4},3\frac{\pi}{4},5\frac{\pi}{4}
+\]
+
+\end_inset
+
+Therefore each symbol transmitted is one of 
+\begin_inset Formula 
+\begin{eqnarray*}
+e^{i\times0} & = & 0+0j\\
+e^{i\pi/4} & = & \frac{\sqrt{2}}{2}+\frac{\sqrt{2}}{2}j\\
+e^{i3\pi/4} & = & -\frac{\sqrt{2}}{2}+\frac{\sqrt{2}}{2}j\\
+e^{i5\pi/4} & = & -\frac{\sqrt{2}}{2}-\frac{\sqrt{2}}{2}j
+\end{eqnarray*}
+
+\end_inset
+
+We use amplitude equal to 
+\begin_inset Formula $1$
+\end_inset
+
+ in order to make the perturbation by the white Gaussian noise simple (explanati
+on follows).
+ Hence 
+\begin_inset Formula $2^{12}$
+\end_inset
+
+ symbols are produced, their IFFT is taken 64 samples at a time, the time
+ space
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|S\right|=1$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ signal 
+\begin_inset Formula $S$
+\end_inset
+
+ is perturbed by white Gaussian noise 
+\begin_inset Formula $G$
+\end_inset
+
+ for SNR values
+\begin_inset Formula 
+\begin{eqnarray*}
+25\text{dB} & = & 10\text{dB}\log\left(\frac{S}{G}\right)\Rightarrow G=1/316.288\\
+15\text{dB} & = & 10\text{dB}\log\left(\frac{S}{G}\right)\Rightarrow G=1/31.6288\\
+5\text{dB} & = & 10\text{dB}\log\left(\frac{S}{G}\right)\Rightarrow G=1/3.16288
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Analysis
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename scatter.jpg
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Received Signals
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Received-Signals"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The system was simulated using the below MATLAB code.
+ The results appear in fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Received-Signals"
+
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+data = randi([0 3],64,64); modSignal = []; 
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData5db = []; receivedData15db = []; receivedData25db = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+fftSignal5db = []; fftSignal15db = []; fftSignal25db = []; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+hMod = comm.QPSKModulator('PhaseOffset',pi/4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+hDemod = comm.QPSKDemodulator('PhaseOffset',pi/4);
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:64
+\end_layout
+
+\begin_layout Plain Layout
+
+    modSignal = [modSignal;step(hMod, data(:,i))];
+\end_layout
+
+\begin_layout Plain Layout
+
+    ifftSignal = ifft(step(hMod, data(:,i)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    noisySignal25db = ifftSignal + (1/10^(25/10))*exp(1i *2*pi*(randn(2^6,1)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    noisySignal15db = ifftSignal + (1/10^(15/10))*exp(1i *2*pi*(randn(2^6,1)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    noisySignal5db = ifftSignal + (1/10^(5/10))*exp(1i *2*pi*(randn(2^6,1)));
+\end_layout
+
+\begin_layout Plain Layout
+
+    fftSignal5db = [fftSignal5db;fft(noisySignal5db)];
+\end_layout
+
+\begin_layout Plain Layout
+
+    fftSignal15db = [fftSignal15db;fft(noisySignal15db)];
+\end_layout
+
+\begin_layout Plain Layout
+
+    fftSignal25db = [fftSignal25db;fft(noisySignal25db)];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData5db = step(hDemod, fftSignal5db);
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData15db = step(hDemod, fftSignal15db);
+\end_layout
+
+\begin_layout Plain Layout
+
+receivedData25db = step(hDemod, fftSignal25db);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%Create an error rate calculator
+\end_layout
+
+\begin_layout Plain Layout
+
+hError = comm.ErrorRate; errorStats1 = step(hError, reshape(data,2^12,1),
+ receivedData5db);
+\end_layout
+
+\begin_layout Plain Layout
+
+fprintf('Error rate = %f
+\backslash
+nNumber of errors for 5dB = %d
+\backslash
+n',errorStats1(1), errorStats1(2))
+\end_layout
+
+\begin_layout Plain Layout
+
+%Create an error rate calculator
+\end_layout
+
+\begin_layout Plain Layout
+
+hError = comm.ErrorRate; errorStats2 = step(hError, reshape(data,2^12,1),
+ receivedData15db);
+\end_layout
+
+\begin_layout Plain Layout
+
+fprintf('Error rate = %f
+\backslash
+nNumber of errors for 15dB = %d
+\backslash
+n',errorStats2(1), errorStats2(2))
+\end_layout
+
+\begin_layout Plain Layout
+
+%Create an error rate calculator
+\end_layout
+
+\begin_layout Plain Layout
+
+hError = comm.ErrorRate; errorStats3 = step(hError, reshape(data,2^12,1),
+ receivedData25db); 
+\end_layout
+
+\begin_layout Plain Layout
+
+fprintf('Error rate = %f
+\backslash
+nNumber of errors for 25dB = %d
+\backslash
+n',errorStats3(1), errorStats3(2))
+\end_layout
+
+\end_inset
+
+The reported bit error rates are summarized in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Bit-error-rates"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="1">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Error rate = 2
+\begin_inset Formula $\times$
+\end_inset
+
+0.569336 Number of errors for 5dB = 2332
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Error rate = 2
+\begin_inset Formula $\times$
+\end_inset
+
+0.000244 Number of errors for 15dB = 1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Error rate = 0.000000 Number of errors for 25dB = 0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Bit-error-rates"
+
+\end_inset
+
+Bit-error rates
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Standard
+The anticipated bit error rate for QPSK 
+\begin_inset Formula 
+\[
+P_{b}=Q\left(\sqrt{\frac{2E_{b}}{N_{0}}}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $E_{b}=$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Energy-per-bit, 
+\begin_inset Formula $N_{0}$
+\end_inset
+
+ is the Noise power spectral density, and 
+\begin_inset Formula $Q$
+\end_inset
+
+ is related to the complementary Gaussian error function.
+ Approximating 
+\begin_inset Formula $\frac{E_{b}}{N_{0}}$
+\end_inset
+
+ by the log ratio 
+\begin_inset Formula 
+\begin{eqnarray*}
+P_{b}\left(\frac{S\text{dB}}{G\text{dB}}\right) & = & Q\left(\sqrt{2\frac{S\text{dB}}{G\text{dB}}}\right)\\
+P_{b}\left(\frac{25\text{db}}{10\text{db}}\right) & = & 0.0126737\\
+P_{b}\left(\frac{15\text{db}}{10\text{db}}\right) & = & 0.0416323\\
+P_{b}\left(\frac{5\text{db}}{10\text{db}}\right) & = & 0.158655
+\end{eqnarray*}
+
+\end_inset
+
+There is not good agreement with experiment but I suspect this is because
+ my conversion factors are incorrect.
+\end_layout
+
+\end_body
+\end_document
