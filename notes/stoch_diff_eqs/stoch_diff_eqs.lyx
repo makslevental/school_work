@@ -4717,8 +4717,12 @@ First for
  by independence of increments 
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right] & = & E\left[a_{i}a_{j}\right]E\left[\left(B_{s_{j+1}}-B_{s_{j}}\right)\left(B_{s_{j+1}}-B_{s_{j}}\right)\right]\\
+E\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right] & = & E\left[a_{i}a_{j}\right]E\left[\left(B_{s_{i+1}}-B_{s_{i}}\right)\left(B_{s_{j+1}}-B_{s_{j}}\right)\right]\\
  & = & \begin{cases}
+0 & \text{if }i\neq j\\
+E\left[a_{j}^{2}\right]E\left[\left(B_{s_{j+1}}-B_{s_{j}}\right)^{2}\right] & \text{if }i=j
+\end{cases}\\
+ &  & \begin{cases}
 0 & \text{if }i\neq j\\
 E\left[a_{j}^{2}\right]\left(s_{j+1}-s_{j}\right) & \text{if }i=j
 \end{cases}
@@ -4729,10 +4733,10 @@ E\left[a_{j}^{2}\right]\left(s_{j+1}-s_{j}\right) & \text{if }i=j
 Thus
 \begin_inset Formula 
 \begin{eqnarray*}
-E\left[\left(\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\right)^{2}\right] & = & E\left[\sum_{i,j}^{\infty}\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right]\right]\\
+E\left[\left(\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\right)^{2}\right] & = & E\left[\sum_{i=1}^{\infty}\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\sum_{j=1}^{\infty}\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right]\\
  & = & \sum_{i,j}^{\infty}E\left[\left(a_{i}\left(B_{s_{i+1}}-B_{s_{i}}\right)\right)\left(a_{j}\left(B_{s_{j+1}}-B_{s_{j}}\right)\right)\right]\\
  & = & \sum_{j=1}^{\infty}E\left[a_{j}^{2}\right]\left(s_{j+1}-s_{j}\right)\\
- & = & E\sum_{j=1}^{\infty}a_{j}^{2}\left(s_{j+1}-s_{j}\right)\\
+ & = & E\left[\sum_{j=1}^{\infty}a_{j}^{2}\left(s_{j+1}-s_{j}\right)\right]\\
  & = & E\left[\int_{Q}^{T}\left(S\left(s,\omega\right)\right)^{2}ds\right]
 \end{eqnarray*}
 
