@@ -4794,7 +4794,20 @@ Let
 \begin_inset Formula $g\in\mathcal{V}$
 \end_inset
 
- be bounded and 
+ be uniformly
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|g\right|\leq M$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ bounded and 
 \begin_inset Formula $g\left(\cdot,\omega\right)$
 \end_inset
 
@@ -4820,35 +4833,53 @@ Let
 
 \begin_deeper
 \begin_layout Proof
-Continuous function can be arbitrarily approximating by simple functions
- and by DCT
+Continuous functions can be arbitrarily approximating by simple functions
+ hence
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\int_{Q}^{T}\left(g-S_{n}\right)^{2}ds=0
+\]
+
+\end_inset
+
+ and by the Bounded convergence theorem
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 If 
-\begin_inset Formula $\left|g_{n}\left(x\right)\right|\leq g\left(x\right)$
+\begin_inset Formula $f_{n}$
 \end_inset
 
- for all 
-\begin_inset Formula $n$
+ is a sequence of uniformly bounded real-valued measurable functions which
+ converges pointwise on a bounded measure space (i.e.
+ one in which 
+\begin_inset Formula $\mu\left(\Omega\right)$
 \end_inset
 
- and 
-\begin_inset Formula $x$
+ is finite) to a function 
+\begin_inset Formula $f$
 \end_inset
 
- then 
-\begin_inset Formula $\int\left|g_{n}-g\right|d\mu\rightarrow0$
+, then the limit 
+\begin_inset Formula $f$
 \end_inset
 
-.
- 
+ is an integrable function and
+\begin_inset Formula $\lim_{n\to\infty}\int_{S}f_{n}d\mu=\int_{S}fd\mu.$
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
+we get the result.
+ Note the sequence of functions in question is 
+\begin_inset Formula $\left\{ \int_{Q}^{T}\left(g-S_{n}\right)^{2}\right\} $
+\end_inset
 
+.
 \end_layout
 
 \end_deeper
@@ -4857,8 +4888,8 @@ Let
 \begin_inset Formula $h\in\mathcal{V}$
 \end_inset
 
- be bounded.
- Then there exist bounded functions 
+ be uniformly bounded.
+ Then there exist uniformly bounded functions 
 \begin_inset Formula $g_{n}\in\mathcal{V}$
 \end_inset
 
@@ -4930,7 +4961,16 @@ Suppose
 \end_layout
 
 \begin_layout Standard
-Define 
+So 
+\begin_inset Formula $\psi_{n}$
+\end_inset
+
+ converge to a 
+\begin_inset Formula $\delta\left(x\right)$
+\end_inset
+
+.
+ Define 
 \begin_inset Formula 
 \[
 g_{n}\left(t,\omega\right)=\int_{0}^{t}\psi_{n}\left(s-t\right)h\left(s,\omega\right)ds
@@ -4938,7 +4978,20 @@ g_{n}\left(t,\omega\right)=\int_{0}^{t}\psi_{n}\left(s-t\right)h\left(s,\omega\r
 
 \end_inset
 
-Then 
+So 
+\begin_inset Quotes eld
+\end_inset
+
+smooth
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ Then 
 \begin_inset Formula $g_{n}\left(\cdot,\omega\right)$
 \end_inset
 
@@ -4954,7 +5007,7 @@ Then
 \begin_inset Formula $h\in\mathcal{V}$
 \end_inset
 
- 
+ it's the case that 
 \begin_inset Formula $g_{n}\left(t,\cdot\right)$
 \end_inset
 
@@ -4966,11 +5019,12 @@ Then
 \begin_inset Formula $t$
 \end_inset
 
- (use sums to approximate the integral defning 
+ (use sums to approximate the integral defining 
 \begin_inset Formula $g_{n}$
 \end_inset
 
-).
+, meaning go back to the definition of the Lebesgue integral in terms of
+ simple functions).
  Finally 
 \begin_inset Formula 
 \[
@@ -4983,12 +5037,23 @@ since
 \begin_inset Formula $\left\{ \psi_{n}\right\} $
 \end_inset
 
- constitute an approximate identity??? 
-\series bold
+ constitute an approximate identity, which probably just means that convolving
+ with the Dirac delta is some sort of identity transformation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
 Hoffman 1962 p 22.
+\end_layout
+
+\end_inset
+
+.
+
+\series bold
  
 \series default
-Then finally by DCT
+Then finally by Bounded convergence again
 \begin_inset Formula 
 \[
 \lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(h-g_{n}\right)^{2}ds\right]=0
@@ -5006,7 +5071,7 @@ Let
 \end_inset
 
 .
- Then there exist bounded functions 
+ Then there exist uniformly bounded functions 
 \begin_inset Formula $h_{n}\in\mathcal{V}$
 \end_inset
 
