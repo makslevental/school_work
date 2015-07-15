@@ -3759,7 +3759,7 @@ Let
 
 \end_inset
 
-for simple functions
+for simple processes
 \begin_inset Formula 
 \[
 S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)
@@ -3847,7 +3847,7 @@ around the edges
 
 .
  This is manifestly reasonable but the next natural step, approximating
- arbitrary functions by these simple functions, when done carelessly leads
+ arbitrary processes by these simple processes, when done carelessly leads
  to problems.
 \end_layout
 
@@ -3865,7 +3865,7 @@ Let
 \end_inset
 
 .
- Then construct the simple functions
+ Then construct the simple processes
 \begin_inset Formula 
 \begin{eqnarray*}
 S_{n}\left(t,\omega\right) & = & \sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)\\
@@ -4378,7 +4378,7 @@ At least the Riemann-Stieltjes integral.
 
 \end_inset
 
- you approximate a function 
+ you approximate a process 
 \begin_inset Formula $f\left(t,\omega\right)$
 \end_inset
 
@@ -4435,9 +4435,9 @@ Stratonovich
 
 \begin_layout Standard
 Choosing one resolves the problem of unbounded variation but still, in either
- case, one must restrict the class of integrand functions to a special class.
+ case, one must restrict the class of integrand processes to a special class.
  Defining this class necessitates defining some properties.
- Heuristically these properties capture the quality that the special functions
+ Heuristically these properties capture the quality that the special processes
  
 \emph on
 only depend on the behavior of 
@@ -4598,7 +4598,7 @@ Let
 \begin_inset Formula $\mathcal{V}=\mathcal{V}\left(Q,T\right)$
 \end_inset
 
- to be the class of functions
+ to be the class of processes
 \begin_inset Formula 
 \[
 g\left(t,\omega\right):\left[0,\infty\right)\times\Omega\rightarrow\mathbb{R}
@@ -4641,6 +4641,13 @@ such that
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:squareintegralprocessspace"
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -4654,6 +4661,48 @@ name "def:itointegrable"
 \end_inset
 
  are fairly obvious but part 3 is mysterious.
+ Firstly what does it even mean? The integral in argument of the expectation
+ is a mundane Lebesgue integral and it integrates out the 
+\begin_inset Formula $t$
+\end_inset
+
+ dependence in 
+\begin_inset Formula $g\left(t,\omega\right)$
+\end_inset
+
+.
+ So
+\begin_inset Formula 
+\[
+X\left(\omega\right)=\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds
+\]
+
+\end_inset
+
+and hence the integral is just a mundane random variable and 
+\begin_inset Formula $E\left[X\right]$
+\end_inset
+
+ is the expectation of that random variable.
+ In fact 
+\begin_inset Formula 
+\[
+\sqrt{\left|E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]\right|}
+\]
+
+\end_inset
+
+is a semi-norm and is complete
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Cauche sequences converge.
+\end_layout
+
+\end_inset
+
+.
  This property is necessary for the 
 \emph on
 Ito
@@ -4666,24 +4715,7 @@ isometry
 \end_layout
 
 \begin_layout Standard
-For function 
-\begin_inset Formula $g\in\mathcal{V}$
-\end_inset
-
- we now define the Ito integral
-\begin_inset Formula 
-\[
-\mathcal{I}\left[g\right]\left(\omega\right)=\int_{Q}^{T}g\left(s,\omega\right)dB_{s}\left(\omega\right)
-\]
-
-\end_inset
-
-Note that the Ito integral 
-\begin_inset Formula $\mathcal{I}\left[g\right]\left(\omega\right)$
-\end_inset
-
- is itself a random variable.
- We will define the integral on simple functions and then use the next lemma
+We will define the integral on simple processes and then use the next lemma
  to extend it.
 \end_layout
 
@@ -4754,7 +4786,7 @@ The rest of the construction proceeds in 3 steps:
 \end_layout
 
 \begin_layout Enumerate
-First we define the integral for simple functions 
+First we define the integral for simple processes 
 \begin_inset Formula 
 \[
 S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[t_{j},t_{j+1}\right)}\left(t\right)
@@ -4774,7 +4806,7 @@ S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[t
 \begin_inset Formula $\mathcal{F}_{t_{j}}$
 \end_inset
 
--measurable, so that the whole simple function is adapted to 
+-measurable, so that the whole simple process is adapted to 
 \begin_inset Formula $B_{t}$
 \end_inset
 
@@ -4816,7 +4848,7 @@ status open
 \end_inset
 
 .
- Then there exist simple functions 
+ Then there exist simple processes 
 \begin_inset Formula $S_{n}\in\mathcal{V}$
 \end_inset
 
@@ -4833,7 +4865,7 @@ status open
 
 \begin_deeper
 \begin_layout Proof
-Continuous functions can be arbitrarily approximating by simple functions
+Continuous processes can be arbitrarily approximating by simple processes
  hence
 \begin_inset Formula 
 \[
@@ -4889,7 +4921,7 @@ Let
 \end_inset
 
  be uniformly bounded.
- Then there exist uniformly bounded functions 
+ Then there exist uniformly bounded processes 
 \begin_inset Formula $g_{n}\in\mathcal{V}$
 \end_inset
 
@@ -4931,7 +4963,7 @@ Suppose
 \begin_inset Formula $\psi_{n}$
 \end_inset
 
- be nonnegative, continuous function on 
+ be nonnegative, continuous processes on 
 \begin_inset Formula $\mathbb{R}$
 \end_inset
 
@@ -5024,7 +5056,7 @@ smooth
 \end_inset
 
 , meaning go back to the definition of the Lebesgue integral in terms of
- simple functions).
+ simple processes).
  Finally 
 \begin_inset Formula 
 \[
@@ -5071,7 +5103,7 @@ Let
 \end_inset
 
 .
- Then there exist uniformly bounded functions 
+ Then there exist uniformly bounded processes 
 \begin_inset Formula $h_{n}\in\mathcal{V}$
 \end_inset
 
@@ -5114,36 +5146,41 @@ Then by DCT
 \end_deeper
 \begin_layout Standard
 That concludes the approximation procedure.
- Finally the definition
+ We now use this approximation by Finally the definition
 \end_layout
 
 \begin_layout Definition
-(The Ito integral).
- Let 
+\begin_inset CommandInset label
+LatexCommand label
+name "def:(The-Ito-integral)."
+
+\end_inset
+
+Let 
 \begin_inset Formula $f\in\mathcal{V}\left(Q,T\right)$
 \end_inset
 
 .
- Then the 
+ Choose 
+\begin_inset Formula $S_{n}\in\mathcal{V}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-S_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+Then the 
 \emph on
 Ito integral
 \emph default
  is defined
 \begin_inset Formula 
 \[
-\mathcal{I}\left[f\right]\left(\omega\right)\coloneqq\int_{Q}^{T}f\left(t,\omega\right)dB_{s}\left(\omega\right)\coloneqq\lim_{n\rightarrow\infty}\int_{Q}^{T}S_{n}\left(t,\omega\right)dB_{s}\left(\omega\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $S_{n}$
-\end_inset
-
- is a sequence of simple functions such that 
-\begin_inset Formula 
-\[
-\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-S_{n}\right)^{2}dt\right]=0
+\mathcal{I}\left[f\right]\left(\omega\right)\coloneqq\int_{Q}^{T}f\left(s,\omega\right)dB_{s}\coloneqq\lim_{n\rightarrow\infty}\int_{Q}^{T}S_{n}\left(s,\omega\right)dB_{s}
 \]
 
 \end_inset
@@ -5152,11 +5189,15 @@ where
 \end_layout
 
 \begin_layout Standard
-Note that 
-\begin_inset Formula $\mathcal{I}\left[f\right]\left(\omega\right)$
+The limit in defn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:(The-Ito-integral)."
+
 \end_inset
 
- as a limit exists as an element of 
+ exists as an element of 
 \begin_inset Formula $L^{2}\left(P\right)$
 \end_inset
 
@@ -5182,14 +5223,54 @@ Square Lebesgue integrable functions over the measure
 \begin_inset Formula $L^{2}\left(P\right)$
 \end_inset
 
- by lemma 
+.
+ Why? Firstly by the hypothesis of the definition 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ converge to 
+\begin_inset Formula $f$
+\end_inset
+
+ under the norm as defined in part 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "lem:itoisometry"
+reference "enu:squareintegralprocessspace"
 
 \end_inset
 
-.
+ of th definition of 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ and the discussion there.
+ Therefore, since convergence sequences are also cauchy convergent for all
+ 
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(S_{n+k}-S_{n}\right)^{2}ds\right]=0
+\]
+
+\end_inset
+
+But by ito isometry 
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(S_{n+k}-S_{n}\right)^{2}ds\right] & = & \lim_{n\rightarrow\infty}E\left[\left(\int_{Q}^{T}\left(S_{n+k}-S_{n}\right)dB_{s}\right)^{2}\right]\\
+0 & = & \lim_{n\rightarrow\infty}E\left[\left(\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n+k\right)}}\left(\omega\right)-B_{s_{j}^{\left(n+k\right)}}\left(\omega\right)\right]-\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right]\right)^{2}\right]
+\end{eqnarray*}
+
+\end_inset
+
+but this is a mundane 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+ limit and the 0 on the left implies the limit converges.
 \end_layout
 
 \end_body
