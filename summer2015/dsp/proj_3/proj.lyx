@@ -121,10 +121,11 @@ Code Division Multiple Access is a multiple access scheme - it employs distinct
  modulating codes assigned to distinct transmitters in order that these
  several transmitters may send simultaneously over a single channel.
  Furthermore spreading codes are used for purposes of privacy preservation:
- a receiver cannot demodule the transmitted signal without prior knowledge
+ a receiver cannot demodulate the transmitted signal without prior knowledge
  of the modulating sequence.
  To effect this the codes are typically pseudo-random generated and therefore,
- for those not in possession of the chipping sequence, appear as noise.
+ for those not in possession of the chipping sequence, mask the signals
+ as noise.
 \end_layout
 
 \begin_layout Standard
@@ -174,7 +175,7 @@ Then if
 \begin_inset Formula $S_{2}$
 \end_inset
 
- are transmitted on the receiving end of the channel recovery of either
+ are transmitted, on the receiving end of the channel recovery of either
  
 \begin_inset Formula $m$
 \end_inset
@@ -423,6 +424,7 @@ reference "fig:Experiment-1"
 \end_inset
 
 .
+ The error rate was 0%.
  
 \begin_inset Float figure
 wide false
@@ -557,7 +559,7 @@ name "fig:Experiment-1-1-1"
 \end_inset
 
 Out of curiosity I ran it a second time and got an error rate of 
-\begin_inset Formula $\approx66\%$
+\begin_inset Formula $30\%$
 \end_inset
 
  .
@@ -586,7 +588,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Experiment 3b: 66% error rate.
+Experiment 3b: 30% error rate.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Experiment-1-1-1-1"
@@ -604,6 +606,12 @@ name "fig:Experiment-1-1-1-1"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In conclusion typically this method of signal transmission works well with
+ the right threshold, but is still subject to low probability events of
+ heavy loss.
 \end_layout
 
 \end_body

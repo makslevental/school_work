@@ -80,7 +80,11 @@ ny1 = conv(np1,h1);
 
 %what happens when the threshholding produces too few values?
 threshed = ny1(abs(ny1) >= 4);
+
 hold on;
 stem(threshed(1:20),'r')
 stem(m)
 hold off;
+
+e=m.*threshed;
+sum(e<0)/20
