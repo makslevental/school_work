@@ -4156,6 +4156,13 @@ For
 \end_inset
 
  almost surely.
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:unboundvar"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Proof
@@ -4577,6 +4584,12 @@ The construction of the Ito integral in earnest
 \end_layout
 
 \begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:spaceofitofunctions"
+
+\end_inset
+
 Let 
 \begin_inset Formula $\mathcal{F}_{t}$
 \end_inset
@@ -4686,9 +4699,9 @@ and hence the integral is just a mundane random variable and
  is the expectation of that random variable.
  In fact 
 \begin_inset Formula 
-\[
-\sqrt{\left|E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]\right|}
-\]
+\begin{equation}
+\left\Vert g\right\Vert _{\mathcal{V}}=\sqrt{\left|E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]\right|}\label{eq:itonorm}
+\end{equation}
 
 \end_inset
 
@@ -4703,7 +4716,12 @@ Cauche sequences converge.
 \end_inset
 
 .
- This property is necessary for the 
+ Let's call this norm the 
+\emph on
+ito norm.
+ 
+\emph default
+This property is necessary for the 
 \emph on
 Ito
 \emph default
@@ -4855,7 +4873,7 @@ status open
  such that 
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(g-S_{n}\right)^{2}ds\right]=0
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(g-S_{n}\right)^{2}ds\right]=\lim_{n\rightarrow\infty}\left\Vert g-S_{n}\right\Vert =0
 \]
 
 \end_inset
@@ -4907,7 +4925,8 @@ If
 \end_inset
 
 we get the result.
- Note the sequence of functions in question is 
+ Note the sequence of functions that we are applying bounded convergence
+ to is 
 \begin_inset Formula $\left\{ \int_{Q}^{T}\left(g-S_{n}\right)^{2}\right\} $
 \end_inset
 
@@ -4940,7 +4959,7 @@ Let
  and 
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(h-g_{n}\right)^{2}ds\right]=0
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(h-g_{n}\right)^{2}ds\right]=\lim_{n\rightarrow\infty}\left\Vert h-g_{n}\right\Vert =0
 \]
 
 \end_inset
@@ -5110,7 +5129,7 @@ Let
  such that
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-h_{n}\right)^{2}ds\right]=0
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-h_{n}\right)^{2}ds\right]=\lim_{n\rightarrow\infty}\left\Vert f-h_{n}\right\Vert =0
 \]
 
 \end_inset
@@ -5165,10 +5184,10 @@ Let
 \begin_inset Formula $S_{n}\in\mathcal{V}$
 \end_inset
 
- such that 
+ according to the approximation such that 
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-S_{n}\right)^{2}ds\right]=0
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-S_{n}\right)^{2}ds\right]=\lim_{n\rightarrow\infty}\left\Vert f-S_{n}\right\Vert =0
 \]
 
 \end_inset
@@ -5189,6 +5208,8 @@ Ito integral
 \end_layout
 
 \begin_layout Standard
+
+\series bold
 The limit in defn.
  
 \begin_inset CommandInset ref
@@ -5197,7 +5218,9 @@ reference "def:(The-Ito-integral)."
 
 \end_inset
 
- exists as an element of 
+ exists as an element of
+\series default
+ 
 \begin_inset Formula $L^{2}\left(P\right)$
 \end_inset
 
@@ -5215,7 +5238,9 @@ Square Lebesgue integrable functions over the measure
 
 \end_inset
 
- since 
+ 
+\series bold
+since 
 \begin_inset Formula $\left\{ \int_{Q}^{T}S_{n}dB_{s}\right\} $
 \end_inset
 
@@ -5223,6 +5248,8 @@ Square Lebesgue integrable functions over the measure
 \begin_inset Formula $L^{2}\left(P\right)$
 \end_inset
 
+
+\series default
 .
  Why? Firstly by the hypothesis of the definition 
 \begin_inset Formula $S_{n}$
@@ -5232,20 +5259,9 @@ Square Lebesgue integrable functions over the measure
 \begin_inset Formula $f$
 \end_inset
 
- under the norm as defined in part 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "enu:squareintegralprocessspace"
-
-\end_inset
-
- of th definition of 
-\begin_inset Formula $\mathcal{V}$
-\end_inset
-
- and the discussion there.
- Therefore, since convergence sequences are also cauchy convergent for all
- 
+ under the ito norm.
+ Therefore, since convergent sequences are also cauchy convergent, we have
+ for all 
 \begin_inset Formula $k$
 \end_inset
 
@@ -5261,7 +5277,8 @@ But by ito isometry
 \begin_inset Formula 
 \begin{eqnarray*}
 \lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(S_{n+k}-S_{n}\right)^{2}ds\right] & = & \lim_{n\rightarrow\infty}E\left[\left(\int_{Q}^{T}\left(S_{n+k}-S_{n}\right)dB_{s}\right)^{2}\right]\\
-0 & = & \lim_{n\rightarrow\infty}E\left[\left(\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n+k\right)}}\left(\omega\right)-B_{s_{j}^{\left(n+k\right)}}\left(\omega\right)\right]-\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right]\right)^{2}\right]
+0 & = & \lim_{n\rightarrow\infty}E\left[\left(\int_{Q}^{T}S_{n+k}dB_{s}-\int_{Q}^{T}S_{n}dB_{s}\right)^{2}\right]\\
+ & = & \lim_{n\rightarrow\infty}E\left[\left(\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n+k\right)}}-B_{s_{j}^{\left(n+k\right)}}\right]-\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n\right)}}-B_{s_{j}^{\left(n\right)}}\right]\right)^{2}\right]
 \end{eqnarray*}
 
 \end_inset
@@ -5271,6 +5288,246 @@ but this is a mundane
 \end_inset
 
  limit and the 0 on the left implies the limit converges.
+ There are two consequences of the definition of the integral as the limit
+ of a sequence of simple processes:
+\end_layout
+
+\begin_layout Corollary
+The ito isometry holds for all 
+\begin_inset Formula $f\in\mathcal{V}$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+E\left[\left(\int_{Q}^{T}f\left(s,\omega\right)dB_{s}\right)^{2}\right]=E\left[\int_{Q}^{T}f^{2}\left(s,\omega\right)ds\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary
+If 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ converges to 
+\begin_inset Formula $f$
+\end_inset
+
+ in the ito norm then 
+\begin_inset Formula $\mathcal{I}\left[f_{n}\right]$
+\end_inset
+
+ converges to 
+\begin_inset Formula $\mathcal{I}\left[f\right]$
+\end_inset
+
+ in 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+ as well, i.e.
+\begin_inset Formula 
+\[
+E\left[\int_{Q}^{T}\left(f_{n}-f\right)ds\right]\rightarrow0\Rightarrow\int_{Q}^{T}f_{n}\left(s,\omega\right)dB_{s}\rightarrow\int_{Q}^{T}f\left(s,\omega\right)dB_{s}
+\]
+
+\end_inset
+
+ This is mostly a reiteration of the fact that 
+\begin_inset Formula $\mathcal{I}\left[f\right]$
+\end_inset
+
+ is defined to be the limit of 
+\begin_inset Formula $\mathcal{I}\left[f_{n}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Alright finally we can actually do an ito integral!
+\end_layout
+
+\begin_layout Example
+Assume 
+\begin_inset Formula $B_{0}=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\frac{1}{2}B_{t}^{2}-\frac{t}{2}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula $t_{j}^{\left(n\right)}=j\cdot2^{-n}$
+\end_inset
+
+ and put 
+\begin_inset Formula $S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\left(\omega\right)1_{\left[t_{j}^{\left(n\right)},t_{j+1}^{\left(n\right)}\right)}\left(t\right)$
+\end_inset
+
+.
+ Then we need to prove convergence in ito norm:
+\begin_inset Formula 
+\begin{eqnarray}
+E\left[\int_{0}^{t}\left(S_{n}-B_{s}\right)^{2}ds\right] & = & E\left[\sum_{j=0}^{\infty}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}\left(B_{t_{j}^{\left(n\right)}}-B_{s}\right)^{2}ds\right]\label{eq:firstintstep1}\\
+ & = & \sum_{j=0}^{\infty}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}E\left[\left(B_{t_{j}^{\left(n\right)}}-B_{s}\right)^{2}\right]ds\label{eq:firstintstep2}\\
+ & = & \sum_{j=0}^{\infty}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}\left(s-t_{j}^{\left(n\right)}\right)ds=\frac{1}{2}\sum_{j=0}^{\infty}\left(t_{j+1}^{\left(n\right)}-t_{j}^{\left(n\right)}\right)^{2}\label{eq:firstintstep3}
+\end{eqnarray}
+
+\end_inset
+
+where in line 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:firstintstep1"
+
+\end_inset
+
+ we use the indicator in the definiton of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ and in line 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:firstintstep3"
+
+\end_inset
+
+ we use that since the limits of integration for 
+\begin_inset Formula $s$
+\end_inset
+
+ are 
+\begin_inset Formula $t_{j}^{\left(n\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{j+1}^{\left(n\right)}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $s>t_{j}^{\left(n\right)}$
+\end_inset
+
+.
+ Finally as the mesh is refined 
+\begin_inset Formula $\frac{1}{2}\sum_{j=0}^{\infty}\left(t_{j+1}^{\left(n\right)}-t_{j}^{\left(n\right)}\right)^{2}\rightarrow0$
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\lim_{n\rightarrow\infty}\int_{0}^{t}S_{n}dB_{s}=\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\Delta B_{t_{j}^{\left(n\right)}}\coloneqq B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta\left(B_{t_{j}^{\left(n\right)}}^{2}\right)=B_{t_{j+1}^{\left(n\right)}}^{2}-B_{t_{j}^{\left(n\right)}}^{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}
+\]
+
+\end_inset
+
+So we have to evaluate this limit.
+ First
+\begin_inset Formula 
+\begin{eqnarray*}
+\Delta\left(B_{t_{j}^{\left(n\right)}}^{2}\right) & = & \left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)^{2}+2B_{t_{j}^{\left(n\right)}}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)\\
+ & = & \left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}+2B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}
+\end{eqnarray*}
+
+\end_inset
+
+The last term in this derivation is what we're interested in because it
+ appears in out limit.
+ Now since 
+\begin_inset Formula $B_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+B_{t}^{2}=\sum_{j=0}^{\infty}\Delta\left(B_{t_{j}^{\left(n\right)}}^{2}\right)=\sum_{j=0}^{\infty}\left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}+2\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}=\frac{1}{2}B_{t}^{2}-\frac{1}{2}\sum_{j=0}^{\infty}\left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}
+\]
+
+\end_inset
+
+Finally by unbounded variation (thm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:unboundvar"
+
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}\left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}=t
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}=\frac{1}{2}B_{t}^{2}-\frac{1}{2}t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Note the extra 
+\begin_inset Formula $\frac{1}{2}t$
+\end_inset
+
+ term, exhibiting the difference from the standard integration rule of 
+\begin_inset Formula $\int x=\frac{1}{2}x^{2}$
+\end_inset
+
+.
 \end_layout
 
 \end_body
