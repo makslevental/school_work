@@ -5677,11 +5677,19 @@ so
 \end_layout
 
 \begin_layout Standard
-In general the transfer function of the state variable system can be written
- as 
+In general the input-output transfer function of the state variable system
+ can be written as 
 \begin_inset Formula 
 \[
 H\left(z\right)=\mathbf{c}^{T}\cdot\left(zI-A\right)^{-1}\mathbf{b}+d
+\]
+
+\end_inset
+
+and the input-state transfer function is 
+\begin_inset Formula 
+\[
+H\left(z\right)=\left(zI-A\right)^{-1}\mathbf{b}
 \]
 
 \end_inset
@@ -5710,7 +5718,9 @@ d' & = & d
 
 \end_inset
 
-The MATLAB functions ss2tf and tf2ss except and return return results which
+Input-output transfer functions are invariant under state changes but input-stat
+e transfer functions not necessarily.
+ The MATLAB functions ss2tf and tf2ss except and return return results which
  are a similarity transformation 
 \begin_inset Formula 
 \[
