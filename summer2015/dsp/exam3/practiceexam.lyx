@@ -1,0 +1,204 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Practice Exam
+\end_layout
+
+\begin_layout Enumerate
+sdfsd
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+330/GCD(330,60)=11 so N=11 point DFT would have a spike at second tick.
+\end_layout
+
+\begin_layout Enumerate
+100=2*2*5*5 so 2 and 5
+\end_layout
+
+\begin_layout Enumerate
+4
+\end_layout
+
+\begin_layout Enumerate
+2x50, 2x50, 5x20,5x20
+\end_layout
+
+\begin_layout Enumerate
+7^3=343
+\end_layout
+
+\begin_layout Enumerate
+there are 3 levels and 49 7 point DFTs and each DFT costs 49 MAC so 3*49*7*49
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+sdfsdf
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+using mathematica 
+\begin_inset Formula $\left(3,0,0\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left(3j,0,0\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+linearly 
+\begin_inset Formula $\left(3\left(j+1\right),0,0\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+parseval's theorem says sum of squares in time space equals sum squares
+ in freq space divided by N so (9+9)/3=6.
+ but that's energy.
+ power is that divided by time so 2.
+\end_layout
+
+\begin_layout Enumerate
+who knows what this means? but the DFT of 
+\begin_inset Formula $x^{*}\left[n\right]$
+\end_inset
+
+ is 
+\begin_inset Formula $X*\left[N-k\right]$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left[0\right] & = & X^{*}\left[3-0\right]=X^{*}\left[3\right]=0\\
+X\left[1\right] & = & X^{*}\left[3-1\right]=X^{*}\left[2\right]=0\\
+X\left[2\right] & = & X^{*}\left[3-2\right]=X^{*}\left[1\right]=
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+sdfdsf
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+FT({1,1,1})={3,0,0} then FT({3,0,0}) = {3,3,3}
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+sdfds
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\Delta f=f_{s}/N$
+\end_inset
+
+.
+ 
+\begin_inset Formula $N=8000/20=400$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+6,6,3^5,6*3^5
+\end_layout
+
+\begin_layout Enumerate
+1010/8000=101/800
+\end_layout
+
+\begin_layout Enumerate
+no because 27=3^3 no coprime factors
+\end_layout
+
+\end_deeper
+\end_body
+\end_document

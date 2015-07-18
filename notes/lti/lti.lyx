@@ -5250,5 +5250,539 @@ An LTI system is stable iff the ROC of its transfer function includes the
  to all of the poles of the transfer function lying inside the unit circle.
 \end_layout
 
+\begin_layout Section
+State Variable Analysis
+\end_layout
+
+\begin_layout Subsection
+Direct II
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula 
+\[
+H\left(z\right)=\frac{b_{0}+b_{1}z^{-1}+\cdots+b_{N}z^{-N}}{1+a_{1}z^{-1}+\cdots+a_{N}z^{-N}}=\frac{Y\left(z\right)}{U\left(z\right)}
+\]
+
+\end_inset
+
+Introduce 
+\begin_inset Formula $X\left(z\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(z\right)=\frac{Y\left(z\right)}{X\left(z\right)}\frac{X\left(z\right)}{U\left(z\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\frac{X\left(z\right)}{U\left(z\right)}=\frac{1}{1+a_{1}z^{-1}+\cdots+a_{N}z^{-N}}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\frac{Y\left(z\right)}{X\left(z\right)}=\frac{b_{0}+b_{1}z^{-1}+\cdots+b_{N}z^{-N}}{1}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left(z\right)\left(1+a_{1}z^{-1}+\cdots+a_{N}z^{-N}\right) & = & U\left(z\right)\\
+ & \Rightarrow\\
+X\left(z\right) & = & U\left(z\right)-a_{1}z^{-1}X\left(z\right)-a_{2}z^{-2}X\left(z\right)-\cdots-a_{N}z^{-N}X\left(z\right)
+\end{eqnarray*}
+
+\end_inset
+
+and taking the inverse Z-transform
+\begin_inset Formula 
+\begin{equation}
+x\left(k\right)=u\left(k\right)-a_{1}x\left(k-1\right)-a_{2}x\left(k-2\right)-\cdots-a_{N}x\left(k-N\right)\label{eq:outputshift}
+\end{equation}
+
+\end_inset
+
+ which schematically looks like fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Half-of-a"
+
+\end_inset
+
+ (where the 
+\begin_inset Formula $z^{-1}$
+\end_inset
+
+ blocks represent 1 unit time delays).
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename halfdirect2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Half of a Direct II architecture 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Half-of-a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Similarly 
+\begin_inset Formula 
+\begin{eqnarray*}
+Y\left(z\right) & = & b_{0}X\left(z\right)+b_{1}z^{-1}X\left(z\right)+\cdots+b_{N}z^{-N}X\left(z\right)\\
+y\left(k\right) & = & b_{0}x\left(k\right)+b_{1}x\left(k-1\right)+\cdots+b_{N}x\left(k-N\right)
+\end{eqnarray*}
+
+\end_inset
+
+The complete Direct II architecture schematic appears in fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Full-Direct-II"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fulldirect2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Full Direct II architecture 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Full-Direct-II"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Define 
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{1}\left(k\right) & \coloneqq & x\left(k-N\right)\\
+x_{2}\left(k\right) & \coloneqq & x\left(k-N+1\right)\\
+ & \vdots\\
+x_{N} & \colon= & x\left(k\right)
+\end{eqnarray*}
+
+\end_inset
+
+Note the 
+\begin_inset Formula $x\left(k-j\right)$
+\end_inset
+
+ run from left to right but the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ run from right to left.
+ These 
+\begin_inset Formula $x_{i}\left(k\right)$
+\end_inset
+
+ are called shift registers because they output the time shifted versions
+ of their inputs, i.e.
+\begin_inset Formula 
+\[
+x_{i}\left(k+1\right)=x_{i+1}\left(k\right)
+\]
+
+\end_inset
+
+More explicitly
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{1}\left(k+1\right) & = & x_{2}\left(k\right)\\
+ & \vdots\\
+x_{N-1}\left(k+1\right) & = & x_{N}\left(k\right)
+\end{eqnarray*}
+
+\end_inset
+
+These equations define the evolution of the contents of the shift registers
+ in time for all the registers except 
+\begin_inset Formula $x_{N}\colon=x$
+\end_inset
+
+.
+ Using eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:outputshift"
+
+\end_inset
+
+ and the definitions of the shift registers we get 
+\begin_inset Formula 
+\[
+x_{N}\left(k+1\right)=u\left(k\right)-a_{N}x_{1}\left(k\right)-a_{N-1}x_{2}\left(k\right)-\cdots-a_{1}x_{N}\left(k\right)
+\]
+
+\end_inset
+
+Define 
+\begin_inset Formula $\mathbf{x}\left(k\right)=\left(x_{1}\left(k\right),\dots,x_{N}\left(k\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}0 & 1 & 0 & \cdots & 0\\
+0 & 0 & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & 0 & 0 & \cdots & 1\\
+-a_{N} & -a_{N-1} & -a_{N-2} & \cdots & -a_{1}
+\end{pmatrix},\ \mathbf{b}=\begin{pmatrix}0\\
+0\\
+0\\
+\vdots\\
+1
+\end{pmatrix}
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula $\mathbf{x}\left(k+1\right)=A\mathbf{x}\left(k\right)+\mathbf{b}u\left(k\right)$
+\end_inset
+
+.
+ Similarly for 
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathbf{c} & = & \left(b_{N}-a_{N}b_{0},b_{N-1}-a_{N-1}b_{0},\dots,b_{1}-a_{1}b_{0}\right)\\
+d & = & b_{0}\\
+y\left(k\right) & = & \mathbf{c}\cdot\mathbf{x}\left(k\right)+du\left(k\right)
+\end{eqnarray*}
+
+\end_inset
+
+One problem with figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Half-of-a"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Full-Direct-II"
+
+\end_inset
+
+ is that while they do correspond directly to the transfer function 
+\begin_inset Formula $H\left(z\right)$
+\end_inset
+
+ they don't reflect exactly to the element of the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ and vector 
+\begin_inset Formula $\mathbf{c}$
+\end_inset
+
+.
+ The 
+\emph on
+Modified Direct II architecture 
+\emph default
+appears in fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Modified-Direct-II"
+
+\end_inset
+
+ and does.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename modifiedd2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Modified Direct II architecture
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Modified-Direct-II"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Note that the Modified Direct II architecture corresponds to the transfer
+ function written as a proper ratio of polynomials
+\begin_inset Formula 
+\[
+H\left(z\right)=b_{0}+\frac{\left(b_{1}-a_{1}b_{0}\right)+\left(b_{2}-a_{2}b_{0}\right)z^{-1}+\cdots+\left(b_{N}-a_{N}b_{0}\right)z^{-\left(N-1\right)}}{1+a_{1}z^{-1}+a_{2}z^{-2}+\cdots+a_{N}z^{-N}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Random facts
+\end_layout
+
+\begin_layout Standard
+Note that in the time domain 
+\begin_inset Formula $A^{k}$
+\end_inset
+
+ dictates that homogeneous evolution of the state variables.
+ But what's the 
+\begin_inset Formula $Z$
+\end_inset
+
+-transform of 
+\begin_inset Formula $A^{k}$
+\end_inset
+
+? I.e.
+ with 
+\begin_inset Formula $\Phi\left(k\right)=A^{k}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mathcal{Z}\left\{ \Phi\right\} =\sum_{n=0}^{\infty}A^{n}z^{-n}=?
+\]
+
+\end_inset
+
+With 
+\begin_inset Formula $\mathbf{x}\left(0\right)=\mathbf{x}_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{x}\left(k+1\right)=A\mathbf{x}\left(k\right)+\mathbf{b}u\left(k\right)$
+\end_inset
+
+ the 
+\begin_inset Formula $Z$
+\end_inset
+
+-transform of the state variables is 
+\begin_inset Formula 
+\[
+z\mathbf{X}\left(z\right)-z\mathbf{x}\left(0\right)=A\mathbf{X}\left(z\right)+\mathbf{b}U\left(z\right)
+\]
+
+\end_inset
+
+The homogenous solution is for 
+\begin_inset Formula $u\left(k\right)=0$
+\end_inset
+
+ we 
+\begin_inset Formula 
+\begin{eqnarray*}
+z\mathbf{X}\left(z\right)-z\mathbf{x}\left(0\right) & = & A\mathbf{X}\left(z\right)\\
+ & \Rightarrow\\
+\mathbf{X}\left(z\right) & = & z\left(zI-A\right)^{-1}\mathbf{x}_{0}\\
+\mathbf{X}\left(z\right) & = & \Phi\left(z\right)\mathbf{x}_{0}
+\end{eqnarray*}
+
+\end_inset
+
+so 
+\begin_inset Formula 
+\[
+\mathcal{Z}\left\{ \Phi\right\} =\sum_{n=0}^{\infty}A^{n}z^{-n}=z\left(zI-A\right)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general the transfer function of the state variable system can be written
+ as 
+\begin_inset Formula 
+\[
+H\left(z\right)=\mathbf{c}^{T}\cdot\left(zI-A\right)^{-1}\mathbf{b}+d
+\]
+
+\end_inset
+
+Suppose the state vector 
+\begin_inset Formula $\mathbf{x}\left(k\right)$
+\end_inset
+
+ is transformed to 
+\begin_inset Formula $\mathbf{x}'\left(k\right)=T\mathbf{x}\left(k\right)$
+\end_inset
+
+.
+ How does the 4-tuple 
+\begin_inset Formula $\left(A,\mathbf{b},\mathbf{c},d\right)$
+\end_inset
+
+ change?
+\begin_inset Formula 
+\begin{eqnarray*}
+A' & = & TAT^{-1}\\
+\mathbf{b}' & = & T\mathbf{b}\\
+\mathbf{c}'^{T} & = & \mathbf{c}T^{-1}\\
+d' & = & d
+\end{eqnarray*}
+
+\end_inset
+
+The MATLAB functions ss2tf and tf2ss except and return return results which
+ are a similarity transformation 
+\begin_inset Formula 
+\[
+T=\begin{pmatrix}0 & 0 & \cdots & 0 & 1\\
+0 & 0 & \cdots & 1 & 0\\
+0 & 0 & \iddots & 0 & \vdots\\
+0 & 1 & 0 & \vdots & 0\\
+1 & 0 & \cdots & 0 & 0
+\end{pmatrix}
+\]
+
+\end_inset
+
+A picture of the relationship between the transfer function and the wiring
+ diagram of the state variable system appears in fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Wiring-diagram"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pictexampled2.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Wiring diagram
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Wiring-diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A transfer function is stable if all poles are strictly within the unit
+ circle, conditionally stable if at most one pole is on the unit circle,
+ unstable if any poles outside of the unit circle.
+\end_layout
+
 \end_body
 \end_document
