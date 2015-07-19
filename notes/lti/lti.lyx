@@ -5794,5 +5794,18 @@ A transfer function is stable if all poles are strictly within the unit
  unstable if any poles outside of the unit circle.
 \end_layout
 
+\begin_layout Standard
+In order to isolate just the output at some state 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ set all the other 
+\begin_inset Formula $c_{j\neq i}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
 \end_body
 \end_document
