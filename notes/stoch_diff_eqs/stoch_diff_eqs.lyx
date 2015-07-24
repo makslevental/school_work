@@ -5596,8 +5596,8 @@ The Ito integral of a process turns out to be a
 \emph on
 martingale
 \emph default
-.
- But this requires a short discussion of conditional expectation.
+, whatever that is.
+ Understanding this requires a short discussion of conditional expectation.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5927,7 +5927,7 @@ reference "enu:martingale"
 \begin_inset Formula $M_{t}$
 \end_inset
 
- is interpreted as the winnings from a game of chance, that the average
+ is interpreted as the winnings from a game of chance, means that the average
  winnings from time 
 \begin_inset Formula $s$
 \end_inset
@@ -5949,19 +5949,19 @@ Brownian motion
  
 \series default
 is a martingale w.r.t.
- the natural filtration
-\begin_inset Formula $\mathcal{F}_{t}$
+ the natural filtration 
+\begin_inset Formula $\mathcal{F}_{s}$
 \end_inset
 
  that 
-\begin_inset Formula $\left\{ B_{t}\right\} _{s\leq t}$
+\begin_inset Formula $\left\{ B_{s}\right\} _{s\leq t}$
 \end_inset
 
  is adapted to.
 \end_layout
 
 \begin_layout Proof
-Firstly 
+Firstly since 
 \begin_inset Formula 
 \begin{eqnarray*}
 \left(E\left[\left|B_{t}\right|\right]\right)^{2} & \leq & E\left[\left|B_{t}\right|^{2}\right]\\
@@ -5972,7 +5972,12 @@ Firstly
 
 \end_inset
 
-So property 1 is satisfied.
+it's the case that 
+\begin_inset Formula $E\left[\left|B_{t}\right|\right]<\infty$
+\end_inset
+
+.
+ So property 1 is satisfied.
  For property 2
 \begin_inset Formula 
 \begin{eqnarray*}
@@ -5992,7 +5997,7 @@ So Brownian motion is a martingale.
 \emph on
 Doob's martingale inequality
 \emph default
- 
+
 \begin_inset Foot
 status open
 
@@ -6019,7 +6024,7 @@ If
 
 \end_inset
 
-to prove that there exists a version of 
+ to prove that there exists a version of 
 \begin_inset Formula 
 \[
 \int_{0}^{t}f\left(s,\omega\right)dB_{s}
@@ -6156,13 +6161,13 @@ Hence
 
 \end_inset
 
-So the cauchy sequence of probabilities on the left are is cauchy convergent
- for any 
+So the sequence of probabilities on the left is cauchy convergent for any
+ 
 \begin_inset Formula $\lambda$
 \end_inset
 
 .
- Choose 
+ Choose a subsequence 
 \begin_inset Formula $n_{k}$
 \end_inset
 
@@ -6231,7 +6236,7 @@ Therefore there exists
 
 \end_inset
 
-and hence 
+and hence the subsequence 
 \begin_inset Formula $I_{n_{k}}$
 \end_inset
 
@@ -6255,7 +6260,17 @@ and hence
 \begin_inset Formula $t\in\left[0,T\right]$
 \end_inset
 
- with probability one.
+ with probability one
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Uniform limit theorem.
+\end_layout
+
+\end_inset
+
+.
  Finally since 
 \begin_inset Formula $I_{n_{k}}\left(t,\cdot\right)\rightarrow I_{t}\left(\cdot\right)$
 \end_inset
@@ -6264,7 +6279,21 @@ and hence
 \begin_inset Formula $L^{2}\left(P\right)$
 \end_inset
 
- it must be the case that 
+ by uniqueness
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Of limits in 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
 P\left(I_{t}=J_{t}\right)=1
