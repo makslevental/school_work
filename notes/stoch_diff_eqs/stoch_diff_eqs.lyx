@@ -5530,5 +5530,796 @@ Note the extra
 .
 \end_layout
 
+\begin_layout Subsection
+Properties of the Ito Integral and the Ito antiderivative
+\end_layout
+
+\begin_layout Theorem
+Some properties of the Ito integral: let 
+\begin_inset Formula $f,g\in\mathcal{V}\left(0,T\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le Q<U<T$
+\end_inset
+
+.
+ Then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $P\left(\int_{Q}^{T}fdB=\int_{Q}^{U}fdB+\int_{U}^{T}fdB\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+: 
+\begin_inset Formula $P\left(\int_{Q}^{T}\left(cf+g\right)dB=\int_{Q}^{T}cfdB+\int_{Q}^{T}gdB\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left[\int_{Q}^{T}fdB\right]=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\int_{Q}^{T}fdB$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathcal{F}_{T}$
+\end_inset
+
+-measurable
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+All follow from the correspondent property holding for Ito integral of elementar
+y functions.
+\end_layout
+
+\begin_layout Standard
+The Ito integral of a process turns out to be a 
+\emph on
+martingale
+\emph default
+.
+ But this requires a short discussion of conditional expectation.
+\end_layout
+
+\begin_layout Subsubsection
+Conditonal expectation
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ be a probability space and 
+\begin_inset Formula $\mathcal{H}\subset\mathcal{F}$
+\end_inset
+
+.
+ The 
+\emph on
+conditional expectation
+\emph default
+ of the random variable 
+\begin_inset Formula $X$
+\end_inset
+
+ is the unique function 
+\begin_inset Formula $E\left[X|\mathcal{H}\right]$
+\end_inset
+
+ that satisfies
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $E\left[X|\mathcal{H}\right]$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+-measurable
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\int_{H}$
+\end_inset
+
+
+\begin_inset Formula $E\left[X|\mathcal{H}\right]dP=\int_{H}XdP$
+\end_inset
+
+ for all 
+\begin_inset Formula $H\in\mathcal{H}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+In fact 
+\begin_inset Formula $E\left[X|\mathcal{H}\right]$
+\end_inset
+
+ is the 
+\emph on
+Radon-Nikodym
+\emph default
+ 
+\emph on
+derivative
+\emph default
+ of 
+\begin_inset Formula $E\left[X\right]$
+\end_inset
+
+ with respect to the measure 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $P$
+\end_inset
+
+ restricted to 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+: a consequence of the Radon-Nikodym theorem
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If a finite measure 
+\series bold
+
+\begin_inset Formula $\nu$
+\end_inset
+
+
+\series default
+ is absolutely continuous with respect to a 
+\begin_inset Formula $\mu$
+\end_inset
+
+ then there is a measurable function 
+\begin_inset Formula $f$
+\end_inset
+
+ such that for any measurable subset 
+\begin_inset Formula $A$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\nu(A)=\int_{A}fd\mu$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ is that for 
+\begin_inset Formula $A\in\mathcal{F}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left.E\left[X\right]\right|_{A}=\int_{A}XdP
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\left.E\left[X\right]\right|_{A}$
+\end_inset
+
+ is absolutely continuous
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ absolutely continuous with respect to measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ if for every measurable set 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $\nu\left(A\right)=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $\mu\left(A\right)=0$
+\end_inset
+
+ .
+ 
+\end_layout
+
+\end_inset
+
+ w.r.t.
+ 
+\begin_inset Formula $\left.P\right|_{\mathcal{H}}$
+\end_inset
+
+ , i.e.
+ there exists an 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+-measurable function 
+\begin_inset Formula $F$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\left.E\left[X\right]\right|_{\mathcal{H}}\left(H\right)=\int_{H}F\left.dP\right|_{\mathcal{H}}\ \text{for }H\in\mathcal{H}
+\]
+
+\end_inset
+
+and thus 
+\begin_inset Formula $E\left[X|\mathcal{H}\right]\coloneqq F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A small fact about conditional expectation
+\end_layout
+
+\begin_layout Lemma
+The law of the iterated expectation: Let 
+\begin_inset Formula $\mathcal{G},\mathcal{H}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{G}\subset\mathcal{H}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+E\left[X|\mathcal{G}\right]=E\left[E\left[X|\mathcal{H}\right]|\mathcal{G}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $G\in\mathcal{G}$
+\end_inset
+
+ then 
+\begin_inset Formula $G\in\mathcal{H}$
+\end_inset
+
+ and therefore
+\begin_inset Formula 
+\[
+\int_{G}E\left[X|\mathcal{H}\right]dP=\int_{G}XdP
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $E\left[X|\mathcal{G}\right]=E\left[E\left[X|\mathcal{H}\right]|\mathcal{G}\right]$
+\end_inset
+
+ by uniqueness.
+\end_layout
+
+\begin_layout Subsubsection
+Martingales and stuff
+\end_layout
+
+\begin_layout Definition
+A stochastic process 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ is martingale with respect to a filtration 
+\begin_inset Formula $\left\{ \mathcal{M}_{t}\right\} _{t\geq0}$
+\end_inset
+
+ if for all 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{M}_{t}$
+\end_inset
+
+-measureable
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left[\left|M_{t}\right|\right]<\infty$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left[M_{t}|\mathcal{M}_{s}\right]=M_{s}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\leq t$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:martingale"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Another way to express property 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:martingale"
+
+\end_inset
+
+ is 
+\begin_inset Formula $E\left[M_{t}-M_{s}|\mathcal{M}_{s}\right]=0$
+\end_inset
+
+ which, if 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is interpreted as the winnings from a game of chance, that the average
+ winnings from time 
+\begin_inset Formula $s$
+\end_inset
+
+ to time 
+\begin_inset Formula $t$
+\end_inset
+
+ is zero.
+\end_layout
+
+\begin_layout Proposition
+Brownian motion 
+\series bold
+
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ 
+\series default
+is a martingale w.r.t.
+ the natural filtration
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+ that 
+\begin_inset Formula $\left\{ B_{t}\right\} _{s\leq t}$
+\end_inset
+
+ is adapted to.
+\end_layout
+
+\begin_layout Proof
+Firstly 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(E\left[\left|B_{t}\right|\right]\right)^{2} & \leq & E\left[\left|B_{t}\right|^{2}\right]\\
+ & = & E\left[\left|\left(B_{t}-B_{0}\right)+B_{0}\right|^{2}\right]\\
+ & = & E\left[\left|B_{t}-B_{0}\right|^{2}\right]+2E\left[\left|\left(B_{t}-B_{0}\right)B_{0}\right|\right]+E\left[\left|B_{0}\right|^{2}\right]\\
+ & = & nt+0+E\left[\left|B_{0}\right|^{2}\right]<\infty
+\end{eqnarray*}
+
+\end_inset
+
+So property 1 is satisfied.
+ For property 2
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[B_{t}|\mathcal{F}_{s}\right] & = & E\left[B_{t}-B_{s}+B_{s}|\mathcal{F}_{s}\right]\\
+ & = & E\left[B_{t}-B_{s}|\mathcal{F}_{s}\right]+E\left[B_{s}|\mathcal{F}_{s}\right]\\
+ & = & 0+B_{s}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So Brownian motion is a martingale.
+ Who cares? We'll use this property and 
+\emph on
+Doob's martingale inequality
+\emph default
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is a continuous martingale then for all 
+\begin_inset Formula $p\geq1,T\geq0,\lambda>0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $P\left[\sup_{0\leq t\leq T}\left|M_{t}\right|\geq\lambda\right]\leq E\left[\left|M_{T}\right|^{p}\right]/\lambda^{p}$
+\end_inset
+
+.
+ This is reminiscent of Chebyshev's inequality 
+\begin_inset Formula $P\left[\left|X\right|\geq\lambda\right]\leq E\left[\left|X\right|^{p}\right]/\lambda^{p}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+to prove that there exists a version of 
+\begin_inset Formula 
+\[
+\int_{0}^{t}f\left(s,\omega\right)dB_{s}
+\]
+
+\end_inset
+
+that is continuous w.r.t.
+ to 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+Let 
+\begin_inset Formula $f\in\mathcal{V}\left(0,T\right)$
+\end_inset
+
+.
+ Then there exists a 
+\begin_inset Formula $t$
+\end_inset
+
+ continuous stochastic process 
+\begin_inset Formula $J_{t}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+P\left[J_{t}=\int_{0}^{t}fdB\right]=1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t$
+\end_inset
+
+ such that 
+\begin_inset Formula $0\leq t\leq T$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\int_{0}^{t}fdB$
+\end_inset
+
+ is continuous function of its upper limit of integration.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\phi_{n}=\phi_{n}\left(t,\omega\right)=\sum_{j}a_{j}\left(\omega\right)1_{\left[t_{j}^{\left(n\right)},t_{j+1}^{\left(n\right)}\right)}\left(t\right)$
+\end_inset
+
+ be simple process that converge to 
+\begin_inset Formula $f$
+\end_inset
+
+ in Ito norm.
+ Put 
+\begin_inset Formula 
+\[
+I_{n}\left(t,\omega\right)=\int_{0}^{t}\phi_{n}dB
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+I_{t}\left(\omega\right)=I\left(t,\omega\right)=\int_{0}^{t}fdB
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $I_{n}$
+\end_inset
+
+ is continuous w.r.t 
+\begin_inset Formula $t$
+\end_inset
+
+ and martingale w.r.t 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+ the filtration that 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ is adapted to: for 
+\begin_inset Formula $s\leq t$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[I_{n}\left(t,\omega\right)|\mathcal{F}_{s}\right] & = & E\left[\left(\int_{0}^{s}\phi_{n}dB+\int_{s}^{t}\phi_{n}dB\right)|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+E\left[\left(\int_{s}^{t}\phi_{n}dB\right)|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+E\left[\left(\sum_{j}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}\phi_{n}dB\right)|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+E\left[\left(\sum_{j}a_{j}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)\right)|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+\sum_{j}E\left[a_{j}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+\sum_{j}E\left[E\left[a_{j}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)|\mathcal{F}_{t_{j}}\right]|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+\sum_{j}E\left[a_{j}E\left[\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)|\mathcal{F}_{t_{j}}\right]|\mathcal{F}_{s}\right]\\
+ & = & \int_{0}^{s}\phi_{n}dB+0=I_{n}\left(s,\omega\right)
+\end{eqnarray*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $I_{n}-I_{m}$
+\end_inset
+
+ is also an 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+-martingale and by Doob's inequality: for 
+\begin_inset Formula $p=2$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\rightarrow\infty}P\left[\sup_{0\leq t\leq T}\left|I_{n}\left(t,\omega\right)-I_{m}\left(t,\omega\right)\right|\geq\lambda\right] & \leq & \lim_{n\rightarrow\infty}\frac{1}{\lambda^{2}}E\left[\left|I_{n}\left(T,\omega\right)-I_{m}\left(T,\omega\right)\right|^{2}\right]\\
+ & = & \frac{1}{\lambda^{2}}\lim_{n\rightarrow\infty}E\left[\int_{0}^{T}\left(\phi_{n}\left(T,\omega\right)-\phi_{m}\left(T,\omega\right)\right)^{2}ds\right]\\
+ & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+So the cauchy sequence of probabilities on the left are is cauchy convergent
+ for any 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ such that for 
+\begin_inset Formula $\lambda=2^{-k}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+P\left[\sup_{0\leq t\leq T}\left|I_{n_{k+1}}\left(t,\omega\right)-I_{n_{k}}\left(t,\omega\right)\right|>2^{-k}\right]<2^{-k}
+\]
+
+\end_inset
+
+Then by the Borel-Cantelli lemma
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If the sum of the probabilities of the events 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ is finite 
+\begin_inset Formula $\sum_{n=1}^{\infty}P\left(A_{n}\right)<\infty$
+\end_inset
+
+, then the probability that infinitely many of them occur is 0, that is,
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $P\left(\limsup_{n\to\infty}A_{n}\right)=0$
+\end_inset
+
+ since 
+\begin_inset Formula $\limsup_{n\to\infty}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P\left[\sup_{0\leq t\leq T}\left|I_{n_{k+1}}\left(t,\omega\right)-I_{n_{k}}\left(t,\omega\right)\right|>2^{-k}\text{ infinitely often}\right]=0
+\]
+
+\end_inset
+
+Therefore there exists 
+\begin_inset Formula $k_{1}\left(\omega\right)$
+\end_inset
+
+ with probability 1 such that for 
+\begin_inset Formula $k\geq k_{1}\left(\omega\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\sup_{0\leq t\leq T}\left|I_{n_{k+1}}\left(t,\omega\right)-I_{n_{k}}\left(t,\omega\right)\right|\leq2^{-k}
+\]
+
+\end_inset
+
+and hence 
+\begin_inset Formula $I_{n_{k}}$
+\end_inset
+
+ is uniformly convergent for 
+\begin_inset Formula $t\in\left[0,T\right]$
+\end_inset
+
+ with probability 1 and the limit of 
+\begin_inset Formula $I_{n_{k}}$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $J_{t}\left(\omega\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $t$
+\end_inset
+
+-continuous for 
+\begin_inset Formula $t\in\left[0,T\right]$
+\end_inset
+
+ with probability one.
+ Finally since 
+\begin_inset Formula $I_{n_{k}}\left(t,\cdot\right)\rightarrow I_{t}\left(\cdot\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+ it must be the case that 
+\begin_inset Formula 
+\[
+P\left(I_{t}=J_{t}\right)=1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t\in\left[0,T\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+From now on assume that we're always working with the 
+\begin_inset Formula $t$
+\end_inset
+
+-continuous version of the Ito integral.
+\end_layout
+
+\begin_layout Corollary
+Let 
+\begin_inset Formula $f\in\mathcal{V}\left(0,T\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I_{t}=I\left(t,\omega\right)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+-martingale and therefore
+\begin_inset Formula 
+\[
+P\left[\sup_{0\leq t\leq T}\left|I_{t}\right|\geq\lambda\right]\leq E\left[\int_{0}^{T}f^{2}ds\right]/\lambda^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Follows from continuity of 
+\begin_inset Formula $I_{t}$
+\end_inset
+
+, Doob's inequality, and Ito isometry.
+ 
+\end_layout
+
 \end_body
 \end_document
