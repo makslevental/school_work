@@ -1,0 +1,618 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+\usepackage{graphicx}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 2cm
+\rightmargin 1cm
+\bottommargin 2cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Matched Filtering
+\begin_inset Newline newline
+\end_inset
+
+EEE 5502 Summer '15
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+The task is to simulate a Code Division Multiple Access (CMDA) system using
+ spreading spectrum codes.
+\end_layout
+
+\begin_layout Subsection
+CDMA
+\end_layout
+
+\begin_layout Standard
+Code Division Multiple Access is a multiple access scheme - it employs distinct
+ modulating codes assigned to distinct transmitters in order that these
+ several transmitters may send simultaneously over a single channel.
+ Furthermore spreading codes are used for purposes of privacy preservation:
+ a receiver cannot demodulate the transmitted signal without prior knowledge
+ of the modulating sequence.
+ To effect this the codes are typically pseudo-random generated and therefore,
+ for those not in possession of the chipping sequence, mask the signals
+ as noise.
+\end_layout
+
+\begin_layout Standard
+To be specific let the messages 
+\begin_inset Formula 
+\begin{eqnarray*}
+m\left[l\right] & = & \left(m_{1},\dots,m_{j}\right)\\
+n\left[l\right] & = & \left(n_{1},\dots,n_{j}\right)
+\end{eqnarray*}
+
+\end_inset
+
+where the symbols 
+\begin_inset Formula $n_{i},m_{i}\in\left\{ -1,1\right\} $
+\end_inset
+
+.
+ Then the spreading sequences
+\begin_inset Formula 
+\begin{eqnarray*}
+s_{1}\left[l\right] & = & \left(s_{1,1},\dots,s_{1,k}\right)\\
+s_{2}\left[l\right] & = & \left(s_{2,1},\dots,s_{2,k}\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the processing gain.
+ This produces modulated transmission sequences 
+\begin_inset Formula 
+\begin{eqnarray*}
+S_{1}\left[l\right] & = & \left(m_{1}\cdot s_{1,1},\dots,m_{1}\cdot s_{1,k},m_{2}\cdot s_{1,1},\dots,m_{2}\cdot s_{1,k},\dots,m_{j}\cdot s_{1,1},\dots,m_{j}\cdot s_{1,k}\right)\\
+ & \coloneqq & \left(m_{1}\cdot s_{1},m_{2}\cdot s_{1},\dots,m_{j}\cdot s_{1}\right)\\
+S_{2}\left[l\right] & = & \left(n_{1}\cdot s_{2},n_{2}\cdot s_{2},\dots,n_{j}\cdot s_{2}\right)
+\end{eqnarray*}
+
+\end_inset
+
+Then if 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{2}$
+\end_inset
+
+ are transmitted, on the receiving end of the channel recovery of either
+ 
+\begin_inset Formula $m$
+\end_inset
+
+ or 
+\begin_inset Formula $n$
+\end_inset
+
+ is done by first convolving with a filter matching the appropriate spreading
+ sequence:
+\begin_inset Formula 
+\begin{eqnarray*}
+h_{1}\left[l\right] & = & S_{1}\left[l\right]\star s_{1}\left[j-l\right]\\
+h_{2}\left[l\right] & = & S_{2}\left[l\right]\star s_{2}\left[j-l\right]
+\end{eqnarray*}
+
+\end_inset
+
+Note that the filter must be inverted because in the convolution it's inverted
+ again.
+ With these configuration parameters
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+And no noise in the channel.
+\end_layout
+
+\end_inset
+
+ the highest amplitude responses in 
+\begin_inset Formula $h_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{2}$
+\end_inset
+
+ are where the filter correlates or anti-correlates perfectly with transmitted
+ signal, and at these points 
+\begin_inset Formula $h_{i}\left[l\right]$
+\end_inset
+
+ is either 
+\begin_inset Formula $k$
+\end_inset
+
+ or 
+\begin_inset Formula $-k$
+\end_inset
+
+, depending on whether the symbol was 
+\begin_inset Formula $1$
+\end_inset
+
+ or 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Analysis
+\end_layout
+
+\begin_layout Standard
+Three experiments were performed:
+\end_layout
+
+\begin_layout Enumerate
+A 20 symbol mesage 
+\begin_inset Formula $m$
+\end_inset
+
+ was generated, with 
+\begin_inset Formula $m_{i}\in\left\{ -1,1\right\} $
+\end_inset
+
+ and encoded using the spreading spectrum 
+\begin_inset Formula $s_{1}=\left(-1,1,-1,1,1\right)$
+\end_inset
+
+ to produce 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ was convolved with the matching filter 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+ reflected 
+\begin_inset Formula $\reflectbox{s}_{1}=\left(1,1,-1,1,-1\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $h_{1}=S_{1}\star\reflectbox{s}_{1}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $h_{1}$
+\end_inset
+
+ was then thresholded to entries 
+\begin_inset Formula $\left|h_{i}\right|\geq5$
+\end_inset
+
+ to recover the original 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Error rates were computed.
+\end_layout
+
+\begin_layout Enumerate
+The same 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ from part 1 was convolved with the matching filter 
+\begin_inset Formula 
+\[
+\reflectbox{s}_{2}=\left(1,-1,-1,-1,-1\right)
+\]
+
+\end_inset
+
+to attempt to recover the same message 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Error rates were computed.
+\end_layout
+
+\begin_layout Enumerate
+Additive White Gaussian Noise was used to perturb 
+\begin_inset Formula $m$
+\end_inset
+
+ to an SNR level of 
+\begin_inset Formula $10\text{dB}$
+\end_inset
+
+ and error rates were computed.
+ The exact process was
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Compute the signal power of 
+\begin_inset Formula $m$
+\end_inset
+
+ in Watts
+\begin_inset Formula 
+\[
+P_{m}=\frac{1}{100}\sum_{i=1}^{100}\left|m_{i}\right|^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The decibel watts of 
+\begin_inset Formula $P_{m}$
+\end_inset
+
+ was computed
+\begin_inset Formula 
+\[
+\text{dBW}_{m}=10\cdot\log_{10}\left(\frac{P_{m}}{1W}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The noise power in dbW was computed
+\begin_inset Formula 
+\[
+\text{ndBW}=\text{dBW}_{m}-10
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The power in Watts of ndBW was computed
+\begin_inset Formula 
+\[
+P_{n}=10^{\text{ndBW}/10}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+100 
+\begin_inset Formula $\text{n}\left(0,1\right)$
+\end_inset
+
+ random variables were generated and scaled by 
+\begin_inset Formula $\sqrt{P_{n}}$
+\end_inset
+
+, since that generates 
+\begin_inset Formula $\text{n}\left(0,P_{n}\right)$
+\end_inset
+
+ random variables
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Standard
+The computed error rates were 
+\end_layout
+
+\begin_layout Enumerate
+For the mentioned threshold of 5 the result is displayed in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Experiment-1"
+
+\end_inset
+
+.
+ The error rate was 0%.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename exp1.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experiment 1: 0% error rate.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Experiment-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For a threshold of 3 the signal return was 38 which is unintelligible.
+ Even for arbitrarily trimming to every other entry of the return the error
+ rate was 100%.
+ The result is display in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Experiment-1-1"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename exp2.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experiment 2: 100% error rate.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Experiment-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+With a threshold of 4 on the first try there was 100% recovery rate.
+ The result is on display in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Experiment-1-1-1"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename exp3a.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experiment 3a: 0% error rate.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Experiment-1-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Out of curiosity I ran it a second time and got an error rate of 
+\begin_inset Formula $30\%$
+\end_inset
+
+ .
+ The result is on display in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Experiment-1-1-1-1"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename exp3b.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Experiment 3b: 30% error rate.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Experiment-1-1-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In conclusion typically this method of signal transmission works well with
+ the right threshold, but is still subject to low probability events of
+ heavy loss.
+\end_layout
+
+\end_body
+\end_document
