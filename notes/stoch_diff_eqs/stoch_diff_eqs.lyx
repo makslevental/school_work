@@ -5357,6 +5357,12 @@ Alright finally we can actually do an ito integral!
 \end_layout
 
 \begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:firstitointegrals"
+
+\end_inset
+
 Assume 
 \begin_inset Formula $B_{0}=0$
 \end_inset
@@ -6348,6 +6354,203 @@ Follows from continuity of
 
 , Doob's inequality, and Ito isometry.
  
+\end_layout
+
+\begin_layout Section
+Ito's Formula and the Martingale Representation Theorem
+\end_layout
+
+\begin_layout Standard
+To derive a calculus of stochastic integrals we take a counterintuitive
+ approach.
+ Note that 
+\begin_inset Formula 
+\[
+B_{t}=\int_{0}^{t}dB_{s}
+\]
+
+\end_inset
+
+and recall that example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:firstitointegrals"
+
+\end_inset
+
+ shows 
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\frac{1}{2}B_{t}^{2}-\frac{1}{2}t
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+\frac{1}{2}B_{t}^{2}=\int_{0}^{t}B_{s}dB_{s}-\frac{1}{2}t
+\]
+
+\end_inset
+
+So the function 
+\begin_inset Formula $g\left(x\right)=\frac{1}{2}x^{2}$
+\end_inset
+
+ does not map the Ito integral 
+\begin_inset Formula $x=B_{t}=\int_{0}^{t}dB_{s}$
+\end_inset
+
+ into another Ito integral; in fact it's the combination of two integrals
+\begin_inset Formula 
+\begin{equation}
+\frac{1}{2}B_{t}^{2}=\int_{0}^{t}B_{s}dB_{s}-\int_{0}^{t}\frac{1}{2}ds\label{eq:easyint}
+\end{equation}
+
+\end_inset
+
+Hence define the class of 
+\emph on
+Ito processes
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ be a 1-D Brownian motion on 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+.
+ An Ito process (or 
+\emph on
+stochastic integral
+\emph default
+) is a stochastic process 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ of the form 
+\begin_inset Formula 
+\begin{equation}
+X_{t}=X_{0}+\int_{0}^{t}u\left(s,\omega\right)ds+\int_{0}^{t}v\left(s,\omega\right)dB_{s}\label{itoprocess}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $v\in\mathcal{V}\left(0,T\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+P\left(\int_{0}^{t}v^{2}ds<\infty\text{ for }t\geq0\right)=1
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+P\left(\int_{0}^{t}\left|u\right|ds<\infty\text{ for }t\geq0\right)=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This class of processes is closed under smooth maps.
+ Eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "itoprocess"
+
+\end_inset
+
+ is more typically written in 
+\begin_inset Quotes eld
+\end_inset
+
+differential form
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\[
+dX_{t}=udt+vdB_{t}
+\]
+
+\end_inset
+
+For example eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:easyint"
+
+\end_inset
+
+ is written
+\begin_inset Formula 
+\[
+d\left(\frac{1}{2}B_{t}^{2}\right)=\frac{1}{2}dt+B_{t}dB_{t}
+\]
+
+\end_inset
+
+The main tool in stochastic calculus is the Ito formula
+\end_layout
+
+\begin_layout Theorem
+(Ito formula) Let 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ be an ito process and 
+\begin_inset Formula $g\left(t,x\right)\in C^{2}\left(\left[0,\infty\right)\times\mathbb{R}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+Y_{t}=g\left(t,X_{t}\right)
+\]
+
+\end_inset
+
+is again an ito process and 
+\begin_inset Formula 
+\[
+dY_{t}=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dX_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(dX_{t}\right)^{2}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left(dX_{t}\right)^{2}=\left(dX_{t}\right)\cdot\left(dX_{t}\right)$
+\end_inset
+
+ is computed according to
+\begin_inset Formula 
+\[
+dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
