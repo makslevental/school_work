@@ -5574,6 +5574,13 @@ For
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:prop3ito"
+
+\end_inset
+
+
 \begin_inset Formula $E\left[\int_{Q}^{T}fdB\right]=0$
 \end_inset
 
@@ -6488,9 +6495,9 @@ differential form
 
 
 \begin_inset Formula 
-\[
-dX_{t}=udt+vdB_{t}
-\]
+\begin{equation}
+dX_{t}=udt+vdB_{t}\label{eq:difformitoprocess}
+\end{equation}
 
 \end_inset
 
@@ -6532,9 +6539,9 @@ Y_{t}=g\left(t,X_{t}\right)
 
 is again an ito process and 
 \begin_inset Formula 
-\[
-dY_{t}=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dX_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(dX_{t}\right)^{2}
-\]
+\begin{equation}
+dY_{t}=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dX_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(dX_{t}\right)^{2}\label{eq:itosformula}
+\end{equation}
 
 \end_inset
 
@@ -6547,6 +6554,740 @@ where
 \[
 dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+We'll prove this by showing equality of the two sides of eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:itosformula"
+
+\end_inset
+
+.
+ First substitute eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:difformitoprocess"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{0}^{t}dY_{t} & = & g\left(t,X_{t}\right)-g\left(0,X_{0}\right)=\int_{0}^{t}\left(\frac{\partial g}{\partial s}ds+\frac{\partial g}{\partial x}\left(uds+vdB_{s}\right)+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(uds+vdB_{s}\right)^{2}\right)\\
+g\left(t,X_{t}\right) & = & g\left(0,X_{0}\right)+\int_{0}^{t}\left(\frac{\partial g}{\partial s}+u\frac{\partial g}{\partial x}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot v^{2}\right)ds+\int_{0}^{t}v\frac{\partial g}{\partial x}dB_{s}
+\end{eqnarray*}
+
+\end_inset
+
+Then assume 
+\begin_inset Quotes eld
+\end_inset
+
+all the things
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $g,\partial_{t}g,\partial_{x}g,\partial_{x}^{2}g$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ are bounded and continuously differentiable
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Or at least that there exists a sequence of functions that converge 
+\begin_inset Formula $g$
+\end_inset
+
+ and are as such.
+\end_layout
+
+\end_inset
+
+ and that 
+\begin_inset Formula $u,v$
+\end_inset
+
+ are simple processes.
+ Using Taylor's theorem to expand 
+\begin_inset Formula $\Delta g\left(t_{j},X_{j}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+g\left(t,X_{t}\right) & = & g\left(0,X_{0}\right)+\sum_{j}\Delta g\left(t_{j},X_{j}\right)\\
+ & = & g\left(0,X_{0}\right)+\sum_{j}\left(\frac{\partial g}{\partial t}\Delta t_{j}+\frac{\partial g}{\partial x}\Delta X_{j}+\frac{1}{2}\left[\frac{\partial^{2}g}{\partial t^{2}}\cdot\left(\Delta t_{j}\right)^{2}+\frac{\partial^{2}g}{\partial t\partial x}\left(\Delta t_{j}\right)\left(\Delta X_{j}\right)+\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(\Delta X_{j}\right)^{2}\right]\right)\\
+ &  & +\sum_{j}R_{j}
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $R_{j}=O\left(\left|\Delta t_{j}\right|^{2}+\left|\Delta X_{j}\right|^{2}\right)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\Delta t_{j}\rightarrow0$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\sum_{j}\left(\frac{\partial g}{\partial t}\Delta t_{j}+\frac{\partial g}{\partial x}\Delta X_{j}\right)\rightarrow\int_{0}^{t}\frac{\partial g}{\partial t}ds+\int_{0}^{t}\frac{\partial g}{\partial x}dX_{s}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $u,v$
+\end_inset
+
+ are elementary 
+\begin_inset Formula 
+\begin{eqnarray}
+\sum_{j}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(\Delta X_{j}\right)^{2} & = & \sum_{j}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(u\Delta t_{j}+v\Delta B_{j}\right)^{2}\nonumber \\
+ & = & \sum_{j}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(u^{2}\left(\Delta t_{j}\right)^{2}+uv\left(\Delta t_{j}\right)\left(\Delta B_{j}\right)+\left(v\right)^{2}\Delta B_{j}\right)\label{eq:sqrterm}
+\end{eqnarray}
+
+\end_inset
+
+The terms that include 
+\begin_inset Formula $\Delta t_{j}$
+\end_inset
+
+ go to zero, for example since 
+\begin_inset Formula $E\left(\Delta B_{j}^{2}\right)\rightarrow\Delta t_{j}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E\left[\left(\sum_{j}\frac{\partial^{2}g}{\partial x^{2}}u_{j}v_{j}\Delta t_{j}\Delta B_{j}\right)^{2}\right]=\sum_{j}E\left[\left(\frac{\partial^{2}g}{\partial x^{2}}u_{j}v_{j}\right)^{2}\right]\left(\Delta t_{j}\right)^{3}
+\]
+
+\end_inset
+
+which goes to 0 as 
+\begin_inset Formula $\Delta t_{j}\rightarrow0$
+\end_inset
+
+.
+ The last term in eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sqrterm"
+
+\end_inset
+
+ tends to 
+\begin_inset Formula 
+\[
+\int_{0}^{t}\frac{\partial^{2}g}{\partial x^{2}}v^{2}ds
+\]
+
+\end_inset
+
+in 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+ as 
+\begin_inset Formula $\Delta t_{j}\rightarrow0$
+\end_inset
+
+.
+ Why? Let 
+\begin_inset Formula $a_{j}=a\left(t_{j}\right)=\frac{\partial^{2}g\left(t_{j},X_{t_{j}}\right)}{\partial x^{2}}v^{2}$
+\end_inset
+
+ and consider the 
+\begin_inset Formula $L^{2}\left(P\right)$
+\end_inset
+
+ norm quantity 
+\begin_inset Formula 
+\[
+E\left[\left(\sum_{j}\left(a_{j}\left(\Delta B_{j}\right)^{2}-a_{j}\Delta t_{j}\right)\right)^{2}\right]=\sum_{i,j}E\left[a_{i}a_{j}\left(\left(\Delta B_{i}\right)^{2}-\Delta t_{i}\right)\left(\left(\Delta B_{j}\right)^{2}-\Delta t_{j}\right)\right]
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $i<j$
+\end_inset
+
+ then 
+\begin_inset Formula $E\left[a_{i}a_{j}\left(\left(\Delta B_{i}\right)^{2}-\Delta t_{i}\right)\left(\left(\Delta B_{j}\right)^{2}-\Delta t_{j}\right)\right]$
+\end_inset
+
+ vanishes by independence of increments.
+ Similarly for 
+\begin_inset Formula $i>j$
+\end_inset
+
+.
+ Hence
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[\left(\sum_{j}\left(a_{j}\left(\Delta B_{j}\right)^{2}-a_{j}\Delta t_{j}\right)\right)^{2}\right] & = & \sum_{j}E\left[a_{j}^{2}\left(\left(\Delta B_{j}\right)^{2}-\Delta t_{j}\right)^{2}\right]\\
+ & = & \sum_{j}E\left[a_{j}^{2}\right]E\left[\left(\Delta B_{j}\right)^{4}+\left(\Delta t_{j}\right)^{2}-\left(\Delta B_{j}\right)^{2}\left(\Delta t_{j}\right)\right]\\
+ & = & \sum_{j}E\left[a_{j}^{2}\right]\left(3\left(\Delta t_{j}\right)^{2}+\left(\Delta t_{j}\right)^{2}-2\left(\Delta t_{j}\right)^{2}\right)\\
+ & = & 2\sum_{j}E\left[a_{j}^{2}\right]\left(\Delta t_{j}\right)^{2}
+\end{eqnarray*}
+
+\end_inset
+
+which goes to 0 as 
+\begin_inset Formula $\Delta t_{j}\rightarrow0$
+\end_inset
+
+.
+ This establishes 
+\begin_inset Formula 
+\[
+\sum_{j}a_{j}\left(\Delta B_{j}\right)^{2}\rightarrow\int_{0}^{t}a\left(s\right)ds
+\]
+
+\end_inset
+
+which is written 
+\begin_inset Formula 
+\[
+\left(dB_{t}\right)^{2}=dt
+\]
+
+\end_inset
+
+and the theorem because it establishes that 
+\begin_inset Formula $\sum_{j}R_{j}\rightarrow0$
+\end_inset
+
+ as 
+\begin_inset Formula $\Delta t_{j}\rightarrow0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+As a curiousity what is 
+\begin_inset Formula 
+\[
+\int_{0}^{t}sdB_{s}
+\]
+
+\end_inset
+
+Using 
+\begin_inset Formula $g\left(t,X\right)=tX$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{t}=g\left(t,B_{t}\right)$
+\end_inset
+
+ we get a sort of integration by parts
+\begin_inset Formula 
+\[
+dY_{t}=B_{t}dt+tdB_{t}+0
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula 
+\[
+d\left(tB_{t}\right)=B_{t}dt+tdB_{t}
+\]
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+\int d\left(tB_{t}\right)=tB_{t}=\int_{0}^{t}B_{s}ds+\int_{0}^{t}sdB_{s}
+\]
+
+\end_inset
+
+i.e.
+\begin_inset Formula 
+\[
+\int_{0}^{t}sdB_{s}=tB_{t}-\int_{0}^{t}B_{s}ds
+\]
+
+\end_inset
+
+This is true in general
+\end_layout
+
+\begin_layout Theorem
+For 
+\begin_inset Formula $f\left(s,\omega\right)=f\left(s\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\int_{0}^{t}f\left(s\right)dB_{s}=f\left(t\right)B_{t}-\int_{0}^{t}B_{s}df_{s}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Martingale Representation Theorem
+\end_layout
+
+\begin_layout Standard
+TODO
+\end_layout
+
+\begin_layout Section
+SDEs
+\end_layout
+
+\begin_layout Standard
+Finally let's solve some god damn stochastic differential equations! 
+\end_layout
+
+\begin_layout Example
+The population growth model from Ch.
+ 1 is
+\begin_inset Formula 
+\[
+\frac{dN_{t}}{dt}=a_{t}N_{t}=\left(r_{t}+\alpha W_{t}\right)N_{t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is white-noise.
+ The Ito interpretation of this model is
+\begin_inset Formula 
+\[
+dN_{t}=\left(r_{t}N_{t}dt+\alpha N_{t}dB_{t}\right)
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\begin{equation}
+\frac{dN_{t}}{N_{t}}=r_{t}dt+\alpha dB_{t}\label{eq:sde-1}
+\end{equation}
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\int_{0}^{t}\frac{dN_{s}}{N_{s}}=rt+\alpha B_{t}
+\]
+
+\end_inset
+
+To evaluate the left-hand side use the Ito formula with 
+\begin_inset Formula $g\left(t,X_{t}\right)=\ln\left(X_{t}\right)$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{eqnarray*}
+d\left(\log N_{t}\right) & = & \frac{1}{N_{t}}dN_{t}+\frac{1}{2}\left(-\frac{1}{N_{t}^{2}}\right)\left(dN_{t}\right)^{2}\\
+ & = & \frac{dN_{t}}{N_{t}}-\frac{1}{2N_{t}^{2}}\alpha^{2}N_{t}dt=\frac{dN_{t}}{N_{t}}-\frac{1}{2}\alpha^{2}dt
+\end{eqnarray*}
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\[
+\frac{dN_{t}}{N_{t}}=d\left(\ln N_{t}\right)+\frac{1}{2}\alpha^{2}dt
+\]
+
+\end_inset
+
+and using eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sde-1"
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{0}^{t}\left(d\left(\ln N_{s}\right)+\frac{1}{2}\alpha^{2}ds\right) & = & rt+\alpha B_{t}\\
+\ln N_{t}-\ln N_{0}+\frac{1}{2}\alpha^{2}t & = & rt+\alpha B_{t}
+\end{eqnarray*}
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+N_{t}=N_{0}e^{\left(r-\frac{1}{2}\alpha^{2}\right)t+\alpha B_{t}}
+\]
+
+\end_inset
+
+which is called 
+\emph on
+geometric Brownian motion
+\emph default
+.
+ Sanity check: on average the noise should filter out and this result should
+ agree with the deterministic population growth ODE
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{dn}{dt}=an$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+E\left[N_{t}\right]=E\left[N_{0}\right]e^{rt}
+\]
+
+\end_inset
+
+as if there were no noise term in the driving force 
+\begin_inset Formula $r_{t}dt+\alpha dB_{t}$
+\end_inset
+
+.
+ Indeed this is true.
+ Let 
+\begin_inset Formula $Y_{t}=e^{\alpha B_{t}}$
+\end_inset
+
+ and apply Ito's formula
+\begin_inset Formula 
+\[
+dY_{t}=\frac{1}{2}\alpha^{2}e^{\alpha B_{t}}dt+\alpha e^{\alpha B_{t}}dB_{t}
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+Y_{t}-Y_{0}=\frac{1}{2}\alpha^{2}\int_{0}^{t}e^{\alpha B_{s}}ds+\alpha\int_{0}^{t}e^{\alpha B_{s}}dB_{s}
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $E\left[\int_{0}^{t}e^{\alpha B_{s}}dB_{s}\right]=0$
+\end_inset
+
+ by property 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:prop3ito"
+
+\end_inset
+
+ or Ito integral we have that 
+\begin_inset Formula 
+\[
+E\left[Y_{t}-Y_{0}\right]=\frac{1}{2}\alpha^{2}\int_{0}^{t}E\left[e^{\alpha B_{s}}\right]ds
+\]
+
+\end_inset
+
+i.e.
+\begin_inset Formula 
+\[
+\frac{d}{dt}E\left[Y_{t}\right]=\frac{1}{2}\alpha^{2}E\left[Y_{t}\right],E\left[Y_{0}\right]=1
+\]
+
+\end_inset
+
+which necessarily implies
+\begin_inset Formula 
+\[
+E\left[Y_{t}\right]=e^{\frac{1}{2}\alpha^{2}t}
+\]
+
+\end_inset
+
+which itself implies that 
+\begin_inset Formula 
+\[
+E\left[N_{t}\right]=E\left[N_{0}\right]e^{rt}
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula 
+\[
+N_{t}=N_{0}e^{\left(r-\frac{1}{2}\alpha^{2}\right)t+\alpha B_{t}}=N_{0}e^{\left(r-\frac{1}{2}\alpha^{2}\right)t}Y_{t}
+\]
+
+\end_inset
+
+and by independence 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[N_{t}\right] & = & E\left[N_{0}\right]e^{\left(r-\frac{1}{2}\alpha^{2}\right)t}E\left[Y_{t}\right]\\
+ & = & E\left[N_{0}\right]e^{\left(r-\frac{1}{2}\alpha^{2}\right)t}e^{\frac{1}{2}\alpha^{2}t}\\
+ & = & E\left[N_{0}\right]e^{rt}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example
+The noisy filter problem from Ch.
+ 1 is
+\begin_inset Formula 
+\[
+LQ_{t}^{''}+RQ_{t}^{'}+\frac{1}{C}Q_{t}=F_{t}=G_{t}+\alpha W_{t}
+\]
+
+\end_inset
+
+Reduce this second order SDE to a system of first order SDEs by introduced
+ 
+\begin_inset Formula 
+\[
+X_{t}=\begin{pmatrix}X_{1}\\
+X_{2}
+\end{pmatrix}=\begin{pmatrix}Q_{t}\\
+Q_{t}^{'}
+\end{pmatrix}
+\]
+
+\end_inset
+
+Then the system is
+\begin_inset Formula 
+\begin{eqnarray*}
+X_{1}^{'} & = & X_{2}\\
+LX_{2}^{'} & = & -RX_{2}-\frac{1}{C}X_{1}+G_{t}+\alpha W_{t}
+\end{eqnarray*}
+
+\end_inset
+
+or using the standard Ito interpretation 
+\begin_inset Formula 
+\begin{eqnarray*}
+dX_{1} & = & X_{2}dt\\
+LdX_{2} & = & -RX_{2}dt-\frac{1}{C}X_{1}dt+G_{t}dt+\alpha dB_{t}
+\end{eqnarray*}
+
+\end_inset
+
+or in matrix form
+\begin_inset Formula 
+\[
+\begin{pmatrix}dX_{1}\\
+dX_{2}
+\end{pmatrix}=\begin{pmatrix}0 & 1\\
+-\frac{1}{CL} & \frac{R}{L}
+\end{pmatrix}\begin{pmatrix}X_{1}\\
+X_{2}
+\end{pmatrix}dt+\begin{pmatrix}0\\
+\frac{1}{L}G_{t}
+\end{pmatrix}+\begin{pmatrix}0\\
+\frac{1}{L}\alpha
+\end{pmatrix}dBt
+\]
+
+\end_inset
+
+This is a 
+\emph on
+2-dimensional stochastic differential equation
+\emph default
+.
+ Rewrite using the matrix exponential
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{A}=\sum_{k=0}^{\infty}\frac{A^{k}}{k!}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+e^{-At}dX_{t}-e^{-At}AX_{t}dt=e^{-At}\left(H_{t}dt+KdB_{t}\right)\label{eq:alg2sde}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}0 & 1\\
+-\frac{1}{CL} & \frac{R}{L}
+\end{pmatrix}\ H_{t}=\begin{pmatrix}0\\
+\frac{1}{L}G_{t}
+\end{pmatrix}\ K=\begin{pmatrix}0\\
+\frac{1}{L}\alpha
+\end{pmatrix}
+\]
+
+\end_inset
+
+Given this 
+\begin_inset Quotes eld
+\end_inset
+
+algebraic representation of the system it's tempting to rewrite the left
+ side of eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:alg2sde"
+
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+d\left(e^{-At}X_{t}\right)=e^{-At}dX_{t}-e^{-At}AX_{t}dt
+\]
+
+\end_inset
+
+But to be able to do this you need something like a multidimensional form
+ of the Ito formula; good thing we have one!
+\end_layout
+
+\begin_layout Theorem
+Let 
+\begin_inset Formula 
+\[
+dX_{t}=udt+vdB_{t}
+\]
+
+\end_inset
+
+be an n-dimensional Ito process and 
+\begin_inset Formula $g\left(t,X\right)=\left(g_{1}\left(t,X\right),\dots,g_{p}\left(t,X\right)\right)$
+\end_inset
+
+ be 
+\begin_inset Formula $C^{2}$
+\end_inset
+
+ map from 
+\begin_inset Formula $\left[0,\infty\right)\times\mathbb{R}^{n}\rightarrow\mathbb{R}^{p}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+Y_{t}=g\left(t,X_{t}\right)
+\]
+
+\end_inset
+
+is an Ito process whose components abide by the Ito formula
+\begin_inset Formula 
+\[
+dY_{k}=\frac{\partial g_{k}}{\partial t}dt+\left(\nabla g\right)\cdot\left(dX\right)+\frac{1}{2}dX\cdot H_{g}\cdot dX
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $dB_{t,i}dB_{t,j}=\delta_{i,j}dt$
+\end_inset
+
+ and 
+\begin_inset Formula $dB_{t,i}dt=dtdB_{t,i}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+And now back to our regularly scheduled program: with
+\begin_inset Formula 
+\[
+g\left(t,X_{1},X_{2}\right)=e^{-At}\begin{pmatrix}X_{1}\\
+X_{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+we indeed get that 
+\begin_inset Formula 
+\[
+d\left(e^{-At}X_{t}\right)=e^{-At}dX_{t}-e^{-At}AX_{t}dt
+\]
+
+\end_inset
+
+and substituting into eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:alg2sde"
+
+\end_inset
+
+ and using integration by parts
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{0}^{t}d\left(e^{-At}X_{t}\right) & = & \int_{0}^{t}e^{-At}\left(H_{t}dt+KdB_{t}\right)\\
+e^{-At}X_{t}-X_{0} & = & e^{At}\left[X_{0}+e^{-At}KB_{t}+\int_{0}^{t}e^{-As}\left(H_{s}+AKB_{s}\right)ds\right]
+\end{eqnarray*}
 
 \end_inset
 
