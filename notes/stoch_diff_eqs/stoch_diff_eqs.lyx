@@ -6330,6 +6330,12 @@ From now on assume that we're always working with the
 \end_layout
 
 \begin_layout Corollary
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:itointmartin"
+
+\end_inset
+
 Let 
 \begin_inset Formula $f\in\mathcal{V}\left(0,T\right)$
 \end_inset
@@ -6864,7 +6870,512 @@ Martingale Representation Theorem
 \end_layout
 
 \begin_layout Standard
-TODO
+Every ito integral/process is a martingale (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cor:itointmartin"
+
+\end_inset
+
+).
+ But in fact every 
+\begin_inset Formula $\mathcal{F}_{t}^{\left(n\right)}$
+\end_inset
+
+-martingale
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The natural filtration that 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ is adapted to.
+ 
+\end_layout
+
+\end_inset
+
+ can be represented as an ito integral/process.
+ First an aside on uniform integrability and martingale convergence.
+\end_layout
+
+\begin_layout Subsubsection
+Uniform integrability and Martingale convergence.
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ be a probability space.
+ A family 
+\begin_inset Formula $\left\{ f_{j}\right\} $
+\end_inset
+
+ of real, measurable functions, for some index set 
+\begin_inset Formula $j\in J$
+\end_inset
+
+, is uniformly integrable if
+\begin_inset Formula 
+\[
+\lim_{M\rightarrow\infty}\left(\sup_{j\in J}\left\{ \int_{\left\{ \left|f_{j}\right|>M\right\} }\left|f_{j}\right|dP\right\} \right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A test for uniform integrability follows from the following defintion
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula $\psi:\left[0,\infty\right)\rightarrow\left[0,\infty\right)$
+\end_inset
+
+ is called a uniform integrability test function if 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is convex
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\psi\left(\lambda x+\left(1-\lambda\right)y\right)\leq\lambda\psi\left(x\right)+\left(1-\lambda\right)\psi\left(y\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\lim_{x\rightarrow\infty}\frac{\psi\left(x\right)}{x}=\infty
+\]
+
+\end_inset
+
+The following theorem is obvious given the names:
+\end_layout
+
+\begin_layout Theorem
+A family 
+\begin_inset Formula $\left\{ f_{j}\right\} $
+\end_inset
+
+ of real, measurable functions, for some index set 
+\begin_inset Formula $j\in J$
+\end_inset
+
+, is uniformly integrable iff there exists a uniform integrability test
+ function such that 
+\begin_inset Formula 
+\[
+\sup_{j\in J}\left\{ \int\psi\left(\left|f_{j}\right|\right)dP\right\} <\infty
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The use of the uniform integrability characterization is the following theorem,
+ a sort of generalization of various convergence theorems:
+\end_layout
+
+\begin_layout Theorem
+Suppose 
+\begin_inset Formula $f_{j}\rightarrow f$
+\end_inset
+
+ pointwise, i.e.
+ for all 
+\begin_inset Formula $\omega$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\lim_{j\rightarrow\infty}f_{j}\left(\omega\right)=f\left(\omega\right)
+\]
+
+\end_inset
+
+Then the following are equivalent:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\left\{ f_{j}\right\} $
+\end_inset
+
+ is uniformly integrable.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f\in L^{1}\left(P\right)$
+\end_inset
+
+, i.e 
+\begin_inset Formula $\int\left|f\right|dP<\infty$
+\end_inset
+
+, and 
+\begin_inset Formula $f_{j}\rightarrow f$
+\end_inset
+
+ in 
+\begin_inset Formula $L^{1}\left(P\right)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+The germaine application of uniform integrability is a convergence theorem
+ for martingales:
+\end_layout
+
+\begin_layout Theorem
+(Doob's martingale convergence theorem) Let 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+ be a right continuous
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $t\rightarrow N_{t}$
+\end_inset
+
+ is right continuous.
+\end_layout
+
+\end_inset
+
+ supermartingale
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Given that the filtration 
+\begin_inset Formula $\mathcal{N}_{t}$
+\end_inset
+
+ contains all the null sets of 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}_{t}$
+\end_inset
+
+ is right continuous, i.e.
+ 
+\begin_inset Formula $\mathcal{N}_{t}=\cap_{s>t}\mathcal{N}_{s}$
+\end_inset
+
+ then 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+ is a 
+\emph on
+supermartingale
+\emph default
+ if 
+\begin_inset Formula $N_{t}\geq E\left[N_{s}|\mathcal{N}_{t}\right]$
+\end_inset
+
+.
+ Similarly for 
+\emph on
+submargtingale 
+\emph default
+but with 
+\begin_inset Formula $\leq$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+such that 
+\begin_inset Formula $\sup_{t>0}E\left[N_{t}^{-}\right]<\infty$
+\end_inset
+
+, where 
+\begin_inset Formula $N_{t}^{-}\coloneqq\max\left(-N_{t},0\right)$
+\end_inset
+
+, i.e only the negative parts but reflected about 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $N_{t}\left(\omega\right)$
+\end_inset
+
+ converges pointwise almost surely and the limit 
+\begin_inset Formula $N$
+\end_inset
+
+ is such that 
+\begin_inset Formula $E\left[N^{-}\right]<\infty$
+\end_inset
+
+.
+ Furthermore if 
+\begin_inset Formula $\left\{ N_{t}\right\} $
+\end_inset
+
+ is uniformly integrable then the convergence is almost everywhere and in
+ 
+\begin_inset Formula $L^{1}\left(P\right)$
+\end_inset
+
+ (actually an iff).
+\end_layout
+
+\begin_layout Standard
+Using Doob's martingale convergence theorem with the uniform integrability
+ test function 
+\begin_inset Formula $\psi\left(x\right)=x^{p}$
+\end_inset
+
+ we 
+\end_layout
+
+\begin_layout Corollary
+If 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is a continuous martingale such that 
+\begin_inset Formula $\sup_{t>0}E\left[\left|M_{t}\right|^{p}\right]<\infty$
+\end_inset
+
+ for some 
+\begin_inset Formula $p>1$
+\end_inset
+
+ then 
+\begin_inset Formula $M_{t}\rightarrow M$
+\end_inset
+
+ almost everywhere and in 
+\begin_inset Formula $L^{1}\left(P\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note 
+\begin_inset Formula $M$
+\end_inset
+
+ is simply whatever 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ converges to.
+ Further note that similar results can be obtained for discrete time super/subma
+rtingales and as a corollary to that we have this result:
+\end_layout
+
+\begin_layout Corollary
+Let 
+\begin_inset Formula $X\in L^{1}\left(P\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ \mathcal{N}_{k}\right\} _{k=1}^{\infty}$
+\end_inset
+
+ be a filtration in 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ and define 
+\begin_inset Formula $\mathcal{N}_{\infty}\coloneqq\sigma\left(\left\{ \mathcal{N}_{k}\right\} _{k=1}^{\infty}\right)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+E\left[X|\mathcal{N}_{k}\right]\rightarrow E\left[X|\mathcal{N}_{\infty}\right]
+\]
+
+\end_inset
+
+almost everywhere and in 
+\begin_inset Formula $L^{1}\left(P\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Set 
+\begin_inset Formula $M_{k}\coloneqq E\left[X|\mathcal{N}_{k}\right]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left\{ M_{k}\right\} $
+\end_inset
+
+ is a uniformly integrable martingale (since 
+\begin_inset Formula $X\in L^{1}\left(P\right)$
+\end_inset
+
+), so there exists 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{k}\rightarrow M$
+\end_inset
+
+ almost everywhere and in 
+\begin_inset Formula $L^{1}\left(P\right)$
+\end_inset
+
+.
+ Consider that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left\Vert M_{k}-E\left[M|\mathcal{N}_{k}\right]\right\Vert _{L^{1}\left(P\right)} & = & \left\Vert E\left[M_{k}|\mathcal{N}_{k}\right]-E\left[M|\mathcal{N}_{k}\right]\right\Vert _{L^{1}\left(P\right)}\\
+ & = & \left\Vert E\left[M_{k}-M|\mathcal{N}_{k}\right]\right\Vert _{L^{1}\left(P\right)}\\
+ & \leq & \left\Vert M_{k}-M\right\Vert _{L^{1}\left(P\right)}\rightarrow0
+\end{eqnarray*}
+
+\end_inset
+
+as 
+\begin_inset Formula $k\rightarrow\infty$
+\end_inset
+
+ because conditional expectation 
+\begin_inset Quotes eld
+\end_inset
+
+contracts 
+\begin_inset Formula $L^{p}$
+\end_inset
+
+ norms
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Proof
+\begin_inset Formula $\left\Vert E\left[X|\mathcal{N}\right]\right\Vert _{L^{p}}\leq\left\Vert X\right\Vert _{L^{p}}$
+\end_inset
+
+ iff 
+\begin_inset Formula $E\left[\left|E\left[X|\mathcal{N}\right]\right|^{p}\right]\leq E\left[\left|X\right|^{p}\right]$
+\end_inset
+
+.
+ By Jensen's and the fact that 
+\begin_inset Formula $\left|\cdot\right|^{p}$
+\end_inset
+
+ is convex for 
+\begin_inset Formula $p\geq1$
+\end_inset
+
+ it's the case that
+\begin_inset Formula 
+\[
+E\left[\left|E\left[X|\mathcal{N}\right]\right|^{p}\right]\leq E\left[E\left[\left|X\right|^{p}|\mathcal{N}\right]\right]=E\left[\left|X\right|^{p}\right]
+\]
+
+\end_inset
+
+Note as a corollary conditional expectation is 
+\begin_inset Formula $L^{p}$
+\end_inset
+
+ continuous, i.e.
+ 
+\begin_inset Formula $X_{n}\overset{L^{p}}{\rightarrow}X\Rightarrow E\left[X_{n}|\mathcal{N}\right]\overset{L^{p}}{\rightarrow}E\left[X|\mathcal{N}\right]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Hence if 
+\begin_inset Formula $F\in\mathcal{N}_{k_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $k>k_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\int_{F}\left(X-M\right)dP=\int_{F}E\left[X-M|\mathcal{N}_{k}\right]dP=\int_{F}\left(M_{k}-E\left[M|\mathcal{N}_{k}\right]\right)dP\rightarrow0
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula $k\rightarrow\infty$
+\end_inset
+
+.
+ The first equality follows from the definition of conditonal expectation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\int_{F\in\mathcal{N}}XdP=\int E\left[X|\mathcal{N}\right]dP$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, the second is definition, and the third by just above.
+ Therefore 
+\begin_inset Formula $\int_{F}\left(X-M\right)dP=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $F\in\cup_{k=1}^{\infty}\mathcal{N}_{k}=\mathcal{N}_{\infty}$
+\end_inset
+
+ and hence 
+\begin_inset Formula $E\left[X|\mathcal{N}_{\infty}\right]=E\left[M|\mathcal{N}_{\infty}\right]=M$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
