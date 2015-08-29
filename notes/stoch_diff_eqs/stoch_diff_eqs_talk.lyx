@@ -1,0 +1,2944 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Stochastic Processes, SDEs, and Option Pricing
+\end_layout
+
+\begin_layout Section
+Measure Theory in 5 Minutes
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is a set called the sample/event space.
+ A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a family 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with the following properties
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\emptyset\in\mathcal{F}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F\in\mathcal{F}\Rightarrow F^{C}\in\mathcal{F}$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is closed under complementation.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A_{i}\in\mathcal{F}\Rightarrow\bigcup_{i=1}^{\infty}A_{i}\in\mathcal{F}$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is closed under countable unions.
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+The pair 
+\begin_inset Formula $\left(\Omega,\mathcal{F}\right)$
+\end_inset
+
+ is called a measurable space and the subsets 
+\begin_inset Formula $F$
+\end_inset
+
+ of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ which belond to 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ are called 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+-measurable sets.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+Given any family 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ there is a smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{H_{U}}$
+\end_inset
+
+ containing 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mathcal{H_{U}}=\bigcap\left\{ \mathcal{H}:\mathcal{H}\,\sigma\text{-algebra of }\Omega,\mathcal{U}\subset\mathcal{H}\right\} 
+\]
+
+\end_inset
+
+(intersection of all sigma algebras containing 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+If 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ is the collection of all open subsets of a topological space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ then 
+\begin_inset Formula $\mathcal{B}=\mathcal{H_{U}}$
+\end_inset
+
+ is called the 
+\emph on
+Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\emph default
+or topological 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\emph default
+and 
+\begin_inset Formula $B\in\mathcal{B}$
+\end_inset
+
+ are called the 
+\emph on
+Borel sets.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+A 
+\emph on
+measure 
+\emph default
+is a function function 
+\begin_inset Formula $\mu:\mathcal{F}\rightarrow\mathbb{R}$
+\end_inset
+
+.
+ It 
+\begin_inset Quotes eld
+\end_inset
+
+weighs
+\begin_inset Quotes erd
+\end_inset
+
+ sets.
+ The triple 
+\begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
+\end_inset
+
+ is appropriately called a 
+\emph on
+measure space
+\emph default
+.
+ If 
+\begin_inset Formula $\mu\left(\Omega\right)<\infty$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
+\end_inset
+
+ is called a 
+\emph on
+finite-measure space
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\Omega',\mathcal{F}',\mu'\right)$
+\end_inset
+
+ be measure spaces.
+ Then a function 
+\begin_inset Formula $X:\Omega\rightarrow\Omega'$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{F}-\mathcal{F}'$
+\end_inset
+
+-
+\emph on
+measurable
+\emph default
+ if for every 
+\begin_inset Formula $U\in\mathcal{F}'$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+X^{-1}\left(U\right)=\left\{ \omega\in\Omega;X\left(\omega\right)\in U\right\} \in\mathcal{F}
+\]
+
+\end_inset
+
+I.e.
+ pre-images of measurable sets in the 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\emph default
+ associated with the codomain are measurable sets in the 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\emph default
+ associated with the domain.
+ For a measure space 
+\begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
+\end_inset
+
+ an 
+\begin_inset Formula $\mathcal{F}-\mathcal{B}$
+\end_inset
+
+-
+\emph on
+measurable
+\emph default
+ function 
+\begin_inset Formula $X:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+ is such that 
+\begin_inset Formula 
+\[
+X^{-1}\left(U\right)=\left\{ \omega\in\Omega;X\left(\omega\right)\in U\right\} \in\mathcal{F}
+\]
+
+\end_inset
+
+for all open sets 
+\begin_inset Formula $U\in\mathbb{R}^{n}$
+\end_inset
+
+(this is because the open sets are the elements of the Borel 
+\emph on
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\emph default
+).
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+The 
+\emph on
+abstract
+\emph default
+ 
+\emph on
+Lebesgue integral
+\emph default
+ of an 
+\begin_inset Formula $\mathcal{F}-\mathcal{F}'$
+\end_inset
+
+-measurable function 
+\begin_inset Formula $X:\Omega\rightarrow\Omega'$
+\end_inset
+
+ on the set 
+\begin_inset Formula $A\in\mathcal{F}'$
+\end_inset
+
+ is denoted 
+\begin_inset Formula 
+\[
+\int_{A}Xd\mu\left(\omega\right)
+\]
+
+\end_inset
+
+and roughly corresponds to inverse of the typical understanding of the Riemann
+ integral: fix a value 
+\begin_inset Formula $X=x$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in A$
+\end_inset
+
+, find the inverse image 
+\begin_inset Formula $X^{-1}\left(x\right)=\left\{ \omega:X\left(\omega\right)=x\right\} $
+\end_inset
+
+, and find the measure/mass of that set 
+\begin_inset Formula $\mu\left(X^{-1}\left(x\right)\right)=\mu\left(\left\{ \omega:X\left(\omega\right)=x\right\} \right)$
+\end_inset
+
+ under the measure on the domain 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ The 
+\emph on
+Lebesgue integral
+\emph default
+ is an abstract Lebesgue integral with 
+\begin_inset Formula $\mu=\lambda$
+\end_inset
+
+ the Lebesgue measure
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The unique translation invariant measure that assigns 
+\begin_inset Formula $\lambda\left(\left[a,b\right)\right)=b-a$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+If 
+\begin_inset Formula $\mu\left(\Omega\right)=1$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
+\end_inset
+
+ is called a 
+\emph on
+probability space
+\emph default
+ and convention is to write 
+\begin_inset Formula $\mu$
+\end_inset
+
+ as 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Furthermore 
+\begin_inset Formula $P$
+\end_inset
+
+ should be such that for 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{i}\cap A_{j}=\emptyset$
+\end_inset
+
+ for 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $P\left(\bigcup_{i=1}^{\infty}A_{i}\right)=\sum_{i=1}^{n}P\left(A_{i}\right)$
+\end_inset
+
+, called countable additivity.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+For 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\mathbb{R}^{n},\mathcal{B}^{n}\right)$
+\end_inset
+
+ a 
+\emph on
+random variable
+\emph default
+ is an 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+-
+\emph on
+measurable
+\emph default
+ function 
+\begin_inset Formula $X:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Every random variable induces a probability measure 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, defined by
+\begin_inset Formula 
+\[
+\mu_{X}\left(A\right)=P\left(X^{-1}\left(A\right)\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $B\in\mathcal{B}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{B}^{n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra over 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is called the 
+\emph on
+distribution 
+\emph default
+or
+\emph on
+ law of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+If 
+\begin_inset Formula $\int_{\Omega}\left|X\left(\omega\right)\right|dP\left(\omega\right)<\infty$
+\end_inset
+
+ then the 
+\emph on
+expectation 
+\emph default
+is defined as 
+\begin_inset Formula 
+\[
+E\left[X\right]:=\int_{\Omega}X\left(\omega\right)dP\left(\omega\right)=\int_{\mathbb{R}^{n}}xd\mu_{X}\left(x\right)
+\]
+
+\end_inset
+
+And generally if 
+\begin_inset Formula $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(\mathcal{B}^{n},\mathcal{B}\right)$
+\end_inset
+
+ measurable and 
+\begin_inset Formula $\int_{\Omega}\left|f\left(X\left(\omega\right)\right)\right|dP\left(\omega\right)<\infty$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+E\left[f\left(X\right)\right]:=\int_{\Omega}f\left(X\left(\omega\right)\right)dP\left(\omega\right)=\int_{\mathbb{R}^{n}}f\left(x\right)d\mu_{X}\left(x\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Stochastic Processes
+\end_layout
+
+\begin_layout Definition
+A stochastic process is a parameterized collection of random variables 
+\begin_inset Formula $\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ with each 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ defined on the same measure space (probability space) 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{t}:\Omega\rightarrow\mathbb{R}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The parameter space for 
+\begin_inset Formula $T$
+\end_inset
+
+ and the range of 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ determine taxonomical classifiction of the process with each possibly being
+ either continuous or discrete.
+\end_layout
+
+\begin_layout Standard
+For fixed 
+\begin_inset Formula $t$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X_{t}\left(\omega\right)$
+\end_inset
+
+ is just a plain random variable 
+\begin_inset Formula 
+\[
+X_{t}\left(\omega\right):\Omega\rightarrow\mathbb{R}^{n}
+\]
+
+\end_inset
+
+and for fixed 
+\begin_inset Formula $\omega$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X_{\omega}\left(t\right)$
+\end_inset
+
+ is just a function on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{\omega}\left(t\right):T\rightarrow\mathbb{R}^{n}
+\]
+
+\end_inset
+
+called a 
+\emph on
+path
+\emph default
+.
+ Note that this gives a way to identify a function with each 
+\begin_inset Formula $\omega\in\Omega$
+\end_inset
+
+ and therefore we may treat 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ as a subset of 
+\begin_inset Formula $\tilde{\Omega}\subset\left(\mathbb{R}^{n}\right)^{T}$
+\end_inset
+
+ the space of 
+\emph on
+all 
+\emph default
+functions from 
+\begin_inset Formula $T$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+The 
+\emph on
+finite-dimensional distributions
+\emph default
+ 
+\begin_inset Formula $\left\{ \mu_{t_{1},\dots,t_{k}};k\in\mathbb{N},t_{i}\in T\right\} $
+\end_inset
+
+ of the process 
+\begin_inset Formula $X=\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ are the multidimensional distributions of the random vectors 
+\begin_inset Formula $\left(X_{t_{1}},\dots,X_{t_{k}}\right)$
+\end_inset
+
+ for any set 
+\begin_inset Formula $\left\{ t_{1},\dots,t_{k}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+These distributions determine many, but not all (and in some important cases
+ crucially), properties the process 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Conversely given a family of distributions 
+\begin_inset Formula $\left\{ \mu_{t_{1},\dots,t_{k}};k\in\mathbb{N},t_{i}\in T\right\} $
+\end_inset
+
+(all finite product distributions indexed by all finite subsets of 
+\begin_inset Formula $T$
+\end_inset
+
+) on 
+\begin_inset Formula $\underbrace{\mathbb{R}^{n}\times\cdots\times\mathbb{R}^{n}}_{k}$
+\end_inset
+
+ one can construct a stochastic process 
+\begin_inset Formula $X=\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ which will have 
+\begin_inset Formula $\left\{ \mu_{t_{1},\dots,t_{k}};k\in\mathbb{N},t_{i}\in T\right\} $
+\end_inset
+
+ as its finite-dimensional distributions given some 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ consistency conditions.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:Kolmogorov's-extension-theorem."
+
+\end_inset
+
+Kolmogorov's extension theorem.
+ For all finite tuples 
+\begin_inset Formula $\left(t_{1},\dots,t_{k}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $t_{i}\in T$
+\end_inset
+
+ let 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ be the probability measures defined above.
+ If 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ satisfy the consistency conditions
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Invariance under permutation: for all permutations 
+\begin_inset Formula $p$
+\end_inset
+
+ on 
+\begin_inset Formula $\left\{ 1,2,\dots,k\right\} $
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mu_{p\left(t_{1}\right),\dots,p\left(t_{k}\right)}\left(F_{1}\times\cdots\times F_{k}\right)=\mu_{t_{1},\dots,t_{k}}\left(F_{p^{-1}\left(1\right)}\times\cdots\times F_{p^{-1}\left(k\right)}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Invariance under marginalization over probability 1 events: 
+\begin_inset Formula 
+\[
+\mu_{t_{1},\dots,t_{k}}\left(F_{1}\times\cdots\times F_{k}\right)=\mu_{t_{1},\dots,t_{k},t_{k+1},\dots,t_{k+m}}\left(F_{1}\times\cdots\times F_{k}\times\underbrace{\mathbb{R}^{n}\times\cdots\times\mathbb{R}^{n}}_{m}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+then there exists a probability space 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ and a stochastic process 
+\begin_inset Formula $X=\left\{ X_{t}\right\} _{t\in T}$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ as its finite-dimensional distributions.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Kolmogorov's extension is actually an if and only if: any stochastic process
+ trivially has these properties.
+ The power of Kolmogorov extension is that the typical workflow is to define
+ a stochastic process by its finite-dimensional distributions and that is
+ completely sufficient
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Kolmogorov extension guarnatees there is a correspondent probability space
+ and process.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Brownian Motion
+\end_layout
+
+\begin_layout Standard
+Envisage the same one dimensional random walk on 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+, with spatial increments 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ and time increments 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ be Bernoulli random variables iid with 
+\begin_inset Formula 
+\[
+P\left(X_{i}=0\right)=\frac{1}{2}\:\text{and}\:P\left(X_{i}=1\right)=\frac{1}{2}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\text{Var}\left(X_{i}\right)=\frac{1}{4}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula 
+\[
+S_{n}\coloneqq\sum_{i=1}^{n}X_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is the number of steps to the right (not the distance but just the number
+ of steps).
+ Note that by iid 
+\begin_inset Formula 
+\[
+ES_{n}=\sum_{i=1}^{n}EX_{i}=\frac{n}{2}
+\]
+
+\end_inset
+
+Then let 
+\begin_inset Formula 
+\[
+X\left(n\Delta t\right)\coloneqq\underbrace{S_{n}\Delta x}_{\text{positive dist}}-\underbrace{\left(n-S_{n}\right)\left(-\Delta x\right)}_{\text{negative dist}}=\left(2S_{n}-n\right)\Delta x
+\]
+
+\end_inset
+
+i.e.
+ the position of the particle at time 
+\begin_inset Formula $n\Delta t$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{eqnarray*}
+\text{Var}\left(X\left(n\Delta t\right)\right) & = & \text{Var}\left(\left(2S_{n}-n\right)\Delta x\right)\\
+ & = & \left(\Delta x\right)^{2}\text{Var}\left(\left(2S_{n}-n\right)\right)\\
+ & = & 4\left(\Delta x\right)^{2}\text{Var}\left(S_{n}\right)\\
+ & = & 4\left(\Delta x\right)^{2}\text{Var}\left(\sum_{i=1}^{n}X_{i}\right)\\
+ & \text{} & X_{i}\text{ iid }\Rightarrow\\
+ & = & 4\left(\Delta x\right)^{2}n\text{Var}\left(X_{i}\right)\\
+ & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
+\end{eqnarray*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{eqnarray*}
+X\left(n\Delta t\right) & = & \left(2S_{n}-n\right)\Delta x\\
+ & = & \sqrt{n}\Delta x\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left(\frac{\left(\sum_{i=1}^{n}X_{i}\right)-\frac{n}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}n\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{n/4}}\right)\\
+ & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
+\end{eqnarray*}
+
+\end_inset
+
+The CLT
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Actually a weaker theorem called Laplace-De Moivre.
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula 
+\[
+\sqrt{Dt}\left[\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]=\sqrt{Dt}\left[\left(\frac{\bar{X}-EX_{i}}{\sigma_{X}/\sqrt{n}}\right)\right]
+\]
+
+\end_inset
+
+implies that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
+ & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
+ & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
+\end{eqnarray*}
+
+\end_inset
+
+So again 
+\begin_inset Formula $X\left(t\right)\sim\text{n}\left(0,Dt\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+Fix 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+ and define 
+\begin_inset Formula 
+\[
+p\left(t,x,y\right)=\frac{1}{\sqrt{2\pi t}}e^{-\frac{\left(x-y\right)^{2}}{2t}}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $0<t_{1}<t_{2}<\cdots<t_{n}$
+\end_inset
+
+ define a measure 
+\begin_inset Formula $\mu_{t_{1},\dots,t_{k}}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{k}$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\begin{eqnarray*}
+\mu_{t_{1},\dots,t_{k}}\left(F_{1}\times\cdots\times F_{k}\right) & = & \int_{F_{1}}\cdots\int_{F_{k}}p\left(t_{1},x,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\\
+ &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}
+\end{eqnarray*}
+
+\end_inset
+
+for 
+\begin_inset Formula $F_{i}\subset\mathbb{R}$
+\end_inset
+
+ with the convention that 
+\begin_inset Formula $p\left(0,x,y\right)dx=\delta_{x}\left(y\right)$
+\end_inset
+
+ a unit point mass at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Extend to all finite sequences 
+\begin_inset Formula $t_{1},\dots,t_{n}$
+\end_inset
+
+ and since 
+\begin_inset Formula $\int_{F_{i}}p\left(t,x,y\right)dx=1$
+\end_inset
+
+ Kolmogorov's Extension theorem says there exists 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P^{x}\right)$
+\end_inset
+
+ and a stochastic process 
+\begin_inset Formula $B=\left\{ B_{t}\right\} _{t\geq0}$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ such that the finite-dimensional distributions of 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ are 
+\begin_inset Formula 
+\begin{eqnarray}
+P^{x}\left(B_{t_{1}}\in F_{1}\times\cdots\times B_{t_{k}}\in F_{k}\right) & = & \int_{F_{1}}\cdots\int_{F_{k}}p\left(t_{1},x,x_{1}\right)p\left(t_{2}-t_{1},x_{1},x_{2}\right)\cdots\label{eq:brownianmotiondef}\\
+ &  & p\left(t_{k}-t_{k-1},x_{k-1},x_{k}\right)dx_{1}dx_{2}\cdots dx_{k}\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+Such a process
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+One that has these finite-dimensional distributions.
+\end_layout
+
+\end_inset
+
+ is called a Brownian motion.
+ The paths of a Brownian motion happen to be almost surely continuous
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Wiener's theorem.
+\end_layout
+
+\end_inset
+
+ (but nowhere differentiable!) so with each 
+\begin_inset Formula $\omega\in\Omega$
+\end_inset
+
+ you can identify a continuous function 
+\begin_inset Formula $t\rightarrow B_{t}\left(\omega\right)$
+\end_inset
+
+ from 
+\begin_inset Formula $\left[0,\infty\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Thus a perspective on Brownian motion is that it's the space of continuous
+ functions 
+\begin_inset Formula $C\left(\left[0,\infty\right),\mathbb{R}\right)$
+\end_inset
+
+ equipped with the measures 
+\begin_inset Formula $P^{x}$
+\end_inset
+
+ above
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Which as discussed are product measures on a function space.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Here are some of the basic properties of Brownian motion as defined by defn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:brownianmotiondef"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+Fix the range of 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ to be 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $x=x_{0}$
+\end_inset
+
+ 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ is a 
+\emph on
+Gaussian process, 
+\emph default
+i.e.
+ for all 
+\begin_inset Formula $0<t_{1}<t_{2}<\cdots<t_{k}$
+\end_inset
+
+ the random vector 
+\begin_inset Formula $Z=\left(B_{t_{1}},\dots,B_{t_{k}}\right)\in\left(\mathbb{R}\right)^{k}$
+\end_inset
+
+ is distributed multinormal.
+ That means there exists a mean vector 
+\begin_inset Formula $\mathbf{m}\in\left(\mathbb{R}\right)^{k}$
+\end_inset
+
+ and covariance matrix 
+\begin_inset Formula $\Sigma=\left[c_{jm}\right]\in\mathbb{R}^{k\times k}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{eqnarray*}
+E^{x}\left[\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]\right] & \coloneqq & \int\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]dP^{x}\\
+ & = & \frac{1}{\sqrt[k]{2\pi t_{1}\left(t_{2}-t_{1}\right)\cdots\left(t_{k}-t_{k-1}\right)}}\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]e^{-\frac{\left(x_{1}-x_{0}\right)^{2}}{2t_{1}}}e^{-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}}\cdots\\
+ &  & e^{-\frac{\left(x_{k-1}-x_{k}\right)^{2}}{2\left(t_{k}-t_{k-1}\right)}}dx_{1}dx_{2}\cdots dx_{k}
+\end{eqnarray*}
+
+\end_inset
+
+Therefore in general
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+With 
+\begin_inset Formula $B_{t_{j}}=\mathbf{B}_{t_{j}}\in\mathbb{R}^{n}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ the finite dimensional distributions of a Brownian motion are multivariate
+ Gaussians with mean vector 
+\begin_inset Formula $\mathbf{m}=\mathbf{x_{0}}$
+\end_inset
+
+ and covariance matrix 
+\begin_inset Formula 
+\[
+\boldsymbol{\Sigma}=\begin{pmatrix}t_{1}I_{n} & t_{1}I_{n} & \cdots & t_{1}I_{n}\\
+t_{1}I_{n} & t_{2}I_{n} & \cdots & t_{2}I_{n}\\
+\vdots & \vdots &  & \vdots\\
+t_{1}I_{n} & t_{2}I_{n} & \cdots & t_{k}I_{n}
+\end{pmatrix}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the dimension of each 
+\begin_inset Formula $B_{t_{j}}$
+\end_inset
+
+.
+ Therefore, since each component of a multivariate Gaussian is itself Gaussian
+ with means and covariances being a function of 
+\begin_inset Formula $\mathbf{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{\Sigma}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+E^{x}\left[B_{t_{j}}\right]=\mathbf{m}_{t_{j}}=x_{0}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\text{Var}\left(B_{t_{j}}\right)=E^{x}\left[\left(B_{t_{j}}-x_{0}\right)^{2}\right]=t_{j}\text{Tr}\left(I_{n}\right)=nt_{j}
+\]
+
+\end_inset
+
+and because of the cascading
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Just think about running your finger down and across the covariance matrix.
+\end_layout
+
+\end_inset
+
+ shape of the covariance matrix 
+\begin_inset Formula 
+\[
+\text{Cov}\left(B_{t_{j}},B_{t_{i}}\right)=E^{x}\left[\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)\right]=\text{Tr}\left(I_{n}\right)\min\left(t_{j},t_{i}\right)=n\min\left(t_{j},t_{i}\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{eqnarray}
+E^{x}\left[\left(B_{t_{j}}-B_{t_{i}}\right)^{2}\right] & = & E^{x}\left[\left(B_{t_{j}}-x_{0}\right)^{2}-2\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)+\left(B_{t_{i}}-x_{0}\right)^{2}\right]\nonumber \\
+ & = & \text{Tr}\left(I_{n}\right)\left(t_{j}-2\min\left(t_{j},t_{i}\right)+t_{i}\right)\nonumber \\
+ & = & \begin{cases}
+n\left(t_{j}-t_{i}\right) & \text{if }t_{j}\geq t_{i}\\
+n\left(t_{i}-t_{j}\right) & \text{otherwise}
+\end{cases}\label{eq:infqvar}\\
+ & = & n\left|t_{i}-t_{j}\right|
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ has independent increments, i.e.
+ for 
+\begin_inset Formula $0\leq t_{1}\leq t_{2}\leq\cdots\leq t_{k}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+B_{t_{1}},B_{t_{2}}-B_{t_{1}},\dots,B_{t_{k}}-B_{t_{k-1}}
+\]
+
+\end_inset
+
+are independent random variables.
+ This follows from the fact that normal RVs are independent if their covariance
+ is zero and for 
+\begin_inset Formula $t_{i}<t_{j}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray}
+E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\right] & = & E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\right]\nonumber \\
+ & = & E^{x}\left[B_{t_{j}}B_{t_{i}}-B_{t_{j}}B_{t_{i-1}}-B_{t_{j-1}}B_{t_{i}}+B_{t_{j-1}}B_{t_{i-1}}\right]\nonumber \\
+ & = & E^{x}\left[\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)-\left(B_{t_{j}}-x_{0}\right)\left(B_{t_{i-1}}-x_{0}\right)-\left(B_{t_{j-1}}-x_{0}\right)\left(B_{t_{i}}-x_{0}\right)+\left(B_{t_{j-1}}-x_{0}\right)\left(B_{t_{i-1}}-x_{0}\right)\right]\label{eq:indepincre}\\
+ & = & n\left(t_{i}-t_{i-1}-t_{i}+t_{i-1}\right)=0\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ 
+\series default
+\emph on
+is
+\emph default
+ almost surely continuous but we need a little theory to prove it:
+\end_layout
+
+\begin_deeper
+\begin_layout Definition*
+Suppose 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{t}$
+\end_inset
+
+ are stochastic processes on 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ is a 
+\emph on
+modification
+\emph default
+ of 
+\begin_inset Formula $Y_{t}$
+\end_inset
+
+ if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+for all 
+\begin_inset Formula $t$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula 
+\[
+P\left(\left\{ \omega;X_{t}\left(\omega\right)=Y_{t}\left(\omega\right)\right\} \right)=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{t}$
+\end_inset
+
+ have the same law
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The same finite-dimensional distributions
+\end_layout
+
+\end_inset
+
+ and as such are essentially the same, but might have different path properties.
+ 
+\end_layout
+
+\begin_layout Theorem
+
+\series bold
+Kolmogorov's continuity theorem
+\series default
+.
+ Suppse for the process 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ there exist 
+\begin_inset Formula $\alpha,\beta,D$
+\end_inset
+
+ for all 
+\begin_inset Formula $T$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula 
+\[
+E\left[\left|X_{t}-X_{s}\right|^{\alpha}\right]\leq D\left|t-s\right|^{1+\beta}\quad\text{for all }0\leq s,t\leq T
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Corollary
+With 
+\begin_inset Formula $\alpha=4,\beta=1,D=n\left(n+2\right)$
+\end_inset
+
+ Brownian motion 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ satisfies the criterion for Kolmogorov's continuity theorem and therefore
+ there exists a version 
+\begin_inset Formula $Y_{t}$
+\end_inset
+
+ with continuous paths.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Ito Integral
+\end_layout
+
+\begin_layout Standard
+Return to the original problem of finding a reasonable interpretation of
+ 
+\begin_inset Formula 
+\[
+\frac{dx}{dt}=b\left(t,x\right)+\sigma\left(t,x\right)\cdot\text{"noise"}
+\]
+
+\end_inset
+
+It turns out it's reasonable to model 
+\begin_inset Quotes eld
+\end_inset
+
+noise
+\begin_inset Quotes erd
+\end_inset
+
+ as some stochastic process 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\begin{equation}
+\frac{dX_{t}}{dt}=b\left(t,X_{t}\right)+\sigma\left(t,X_{t}\right)\cdot B_{t}\label{eq:sde}
+\end{equation}
+
+\end_inset
+
+This will be shorthand for 
+\begin_inset Formula 
+\begin{equation}
+X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(s,X_{s}\right)dB_{s}\text{"}\label{eq:stochint}
+\end{equation}
+
+\end_inset
+
+as soon as I define 
+\begin_inset Formula $\text{"}\int_{0}^{t}\sigma\left(s,X_{s}\right)dB_{s}\text{"}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $0\leq Q<T$
+\end_inset
+
+ and start by defining 
+\begin_inset Formula 
+\[
+\int_{Q}^{T}\left\{ \cdot\right\} dB_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+for simple processes
+\begin_inset Formula 
+\[
+S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}a_{j}\left(\omega\right)1_{\left[j\cdot2^{-n},\left(j+1\right)\cdot2^{-n}\right)}\left(t\right)
+\]
+
+\end_inset
+
+You can imagine that 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is defined for all 
+\begin_inset Formula $t\in\left[0,\infty\right)$
+\end_inset
+
+ by defining the 
+\begin_inset Formula $a_{j}=0$
+\end_inset
+
+ appropriately.
+ So basically chop the real line into intervals of length 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+ and define 
+\begin_inset Formula $S_{t}\left(\omega\right)$
+\end_inset
+
+ piecewise constant on that mesh.
+ Then define 
+\begin_inset Formula 
+\[
+\int_{Q}^{T}S_{n}\left(s,\omega\right)dB_{s}\coloneqq\sum_{j=0}^{\infty}a_{j}\left(\omega\right)\left[B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+s_{j}^{\left(n\right)}\coloneqq\begin{cases}
+\frac{j}{2^{n}} & \text{if }Q\leq j\cdot2^{-n}\leq T\\
+Q & \text{if }j\cdot2^{-n}<Q\\
+T & \text{if }j\cdot2^{-n}>T
+\end{cases}
+\]
+
+\end_inset
+
+which just truncates the sum outside of 
+\begin_inset Formula $\left[Q,T\right]$
+\end_inset
+
+ since for 
+\begin_inset Formula $s_{j}^{\left(n\right)}>T$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+B_{s_{j+1}^{\left(n\right)}}\left(\omega\right)-B_{s_{j}^{\left(n\right)}}\left(\omega\right)=B_{T}\left(\omega\right)-B_{T}\left(\omega\right)=0
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $T-Q=m\cdot2^{-n}$
+\end_inset
+
+ for some 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+around the edges
+\begin_inset Quotes erd
+\end_inset
+
+ the error becomes neglibile as 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:spaceofitofunctions"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+ be the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra that 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ is adapted to and 
+\begin_inset Formula $\mathcal{F}=\cup_{t\geq0}\mathcal{F}_{t}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\mathcal{V}=\mathcal{V}\left(Q,T\right)$
+\end_inset
+
+ to be the class of processes
+\begin_inset Formula 
+\[
+g\left(t,\omega\right):\left[0,\infty\right)\times\Omega\rightarrow\mathbb{R}
+\]
+
+\end_inset
+
+such that
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\left(t,\omega\right)\rightarrow g\left(t,\omega\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{B}\times\mathcal{F}$
+\end_inset
+
+-measurable, where 
+\begin_inset Formula $\mathcal{B}=\sigma\left(\left[0,\infty\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g\left(t,\omega\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{F}_{t}$
+\end_inset
+
+-adapted.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]<\infty$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:squareintegralprocessspace"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Parts 1 and 2 of defn.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "def:itointegrable"
+
+\end_inset
+
+ are fairly obvious but part 3 is mysterious.
+ Firstly what does it even mean? The integral in argument of the expectation
+ is a mundane Lebesgue integral and it integrates out the 
+\begin_inset Formula $t$
+\end_inset
+
+ dependence in 
+\begin_inset Formula $g\left(t,\omega\right)$
+\end_inset
+
+.
+ So
+\begin_inset Formula 
+\[
+X\left(\omega\right)=\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds
+\]
+
+\end_inset
+
+and hence the integral is just a mundane random variable and 
+\begin_inset Formula $E\left[X\right]$
+\end_inset
+
+ is the expectation of that random variable.
+ In fact 
+\begin_inset Formula 
+\begin{equation}
+\left\Vert g\right\Vert _{\mathcal{V}}=\sqrt{\left|E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]\right|}\label{eq:itonorm}
+\end{equation}
+
+\end_inset
+
+is a semi-norm and is complete
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Cauche sequences converge.
+\end_layout
+
+\end_inset
+
+.
+ Let's call this norm the 
+\emph on
+ito norm.
+ 
+\emph default
+This property is necessary for the 
+\emph on
+Ito
+\emph default
+ 
+\emph on
+isometry
+\emph default
+ which will be discussed shortly.
+\end_layout
+
+\begin_layout Standard
+We will define the integral on simple processes and then use the next lemma
+ to extend it.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:itoisometry"
+
+\end_inset
+
+(Ito isometry) If 
+\begin_inset Formula $S$
+\end_inset
+
+ is simple and bounded then
+\begin_inset Formula 
+\[
+E\left[\left(\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\right)^{2}\right]=E\left[\int_{Q}^{T}\left(S\left(s,\omega\right)\right)^{2}ds\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:(The-Ito-integral)."
+
+\end_inset
+
+Let 
+\begin_inset Formula $f\in\mathcal{V}\left(Q,T\right)$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $S_{n}\in\mathcal{V}$
+\end_inset
+
+ according to the approximation such that 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}E\left[\int_{Q}^{T}\left(f-S_{n}\right)^{2}ds\right]=\lim_{n\rightarrow\infty}\left\Vert f-S_{n}\right\Vert =0
+\]
+
+\end_inset
+
+Then the 
+\emph on
+Ito integral
+\emph default
+ is defined
+\begin_inset Formula 
+\[
+\mathcal{I}\left[f\right]\left(\omega\right)\coloneqq\int_{Q}^{T}f\left(s,\omega\right)dB_{s}\coloneqq\lim_{n\rightarrow\infty}\int_{Q}^{T}S_{n}\left(s,\omega\right)dB_{s}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Alright finally we can actually do an ito integral!
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:firstitointegrals"
+
+\end_inset
+
+Assume 
+\begin_inset Formula $B_{0}=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\frac{1}{2}B_{t}^{2}-\frac{t}{2}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula $t_{j}^{\left(n\right)}=j\cdot2^{-n}$
+\end_inset
+
+ and put 
+\begin_inset Formula $S_{n}\left(t,\omega\right)=\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\left(\omega\right)1_{\left[t_{j}^{\left(n\right)},t_{j+1}^{\left(n\right)}\right)}\left(t\right)$
+\end_inset
+
+.
+ Then we need to prove convergence in ito norm:
+\begin_inset Formula 
+\begin{eqnarray}
+E\left[\int_{0}^{t}\left(S_{n}-B_{s}\right)^{2}ds\right] & = & E\left[\sum_{j=0}^{\infty}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}\left(B_{t_{j}^{\left(n\right)}}-B_{s}\right)^{2}ds\right]\label{eq:firstintstep1}\\
+ & = & \sum_{j=0}^{\infty}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}E\left[\left(B_{t_{j}^{\left(n\right)}}-B_{s}\right)^{2}\right]ds\label{eq:firstintstep2}\\
+ & = & \sum_{j=0}^{\infty}\int_{t_{j}^{\left(n\right)}}^{t_{j+1}^{\left(n\right)}}\left(s-t_{j}^{\left(n\right)}\right)ds=\frac{1}{2}\sum_{j=0}^{\infty}\left(t_{j+1}^{\left(n\right)}-t_{j}^{\left(n\right)}\right)^{2}\label{eq:firstintstep3}
+\end{eqnarray}
+
+\end_inset
+
+where in line 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:firstintstep1"
+
+\end_inset
+
+ we use the indicator in the definiton of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ and in line 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:firstintstep3"
+
+\end_inset
+
+ we use that since the limits of integration for 
+\begin_inset Formula $s$
+\end_inset
+
+ are 
+\begin_inset Formula $t_{j}^{\left(n\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{j+1}^{\left(n\right)}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $s>t_{j}^{\left(n\right)}$
+\end_inset
+
+.
+ Finally as the mesh is refined 
+\begin_inset Formula $\frac{1}{2}\sum_{j=0}^{\infty}\left(t_{j+1}^{\left(n\right)}-t_{j}^{\left(n\right)}\right)^{2}\rightarrow0$
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\lim_{n\rightarrow\infty}\int_{0}^{t}S_{n}dB_{s}=\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula $\Delta B_{t_{j}^{\left(n\right)}}\coloneqq B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta\left(B_{t_{j}^{\left(n\right)}}^{2}\right)=B_{t_{j+1}^{\left(n\right)}}^{2}-B_{t_{j}^{\left(n\right)}}^{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}
+\]
+
+\end_inset
+
+So we have to evaluate this limit.
+ First
+\begin_inset Formula 
+\begin{eqnarray*}
+\Delta\left(B_{t_{j}^{\left(n\right)}}^{2}\right) & = & \left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)^{2}+2B_{t_{j}^{\left(n\right)}}\left(B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}\right)\\
+ & = & \left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}+2B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}
+\end{eqnarray*}
+
+\end_inset
+
+The last term in this derivation is what we're interested in because it
+ appears in out limit.
+ Now since 
+\begin_inset Formula $B_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+B_{t}^{2}=\sum_{j=0}^{\infty}\Delta\left(B_{t_{j}^{\left(n\right)}}^{2}\right)=\sum_{j=0}^{\infty}\left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}+2\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}=\frac{1}{2}B_{t}^{2}-\frac{1}{2}\sum_{j=0}^{\infty}\left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}
+\]
+
+\end_inset
+
+Finally by unbounded variation (thm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:unboundvar"
+
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}\left(\Delta B_{t_{j}^{\left(n\right)}}\right)^{2}=t
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\sum_{j=0}^{\infty}B_{t_{j}^{\left(n\right)}}\Delta B_{t_{j}^{\left(n\right)}}=\frac{1}{2}B_{t}^{2}-\frac{1}{2}t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note the extra 
+\begin_inset Formula $\frac{1}{2}t$
+\end_inset
+
+ term, exhibiting the difference from the standard integration rule of 
+\begin_inset Formula $\int x=\frac{1}{2}x^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Ito's Formula
+\end_layout
+
+\begin_layout Standard
+To derive a calculus of stochastic integrals we take a counterintuitive
+ approach.
+ Note that 
+\begin_inset Formula 
+\[
+B_{t}=\int_{0}^{t}dB_{s}
+\]
+
+\end_inset
+
+and recall that example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:firstitointegrals"
+
+\end_inset
+
+ shows 
+\begin_inset Formula 
+\[
+\int_{0}^{t}B_{s}dB_{s}=\frac{1}{2}B_{t}^{2}-\frac{1}{2}t
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+\frac{1}{2}B_{t}^{2}=\int_{0}^{t}B_{s}dB_{s}-\frac{1}{2}t
+\]
+
+\end_inset
+
+So the function 
+\begin_inset Formula $g\left(x\right)=\frac{1}{2}x^{2}$
+\end_inset
+
+ does not map the Ito integral 
+\begin_inset Formula $x=B_{t}=\int_{0}^{t}dB_{s}$
+\end_inset
+
+ into another Ito integral; in fact it's the combination of two integrals
+\begin_inset Formula 
+\begin{equation}
+\frac{1}{2}B_{t}^{2}=\int_{0}^{t}B_{s}dB_{s}-\int_{0}^{t}\frac{1}{2}ds\label{eq:easyint}
+\end{equation}
+
+\end_inset
+
+Hence define the class of 
+\emph on
+Ito processes
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+ be a 1-D Brownian motion on 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+.
+ An Ito process (or 
+\emph on
+stochastic integral
+\emph default
+) is a stochastic process 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
+\end_inset
+
+ of the form 
+\begin_inset Formula 
+\begin{equation}
+X_{t}=X_{0}+\int_{0}^{t}u\left(s,\omega\right)ds+\int_{0}^{t}v\left(s,\omega\right)dB_{s}\label{itoprocess}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $v\in\mathcal{V}\left(0,T\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+P\left(\int_{0}^{t}v^{2}ds<\infty\text{ for }t\geq0\right)=1
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+P\left(\int_{0}^{t}\left|u\right|ds<\infty\text{ for }t\geq0\right)=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This class of processes is closed under smooth maps.
+ Eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "itoprocess"
+
+\end_inset
+
+ is more typically written in 
+\begin_inset Quotes eld
+\end_inset
+
+differential form
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+dX_{t}=udt+vdB_{t}\label{eq:difformitoprocess}
+\end{equation}
+
+\end_inset
+
+For example eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:easyint"
+
+\end_inset
+
+ is written
+\begin_inset Formula 
+\[
+d\left(\frac{1}{2}B_{t}^{2}\right)=\frac{1}{2}dt+B_{t}dB_{t}
+\]
+
+\end_inset
+
+The main tool in stochastic calculus is the Ito formula
+\end_layout
+
+\begin_layout Theorem
+(Ito formula) Let 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ be an ito process and 
+\begin_inset Formula $g\left(t,x\right)\in C^{2}\left(\left[0,\infty\right)\times\mathbb{R}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+Y_{t}=g\left(t,X_{t}\right)
+\]
+
+\end_inset
+
+is again an ito process and 
+\begin_inset Formula 
+\begin{equation}
+dY_{t}=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dX_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(dX_{t}\right)^{2}\label{eq:itosformula}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\left(dX_{t}\right)^{2}=\left(dX_{t}\right)\cdot\left(dX_{t}\right)$
+\end_inset
+
+ is computed according to
+\begin_inset Formula 
+\[
+dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+SDEs
+\end_layout
+
+\begin_layout Standard
+Finally let's solve some god damn stochastic differential equations! 
+\end_layout
+
+\begin_layout Example
+The population growth model from Ch.
+ 1 is
+\begin_inset Formula 
+\[
+\frac{dN_{t}}{dt}=a_{t}N_{t}=\left(r_{t}+\alpha W_{t}\right)N_{t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ is white-noise.
+ The Ito interpretation of this model is
+\begin_inset Formula 
+\[
+dN_{t}=\left(r_{t}N_{t}dt+\alpha N_{t}dB_{t}\right)
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\begin{equation}
+\frac{dN_{t}}{N_{t}}=r_{t}dt+\alpha dB_{t}\label{eq:sde-1}
+\end{equation}
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\int_{0}^{t}\frac{dN_{s}}{N_{s}}=rt+\alpha B_{t}
+\]
+
+\end_inset
+
+To evaluate the left-hand side use the Ito formula with 
+\begin_inset Formula $g\left(t,X_{t}\right)=\ln\left(X_{t}\right)$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{eqnarray*}
+d\left(\log N_{t}\right) & = & \frac{1}{N_{t}}dN_{t}+\frac{1}{2}\left(-\frac{1}{N_{t}^{2}}\right)\left(dN_{t}\right)^{2}\\
+ & = & \frac{dN_{t}}{N_{t}}-\frac{1}{2N_{t}^{2}}\alpha^{2}N_{t}dt=\frac{dN_{t}}{N_{t}}-\frac{1}{2}\alpha^{2}dt
+\end{eqnarray*}
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\[
+\frac{dN_{t}}{N_{t}}=d\left(\ln N_{t}\right)+\frac{1}{2}\alpha^{2}dt
+\]
+
+\end_inset
+
+and using eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sde-1"
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray*}
+\int_{0}^{t}\left(d\left(\ln N_{s}\right)+\frac{1}{2}\alpha^{2}ds\right) & = & rt+\alpha B_{t}\\
+\ln N_{t}-\ln N_{0}+\frac{1}{2}\alpha^{2}t & = & rt+\alpha B_{t}
+\end{eqnarray*}
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+N_{t}=N_{0}e^{\left(r-\frac{1}{2}\alpha^{2}\right)t+\alpha B_{t}}
+\]
+
+\end_inset
+
+which is called 
+\emph on
+geometric Brownian motion
+\emph default
+.
+ Sanity check: on average the noise should filter out and this result should
+ agree with the deterministic population growth ODE
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{dn}{dt}=an$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+E\left[N_{t}\right]=E\left[N_{0}\right]e^{rt}
+\]
+
+\end_inset
+
+as if there were no noise term in the driving force 
+\begin_inset Formula $r_{t}dt+\alpha dB_{t}$
+\end_inset
+
+.
+ Indeed this is true.
+ Let 
+\begin_inset Formula $Y_{t}=e^{\alpha B_{t}}$
+\end_inset
+
+ and apply Ito's formula
+\begin_inset Formula 
+\[
+dY_{t}=\frac{1}{2}\alpha^{2}e^{\alpha B_{t}}dt+\alpha e^{\alpha B_{t}}dB_{t}
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+Y_{t}-Y_{0}=\frac{1}{2}\alpha^{2}\int_{0}^{t}e^{\alpha B_{s}}ds+\alpha\int_{0}^{t}e^{\alpha B_{s}}dB_{s}
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $E\left[\int_{0}^{t}e^{\alpha B_{s}}dB_{s}\right]=0$
+\end_inset
+
+ by property 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:prop3ito"
+
+\end_inset
+
+ or Ito integral we have that 
+\begin_inset Formula 
+\[
+E\left[Y_{t}-Y_{0}\right]=\frac{1}{2}\alpha^{2}\int_{0}^{t}E\left[e^{\alpha B_{s}}\right]ds
+\]
+
+\end_inset
+
+i.e.
+\begin_inset Formula 
+\[
+\frac{d}{dt}E\left[Y_{t}\right]=\frac{1}{2}\alpha^{2}E\left[Y_{t}\right],E\left[Y_{0}\right]=1
+\]
+
+\end_inset
+
+which necessarily implies
+\begin_inset Formula 
+\[
+E\left[Y_{t}\right]=e^{\frac{1}{2}\alpha^{2}t}
+\]
+
+\end_inset
+
+which itself implies that 
+\begin_inset Formula 
+\[
+E\left[N_{t}\right]=E\left[N_{0}\right]e^{rt}
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula 
+\[
+N_{t}=N_{0}e^{\left(r-\frac{1}{2}\alpha^{2}\right)t+\alpha B_{t}}=N_{0}e^{\left(r-\frac{1}{2}\alpha^{2}\right)t}Y_{t}
+\]
+
+\end_inset
+
+and by independence 
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left[N_{t}\right] & = & E\left[N_{0}\right]e^{\left(r-\frac{1}{2}\alpha^{2}\right)t}E\left[Y_{t}\right]\\
+ & = & E\left[N_{0}\right]e^{\left(r-\frac{1}{2}\alpha^{2}\right)t}e^{\frac{1}{2}\alpha^{2}t}\\
+ & = & E\left[N_{0}\right]e^{rt}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout SpecialSection
+Option pricing
+\end_layout
+
+\begin_layout Definition
+An 
+\emph on
+option 
+\emph default
+is a type of 
+\emph on
+derivative
+\emph default
+ that is a contract the affords the right but not the obligation to take
+ a position against an 
+\emph on
+underlying 
+\emph default
+(stock, commodity, equity).
+ The derivative derives its value from the value of the underlying.
+ A 
+\emph on
+call option
+\emph default
+ provides the right to buy and a 
+\emph on
+put option
+\emph default
+ provides the right to sell the underlying at the 
+\emph on
+strike price
+\emph default
+.
+ Exercising the option is called 
+\emph on
+writing the contract
+\emph default
+.
+ A European call option is which can only be written at the time of expiration.
+ An American option can be exercised at any time up to, and including, the
+ time of expiry.
+\end_layout
+
+\begin_layout Example
+Here is an example of using call options to hedge
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename hedge.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hedging
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So how much should you pay for such a right (either call or put)? Alternatively
+ how much can you charge if you're selling such a contract? The basic idea
+ in figuring out how to price such a contract is to assume that no arbitrages
+ exist in the market and use delta hedging (fractional shares) to construct
+ a perfect hedge (one that eliminates all risk from a portfolio).
+ Since the portfolio is riskless it must earn interest at the risk-free
+ rate.
+ From this you can calculate the value of the portfolio at expiration and
+ work backwards to see how much the option should have the buyer.
+\end_layout
+
+\begin_layout Subsection
+Black-Scholes
+\end_layout
+
+\begin_layout Standard
+The Black-Scholes model was constructed by Fischer Black and Myron Scholes
+ in 1973, based on work by Robert Merton.
+ Merton and Scholes won the Nobel in Economics in 97 (Black was ineligible
+ having died in 95).
+ It forms the basis for much more complicated investment strategies used
+ by hedge funds.
+\end_layout
+
+\begin_layout Standard
+The Black–Scholes model assumes that the market consists of at least one
+ risky asset, usually called the stock, and one riskless asset, usually
+ called the money market, cash, or bond.
+ The assumptions on market are
+\end_layout
+
+\begin_layout Itemize
+There is no arbitrage opportunity (i.e., there is no way to make a riskless
+ profit).
+\end_layout
+
+\begin_layout Itemize
+It is possible to borrow and lend any amount, even fractional, of cash at
+ the riskless rate.
+\end_layout
+
+\begin_layout Itemize
+It is possible to buy and sell any amount, even fractional, of the stock.
+\end_layout
+
+\begin_layout Itemize
+The above transactions do not incur any fees or costs (i.e., frictionless
+ market).
+\end_layout
+
+\begin_layout Standard
+The assumptions on the assets are
+\end_layout
+
+\begin_layout Itemize
+The rate of return on the riskless asset is constant and thus called the
+ risk-free interest rate.
+\end_layout
+
+\begin_layout Itemize
+The instantaneous log returns of the stock price is a geometric Brownian
+ motion, and we will assume its drift and volatility is constant.
+\end_layout
+
+\begin_layout Itemize
+The stock does not pay a dividend.
+\end_layout
+
+\begin_layout Standard
+Per the model assumptions above, the price of the underlying asset (typically
+ a stock) follows a geometric Brownian motion.
+ That is
+\begin_inset Formula 
+\[
+\frac{dS}{S}=\mu dt+\sigma dB
+\]
+
+\end_inset
+
+We now construct a portfolio 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ consisting of some number of European call options on the stock and some
+ number of shares which is a perfect hedge (riskless).
+ First the price of the call option 
+\begin_inset Formula $V$
+\end_inset
+
+ is a stochastic process and clearly a function of 
+\begin_inset Formula $S_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ So by Ito's lemma
+\begin_inset Formula 
+\[
+dV=\left(\mu S\frac{\partial V}{\partial S}+\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}\right)dt+\sigma S\frac{\partial V}{\partial S}dB
+\]
+
+\end_inset
+
+Now delta-hedging portfolio that turns out to be a perfect hedge is to sell
+ 1 option and buy 
+\begin_inset Formula $\frac{\partial V}{\partial S}$
+\end_inset
+
+ shares of the stock.
+ It will become clear in a moment why this is the portfolio that turns out
+ to be a perfect hedge.
+ The value of this portfolio/holdings is 
+\begin_inset Formula 
+\[
+\Pi=-1\times V+\frac{\partial V}{\partial S}S
+\]
+
+\end_inset
+
+Why? First note that we're on the sell side of the option.
+ Meaning we have sold someone else the right to sell us something, at the
+ expiration of the option.
+ What happens if the price of the stock exceeds the strike price of the
+ option? Then it wouldn't make sense for the buyer to sell us shares of
+ the stock at the strike price because they would be losing money.
+ Alternatively if the price of the stock is below the strike price then
+ it does make sense for the buyer to sell us shares of the underlying.
+ This is the value 
+\begin_inset Formula $V$
+\end_inset
+
+ of the option and to us it's a loss (because end up paying above market
+ rate for the shares).
+ Because we're on the sell side of the option (we sold a call option).
+ On the otherhand the value of our holdings in the underlying 
+\begin_inset Formula $\left(\frac{\partial V}{\partial S}S\right)$
+\end_inset
+
+ is a gain (since the shares simply have their face value).
+ 
+\end_layout
+
+\begin_layout Standard
+Discretizing the differentials in
+\begin_inset Formula $\Pi$
+\end_inset
+
+: from 
+\begin_inset Formula $t$
+\end_inset
+
+ to 
+\begin_inset Formula $t+\Delta t$
+\end_inset
+
+ the net change in the value of the portfolio is
+\begin_inset Formula 
+\[
+\Delta\Pi=-\Delta V+\frac{\partial V}{\partial S}\Delta S
+\]
+
+\end_inset
+
+Similarly discretising the process that defines 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+\Delta S & = & \mu S\Delta t+\sigma S\Delta B\\
+\Delta V & = & \left(\mu S\frac{\partial V}{\partial S}+\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}\right)\Delta t+\sigma S\frac{\partial V}{\partial S}\Delta B
+\end{eqnarray*}
+
+\end_inset
+
+Note ratios of differentials haven't been discretised because _______.
+ Now substituting into 
+\begin_inset Formula $\Delta\Pi$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\Pi=\left(-\frac{\partial V}{\partial t}-\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}\right)\Delta t
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\Delta B$
+\end_inset
+
+ dependence drops out.
+ The portfolio is now riskless (independent of the stochastic volatility
+ in the market).
+ Therefore the rate of return must be the risk-free rate 
+\begin_inset Formula $r$
+\end_inset
+
+ (otherwise there would be arbitrage in the market because you could earn
+ money on this riskless portfolio at a greater rate than the risk-free rate).
+ Hence 
+\begin_inset Formula 
+\[
+\Delta\Pi=r\Pi\Delta t
+\]
+
+\end_inset
+
+If this is unrecognizable think 
+\begin_inset Formula 
+\[
+\frac{d\Pi}{dt}=r\Pi
+\]
+
+\end_inset
+
+i.e.
+ continuously compounding interest.
+ Equating the two expressions for 
+\begin_inset Formula $\Delta\Pi$
+\end_inset
+
+ we get 
+\begin_inset Formula 
+\[
+\left(-\frac{\partial V}{\partial t}-\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}\right)\Delta t=r\left(-V+S\frac{\partial V}{\partial S}\right)\Delta t
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+\frac{\partial V}{\partial t}+\frac{1}{2}\sigma^{2}S^{2}\frac{\partial^{2}V}{\partial S^{2}}+rS\frac{\partial V}{\partial S}-rV=0
+\]
+
+\end_inset
+
+the Black-Scholes equation.
+ Solving this PDE with boundary conditions 
+\begin_inset Formula 
+\[
+\begin{align}V(0,t) & =0\text{ for all }t\\
+V(S,t) & \rightarrow S\text{ as }S\rightarrow\infty\\
+V(S,T) & =\max\left\{ S-K,0\right\} 
+\end{align}
+\]
+
+\end_inset
+
+gives the value of the option for all 
+\begin_inset Formula $t\leq T$
+\end_inset
+
+.
+ To actually solve recognize it as a Cauchy-Euler equation which can be
+ transformed into a diffusion equation with the change of variables
+\begin_inset Formula 
+\begin{eqnarray*}
+\tau & = & T-t\\
+u & = & Ve^{r\tau}\\
+x & = & \ln\left(\frac{S}{K}\right)+\left(r-\frac{1}{2}\sigma^{2}\right)\tau
+\end{eqnarray*}
+
+\end_inset
+
+to produce
+\begin_inset Formula 
+\[
+\frac{\partial u}{\partial\tau}=\frac{1}{2}\sigma^{2}\frac{\partial^{2}u}{\partial x^{2}}
+\]
+
+\end_inset
+
+with boundary condition 
+\begin_inset Formula $V\left(S,T\right)=\max\left\{ S-K,0\right\} $
+\end_inset
+
+ becoming initial condition
+\begin_inset Formula 
+\[
+u\left(x,0\right)=u_{0}\left(x\right)=K\left(e^{\max\left\{ x,0\right\} }-1\right)
+\]
+
+\end_inset
+
+The standard solution is by method of Green's functions
+\begin_inset Formula 
+\begin{eqnarray*}
+u\left(x,\tau\right) & = & \frac{1}{\sigma\sqrt{2\pi\tau}}\int_{-\infty}^{\infty}u_{0}\left(y\right)e^{-\frac{\left(x-y\right)^{2}}{2\sigma^{2}\tau}}dy\\
+ & = & Ke^{x+\frac{1}{2}\sigma^{2}\tau}\Phi\left(d_{1}\right)-K\mathcal{\Phi}\left(d_{2}\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is the CDF of a standard normal and 
+\begin_inset Formula 
+\[
+\begin{align}d_{1} & =\frac{1}{\sigma\sqrt{\tau}}\left[\left(x+\frac{1}{2}\sigma^{2}\tau\right)+\frac{1}{2}\sigma^{2}\tau\right]\\
+d_{2} & =\frac{1}{\sigma\sqrt{\tau}}\left[\left(x+\frac{1}{2}\sigma^{2}\tau\right)-\frac{1}{2}\sigma^{2}\tau\right]
+\end{align}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
