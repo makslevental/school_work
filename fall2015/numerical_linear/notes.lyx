@@ -1,0 +1,754 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+MAD6406 Notes
+\end_layout
+
+\begin_layout Section
+SVD
+\end_layout
+
+\begin_layout Standard
+The image of the unit sphere under any full rank 
+\begin_inset Formula $m\times n$
+\end_inset
+
+ linear mapping (matrix) is a hyperellipse, i.e.
+ fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:hyperellipse"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename svd.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+SVD of a 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ matrix.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:hyperellipse"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The vectors 
+\begin_inset Formula $\left\{ \sigma_{i}u_{i}\right\} $
+\end_inset
+
+ are the 
+\emph on
+principal semiaxes
+\emph default
+ of the ellipse, where 
+\begin_inset Formula $\left\{ u_{j}\right\} $
+\end_inset
+
+ are unit length.
+ The mapping 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+Av_{j}=\sigma_{j}u_{j}=u_{j}\sigma_{j}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+AV=\hat{U}\hat{\Sigma}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+A=\hat{U}\hat{\Sigma}V^{-1}
+\]
+
+\end_inset
+
+The vectors 
+\begin_inset Formula $\left\{ v_{j}\right\} $
+\end_inset
+
+ are called the 
+\emph on
+right singular 
+\emph default
+vectors
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Because they appear on the right of 
+\begin_inset Formula $\hat{\Sigma}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+, the vectors 
+\begin_inset Formula $\left\{ u_{j}\right\} $
+\end_inset
+
+ are called the 
+\emph on
+left singular
+\emph default
+ vectors
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Because they appear on the left of 
+\begin_inset Formula $\hat{\Sigma}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The values 
+\begin_inset Formula $\left\{ \sigma_{j}\right\} $
+\end_inset
+
+ are called the 
+\emph on
+singular values
+\emph default
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $n$
+\end_inset
+
+ right singular vectors (because by construction this is the highest dimensional
+ sphere we can map with 
+\begin_inset Formula $A$
+\end_inset
+
+) and there are 
+\begin_inset Formula $n$
+\end_inset
+
+ left singular vectors (since 
+\begin_inset Formula $A$
+\end_inset
+
+ has rull rank the 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional sphere in 
+\begin_inset Formula $\mathbb{C}^{n}$
+\end_inset
+
+ maps to an 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional hyperellipse in a subspace of 
+\begin_inset Formula $\mathbb{C}^{m}$
+\end_inset
+
+).
+ The right singular vectors are 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional (because 
+\begin_inset Formula $A$
+\end_inset
+
+ has 
+\begin_inset Formula $n$
+\end_inset
+
+ columns) but the left singular vectors are 
+\begin_inset Formula $m$
+\end_inset
+
+ dimensional.
+ The basic scheme appears in fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SVD-schematically"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename svd2.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+SVD schematically
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SVD-schematically"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+This actually the 
+\emph on
+reduce SVD
+\emph default
+.
+ Note that unless 
+\begin_inset Formula $m=n$
+\end_inset
+
+ the left singular vectors don't form a basis for 
+\begin_inset Formula $\mathbb{C}^{m}$
+\end_inset
+
+.
+ To get the full SVD complete the set 
+\begin_inset Formula $\left\{ u_{j}\right\} $
+\end_inset
+
+ to get 
+\begin_inset Formula $m$
+\end_inset
+
+ vectors, so that it's an orthonormal basis for 
+\begin_inset Formula $\mathbb{C}^{m}$
+\end_inset
+
+.
+ This makes 
+\begin_inset Formula $\hat{U}\rightarrow eU$
+\end_inset
+
+ a square 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ matrix.
+ Since the additional 
+\begin_inset Formula $\left\{ u_{j}\right\} _{n<j\leq m}$
+\end_inset
+
+ don't participate in the transformation of the 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional sphere so 
+\begin_inset Formula $\hat{\Sigma}\rightarrow\Sigma$
+\end_inset
+
+ where the bottom 
+\begin_inset Formula $m-n$
+\end_inset
+
+ rows are all zeros.
+ If 
+\begin_inset Formula $A$
+\end_inset
+
+ is full rank nothing about 
+\begin_inset Formula $V^{-1}$
+\end_inset
+
+ changes.
+ Otherwise just extend extend 
+\begin_inset Formula $V$
+\end_inset
+
+ as well, i.e.
+ suppose 
+\begin_inset Formula $\text{rank}\left(A\right)=r$
+\end_inset
+
+ then complete 
+\begin_inset Formula $\left\{ v_{j}\right\} _{1\leq j\leq r}$
+\end_inset
+
+ with 
+\begin_inset Formula $\left\{ v_{j}\right\} _{r<j\leq n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{\Sigma}\rightarrow\Sigma$
+\end_inset
+
+ where the bottom 
+\begin_inset Formula $m-r$
+\end_inset
+
+ rows are all zeros.
+ So en toto 
+\begin_inset Formula $U$
+\end_inset
+
+ is an orthonormal basis for the codomain of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $V$
+\end_inset
+
+ is an orthonormal basis for the domain of 
+\begin_inset Formula $A$
+\end_inset
+
+, and 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ effects the mapping from one basis to the other.
+ Also the entries in 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ are sorted in decreasing order, i.e.
+ 
+\begin_inset Formula $\sigma_{1}\geq\sigma_{2}\geq\cdots\geq\sigma_{p}\geq0$
+\end_inset
+
+ where 
+\begin_inset Formula $p=\min\left(n,m\right)$
+\end_inset
+
+, i.e.
+ the diagonal is across the main diagonal of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+Existence and Uniqueness of SVD.
+\end_layout
+
+\begin_layout Proof
+Set 
+\begin_inset Formula $\sigma_{1}=\left\Vert A\right\Vert _{2}$
+\end_inset
+
+, i.e.
+ the largest action of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ This makes sens e since if 
+\begin_inset Formula $A$
+\end_inset
+
+ maps the unit circle to an ellipse by morphing the axes then its largest
+ action should be the length of the major axis.
+ In fact 
+\begin_inset Formula $\left\Vert A\right\Vert _{2}$
+\end_inset
+
+ might as well be defined as 
+\begin_inset Formula $\sup_{x\in S}\left\Vert Ax\right\Vert _{2}$
+\end_inset
+
+ where the left-hand side if the vector 2-norm.
+ Now 
+\begin_inset Formula $f\left(x\right)=\left\Vert Ax\right\Vert _{2}$
+\end_inset
+
+ is clearly a continuous function and 
+\begin_inset Formula $S$
+\end_inset
+
+ is a compact subspace of 
+\begin_inset Formula $\mathbb{C}^{n}$
+\end_inset
+
+.
+ Therefore by the extreme-value theorem 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ attains a local maximum on 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ the vector at which 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is maximum.
+ Then 
+\begin_inset Formula $\left\Vert Av_{1}\right\Vert _{2}=\sigma_{1}$
+\end_inset
+
+ by definition of the matrix 2-norm.
+ Then there exists 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert u_{1}\right\Vert _{2}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $Av_{1}=\sigma_{1}u_{1}$
+\end_inset
+
+.
+ This is since 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ is simply the image of 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $u_{1}=0$
+\end_inset
+
+ then 
+\begin_inset Formula $\sigma_{1}=0$
+\end_inset
+
+ and there's no problem.
+ Extend 
+\begin_inset Formula $v_{1},u_{1}$
+\end_inset
+
+ to orthonormal bases 
+\begin_inset Formula $\left\{ v_{j}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ u_{j}\right\} $
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+U_{1}^{-1}AV_{1}=\Sigma_{1}=\begin{pmatrix}\sigma_{1} & w^{*}\\
+0 & B
+\end{pmatrix}
+\]
+
+\end_inset
+
+where 0 is a column vector of dimension 
+\begin_inset Formula $m-1$
+\end_inset
+
+, 
+\begin_inset Formula $w^{*}$
+\end_inset
+
+ is a row vector of dimension 
+\begin_inset Formula $n-1$
+\end_inset
+
+, and 
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(m-1\right)\times\left(n-1\right)$
+\end_inset
+
+ dimensional.
+ Then
+\begin_inset Formula 
+\[
+\left\Vert \begin{pmatrix}\sigma_{1} & w^{*}\\
+0 & B
+\end{pmatrix}\begin{pmatrix}\sigma_{1}\\
+w
+\end{pmatrix}\right\Vert _{2}\geq\sigma_{1}^{2}+w^{*}w=\sqrt{\sigma_{1}^{2}+w^{*}w}\left\Vert \begin{pmatrix}\sigma_{1}\\
+w
+\end{pmatrix}\right\Vert _{2}
+\]
+
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula 
+\[
+\left\Vert \begin{pmatrix}\sigma_{1} & w^{*}\\
+0 & B
+\end{pmatrix}\begin{pmatrix}\sigma_{1}\\
+w
+\end{pmatrix}\right\Vert _{2}\geq\sqrt{\sigma_{1}^{2}+w^{*}w}\left\Vert \begin{pmatrix}\sigma_{1}\\
+w
+\end{pmatrix}\right\Vert _{2}
+\]
+
+\end_inset
+
+implying 
+\begin_inset Formula $\left\Vert \Sigma_{1}\right\Vert _{2}\geq\sqrt{\sigma_{1}^{2}+w^{*}w}$
+\end_inset
+
+.
+ But 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ are unitary and therefore preserve the matrix 2-norm so 
+\begin_inset Formula $\left\Vert \Sigma_{1}\right\Vert _{2}=\left\Vert A\right\Vert _{2}=\sigma_{1}$
+\end_inset
+
+ and hence 
+\begin_inset Formula $w=0$
+\end_inset
+
+.
+ 
+\series bold
+This comprises the base case for induction
+\series default
+.
+ If 
+\begin_inset Formula $n=1$
+\end_inset
+
+ or 
+\begin_inset Formula $m=1$
+\end_inset
+
+ then we are done.
+ Why? because then 
+\begin_inset Formula $B=0$
+\end_inset
+
+.
+ Otherwise, 
+\begin_inset Formula $B$
+\end_inset
+
+ constitutes the action of 
+\begin_inset Formula $A$
+\end_inset
+
+ on the subspace orthogonal to 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+.
+ Why? Because the vectors 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ are all orthogonal so any other scaling happens in directions orthogonal
+ to 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+.
+ By the induction hypothesis 
+\begin_inset Formula $B$
+\end_inset
+
+ has an SVD, i.e.
+ 
+\begin_inset Formula $B=U_{2}\Sigma_{2}V_{2}^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{eqnarray*}
+A & = & U_{1}\begin{pmatrix}1 & 0\\
+0 & U_{2}
+\end{pmatrix}\begin{pmatrix}\sigma_{1} & 0\\
+0 & \Sigma_{2}
+\end{pmatrix}\begin{pmatrix}1 & 0\\
+0 & V_{2}
+\end{pmatrix}^{-1}V_{1}^{-1}\\
+ & = & \begin{pmatrix}U_{1} & 0\\
+0 & U_{1}U_{2}
+\end{pmatrix}\begin{pmatrix}\sigma_{1} & 0\\
+0 & \Sigma_{2}
+\end{pmatrix}\begin{pmatrix}1 & 0\\
+0 & V_{2}^{-1}V_{1}^{-1}
+\end{pmatrix}
+\end{eqnarray*}
+
+\end_inset
+
+is an SVD of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ For uniqueness, the geometric argument is simple: if the semiaxis lengths
+ of a hyperellipse are distinct, then the semiaxes themselves are determined
+ by the geometry, up to signs.
+ I.e.
+ there's only one hyperellipse for any set of semiaxis lengths.
+\end_layout
+
+\end_body
+\end_document

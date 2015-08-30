@@ -383,13 +383,142 @@ status open
 
 \begin_layout Plain Layout
 
-[3.3]
+[3.5]
 \end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $\left\Vert A\right\Vert _{F}=\left\Vert uv^{*}\right\Vert _{F}=\left\Vert u\right\Vert _{F}\left\Vert v\right\Vert _{F}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Since the Frobenius norm of a vector is just the 2-norm so it distributes
+ over the product.
+ To wit if 
+\begin_inset Formula $A=uv^{*}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left\Vert A\right\Vert _{F}=\left\Vert uv^{*}\right\Vert _{F}=\sqrt{\sum_{i,j}\left|u_{j}v_{i}^{*}\right|^{2}}=\sqrt{\sum_{j}\left|u_{j}\right|^{2}\sum_{i}\left|v_{i}^{*}\right|^{2}}=\sqrt{\sum_{j}\left|u_{j}\right|^{2}}\sqrt{\sum_{i}\left|v_{i}^{*}\right|^{2}}
+\]
+
+\end_inset
+
+Now since 
+\begin_inset Formula $\left|x^{*}\right|=\left|x\right|$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sqrt{\sum_{j}\left|u_{j}\right|^{2}}\sqrt{\sum_{i}\left|v_{i}^{*}\right|^{2}}=\sqrt{\sum_{j}\left|u_{j}\right|^{2}}\sqrt{\sum_{i}\left|v_{i}\right|^{2}}=\left\Vert u\right\Vert _{F}\left\Vert v\right\Vert _{F}
+\]
 
 \end_inset
 
 
 \end_layout
 
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.4]
+\end_layout
+
+\end_inset
+
+Claim: It is 
+\series bold
+false 
+\series default
+that 
+\begin_inset Formula $A,B\in\mathbb{C}^{m}$
+\end_inset
+
+ are unitary equivalent iff they have the same singular values.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $-A$
+\end_inset
+
+ have the same singular values: let 
+\begin_inset Formula $A=U\Sigma V^{-1}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+-A=U\Sigma\left(-V^{-1}\right)
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $-A$
+\end_inset
+
+ cannot be unitarily equivalent since then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\det\left(A\right) & = & \det\left(Q\left(-A\right)Q^{-1}\right)\\
+ & = & \det\left(Q\right)\det\left(-A\right)\det\left(Q^{-1}\right)\\
+ & = & \det\left(Q\right)\det\left(Q^{-1}\right)\det\left(-A\right)\\
+ & = & \left(-1\right)^{m}\det\left(A\right)
+\end{eqnarray*}
+
+\end_inset
+
+which is only true if 
+\begin_inset Formula $m$
+\end_inset
+
+ is even or 
+\begin_inset Formula $\det\left(A\right)=0$
+\end_inset
+
+.
+ Alternatively 
+\begin_inset Formula 
+\begin{eqnarray*}
+\text{tr}\left(A\right) & = & \text{tr}\left(Q\left(-A\right)Q^{-1}\right)\\
+ & = & \text{tr}\left(Q^{-1}Q\left(-A\right)\right)\\
+ & = & -\text{tr}\left(A\right)
+\end{eqnarray*}
+
+\end_inset
+
+which is only true if 
+\begin_inset Formula $\left(A\right)_{ii}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
