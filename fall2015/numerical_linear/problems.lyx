@@ -520,5 +520,158 @@ which is only true if
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.4]
+\end_layout
+
+\end_inset
+
+Claim: If 
+\begin_inset Formula $A\in\mathbb{C}^{m\times m}$
+\end_inset
+
+, with 
+\begin_inset Formula $A=U\Sigma V^{-1}=U\Sigma V^{\dagger}$
+\end_inset
+
+, and 
+\begin_inset Formula 
+\[
+B=\begin{pmatrix}0 & A^{\dagger}\\
+A & 0
+\end{pmatrix}
+\]
+
+\end_inset
+
+then there exists 
+\begin_inset Formula $X,\Lambda$
+\end_inset
+
+ such that 
+\begin_inset Formula $B=X\Lambda X^{-1}$
+\end_inset
+
+ is an eigenvalue decomposition.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+First note that 
+\begin_inset Formula $A^{\dagger}=\left(U\Sigma V^{\dagger}\right)^{\dagger}=V\Sigma^{\dagger}U^{\dagger}=V\Sigma U^{\dagger}$
+\end_inset
+
+ since singular values are always real
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Thm.
+ 4.1 in Trefethen: 
+\begin_inset Formula $\sigma_{1}=\left\Vert A\right\Vert $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A$
+\end_inset
+
+ is square 
+\begin_inset Formula 
+\begin{eqnarray*}
+A^{\dagger}u_{j} & = & \sigma_{j}v_{j}\\
+Av_{j} & = & \sigma_{j}u_{j}
+\end{eqnarray*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula 
+\[
+B\begin{pmatrix}u_{j}\\
+v_{j}
+\end{pmatrix}=\begin{pmatrix}0 & A^{\dagger}\\
+A & 0
+\end{pmatrix}\begin{pmatrix}v_{j}\\
+u_{j}
+\end{pmatrix}=\begin{pmatrix}A^{\dagger}u_{j}\\
+Av_{j}
+\end{pmatrix}=\begin{pmatrix}\sigma_{j}v_{j}\\
+\sigma_{j}u_{j}
+\end{pmatrix}=\sigma_{j}\begin{pmatrix}v_{j}\\
+u_{j}
+\end{pmatrix}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+B\begin{pmatrix}v_{j}\\
+-u_{j}
+\end{pmatrix}=\begin{pmatrix}0 & A^{\dagger}\\
+A & 0
+\end{pmatrix}\begin{pmatrix}v_{j}\\
+-u_{j}
+\end{pmatrix}=\begin{pmatrix}-A^{\dagger}u_{j}\\
+Av_{j}
+\end{pmatrix}=\begin{pmatrix}-\sigma_{j}v_{j}\\
+\sigma_{j}u_{j}
+\end{pmatrix}=-\sigma_{j}\begin{pmatrix}v_{j}\\
+-u_{j}
+\end{pmatrix}
+\]
+
+\end_inset
+
+Therefore the eigenvectors of 
+\begin_inset Formula $B$
+\end_inset
+
+ are 
+\begin_inset Formula $\left\{ \begin{pmatrix}v_{1}\\
+u_{1}
+\end{pmatrix},\dots,\begin{pmatrix}v_{m}\\
+u_{m}
+\end{pmatrix},\begin{pmatrix}v_{1}\\
+-u_{1}
+\end{pmatrix},\dots,\begin{pmatrix}v_{m}\\
+-u_{m}
+\end{pmatrix}\right\} $
+\end_inset
+
+ with eigenvalues 
+\begin_inset Formula $\left\{ \sigma_{1},\dots,\sigma_{m},-\sigma_{1},\dots,-\sigma_{m}\right\} $
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\[
+B=\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}\begin{pmatrix}\Sigma & 0\\
+0 & -\Sigma
+\end{pmatrix}\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

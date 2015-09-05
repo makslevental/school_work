@@ -114,7 +114,7 @@ today
 \begin_layout Enumerate
 
 \series bold
-Minimizing Skiing distance
+Minimizing skiing distance
 \end_layout
 
 \begin_deeper
@@ -234,7 +234,7 @@ Without loss of generality orient the rectangle with sides parallel to the
 \end_inset
 
  and the coordinates of the northeast vertex of the rectange 
-\begin_inset Formula $c_{0}\coloneqq\left(c_{x},c_{y}\right)$
+\begin_inset Formula $c\coloneqq\left(c_{x},c_{y}\right)$
 \end_inset
 
 .
@@ -288,6 +288,203 @@ i.e.
 \begin_inset Formula 
 \[
 \min_{\left(x_{i},y_{i},c_{x},c_{y}\right)}f\left(c_{x},c_{y}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Hub-and-spoke design
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+This is purely a combinatorics problem: there are 
+\begin_inset Formula $_{9}C_{3}=84$
+\end_inset
+
+ choices for which of the 9 cities are the hub cities.
+ Let 
+\begin_inset Formula 
+\[
+H=\left\{ \left(h_{i},h_{j},h_{k}\right):i\neq j\neq k\text{ but }i,j,k=1,\dots,9\text{ and up to permutation}\right\} 
+\]
+
+\end_inset
+
+the set of distinct combinations of hub choices.
+ For each choice of hub tuple the total miles traveled by all passengers
+ is the minimum of a direct flight to the destination, and a flight to the
+ nearest hub, a flight to hub nearest to the destination, and the flight
+ to the destintation.
+ Let 
+\begin_inset Formula $s\left(i\right)$
+\end_inset
+
+ be the coordinates of city of departure, 
+\begin_inset Formula $s\left(j\right)$
+\end_inset
+
+ be the destination city, 
+\begin_inset Formula $s\left(h\left(i\right)\right)$
+\end_inset
+
+ be the coordinates of the hub nearest to the city of departure, 
+\begin_inset Formula $s\left(h\left(j\right)\right)$
+\end_inset
+
+ be the coordinates of the hub nearest to the destination city, and 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+ be the total travel distance between 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+x_{ij}=\min\left\{ \left\Vert s\left(i\right)-s\left(h\left(i\right)\right)\right\Vert +\frac{1}{2}\left\Vert s\left(h\left(i\right)\right)-s\left(h\left(j\right)\right)\right\Vert +\left\Vert s\left(h\left(j\right)\right)-s\left(j\right)\right\Vert ,\left\Vert s\left(i\right)-s\left(j\right)\right\Vert \right\} 
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $a_{ij}$
+\end_inset
+
+ be the quantity of passengers traveling from city 
+\begin_inset Formula $i$
+\end_inset
+
+ to city 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Then total daily travel is
+\begin_inset Formula 
+\begin{align*}
+T & =\sum_{i,j}a_{ij}x_{ij}
+\end{align*}
+
+\end_inset
+
+All 
+\begin_inset Formula $a_{ij},s\left(i\right)$
+\end_inset
+
+ are data and the only (discrete) variable is the tuple 
+\begin_inset Formula $\left(h_{i},h_{j},h_{k}\right)$
+\end_inset
+
+.
+ So the optimization problem is 
+\begin_inset Formula 
+\[
+\min_{\left(h_{i},h_{j},h_{k}\right)\in H}T
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Supply chain problem
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The data are the sales goals by month 
+\begin_inset Formula $g_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j=1,\dots,6$
+\end_inset
+
+, the production costs by month 
+\begin_inset Formula $c_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j=1,\dots,6$
+\end_inset
+
+, the initial inventory 
+\begin_inset Formula $i_{0}=100$
+\end_inset
+
+, the final inventory 
+\begin_inset Formula $i_{7}=100$
+\end_inset
+
+, the storage cost of 
+\begin_inset Formula $c=4\$/\text{unit}$
+\end_inset
+
+, the production prior to month 1 
+\begin_inset Formula $p_{0}=1000$
+\end_inset
+
+, and the regularization weights 
+\begin_inset Formula $w_{s}=w_{i}=w_{p}=1$
+\end_inset
+
+.
+ The decision variables are the production by month 
+\begin_inset Formula $p_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j=1,\dots,6$
+\end_inset
+
+, the actual sales by month 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j=1,\dots,6$
+\end_inset
+
+, and the inventory leftover by month 
+\begin_inset Formula $i_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j=1,\dots,6$
+\end_inset
+
+.
+ The constraints are that 
+\begin_inset Formula 
+\begin{align*}
+s_{j} & =\max\left\{ g_{j},p_{j}+i_{j-1}\right\} \\
+i_{j} & =\max\left\{ p_{j}+i_{j-1}-g_{j},0\right\} \\
+\left(s_{j},i_{j},p_{j}\right) & \succeq\left(0,0,0\right)
+\end{align*}
+
+\end_inset
+
+Then the optimization problem is 
+\begin_inset Formula 
+\[
+\min_{\left\{ p_{j}\right\} }\left(\sum_{j=1}^{6}\left(p_{j}c_{j}+ci_{j}\right)+w_{s}\left(s_{j}-g_{j}\right)^{2}+w_{i}\left(i_{j}-100\right)^{2}+w_{p}\sum_{j=1}^{6}\left(p_{j}-p_{j-1}\right)^{2}\right)
 \]
 
 \end_inset
