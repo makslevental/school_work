@@ -242,7 +242,7 @@ status open
 
 \end_inset
 
- Claim: For self-adjoint 
+ Claim: for self-adjoint 
 \begin_inset Formula $A\in\mathbb{C}^{m\times m}$
 \end_inset
 
@@ -438,7 +438,7 @@ status open
 
 \end_inset
 
-Claim: It is 
+Claim: it is 
 \series bold
 false 
 \series default
@@ -531,7 +531,7 @@ status open
 
 \end_inset
 
-Claim: If 
+Claim: if 
 \begin_inset Formula $A\in\mathbb{C}^{m\times m}$
 \end_inset
 
@@ -673,5 +673,161 @@ U & -U
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.1]
+\end_layout
+
+\end_inset
+
+Claim: if 
+\begin_inset Formula $P$
+\end_inset
+
+ is an orthogonal projector, the 
+\begin_inset Formula $I-2P$
+\end_inset
+
+ is unitary.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Since 
+\begin_inset Formula $P$
+\end_inset
+
+ is an orthogonal projector 
+\begin_inset Formula $P=P^{\dagger}$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(I-2P\right)^{\dagger}\left(I-2P\right) & = & \left(I^{\dagger}-2P^{\dagger}\right)\left(I-2P\right)\\
+ & = & \left(I-2P\right)\left(I-2P\right)\\
+ & = & I-4P-4P^{2}\\
+ & = & I-4P-4P\\
+ & = & I
+\end{eqnarray*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $P$
+\end_inset
+
+ is unitary.
+ The geometric intuition is that since 
+\begin_inset Formula $I-2P=\left(I-P\right)-P$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left(I-2P\right)x & = & \left(I-P\right)x-Px
+\end{eqnarray*}
+
+\end_inset
+
+Since in general 
+\begin_inset Formula $x=\left(I-P\right)x+Px$
+\end_inset
+
+ it's obvious that 
+\begin_inset Formula $\left(I-P\right)x+\left(-Px\right)$
+\end_inset
+
+ is the reflection of 
+\begin_inset Formula $x$
+\end_inset
+
+ across 
+\begin_inset Formula $\text{range}\left(I-P\right)$
+\end_inset
+
+, which is what unitary transformations are (reflections and/or rotations).
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[7.4]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $P_{1}=\left[x^{\left(1\right)},y^{\left(1\right)}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{2}=\left[x^{\left(2\right)},y^{\left(2\right)}\right]$
+\end_inset
+
+ be matrices.
+ Then compute the full QR factorizations 
+\begin_inset Formula $P_{1}=Q_{1}R_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{2}=Q_{2}R_{2}$
+\end_inset
+
+.
+ The third columns 
+\begin_inset Formula $z^{\left(1\right)},z^{\left(2\right)}$
+\end_inset
+
+of 
+\begin_inset Formula $Q_{1},Q_{2}$
+\end_inset
+
+ are orthogonal to 
+\begin_inset Formula $P^{\left(1\right)},P^{\left(2\right)}$
+\end_inset
+
+ respectively.
+ Then let matrix 
+\begin_inset Formula $P_{3}=\left[z^{\left(1\right)},z^{\left(2\right)}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{3}=Q_{3}R_{3}$
+\end_inset
+
+.
+ Then the third column 
+\begin_inset Formula $z^{\left(3\right)}$
+\end_inset
+
+ of 
+\begin_inset Formula $Q_{3}$
+\end_inset
+
+ is orthogonal to 
+\begin_inset Formula $\left\langle z^{\left(1\right)},z^{\left(2\right)}\right\rangle $
+\end_inset
+
+, i.e.
+ in both 
+\begin_inset Formula $P^{\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $P^{\left(2\right)}$
+\end_inset
+
+.
+\end_layout
+
 \end_body
 \end_document
