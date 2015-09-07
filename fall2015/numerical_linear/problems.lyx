@@ -827,6 +827,108 @@ of
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[8.2]
+\end_layout
+
+\end_inset
+
+QR factorization in MATLAB
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [ Q,R ] = mgs( A )
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+n=size(A,2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+V = A; 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = zeros(n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+Q = zeros(size(A));
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:n
+\end_layout
+
+\begin_layout Plain Layout
+
+    R(i,i) = norm(V(:,i));
+\end_layout
+
+\begin_layout Plain Layout
+
+    Q(:,i) = V(:,i)/R(i,i);
+\end_layout
+
+\begin_layout Plain Layout
+
+    for j=i+1:n
+\end_layout
+
+\begin_layout Plain Layout
+
+        R(i,j) = dot(conj(Q(:,i)),V(:,j));
+\end_layout
+
+\begin_layout Plain Layout
+
+        V(:,j) = V(:,j) - R(i,j)*Q(:,i);
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

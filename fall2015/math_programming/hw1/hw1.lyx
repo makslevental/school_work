@@ -304,7 +304,7 @@ Hub-and-spoke design
 
 \begin_deeper
 \begin_layout Enumerate
-This is purely a combinatorics problem: there are 
+This is purely a combinatorial problem: there are 
 \begin_inset Formula $_{9}C_{3}=84$
 \end_inset
 
@@ -319,9 +319,8 @@ H=\left\{ \left(h_{i},h_{j},h_{k}\right):i\neq j\neq k\text{ but }i,j,k=1,\dots,
 
 the set of distinct combinations of hub choices.
  For each choice of hub tuple the total miles traveled by all passengers
- is the minimum of a direct flight to the destination, and a flight to the
- nearest hub, a flight to hub nearest to the destination, and the flight
- to the destintation.
+ is the distance of a flight to the nearest hub, a flight to hub nearest
+ to the destination, and the flight to the destintation.
  Let 
 \begin_inset Formula $s\left(i\right)$
 \end_inset
@@ -354,7 +353,7 @@ the set of distinct combinations of hub choices.
  Then 
 \begin_inset Formula 
 \[
-x_{ij}=\min\left\{ \left\Vert s\left(i\right)-s\left(h\left(i\right)\right)\right\Vert +\frac{1}{2}\left\Vert s\left(h\left(i\right)\right)-s\left(h\left(j\right)\right)\right\Vert +\left\Vert s\left(h\left(j\right)\right)-s\left(j\right)\right\Vert ,\left\Vert s\left(i\right)-s\left(j\right)\right\Vert \right\} 
+x_{ij}=\left\Vert s\left(i\right)-s\left(h\left(i\right)\right)\right\Vert +\frac{1}{2}\left\Vert s\left(h\left(i\right)\right)-s\left(h\left(j\right)\right)\right\Vert +\left\Vert s\left(h\left(j\right)\right)-s\left(j\right)\right\Vert 
 \]
 
 \end_inset
@@ -484,7 +483,7 @@ i_{j} & =\max\left\{ p_{j}+i_{j-1}-g_{j},0\right\} \\
 Then the optimization problem is 
 \begin_inset Formula 
 \[
-\min_{\left\{ p_{j}\right\} }\left(\sum_{j=1}^{6}\left(p_{j}c_{j}+ci_{j}\right)+w_{s}\left(s_{j}-g_{j}\right)^{2}+w_{i}\left(i_{j}-100\right)^{2}+w_{p}\sum_{j=1}^{6}\left(p_{j}-p_{j-1}\right)^{2}\right)
+\min_{\left\{ p_{j}\right\} }\left(\sum_{j=1}^{6}\left(p_{j}c_{j}+ci_{j}\right)+w_{s}\left(s_{j}-g_{j}\right)^{2}+w_{i}\left(i_{j}-100\right)^{2}+w_{p}\left(p_{j}-p_{j-1}\right)^{2}\right)
 \]
 
 \end_inset
