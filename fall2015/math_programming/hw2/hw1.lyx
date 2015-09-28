@@ -1394,6 +1394,225 @@ By definition every
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $\left\langle \left\langle I\right\rangle \right\rangle =1$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+To wit
+\begin_inset Formula 
+\[
+\left\langle \left\langle I\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ix\right\Vert _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert x\right\Vert _{p}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: For 
+\begin_inset Formula $\left\langle \left\langle A\right\rangle \right\rangle _{2}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{2}=\sqrt{\lambda_{\max}\left(A^{T}A\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Firstly 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}\left\Vert Ax\right\Vert _{2}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}\left(Ax\right)^{T}\left(Ax\right)\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}x^{T}\left(A^{T}A\right)x
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $A^{T}A$
+\end_inset
+
+ is symmetric there exist 
+\begin_inset Formula $P,\Sigma$
+\end_inset
+
+ such that 
+\begin_inset Formula $A^{T}A=P\Sigma P^{T}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}x^{T}\left(P\Sigma P^{T}\right)x\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}\left(P^{T}x\right)^{T}\Sigma\left(P^{T}x\right)
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $y=P^{T}x$
+\end_inset
+
+ and note that 
+\begin_inset Formula $\left\Vert y\right\Vert _{2}=1$
+\end_inset
+
+ since 
+\begin_inset Formula $P^{T}$
+\end_inset
+
+ is an isometry.
+ Further note that 
+\begin_inset Formula $A^{T}A$
+\end_inset
+
+ is positive semi-definite since 
+\begin_inset Formula $x^{T}\left(A^{T}A\right)x=\left\Vert Ax\right\Vert \geq0$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\Sigma_{ii}\geq0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\left(\sqrt{\Sigma}\right)_{ij}=\sqrt{\Sigma_{ij}}$
+\end_inset
+
+ and then
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{y\in\mathbb{R}^{n},\left\Vert y\right\Vert _{2}=1}\left(y^{T}\sqrt{\Sigma}\right)\left(\sqrt{\Sigma}y\right)\\
+ & =\sup_{y\in\mathbb{R}^{n},\left\Vert y\right\Vert _{2}=1}\left(\sqrt{\Sigma}y\right)^{T}\left(\sqrt{\Sigma}y\right)
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\sqrt{\Sigma}$
+\end_inset
+
+ is symmetric.
+ Finally 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{y\in\mathbb{R}^{n},\left\Vert y\right\Vert _{2}=1}\left\Vert \sqrt{\Sigma}y\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+and under the constraint 
+\begin_inset Formula $\left\Vert y\right\Vert _{2}=1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left\Vert \sqrt{\Sigma}y\right\Vert _{2}$
+\end_inset
+
+ is maximized at 
+\begin_inset Formula $y=e_{j}$
+\end_inset
+
+ where 
+\begin_inset Formula $j$
+\end_inset
+
+ corresponds to the 
+\begin_inset Formula $\left(\sqrt{\Sigma}\right)_{jj}$
+\end_inset
+
+ is maximum, i.e.
+ the square root of the maximal eigenvalue of 
+\begin_inset Formula $A^{T}A$
+\end_inset
+
+, and furthermore 
+\begin_inset Formula $\left\Vert \sqrt{\Sigma}e_{j}\right\Vert _{2}=\sqrt{\lambda_{j}}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim:
+\begin_inset Formula $\left\langle \left\langle A\right\rangle \right\rangle _{F}$
+\end_inset
+
+ is not an induced 
+\begin_inset Formula $p$
+\end_inset
+
+-norm.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+By counterexample: take 
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}1 & 0\\
+0 & -1
+\end{pmatrix}
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+A^{T}A=\begin{pmatrix}1 & 0\\
+0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{F}=\sqrt{1+1}=\sqrt{2}
+\]
+
+\end_inset
+
+but 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \begin{pmatrix}1 & 0\\
+0 & -1
+\end{pmatrix}x\right\Vert _{p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \begin{pmatrix}x_{1}\\
+-x_{2}
+\end{pmatrix}\right\Vert _{p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left(\left|x_{1}\right|^{p}+\left|-x_{2}\right|^{p}\right)^{1/p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left(\left|x_{1}\right|^{p}+\left|x_{2}\right|^{p}\right)^{1/p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert x\right\Vert _{p}\\
+ & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_deeper
 \end_body
 \end_document
