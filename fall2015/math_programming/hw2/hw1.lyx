@@ -1,0 +1,1399 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+%\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+ESI 6420 Homework 2 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Time spent: too much but time well spent is never wasted.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.1]
+\end_layout
+
+\end_inset
+
+Claim: For 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+, 
+\begin_inset Formula $B\in\mathbb{R}^{k\times n}$
+\end_inset
+
+ , if for all 
+\begin_inset Formula $x$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $Ax=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $Bx=0$
+\end_inset
+
+ then 
+\begin_inset Formula $B=CA$
+\end_inset
+
+ for some 
+\begin_inset Formula $C\in\mathbb{R}^{k\times m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Assume without loss of generality that and 
+\begin_inset Formula $k\leq m$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $Ax=0\Rightarrow Bx=0$
+\end_inset
+
+.
+ This is equivalent to 
+\begin_inset Formula $\text{null}\left(A\right)\subset\text{null}\left(B\right)$
+\end_inset
+
+.
+ By the fundamental theorem of Linear Algebra and the fact that 
+\begin_inset Formula $\text{row}\left(A\right)\subset\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{row}\left(B\right)\subset\mathbb{R}^{n}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $\text{null}\left(A\right)\cup\text{row}\left(A\right)=\text{null}\left(B\right)\cup\text{row}\left(B\right)=\mathbb{R}^{n}$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\begin{align*}
+\text{null}\left(A\right) & \subset\text{null}\left(B\right)\\
+ & \iff\\
+\overline{\text{null}\left(A\right)} & \subset\overline{\text{null}\left(B\right)}\\
+ & \iff\\
+\text{row}\left(B\right) & \subset\text{row}\left(A\right)
+\end{align*}
+
+\end_inset
+
+Therefore for all 
+\begin_inset Formula $i=1,\dots,k$
+\end_inset
+
+ there exist 
+\begin_inset Formula $c_{i}\in\mathbb{R}^{m}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+A^{T}c_{i}=b_{i}^{T}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{i}^{T}=\left(B^{T}\right)_{i}$
+\end_inset
+
+ the 
+\begin_inset Formula $i$
+\end_inset
+
+th row of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Collecting all of the 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ into a matrix 
+\begin_inset Formula $C^{T}$
+\end_inset
+
+ we get that
+\begin_inset Formula 
+\[
+A^{T}C^{T}=B^{T}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+CA=B
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.2]
+\end_layout
+
+\end_inset
+
+Claim: For 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{m}\right\} \subset\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $m\geq n+2$
+\end_inset
+
+ there exist 
+\begin_inset Formula $\boldsymbol{\alpha}=\left(\alpha_{1},\dots,\alpha_{m}\right)\neq\mathbf{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{m}\alpha_{i}v_{i}=0
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\sum_{i=1}^{m}\alpha_{i}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Assume 
+\begin_inset Formula $m\geq n+2$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+w_{i}=\begin{pmatrix}v_{i}\\
+1
+\end{pmatrix}
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $w_{i}\in\mathbb{R}^{\left(n+1\right)}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $m\geq n+2$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $m>n+1$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\left\{ w_{1},\dots,w_{m}\right\} $
+\end_inset
+
+ is linearly dependent (since the maximal number of linearly independent
+ vectors in 
+\begin_inset Formula $\mathbb{R}^{\left(n+1\right)}$
+\end_inset
+
+ is 
+\begin_inset Formula $n+1$
+\end_inset
+
+).
+ Therefore, with 
+\begin_inset Formula $W=\left(w_{1},w_{2},\dots,w_{m}\right)$
+\end_inset
+
+ it must be case that there exists 
+\begin_inset Formula $\boldsymbol{\alpha}\in\mathbb{R}^{m}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{align*}
+W\boldsymbol{\alpha} & =\begin{pmatrix}v_{1} & \cdots & v_{m}\\
+1 & \cdots & 1
+\end{pmatrix}\begin{pmatrix}\alpha_{1}\\
+\vdots\\
+\alpha_{m}
+\end{pmatrix}\\
+ & =\begin{pmatrix}\sum_{i=1}^{m}\alpha_{i}v_{i}\\
+\sum_{i=1}^{m}\alpha_{i}
+\end{pmatrix}\\
+ & =\mathbf{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.3]
+\end_layout
+
+\end_inset
+
+Claim: For 
+\begin_inset Formula $A:U\rightarrow V$
+\end_inset
+
+ and 
+\begin_inset Formula $B:V\rightarrow W$
+\end_inset
+
+ linear maps
+\begin_inset Formula 
+\[
+\dim\left(R\left[A\right]\cap\ker\left[B\right]\right)=\dim\left(R\left[A\right]\right)-\dim\left(R\left[BA\right]\right)=\dim\left(\ker\left[BA\right]\right)-\dim\left(\ker\left[A\right]\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\dim\left(R\left[BA\right]\right) & =\dim\left(R\left[A\right]\right)-\dim\left(R\left[A\right]\cap\ker\left[B\right]\right)\\
+\dim\left(R\left[A\right]\right)+\dim\left(\ker\left[A\right]\right) & =\dim\left(\ker\left[BA\right]\right)+\dim\left(R\left[BA\right]\right)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $R\left[X\right]$
+\end_inset
+
+ is the column-space of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula $u,v,w$
+\end_inset
+
+ be the dimensions of 
+\begin_inset Formula $U,V,W$
+\end_inset
+
+ respectively.
+ Since 
+\begin_inset Formula $BA:U\rightarrow W$
+\end_inset
+
+ the rank-nullity theorem states that 
+\begin_inset Formula 
+\[
+\text{rank}\left(A\right)+\text{nullity}\left(A\right)=u=\text{rank}\left(BA\right)+\text{nullity}\left(BA\right)
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\text{rank}\left(X\right)=\dim\left(R\left[X\right]\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{nullity}\left(X\right)=\dim\left(\ker\left[X\right]\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+\dim\left(R\left[A\right]\right)+\dim\left(\ker\left[A\right]\right)=\dim\left(\ker\left[BA\right]\right)+\dim\left(R\left[BA\right]\right)
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\dim\left(R\left[A\right]\right)-\dim\left(R\left[BA\right]\right)=\dim\left(\ker\left[BA\right]\right)-\dim\left(\ker\left[A\right]\right)
+\]
+
+\end_inset
+
+Now let 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{k}\right\} $
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $R\left[A\right]\cap\ker\left[B\right]$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{k}\right\} $
+\end_inset
+
+ is linearly independent in 
+\begin_inset Formula $R\left[A\right]$
+\end_inset
+
+ and hence can be extended to a basis: let 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} $
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $R\left[A\right]$
+\end_inset
+
+.
+ Finally let 
+\begin_inset Formula $\left\{ y_{1},\dots,y_{m}\right\} $
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $R\left[BA\right]$
+\end_inset
+
+ and pick an arbitrary 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+.
+ By definition there exists 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+BAx_{i}=y_{i}
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula $Ax_{i}$
+\end_inset
+
+ is in 
+\begin_inset Formula $R\left[A\right]$
+\end_inset
+
+ and therefore there exist 
+\begin_inset Formula $\left\{ \alpha_{1},\dots,\alpha_{k},\beta_{1},\dots,\beta_{n}\right\} $
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+Ax_{i}=\sum_{i=1}^{k}\alpha_{i}u_{i}+\sum_{i=1}^{n}\beta_{i}v_{i}
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula 
+\[
+y_{i}=B\left(Ax_{i}\right)=B\left(\sum_{i=1}^{k}\alpha_{i}u_{i}+\sum_{i=1}^{n}\beta_{i}v_{i}\right)=\sum_{i=1}^{k}\alpha_{i}Bu_{i}+B\left(\sum_{i=1}^{n}\beta_{i}v_{i}\right)
+\]
+
+\end_inset
+
+and by 
+\begin_inset Formula $\left\{ u_{i}\right\} $
+\end_inset
+
+ being a basis for 
+\begin_inset Formula $\ker\left[B\right]$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+y_{i}=\cancel{\sum_{i=1}^{k}\alpha_{i}Bu_{i}}+B\left(\sum_{i=1}^{n}\beta_{i}v_{i}\right)=\sum_{i=1}^{n}\beta_{i}Bv_{i}=\sum_{i=1}^{n}\beta_{i}w_{i}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $w_{i}\coloneqq Bv_{i}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\[
+R\left[BA\right]=\text{span}\left(\left\{ y_{1},\dots,y_{m}\right\} \right)=\text{span}\left(\left\{ w_{1},\dots,w_{n}\right\} \right)
+\]
+
+\end_inset
+
+but note that 
+\begin_inset Formula $\left\{ w_{1},\dots,w_{n}\right\} $
+\end_inset
+
+ is linearly independent: if there existed 
+\begin_inset Formula $\left\{ \gamma_{1},\dots,\gamma_{n}\right\} $
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{i=1}^{n}\gamma_{i}w_{i}=0$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{n}\gamma_{i}w_{i}=\sum_{i=1}^{n}\gamma_{i}Bv_{i}=B\left(\sum_{i=1}^{n}\gamma_{i}v_{i}\right)=0
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{n}\right\} $
+\end_inset
+
+ were defined to be linearly independent of 
+\begin_inset Formula $\ker\left[B\right]$
+\end_inset
+
+ (and hence no vector in their span could be in 
+\begin_inset Formula $\ker\left[B\right]$
+\end_inset
+
+).
+ Hence (finally) 
+\begin_inset Formula 
+\begin{align*}
+\dim\left(R\left[BA\right]\right) & =\dim\left(\text{span}\left(\left\{ y_{1},\dots,y_{m}\right\} \right)\right)\\
+ & =\dim\left(\text{span}\left(\left\{ w_{1},\dots,w_{n}\right\} \right)\right)\\
+ & =\dim\left(\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} \backslash\left\{ u_{1},\dots,u_{k}\right\} \right)
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{k}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{n}\right\} $
+\end_inset
+
+ are linearly independent 
+\begin_inset Formula 
+\begin{align*}
+\dim\left(R\left[BA\right]\right) & =\dim\left(\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} \backslash\left\{ u_{1},\dots,u_{k}\right\} \right)\\
+ & =\dim\left(\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} \right)-\dim\left(\left\{ u_{1},\dots,u_{k}\right\} \right)\\
+ & =\dim\left(R\left[A\right]\right)-\dim\left(R\left[A\right]\cap\ker\left[B\right]\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Corollary*
+For 
+\begin_inset Formula $D$
+\end_inset
+
+ a linear operator
+\begin_inset Formula 
+\[
+\dim\left(\ker\left[D^{n+1}\right]\right)=\dim\left(\ker\left[D\right]\right)+\sum_{j=1}^{n}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By induction on 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n=1$
+\end_inset
+
+ and by the (manipulated above) result with 
+\begin_inset Formula $A=B=D$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\dim\left(R\left[D\right]\cap\ker\left[D\right]\right)+\dim\left(\ker\left[D\right]\right)=\dim\left(\ker\left[DD\right]\right)
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+\dim\left(\ker\left[D^{1+1}\right]\right)=\dim\left(\ker\left[D\right]\right)+\sum_{j=1}^{1}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)
+\]
+
+\end_inset
+
+Assume 
+\begin_inset Formula $n>1$
+\end_inset
+
+.
+ Then by applying the above result again with 
+\begin_inset Formula $B=D^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $A=D$
+\end_inset
+
+, and applying the induction hypothesis 
+\begin_inset Formula 
+\begin{align*}
+\dim\left(\ker\left[D^{n+1}\right]\right) & =\dim\left(\ker\left[D^{1}D^{n}\right]\right)\\
+ & =\dim\left(R\left[D^{n}\right]\cap\ker\left[D\right]\right)+\dim\left(\ker\left[D\right]\right)\\
+ & =\dim\left(R\left[D^{n}\right]\cap\ker\left[D\right]\right)+\dim\left(\ker\left[D\right]\right)\\
+ & +\sum_{j=1}^{n-1}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)\\
+ & =\dim\left(\ker\left[D\right]\right)+\sum_{j=1}^{n}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.5]
+\end_layout
+
+\end_inset
+
+Claim: For 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional real vector space and 
+\begin_inset Formula $U,W$
+\end_inset
+
+ 
+\begin_inset Formula $m$
+\end_inset
+
+-dimensional subspaces of 
+\begin_inset Formula $V$
+\end_inset
+
+, if 
+\begin_inset Formula $u\perp W$
+\end_inset
+
+ for all 
+\begin_inset Formula $u\in U\backslash\left\{ 0\right\} $
+\end_inset
+
+ then there exists 
+\begin_inset Formula $w\in W\backslash\left\{ 0\right\} $
+\end_inset
+
+ such that 
+\begin_inset Formula $w\perp U\backslash\left\{ 0\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Fix bases 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{m}\right\} ,\left\{ w_{1},\dots,w_{m}\right\} $
+\end_inset
+
+ for for 
+\begin_inset Formula $U,W$
+\end_inset
+
+.
+ The hypothesis 
+\begin_inset Formula $u\perp W$
+\end_inset
+
+ for all 
+\begin_inset Formula $u\in U\backslash\left\{ 0\right\} $
+\end_inset
+
+ implies that 
+\begin_inset Formula $u_{j}\cdot w_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+w=\sum_{i=1}^{m}w_{i}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $w\perp U\backslash\left\{ 0\right\} $
+\end_inset
+
+ since for arbitrary 
+\begin_inset Formula $u\in U\backslash\left\{ 0\right\} $
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+u=\sum_{i=1}^{m}\alpha_{i}u_{i}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+w\cdot u=\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}u_{j}\cdot w_{i}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3.1]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $\left\langle \left\langle I\right\rangle \right\rangle \geq1$
+\end_inset
+
+ for all matrix norms 
+\begin_inset Formula $\left\langle \left\langle \cdot\right\rangle \right\rangle $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Since 
+\begin_inset Formula $II=I$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+\left\langle \left\langle I\right\rangle \right\rangle =\left\langle \left\langle II\right\rangle \right\rangle \leq\left\langle \left\langle I\right\rangle \right\rangle \left\langle \left\langle I\right\rangle \right\rangle 
+\]
+
+\end_inset
+
+cancelling 
+\begin_inset Formula $\left\langle \left\langle I\right\rangle \right\rangle $
+\end_inset
+
+ from both sides of the inequality we have that 
+\begin_inset Formula 
+\[
+1\leq\left\langle \left\langle I\right\rangle \right\rangle 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3.2]
+\end_layout
+
+\end_inset
+
+Claim: The Frobenius norm 
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{F}=\sqrt{\text{tr}\left(A^{T}A\right)}=\sqrt{\sum_{i}\sum_{j}\left|a_{ij}\right|^{2}}
+\]
+
+\end_inset
+
+is a matrix norm.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+It is positively homogenous, subadditive, and positive definite because
+ it is equivalent to the Euclidean norm on 
+\begin_inset Formula $\mathbb{R}^{n^{2}}$
+\end_inset
+
+.
+ Further it satisfies 
+\begin_inset Quotes eld
+\end_inset
+
+submultiplicativity
+\begin_inset Quotes erd
+\end_inset
+
+: first note that for 
+\begin_inset Formula $A,B$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(AB\right)_{ij}=\sum_{k}a_{ik}b_{kj}
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle AB\right\rangle \right\rangle _{F} & =\sqrt{\sum_{i}\sum_{j}\left(\left(AB\right)_{ij}\right)^{2}}\\
+ & =\sqrt{\sum_{i}\sum_{j}\left(\left|\sum_{k}a_{ik}b_{kj}\right|\right)^{2}}
+\end{align*}
+
+\end_inset
+
+now by Cauchy-Schwarz
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle AB\right\rangle \right\rangle _{F} & =\sqrt{\sum_{i}\sum_{j}\left(\left(AB\right)_{ij}\right)^{2}}\\
+ & =\sqrt{\sum_{i}\sum_{j}\left(\left|\sum_{k}a_{ik}b_{kj}\right|\right)^{2}}\\
+ & \leq\sqrt{\sum_{i}\sum_{j}\left(\sum_{k}\left|a_{ik}\right|^{2}\sum_{k}\left|b_{kj}\right|^{2}\right)}\\
+ & =\sqrt{\left(\sum_{i}\sum_{k}\left|a_{ik}\right|^{2}\right)\left(\sum_{j}\sum_{k}\left|b_{kj}\right|^{2}\right)}\\
+ & =\left\langle \left\langle A\right\rangle \right\rangle _{F}\left\langle \left\langle B\right\rangle \right\rangle _{F}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[3.3]
+\end_layout
+
+\end_inset
+
+Let the induced matrix 
+\begin_inset Formula $p$
+\end_inset
+
+-norm be
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n}\backslash\left\{ 0\right\} }\frac{\left\Vert Ax\right\Vert _{p}}{\left\Vert x\right\Vert _{p}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Claim: The induced matrix 
+\begin_inset Formula $p$
+\end_inset
+
+-norm is equivalent to
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula $y$
+\end_inset
+
+ be such that 
+\begin_inset Formula 
+\[
+y=\text{argmax}\left(\frac{\left\Vert Ax\right\Vert _{p}}{\left\Vert x\right\Vert _{p}}\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{p}=\frac{\left\Vert Ay\right\Vert _{p}}{\left\Vert y\right\Vert _{p}}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $z\in\mathbb{R}^{n},c\in\mathbb{R}$
+\end_inset
+
+ be such that 
+\begin_inset Formula $cz=y$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert z\right\Vert _{p}=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\frac{\left\Vert Ay\right\Vert _{p}}{\left\Vert y\right\Vert _{p}} & =\frac{\left\Vert A\left(cz\right)\right\Vert _{p}}{\left\Vert cz\right\Vert _{p}}
+\end{align*}
+
+\end_inset
+
+Then by linearity of matrix multiplication and the 
+\begin_inset Formula $p$
+\end_inset
+
+-norm
+\begin_inset Formula 
+\begin{align*}
+\frac{\left\Vert c\right\Vert _{p}\left\Vert Az\right\Vert _{p}}{\left\Vert c\right\Vert _{p}\left\Vert z\right\Vert _{p}} & =\frac{\left\Vert Az\right\Vert _{p}}{\left\Vert z\right\Vert _{p}}\\
+ & =\left\Vert Az\right\Vert _{p}
+\end{align*}
+
+\end_inset
+
+Now suppose that there were some 
+\begin_inset Formula $z'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert z'\right\Vert _{p}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert Az'\right\Vert _{p}>\left\Vert Az\right\Vert _{p}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\left\Vert Az'\right\Vert _{p}>\left\Vert Az\right\Vert _{p} & =\frac{\left\Vert Az\right\Vert _{p}}{\left\Vert z\right\Vert _{p}}=\frac{\left\Vert A\frac{y}{c}\right\Vert _{p}}{\left\Vert \frac{y}{c}\right\Vert _{p}}=\frac{\left\Vert \frac{1}{c}\right\Vert _{p}\left\Vert Ay\right\Vert _{p}}{\left\Vert \frac{1}{c}\right\Vert _{p}\left\Vert y\right\Vert _{p}}=\frac{\left\Vert Ay\right\Vert _{p}}{\left\Vert y\right\Vert _{p}}
+\end{align*}
+
+\end_inset
+
+which is a contradiction (since 
+\begin_inset Formula $y$
+\end_inset
+
+ was defined to the argmax of 
+\begin_inset Formula $\left\Vert Ax\right\Vert _{p}/\left\Vert x\right\Vert _{p}$
+\end_inset
+
+).
+ Hence it sufficies to define 
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: the induced matrix 
+\begin_inset Formula $p$
+\end_inset
+
+-norm is a legitimate matrix norm.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Using the equivalent definition from part (a) we prove
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Positive homogenous: let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+ and then by the homogeneity of the 
+\begin_inset Formula $p$
+\end_inset
+
+-norm 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle cA\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \left(cA\right)x\right\Vert _{p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left|c\right|\left\Vert Ax\right\Vert _{p}\\
+ & =\left|c\right|\left(\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}\right)\\
+ & =\left|c\right|\left\langle \left\langle A\right\rangle \right\rangle _{p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Subadditivity: let 
+\begin_inset Formula $A,B\in M_{n}\left(\mathbb{R}\right)$
+\end_inset
+
+ and then by the subadditivity of the 
+\begin_inset Formula $p$
+\end_inset
+
+-norm
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A+B\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \left(A+B\right)x\right\Vert _{p}\\
+ & \leq\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left(\left\Vert Ax\right\Vert _{p}+\left\Vert Bx\right\Vert _{p}\right)\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}+\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Bx\right\Vert _{p}\\
+ & =\left\langle \left\langle A\right\rangle \right\rangle _{p}+\left\langle \left\langle B\right\rangle \right\rangle _{p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Positive-definiteness: let 
+\begin_inset Formula $A\neq0$
+\end_inset
+
+ and then firstly note that
+\begin_inset Formula 
+\[
+\left\langle \left\langle -A\right\rangle \right\rangle _{p}=\left|-1\right|\left\langle \left\langle A\right\rangle \right\rangle _{p}=\left\langle \left\langle A\right\rangle \right\rangle _{p}
+\]
+
+\end_inset
+
+ and by the subadditivity of the 
+\begin_inset Formula $p$
+\end_inset
+
+-norm 
+\begin_inset Formula 
+\begin{align*}
+0 & =\left\langle \left\langle A+\left(-A\right)\right\rangle \right\rangle _{p}\\
+ & \leq\left\langle \left\langle A\right\rangle \right\rangle _{p}+\left\langle \left\langle -A\right\rangle \right\rangle _{p}\\
+ & =2\left\langle \left\langle A\right\rangle \right\rangle _{p}
+\end{align*}
+
+\end_inset
+
+hence 
+\begin_inset Formula $\left\langle \left\langle A\right\rangle \right\rangle _{p}\geq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Submultiplicativity: first note that for arbitrary 
+\begin_inset Formula $y$
+\end_inset
+
+, by definition of 
+\begin_inset Formula $\left\langle \left\langle A\right\rangle \right\rangle _{p}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\left\Vert Ay\right\Vert _{p} & \leq\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\Vert y\right\Vert _{p}
+\end{align*}
+
+\end_inset
+
+Then let 
+\begin_inset Formula $y=Bx$
+\end_inset
+
+ for 
+\begin_inset Formula $\left\Vert x\right\Vert =1$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle AB\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert ABx\right\Vert _{p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ay\right\Vert _{p}\\
+ & \leq\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\Vert y\right\Vert _{p}\\
+ & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\Vert Bx\right\Vert _{p}\\
+ & =\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\langle \left\langle B\right\rangle \right\rangle _{p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Claim: The supremum of a set 
+\begin_inset Formula $A$
+\end_inset
+
+ is equal to the infimum of the set 
+\begin_inset Formula $B$
+\end_inset
+
+ of upperbounds on 
+\begin_inset Formula $A.$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+By contradiction.
+ Let 
+\begin_inset Formula $l=\sup\:A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $l$
+\end_inset
+
+ is an upperbound on 
+\begin_inset Formula $A$
+\end_inset
+
+ and hence 
+\begin_inset Formula $l\in B$
+\end_inset
+
+.
+ Consider the set 
+\begin_inset Formula $B'$
+\end_inset
+
+ of lower bounds of the set 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $l$
+\end_inset
+
+ is a lower bound on 
+\begin_inset Formula $B$
+\end_inset
+
+, since if that were not the case there would exist some element 
+\begin_inset Formula $b\in B$
+\end_inset
+
+ such that 
+\begin_inset Formula $b<l$
+\end_inset
+
+, but 
+\begin_inset Formula $l$
+\end_inset
+
+ is the least upper bound.
+ Suppose 
+\begin_inset Formula $l\neq\inf\,B$
+\end_inset
+
+.
+ Then there exists 
+\begin_inset Formula $b$
+\end_inset
+
+ such that 
+\begin_inset Formula $b$
+\end_inset
+
+ is a lower bound on 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $l<b$
+\end_inset
+
+.
+ But then 
+\begin_inset Formula $b$
+\end_inset
+
+ is not a lower bound on 
+\begin_inset Formula $B$
+\end_inset
+
+ since 
+\begin_inset Formula $l\in B$
+\end_inset
+
+ and 
+\begin_inset Formula $l<b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+The induced matrix 
+\begin_inset Formula $p$
+\end_inset
+
+-norm is equivalent to 
+\begin_inset Formula $\left\langle \left\langle A\right\rangle \right\rangle _{p}=\inf\,\Lambda$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\Lambda=\left\{ \lambda\Bigg|\frac{\left\Vert Ax\right\Vert _{p}}{\left\Vert x\right\Vert _{p}}\leq\lambda,x\in\mathbb{R}^{n},\lambda\in\mathbb{R}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By definition every 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+ is an upper bound on the set 
+\begin_inset Formula $C=\left\{ c\big|c=\left\Vert Ax\right\Vert _{p}/\left\Vert x\right\Vert _{p},x\in\mathbb{R}^{n}\right\} $
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup\left(C\right)$
+\end_inset
+
+ by the above we have that 
+\begin_inset Formula 
+\[
+\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup\,C=\inf\,\Lambda
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_body
+\end_document

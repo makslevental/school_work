@@ -1,4 +1,7 @@
-function prob3()
+* problem 3
+
+
+function grandtotal = prob3()
 
 flights = [0       165     80      125     120     155     195     100     185;
         180     0       110     160     135     185     90      180     90;
@@ -17,27 +20,67 @@ combos = nchoosek(1:9,3);
 
 grandtotal = {};
 for i=1:size(combos,1)
-    total = 0;
-    hublocs = locs(:,combos(i,:));
-    nearesthubind = dsearchn(hublocs',locs');
-    for j=1:9
-        for k=1:9
-            total = total + flights(j,k)*metric(j,k);
+    hubs = combos(i,:);
+    nonhubs = setdiff(1:9,hubs);
+    [a,b,c,d,e,f]=ndgrid(hubs',hubs',hubs',...
+                         hubs',hubs',hubs');
+    X = [a(:),b(:),c(:),d(:),e(:),f(:)];
+    for m=1:729
+        total = 0;
+        hubchoices = X(m,:);
+        for j=1:6
+            nonhubsrcind = nonhubs(j);
+            locsrc = locs(:,nonhubsrcind);
+            locsrcshub = locs(:,hubchoices(j));
+            for k=1:6
+                nonhubinddst = nonhubs(k);
+                locdst = locs(:,nonhubinddst);
+                locdsthub = locs(:,hubchoices(k));
+                
+                d = norm(locsrc-locsrcshub)+.5*norm(locsrcshub-locdsthub)+norm(locdsthub-locdst); 
+                
+                total = total + flights(nonhubsrcind,nonhubinddst)*d;
+            end
+            
+            for k=1:3
+                hubindsrc = hubs(k);
+                d = norm(locsrc-locsrcshub)+.5*norm(locsrcshub-locs(hubindsrc));  
+                total = total + flights(nonhubsrcind,hubindsrc)*d;
+            end
         end
+        for j=1:3
+            hubindsrc = hubs(j);
+            lochubsrc = locs(:,hubindsrc);
+            for k=1:6
+                nonhubinddst = nonhubs(k);
+                locdst = locs(:,nonhubs(k));
+                locsdsthub = locs(:,hubchoices(k));
+                
+                d = .5*norm(lochubsrc-locsdsthub)+norm(locsdsthub-locdst); 
+                total = total + flights(hubindsrc,nonhubinddst)*d;
+            end
+            for k=1:3
+                hubinddst = hubs(k);
+                lochubdst =  locs(:,hubinddst);
+                d = .5*norm(lochubsrc-lochubdst);  
+                total = total + flights(hubindsrc,hubinddst)*d;
+            end
+        end
+        grandtotal{end+1,1} = combos(i,:);
+        grandtotal{end,2} = hubchoices;
+        grandtotal{end,3} = nonhubs;
+        grandtotal{end,4} = total;
     end
-    grandtotal{i,1} = combos(i,:);
-    grandtotal{i,2} = total;
+
+    
             
 end
 
-[c,i]=min(cell2mat(grandtotal(:,2)));
+[c,i]=min(cell2mat(grandtotal(:,4)));
 display(grandtotal{i,1})
 display(grandtotal{i,2})
-
-    function d = metric(sourceInd,destInd)
-        d = norm(locs(sourceInd)-locs(nearesthubind(sourceInd)))+ ...
-            .5*norm(locs(nearesthubind(sourceInd))-locs(nearesthubind(destInd)))+ ...
-            norm(locs(nearesthubind(destInd))-locs(destInd));
-        
-    end
+display(grandtotal{i,3})
+display(grandtotal{i,4})
+display(locs(:,grandtotal{i,1}));
+display(locs(:,grandtotal{i,3}));
 end

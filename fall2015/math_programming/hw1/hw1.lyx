@@ -111,6 +111,14 @@ today
 
 \end_layout
 
+\begin_layout Standard
+Collaborators: Chris Gianelli.
+\end_layout
+
+\begin_layout Standard
+Time spent: too much.
+\end_layout
+
 \begin_layout Enumerate
 
 \series bold
@@ -133,7 +141,7 @@ The data here are the coordinates of the edges of the gates
 
 .
  Since the shortest distance between two points is a straight line the path
- through the course should piecewise defined continuous linear function.
+ through the course should be a piecewise defined continuous linear function.
  The gates terminate and initiate the linear segments of the path but the
  end of one segment is the beginning of the following segment so actually
  only the end points of each segment are free (except for the last one,
@@ -178,6 +186,38 @@ then optimization problem is
 \[
 \min_{\boldsymbol{\gamma}}f\left(\gamma_{1},\dots,\gamma_{n}\right)\text{ subject to }\left|\gamma_{i}-y_{i}\right|\leq c_{i}\ i=1,\dots,n
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+GAMS code appears in backmatter but the produced solution is
+\begin_inset Formula 
+\begin{align*}
+y_{1} & =4.4\\
+y_{2} & =4.8\\
+y_{3} & =5.2\\
+y_{4} & =5.6\\
+y_{5} & =6.0\\
+y_{6} & =5.0\\
+y_{7} & =6.5\\
+y_{8} & =8.0\\
+y_{9} & =6.0\\
+y_{10} & =4.0\\
+y_{11} & =4.0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Graphics
+	filename skiing.png
+	scale 75
 
 \end_inset
 
@@ -295,6 +335,495 @@ i.e.
 
 \end_layout
 
+\begin_layout Enumerate
+For 
+\begin_inset Formula $n=1,\dots,10$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=1$]
+\end_layout
+
+\end_inset
+
+ Obvious.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=2$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\} =\left\{ \left(1.000,2.000\right),\left(1.000,3.828\right),\left(23.314\right)\right\} $
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 2circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Two cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=3$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\} =\left\{ \left(1.007,2.000,6.899\right),\left(1.019,4.000,3.000\right),\left(59.394\right)\right\} $
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 3circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Three cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=4$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\} =\left\{ \left(1.000,2.000,6.931,4.157\right),\left(1.000,3.828,3.000,9.427\right),\left(133.343\right)\right\} $
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 4circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Four cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=5$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\} =\big\{\left(1.000,4.476,3.000,6.440,10.800\right),\left(1.000,2.000,6.777,12.874,5.000\right),\left(266.603\right)\big\}$
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 5circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Five cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=6$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\}  & =\big\{\left(1.000,2.144,3.000,4.000,9.857,8.857\right),\\
+ & \left(1.000,4.195,9.121,24.696,5.000,15.954\right),\left(426.331\right)\big\}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 6circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Six cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=7$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\}  & =\big\{\left(1.000,2.000,5.275,5.507,5.000,13.761,16.832\right),\\
+ & \left(1.000,6.778,3.000,11.646,20.632,6.000,18.632\right),\left(610.864\right)\big\}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 7circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Seven cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=8$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\}  & =\big\{\left(1.000,2.000,6.925,4.029,13.122,23.967,7.000,21.967\right),\\
+ & \left(1.000,3.863,3.002,9.645,10.039,6.000,20.856,19.856\right),\left(834.763\right)\big\}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 8circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Eight cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=9$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\}  & =\big\{\left(1.856,6.460,3.000,12.117,5.000,15.999,27.417,8.446,25.417\right),\\
+ & \left(1.303,2.000,5.610,4.000,13.356,13.216,7.000,25.891,24.891\right),\left(1166.407\right)\big\}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 9circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Nine cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[$n=10$]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\{ \mathbf{x},\mathbf{y},\left(c_{x}\times c_{y}\right)\right\}  & =\big\{\left(1.000,3.828,3.000,9.485,28.661,6.000,18.146,41.116,15.960,34.934\right),\\
+ & \left(1.000,2.000,6.931,4.000,5.000,15.416,10.782,8.727,26.632,25.632\right),\left(1750.079\right)\big\}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 10circs.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ten cirlces
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Enumerate
 
@@ -318,9 +847,11 @@ H=\left\{ \left(h_{i},h_{j},h_{k}\right):i\neq j\neq k\text{ but }i,j,k=1,\dots,
 \end_inset
 
 the set of distinct combinations of hub choices.
- For each choice of hub tuple the total miles traveled by all passengers
- is the distance of a flight to the nearest hub, a flight to hub nearest
- to the destination, and the flight to the destintation.
+ For each choice of hub tuple there are 
+\begin_inset Formula $3^{6}$
+\end_inset
+
+ choices for which hub each other city is associated with.
  Let 
 \begin_inset Formula $s\left(i\right)$
 \end_inset
@@ -333,11 +864,19 @@ the set of distinct combinations of hub choices.
 \begin_inset Formula $s\left(h\left(i\right)\right)$
 \end_inset
 
- be the coordinates of the hub nearest to the city of departure, 
+ be the coordinates of the hub that city 
+\begin_inset Formula $i$
+\end_inset
+
+ is associated with, 
 \begin_inset Formula $s\left(h\left(j\right)\right)$
 \end_inset
 
- be the coordinates of the hub nearest to the destination city, and 
+ be the coordinates of the hub city 
+\begin_inset Formula $j$
+\end_inset
+
+ is associated with, and 
 \begin_inset Formula $x_{ij}$
 \end_inset
 
@@ -391,8 +930,72 @@ All
  So the optimization problem is 
 \begin_inset Formula 
 \[
-\min_{\left(h_{i},h_{j},h_{k}\right)\in H}T
+\min_{\left(\mathbf{h},\mathbf{h}\left(j\right)\right)\in H}T
 \]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{h}$
+\end_inset
+
+ is the 3-tuple of hub cities and 
+\begin_inset Formula $\mathbf{h}\left(j\right)$
+\end_inset
+
+ is the hub associated with every other city.
+\end_layout
+
+\begin_layout Enumerate
+The global solution, discovered by a MATLAB code that iterates over all
+ combinations/permutations is a total distance of 3.6482e+05 with hubs
+\begin_inset Formula 
+\begin{align*}
+\left(h_{1},h_{2},h_{3}\right) & =\left(4,5,9\right)
+\end{align*}
+
+\end_inset
+
+and city to hub assignments of 
+\begin_inset Formula 
+\begin{align*}
+1 & \rightarrow4\\
+2 & \rightarrow4\\
+3 & \rightarrow4\\
+6 & \rightarrow5\\
+7 & \rightarrow4\\
+8 & \rightarrow5
+\end{align*}
+
+\end_inset
+
+and the plot
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename airline.png
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Airline hubs
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -485,6 +1088,294 @@ Then the optimization problem is
 \[
 \min_{\left\{ p_{j}\right\} }\left(\sum_{j=1}^{6}\left(p_{j}c_{j}+ci_{j}\right)+w_{s}\left(s_{j}-g_{j}\right)^{2}+w_{i}\left(i_{j}-100\right)^{2}+w_{p}\left(p_{j}-p_{j-1}\right)^{2}\right)
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+GAMS produces 
+\begin_inset Formula 
+\begin{align*}
+p_{1} & =591.387\\
+p_{2} & =877.468\\
+p_{3} & =1093.516\\
+p_{4} & =1365.720\\
+p_{5} & =1502.215\\
+p_{6} & =1447.215
+\end{align*}
+
+\end_inset
+
+with
+\begin_inset Formula 
+\begin{align*}
+i_{1} & =453.306\\
+i_{2} & =0\\
+i_{3} & =0\\
+i_{4} & =292.362\\
+i_{5} & =151.289\\
+i_{6} & =0
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+s_{1} & =1300\\
+s_{2} & =1044.694\\
+s_{3} & =877.468\\
+s_{4} & =801.155\\
+s_{5} & =1506.793\\
+s_{6} & =1653.504
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Capacity planning
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let demand 
+\begin_inset Formula 
+\[
+d_{i}=a_{i}-b_{i}p_{i}
+\]
+
+\end_inset
+
+and capacity
+\begin_inset Formula 
+\begin{align*}
+c_{i} & \geq\max\left\{ d_{i},0\right\} \\
+ & \iff\\
+c_{i} & \geq d_{i}
+\end{align*}
+
+\end_inset
+
+and revenue
+\begin_inset Formula 
+\[
+r_{i}=pd_{i}-fc_{i}
+\]
+
+\end_inset
+
+Then the program is 
+\begin_inset Formula 
+\begin{align*}
+\max_{c_{i},p}\left(\sum_{i=1}^{10}r_{i}\right) & =\max_{c_{i},p}\left(p\sum_{i=1}^{10}d_{i}-f\sum_{i=1}^{10}c_{i}\right)\\
+ & \text{subject to }\left(\mathbf{c},p\right)\succeq\left(\mathbf{0},0\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+GAMS produces for 
+\begin_inset Formula $f=5$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+p_{1} & =4\\
+p_{2} & =7.667\\
+p_{3} & =6.667\\
+p_{4} & =2.667\\
+p_{5} & =4.167\\
+p_{6} & =2.875\\
+p_{7} & =1.167\\
+p_{8} & =0.875\\
+p_{9} & =3.25\\
+p_{10} & =.5
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $c=16$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $f=10$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+p_{1} & =4.417\\
+p_{2} & =8.5\\
+p_{3} & =7.5\\
+p_{4} & =3.083\\
+p_{5} & =4.167\\
+p_{6} & =2.875\\
+p_{7} & =1.167\\
+p_{8} & =0.875\\
+p_{9} & =3.25\\
+p_{10} & =.5
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $c=13.5$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $f=20$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+p_{1} & =5.023\\
+p_{2} & =9.713\\
+p_{3} & =8.713\\
+p_{4} & =3.690\\
+p_{5} & =5.046\\
+p_{6} & =3.285\\
+p_{7} & =1.238\\
+p_{8} & =0.875\\
+p_{9} & =3.25\\
+p_{10} & =.5
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $c=9.861$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+No clue.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Quickest take-off
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Given that 
+\begin_inset Formula $t_{k}=hk$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+p_{t_{k+1}}-p_{t_{k}} & =hv_{t_{k}}
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+v_{t_{k+1}}-v_{t_{k}}=\left(-\eta\right)v_{t_{k}}+h\left(f_{t_{k}}-b_{t_{k}}\right)
+\]
+
+\end_inset
+
+We have that 
+\begin_inset Formula 
+\begin{align*}
+\sum_{k=0}^{K-1}p_{t_{k+1}}-p_{t_{k}} & =p_{t_{K}}-p_{t_{0}}\\
+ & =h\sum_{k=1}^{K-1}v_{t_{k}}
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+\sum_{k=0}^{K-1}\left(v_{t_{k+1}}-v_{t_{k}}\right) & =v_{t_{K}}-v_{t_{0}}\\
+ & =\sum_{k=0}^{K-1}\left[\left(-\eta\right)v_{t_{k}}+h\left(f_{t_{k}}-b_{t_{k}}\right)\right]\\
+ & =h\sum_{k=0}^{K-1}\left(f_{t_{k}}-b_{t_{k}}\right)-\eta\sum_{k=0}^{K-1}v_{t_{k}}
+\end{align*}
+
+\end_inset
+
+For any value 
+\begin_inset Formula $K$
+\end_inset
+
+ these update equations along with the constraints
+\begin_inset Formula 
+\begin{align*}
+p_{t_{K}} & \leq L\\
+0 & \leq b_{t_{k}}\leq\min\left\{ B_{max},f_{t_{k}}\right\} \\
+0 & \leq f_{t_{k}}\leq F_{max}\\
+\left|f_{t_{k+1}}-f_{t_{k}}\right| & \leq S
+\end{align*}
+
+\end_inset
+
+constitute a model with objective
+\begin_inset Formula 
+\[
+\min_{t_{k}}\left\{ v_{t_{k}}\ge V^{to}\right\} 
+\]
+
+\end_inset
+
+Therefore the algorithm is to start with particular values for 
+\begin_inset Formula $\eta,h,p_{t_{0}},v_{t_{0}},B_{max},F_{max},S,V^{to},L$
+\end_inset
+
+ and iterate 
+\begin_inset Formula $K$
+\end_inset
+
+ until a feasible solution is found.
+\end_layout
+
+\begin_layout Enumerate
+With 
+\begin_inset Formula $\eta=.05,h=1,p_{t_{0}}=0,v_{t_{0}}=0,B_{max}=.5,F_{max}=4,S=.8,V^{to}=40,L=300$
+\end_inset
+
+ GAMS produces a feasible solution for 
+\begin_inset Formula $K=14$
+\end_inset
+
+ with 
+\begin_inset Formula $V^{to}=40.981$
+\end_inset
+
+ and 
+\begin_inset Formula $P^{to}=p_{t_{K}}=264.38.$
+\end_inset
+
+ The velocity, position, breaking, and thrust profiles are:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{p} & =\left(0,0,1.300,4.635,10.703,20.168,33.660,50.977,71.928,96.331,124.015,154.814,188.573,225.145,264.388\right)\\
+\mathbf{v} & =\left(0,1.300,3.335,6.068,9.465,13.492,17.317,20.951,24.404,27.683,30.799,33.759,36.571,39.243,40.981\right)\\
+\mathbf{b} & =\left(.5\dots,.5\right)\\
+\mathbf{f} & =\left(0.800,1.600,2.400,3.200,4.000,4.000,4.000,4.000,4.000,4.000,4.000,4.000,4.000,3.200,2.400\right)
+\end{align*}
 
 \end_inset
 

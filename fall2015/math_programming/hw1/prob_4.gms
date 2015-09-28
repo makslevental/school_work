@@ -21,33 +21,20 @@ parameter  sc /4/,
            wp /1/,
            invPenalty /100/;
 
-
-* Define variables of the problem:
-* --------------------------------
-* - Q         : order quantity
-* - expprofit : expected profit
-
-
-positive variables p(k), i(k), s(j);
+positive variables p(k), i(k), s(j), t(k);
 i.l('0')= 100;
 i.l('7') = 100;
 p.l('0') = 1000;
-
+t.l('0') = 1100;
 free variable obj;
 
-* Define equations
-* ----------------
-* - objdef:     Define objective
-
-equations sales,inventory,objdef;
-sales(j).. s(j) =e= max(g(j),p(j)+i(j-1));
-inventory(j).. i(j) =g= p(j)+i(j-1)-g(j);
+equations sales,inventory,objdef,totalstock;
+totalstock(k)$(ord(k) gt 2).. t(k) =e= p(k-1)+i(k-1);
+sales(j).. s(j) =l= t(j);
+inventory(j).. i(j) =e= t(j) - s(j);
 objdef.. obj =e= sum(j,p(j)*c(j)+sc*i(j)+ws*sqr(s(j)-g(j))+wi*sqr(i(j)-invPenalty)+wp*sqr(p(j)-p(j-1)));
-
-* Create Model
-* ------------
 
 model production /all/
 
 
-solve production using dnlp minimizing obj;
+solve production using nlp minimizing obj;

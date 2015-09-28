@@ -1,0 +1,55 @@
+GAMS 24.4.6  r52609 Released Jun 26, 2015 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/12/15 12:36:06 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  set i /1 * 10/;
+   2  set j(i) /1 * 10/;
+   3  set k /1 * 10/;
+   4   
+   5  parameter r(i);
+   6  r(i) = ord(i);
+   7   
+   8  positive variables x(i), y(i);
+   9  positive variables cx,cy;
+  10  free variable obj;
+  11   
+  12   
+  13  equations southbound,westbound,intersectbound,eastbound,northbound,objdef;
+  14  southbound(i).. x(i) =g= r(i);
+  15  westbound(i).. y(i) =g= r(i);
+  16  intersectbound(i,j)$(ord(i) ne ord(j)).. sqr(x(i)-x(j)) + sqr(y(i)-y(j)) =g= r(i)+r(j);
+  17  eastbound(i).. x(i) + r(i) =l= cx;
+  18  northbound(i).. y(i) + r(i) =l= cy;
+  19  objdef.. obj =e= cx*cy;
+  20   
+  21  model circles /all/
+  22   
+  23   
+  24  solve circles using nlp minimizing obj;
+  25   
+  26  display x,y;
+****          $143,143
+GAMS 24.4.6  r52609 Released Jun 26, 2015 LEX-LEG x86 64bit/Linux                                                                                                                                                                      09/12/15 12:36:06 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Error Messages
+
+
+143  A suffix is missing
+
+**** 2 ERROR(S)   0 WARNING(S)
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  24.4.6 r52609 LEX-LEG
+
+
+USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
+      Free Demo,  202-342-0180,  sales@gams.com,  www.gams.com   DC0000
+
+
+**** FILE SUMMARY
+
+Input      /home/maksim/Desktop/school_work/fall2015/math_programming/hw1/prob_2.gms
+Output     /home/maksim/Desktop/school_work/fall2015/math_programming/hw1/prob_2.lst
+
+**** USER ERROR(S) ENCOUNTERED
