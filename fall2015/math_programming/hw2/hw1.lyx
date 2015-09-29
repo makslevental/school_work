@@ -1948,8 +1948,14 @@ Claim: If
 
 \begin_deeper
 \begin_layout Proof
-The number of connected components of the graph corresponds to the block
- structure of the Laplacian.
+We prove a strong fact: the dimension of the eigenspace associated with
+ the eigenvalue 0 is the number of connected components of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Indeed the number of connected components of the graph corresponds to the
+ block structure of the Laplacian.
  If there exists more than one block, e.g.
  
 \begin_inset Formula 
@@ -1969,7 +1975,26 @@ that means there's no path from connected component
 \begin_inset Formula $L_{2}$
 \end_inset
 
- (since, up to relabeling, there are no edges from any vertex in 
+ (since, up to relabeling
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Simply write down the Laplacian for each connected component 
+\begin_inset Formula $L_{1},\dots,L_{k}$
+\end_inset
+
+ (with distinct labels for vertices in distinct connected components) and
+ take the direct sum of the matrices 
+\begin_inset Formula $\varoplus_{i=1}^{k}L_{i}=\text{diag}\left(L_{1},\dots,L_{k}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, there are no edges from any vertex in 
 \begin_inset Formula $L_{1}$
 \end_inset
 
@@ -2017,66 +2042,11 @@ are eigenvectors corresponding to the eigenvalue
 \begin_inset Formula $0$
 \end_inset
 
-.ince 
-\begin_inset Formula 
-\[
-u^{T}Lu=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(u_{i}-u_{j}\right)^{2}
-\]
-
-\end_inset
-
-if 
-\begin_inset Formula $u^{T}Lu=0$
-\end_inset
-
- it means each other terms 
-\begin_inset Formula $\left(u_{i}-u_{j}\right)^{2}$
-\end_inset
-
- in the sum must be zero, which necessitates 
-\begin_inset Formula $u_{i}=u_{j}$
-\end_inset
-
- for all 
-\begin_inset Formula $\left(i,j\right)\in E$
+ and 
+\begin_inset Formula $u_{1}\cdot u_{2}=0$
 \end_inset
 
 .
- Without loss of generality let 
-\begin_inset Formula $u=\left(1,\dots,1\right)$
-\end_inset
-
-.
- Then 
-\begin_inset Formula 
-\[
-u^{T}Lu=\left(1,\dots,1\right)\begin{pmatrix}\sum_{i}L_{i1}\\
-\vdots\\
-\sum_{i}L_{in}
-\end{pmatrix}=\sum_{j}\sum_{i}L_{ij}=0
-\]
-
-\end_inset
-
- for all If 
-\begin_inset Formula $G$
-\end_inset
-
- is path connected then there's a 
-\begin_inset Formula 
-\[
-\begin{pmatrix}1 & 1 & 0 & 0 & 1 & 0\\
-1 & 1 & 1 & 0 & 1 & 0\\
-0 & 1 & 1 & 1 & 0 & 0\\
-0 & 0 & 1 & 1 & 1 & 1\\
-1 & 1 & 0 & 1 & 1 & 0\\
-0 & 0 & 0 & 1 & 0 & 1
-\end{pmatrix}
-\]
-
-\end_inset
-
-
 \end_layout
 
 \end_deeper
