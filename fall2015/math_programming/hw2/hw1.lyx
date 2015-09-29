@@ -1614,5 +1614,471 @@ but
 
 \end_deeper
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.1]
+\end_layout
+
+\end_inset
+
+The Laplacian is 
+\begin_inset Formula $L=D-A$
+\end_inset
+
+ where 
+\begin_inset Formula $D$
+\end_inset
+
+ is the degree matrix and 
+\begin_inset Formula $A$
+\end_inset
+
+ is the adjacency matrix, hence
+\begin_inset Formula 
+\[
+L=D-A=\begin{pmatrix}2 & 0 & 0 & 0 & 0 & 0\\
+0 & 3 & 0 & 0 & 0 & 0\\
+0 & 0 & 2 & 0 & 0 & 0\\
+0 & 0 & 0 & 3 & 0 & 0\\
+0 & 0 & 0 & 0 & 3 & 0\\
+0 & 0 & 0 & 0 & 0 & 1
+\end{pmatrix}-\begin{pmatrix}0 & 1 & 0 & 0 & 1 & 0\\
+1 & 0 & 1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 1 & 1\\
+1 & 1 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0
+\end{pmatrix}=\begin{pmatrix}2 & -1 & 0 & 0 & -1 & 0\\
+-1 & 3 & -1 & 0 & -1 & 0\\
+0 & -1 & 2 & -1 & 0 & 0\\
+0 & 0 & -1 & 3 & -1 & -1\\
+-1 & -1 & 0 & -1 & 3 & 0\\
+0 & 0 & 0 & -1 & 0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+where
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.2]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $L^{T}=L$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+For an undirected graph the adjacency matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ is symmetric since 
+\begin_inset Formula $A_{ij}=1$
+\end_inset
+
+ iff 
+\begin_inset Formula $\left(i,j\right)\in E$
+\end_inset
+
+ but by undirected 
+\begin_inset Formula $\left(i,j\right)\in E$
+\end_inset
+
+ implies 
+\begin_inset Formula $\left(j,i\right)\in E$
+\end_inset
+
+ and so 
+\begin_inset Formula $A_{ij}=A_{ji}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $D$
+\end_inset
+
+ is symmetric since it is diagonal.
+ Therefore 
+\begin_inset Formula 
+\[
+L^{T}=\left(D-A\right)^{T}=D^{T}-A^{T}=D-A=L
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.3]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $L$
+\end_inset
+
+ is PSD.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+If for 
+\begin_inset Formula $L$
+\end_inset
+
+ we can write 
+\begin_inset Formula 
+\[
+u^{T}Lu=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(u_{i}-u_{j}\right)^{2}
+\]
+
+\end_inset
+
+for arbitrary 
+\begin_inset Formula $u$
+\end_inset
+
+ then 
+\begin_inset Formula $L$
+\end_inset
+
+ is PSD, since 
+\begin_inset Formula 
+\[
+\sum_{i,j\big|\left(i,j\right)\in E}\left(u_{i}-u_{j}\right)^{2}\geq0
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $u=\left(u_{1},\dots,u_{n}\right)$
+\end_inset
+
+ and using 
+\begin_inset Formula $L=D-A$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+u^{T}\left(D-A\right)u & =u^{T}Du-u^{T}Au\\
+ & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-u^{T}Au\\
+ & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-\sum_{i,j}u_{i}u_{j}A_{ij}
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $A_{ij}=\delta_{\left\{ \left(i,j\right)\in E\right\} }$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+u^{T}\left(D-A\right)u & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}
+\end{align*}
+
+\end_inset
+
+Now 
+\begin_inset Formula $d\left(i\right)=\sum_{j=1}^{n}\delta_{\left(i,j\right)\in E}$
+\end_inset
+
+ (self edges are not in 
+\begin_inset Formula $E,$
+\end_inset
+
+ i.e.
+ there does not exist 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left(i,i\right)\in E$
+\end_inset
+
+) and since the graph is undirected for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\delta_{\left\{ \left(i,j\right)\in E\right\} }=1\iff\delta_{\left\{ \left(j,i\right)\in E\right\} }=1$
+\end_inset
+
+.
+ Essentially there is double counting in the 
+\begin_inset Formula $d\left(i\right)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+u^{T}\left(D-A\right)u & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}\\
+ & ==\sum_{i=1}^{n}\left(\sum_{j=1}^{n}\delta_{\left(i,j\right)\in E}\right)u_{i}^{2}-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}\\
+ & =\sum_{i,j\big|\left(i,j\right)\in E}^{n}2\left(u_{i}^{2}+u_{j}^{2}\right)-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}\\
+ & =\frac{1}{2}\left(\sum_{i,j\big|\left(i,j\right)\in E}^{n}\left(u_{i}^{2}+u_{j}^{2}\right)-2u_{i}u_{j}\right)\\
+ & =\frac{1}{2}\left(\sum_{i,j\big|\left(i,j\right)\in E}^{n}u_{i}^{2}-2u_{i}u_{j}+u_{j}^{2}\right)\\
+ & =\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}^{n}\left(u_{i}-u_{j}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.4]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $0$
+\end_inset
+
+ is always an eigenvalue of 
+\begin_inset Formula $L$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+If a matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ is diagonalizable then 0 is an eigenvalue iff 
+\begin_inset Formula $A$
+\end_inset
+
+ is singular, since 
+\begin_inset Formula 
+\begin{align*}
+\det\left(A\right) & =\det\left(PDP^{T}\right)\\
+ & =\det\left(P^{T}PD\right)\\
+ & =\det\left(D\right)\\
+ & =\prod_{i}\lambda_{i}
+\end{align*}
+
+\end_inset
+
+Therefore if the nullspace of 
+\begin_inset Formula $A$
+\end_inset
+
+ is non-trivial then 
+\begin_inset Formula $A$
+\end_inset
+
+ has an eigenvalue equal to zero.
+ Note that summing across any row of a Laplacian matrix 
+\begin_inset Formula $L$
+\end_inset
+
+, for an undirected graph, we get zero.
+ Therefore let 
+\begin_inset Formula $u=\left(1,\dots,1\right)$
+\end_inset
+
+ implies 
+\begin_inset Formula $Lu=0$
+\end_inset
+
+.
+ Hence 0 is an eigenvalue.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.5]
+\end_layout
+
+\end_inset
+
+Claim: If 
+\begin_inset Formula $G=\left(V,E\right)$
+\end_inset
+
+ is path connected then the multiplicity of the zero eigenvalue is 
+\begin_inset Formula $1$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+The number of connected components of the graph corresponds to the block
+ structure of the Laplacian.
+ If there exists more than one block, e.g.
+ 
+\begin_inset Formula 
+\[
+L=\begin{pmatrix}L_{1} & 0\\
+0 & L_{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+that means there's no path from connected component 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ (since, up to relabeling, there are no edges from any vertex in 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ to any in 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+).
+ Furthermore this clearly corresponds to the dimension of the nullspace,
+ i.e.
+ the degenerate eigenspace associated with eigenvalue 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+.
+ For example for the 
+\begin_inset Formula $L$
+\end_inset
+
+ above, if 
+\begin_inset Formula $L_{1}\in\mathbb{R}^{m\times m}$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{2}\in\mathbb{R}^{n\times n}$
+\end_inset
+
+, then both 
+\begin_inset Formula 
+\[
+u_{1}=\left(\underbrace{1,\dots,1}_{m},\underbrace{0,\dots,0}_{n}\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+u_{2}=\left(\underbrace{0,\dots,0}_{m},\underbrace{1,\dots,1}_{n}\right)
+\]
+
+\end_inset
+
+are eigenvectors corresponding to the eigenvalue 
+\begin_inset Formula $0$
+\end_inset
+
+.ince 
+\begin_inset Formula 
+\[
+u^{T}Lu=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(u_{i}-u_{j}\right)^{2}
+\]
+
+\end_inset
+
+if 
+\begin_inset Formula $u^{T}Lu=0$
+\end_inset
+
+ it means each other terms 
+\begin_inset Formula $\left(u_{i}-u_{j}\right)^{2}$
+\end_inset
+
+ in the sum must be zero, which necessitates 
+\begin_inset Formula $u_{i}=u_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\left(i,j\right)\in E$
+\end_inset
+
+.
+ Without loss of generality let 
+\begin_inset Formula $u=\left(1,\dots,1\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+u^{T}Lu=\left(1,\dots,1\right)\begin{pmatrix}\sum_{i}L_{i1}\\
+\vdots\\
+\sum_{i}L_{in}
+\end{pmatrix}=\sum_{j}\sum_{i}L_{ij}=0
+\]
+
+\end_inset
+
+ for all If 
+\begin_inset Formula $G$
+\end_inset
+
+ is path connected then there's a 
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & 1 & 0 & 0 & 1 & 0\\
+1 & 1 & 1 & 0 & 1 & 0\\
+0 & 1 & 1 & 1 & 0 & 0\\
+0 & 0 & 1 & 1 & 1 & 1\\
+1 & 1 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 1 & 0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
