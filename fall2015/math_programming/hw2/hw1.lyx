@@ -2223,15 +2223,15 @@ Assume
 \begin_inset Formula $0=\sigma_{j}=\sigma_{i}$
 \end_inset
 
-, then by Gram-Schmidt the 
-\begin_inset Formula $w_{j}$
+ and 
+\begin_inset Formula $i<j$
 \end_inset
 
- can be chosen such that 
-\begin_inset Formula $w_{j}^{T}\cdot w_{i}=0$
+, then by 
+\begin_inset Formula $w_{j}\in\text{span}\left\{ u_{1},\dots,u_{j-1}\right\} ^{\perp}$
 \end_inset
 
- and so
+ 
 \begin_inset Formula 
 \begin{align*}
 u_{j}^{T}\cdot u_{i} & =\left(w_{j}\right)^{T}\cdot w_{i}=0
@@ -2431,8 +2431,234 @@ status open
 
 \end_inset
 
+For 
+\begin_inset Formula $r$
+\end_inset
 
+ being the largest 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sigma_{i}\neq0$
+\end_inset
+
+ (note that 
+\begin_inset Formula $\sigma_{i}\geq\sigma_{i+1}$
+\end_inset
+
+)
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{r}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $R\left[A\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Consider for 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+Ax & =\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{pmatrix}\sigma_{1} & 0 & \cdots & 0\\
+0 & \ddots & \ddots & \vdots\\
+\vdots & \ddots & \ddots & 0\\
+0 & \cdots & 0 & \sigma_{n}
+\end{pmatrix}\begin{bmatrix}v_{1}^{T}\\
+\vdots\\
+v_{n}^{T}
+\end{bmatrix}x\\
+ & =\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{bmatrix}\sigma_{1}v_{1}^{T}\\
+\vdots\\
+\sigma_{r}v_{r}^{T}\\
+0\\
+\vdots\\
+0
+\end{bmatrix}x\\
+ & =\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{pmatrix}\sigma_{1}v_{11} & \cdots & \sigma_{1}v_{1n}\\
+\vdots & \ddots & \vdots\\
+\sigma_{r}v_{r1} & \cdots & \sigma_{1}v_{1n}\\
+0 & \cdots & 0\\
+\vdots & \ddots & \vdots\\
+0 & \cdots & 0
+\end{pmatrix}x\\
+ & =\left[\sum_{i=1}^{r}u_{i}\sigma_{i}v_{i1}\big|\cdots\big|\sum_{i=1}^{r}u_{i}\sigma_{i}v_{in}\right]\begin{pmatrix}x_{1}\\
+\vdots\\
+x_{n}
+\end{pmatrix}\\
+ & =\sum_{j=1}^{n}\sum_{i=1}^{r}u_{i}\sigma_{i}v_{ij}x_{j}\\
+ & =\sum_{i=1}^{r}u_{i}\left(\sum_{j=1}^{n}\sigma_{i}v_{ij}x_{j}\right)
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $k_{i}=\left(\sum_{j=1}^{n}\sigma_{i}v_{ij}x_{j}\right)$
+\end_inset
+
+ and then 
+\begin_inset Formula $Ax=\sum_{i=1}^{r}u_{i}k_{i}$
+\end_inset
+
+ and the image of 
+\begin_inset Formula $x$
+\end_inset
+
+ is a linear combination of 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{r}\right\} $
+\end_inset
+
+.
+ Therefore the range (column-space) of 
+\begin_inset Formula $A$
+\end_inset
+
+ is spanned by 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{r}\right\} $
+\end_inset
+
+ and since by 5.2 
+\begin_inset Formula $u_{j}^{T}\cdot u_{i}=\delta_{ij}$
+\end_inset
+
+ it's in fact a basis.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $\left\{ u_{r+1},\dots,u_{m}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $\ker\left[A^{T}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Firstly 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{m}\right\} $
+\end_inset
+
+ spans 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+.
+ By the fundamental theorem of linear algebra 
+\begin_inset Formula $R\left[A\right]\perp\ker\left[A^{T}\right]$
+\end_inset
+
+ and since by part (a) 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{r}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $R\left[A\right]$
+\end_inset
+
+ we have that 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{r}\right\} \perp\ker\left[A^{T}\right]$
+\end_inset
+
+.
+ But by definition 
+\begin_inset Formula $\left\{ u_{r+1},\dots,u_{m}\right\} \perp\left\{ u_{1},\dots,u_{r}\right\} $
+\end_inset
+
+ and furthermore for 
+\begin_inset Formula $j=r+2,\dots,m$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $u_{j}\perp\left\{ u_{r+1},\dots,u_{j-1}\right\} $
+\end_inset
+
+ and so 
+\begin_inset Formula $\left\{ u_{r+1},\dots,u_{m}\right\} $
+\end_inset
+
+ are pairwise orthogonal.
+ Hence 
+\begin_inset Formula $\left\{ u_{r+1},\dots,u_{m}\right\} $
+\end_inset
+
+ is a suitable basis for 
+\begin_inset Formula $\ker\left[A^{T}\right]$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{r}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $R\left[A^{T}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Note that 
+\begin_inset Formula $A^{T}=\left(U\Sigma V^{T}\right)=V\Sigma U^{T}$
+\end_inset
+
+, since 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is diagonal.
+ Then by similar reasoning as in (a) we have that 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{r}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $R\left[A^{T}\right]$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $\left\{ v_{r+1},\dots,v_{n}\right\} $
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $\ker\left[A\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+By similar reasoning as in (b).
+\end_layout
+
+\end_deeper
+\end_deeper
 \end_body
 \end_document
