@@ -1,5 +1,3 @@
-set P /1*4/;
-set K /1*6/;
 
 set I /1*20/;
 set N /1*100/;
@@ -210,51 +208,4 @@ parameter y(N)
     98     1
     99    -1
    100    -1/;
-
-*set P /1*4/;
-*set K /1*6/;
-
-parameter PP(P) /1=3, 2=4, 3=5, 4=6/;
-parameter KK(K) /1=4, 2=6, 3=8, 4=10, 5=12, 6=14/;  
-
-
-
-
-
-
-* Define variables of the model:
-* -------------------------------
-* - alpha1 : x1 coefficient of the separating plane
-* - alpha2 : x2 coefficient of the separating plane
-* - beta   : rhs of the separating plane
-* - obj    : margin (^2)
-
-free variable alpha1, alpha2, beta;
-free variable obj;
-
-* Define equations
-* ----------------
-* - margin(I) : relations between points and margin
-* - objdef    : definition of margin
-
-equation margin(I), objdef;
-
-margin(I).. y(I)*(alpha1*x1(I)+alpha2*x2(I)-beta) =g= 1;
-objdef.. obj =e= sqr(alpha1)+sqr(alpha2);
-
-* Create Model
-* ------------
-
-model svm /all/;
-option nlp=conopt;
-solve svm using nlp minimizing obj;
-
-* Report 5 decimals on the solution
-* --------------------------------------------------
-
-option decimals=5;
-display alpha1.l;
-display alpha2.l;
-display beta.l;
- problem 1
 

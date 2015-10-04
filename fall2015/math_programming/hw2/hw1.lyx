@@ -126,6 +126,478 @@ status open
 
 \begin_layout Plain Layout
 
+[1.1]
+\end_layout
+
+\end_inset
+
+ The model for this SVM is similar to the typical SVM model except with
+ some binary integer variables and constraints on those variables: the standard
+ SVM (with data 
+\begin_inset Formula $\mathbf{x}_{i}\in\mathbb{R}^{n}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,\dots,k$
+\end_inset
+
+ and class assignments 
+\begin_inset Formula $y_{i}\in\left\{ -1,1\right\} $
+\end_inset
+
+) is 
+\begin_inset Formula 
+\begin{align*}
+\min_{\boldsymbol{\alpha}\in\mathbb{R}^{n}} & \left\Vert \boldsymbol{\alpha}\right\Vert \\
+\text{s.t.} & y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)\geq1\,\forall i\in\left\{ 1,\dots,k\right\} 
+\end{align*}
+
+\end_inset
+
+The 
+\begin_inset Quotes eld
+\end_inset
+
+incomplete SVM
+\begin_inset Quotes erd
+\end_inset
+
+ introduces two new binary integer variables 
+\begin_inset Formula $\mathbf{b}\in\left\{ 0,1\right\} ^{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{p}\in\left\{ 0,1\right\} ^{n}$
+\end_inset
+
+.
+ They are incorporated as such: 
+\series bold
+
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ 
+\series default
+determines whether constraint 
+\begin_inset Formula $y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)\geq1\iff y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)-1\geq0$
+\end_inset
+
+ is active.
+ This is effected by multipltying the constraint by 
+\begin_inset Formula $b_{i}:$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+b_{i}\left(y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)-1\right)\geq0
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $b_{i}=1$
+\end_inset
+
+ then the constraint is left as is and if 
+\begin_inset Formula $b_{i}=0$
+\end_inset
+
+ then the constraint is automatically satisfied as 
+\begin_inset Formula $0\geq0$
+\end_inset
+
+.
+ Then the constraint on how many constraint equations can be active is effected
+ by using 0-norm:
+\begin_inset Formula 
+\[
+\left\Vert \mathbf{b}\right\Vert _{0}\geq100-K
+\]
+
+\end_inset
+
+The sparsity of 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ is controlled by 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ in the same way.
+ The margin constraints transform further into 
+\begin_inset Formula 
+\[
+b_{i}\left(y_{i}\left(\sum_{i=1}^{n}p_{i}\alpha_{i}x_{i}-\beta\right)-1\right)\geq0
+\]
+
+\end_inset
+
+and maximum 
+\begin_inset Quotes eld
+\end_inset
+
+density
+\begin_inset Quotes erd
+\end_inset
+
+ (as opposed to sparsity) is controlled by 
+\begin_inset Formula 
+\[
+\left\Vert \mathbf{p}\right\Vert _{0}\leq M
+\]
+
+\end_inset
+
+Therefore the model is for some 
+\begin_inset Formula $K,M$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\min_{\underset{\underset{,\mathbf{p}\in\left\{ 0,1\right\} ^{n}}{\mathbf{b}\in\left\{ 0,1\right\} ^{k}}}{\boldsymbol{\alpha}\in\mathbb{R}^{n}}} & \left\Vert \boldsymbol{\alpha}\right\Vert \\
+\text{s.t.} & b_{i}\left(y_{i}\left(\sum_{i=1}^{n}p_{i}\alpha_{i}x_{i}-\beta\right)-1\right)\geq0\,\forall i\in\left\{ 1,\dots,k\right\} \\
+\left\Vert \mathbf{b}\right\Vert _{0} & \geq100-K\\
+\left\Vert \mathbf{p}\right\Vert _{0} & \leq M
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.2]
+\end_layout
+
+\end_inset
+
+ I wrote AMPL code instead of GAMS code because AMPL 
+\begin_inset Formula $\gg$
+\end_inset
+
+ GAMS.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+set cnts := 1 ..
+ 20;
+\end_layout
+
+\begin_layout Plain Layout
+
+set dps := 1 ..
+ 100; 
+\end_layout
+
+\begin_layout Plain Layout
+
+param x{dps,cnts};
+\end_layout
+
+\begin_layout Plain Layout
+
+param y{dps};
+\end_layout
+
+\begin_layout Plain Layout
+
+param omit_points;
+\end_layout
+
+\begin_layout Plain Layout
+
+param nz_a;
+\end_layout
+
+\begin_layout Plain Layout
+
+var afa {cnts};
+\end_layout
+
+\begin_layout Plain Layout
+
+var b {dps} binary integer;
+\end_layout
+
+\begin_layout Plain Layout
+
+var p {cnts} binary integer;
+\end_layout
+
+\begin_layout Plain Layout
+
+var bta;
+\end_layout
+
+\begin_layout Plain Layout
+
+minimize obj: sum{c in cnts} alpha[c]*alpha[c];
+\end_layout
+
+\begin_layout Plain Layout
+
+s.t.
+ mgn{d in dps}: b[d]*(y[d]*((sum{c in cnts} p[c]*afa[c]*x[d,c])-bta)-1)>=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+s.t.
+ cstnt_msk:  sum{d in dps} b[d] >= 100 - omit_points;
+\end_layout
+
+\begin_layout Plain Layout
+
+s.t.
+ non_z_a: sum{c in cnts} p[c] <= nz_a; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+data;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+param y := <snip>
+\end_layout
+
+\begin_layout Plain Layout
+
+param x := <snip>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+script;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+set omitted_data;
+\end_layout
+
+\begin_layout Plain Layout
+
+set max_nonzero_alpha;
+\end_layout
+
+\begin_layout Plain Layout
+
+param om{omitted_data};
+\end_layout
+
+\begin_layout Plain Layout
+
+param ma{max_nonzero_alpha};
+\end_layout
+
+\begin_layout Plain Layout
+
+let omitted_data := 4 ..
+ 16 by 2;
+\end_layout
+
+\begin_layout Plain Layout
+
+let max_nonzero_alpha := 3 ..
+ 6;
+\end_layout
+
+\begin_layout Plain Layout
+
+for {o in omitted_data} {
+\end_layout
+
+\begin_layout Plain Layout
+
+	for {m in max_nonzero_alpha} {
+\end_layout
+
+\begin_layout Plain Layout
+
+		let omit_points := o;
+\end_layout
+
+\begin_layout Plain Layout
+
+		let nz_a := m;
+\end_layout
+
+\begin_layout Plain Layout
+
+		option solver couenne;
+\end_layout
+
+\begin_layout Plain Layout
+
+		solve;
+\end_layout
+
+\begin_layout Plain Layout
+
+		display sqrt(sum{c in cnts} afa[c]*afa[c]);
+\end_layout
+
+\begin_layout Plain Layout
+
+		display afa;
+\end_layout
+
+\begin_layout Plain Layout
+
+		display b;
+\end_layout
+
+\begin_layout Plain Layout
+
+		display o;
+\end_layout
+
+\begin_layout Plain Layout
+
+		display m;
+\end_layout
+
+\begin_layout Plain Layout
+
+		display p;
+\end_layout
+
+\begin_layout Plain Layout
+
+		display beta;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.3]
+\end_layout
+
+\end_inset
+
+Pictures
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mu_table.jpeg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu\left(k,p\right)$
+\end_inset
+
+ table
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mu_pic.jpeg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu\left(k,p\right)$
+\end_inset
+
+ picture
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [2.1]
 \end_layout
 
@@ -752,12 +1224,12 @@ Claim: For
 \begin_inset Formula $V$
 \end_inset
 
-, if 
-\begin_inset Formula $u\perp W$
+, if there exists 
+\begin_inset Formula $u^{'}\in U\backslash\left\{ 0\right\} $
 \end_inset
 
- for all 
-\begin_inset Formula $u\in U\backslash\left\{ 0\right\} $
+ such that 
+\begin_inset Formula $u^{'}\perp W$
 \end_inset
 
  then there exists 
@@ -773,65 +1245,138 @@ Claim: For
 
 \begin_deeper
 \begin_layout Proof
-Fix bases 
-\begin_inset Formula $\left\{ u_{1},\dots,u_{m}\right\} ,\left\{ w_{1},\dots,w_{m}\right\} $
+Suppose not.
+ Then there does not exist 
+\begin_inset Formula $w$
 \end_inset
 
- for for 
-\begin_inset Formula $U,W$
-\end_inset
-
-.
- The hypothesis 
-\begin_inset Formula $u\perp W$
+ such that 
+\begin_inset Formula $w\cdot u=0$
 \end_inset
 
  for all 
-\begin_inset Formula $u\in U\backslash\left\{ 0\right\} $
-\end_inset
-
- implies that 
-\begin_inset Formula $u_{j}\cdot w_{i}=0$
-\end_inset
-
- for all 
-\begin_inset Formula $i,j$
+\begin_inset Formula $u\in U$
 \end_inset
 
 .
- Let 
+ That means for every 
+\begin_inset Formula $w$
+\end_inset
+
+ there exists 
+\begin_inset Formula $u$
+\end_inset
+
+ such that 
+\begin_inset Formula $u\cdot w\neq0$
+\end_inset
+
+.
+ Fix a basis 
+\begin_inset Formula $\left\{ w_{1},\dots,w_{m}\right\} $
+\end_inset
+
+ for 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Then there exist 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{m}\right\} $
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{i}\cdot u_{i}\neq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\dots,m$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\left\{ u_{1},\dots,u_{m}\right\} $
+\end_inset
+
+ can be chosen such that they are necessarily linearly dependent.
+ Why? Let 
 \begin_inset Formula 
 \[
-w=\sum_{i=1}^{m}w_{i}
+\upsilon_{i}=u_{i}-\left(u_{i}\cdot u^{'}\right)\frac{u^{'}}{\left\Vert u^{'}\right\Vert _{2}}
+\]
+
+\end_inset
+
+and then 
+\begin_inset Formula $u^{'}\perp\upsilon_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\dots,m$
+\end_inset
+
+ (but 
+\begin_inset Formula $w_{i}\cdot\upsilon_{i}$
+\end_inset
+
+ is still non-zero) and hence 
+\begin_inset Formula $\left\{ u^{'},\upsilon_{1},\dots,\upsilon_{m}\right\} $
+\end_inset
+
+ would be a linearly independent set of 
+\begin_inset Formula $m+1$
+\end_inset
+
+ vectors in 
+\begin_inset Formula $U$
+\end_inset
+
+ an 
+\begin_inset Formula $m$
+\end_inset
+
+-dimensional vector space.
+ So there exist 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{m}\alpha_{i}\upsilon_{i}=0
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\upsilon_{1}=-\sum_{i=2}^{m}\alpha_{i}\upsilon_{i}
 \]
 
 \end_inset
 
 Then 
-\begin_inset Formula $w\perp U\backslash\left\{ 0\right\} $
-\end_inset
-
- since for arbitrary 
-\begin_inset Formula $u\in U\backslash\left\{ 0\right\} $
-\end_inset
-
- 
 \begin_inset Formula 
 \[
-u=\sum_{i=1}^{m}\alpha_{i}u_{i}
-\]
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\[
-w\cdot u=\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}u_{j}\cdot w_{i}=0
+\sum_{i=1}^{n}\left(w_{i}\cdot\upsilon_{i}\right)w_{i}=\left(w_{1}\cdot\left(-\sum_{i=2}^{m}\alpha_{i}\upsilon_{i}\right)\right)w_{1}+\sum_{i=2}^{n}\left(w_{i}\cdot\upsilon_{i}\right)w_{i}
 \]
 
 \end_inset
 
 
+\begin_inset Formula 
+\[
+\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\upsilon_{2}\right)w_{2}=\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\left(c\upsilon_{1}\right)\right)w_{2}=\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\left(c\upsilon_{1}\right)\right)w_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+And I have no clue..................
 \end_layout
 
 \end_deeper
@@ -1948,13 +2493,111 @@ Claim: If
 
 \begin_deeper
 \begin_layout Proof
-We prove a strong fact: the dimension of the eigenspace associated with
- the eigenvalue 0 is the number of connected components of 
+If the graph is connected then every row of 
+\begin_inset Formula $L$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $L_{i}=D_{i}-A_{i}$
+\end_inset
+
+, has non-zero entries and for 
+\begin_inset Formula $u=\left(\underbrace{1,\dots,1}_{\left|V\right|}\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+L_{i}\cdot u=D_{i}\cdot u-A_{i}\cdot u=d\left(i\right)-2\left|\left\{ v\in V\big|\left(i,v\right)\in E\right\} \right|=0
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $Lu=0$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $w_{h}\neq w_{g}$
+\end_inset
+
+ for some 
+\begin_inset Formula $h,g$
+\end_inset
+
+ and 
+\begin_inset Formula $Lw=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $w^{T}Lw=0$
+\end_inset
+
+ but consider 
+\begin_inset Formula 
+\[
+w^{T}Lw=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(w_{i}-w_{j}\right)^{2}
+\]
+
+\end_inset
+
+because of connectedness there exists 
+\begin_inset Formula $E'=\left\{ \left(h,x_{0}\right),\left(x_{1},x_{2}\right),\dots,\left(x_{k},g\right)\right\} \subset E$
+\end_inset
+
+ where for some 
+\begin_inset Formula $t,v$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $w_{v}\neq w_{t}$
+\end_inset
+
+ (otherwise if no such 
+\begin_inset Formula $t,v$
+\end_inset
+
+ existed then 
+\begin_inset Formula $w_{h}=w_{0}=\cdots=w_{k}=w_{g}$
+\end_inset
+
+) 
+\begin_inset Formula 
+\begin{align*}
+w^{T}Lw & =\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(w_{i}-w_{j}\right)^{2}\\
+ & \geq\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E'}\left(w_{i}-w_{j}\right)^{2}\\
+ & \geq\frac{1}{2}\left(w_{t}-w_{v}\right)^{2}>0
+\end{align*}
+
+\end_inset
+
+which is a contradiction.
+ Therefore 
+\begin_inset Formula $Lu=0\iff u=\left(\underbrace{1,\dots,1}_{\left|V\right|}\right)$
+\end_inset
+
+ and so the dimension of the eigenspace is 
+\begin_inset Formula $\dim\left(\left\{ u\right\} \right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+The dimension of the eigenspace associated with the eigenvalue 0 is the
+ number of connected components of 
 \begin_inset Formula $G$
 \end_inset
 
 .
- Indeed the number of connected components of the graph corresponds to the
+ 
+\end_layout
+
+\begin_layout Proof
+Indeed the number of connected components of the graph corresponds to the
  block structure of the Laplacian.
  If there exists more than one block, e.g.
  
@@ -2659,6 +3302,784 @@ By similar reasoning as in (b).
 \end_layout
 
 \end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.5]
+\end_layout
+
+\end_inset
+
+Claim: For 
+\begin_inset Formula $1\leq k\leq\text{rank}\left(A\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\min_{X\big|\text{rank}\left(X\right)=k}\left\langle \left\langle A-X\right\rangle \right\rangle _{2}=\sigma_{k+1}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\text{argmin}\left\langle \left\langle A-X\right\rangle \right\rangle _{2}=X_{k}=\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+In 3 parts:
+\end_layout
+
+\begin_layout Enumerate
+Lemma: For 
+\begin_inset Formula $X$
+\end_inset
+
+ such that 
+\begin_inset Formula $\text{rank}\left(X\right)=k$
+\end_inset
+
+ there exists 
+\begin_inset Formula $z\in\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert z\right\Vert _{2}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+By the rank-nullity theorem 
+\begin_inset Formula $\dim\left(\ker\left[X\right]\right)+\text{rank}=n$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} =\left\{ 0\right\} $
+\end_inset
+
+.
+ Then we can find a basis 
+\begin_inset Formula $\left\{ x_{1},\dots,x_{n-k}\right\} $
+\end_inset
+
+of 
+\begin_inset Formula $\ker\left[X\right]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\dim\left(\ker\left[X\right]\right)=n-k$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\{ x_{1},\dots,x_{n-k}\right\} \perp\left\{ v_{1},\dots,v_{k+1}\right\} $
+\end_inset
+
+.
+ But then 
+\begin_inset Formula 
+\[
+\dim\left(\left\{ x_{1},\dots,x_{n-k}\right\} \right)+\dim\left(\left\{ v_{1},\dots,v_{k+1}\right\} \right)=n-k+k+1=n+1>n=\dim\left(\mathbb{R}^{n}\right)
+\]
+
+\end_inset
+
+Hence there exists 
+\begin_inset Formula $z\in\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
+\end_inset
+
+ and we are free to normalize it.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Lemma: 
+\begin_inset Formula $\left\langle \left\langle A-X\right\rangle \right\rangle _{2}\geq\sigma_{k+1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Using 
+\begin_inset Formula $z$
+\end_inset
+
+, and the fact that 
+\begin_inset Formula $\left\Vert z\right\Vert _{2}=1$
+\end_inset
+
+, from part (a) 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}\left\Vert \left(A-X\right)x\right\Vert _{2}\\
+ & \geq\left\Vert \left(A-X\right)z\right\Vert _{2}\\
+ & =\left\Vert Az-Xz\right\Vert _{2}\\
+ & =\left\Vert Az\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $z\in\ker\left(X\right)$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $z\in V$
+\end_inset
+
+ wher 
+\begin_inset Formula $V$
+\end_inset
+
+ might be a strict subset (potentially many 
+\begin_inset Formula $\alpha_{i}=0$
+\end_inset
+
+ but 
+\begin_inset Formula $\sum_{i}\left|\alpha_{i}\right|^{2}=1$
+\end_inset
+
+) of 
+\begin_inset Formula $\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z=\sum_{i=1}^{k+1}\alpha_{i}v_{i}
+\]
+
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert Az\right\Vert _{2}\\
+ & =\left\Vert U\Sigma V^{T}\left(\sum_{i=1}^{k+1}\alpha_{i}v_{i}\right)\right\Vert _{2}\\
+ & =\left\Vert U\Sigma\left(\sum_{i=1}^{k+1}\alpha_{i}V^{T}v_{i}\right)\right\Vert _{2}\\
+ & =\left\Vert U\Sigma\left(\sum_{i=1}^{k+1}\alpha_{i}e_{i}\right)\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $e_{i}\in\mathbb{R}^{n}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert U\left(\sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}e_{i}\right)\right\Vert _{2}\\
+ & =\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}Ue_{i}\right\Vert _{2}\\
+ & =\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}u_{i}\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\sigma_{1}\geq\cdots\geq\sigma_{k+1}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}u_{i}\right\Vert _{2}\\
+ & =\sigma_{k+1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+Then since 
+\begin_inset Formula $\sum_{i}\left|\alpha_{i}\right|^{2}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{j}^{T}\cdot u_{i}=\delta_{ij}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\sigma_{k+1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\right\Vert _{2}\\
+ & =\sigma_{k+1}\left(\sum_{i=1}^{k+1}\alpha_{i}u_{i}\right)^{T}\left(\sum_{i=1}^{k+1}\alpha_{i}u_{i}\right)\\
+ & =\sigma_{k+1}\left(\sum_{i,j=1}^{k+1}\alpha_{i}\alpha_{j}u_{j}^{T}u_{i}\right)\\
+ & =\sigma_{k+1}\left(\sum_{i,j=1}^{k+1}\alpha_{i}\alpha_{j}\delta_{ij}\right)=\sigma_{k+1}\sum_{i=1}^{k+1}\left|\alpha_{i}\right|^{2}=\sigma_{k+1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Lemma: For 
+\begin_inset Formula $A_{k}=\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle =\sigma_{k+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Since 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{k+1}\right\} $
+\end_inset
+
+spans 
+\begin_inset Formula $\mathbb{R}^{k+1}$
+\end_inset
+
+, consider for 
+\begin_inset Formula $x=\sum_{i=1}^{k+1}\alpha_{i}v_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{i=1}^{k+1}\left|\alpha_{i}\right|^{2}=1$
+\end_inset
+
+ (so that 
+\begin_inset Formula $\left\Vert x\right\Vert _{2}=1$
+\end_inset
+
+) 
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}\left\Vert \left(A-A_{k}\right)x\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \left(A-A_{k}\right)\sum_{i=1}^{k+1}\alpha_{i}v_{i}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\left(A-A_{k}\right)v_{i}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k+1}\alpha_{i}\left(\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}\right)v_{i}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $v_{j}^{T}\cdot v_{i}=\delta_{ij}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{k+1}\perp\left\{ v_{1},\dots,v_{k}\right\} $
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\left(U\Sigma V^{T}\right)v_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}U\Sigma e_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}U\sigma_{i}e_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\sigma_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \alpha_{k+1}u_{k+1}\sigma_{k+1}\right\Vert _{2}=\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\sigma_{k+1}\left\Vert \alpha_{k+1}u_{k+1}\right\Vert _{2}
+\end{align*}
+
+\end_inset
+
+Clearly this is maximized for 
+\begin_inset Formula $\alpha_{k+1}=1$
+\end_inset
+
+ and hence
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\sigma_{k+1}\left\Vert \alpha_{k+1}u_{k+1}\right\Vert _{2}\\
+ & =\sigma_{k+1}\left\Vert u_{k+1}\right\Vert _{2}\\
+ & =\sigma_{k+1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.6]
+\end_layout
+
+\end_inset
+
+Durer and Escher
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename d5.jpg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Durer rank 5 approximation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename d15.jpg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Durer rank 15 approximation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename d30.jpg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Durer rank 30 approximation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename e5.jpg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Escher rank 5 approximation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename e15.jpg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Escher rank 15 approximation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename e30.jpg
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Escher rank 30 approximation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.1]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $U,V\in\mathbb{R}$
+\end_inset
+
+ be open.
+ Then 
+\begin_inset Formula $U\times V$
+\end_inset
+
+ is open in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Take 
+\begin_inset Formula $\mathbf{x}=\left(x_{1},x_{2}\right)\in U\times V$
+\end_inset
+
+.
+ We seek and open ball around 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ contained in 
+\begin_inset Formula $U\times V$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $U,V\in\mathbb{R}$
+\end_inset
+
+ be open.
+ Then 
+\begin_inset Formula $x_{1}\in U$
+\end_inset
+
+ and there exists an openball centered on 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+such that 
+\begin_inset Formula $B_{x_{1}}\left(\epsilon_{1}\right)\subset U$
+\end_inset
+
+.
+ Similarly there exists an openball centered on 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+such that 
+\begin_inset Formula $B_{x_{2}}\left(\epsilon_{2}\right)\subset V$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\left(x_{1},x_{2}\right)\in B_{x_{1}}\left(\epsilon_{1}\right)\times B_{x_{2}}\left(\epsilon_{2}\right)\subset U\times V$
+\end_inset
+
+.
+ Take 
+\begin_inset Formula $\epsilon=\min\left\{ \epsilon_{1},\epsilon_{2}\right\} $
+\end_inset
+
+ and the openball centered on 
+\begin_inset Formula $\left(x_{1},x_{2}\right)$
+\end_inset
+
+ with radius 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ contained in 
+\begin_inset Formula $U\times V$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+B_{\left(x_{1},x_{2}\right)}\left(\epsilon\right)\subset U\times V
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.2]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $\sum_{i=1}^{\infty}\frac{1}{k!}$
+\end_inset
+
+ converges.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Note that 
+\begin_inset Formula $1/k!\leq2^{1-k}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\frac{1}{2}\sum_{i=0}^{k}\frac{1}{2^{k}}=\frac{1}{2}\left(\frac{1-\left(\frac{1}{2}\right)^{k+1}}{1-\frac{1}{2}}\right)=1-\left(\frac{1}{2}\right)^{k+1}\leq1
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\sum_{i=1}^{n}\frac{1}{k!}$
+\end_inset
+
+ is monotonically increasing and bounded above by 
+\begin_inset Formula $1$
+\end_inset
+
+ and hence converges.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.3]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $\sum_{i=1}^{\infty}\frac{1}{k^{2}}$
+\end_inset
+
+ converges.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Without loss of generality consider, for 
+\begin_inset Formula $2\leq m\leq n$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\left|\sum_{i=1}^{n}\frac{1}{k^{2}}-\sum_{i=1}^{m-1}\frac{1}{k^{2}}\right| & =\left|\sum_{i=m}^{n}\frac{1}{k^{2}}\right|\\
+ & \leq\left|\sum_{i=m}^{n}\frac{1}{k\left(k-1\right)}\right|\\
+ & =\left|-\left(\sum_{i=m}^{n}\frac{1}{k}-\frac{1}{k-1}\right)\right|\\
+ & =\left|-\left(\frac{1}{n}-\frac{1}{m-1}\right)\right|=\left|\frac{1}{n}-\frac{1}{m-1}\right|\\
+ & \leq\left|\frac{1}{n}\right|+\left|\frac{1}{m-1}\right|
+\end{align*}
+
+\end_inset
+
+Therefore pick 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $1/N\leq\epsilon/2$
+\end_inset
+
+ and 
+\begin_inset Formula $m\geq N+1$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+\left|\sum_{i=1}^{n}\frac{1}{k^{2}}-\sum_{i=1}^{m-1}\frac{1}{k^{2}}\right|\leq\left|\frac{1}{n}\right|+\left|\frac{1}{m-1}\right|\leq\frac{1}{N}+\frac{1}{N}\leq\epsilon
+\]
+
+\end_inset
+
+Hence the sequence of partial sums is Cauchy and so the series converges.
+\end_layout
+
+\begin_layout Proof
+Actually we can show that this series converges by computing its limit explicitl
+y.
+ Let 
+\begin_inset Formula $f\left(x\right)=x$
+\end_inset
+
+ be defined on 
+\begin_inset Formula $\left(-\pi,\pi\right)$
+\end_inset
+
+.
+ The Fourier series expansion of 
+\begin_inset Formula $f$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+f\left(x\right) & =\left(\frac{1}{2}\int_{-\pi}^{\pi}xdx\right)+\sum_{n=1}^{\infty}\left(\left(\int_{-\pi}^{\pi}x\cos\left(nx\right)dx\right)\cos\left(nx\right)+\left(\int_{-\pi}^{\pi}x\sin\left(nx\right)dx\right)\sin\left(nx\right)\right)\\
+ & =\sum_{n=1}^{\infty}\left(\left(\int_{-\pi}^{\pi}x\sin\left(nx\right)dx\right)\sin\left(nx\right)\right)
+\end{align*}
+
+\end_inset
+
+ by the 
+\begin_inset Quotes eld
+\end_inset
+
+oddness
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $x\cos\left(nx\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+, and so 
+\begin_inset Formula 
+\begin{align*}
+f\left(x\right) & =\sum_{n=1}^{\infty}\left(\left(\frac{2}{\pi n^{2}}\sin\left(n\pi\right)-\frac{2}{n}\cos\left(n\pi\right)\right)\sin\left(nx\right)\right)\\
+ & =2\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{n}\sin\left(nx\right)
+\end{align*}
+
+\end_inset
+
+Then by Parseval's identity 
+\begin_inset Formula 
+\[
+\frac{\pi^{2}}{3}=\frac{1}{2\pi}\int_{-\pi}^{\pi}x^{2}dx=\sum_{n=-\infty,n\eqcirc0}^{\infty}\left|\frac{\left(-1\right)^{n+1}}{n}\right|^{2}=\underset{n\neq0}{\sum_{n=\infty}^{\infty}}\frac{1}{n^{2}}=2\sum_{n=1}^{\infty}\frac{1}{n^{2}}
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\[
+\sum_{i=1}^{\infty}\frac{1}{n^{2}}=\frac{\pi^{2}}{6}
+\]
+
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \end_body
 \end_document
