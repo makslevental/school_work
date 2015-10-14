@@ -1,0 +1,2116 @@
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0
+
+alpha [*] :=
+ 1  0
+ 2  0
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  0
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  0
+;
+
+b [*] :=
+  1 0    11 0    21 0    31 0    41 0    51 0    61 0    71 0    81 0    91 0
+  2 0    12 0    22 0    32 0    42 0    52 0    62 0    72 0    82 0    92 0
+  3 0    13 0    23 0    33 0    43 0    53 0    63 0    73 0    83 0    93 0
+  4 0    14 0    24 0    34 0    44 0    54 0    64 0    74 0    84 0    94 0
+  5 0    15 0    25 0    35 0    45 0    55 0    65 0    75 0    85 0    95 0
+  6 0    16 0    26 0    36 0    46 0    56 0    66 0    76 0    86 0    96 0
+  7 0    17 0    27 0    37 0    47 0    57 0    67 0    77 0    87 0    97 0
+  8 0    18 0    28 0    38 0    48 0    58 0    68 0    78 0    88 0    98 0
+  9 0    19 0    29 0    39 0    49 0    59 0    69 0    79 0    89 0    99 0
+ 10 0    20 0    30 0    40 0    50 0    60 0    70 0    80 0    90 0   100 0
+;
+
+o = 4
+
+m = 3
+
+p [*] :=
+ 1  0
+ 2  0
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  0
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  0
+;
+
+beta = 0
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: NLP0012I 
+              Num      Status      Obj             It       time                 Location
+NLP0014I             1         OPT 0.033947211     1728 30.060036
+NLP0014I             2      INFEAS 3.0941312       35 0.212175
+Loaded instance "/tmp/at5408.nl"
+Constraints:          102
+Variables:            141 (120 integer)
+Auxiliaries:          241 (0 integer)
+
+Coin0506I Presolve 80 (-103) rows, 40 (-342) columns and 160 (-2322) elements
+Clp0000I Optimal - objective value 0
+Clp0032I Optimal objective 0 - 0 iterations time 0.002, Presolve 0.00
+Clp0000I Optimal - objective value 0
+NLP Heuristic: time limit reached.
+Clp0000I Optimal - objective value 0
+Optimality Based BT: 0 improved bounds
+Probing: 21 improved bounds
+NLP Heuristic: time limit reached.
+Cbc0013I At root node, 0 cuts changed objective from 0 to 0 in 1 passes
+Cbc0014I Cut generator 0 (Couenne convexifier cuts) - 0 row cuts average 0.0 elements, 21 column cuts (21 active)
+Cbc0010I After 0 nodes, 0 on tree, 1e+50 best solution, best possible 0 (0.30 seconds)
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Cbc0010I After 100 nodes, 15 on tree, 1e+50 best solution, best possible 0 (111.95 seconds)
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Cbc0010I After 200 nodes, 26 on tree, 1e+50 best solution, best possible 0 (149.86 seconds)
+Optimality Based BT: 0 improved bounds
+Couenne: new cutoff value 2.5690306283e+01 (191.94 seconds)
+Cbc0004I Integer solution of 25.690306 found after 7903 iterations and 288 nodes (161.59 seconds)
+Cbc0010I After 300 nodes, 34 on tree, 25.690306 best solution, best possible 0 (161.68 seconds)
+Optimality Based BT: 1 improved bounds
+Couenne: new cutoff value 8.3617010252e+00 (193.821 seconds)
+Couenne: new cutoff value 8.3616590961e+00 (193.824 seconds)
+Cbc0010I After 400 nodes, 51 on tree, 25.690306 best solution, best possible 0 (164.37 seconds)
+Couenne: new cutoff value 6.6456594454e+00 (194.97 seconds)
+Couenne: new cutoff value 6.6456527293e+00 (194.972 seconds)
+Couenne: new cutoff value 1.6417329638e+00 (195.181 seconds)
+ouenne: new cutoff value 5.4599005880e-01 (324.481 seconds)
+Couenne: new cutoff value 5.4561788816e-01 (324.484 seconds)
+Couenne: new cutoff value 5.4561748308e-01 (324.491 seconds)
+Couenne: new cutoff value 5.4561722593e-01 (324.494 seconds)
+Cbc0004I Integer solution of 0.54561644 found after 1163756 iterations and 16729 nodes (294.14 seconds)
+Cbc0001I Search completed - best objective 0.5456164407644677, took 1163756 iterations and 16729 nodes (294.24 seconds)
+Cbc0035I Maximum depth 46, 17 variables fixed on reduced cost
+
+ 	"Finished"
+
+Linearization cuts added at root node:        183
+Linearization cuts added in total:            183  (separation time: 0.000708s)
+Total solve time:                         294.239s (294.239s in branch-and-bound)
+Lower bound:                             0.545616
+Upper bound:                             0.545616  (gap: 0.00%)
+Branch-and-bound nodes:                     16729
+Performance of                           FBBT:	    3.58479s,    13406 runs. fix:          0 shrnk:    1.54848 ubd:          0 2ubd:    6.64349 infeas:          0
+
+couenne: Optimal
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.738659
+
+alpha [*] :=
+ 1   0.351765
+ 2  -0.551133
+ 3   0.000214365
+ 4  -0.000214365
+ 5  -0.000214365
+ 6   0.000214365
+ 7  -0.000214365
+ 8  -0.000214365
+ 9   0.000214365
+10  -0.000214365
+11  -0.232307
+12   0.000214365
+13  -0.000214365
+14  -0.000214365
+15  -0.000214365
+16  -0.000214365
+17   0.000214365
+18  -0.000214365
+19   0.000214365
+20   0.253304
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 0    13 1    23 1    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 0    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 4
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -2.02133
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: Couenne: new cutoff value 5.4561727809e-01 (0.029981 seconds)
+NLP0012I 
+              Num      Status      Obj             It       time                 Location
+NLP0014I             1         OPT 0.029131481      480 10.348672
+NLP0014I             2      INFEAS 0.99999995       32 0.196437
+Loaded instance "/tmp/at5408.nl"
+Constraints:          102
+Variables:            141 (120 integer)
+Auxiliaries:          241 (0 integer)
+
+Coin0506I Presolve 162 (-101) rows, 81 (-301) columns and 401 (-2281) elements
+Clp0006I 0  Obj 0 Primal inf 33.877229 (60)
+Clp0006I 60  Obj -5.4577184e-18
+Clp0000I Optimal - objective value 0
+Clp0032I Optimal objective 0 - 60 iterations time 0.002, Presolve 0.00
+Clp0000I Optimal - objective value 0
+NLP Heuristic: time limit reached.
+Clp0000I Optimal - objective value 0
+Optimality Based BT: 0 improved bounds
+Probing: 1 improved bounds
+NLP Heuristic: time limit reached.
+Cbc0031I 69 added rows had average density of 2.7101449
+Cbc0013I At root node, 69 cuts changed objective from 0 to 0 in 10 passes
+Cbc0014I Cut generator 0 (Couenne convexifier cuts) - 296 row cuts average 2.3 elements, 1 column cuts (1 active)
+Cbc0010I After 0 nodes, 0 on tree, 1e+50 best solution, best possible 0 (0.43 seconds)
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 14 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 8 improved bounds
+Cbc0010I After 100 nodes, 22 on tree, 1e+50 best solution, best possible 0 (21.91 seconds)
+bc0020I Exiting on maximum time
+Cbc0005I Partial search - best objective 0.023200207 (best possible 0), took 11149423 iterations and 88074 nodes (991.33 seconds)
+Cbc0035I Maximum depth 78, 3823 variables fixed on reduced cost
+
+ 	"Not finished"
+
+Linearization cuts added at root node:        263
+Linearization cuts added in total:            263  (separation time: 0.0008s)
+Total solve time:                          991.33s (991.33s in branch-and-bound)
+Lower bound:                                    0
+Upper bound:                            0.0232002  (gap: 2.32%)
+Branch-and-bound nodes:                     88074
+Performance of                           FBBT:	    25.4585s,    89880 runs. fix:          0 shrnk:    3.02178 ubd:   0.023128 2ubd:  0.0925118 infeas:          0
+
+couenne: Optimization interrupted on limit.
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.152318
+
+alpha [*] :=
+ 1   0.0904208
+ 2  -0.0941368
+ 3   0.000159724
+ 4  -0.000266467
+ 5  -0.000276944
+ 6   0.000158914
+ 7   0.000165075
+ 8   0.000189104
+ 9  -0.000166769
+10  -0.0409554
+11  -0.0581804
+12   0.000166769
+13   0.000289014
+14   0.000262044
+15   0.000159489
+16  -0.000166769
+17   0.000166769
+18  -0.000273845
+19  -0.000166769
+20   0.0331701
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 1    63 0    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 0    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 4
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.522227
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: Couenne: new cutoff value 2.3200859843e-02 (0.036304 seconds)
+NLP0012I 
+              Num      Status      Obj             It       time                 Location
+NLP0014I             1         OPT 0.021287975      391 8.934512
+NLP0014I             2      INFEAS 1.9999999       15 0.096085
+Loaded instance "/tmp/at5408.nl"
+Constraints:          102
+Variables:            141 (120 integer)
+Auxiliaries:          241 (0 integer)
+
+Coin0506I Presolve 162 (-101) rows, 81 (-301) columns and 401 (-2281) elements
+Clp0006I 0  Obj 0 Primal inf 3.8686271 (60)
+Clp0006I 58  Obj -2.7963816e-18 Primal inf 0.27379136 (21)
+Clp0006I 80  Obj -1.9458155e-18
+Clp0000I Optimal - objective value 0
+Clp0032I Optimal objective 0 - 80 iterations time 0.002, Presolve 0.00
+Clp0000I Optimal - objective value 0
+NLP Heuristic: time limit reached.
+Clp0000I Optimal - objective value 0
+Optimality Based BT: 0 improved bounds
+Probing: 1 improved bounds
+NLP Heuristic: time limit reached.
+Cbc0031I 67 added rows had average density of 2.7014925
+Cbc0013I At root node, 67 cuts changed objective from 0 to 0 in 10 passes
+Cbc0014I Cut generator 0 (Couenne convexifier cuts) - 242 row cuts average 2.4 elements, 1 column cuts (1 active)
+Cbc0010I After 0 nodes, 0 on tree, 1e+50 best solution, best possible 0 (0.36 seconds)
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 1 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Couenne: new cutoff value 2.2743069221e-02 (15.6669 seconds)
+Cbc0004I Integer solution of 0.022741883 found after 4358 iterations and 28 nodes (6.51 seconds)
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 0 improved bounds
+Optimality Based BT: 40 improved bounds
+Couenne: new cutoff value 2.2002253801e-02 (22.3006 seconds)
+Couenne: new cutoff value 2.1825243471e-02 (22.303 seconds)
+Couenne: new cutoff value 2.1824714199e-02 (22.3057 seconds)
+Cbc0004I Integer solution of 0.021823436 found after 9362 iterations and 70 nodes (13.15 seconds)
+Cbc0010I After 100 nodes, 23 on tree, 0.021823436 best solution, best possible 0 (14.71 seconds)
+bc0020I Exiting on maximum time
+Cbc0005I Partial search - best objective 0.01691614 (best possible 0), took 10867907 iterations and 111314 nodes (992.83 seconds)
+Cbc0035I Maximum depth 78, 2506 variables fixed on reduced cost
+
+ 	"Not finished"
+
+Linearization cuts added at root node:        263
+Linearization cuts added in total:            263  (separation time: 0.000763s)
+Total solve time:                         992.835s (992.835s in branch-and-bound)
+Lower bound:                                    0
+Upper bound:                            0.0169161  (gap: 1.69%)
+Branch-and-bound nodes:                    111314
+Performance of                           FBBT:	    32.6944s,   113687 runs. fix:          0 shrnk:    6.12408 ubd:  0.0204393 2ubd:  0.0817573 infeas:          0
+
+couenne: Optimization interrupted on limit.
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.130067
+
+alpha [*] :=
+ 1   0.0750578
+ 2  -0.0859408
+ 3   0.000297005
+ 4  -0.000297005
+ 5   0.00648766
+ 6   0.000297005
+ 7  -0.000297005
+ 8   0.000297005
+ 9   0.000297005
+10  -0.0287904
+11  -0.0458654
+12   0.000297005
+13   0.000255965
+14   0.000231125
+15  -0.000297005
+16   0.000297005
+17   0.000297005
+18  -0.000297005
+19  -0.000297005
+20   0.0303651
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 0    64 1    74 1    84 1    94 1
+  5 0    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 4
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  1
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.460513
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: NLP0012I 
+              Num      Status      Obj             It       time                 Location
+NLP0014I             1         OPT 0.042669492      469 10.733228
+NLP0014I             2      INFEAS 3.9999991       22 0.134762
+Loaded instance "/tmp/at5408.nl"
+Constraints:          102
+Variables:            141 (120 integer)
+Auxiliaries:          241 (0 integer)
+bc0020I Exiting on maximum time
+Cbc0005I Partial search - best objective 1e+50 (best possible 0), took 2929571 iterations and 149475 nodes (989.09 seconds)
+Cbc0035I Maximum depth 25, 0 variables fixed on reduced cost
+
+ 	"Not finished"
+
+Linearization cuts added at root node:        183
+Linearization cuts added in total:            183  (separation time: 0.000689s)
+Total solve time:                         989.097s (989.097s in branch-and-bound)
+Lower bound:                                    0
+Upper bound:                                  inf  (gap: --)
+Branch-and-bound nodes:                    149475
+Performance of                           FBBT:	    12.5665s,    81286 runs. fix:          0 shrnk:          0 ubd:          0 2ubd:    90.6051 infeas:          0
+
+couenne: Optimization interrupted on limit.
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.130067
+
+alpha [*] :=
+ 1   0.0750578
+ 2  -0.0859408
+ 3   0.000297005
+ 4  -0.000297005
+ 5   0.00648766
+ 6   0.000297005
+ 7  -0.000297005
+ 8   0.000297005
+ 9   0.000297005
+10  -0.0287904
+11  -0.0458654
+12   0.000297005
+13   0.000255965
+14   0.000231125
+15  -0.000297005
+16   0.000297005
+17   0.000297005
+18  -0.000297005
+19  -0.000297005
+20   0.0303651
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 0    64 1    74 1    84 1    94 1
+  5 0    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 6
+
+m = 3
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  1
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.460513
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: NLP0012I 
+              Num      Status      Obj             It       time                 Location
+NLP0014I             1         OPT 0.023852718      356 8.517522
+NLP0014I             2      INFEAS 3.9999991       19 0.120449
+Loaded instance "/tmp/at5408.nl"
+Constraints:          102
+Variables:            141 (120 integer)
+Auxiliaries:          241 (0 integer)
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.680865
+
+alpha [*] :=
+ 1   0.356038
+ 2  -0.479079
+ 3   0.000214365
+ 4   0.000214365
+ 5  -0.000214365
+ 6   0.000214365
+ 7   0.000214365
+ 8   0.000214365
+ 9   0.000214365
+10   0.000200634
+11  -0.1645
+12  -0.000214365
+13  -0.000214365
+14   0.000214365
+15  -0.000214365
+16   0.000214365
+17  -0.000214365
+18   0.000214365
+19   0.000214365
+20   0.283262
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 0
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 0    43 1    53 1    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 0    15 1    25 0    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 0    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 0   100 1
+;
+
+o = 6
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = 2.17494
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: Couenne: new cutoff value 4.6357768035e-01 (0.024807 seconds)
+NLP0012I 
+ sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.130437
+
+alpha [*] :=
+ 1   0.0716463
+ 2  -0.0937292
+ 3  -0.000264389
+ 4  -0.000281181
+ 5  -0.000264389
+ 6  -0.000280615
+ 7  -0.000167123
+ 8  -0.000310674
+ 9   0.000310674
+10  -0.029481
+11  -0.0427279
+12  -0.000310674
+13  -0.000310674
+14  -0.000281181
+15  -0.000310674
+16   0.000173745
+17   0.000280615
+18  -0.000263585
+19  -0.000310674
+20   0.0199873
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 0    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 0    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 6
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.304108
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: Couenne: new cutoff value 1.7013817427e-02 (0.029093 seconds)
+NLP0012I 
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.119951
+
+alpha [*] :=
+ 1   0.0558187
+ 2  -0.0650703
+ 3   0.000254796
+ 4   0.000254796
+ 5   0.000254796
+ 6  -0.000254796
+ 7  -0.000254796
+ 8   0.000254796
+ 9   0.000254796
+10  -0.0248401
+11  -0.0625876
+12  -0.000254796
+13  -0.000254796
+14   0.0110521
+15   0.000254796
+16   0.000254796
+17  -0.000254796
+18  -0.000254796
+19   0.000254796
+20   0.0487974
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 6
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  1
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.277722
+
+Couenne 0.5.3 -- an Open-Source solver for Mixed Integer Nonlinear Optimization
+Mailing list: couenne@list.coin-or.org
+Instructions: http://www.coin-or.org/Couenne
+couenne: 
+ANALYSIS TEST: NLP0012I 
+sqrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.119951
+
+alpha [*] :=
+ 1   0.0558187
+ 2  -0.0650703
+ 3   0.000254796
+ 4   0.000254796
+ 5   0.000254796
+ 6  -0.000254796
+ 7  -0.000254796
+ 8   0.000254796
+ 9   0.000254796
+10  -0.0248401
+11  -0.0625876
+12  -0.000254796
+13  -0.000254796
+14   0.0110521
+15   0.000254796
+16   0.000254796
+17  -0.000254796
+18  -0.000254796
+19   0.000254796
+20   0.0487974
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 8
+
+m = 3
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  1
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.277722
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.611993
+
+alpha [*] :=
+ 1   0.306986
+ 2  -0.453837
+ 3  -0.000214365
+ 4   0.000214365
+ 5   0.000214365
+ 6   0.000214365
+ 7  -0.000214365
+ 8  -0.000214365
+ 9   0.000214365
+10   0.000214365
+11  -0.192581
+12  -0.000214365
+13  -0.000214365
+14  -0.000248612
+15   0.000214365
+16  -0.000214365
+17  -0.000214365
+18   0.000214365
+19  -0.000214365
+20   0.192974
+;
+
+b [*] :=
+  1 0    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 0    32 1    42 1    52 0    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 0
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 0    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 0    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 8
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -1.73588
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.126354
+
+alpha [*] :=
+ 1   0.0710799
+ 2  -0.0800674
+ 3  -0.000270162
+ 4  -0.000240265
+ 5  -0.000259577
+ 6   8.48095e-05
+ 7  -0.000229412
+ 8   0.000282568
+ 9   0.000217259
+10  -0.0328607
+11  -0.0443058
+12   0.000240265
+13  -0.000282568
+14   0.000240265
+15  -0.00021026
+16  -0.000163696
+17  -0.000270162
+18  -0.000240265
+19  -0.000214421
+20   0.0381895
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 0    51 1    61 0    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 0    43 0    53 1    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 0    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 0    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 0    70 1    80 1    90 1   100 1
+;
+
+o = 8
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.299076
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.1194
+
+alpha [*] :=
+ 1   0.055369
+ 2  -0.0652689
+ 3   0.00024691
+ 4   0.00024691
+ 5  -0.000244632
+ 6  -0.00024691
+ 7   0.00031228
+ 8   0.00024691
+ 9   0.00049382
+10  -0.0237344
+11  -0.0616863
+12   0.00024691
+13   0.00024691
+14   0.0118626
+15  -0.00024691
+16  -0.00024691
+17  -0.00024691
+18  -0.00024691
+19  -0.00024691
+20   0.0491965
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 0    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 8
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  1
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.274206
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.1194
+
+alpha [*] :=
+ 1   0.055369
+ 2  -0.0652689
+ 3   0.00024691
+ 4   0.00024691
+ 5  -0.000244632
+ 6  -0.00024691
+ 7   0.00031228
+ 8   0.00024691
+ 9   0.00049382
+10  -0.0237344
+11  -0.0616863
+12   0.00024691
+13   0.00024691
+14   0.0118626
+15  -0.00024691
+16  -0.00024691
+17  -0.00024691
+18  -0.00024691
+19  -0.00024691
+20   0.0491965
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 0    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 10
+
+m = 3
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  1
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.274206
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.611993
+
+alpha [*] :=
+ 1   0.306986
+ 2  -0.453837
+ 3   0.000214365
+ 4   0.000214365
+ 5   0.000214365
+ 6   0.000214365
+ 7   0.000214365
+ 8   0.000214365
+ 9   0.000214365
+10   0.000214365
+11  -0.192581
+12   0.000214365
+13   0.000214365
+14   0.000214365
+15   0.000214365
+16   0.000214365
+17   0.000214365
+18   0.000214365
+19   0.000214365
+20   0.192974
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 0
+  3 1    13 1    23 1    33 1    43 0    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 0    84 1    94 1
+  5 1    15 0    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 0    26 1    36 1    46 1    56 1    66 0    76 0    86 1    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 0    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 10
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -1.73588
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.12492
+
+alpha [*] :=
+ 1   0.0684378
+ 2  -0.0819062
+ 3  -0.000235748
+ 4   0.000235748
+ 5  -0.000235748
+ 6  -0.000282568
+ 7   0.00026212
+ 8  -0.000282568
+ 9  -0.000235748
+10  -0.0315595
+11  -0.0432449
+12   0.000282568
+13  -0.000235748
+14   0.00018411
+15  -0.000282568
+16  -0.000282568
+17   0.000235748
+18  -0.000282568
+19   0.000276756
+20   0.0366828
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 0    71 0    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 0    72 1    82 0    92 1
+  3 1    13 1    23 1    33 0    43 1    53 1    63 0    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 0
+  6 0    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 10
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.096171
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.113674
+
+alpha [*] :=
+ 1   0.050136
+ 2  -0.0637178
+ 3   0.000244141
+ 4   0.000244141
+ 5   0.000244141
+ 6  -0.000244141
+ 7   0.000244141
+ 8   0.000246974
+ 9   0.000244141
+10  -0.0245864
+11  -0.0619069
+12   0.000244141
+13  -0.000244141
+14   0.00708496
+15   0.000244141
+16   0.000244141
+17  -0.000244141
+18  -0.000244141
+19  -0.000244141
+20   0.0431294
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 0    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 0    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 0
+;
+
+o = 10
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  1
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.493407
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.113674
+
+alpha [*] :=
+ 1   0.050136
+ 2  -0.0637178
+ 3   0.000244141
+ 4   0.000244141
+ 5   0.000244141
+ 6  -0.000244141
+ 7   0.000244141
+ 8   0.000246974
+ 9   0.000244141
+10  -0.0245864
+11  -0.0619069
+12   0.000244141
+13  -0.000244141
+14   0.00708496
+15   0.000244141
+16   0.000244141
+17  -0.000244141
+18  -0.000244141
+19  -0.000244141
+20   0.0431294
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 0    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 0    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 0
+;
+
+o = 12
+
+m = 3
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  1
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.493407
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.8048
+
+alpha [*] :=
+ 1   0.412218
+ 2  -0.609244
+ 3   0.000214365
+ 4   0.000214365
+ 5   0.000214365
+ 6   0.000214365
+ 7   0.000214365
+ 8  -0.000214365
+ 9   0.000214365
+10  -0.000214365
+11  -0.194814
+12   0.000214365
+13  -0.000214365
+14   0.000214365
+15   0.000214365
+16   0.000214365
+17   0.000214365
+18   0.000214365
+19   0.000214365
+20   0.262008
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 0    82 1    92 1
+  3 1    13 1    23 1    33 0    43 0    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 0    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 0    65 1    75 0    85 1    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 0    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 0    49 1    59 1    69 1    79 1    89 1    99 0
+ 10 0    20 1    30 1    40 1    50 1    60 0    70 1    80 1    90 1   100 1
+;
+
+o = 12
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.330448
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.118818
+
+alpha [*] :=
+ 1   0.0668016
+ 2  -0.0809209
+ 3  -0.000268156
+ 4   0.000233272
+ 5   0.000179448
+ 6   0.000179448
+ 7   0.000233272
+ 8   0.000179448
+ 9   0.000179448
+10  -0.0260813
+11  -0.0403025
+12  -0.000179448
+13  -0.00026982
+14   0.000187068
+15  -0.000178584
+16   0.000179448
+17   0.000179448
+18   0.000268755
+19  -0.000179448
+20   0.0283185
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 0    23 1    33 0    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 0    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 0    45 1    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 1
+  7 1    17 1    27 1    37 0    47 1    57 1    67 1    77 1    87 0    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 0    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 12
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.170463
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.11665
+
+alpha [*] :=
+ 1   0.0646853
+ 2  -0.0766708
+ 3   0.00023235
+ 4   0.00023235
+ 5  -0.00023235
+ 6   0.00023235
+ 7  -0.00894599
+ 8   0.000212174
+ 9  -0.000224767
+10  -0.0265713
+11  -0.0417208
+12  -0.00023235
+13  -0.00023235
+14   0.00023235
+15  -0.00023235
+16  -0.00023235
+17  -0.000205521
+18  -0.00023235
+19  -0.00023235
+20   0.031894
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 0    61 1    71 1    81 1    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 0    64 1    74 1    84 1    94 0
+  5 0    15 1    25 1    35 1    45 1    55 1    65 1    75 0    85 1    95 1
+  6 0    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 0    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 0    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 0    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 12
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  1
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.754547
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.11665
+
+alpha [*] :=
+ 1   0.0646853
+ 2  -0.0766708
+ 3   0.00023235
+ 4   0.00023235
+ 5  -0.00023235
+ 6   0.00023235
+ 7  -0.00894599
+ 8   0.000212174
+ 9  -0.000224767
+10  -0.0265713
+11  -0.0417208
+12  -0.00023235
+13  -0.00023235
+14   0.00023235
+15  -0.00023235
+16  -0.00023235
+17  -0.000205521
+18  -0.00023235
+19  -0.00023235
+20   0.031894
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 1    51 0    61 1    71 1    81 1    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 0    64 1    74 1    84 1    94 0
+  5 0    15 1    25 1    35 1    45 1    55 1    65 1    75 0    85 1    95 1
+  6 0    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 0    96 1
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 0    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 0    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 14
+
+m = 3
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  1
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.754547
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.680273
+
+alpha [*] :=
+ 1   0.356346
+ 2  -0.477331
+ 3   0.000214365
+ 4   0.000214365
+ 5   0.000214365
+ 6   0.000214365
+ 7   0.000214365
+ 8   0.000214365
+ 9   0.000214365
+10   0.000214365
+11  -0.164334
+12   0.000214365
+13   0.000214365
+14   0.000214365
+15   0.000214365
+16   0.000214365
+17   0.000214365
+18   0.000214365
+19   0.000214365
+20   0.284493
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 1    81 0    91 1
+  2 1    12 0    22 1    32 1    42 1    52 1    62 1    72 1    82 1    92 1
+  3 1    13 1    23 1    33 0    43 1    53 1    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 0    74 0    84 1    94 1
+  5 1    15 0    25 0    35 1    45 1    55 1    65 1    75 1    85 0    95 1
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 0    86 1    96 0
+  7 1    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 0    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 0    99 1
+ 10 1    20 1    30 0    40 0    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 14
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = 2.22849
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.113027
+
+alpha [*] :=
+ 1   0.0579824
+ 2  -0.0835661
+ 3  -0.000229715
+ 4  -0.000310436
+ 5  -0.000231968
+ 6   0.000310436
+ 7  -0.000310436
+ 8   0.000229715
+ 9   0.000286393
+10  -0.0221876
+11  -0.0360959
+12   0.000229715
+13  -0.000229715
+14   0.000286393
+15   0.000229715
+16  -0.000310436
+17   0.000212983
+18  -0.000310436
+19  -0.000310436
+20   0.0251722
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 1    71 0    81 1    91 1
+  2 0    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 0    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 0    64 0    74 1    84 1    94 0
+  5 1    15 1    25 1    35 1    45 0    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 0    66 1    76 1    86 1    96 1
+  7 1    17 1    27 0    37 1    47 1    57 1    67 0    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 14
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.0975528
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.109984
+
+alpha [*] :=
+ 1   0.0609132
+ 2  -0.0730194
+ 3  -0.000221157
+ 4  -0.00375
+ 5   0.000221157
+ 6   0.000221157
+ 7  -0.000221157
+ 8  -0.000240023
+ 9   0.00017787
+10  -0.0252813
+11  -0.0383921
+12  -0.000221157
+13   0.000221157
+14  -0.000221157
+15  -0.000221157
+16  -0.000221157
+17   0.000221157
+18   0.000221157
+19  -0.000221157
+20   0.0304369
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 0    71 1    81 1    91 1
+  2 0    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 0    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 1    64 1    74 1    84 1    94 0
+  5 1    15 1    25 1    35 0    45 1    55 1    65 1    75 0    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 0    96 1
+  7 1    17 0    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 14
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  1
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.0418402
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.109984
+
+alpha [*] :=
+ 1   0.0609132
+ 2  -0.0730194
+ 3  -0.000221157
+ 4  -0.00375
+ 5   0.000221157
+ 6   0.000221157
+ 7  -0.000221157
+ 8  -0.000240023
+ 9   0.00017787
+10  -0.0252813
+11  -0.0383921
+12  -0.000221157
+13   0.000221157
+14  -0.000221157
+15  -0.000221157
+16  -0.000221157
+17   0.000221157
+18   0.000221157
+19  -0.000221157
+20   0.0304369
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 1    61 0    71 1    81 1    91 1
+  2 0    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 0    43 1    53 0    63 0    73 1    83 1    93 1
+  4 1    14 1    24 0    34 1    44 1    54 1    64 1    74 1    84 1    94 0
+  5 1    15 1    25 1    35 0    45 1    55 1    65 1    75 0    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 0    96 1
+  7 1    17 0    27 1    37 0    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 16
+
+m = 3
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  1
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.0418402
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.611993
+
+alpha [*] :=
+ 1   0.306986
+ 2  -0.453837
+ 3  -0.000249627
+ 4   0.000214365
+ 5   0.000214365
+ 6   0.000214365
+ 7   0.000214365
+ 8   0.000214365
+ 9  -0.000214365
+10   0.000214365
+11  -0.192581
+12  -0.000214365
+13   0.000214365
+14  -0.000214365
+15   0.000214365
+16   0.000214365
+17   0.000214365
+18  -0.000214365
+19   0.000214365
+20   0.192974
+;
+
+b [*] :=
+  1 1    11 1    21 1    31 1    41 1    51 0    61 1    71 1    81 1    91 1
+  2 1    12 1    22 0    32 1    42 1    52 1    62 0    72 1    82 1    92 0
+  3 1    13 1    23 0    33 1    43 1    53 0    63 1    73 1    83 1    93 1
+  4 1    14 1    24 1    34 1    44 1    54 1    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 1    45 1    55 1    65 1    75 1    85 1    95 1
+  6 1    16 1    26 1    36 0    46 1    56 1    66 0    76 0    86 0    96 1
+  7 1    17 1    27 1    37 1    47 0    57 1    67 1    77 1    87 1    97 1
+  8 1    18 1    28 1    38 1    48 1    58 1    68 1    78 1    88 0    98 1
+  9 1    19 1    29 1    39 0    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 0    20 0    30 0    40 1    50 1    60 1    70 1    80 1    90 1   100 1
+;
+
+o = 16
+
+m = 4
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  0
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -1.73588
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.11295
+
+alpha [*] :=
+ 1   0.0606595
+ 2  -0.0797235
+ 3   0.000261026
+ 4   0.000239596
+ 5   0.000239596
+ 6  -0.000238898
+ 7   0.000274174
+ 8   0.000238898
+ 9   0.000282568
+10  -0.0237625
+11  -0.0403517
+12   0.000274174
+13  -0.000238898
+14   0.000238898
+15   0.000274174
+16   0.000165812
+17  -0.000282568
+18   0.000274174
+19   0.000238898
+20   0.0229862
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 0    51 1    61 1    71 0    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 0    43 1    53 0    63 1    73 1    83 1    93 1
+  4 0    14 1    24 0    34 1    44 1    54 0    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 0    45 1    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 0
+  7 0    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 0    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 0    80 1    90 1   100 0
+;
+
+o = 16
+
+m = 5
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.364554
+
+qrt(sum{c in coordinates} alpha[c]*alpha[c]) = 0.11295
+
+alpha [*] :=
+ 1   0.0606595
+ 2  -0.0797235
+ 3   0.000261026
+ 4   0.000239596
+ 5   0.000239596
+ 6  -0.000238898
+ 7   0.000274174
+ 8   0.000238898
+ 9   0.000282568
+10  -0.0237625
+11  -0.0403517
+12   0.000274174
+13  -0.000238898
+14   0.000238898
+15   0.000274174
+16   0.000165812
+17  -0.000282568
+18   0.000274174
+19   0.000238898
+20   0.0229862
+;
+
+b [*] :=
+  1 1    11 1    21 0    31 1    41 0    51 1    61 1    71 0    81 1    91 1
+  2 1    12 1    22 1    32 1    42 1    52 1    62 1    72 1    82 0    92 1
+  3 1    13 1    23 1    33 0    43 1    53 0    63 1    73 1    83 1    93 1
+  4 0    14 1    24 0    34 1    44 1    54 0    64 1    74 1    84 1    94 1
+  5 1    15 1    25 1    35 0    45 1    55 1    65 1    75 1    85 1    95 0
+  6 1    16 1    26 1    36 1    46 1    56 1    66 1    76 1    86 1    96 0
+  7 0    17 1    27 1    37 1    47 1    57 1    67 1    77 1    87 1    97 1
+  8 1    18 0    28 1    38 1    48 1    58 1    68 1    78 1    88 1    98 1
+  9 1    19 1    29 1    39 1    49 1    59 1    69 1    79 1    89 1    99 1
+ 10 1    20 1    30 1    40 1    50 1    60 1    70 0    80 1    90 1   100 0
+;
+
+o = 16
+
+m = 6
+
+p [*] :=
+ 1  1
+ 2  1
+ 3  0
+ 4  0
+ 5  0
+ 6  0
+ 7  0
+ 8  0
+ 9  0
+10  1
+11  1
+12  0
+13  0
+14  0
+15  0
+16  0
+17  0
+18  0
+19  0
+20  1
+;
+
+beta = -0.364554
+

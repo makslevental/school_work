@@ -4,6 +4,7 @@
 \usepackage[latin9]{inputenc}
 \setlength{\parskip}{\medskipamount}
 \setlength{\parindent}{0pt}
+\usepackage{float}
 \usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{amsbsy}
@@ -11,6 +12,8 @@
 \usepackage{amssymb}
 \usepackage{cancel}
 \usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{esint}
 
 \makeatletter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
@@ -39,7 +42,9 @@
 
 \makeatother
 
+\usepackage{listings}
   \providecommand{\corollaryname}{Corollary}
+\renewcommand{\lstlistingname}{Listing}
 
 \begin{document}
 
@@ -53,7 +58,108 @@
 
 \maketitle
 Time spent: too much but time well spent is never wasted.
+
+Collaborators: Chris Gianelli.
 \begin{enumerate}
+\item [1.1] The model for this SVM is similar to the typical SVM model
+except with some binary integer variables and constraints on those
+variables: the standard SVM (with data $\mathbf{x}_{i}\in\mathbb{R}^{n}$
+for $i=1,\dots,k$ and class assignments $y_{i}\in\left\{ -1,1\right\} $)
+is 
+\begin{align*}
+\min_{\boldsymbol{\alpha}\in\mathbb{R}^{n}} & \left\Vert \boldsymbol{\alpha}\right\Vert \\
+\text{s.t.} & y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)\geq1\,\forall i\in\left\{ 1,\dots,k\right\} 
+\end{align*}
+The ``incomplete SVM'' introduces two new binary integer variables
+$\mathbf{b}\in\left\{ 0,1\right\} ^{k}$ and $\mathbf{p}\in\left\{ 0,1\right\} ^{n}$.
+They are incorporated as such: \textbf{$b_{i}$ }determines whether
+constraint $y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)\geq1\iff y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)-1\geq0$
+is active. This is effected by multipltying the constraint by $b_{i}:$
+\[
+b_{i}\left(y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)-1\right)\geq0
+\]
+If $b_{i}=1$ then the constraint is left as is and if $b_{i}=0$
+then the constraint is automatically satisfied as $0\geq0$. Then
+the constraint on how many constraint equations can be active is effected
+by using 0-norm:
+\[
+\left\Vert \mathbf{b}\right\Vert _{0}\geq100-K
+\]
+The sparsity of $\boldsymbol{\alpha}$ is controlled by $p_{i}$ in
+the same way. The margin constraints transform further into 
+\[
+b_{i}\left(y_{i}\left(\sum_{i=1}^{n}p_{i}\alpha_{i}x_{i}-\beta\right)-1\right)\geq0
+\]
+and maximum ``density'' (as opposed to sparsity) is controlled by
+\[
+\left\Vert \mathbf{p}\right\Vert _{0}\leq M
+\]
+Therefore the model is for some $K,M$ 
+\begin{align*}
+\min_{\underset{\underset{,\mathbf{p}\in\left\{ 0,1\right\} ^{n}}{\mathbf{b}\in\left\{ 0,1\right\} ^{k}}}{\boldsymbol{\alpha}\in\mathbb{R}^{n}}} & \left\Vert \boldsymbol{\alpha}\right\Vert \\
+\text{s.t.} & b_{i}\left(y_{i}\left(\sum_{i=1}^{n}p_{i}\alpha_{i}x_{i}-\beta\right)-1\right)\geq0\,\forall i\in\left\{ 1,\dots,k\right\} \\
+\left\Vert \mathbf{b}\right\Vert _{0} & \geq100-K\\
+\left\Vert \mathbf{p}\right\Vert _{0} & \leq M
+\end{align*}
+
+\item [1.2] I wrote AMPL code instead of GAMS code because AMPL $\gg$
+GAMS.
+\begin{lstlisting}
+set cnts := 1 .. 20;
+set dps := 1 .. 100; 
+param x{dps,cnts};
+param y{dps};
+param omit_points;
+param nz_a;
+var afa {cnts};
+var b {dps} binary integer;
+var p {cnts} binary integer;
+var bta;
+minimize obj: sum{c in cnts} alpha[c]*alpha[c];
+s.t. mgn{d in dps}: b[d]*(y[d]*((sum{c in cnts} p[c]*afa[c]*x[d,c])-bta)-1)>=0;
+s.t. cstnt_msk:  sum{d in dps} b[d] >= 100 - omit_points;
+s.t. non_z_a: sum{c in cnts} p[c] <= nz_a; 
+
+data;
+
+param y := <snip>
+param x := <snip>
+
+script;
+
+set omitted_data;
+set max_nonzero_alpha;
+param om{omitted_data};
+param ma{max_nonzero_alpha};
+let omitted_data := 4 .. 16 by 2;
+let max_nonzero_alpha := 3 .. 6;
+for {o in omitted_data} {
+	for {m in max_nonzero_alpha} {
+		let omit_points := o;
+		let nz_a := m;
+		option solver couenne;
+		solve;
+		display sqrt(sum{c in cnts} afa[c]*afa[c]);
+		display afa;
+		display b;
+		display o;
+		display m;
+		display p;
+		display beta;
+	}
+}
+\end{lstlisting}
+
+\item [1.3]Pictures
+\begin{figure}[H]
+\includegraphics[scale=0.75]{mu_table.jpeg}\protect\caption{$\mu\left(k,p\right)$ table}
+
+
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.5]{mu_pic.jpeg}\protect\caption{$\mu\left(k,p\right)$ picture}
+\end{figure}
+
 \item [2.1]Claim: For $A\in\mathbb{R}^{m\times n}$, $B\in\mathbb{R}^{k\times n}$
 , if for all $x$ it's the case that $Ax=0$ implies $Bx=0$ then
 $B=CA$ for some $C\in\mathbb{R}^{k\times m}$.
@@ -232,26 +338,42 @@ and $A=D$, and applying the induction hypothesis
 \end{proof}
 \end{proof}
 \item [2.5]Claim: For $V$ and $n$-dimensional real vector space and $U,W$
-$m$-dimensional subspaces of $V$, if $u\perp W$ for all $u\in U\backslash\left\{ 0\right\} $
-then there exists $w\in W\backslash\left\{ 0\right\} $ such that
-$w\perp U\backslash\left\{ 0\right\} $.
+$m$-dimensional subspaces of $V$, if there exists $u^{'}\in U\backslash\left\{ 0\right\} $
+such that $u^{'}\perp W$ then there exists $w\in W\backslash\left\{ 0\right\} $
+such that $w\perp U\backslash\left\{ 0\right\} $.
 
 \begin{proof}
-Fix bases $\left\{ u_{1},\dots,u_{m}\right\} ,\left\{ w_{1},\dots,w_{m}\right\} $
-for for $U,W$. The hypothesis $u\perp W$ for all $u\in U\backslash\left\{ 0\right\} $
-implies that $u_{j}\cdot w_{i}=0$ for all $i,j$. Let 
+Suppose not. Then there does not exist $w$ such that $w\cdot u=0$
+for all $u\in U$. That means for every $w$ there exists $u$ such
+that $u\cdot w\neq0$. Fix a basis $\left\{ w_{1},\dots,w_{m}\right\} $
+for $W$. Then there exist $\left\{ u_{1},\dots,u_{m}\right\} $ such
+that $w_{i}\cdot u_{i}\neq0$ for all $i=1,\dots,m$. Note that $\left\{ u_{1},\dots,u_{m}\right\} $
+can be chosen such that they are necessarily linearly dependent. Why?
+Let 
 \[
-w=\sum_{i=1}^{m}w_{i}
+\upsilon_{i}=u_{i}-\left(u_{i}\cdot u^{'}\right)\frac{u^{'}}{\left\Vert u^{'}\right\Vert _{2}}
 \]
-Then $w\perp U\backslash\left\{ 0\right\} $ since for arbitrary $u\in U\backslash\left\{ 0\right\} $
+and then $u^{'}\perp\upsilon_{i}$ for all $i=1,\dots,m$ (but $w_{i}\cdot\upsilon_{i}$
+is still non-zero) and hence $\left\{ u^{'},\upsilon_{1},\dots,\upsilon_{m}\right\} $
+would be a linearly independent set of $m+1$ vectors in $U$ an $m$-dimensional
+vector space. So there exist $\alpha_{i}$ such that 
 \[
-u=\sum_{i=1}^{m}\alpha_{i}u_{i}
+\sum_{i=1}^{m}\alpha_{i}\upsilon_{i}=0
 \]
-and 
+or
 \[
-w\cdot u=\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}u_{j}\cdot w_{i}=0
+\upsilon_{1}=-\sum_{i=2}^{m}\alpha_{i}\upsilon_{i}
+\]
+Then 
+\[
+\sum_{i=1}^{n}\left(w_{i}\cdot\upsilon_{i}\right)w_{i}=\left(w_{1}\cdot\left(-\sum_{i=2}^{m}\alpha_{i}\upsilon_{i}\right)\right)w_{1}+\sum_{i=2}^{n}\left(w_{i}\cdot\upsilon_{i}\right)w_{i}
+\]
+\[
+\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\upsilon_{2}\right)w_{2}=\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\left(c\upsilon_{1}\right)\right)w_{2}=\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\left(c\upsilon_{1}\right)\right)w_{2}
 \]
 
+
+And I have no clue..................
 \end{proof}
 \item [3.1]Claim: $\left\langle \left\langle I\right\rangle \right\rangle \geq1$
 for all matrix norms $\left\langle \left\langle \cdot\right\rangle \right\rangle $. 
@@ -597,8 +719,31 @@ implies $Lu=0$. Hence 0 is an eigenvalue.
 of the zero eigenvalue is $1$.
 
 \begin{proof}
-We prove a strong fact: the dimension of the eigenspace associated
-with the eigenvalue 0 is the number of connected components of $G$.
+If the graph is connected then every row of $L$, i.e. $L_{i}=D_{i}-A_{i}$,
+has non-zero entries and for $u=\left(\underbrace{1,\dots,1}_{\left|V\right|}\right)$
+it's the case that 
+\[
+L_{i}\cdot u=D_{i}\cdot u-A_{i}\cdot u=d\left(i\right)-2\left|\left\{ v\in V\big|\left(i,v\right)\in E\right\} \right|=0
+\]
+Therefore $Lu=0$. Assume $w_{h}\neq w_{g}$ for some $h,g$ and $Lw=0$.
+Then $w^{T}Lw=0$ but consider 
+\[
+w^{T}Lw=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(w_{i}-w_{j}\right)^{2}
+\]
+because of connectedness there exists $E'=\left\{ \left(h,x_{0}\right),\left(x_{1},x_{2}\right),\dots,\left(x_{k},g\right)\right\} \subset E$
+where for some $t,v$ it's the case that $w_{v}\neq w_{t}$ (otherwise
+if no such $t,v$ existed then $w_{h}=w_{0}=\cdots=w_{k}=w_{g}$)
+\begin{align*}
+w^{T}Lw & =\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(w_{i}-w_{j}\right)^{2}\\
+ & \geq\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E'}\left(w_{i}-w_{j}\right)^{2}\\
+ & \geq\frac{1}{2}\left(w_{t}-w_{v}\right)^{2}>0
+\end{align*}
+which is a contradiction. Therefore $Lu=0\iff u=\left(\underbrace{1,\dots,1}_{\left|V\right|}\right)$
+and so the dimension of the eigenspace is $\dim\left(\left\{ u\right\} \right)=1$.\end{proof}
+\begin{cor*}
+The dimension of the eigenspace associated with the eigenvalue 0 is
+the number of connected components of $G$. \end{cor*}
+\begin{proof}
 Indeed the number of connected components of the graph corresponds
 to the block structure of the Laplacian. If there exists more than
 one block, e.g. 
@@ -822,17 +967,186 @@ $z\in\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
 such that $\left\Vert z\right\Vert _{2}=1$.
 
 \begin{proof}
-sdf
+By the rank-nullity theorem $\dim\left(\ker\left[X\right]\right)+\text{rank}=n$.
+Suppose $\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} =\left\{ 0\right\} $.
+Then we can find a basis $\left\{ x_{1},\dots,x_{n-k}\right\} $of
+$\ker\left[X\right]$ such that $\dim\left(\ker\left[X\right]\right)=n-k$
+and $\left\{ x_{1},\dots,x_{n-k}\right\} \perp\left\{ v_{1},\dots,v_{k+1}\right\} $.
+But then 
+\[
+\dim\left(\left\{ x_{1},\dots,x_{n-k}\right\} \right)+\dim\left(\left\{ v_{1},\dots,v_{k+1}\right\} \right)=n-k+k+1=n+1>n=\dim\left(\mathbb{R}^{n}\right)
+\]
+Hence there exists $z\in\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
+and we are free to normalize it.
 \end{proof}
 \item Lemma: $\left\langle \left\langle A-X\right\rangle \right\rangle _{2}\geq\sigma_{k+1}$.
 
 \begin{proof}
-Using $z$ from part (a) 
+Using $z$, and the fact that $\left\Vert z\right\Vert _{2}=1$, from
+part (a) 
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}\left\Vert \left(A-X\right)x\right\Vert _{2}\\
+ & \geq\left\Vert \left(A-X\right)z\right\Vert _{2}\\
+ & =\left\Vert Az-Xz\right\Vert _{2}\\
+ & =\left\Vert Az\right\Vert _{2}
+\end{align*}
+since $z\in\ker\left(X\right)$. Then since $z\in V$ wher $V$ might
+be a strict subset (potentially many $\alpha_{i}=0$ but $\sum_{i}\left|\alpha_{i}\right|^{2}=1$)
+of $\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
 \[
-\left\langle \left\langle A-X\right\rangle \right\rangle _{2}=\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}
+z=\sum_{i=1}^{k+1}\alpha_{i}v_{i}
 \]
+. Then
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert Az\right\Vert _{2}\\
+ & =\left\Vert U\Sigma V^{T}\left(\sum_{i=1}^{k+1}\alpha_{i}v_{i}\right)\right\Vert _{2}\\
+ & =\left\Vert U\Sigma\left(\sum_{i=1}^{k+1}\alpha_{i}V^{T}v_{i}\right)\right\Vert _{2}\\
+ & =\left\Vert U\Sigma\left(\sum_{i=1}^{k+1}\alpha_{i}e_{i}\right)\right\Vert _{2}
+\end{align*}
+where $e_{i}\in\mathbb{R}^{n}$. Then
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert U\left(\sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}e_{i}\right)\right\Vert _{2}\\
+ & =\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}Ue_{i}\right\Vert _{2}\\
+ & =\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}u_{i}\right\Vert _{2}
+\end{align*}
+Since $\sigma_{1}\geq\cdots\geq\sigma_{k+1}$
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}u_{i}\right\Vert _{2}\\
+ & =\sigma_{k+1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\right\Vert _{2}
+\end{align*}
+Then since $\sum_{i}\left|\alpha_{i}\right|^{2}=1$ and $u_{j}^{T}\cdot u_{i}=\delta_{ij}$
+\begin{align*}
+\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\sigma_{k+1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\right\Vert _{2}\\
+ & =\sigma_{k+1}\left(\sum_{i=1}^{k+1}\alpha_{i}u_{i}\right)^{T}\left(\sum_{i=1}^{k+1}\alpha_{i}u_{i}\right)\\
+ & =\sigma_{k+1}\left(\sum_{i,j=1}^{k+1}\alpha_{i}\alpha_{j}u_{j}^{T}u_{i}\right)\\
+ & =\sigma_{k+1}\left(\sum_{i,j=1}^{k+1}\alpha_{i}\alpha_{j}\delta_{ij}\right)=\sigma_{k+1}\sum_{i=1}^{k+1}\left|\alpha_{i}\right|^{2}=\sigma_{k+1}
+\end{align*}
+
+\end{proof}
+\item Lemma: For $A_{k}=\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}$ 
+\[
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle =\sigma_{k+1}
+\]
+
+
+\begin{proof}
+Since $\left\{ v_{1},\dots,v_{k+1}\right\} $spans $\mathbb{R}^{k+1}$,
+consider for $x=\sum_{i=1}^{k+1}\alpha_{i}v_{i}$ such that $\sum_{i=1}^{k+1}\left|\alpha_{i}\right|^{2}=1$
+(so that $\left\Vert x\right\Vert _{2}=1$) 
+\begin{align*}
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}\left\Vert \left(A-A_{k}\right)x\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \left(A-A_{k}\right)\sum_{i=1}^{k+1}\alpha_{i}v_{i}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\left(A-A_{k}\right)v_{i}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k+1}\alpha_{i}\left(\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}\right)v_{i}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}
+\end{align*}
+Since $v_{j}^{T}\cdot v_{i}=\delta_{ij}$ and $v_{k+1}\perp\left\{ v_{1},\dots,v_{k}\right\} $.
+Then
+\begin{align*}
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\left(U\Sigma V^{T}\right)v_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}U\Sigma e_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}U\sigma_{i}e_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\sigma_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
+ & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \alpha_{k+1}u_{k+1}\sigma_{k+1}\right\Vert _{2}=\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\sigma_{k+1}\left\Vert \alpha_{k+1}u_{k+1}\right\Vert _{2}
+\end{align*}
+Clearly this is maximized for $\alpha_{k+1}=1$ and hence
+\begin{align*}
+\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\sigma_{k+1}\left\Vert \alpha_{k+1}u_{k+1}\right\Vert _{2}\\
+ & =\sigma_{k+1}\left\Vert u_{k+1}\right\Vert _{2}\\
+ & =\sigma_{k+1}
+\end{align*}
+
 \end{proof}
 \end{enumerate}
+\item [5.6]Durer and Escher
+\begin{figure}[H]
+\includegraphics[scale=0.75]{d5}\protect\caption{Durer rank 5 approximation}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.75]{d15}\protect\caption{Durer rank 15 approximation}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.75]{d30}\protect\caption{Durer rank 30 approximation}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.75]{e5}\protect\caption{Escher rank 5 approximation}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.75]{e15}\protect\caption{Escher rank 15 approximation}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.75]{e30}\protect\caption{Escher rank 30 approximation}
+\end{figure}
+
+\item [6.1]Claim: $U,V\in\mathbb{R}$ be open. Then $U\times V$ is open
+in $\mathbb{R}^{2}$.
+
+\begin{proof}
+Take $\mathbf{x}=\left(x_{1},x_{2}\right)\in U\times V$. We seek
+and open ball around $\mathbf{x}$ contained in $U\times V$. Let
+$U,V\in\mathbb{R}$ be open. Then $x_{1}\in U$ and there exists an
+openball centered on $x_{1}$such that $B_{x_{1}}\left(\epsilon_{1}\right)\subset U$.
+Similarly there exists an openball centered on $x_{1}$such that $B_{x_{2}}\left(\epsilon_{2}\right)\subset V$.
+Therefore $\left(x_{1},x_{2}\right)\in B_{x_{1}}\left(\epsilon_{1}\right)\times B_{x_{2}}\left(\epsilon_{2}\right)\subset U\times V$.
+Take $\epsilon=\min\left\{ \epsilon_{1},\epsilon_{2}\right\} $ and
+the openball centered on $\left(x_{1},x_{2}\right)$ with radius $\epsilon$
+contained in $U\times V$, i.e.
+\[
+B_{\left(x_{1},x_{2}\right)}\left(\epsilon\right)\subset U\times V
+\]
+
+\end{proof}
+\item [6.2]Claim: $\sum_{i=1}^{\infty}\frac{1}{k!}$ converges.
+
+\begin{proof}
+Note that $1/k!\leq2^{1-k}$ and 
+\[
+\frac{1}{2}\sum_{i=0}^{k}\frac{1}{2^{k}}=\frac{1}{2}\left(\frac{1-\left(\frac{1}{2}\right)^{k+1}}{1-\frac{1}{2}}\right)=1-\left(\frac{1}{2}\right)^{k+1}\leq1
+\]
+Therefore $\sum_{i=1}^{n}\frac{1}{k!}$ is monotonically increasing
+and bounded above by $1$ and hence converges.
+\end{proof}
+\item [6.3]Claim: $\sum_{i=1}^{\infty}\frac{1}{k^{2}}$ converges.
+
+\begin{proof}
+Without loss of generality consider, for $2\leq m\leq n$ 
+\begin{align*}
+\left|\sum_{i=1}^{n}\frac{1}{k^{2}}-\sum_{i=1}^{m-1}\frac{1}{k^{2}}\right| & =\left|\sum_{i=m}^{n}\frac{1}{k^{2}}\right|\\
+ & \leq\left|\sum_{i=m}^{n}\frac{1}{k\left(k-1\right)}\right|\\
+ & =\left|-\left(\sum_{i=m}^{n}\frac{1}{k}-\frac{1}{k-1}\right)\right|\\
+ & =\left|-\left(\frac{1}{n}-\frac{1}{m-1}\right)\right|=\left|\frac{1}{n}-\frac{1}{m-1}\right|\\
+ & \leq\left|\frac{1}{n}\right|+\left|\frac{1}{m-1}\right|
+\end{align*}
+Therefore pick $N$ such that $1/N\leq\epsilon/2$ and $m\geq N+1$
+then
+\[
+\left|\sum_{i=1}^{n}\frac{1}{k^{2}}-\sum_{i=1}^{m-1}\frac{1}{k^{2}}\right|\leq\left|\frac{1}{n}\right|+\left|\frac{1}{m-1}\right|\leq\frac{1}{N}+\frac{1}{N}\leq\epsilon
+\]
+Hence the sequence of partial sums is Cauchy and so the series converges.
+
+Actually we can show that this series converges by computing its limit
+explicitly. Let $f\left(x\right)=x$ be defined on $\left(-\pi,\pi\right)$.
+The Fourier series expansion of $f$
+\begin{align*}
+f\left(x\right) & =\left(\frac{1}{2}\int_{-\pi}^{\pi}xdx\right)+\sum_{n=1}^{\infty}\left(\left(\int_{-\pi}^{\pi}x\cos\left(nx\right)dx\right)\cos\left(nx\right)+\left(\int_{-\pi}^{\pi}x\sin\left(nx\right)dx\right)\sin\left(nx\right)\right)\\
+ & =\sum_{n=1}^{\infty}\left(\left(\int_{-\pi}^{\pi}x\sin\left(nx\right)dx\right)\sin\left(nx\right)\right)
+\end{align*}
+ by the ``oddness'' of $x\cos\left(nx\right)$ for all $n$, and
+so 
+\begin{align*}
+f\left(x\right) & =\sum_{n=1}^{\infty}\left(\left(\frac{2}{\pi n^{2}}\sin\left(n\pi\right)-\frac{2}{n}\cos\left(n\pi\right)\right)\sin\left(nx\right)\right)\\
+ & =2\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{n}\sin\left(nx\right)
+\end{align*}
+Then by Parseval's identity 
+\[
+\frac{\pi^{2}}{3}=\frac{1}{2\pi}\int_{-\pi}^{\pi}x^{2}dx=\sum_{n=-\infty,n\eqcirc0}^{\infty}\left|\frac{\left(-1\right)^{n+1}}{n}\right|^{2}=\underset{n\neq0}{\sum_{n=\infty}^{\infty}}\frac{1}{n^{2}}=2\sum_{n=1}^{\infty}\frac{1}{n^{2}}
+\]
+and therefore
+\[
+\sum_{i=1}^{\infty}\frac{1}{n^{2}}=\frac{\pi^{2}}{6}
+\]
+\end{proof}
 \end{enumerate}
 
 \end{document}

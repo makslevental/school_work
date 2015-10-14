@@ -82,14 +82,20 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
+
+\size largest
 Stochastic Processes, SDEs, and Option Pricing
 \end_layout
 
 \begin_layout Section
+
+\size largest
 Measure Theory in 5 Minutes
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -115,6 +121,8 @@ Measure Theory in 5 Minutes
 
 \begin_deeper
 \begin_layout Enumerate
+
+\size largest
 \begin_inset Formula $\emptyset\in\mathcal{F}$
 \end_inset
 
@@ -122,6 +130,8 @@ Measure Theory in 5 Minutes
 \end_layout
 
 \begin_layout Enumerate
+
+\size largest
 \begin_inset Formula $F\in\mathcal{F}\Rightarrow F^{C}\in\mathcal{F}$
 \end_inset
 
@@ -134,6 +144,8 @@ Measure Theory in 5 Minutes
 \end_layout
 
 \begin_layout Enumerate
+
+\size largest
 \begin_inset Formula $A_{i}\in\mathcal{F}\Rightarrow\bigcup_{i=1}^{\infty}A_{i}\in\mathcal{F}$
 \end_inset
 
@@ -151,6 +163,8 @@ Measure Theory in 5 Minutes
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 The pair 
 \begin_inset Formula $\left(\Omega,\mathcal{F}\right)$
 \end_inset
@@ -179,98 +193,33 @@ The pair
 \end_layout
 
 \begin_layout Definition
-Given any family 
-\begin_inset Formula $\mathcal{U}$
-\end_inset
 
- of subsets of 
-\begin_inset Formula $\Omega$
-\end_inset
-
- there is a smallest 
-\begin_inset Formula $\sigma$
-\end_inset
-
--algebra 
-\begin_inset Formula $\mathcal{H_{U}}$
-\end_inset
-
- containing 
-\begin_inset Formula $\mathcal{U}$
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-\mathcal{H_{U}}=\bigcap\left\{ \mathcal{H}:\mathcal{H}\,\sigma\text{-algebra of }\Omega,\mathcal{U}\subset\mathcal{H}\right\} 
-\]
-
-\end_inset
-
-(intersection of all sigma algebras containing 
-\begin_inset Formula $\mathcal{U}$
-\end_inset
-
-)
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Definition
-If 
-\begin_inset Formula $\mathcal{U}$
-\end_inset
-
- is the collection of all open subsets of a topological space 
-\begin_inset Formula $\Omega$
-\end_inset
-
- then 
-\begin_inset Formula $\mathcal{B}=\mathcal{H_{U}}$
-\end_inset
-
- is called the 
-\emph on
-Borel 
-\begin_inset Formula $\sigma$
-\end_inset
-
--algebra 
-\emph default
-or topological 
-\emph on
-
-\begin_inset Formula $\sigma$
-\end_inset
-
--algebra 
-\emph default
-and 
-\begin_inset Formula $B\in\mathcal{B}$
-\end_inset
-
- are called the 
-\emph on
-Borel sets.
- 
-\end_layout
-
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Definition
+\size largest
 A 
 \emph on
 measure 
 \emph default
 is a function function 
-\begin_inset Formula $\mu:\mathcal{F}\rightarrow\mathbb{R}$
+\begin_inset Formula $\mu:\mathcal{F}\rightarrow\mathbb{R}_{+}$
 \end_inset
 
-.
+ such that 
+\begin_inset Formula $\mu\left(\emptyset\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is countably additive
+\begin_inset Formula 
+\[
+\mu\left(\bigcup_{i=1}^{\infty}E_{i}\right)=\sum_{i=1}^{\infty}E_{i}
+\]
+
+\end_inset
+
+ .
  It 
 \begin_inset Quotes eld
 \end_inset
@@ -310,6 +259,8 @@ finite-measure space
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 Let 
 \begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
 \end_inset
@@ -361,50 +312,23 @@ I.e.
 -algebra
 \emph default
  associated with the domain.
- For a measure space 
-\begin_inset Formula $\left(\Omega,\mathcal{F},\mu\right)$
-\end_inset
-
- an 
-\begin_inset Formula $\mathcal{F}-\mathcal{B}$
-\end_inset
-
--
-\emph on
-measurable
-\emph default
- function 
-\begin_inset Formula $X:\Omega\rightarrow\mathbb{R}^{n}$
-\end_inset
-
- is such that 
-\begin_inset Formula 
-\[
-X^{-1}\left(U\right)=\left\{ \omega\in\Omega;X\left(\omega\right)\in U\right\} \in\mathcal{F}
-\]
-
-\end_inset
-
-for all open sets 
-\begin_inset Formula $U\in\mathbb{R}^{n}$
-\end_inset
-
-(this is because the open sets are the elements of the Borel 
-\emph on
-
-\begin_inset Formula $\sigma$
-\end_inset
-
--algebra
-\emph default
-).
+ 
 \end_layout
 
 \begin_layout --Separator--
 
 \end_layout
 
+\begin_layout Standard
+
+\size largest
+Talk a little about defining the Lebesgue integral in terms of simple functions
+ and approximating continuous functions by simple functions.
+\end_layout
+
 \begin_layout Definition
+
+\size largest
 The 
 \emph on
 abstract
@@ -477,6 +401,8 @@ Lebesgue integral
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 The unique translation invariant measure that assigns 
 \begin_inset Formula $\lambda\left(\left[a,b\right)\right)=b-a$
 \end_inset
@@ -499,6 +425,8 @@ The unique translation invariant measure that assigns
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 If 
 \begin_inset Formula $\mu\left(\Omega\right)=1$
 \end_inset
@@ -548,6 +476,8 @@ probability space
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 For 
 \begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
 \end_inset
@@ -576,6 +506,8 @@ measurable
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Every random variable induces a probability measure 
 \begin_inset Formula $\mu_{X}$
 \end_inset
@@ -627,55 +559,15 @@ or
  
 \end_layout
 
-\begin_layout --Separator--
-
-\end_layout
-
-\begin_layout Definition
-If 
-\begin_inset Formula $\int_{\Omega}\left|X\left(\omega\right)\right|dP\left(\omega\right)<\infty$
-\end_inset
-
- then the 
-\emph on
-expectation 
-\emph default
-is defined as 
-\begin_inset Formula 
-\[
-E\left[X\right]:=\int_{\Omega}X\left(\omega\right)dP\left(\omega\right)=\int_{\mathbb{R}^{n}}xd\mu_{X}\left(x\right)
-\]
-
-\end_inset
-
-And generally if 
-\begin_inset Formula $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$
-\end_inset
-
- is 
-\begin_inset Formula $\left(\mathcal{B}^{n},\mathcal{B}\right)$
-\end_inset
-
- measurable and 
-\begin_inset Formula $\int_{\Omega}\left|f\left(X\left(\omega\right)\right)\right|dP\left(\omega\right)<\infty$
-\end_inset
-
- then 
-\begin_inset Formula 
-\[
-E\left[f\left(X\right)\right]:=\int_{\Omega}f\left(X\left(\omega\right)\right)dP\left(\omega\right)=\int_{\mathbb{R}^{n}}f\left(x\right)d\mu_{X}\left(x\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
+
+\size largest
 Stochastic Processes
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 A stochastic process is a parameterized collection of random variables 
 \begin_inset Formula $\left\{ X_{t}\right\} _{t\in T}$
 \end_inset
@@ -696,6 +588,8 @@ A stochastic process is a parameterized collection of random variables
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 The parameter space for 
 \begin_inset Formula $T$
 \end_inset
@@ -709,6 +603,8 @@ The parameter space for
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 For fixed 
 \begin_inset Formula $t$
 \end_inset
@@ -779,6 +675,8 @@ functions from
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 The 
 \emph on
 finite-dimensional distributions
@@ -803,6 +701,8 @@ finite-dimensional distributions
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 These distributions determine many, but not all (and in some important cases
  crucially), properties the process 
 \begin_inset Formula $X$
@@ -841,6 +741,8 @@ natural
 \end_layout
 
 \begin_layout Theorem
+
+\size largest
 \begin_inset CommandInset label
 LatexCommand label
 name "thm:Kolmogorov's-extension-theorem."
@@ -870,6 +772,8 @@ Kolmogorov's extension theorem.
 
 \begin_deeper
 \begin_layout Enumerate
+
+\size largest
 Invariance under permutation: for all permutations 
 \begin_inset Formula $p$
 \end_inset
@@ -890,6 +794,8 @@ Invariance under permutation: for all permutations
 \end_layout
 
 \begin_layout Enumerate
+
+\size largest
 Invariance under marginalization over probability 1 events: 
 \begin_inset Formula 
 \[
@@ -902,6 +808,8 @@ Invariance under marginalization over probability 1 events:
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 then there exists a probability space 
 \begin_inset Formula $\left(\Omega,\mathcal{F},P\right)$
 \end_inset
@@ -923,6 +831,8 @@ then there exists a probability space
 
 \end_deeper
 \begin_layout Standard
+
+\size largest
 Kolmogorov's extension is actually an if and only if: any stochastic process
  trivially has these properties.
  The power of Kolmogorov extension is that the typical workflow is to define
@@ -932,6 +842,8 @@ Kolmogorov's extension is actually an if and only if: any stochastic process
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 Kolmogorov extension guarnatees there is a correspondent probability space
  and process.
 \end_layout
@@ -942,139 +854,14 @@ Kolmogorov extension guarnatees there is a correspondent probability space
 \end_layout
 
 \begin_layout Section
+
+\size largest
 Brownian Motion
 \end_layout
 
-\begin_layout Standard
-Envisage the same one dimensional random walk on 
-\begin_inset Formula $\mathbb{Z}$
-\end_inset
-
-, with spatial increments 
-\begin_inset Formula $\Delta x$
-\end_inset
-
- and time increments 
-\begin_inset Formula $\Delta t$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- be Bernoulli random variables iid with 
-\begin_inset Formula 
-\[
-P\left(X_{i}=0\right)=\frac{1}{2}\:\text{and}\:P\left(X_{i}=1\right)=\frac{1}{2}
-\]
-
-\end_inset
-
-Then 
-\begin_inset Formula $\text{Var}\left(X_{i}\right)=\frac{1}{4}$
-\end_inset
-
-.
- Define 
-\begin_inset Formula 
-\[
-S_{n}\coloneqq\sum_{i=1}^{n}X_{i}
-\]
-
-\end_inset
-
-
-\begin_inset Formula $S_{n}$
-\end_inset
-
- is the number of steps to the right (not the distance but just the number
- of steps).
- Note that by iid 
-\begin_inset Formula 
-\[
-ES_{n}=\sum_{i=1}^{n}EX_{i}=\frac{n}{2}
-\]
-
-\end_inset
-
-Then let 
-\begin_inset Formula 
-\[
-X\left(n\Delta t\right)\coloneqq\underbrace{S_{n}\Delta x}_{\text{positive dist}}-\underbrace{\left(n-S_{n}\right)\left(-\Delta x\right)}_{\text{negative dist}}=\left(2S_{n}-n\right)\Delta x
-\]
-
-\end_inset
-
-i.e.
- the position of the particle at time 
-\begin_inset Formula $n\Delta t$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{eqnarray*}
-\text{Var}\left(X\left(n\Delta t\right)\right) & = & \text{Var}\left(\left(2S_{n}-n\right)\Delta x\right)\\
- & = & \left(\Delta x\right)^{2}\text{Var}\left(\left(2S_{n}-n\right)\right)\\
- & = & 4\left(\Delta x\right)^{2}\text{Var}\left(S_{n}\right)\\
- & = & 4\left(\Delta x\right)^{2}\text{Var}\left(\sum_{i=1}^{n}X_{i}\right)\\
- & \text{} & X_{i}\text{ iid }\Rightarrow\\
- & = & 4\left(\Delta x\right)^{2}n\text{Var}\left(X_{i}\right)\\
- & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
-\end{eqnarray*}
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\begin{eqnarray*}
-X\left(n\Delta t\right) & = & \left(2S_{n}-n\right)\Delta x\\
- & = & \sqrt{n}\Delta x\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}\left(\frac{\left(\sum_{i=1}^{n}X_{i}\right)-\frac{n}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}n\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{n/4}}\right)\\
- & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
-\end{eqnarray*}
-
-\end_inset
-
-The CLT
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Actually a weaker theorem called Laplace-De Moivre.
-\end_layout
-
-\end_inset
-
- with 
-\begin_inset Formula 
-\[
-\sqrt{Dt}\left[\left(\frac{\frac{1}{n}\sum_{i=1}^{n}X_{i}-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]=\sqrt{Dt}\left[\left(\frac{\bar{X}-EX_{i}}{\sigma_{X}/\sqrt{n}}\right)\right]
-\]
-
-\end_inset
-
-implies that 
-\begin_inset Formula 
-\begin{eqnarray*}
-\lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
- & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
- & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
-\end{eqnarray*}
-
-\end_inset
-
-So again 
-\begin_inset Formula $X\left(t\right)\sim\text{n}\left(0,Dt\right)$
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Definition
+
+\size largest
 Fix 
 \begin_inset Formula $x\in\mathbb{R}$
 \end_inset
@@ -1164,6 +951,8 @@ Such a process
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 One that has these finite-dimensional distributions.
 \end_layout
 
@@ -1175,6 +964,8 @@ One that has these finite-dimensional distributions.
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 Wiener's theorem.
 \end_layout
 
@@ -1211,6 +1002,8 @@ Wiener's theorem.
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 Which as discussed are product measures on a function space.
 \end_layout
 
@@ -1221,6 +1014,8 @@ Which as discussed are product measures on a function space.
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Here are some of the basic properties of Brownian motion as defined by defn.
  
 \begin_inset CommandInset ref
@@ -1233,6 +1028,8 @@ reference "eq:brownianmotiondef"
 \end_layout
 
 \begin_layout Enumerate
+
+\size largest
 Fix the range of 
 \begin_inset Formula $B_{t}$
 \end_inset
@@ -1275,9 +1072,7 @@ i.e.
  such that 
 \begin_inset Formula 
 \begin{eqnarray*}
-E^{x}\left[\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]\right] & \coloneqq & \int\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]dP^{x}\\
- & = & \frac{1}{\sqrt[k]{2\pi t_{1}\left(t_{2}-t_{1}\right)\cdots\left(t_{k}-t_{k-1}\right)}}\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]e^{-\frac{\left(x_{1}-x_{0}\right)^{2}}{2t_{1}}}e^{-\frac{\left(x_{1}-x_{2}\right)^{2}}{2\left(t_{2}-t_{1}\right)}}\cdots\\
- &  & e^{-\frac{\left(x_{k-1}-x_{k}\right)^{2}}{2\left(t_{k}-t_{k-1}\right)}}dx_{1}dx_{2}\cdots dx_{k}
+E^{x}\left[\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]\right] & \coloneqq & \int\exp\left[i\sum_{j=1}^{k}u_{j}B_{t_{j}}\right]dP^{x}
 \end{eqnarray*}
 
 \end_inset
@@ -1287,6 +1082,8 @@ Therefore in general
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 With 
 \begin_inset Formula $B_{t_{j}}=\mathbf{B}_{t_{j}}\in\mathbb{R}^{n}$
 \end_inset
@@ -1352,6 +1149,8 @@ and because of the cascading
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 Just think about running your finger down and across the covariance matrix.
 \end_layout
 
@@ -1383,6 +1182,8 @@ n\left(t_{i}-t_{j}\right) & \text{otherwise}
 \end_layout
 
 \begin_layout Enumerate
+
+\size largest
 \begin_inset Formula $B_{t}$
 \end_inset
 
@@ -1422,6 +1223,7 @@ E^{x}\left[\left(B_{t_{j}}-B_{t_{j-1}}\right)\left(B_{t_{i}}-B_{t_{i-1}}\right)\
 \begin_layout Enumerate
 
 \series bold
+\size largest
 \begin_inset Formula $B_{t}$
 \end_inset
 
@@ -1435,6 +1237,8 @@ is
 
 \begin_deeper
 \begin_layout Definition*
+
+\size largest
 Suppose 
 \begin_inset Formula $X_{t}$
 \end_inset
@@ -1459,34 +1263,10 @@ modification
 \begin_inset Formula $Y_{t}$
 \end_inset
 
- if 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-for all 
+ if for all 
 \begin_inset Formula $t$
 \end_inset
 
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
 
 \begin_inset Formula 
 \[
@@ -1499,6 +1279,8 @@ P\left(\left\{ \omega;X_{t}\left(\omega\right)=Y_{t}\left(\omega\right)\right\} 
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Note that 
 \begin_inset Formula $X_{t}$
 \end_inset
@@ -1512,6 +1294,8 @@ Note that
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 The same finite-dimensional distributions
 \end_layout
 
@@ -1524,6 +1308,7 @@ The same finite-dimensional distributions
 \begin_layout Theorem
 
 \series bold
+\size largest
 Kolmogorov's continuity theorem
 \series default
 .
@@ -1543,6 +1328,8 @@ Kolmogorov's continuity theorem
 \end_layout
 
 \begin_layout Theorem
+
+\size largest
 \begin_inset Formula 
 \[
 E\left[\left|X_{t}-X_{s}\right|^{\alpha}\right]\leq D\left|t-s\right|^{1+\beta}\quad\text{for all }0\leq s,t\leq T
@@ -1554,6 +1341,8 @@ E\left[\left|X_{t}-X_{s}\right|^{\alpha}\right]\leq D\left|t-s\right|^{1+\beta}\
 \end_layout
 
 \begin_layout Corollary
+
+\size largest
 With 
 \begin_inset Formula $\alpha=4,\beta=1,D=n\left(n+2\right)$
 \end_inset
@@ -1572,10 +1361,14 @@ With
 
 \end_deeper
 \begin_layout Section
+
+\size largest
 Ito Integral
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Return to the original problem of finding a reasonable interpretation of
  
 \begin_inset Formula 
@@ -1622,6 +1415,8 @@ as soon as I define
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 Let 
 \begin_inset Formula $0\leq Q<T$
 \end_inset
@@ -1728,182 +1523,8 @@ around the edges
 \end_layout
 
 \begin_layout Definition
-\begin_inset CommandInset label
-LatexCommand label
-name "def:spaceofitofunctions"
 
-\end_inset
-
-Let 
-\begin_inset Formula $\mathcal{F}_{t}$
-\end_inset
-
- be the 
-\begin_inset Formula $\sigma$
-\end_inset
-
--algebra that 
-\begin_inset Formula $B_{t}$
-\end_inset
-
- is adapted to and 
-\begin_inset Formula $\mathcal{F}=\cup_{t\geq0}\mathcal{F}_{t}$
-\end_inset
-
-.
- Define 
-\begin_inset Formula $\mathcal{V}=\mathcal{V}\left(Q,T\right)$
-\end_inset
-
- to be the class of processes
-\begin_inset Formula 
-\[
-g\left(t,\omega\right):\left[0,\infty\right)\times\Omega\rightarrow\mathbb{R}
-\]
-
-\end_inset
-
-such that
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-\begin_inset Formula $\left(t,\omega\right)\rightarrow g\left(t,\omega\right)$
-\end_inset
-
- is 
-\begin_inset Formula $\mathcal{B}\times\mathcal{F}$
-\end_inset
-
--measurable, where 
-\begin_inset Formula $\mathcal{B}=\sigma\left(\left[0,\infty\right)\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $g\left(t,\omega\right)$
-\end_inset
-
- is 
-\begin_inset Formula $\mathcal{F}_{t}$
-\end_inset
-
--adapted.
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]<\infty$
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "enu:squareintegralprocessspace"
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-Parts 1 and 2 of defn.
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "def:itointegrable"
-
-\end_inset
-
- are fairly obvious but part 3 is mysterious.
- Firstly what does it even mean? The integral in argument of the expectation
- is a mundane Lebesgue integral and it integrates out the 
-\begin_inset Formula $t$
-\end_inset
-
- dependence in 
-\begin_inset Formula $g\left(t,\omega\right)$
-\end_inset
-
-.
- So
-\begin_inset Formula 
-\[
-X\left(\omega\right)=\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds
-\]
-
-\end_inset
-
-and hence the integral is just a mundane random variable and 
-\begin_inset Formula $E\left[X\right]$
-\end_inset
-
- is the expectation of that random variable.
- In fact 
-\begin_inset Formula 
-\begin{equation}
-\left\Vert g\right\Vert _{\mathcal{V}}=\sqrt{\left|E\left[\int_{Q}^{T}\left(g\left(s,\omega\right)\right)^{2}ds\right]\right|}\label{eq:itonorm}
-\end{equation}
-
-\end_inset
-
-is a semi-norm and is complete
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Cauche sequences converge.
-\end_layout
-
-\end_inset
-
-.
- Let's call this norm the 
-\emph on
-ito norm.
- 
-\emph default
-This property is necessary for the 
-\emph on
-Ito
-\emph default
- 
-\emph on
-isometry
-\emph default
- which will be discussed shortly.
-\end_layout
-
-\begin_layout Standard
-We will define the integral on simple processes and then use the next lemma
- to extend it.
-\end_layout
-
-\begin_layout Lemma
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:itoisometry"
-
-\end_inset
-
-(Ito isometry) If 
-\begin_inset Formula $S$
-\end_inset
-
- is simple and bounded then
-\begin_inset Formula 
-\[
-E\left[\left(\int_{Q}^{T}S\left(s,\omega\right)dB_{s}\right)^{2}\right]=E\left[\int_{Q}^{T}\left(S\left(s,\omega\right)\right)^{2}ds\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
+\size largest
 \begin_inset CommandInset label
 LatexCommand label
 name "def:(The-Ito-integral)."
@@ -1943,10 +1564,14 @@ Ito integral
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Alright finally we can actually do an ito integral!
 \end_layout
 
 \begin_layout Example
+
+\size largest
 \begin_inset CommandInset label
 LatexCommand label
 name "exa:firstitointegrals"
@@ -1971,6 +1596,8 @@ Assume
 
 \begin_deeper
 \begin_layout Proof
+
+\size largest
 Let 
 \begin_inset Formula $t_{j}^{\left(n\right)}=j\cdot2^{-n}$
 \end_inset
@@ -2043,6 +1670,8 @@ reference "eq:firstintstep3"
 
 \end_deeper
 \begin_layout Proof
+
+\size largest
 Let 
 \begin_inset Formula $\Delta B_{t_{j}^{\left(n\right)}}\coloneqq B_{t_{j+1}^{\left(n\right)}}-B_{t_{j}^{\left(n\right)}}$
 \end_inset
@@ -2119,6 +1748,8 @@ and so
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Note the extra 
 \begin_inset Formula $\frac{1}{2}t$
 \end_inset
@@ -2131,10 +1762,14 @@ Note the extra
 \end_layout
 
 \begin_layout Section
+
+\size largest
 Ito's Formula
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 To derive a calculus of stochastic integrals we take a counterintuitive
  approach.
  Note that 
@@ -2190,6 +1825,8 @@ Ito processes
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 Let 
 \begin_inset Formula $B_{t}$
 \end_inset
@@ -2243,6 +1880,8 @@ P\left(\int_{0}^{t}\left|u\right|ds<\infty\text{ for }t\geq0\right)=1
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 This class of processes is closed under smooth maps.
  Eqn.
  
@@ -2288,6 +1927,8 @@ The main tool in stochastic calculus is the Ito formula
 \end_layout
 
 \begin_layout Theorem
+
+\size largest
 (Ito formula) Let 
 \begin_inset Formula $X_{t}$
 \end_inset
@@ -2328,14 +1969,20 @@ dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
 \end_layout
 
 \begin_layout Section
+
+\size largest
 SDEs
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Finally let's solve some god damn stochastic differential equations! 
 \end_layout
 
 \begin_layout Example
+
+\size largest
 The population growth model from Ch.
  1 is
 \begin_inset Formula 
@@ -2431,6 +2078,8 @@ geometric Brownian motion
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 \begin_inset Formula $\frac{dn}{dt}=an$
 \end_inset
 
@@ -2539,10 +2188,14 @@ E\left[N_{t}\right] & = & E\left[N_{0}\right]e^{\left(r-\frac{1}{2}\alpha^{2}\ri
 \end_layout
 
 \begin_layout SpecialSection
+
+\size largest
 Option pricing
 \end_layout
 
 \begin_layout Definition
+
+\size largest
 An 
 \emph on
 option 
@@ -2582,16 +2235,22 @@ writing the contract
 \end_layout
 
 \begin_layout Example
+
+\size largest
 Here is an example of using call options to hedge
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 \begin_inset Float figure
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
+
+\size largest
 \begin_inset Graphics
 	filename hedge.png
 
@@ -2619,6 +2278,8 @@ Hedging
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 So how much should you pay for such a right (either call or put)? Alternatively
  how much can you charge if you're selling such a contract? The basic idea
  in figuring out how to price such a contract is to assume that no arbitrages
@@ -2630,11 +2291,161 @@ So how much should you pay for such a right (either call or put)? Alternatively
  work backwards to see how much the option should have the buyer.
 \end_layout
 
+\begin_layout Standard
+
+\size largest
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size largest
+\begin_inset Graphics
+	filename binom.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+One step binomial
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
+
+\size largest
+One step binomial tree
+\end_layout
+
+\begin_layout Standard
+
+\size largest
+Let's construct a severely simplified model.
+ Suppose the stock moves in discrete increments per discrete steps.
+ For example suppose the current stock price is $20 and in a quarter it
+ will be either $22 or $18.
+ Let's value a $21 European call option.
+ If the stock rises to 22$ then the value of the option is $1 (to whomever
+ bought it, since they get to purchase the $22 stock at $21) but if the
+ stock goes down to 20 then the value of the option is $0 (to whomever bought
+ it since they wouldn't exercise the contract).
+\end_layout
+
+\begin_layout Standard
+
+\size largest
+We assume that zero arbitrage opportunities exist in the market (implied
+ by efficient market hypothesis) and construct a 
+\begin_inset Quotes eld
+\end_inset
+
+riskless
+\begin_inset Quotes erd
+\end_inset
+
+ portfolio.
+ Because of zero arbitrage opportunities this portfolio should earn the
+ riskfree rate.
+ Let the portfolio be a long position (buy) in 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ shares of the underlying stock and a short position (sell side) in one
+ call option.
+ Calculate the value of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ that makes the portfolio riskless.
+ If the price of the stock moves from $20 to $22 then the portfolio is worth
+ 
+\begin_inset Formula $22\Delta-1$
+\end_inset
+
+ (since we end up having to buy the underlying at $22 and then selling for
+ $21).
+ If the price of the stock moves down to $18 then the value of the portfolio
+ is just 
+\begin_inset Formula $18\Delta$
+\end_inset
+
+ because the person in the long position of the call option doesn't exercise.
+ The portfolio is riskless if the value is the same regardless of whether
+ the stock price goes up or down and so 
+\begin_inset Formula 
+\[
+22\Delta-1=18\Delta\Rightarrow\Delta=0.25
+\]
+
+\end_inset
+
+Thus the portfolio is long .25 shares and short 1 option.
+ Constructing a portfolio is called delta hedging because you purchase fractiona
+l shares of the underlying.
+ If the price moves up the value of the portfolio is 
+\begin_inset Formula 
+\[
+22\times.25-1=4.5=18\times.25
+\]
+
+\end_inset
+
+Riskless portfolios earn the riskless rate (tbills).
+ Suppose the riskfree rate is %12 per annum.
+ The the present day value of the portfolio must be (interest compounding
+ quarterly) 
+\begin_inset Formula 
+\[
+\Pi e^{\frac{.12\times3}{12}}=4.5\Rightarrow4.367
+\]
+
+\end_inset
+
+Since the value of the stock today is $20
+\begin_inset Formula 
+\[
+20\times.25-V=4.367
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula $V=.633$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+\size largest
 Black-Scholes
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 The Black-Scholes model was constructed by Fischer Black and Myron Scholes
  in 1973, based on work by Robert Merton.
  Merton and Scholes won the Nobel in Economics in 97 (Black was ineligible
@@ -2644,6 +2455,8 @@ The Black-Scholes model was constructed by Fischer Black and Myron Scholes
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 The Black–Scholes model assumes that the market consists of at least one
  risky asset, usually called the stock, and one riskless asset, usually
  called the money market, cash, or bond.
@@ -2651,43 +2464,61 @@ The Black–Scholes model assumes that the market consists of at least one
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 There is no arbitrage opportunity (i.e., there is no way to make a riskless
  profit).
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 It is possible to borrow and lend any amount, even fractional, of cash at
  the riskless rate.
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 It is possible to buy and sell any amount, even fractional, of the stock.
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 The above transactions do not incur any fees or costs (i.e., frictionless
  market).
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 The assumptions on the assets are
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 The rate of return on the riskless asset is constant and thus called the
  risk-free interest rate.
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 The instantaneous log returns of the stock price is a geometric Brownian
  motion, and we will assume its drift and volatility is constant.
 \end_layout
 
 \begin_layout Itemize
+
+\size largest
 The stock does not pay a dividend.
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Per the model assumptions above, the price of the underlying asset (typically
  a stock) follows a geometric Brownian motion.
  That is
@@ -2765,6 +2596,8 @@ Why? First note that we're on the sell side of the option.
 \end_layout
 
 \begin_layout Standard
+
+\size largest
 Discretizing the differentials in
 \begin_inset Formula $\Pi$
 \end_inset
@@ -2868,13 +2701,45 @@ or
 
 the Black-Scholes equation.
  Solving this PDE with boundary conditions 
-\begin_inset Formula 
-\[
-\begin{align}V(0,t) & =0\text{ for all }t\\
-V(S,t) & \rightarrow S\text{ as }S\rightarrow\infty\\
-V(S,T) & =\max\left\{ S-K,0\right\} 
-\end{align}
-\]
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{align}V(0,t) & =0
+\backslash
+text{ for all }t
+\backslash
+
+\backslash
+V(S,t) & 
+\backslash
+rightarrow S
+\backslash
+text{ as }S
+\backslash
+rightarrow
+\backslash
+infty
+\backslash
+
+\backslash
+V(S,T) & =
+\backslash
+max
+\backslash
+left
+\backslash
+{ S-K,0
+\backslash
+right
+\backslash
+} 
+\backslash
+end{align}
+\end_layout
 
 \end_inset
 
@@ -2928,12 +2793,77 @@ where
 \end_inset
 
  is the CDF of a standard normal and 
-\begin_inset Formula 
-\[
-\begin{align}d_{1} & =\frac{1}{\sigma\sqrt{\tau}}\left[\left(x+\frac{1}{2}\sigma^{2}\tau\right)+\frac{1}{2}\sigma^{2}\tau\right]\\
-d_{2} & =\frac{1}{\sigma\sqrt{\tau}}\left[\left(x+\frac{1}{2}\sigma^{2}\tau\right)-\frac{1}{2}\sigma^{2}\tau\right]
-\end{align}
-\]
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{align}d_{1} & =
+\backslash
+frac{1}{
+\backslash
+sigma
+\backslash
+sqrt{
+\backslash
+tau}}
+\backslash
+left[
+\backslash
+left(x+
+\backslash
+frac{1}{2}
+\backslash
+sigma^{2}
+\backslash
+tau
+\backslash
+right)+
+\backslash
+frac{1}{2}
+\backslash
+sigma^{2}
+\backslash
+tau
+\backslash
+right]
+\backslash
+
+\backslash
+d_{2} & =
+\backslash
+frac{1}{
+\backslash
+sigma
+\backslash
+sqrt{
+\backslash
+tau}}
+\backslash
+left[
+\backslash
+left(x+
+\backslash
+frac{1}{2}
+\backslash
+sigma^{2}
+\backslash
+tau
+\backslash
+right)-
+\backslash
+frac{1}{2}
+\backslash
+sigma^{2}
+\backslash
+tau
+\backslash
+right]
+\backslash
+end{align}
+\end_layout
 
 \end_inset
 

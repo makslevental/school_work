@@ -1,0 +1,27 @@
+model '/home/maksim/Desktop/school_work/fall2015/math_programming/hw2/prob1.mod';
+data '/home/maksim/Desktop/school_work/fall2015/math_programming/hw2/data.dat';
+#commands '/home/maksim/Desktop/school_work/fall2015/math_programming/hw2/script.run';
+
+set omitted_data;
+set max_nonzero_alpha;
+
+param om{omitted_data};
+param ma{max_nonzero_alpha};
+let omitted_data := 4 .. 16 by 2;
+let max_nonzero_alpha := 3 .. 6;
+
+for {o in omitted_data} {
+	for {m in max_nonzero_alpha} {
+		let omit_points := o;
+		let nz_a := m;
+		option solver couenne;
+		solve;
+		display sqrt(sum{c in coordinates} alpha[c]*alpha[c]);
+		display alpha;
+		display b;
+		display o;
+		display m;
+		display p;
+		display beta;
+	}
+}
