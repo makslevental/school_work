@@ -1112,34 +1112,67 @@ status open
 
 \end_inset
 
-Since 
-\begin_inset Formula $v=p_{K}0$
-\end_inset
 
- it's the case that 
-\begin_inset Formula $v$
+\begin_inset Formula $v\coloneqq p_{K}0$
 \end_inset
 
  is the vector in 
 \begin_inset Formula $K=B-A$
 \end_inset
 
- that is closest to 0.
+ that is 
+\begin_inset Quotes eld
+\end_inset
+
+closest
+\begin_inset Quotes erd
+\end_inset
+
+ to 0, i.e.
+ that for which its norm is minimal.
  Since 
-\begin_inset Formula $K$
+\begin_inset Formula $A,B$
 \end_inset
 
- is linear vector space (being a set of displacements) 
-\begin_inset Formula $v$
+ are closed sets (infima are contained in the sets) there exists a 
+\begin_inset Formula $b^{*}\in B$
 \end_inset
 
- is therefore the vector in 
-\begin_inset Formula $K$
+ such that 
+\begin_inset Formula 
+\[
+\left\Vert a-b^{*}\right\Vert _{2}=\inf_{b\in B}\left\Vert a-b\right\Vert _{2}
+\]
+
 \end_inset
 
- of smallest norm.
+and similarly there exists a 
+\begin_inset Formula $a^{*}\in A$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\left\Vert a^{*}-b^{*}\right\Vert _{2}=\inf_{a\in A}\left\Vert a-b^{*}\right\Vert _{2}
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $k\coloneqq b^{*}-a^{*}\in K$
+\end_inset
+
+ and by definition 
+\begin_inset Formula $\left\Vert k\right\Vert _{2}\leq\left\Vert k^{'}\right\Vert _{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k^{'}\in K$
+\end_inset
+
+.
  Therefore 
-\begin_inset Formula $\left\Vert v\right\Vert _{2}=d\left(A,B\right)$
+\begin_inset Formula $d\left(A,B\right)=\left\Vert v\right\Vert _{2}$
 \end_inset
 
 .
@@ -1156,74 +1189,117 @@ status open
 
 \end_inset
 
-Let 
-\begin_inset Formula $x\in E+v$
+First
+\end_layout
+
+\begin_deeper
+\begin_layout Lemma*
+\begin_inset Formula $v=f-e$
+\end_inset
+
+ where 
+\begin_inset Formula $f\in F$
+\end_inset
+
+ and 
+\begin_inset Formula $e\in E$
+\end_inset
+
+ for some 
+\begin_inset Formula $e,f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $v=b-a$
+\end_inset
+
+ where 
+\begin_inset Formula $b\notin F$
 \end_inset
 
 .
  Then 
-\begin_inset Formula $x=e+v$
+\begin_inset Formula $d\left(b,A\right)>d\left(A,B\right)$
 \end_inset
 
- for some 
-\begin_inset Formula $e$
+ and so by (3.3) 
+\begin_inset Formula 
+\[
+\left\Vert v\right\Vert _{2}=d\left(A,B\right)<d\left(b,A\right)=\inf_{a^{'}\in A}\left(\left\Vert b-a^{'}\right\Vert _{2}\right)\leq\left\Vert b-a\right\Vert _{2}=\left\Vert v\right\Vert _{2}
+\]
+
 \end_inset
 
- such that 
-\begin_inset Formula $e\in A$
-\end_inset
-
- and 
-\begin_inset Formula $d\left(e,B\right)=d\left(A,B\right)$
-\end_inset
-
-.
- Finally since 
-\begin_inset Formula $v\in B-A$
-\end_inset
-
- (i.e.
- a vector that reaches from 
-\begin_inset Formula $A$
-\end_inset
-
- to 
-\begin_inset Formula $B$
-\end_inset
-
-) and 
-\begin_inset Formula $\left\Vert v\right\Vert _{2}=d\left(A,B\right)$
-\end_inset
-
- it follows that 
-\begin_inset Formula $x\in F$
-\end_inset
-
-, the set of points in 
-\begin_inset Formula $B$
-\end_inset
-
- nearest to 
-\begin_inset Formula $A$
+a contradiction.
+ Now suppose 
+\begin_inset Formula $a\notin E$
 \end_inset
 
 .
- Let 
-\begin_inset Formula $x\in F-v$
+ Then 
+\begin_inset Formula $d\left(a,B\right)>d\left(A,B\right)$
 \end_inset
 
- then by similar arguments 
-\begin_inset Formula $x\in E$
+ and similarly 
+\begin_inset Formula 
+\[
+\left\Vert v\right\Vert _{2}=d\left(A,B\right)<d\left(a,B\right)=\inf_{b^{'}\in A}\left(\left\Vert b^{'}-a\right\Vert _{2}\right)\leq\left\Vert b-a\right\Vert _{2}=\left\Vert v\right\Vert _{2}
+\]
+
 \end_inset
 
-.
- Hence 
+a contradiction yet again.
+\end_layout
+
+\begin_layout Corollary*
 \begin_inset Formula $E+v=F$
 \end_inset
 
 .
+ 
 \end_layout
 
+\begin_layout Proof
+Let 
+\begin_inset Formula $x\in E+v$
+\end_inset
+
+ and 
+\begin_inset Formula $e,f$
+\end_inset
+
+ as in the lemma.
+ Then 
+\begin_inset Formula $x=e^{'}+v$
+\end_inset
+
+ for some 
+\begin_inset Formula $e^{'}$
+\end_inset
+
+ such that 
+\begin_inset Formula $d\left(e^{'},B\right)=d\left(A,B\right)$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $e^{'}+v\neq f^{'}$
+\end_inset
+
+ for some 
+\begin_inset Formula $f^{'}\in F$
+\end_inset
+
+.
+ Then 
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1235,6 +1311,15 @@ status open
 
 \end_inset
 
+Claim: 
+\begin_inset Formula $E=\text{Fix}\left(p_{A}p_{B}\right)=A\cap\left(B-v\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
 Since 
 \begin_inset Formula $v$
 \end_inset
@@ -1314,6 +1399,7 @@ Since
 .
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
