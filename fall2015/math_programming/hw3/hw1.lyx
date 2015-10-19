@@ -1265,38 +1265,164 @@ a contradiction yet again.
 \end_layout
 
 \begin_layout Proof
-Let 
-\begin_inset Formula $x\in E+v$
+Fix 
+\begin_inset Formula $e^{'}\in E$
 \end_inset
 
- and 
-\begin_inset Formula $e,f$
-\end_inset
-
- as in the lemma.
- Then 
-\begin_inset Formula $x=e^{'}+v$
-\end_inset
-
- for some 
-\begin_inset Formula $e^{'}$
+.
+ Then there exists some 
+\begin_inset Formula $v^{'}$
 \end_inset
 
  such that 
-\begin_inset Formula $d\left(e^{'},B\right)=d\left(A,B\right)$
-\end_inset
-
-.
- Suppose 
-\begin_inset Formula $e^{'}+v\neq f^{'}$
+\begin_inset Formula $e^{'}+v^{'}=f^{'}$
 \end_inset
 
  for some 
+\begin_inset Formula $v^{'}$
+\end_inset
+
+ and 
 \begin_inset Formula $f^{'}\in F$
 \end_inset
 
+ (by definition of 
+\begin_inset Formula $E$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $d\left(e,B\right)=\left\Vert v\right\Vert _{2}$
+\end_inset
+
+).
+ Suppose 
+\begin_inset Formula $v^{'}\neq v$
+\end_inset
+
 .
+ By the lemma, 
+\begin_inset Formula $v=f-e$
+\end_inset
+
+ for some 
+\begin_inset Formula $e\in E$
+\end_inset
+
+ and 
+\begin_inset Formula $f\in F$
+\end_inset
+
+, we have that 
+\begin_inset Formula $v\in K$
+\end_inset
+
+.
+ Since the Minkowski difference is convex it's the case that 
+\begin_inset Formula $\frac{1}{2}\left(v^{'}+v\right)\in K$
+\end_inset
+
+.
+ But then 
+\begin_inset Formula 
+\begin{align*}
+\left\Vert \frac{1}{2}\left(v^{'}+v\right)\right\Vert ^{2} & =\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2v\cdot v^{'}\right)
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $2v\cdot v^{'}\leq0$
+\end_inset
+
+ then immediately we have then immediately we have that 
+\begin_inset Formula $\left\Vert \frac{1}{2}\left(v^{'}+v\right)\right\Vert <\left\Vert v\right\Vert $
+\end_inset
+
+ which implies there exist 
+\begin_inset Formula $e^{''}\in E$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{''}\in F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert f^{''}-e^{''}\right\Vert _{2}<d\left(A,B\right)$
+\end_inset
+
+ a contradiction.
  Then 
+\begin_inset Formula $v\cdot v^{'}>0$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2v\cdot v^{'}\right) & =\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2\left|v\cdot v^{'}\right|\right)\\
+ & \leq\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2\left\Vert v\right\Vert \left\Vert v^{'}\right\Vert \right)
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $2\left|v\cdot v^{'}\right|<2\left\Vert v\right\Vert \left\Vert v^{'}\right\Vert $
+\end_inset
+
+ then again we have that 
+\begin_inset Formula $\left\Vert \frac{1}{2}\left(v^{'}+v\right)\right\Vert <\left\Vert v\right\Vert $
+\end_inset
+
+ a contradiction.
+ Then 
+\begin_inset Formula $2\left|v\cdot v^{'}\right|=2\left\Vert v\right\Vert \left\Vert v^{'}\right\Vert $
+\end_inset
+
+.
+ But Cauchy-Schwarz is saturated iff 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $v^{'}$
+\end_inset
+
+ are colinear and we've already assumed 
+\begin_inset Formula $v\cdot v^{'}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert v\right\Vert =\left\Vert v^{'}\right\Vert $
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $v^{'}=v$
+\end_inset
+
+ and hence 
+\begin_inset Formula $e^{'}+v=f^{'}$
+\end_inset
+
+.
+ Similarly for arbitrary 
+\begin_inset Formula $f^{'}\in F$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{'}-v^{'}=e^{'}$
+\end_inset
+
+ with 
+\begin_inset Formula $v^{'}=-v$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $E+v=F$
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
@@ -1320,40 +1446,67 @@ Claim:
 
 \begin_deeper
 \begin_layout Proof
-Since 
-\begin_inset Formula $v$
+Firstly clearly 
+\begin_inset Formula $E\subset\text{Fix}\left(p_{A}p_{B}\right)$
 \end_inset
 
- is the displacement of 
+ since 
+\begin_inset Formula $p_{B}\left(\cdot\right)\subset B$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{A}B=E$
+\end_inset
+
+ (hence for some 
+\begin_inset Formula $B^{'}\subset B$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $p_{A}B^{'}\subset E$
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $x\in\text{Fix}\left(p_{A}p_{B}\right)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $p_{B}\left(\cdot\right)\subset B$
+\end_inset
+
+ is the set of points 
 \begin_inset Formula $B$
 \end_inset
 
- from 
-\begin_inset Formula $A$
+ 
+\begin_inset Quotes eld
 \end_inset
 
- it must be the case that 
-\begin_inset Formula $B-v$
+closest
+\begin_inset Quotes erd
 \end_inset
 
- is 
+ to 
+\begin_inset Formula $\mathbb{R}^{n}\backslash B$
+\end_inset
+
+, i.e.
+ the boundary of 
 \begin_inset Formula $B$
 \end_inset
 
- translated in the direction 
-\begin_inset Formula $A$
-\end_inset
-
- the minimum such that they're in contact.
- Therefore 
-\begin_inset Formula $A\cap\left(B-v\right)$
+.
+ Then 
+\begin_inset Formula $p_{A}\left(p_{B}\left(\cdot\right)\right)\subset A$
 \end_inset
 
  is the set of points in 
 \begin_inset Formula $A$
 \end_inset
 
- closest to 
+ closest the boundary of 
 \begin_inset Formula $B$
 \end_inset
 
@@ -1363,43 +1516,52 @@ Since
 \end_inset
 
 .
- Any point fixed by 
-\begin_inset Formula $p_{A}p_{B}$
-\end_inset
-
- is in 
-\begin_inset Formula $A$
-\end_inset
-
- (since 
-\begin_inset Formula $p_{A}x\in A$
-\end_inset
-
-) and therefore any point fixed by 
-\begin_inset Formula $p_{A}p_{B}$
-\end_inset
-
- is a point in 
-\begin_inset Formula $A$
-\end_inset
-
- such that the nearest point to the point it is nearest to in 
-\begin_inset Formula $B$
-\end_inset
-
-, is itself.
- Therefore 
-\begin_inset Formula $\text{Fix}\left(p_{A}p_{B}\right)$
-\end_inset
-
- is 
-\begin_inset Formula $E$
+ Hence 
+\begin_inset Formula $E=\text{Fix}\left(p_{A}p_{B}\right)$
 \end_inset
 
 .
+ Since 
+\begin_inset Formula $F-v=E$
+\end_inset
+
+ and otherwise 
+\begin_inset Formula $\left(\left(B-v\right)\backslash F\right)\cap A=\emptyset$
+\end_inset
+
+ (otherwise if 
+\begin_inset Formula $b\in B-v\backslash F$
+\end_inset
+
+ would be such that 
+\begin_inset Formula $d\left(b,A\right)=d\left(A,B\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in F$
+\end_inset
+
+) we have that 
+\begin_inset Formula $A\cap\left(B-v\right)=A\cap\left(F-v\right)=E\cap\left(F-v\right)=E$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $E=A\cap\left(B-v\right)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\[
+\text{Fix}\left(p_{A}p_{B}\right)=E=A\cap\left(B-v\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
-\end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1418,18 +1580,12 @@ Claim:
 .
 \end_layout
 
-\begin_deeper
 \begin_layout Proof
-Fix arbitrary 
-\begin_inset Formula $f\in F$
+Let 
+\begin_inset Formula $x=p_{A}f$
 \end_inset
 
-.
- Then 
-\begin_inset Formula $x\in p_{A}f$
-\end_inset
-
- is the nearest point in 
+, the nearest point in 
 \begin_inset Formula $A$
 \end_inset
 
@@ -1447,7 +1603,11 @@ Fix arbitrary
 \end_inset
 
 , it must be the case that 
-\begin_inset Formula $x\in E$
+\begin_inset Formula $x=e$
+\end_inset
+
+ for some 
+\begin_inset Formula $e\in E$
 \end_inset
 
 .
@@ -1483,16 +1643,44 @@ Fix arbitrary
 \begin_inset Formula $f$
 \end_inset
 
+ .
+ Finally by 3.4 for arbitrary 
+\begin_inset Formula $f\in F$
+\end_inset
+
+ there exists 
+\begin_inset Formula $e\in E$
+\end_inset
+
+ such that 
+\begin_inset Formula $f-v=e$
+\end_inset
+
  and 
+\begin_inset Formula $e$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+nearest
+\begin_inset Quotes erd
+\end_inset
+
+ point in 
 \begin_inset Formula $E\subset A$
 \end_inset
 
-.
- Finally 
-\begin_inset Formula $p_{E}f=f-v$
+ and hence by definition of 
+\begin_inset Formula $p_{E}\left(\cdot\right)$
 \end_inset
 
- TODO
+ it's the case that 
+\begin_inset Formula $p_{E}f=e=f-v$
+\end_inset
+
+ .
 \end_layout
 
 \end_deeper
@@ -1600,10 +1788,208 @@ Assume
 \begin_inset Formula $\left(K+I\right)x$
 \end_inset
 
-
+............
+ No clue?
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.1]
+\end_layout
+
+\end_inset
+
+Reference: Introduction to Algorithms by CLRS.
+ The model is minimize the maximum flow of drugs from node 1 to node 10
+ given the constraint that arcs can be turned off at a maximum cost of 15
+ units.
+ The adjacency/drug-flow matrix is 
+\begin_inset Formula 
+\[
+D=\begin{pmatrix}\backslash & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+1 & 0 & 4 & 8 & 16 & 0 & 0 & 0 & 0 & 0 & 0\\
+2 & 0 & 0 & 0 & 9 & 0 & 0 & 9 & 0 & 0 & 0\\
+3 & 0 & 0 & 0 & 3 & 6 & 0 & 0 & 0 & 19 & 0\\
+4 & 0 & 0 & 0 & 0 & 19 & 6 & 0 & 0 & 0 & 0\\
+5 & 0 & 0 & 0 & 0 & 0 & 16 & 0 & 0 & 9 & 0\\
+6 & 0 & 0 & 0 & 0 & 0 & 0 & 6 & 0 & 16 & 0\\
+7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 3\\
+8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 13 & 5\\
+9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 20\\
+10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+\end_inset
+
+The checkpoint weight matrix is
+\begin_inset Formula 
+\[
+C=\begin{pmatrix}\backslash & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+1 & 0 & 11 & 3 & 17 & 0 & 0 & 0 & 0 & 0 & 0\\
+2 & 0 & 0 & 0 & 7 & 0 & 0 & 9 & 0 & 0 & 0\\
+3 & 0 & 0 & 0 & 8 & 12 & 0 & 0 & 0 & 20 & 0\\
+4 & 0 & 0 & 0 & 0 & 6 & 6 & 0 & 0 & 0 & 0\\
+5 & 0 & 0 & 0 & 0 & 0 & 7 & 0 & 0 & 6 & 0\\
+6 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 11 & 0\\
+7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 0 & 17\\
+8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 3 & 4\\
+9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 20\\
+10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $G=\left(V,E\right)$
+\end_inset
+
+ be the network and the flow from node 
+\begin_inset Formula $u$
+\end_inset
+
+ to node 
+\begin_inset Formula $v$
+\end_inset
+
+ be 
+\begin_inset Formula $f_{uv}$
+\end_inset
+
+.
+ Then the flow of drugs across the network is 
+\begin_inset Formula 
+\[
+\left|f\right|=\sum_{v\in V}f_{1v}
+\]
+
+\end_inset
+
+and optimization problem is 
+\begin_inset Formula 
+\begin{align*}
+\min_{\mathbf{B}} & \max_{f}\left(\left|f\right|\right)\\
+\text{s.t.} & f_{uv}\leq b_{uv}D_{uv}\\
+\text{s.t.} & \sum\nolimits _{\{u:(u,v)\in E\}}f_{uv}=\sum\nolimits _{\{u:(v,u)\in E\}}f_{vu}\ \forall v\in V\setminus\left\{ 1,10\right\} \\
+\text{s.t.} & \sum_{k=2}^{9}b_{uv}C_{uv}\leq15
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{uv}=0$
+\end_inset
+
+ if the government chooses to put a checkpoint on edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ and 1 otherwise.
+ For the dual formulation let a 
+\begin_inset Formula $SR$
+\end_inset
+
+-
+\begin_inset Formula $SI$
+\end_inset
+
+ 
+\emph on
+cut
+\emph default
+ be be a partition of the nodes such that 
+\begin_inset Formula $1\in SR$
+\end_inset
+
+ and 
+\begin_inset Formula $10\in SI$
+\end_inset
+
+.
+ The cut-set of the is the set of edges that cross the cut, i.e.
+ 
+\begin_inset Formula $\left\{ \left(u,v\right)\in E\,\text{s.t. }u\in SR,v\in SI\right\} $
+\end_inset
+
+.
+ Alternatively use the 
+\series bold
+B 
+\series default
+checkpoint indicators to 
+\begin_inset Quotes eld
+\end_inset
+
+turn on and off
+\begin_inset Quotes erd
+\end_inset
+
+ the edges.
+ The capacity of a 
+\begin_inset Formula $SR$
+\end_inset
+
+-
+\begin_inset Formula $SI$
+\end_inset
+
+ 
+\emph on
+cut 
+\emph default
+is 
+\begin_inset Formula 
+\[
+c\left(SR,SI\right)=\sum_{\left(u,v\right)\in E}D_{uv}b_{uv}
+\]
+
+\end_inset
+
+The dual problem is to minimize 
+\begin_inset Formula $c\left(SR,SI\right)$
+\end_inset
+
+ over 
+\begin_inset Formula $SR$
+\end_inset
+
+-
+\begin_inset Formula $SI$
+\end_inset
+
+ cuts and, i.e.
+ 
+\begin_inset Formula 
+\begin{align*}
+\min_{\mathbf{B}} & \min_{SR,SI}\left(c\right)\\
+\text{s.t.} & \sum_{k=2}^{9}b_{uv}C_{uv}\leq15
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.2]
+\end_layout
+
+\end_inset
+
+Skip
+\end_layout
+
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -1782,7 +2168,7 @@ status open
 \begin_inset Formula $z_{1},z_{2}\in R\left(x\right)$
 \end_inset
 
- then since 
+ then, since 
 \begin_inset Formula $C$
 \end_inset
 
@@ -1832,8 +2218,45 @@ where
 \begin_inset Formula $C$
 \end_inset
 
- is closed.
- TODO
+ is closed: let 
+\begin_inset Formula $z_{k}\rightarrow z$
+\end_inset
+
+ be a convergent sequence in 
+\begin_inset Formula $R\left(x\right)$
+\end_inset
+
+.
+ Fix a 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and then for each 
+\begin_inset Formula $k$
+\end_inset
+
+ we have that 
+\begin_inset Formula $x_{k}=x+\lambda z_{k}\in C$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $C$
+\end_inset
+
+ is closed 
+\begin_inset Formula $\lim_{k\rightarrow\infty}x_{k}\in C$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\[
+\lim_{k\rightarrow\infty}x_{k}=\lim_{k\rightarrow\infty}\left(x+\lambda z_{k}\right)=x+\lambda\lim_{k\rightarrow\infty}z_{k}=x+\lambda z\in C
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -1881,7 +2304,8 @@ Let
 \begin_inset Formula $\lambda_{k}=k$
 \end_inset
 
- then for every 
+.
+ Then for every 
 \begin_inset Formula $k$
 \end_inset
 
@@ -1946,7 +2370,6 @@ Let
 \end_inset
 
 .
- TODO.
 \end_layout
 
 \begin_layout Enumerate
