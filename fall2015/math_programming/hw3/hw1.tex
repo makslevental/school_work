@@ -4,21 +4,18 @@
 \usepackage[latin9]{inputenc}
 \setlength{\parskip}{\medskipamount}
 \setlength{\parindent}{0pt}
-\usepackage{float}
 \usepackage{mathtools}
 \usepackage{amsthm}
-\usepackage{amsbsy}
 \usepackage{amstext}
 \usepackage{amssymb}
 \usepackage{cancel}
-\usepackage{stmaryrd}
-\usepackage{graphicx}
-\usepackage{esint}
 
 \makeatletter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
+  \theoremstyle{plain}
+  \newtheorem*{lem*}{\protect\lemmaname}
   \theoremstyle{plain}
   \newtheorem*{cor*}{\protect\corollaryname}
 
@@ -26,6 +23,7 @@
 
 %
 \usepackage{amsfonts}
+\usepackage{xfrac}
 %\usepackage{mathabx}
 \usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
 \usepackage{bm}
@@ -42,13 +40,12 @@
 
 \makeatother
 
-\usepackage{listings}
   \providecommand{\corollaryname}{Corollary}
-\renewcommand{\lstlistingname}{Listing}
+  \providecommand{\lemmaname}{Lemma}
 
 \begin{document}
 
-\title{ESI 6420 Homework 2 Solutions}
+\title{ESI 6420 Homework 3 Solutions}
 
 
 \author{Maksim Levental}
@@ -57,1096 +54,440 @@
 \date{\today}
 
 \maketitle
-Time spent: too much but time well spent is never wasted.
+Time spent: 15 hours
 
-Collaborators: Chris Gianelli.
+Collaborators: Chris Gianelli
 \begin{enumerate}
-\item [1.1] The model for this SVM is similar to the typical SVM model
-except with some binary integer variables and constraints on those
-variables: the standard SVM (with data $\mathbf{x}_{i}\in\mathbb{R}^{n}$
-for $i=1,\dots,k$ and class assignments $y_{i}\in\left\{ -1,1\right\} $)
-is 
-\begin{align*}
-\min_{\boldsymbol{\alpha}\in\mathbb{R}^{n}} & \left\Vert \boldsymbol{\alpha}\right\Vert \\
-\text{s.t.} & y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)\geq1\,\forall i\in\left\{ 1,\dots,k\right\} 
-\end{align*}
-The ``incomplete SVM'' introduces two new binary integer variables
-$\mathbf{b}\in\left\{ 0,1\right\} ^{k}$ and $\mathbf{p}\in\left\{ 0,1\right\} ^{n}$.
-They are incorporated as such: \textbf{$b_{i}$ }determines whether
-constraint $y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)\geq1\iff y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)-1\geq0$
-is active. This is effected by multipltying the constraint by $b_{i}:$
+\item [1.1] The set is not convex: take as a counterexample the $T=\left\{ \left(0,1\right)\right\} $
+and the set $S=\left\{ \left(0,0\right),\left(0,2\right)\right\} $.
+Then the set of points closer to $S$ is $\left(-\infty,.\frac{1}{2}\right)\cup\left(\frac{3}{2},\infty\right)$,
+which is clearly not convex.
+\item [1.2] The set is convex. Let 
 \[
-b_{i}\left(y_{i}\left(\boldsymbol{\alpha}\cdot\mathbf{x}_{i}-\beta\right)-1\right)\geq0
+S=\left\{ x\in\mathbb{R}^{n}\big|x+S_{2}\subset S_{1}\right\} 
 \]
-If $b_{i}=1$ then the constraint is left as is and if $b_{i}=0$
-then the constraint is automatically satisfied as $0\geq0$. Then
-the constraint on how many constraint equations can be active is effected
-by using 0-norm:
-\[
-\left\Vert \mathbf{b}\right\Vert _{0}\geq100-K
-\]
-The sparsity of $\boldsymbol{\alpha}$ is controlled by $p_{i}$ in
-the same way. The margin constraints transform further into 
-\[
-b_{i}\left(y_{i}\left(\sum_{i=1}^{n}p_{i}\alpha_{i}x_{i}-\beta\right)-1\right)\geq0
-\]
-and maximum ``density'' (as opposed to sparsity) is controlled by
-\[
-\left\Vert \mathbf{p}\right\Vert _{0}\leq M
-\]
-Therefore the model is for some $K,M$ 
-\begin{align*}
-\min_{\underset{\underset{,\mathbf{p}\in\left\{ 0,1\right\} ^{n}}{\mathbf{b}\in\left\{ 0,1\right\} ^{k}}}{\boldsymbol{\alpha}\in\mathbb{R}^{n}}} & \left\Vert \boldsymbol{\alpha}\right\Vert \\
-\text{s.t.} & b_{i}\left(y_{i}\left(\sum_{i=1}^{n}p_{i}\alpha_{i}x_{i}-\beta\right)-1\right)\geq0\,\forall i\in\left\{ 1,\dots,k\right\} \\
-\left\Vert \mathbf{b}\right\Vert _{0} & \geq100-K\\
-\left\Vert \mathbf{p}\right\Vert _{0} & \leq M
-\end{align*}
-
-\item [1.2] I wrote AMPL code instead of GAMS code because AMPL $\gg$
-GAMS.
-\begin{lstlisting}
-set cnts := 1 .. 20;
-set dps := 1 .. 100; 
-param x{dps,cnts};
-param y{dps};
-param omit_points;
-param nz_a;
-var afa {cnts};
-var b {dps} binary integer;
-var p {cnts} binary integer;
-var bta;
-minimize obj: sum{c in cnts} alpha[c]*alpha[c];
-s.t. mgn{d in dps}: b[d]*(y[d]*((sum{c in cnts} p[c]*afa[c]*x[d,c])-bta)-1)>=0;
-s.t. cstnt_msk:  sum{d in dps} b[d] >= 100 - omit_points;
-s.t. non_z_a: sum{c in cnts} p[c] <= nz_a; 
-
-data;
-
-param y := <snip>
-param x := <snip>
-
-script;
-
-set omitted_data;
-set max_nonzero_alpha;
-param om{omitted_data};
-param ma{max_nonzero_alpha};
-let omitted_data := 4 .. 16 by 2;
-let max_nonzero_alpha := 3 .. 6;
-for {o in omitted_data} {
-	for {m in max_nonzero_alpha} {
-		let omit_points := o;
-		let nz_a := m;
-		option solver couenne;
-		solve;
-		display sqrt(sum{c in cnts} afa[c]*afa[c]);
-		display afa;
-		display b;
-		display o;
-		display m;
-		display p;
-		display beta;
-	}
-}
-\end{lstlisting}
-
-\item [1.3]Pictures
-\begin{figure}[H]
-\includegraphics[scale=0.75]{mu_table.jpeg}\protect\caption{$\mu\left(k,p\right)$ table}
-
-
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.5]{mu_pic.jpeg}\protect\caption{$\mu\left(k,p\right)$ picture}
-\end{figure}
-
-\item [2.1]Claim: For $A\in\mathbb{R}^{m\times n}$, $B\in\mathbb{R}^{k\times n}$
-, if for all $x$ it's the case that $Ax=0$ implies $Bx=0$ then
-$B=CA$ for some $C\in\mathbb{R}^{k\times m}$.
-
-\begin{proof}
-Assume without loss of generality that and $k\leq m$. Suppose $Ax=0\Rightarrow Bx=0$.
-This is equivalent to $\text{null}\left(A\right)\subset\text{null}\left(B\right)$.
-By the fundamental theorem of Linear Algebra and the fact that $\text{row}\left(A\right)\subset\mathbb{R}^{n}$
-and $\text{row}\left(B\right)\subset\mathbb{R}^{n}$ we have that
-$\text{null}\left(A\right)\cup\text{row}\left(A\right)=\text{null}\left(B\right)\cup\text{row}\left(B\right)=\mathbb{R}^{n}$
-and hence 
-\begin{align*}
-\text{null}\left(A\right) & \subset\text{null}\left(B\right)\\
- & \iff\\
-\overline{\text{null}\left(A\right)} & \subset\overline{\text{null}\left(B\right)}\\
- & \iff\\
-\text{row}\left(B\right) & \subset\text{row}\left(A\right)
-\end{align*}
-Therefore for all $i=1,\dots,k$ there exist $c_{i}\in\mathbb{R}^{m}$
-such that
-\[
-A^{T}c_{i}=b_{i}^{T}
-\]
-where $b_{i}^{T}=\left(B^{T}\right)_{i}$ the $i$th row of $B$.
-Collecting all of the $c_{i}$ into a matrix $C^{T}$ we get that
-\[
-A^{T}C^{T}=B^{T}
-\]
-or 
-\[
-CA=B
-\]
-
-\end{proof}
-\item [2.2]Claim: For $\left\{ v_{1},\dots,v_{m}\right\} \subset\mathbb{R}^{n}$
-and $m\geq n+2$ there exist $\boldsymbol{\alpha}=\left(\alpha_{1},\dots,\alpha_{m}\right)\neq\mathbf{0}$
-such that 
-\[
-\sum_{i=1}^{m}\alpha_{i}v_{i}=0
-\]
-and
-\[
-\sum_{i=1}^{m}\alpha_{i}=0
-\]
-
-
-\begin{proof}
-Assume $m\geq n+2$. Let 
-\[
-w_{i}=\begin{pmatrix}v_{i}\\
-1
-\end{pmatrix}
-\]
-Note that $w_{i}\in\mathbb{R}^{\left(n+1\right)}$. Since $m\geq n+2$
-it's the case that $m>n+1$ and hence $\left\{ w_{1},\dots,w_{m}\right\} $
-is linearly dependent (since the maximal number of linearly independent
-vectors in $\mathbb{R}^{\left(n+1\right)}$ is $n+1$). Therefore,
-with $W=\left(w_{1},w_{2},\dots,w_{m}\right)$ it must be case that
-there exists $\boldsymbol{\alpha}\in\mathbb{R}^{m}$ such that 
-\begin{align*}
-W\boldsymbol{\alpha} & =\begin{pmatrix}v_{1} & \cdots & v_{m}\\
-1 & \cdots & 1
-\end{pmatrix}\begin{pmatrix}\alpha_{1}\\
-\vdots\\
-\alpha_{m}
-\end{pmatrix}\\
- & =\begin{pmatrix}\sum_{i=1}^{m}\alpha_{i}v_{i}\\
-\sum_{i=1}^{m}\alpha_{i}
-\end{pmatrix}\\
- & =\mathbf{0}
-\end{align*}
-
-\end{proof}
-\item [2.3]Claim: For $A:U\rightarrow V$ and $B:V\rightarrow W$ linear
-maps
-\[
-\dim\left(R\left[A\right]\cap\ker\left[B\right]\right)=\dim\left(R\left[A\right]\right)-\dim\left(R\left[BA\right]\right)=\dim\left(\ker\left[BA\right]\right)-\dim\left(\ker\left[A\right]\right)
-\]
-\begin{align*}
-\dim\left(R\left[BA\right]\right) & =\dim\left(R\left[A\right]\right)-\dim\left(R\left[A\right]\cap\ker\left[B\right]\right)\\
-\dim\left(R\left[A\right]\right)+\dim\left(\ker\left[A\right]\right) & =\dim\left(\ker\left[BA\right]\right)+\dim\left(R\left[BA\right]\right)
-\end{align*}
-where $R\left[X\right]$ is the column-space of $X$.
-
-\begin{proof}
-Let $u,v,w$ be the dimensions of $U,V,W$ respectively. Since $BA:U\rightarrow W$
-the rank-nullity theorem states that 
-\[
-\text{rank}\left(A\right)+\text{nullity}\left(A\right)=u=\text{rank}\left(BA\right)+\text{nullity}\left(BA\right)
-\]
-and since $\text{rank}\left(X\right)=\dim\left(R\left[X\right]\right)$
-and $\text{nullity}\left(X\right)=\dim\left(\ker\left[X\right]\right)$
-it's the case that 
-\[
-\dim\left(R\left[A\right]\right)+\dim\left(\ker\left[A\right]\right)=\dim\left(\ker\left[BA\right]\right)+\dim\left(R\left[BA\right]\right)
-\]
-or
-\[
-\dim\left(R\left[A\right]\right)-\dim\left(R\left[BA\right]\right)=\dim\left(\ker\left[BA\right]\right)-\dim\left(\ker\left[A\right]\right)
-\]
-Now let $\left\{ u_{1},\dots,u_{k}\right\} $ be a basis for $R\left[A\right]\cap\ker\left[B\right]$.
-The set $\left\{ u_{1},\dots,u_{k}\right\} $ is linearly independent
-in $R\left[A\right]$ and hence can be extended to a basis: let $\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} $
-be a basis for $R\left[A\right]$. Finally let $\left\{ y_{1},\dots,y_{m}\right\} $
-be a basis for $R\left[BA\right]$ and pick an arbitrary $y_{i}$.
-By definition there exists $x_{i}$ such that 
-\[
-BAx_{i}=y_{i}
-\]
-But $Ax_{i}$ is in $R\left[A\right]$ and therefore there exist $\left\{ \alpha_{1},\dots,\alpha_{k},\beta_{1},\dots,\beta_{n}\right\} $
-such that 
-\[
-Ax_{i}=\sum_{i=1}^{k}\alpha_{i}u_{i}+\sum_{i=1}^{n}\beta_{i}v_{i}
-\]
-But 
-\[
-y_{i}=B\left(Ax_{i}\right)=B\left(\sum_{i=1}^{k}\alpha_{i}u_{i}+\sum_{i=1}^{n}\beta_{i}v_{i}\right)=\sum_{i=1}^{k}\alpha_{i}Bu_{i}+B\left(\sum_{i=1}^{n}\beta_{i}v_{i}\right)
-\]
-and by $\left\{ u_{i}\right\} $ being a basis for $\ker\left[B\right]$
-\[
-y_{i}=\cancel{\sum_{i=1}^{k}\alpha_{i}Bu_{i}}+B\left(\sum_{i=1}^{n}\beta_{i}v_{i}\right)=\sum_{i=1}^{n}\beta_{i}Bv_{i}=\sum_{i=1}^{n}\beta_{i}w_{i}
-\]
-where $w_{i}\coloneqq Bv_{i}$. Therefore 
-\[
-R\left[BA\right]=\text{span}\left(\left\{ y_{1},\dots,y_{m}\right\} \right)=\text{span}\left(\left\{ w_{1},\dots,w_{n}\right\} \right)
-\]
-but note that $\left\{ w_{1},\dots,w_{n}\right\} $ is linearly independent:
-if there existed $\left\{ \gamma_{1},\dots,\gamma_{n}\right\} $ such
-that $\sum_{i=1}^{n}\gamma_{i}w_{i}=0$ then 
-\[
-\sum_{i=1}^{n}\gamma_{i}w_{i}=\sum_{i=1}^{n}\gamma_{i}Bv_{i}=B\left(\sum_{i=1}^{n}\gamma_{i}v_{i}\right)=0
-\]
-and $\left\{ v_{1},\dots,v_{n}\right\} $ were defined to be linearly
-independent of $\ker\left[B\right]$ (and hence no vector in their
-span could be in $\ker\left[B\right]$). Hence (finally) 
-\begin{align*}
-\dim\left(R\left[BA\right]\right) & =\dim\left(\text{span}\left(\left\{ y_{1},\dots,y_{m}\right\} \right)\right)\\
- & =\dim\left(\text{span}\left(\left\{ w_{1},\dots,w_{n}\right\} \right)\right)\\
- & =\dim\left(\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} \backslash\left\{ u_{1},\dots,u_{k}\right\} \right)
-\end{align*}
-and $\left\{ u_{1},\dots,u_{k}\right\} $ and $\left\{ v_{1},\dots,v_{n}\right\} $
-are linearly independent 
-\begin{align*}
-\dim\left(R\left[BA\right]\right) & =\dim\left(\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} \backslash\left\{ u_{1},\dots,u_{k}\right\} \right)\\
- & =\dim\left(\left\{ u_{1},\dots,u_{k},v_{1},\dots,v_{n}\right\} \right)-\dim\left(\left\{ u_{1},\dots,u_{k}\right\} \right)\\
- & =\dim\left(R\left[A\right]\right)-\dim\left(R\left[A\right]\cap\ker\left[B\right]\right)
-\end{align*}
-
-\begin{cor*}
-For $D$ a linear operator
-\[
-\dim\left(\ker\left[D^{n+1}\right]\right)=\dim\left(\ker\left[D\right]\right)+\sum_{j=1}^{n}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)
-\]
-\end{cor*}
-\begin{proof}
-By induction on $n$. Let $n=1$ and by the (manipulated above) result
-with $A=B=D$
-
-\[
-\dim\left(R\left[D\right]\cap\ker\left[D\right]\right)+\dim\left(\ker\left[D\right]\right)=\dim\left(\ker\left[DD\right]\right)
-\]
-or 
-\[
-\dim\left(\ker\left[D^{1+1}\right]\right)=\dim\left(\ker\left[D\right]\right)+\sum_{j=1}^{1}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)
-\]
-Assume $n>1$. Then by applying the above result again with $B=D^{n}$
-and $A=D$, and applying the induction hypothesis 
-\begin{align*}
-\dim\left(\ker\left[D^{n+1}\right]\right) & =\dim\left(\ker\left[D^{1}D^{n}\right]\right)\\
- & =\dim\left(R\left[D^{n}\right]\cap\ker\left[D\right]\right)+\dim\left(\ker\left[D\right]\right)\\
- & =\dim\left(R\left[D^{n}\right]\cap\ker\left[D\right]\right)+\dim\left(\ker\left[D\right]\right)\\
- & +\sum_{j=1}^{n-1}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)\\
- & =\dim\left(\ker\left[D\right]\right)+\sum_{j=1}^{n}\dim\left(R\left[D^{k}\right]\cap\ker\left[D\right]\right)
-\end{align*}
-
-\end{proof}
-\end{proof}
-\item [2.5]Claim: For $V$ and $n$-dimensional real vector space and $U,W$
-$m$-dimensional subspaces of $V$, if there exists $u^{'}\in U\backslash\left\{ 0\right\} $
-such that $u^{'}\perp W$ then there exists $w\in W\backslash\left\{ 0\right\} $
-such that $w\perp U\backslash\left\{ 0\right\} $.
-
-\begin{proof}
-Suppose not. Then there does not exist $w$ such that $w\cdot u=0$
-for all $u\in U$. That means for every $w$ there exists $u$ such
-that $u\cdot w\neq0$. Fix a basis $\left\{ w_{1},\dots,w_{m}\right\} $
-for $W$. Then there exist $\left\{ u_{1},\dots,u_{m}\right\} $ such
-that $w_{i}\cdot u_{i}\neq0$ for all $i=1,\dots,m$. Note that $\left\{ u_{1},\dots,u_{m}\right\} $
-can be chosen such that they are necessarily linearly dependent. Why?
-Let 
-\[
-\upsilon_{i}=u_{i}-\left(u_{i}\cdot u^{'}\right)\frac{u^{'}}{\left\Vert u^{'}\right\Vert _{2}}
-\]
-and then $u^{'}\perp\upsilon_{i}$ for all $i=1,\dots,m$ (but $w_{i}\cdot\upsilon_{i}$
-is still non-zero) and hence $\left\{ u^{'},\upsilon_{1},\dots,\upsilon_{m}\right\} $
-would be a linearly independent set of $m+1$ vectors in $U$ an $m$-dimensional
-vector space. So there exist $\alpha_{i}$ such that 
-\[
-\sum_{i=1}^{m}\alpha_{i}\upsilon_{i}=0
-\]
-or
-\[
-\upsilon_{1}=-\sum_{i=2}^{m}\alpha_{i}\upsilon_{i}
-\]
-Then 
-\[
-\sum_{i=1}^{n}\left(w_{i}\cdot\upsilon_{i}\right)w_{i}=\left(w_{1}\cdot\left(-\sum_{i=2}^{m}\alpha_{i}\upsilon_{i}\right)\right)w_{1}+\sum_{i=2}^{n}\left(w_{i}\cdot\upsilon_{i}\right)w_{i}
-\]
-\[
-\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\upsilon_{2}\right)w_{2}=\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\left(c\upsilon_{1}\right)\right)w_{2}=\left(w_{1}\upsilon_{1}\right)w_{1}+\left(w_{2}\left(c\upsilon_{1}\right)\right)w_{2}
-\]
-
-
-And I have no clue..................
-\end{proof}
-\item [3.1]Claim: $\left\langle \left\langle I\right\rangle \right\rangle \geq1$
-for all matrix norms $\left\langle \left\langle \cdot\right\rangle \right\rangle $. 
-
-\begin{proof}
-Since $II=I$ we have that 
-\[
-\left\langle \left\langle I\right\rangle \right\rangle =\left\langle \left\langle II\right\rangle \right\rangle \leq\left\langle \left\langle I\right\rangle \right\rangle \left\langle \left\langle I\right\rangle \right\rangle 
-\]
-cancelling $\left\langle \left\langle I\right\rangle \right\rangle $
-from both sides of the inequality we have that 
-\[
-1\leq\left\langle \left\langle I\right\rangle \right\rangle 
-\]
-
-\end{proof}
-\item [3.2]Claim: The Frobenius norm 
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{F}=\sqrt{\text{tr}\left(A^{T}A\right)}=\sqrt{\sum_{i}\sum_{j}\left|a_{ij}\right|^{2}}
-\]
-is a matrix norm.
-
-\begin{proof}
-It is positively homogenous, subadditive, and positive definite because
-it is equivalent to the Euclidean norm on $\mathbb{R}^{n^{2}}$. Further
-it satisfies ``submultiplicativity'': first note that for $A,B$
-\[
-\left(AB\right)_{ij}=\sum_{k}a_{ik}b_{kj}
-\]
-Therefore 
-\begin{align*}
-\left\langle \left\langle AB\right\rangle \right\rangle _{F} & =\sqrt{\sum_{i}\sum_{j}\left(\left(AB\right)_{ij}\right)^{2}}\\
- & =\sqrt{\sum_{i}\sum_{j}\left(\left|\sum_{k}a_{ik}b_{kj}\right|\right)^{2}}
-\end{align*}
-now by Cauchy-Schwarz
-\begin{align*}
-\left\langle \left\langle AB\right\rangle \right\rangle _{F} & =\sqrt{\sum_{i}\sum_{j}\left(\left(AB\right)_{ij}\right)^{2}}\\
- & =\sqrt{\sum_{i}\sum_{j}\left(\left|\sum_{k}a_{ik}b_{kj}\right|\right)^{2}}\\
- & \leq\sqrt{\sum_{i}\sum_{j}\left(\sum_{k}\left|a_{ik}\right|^{2}\sum_{k}\left|b_{kj}\right|^{2}\right)}\\
- & =\sqrt{\left(\sum_{i}\sum_{k}\left|a_{ik}\right|^{2}\right)\left(\sum_{j}\sum_{k}\left|b_{kj}\right|^{2}\right)}\\
- & =\left\langle \left\langle A\right\rangle \right\rangle _{F}\left\langle \left\langle B\right\rangle \right\rangle _{F}
-\end{align*}
-
-\end{proof}
-\item [3.3]Let the induced matrix $p$-norm be
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n}\backslash\left\{ 0\right\} }\frac{\left\Vert Ax\right\Vert _{p}}{\left\Vert x\right\Vert _{p}}
-\]
-
-
-\begin{enumerate}
-\item Claim: The induced matrix $p$-norm is equivalent to
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}
-\]
-
-
-\begin{proof}
-Let $y$ be such that 
-\[
-y=\text{argmax}\left(\frac{\left\Vert Ax\right\Vert _{p}}{\left\Vert x\right\Vert _{p}}\right)
-\]
-Then 
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{p}=\frac{\left\Vert Ay\right\Vert _{p}}{\left\Vert y\right\Vert _{p}}
-\]
-Let $z\in\mathbb{R}^{n},c\in\mathbb{R}$ be such that $cz=y$ and
-$\left\Vert z\right\Vert _{p}=1$. Then 
-\begin{align*}
-\frac{\left\Vert Ay\right\Vert _{p}}{\left\Vert y\right\Vert _{p}} & =\frac{\left\Vert A\left(cz\right)\right\Vert _{p}}{\left\Vert cz\right\Vert _{p}}
-\end{align*}
-Then by linearity of matrix multiplication and the $p$-norm
-\begin{align*}
-\frac{\left\Vert c\right\Vert _{p}\left\Vert Az\right\Vert _{p}}{\left\Vert c\right\Vert _{p}\left\Vert z\right\Vert _{p}} & =\frac{\left\Vert Az\right\Vert _{p}}{\left\Vert z\right\Vert _{p}}\\
- & =\left\Vert Az\right\Vert _{p}
-\end{align*}
-Now suppose that there were some $z'$ such that $\left\Vert z'\right\Vert _{p}=1$
-and $\left\Vert Az'\right\Vert _{p}>\left\Vert Az\right\Vert _{p}$.
-Then 
-\begin{align*}
-\left\Vert Az'\right\Vert _{p}>\left\Vert Az\right\Vert _{p} & =\frac{\left\Vert Az\right\Vert _{p}}{\left\Vert z\right\Vert _{p}}=\frac{\left\Vert A\frac{y}{c}\right\Vert _{p}}{\left\Vert \frac{y}{c}\right\Vert _{p}}=\frac{\left\Vert \frac{1}{c}\right\Vert _{p}\left\Vert Ay\right\Vert _{p}}{\left\Vert \frac{1}{c}\right\Vert _{p}\left\Vert y\right\Vert _{p}}=\frac{\left\Vert Ay\right\Vert _{p}}{\left\Vert y\right\Vert _{p}}
-\end{align*}
-which is a contradiction (since $y$ was defined to the argmax of
-$\left\Vert Ax\right\Vert _{p}/\left\Vert x\right\Vert _{p}$). Hence
-it sufficies to define 
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}
-\]
-
-\end{proof}
-\item Claim: the induced matrix $p$-norm is a legitimate matrix norm.
-
-\begin{proof}
-Using the equivalent definition from part (a) we prove
-\begin{enumerate}
-\item Positive homogenous: let $c\in\mathbb{R}$ and then by the homogeneity
-of the $p$-norm 
-\begin{align*}
-\left\langle \left\langle cA\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \left(cA\right)x\right\Vert _{p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left|c\right|\left\Vert Ax\right\Vert _{p}\\
- & =\left|c\right|\left(\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}\right)\\
- & =\left|c\right|\left\langle \left\langle A\right\rangle \right\rangle _{p}
-\end{align*}
-
-\item Subadditivity: let $A,B\in M_{n}\left(\mathbb{R}\right)$ and then
-by the subadditivity of the $p$-norm
-\begin{align*}
-\left\langle \left\langle A+B\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \left(A+B\right)x\right\Vert _{p}\\
- & \leq\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left(\left\Vert Ax\right\Vert _{p}+\left\Vert Bx\right\Vert _{p}\right)\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ax\right\Vert _{p}+\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Bx\right\Vert _{p}\\
- & =\left\langle \left\langle A\right\rangle \right\rangle _{p}+\left\langle \left\langle B\right\rangle \right\rangle _{p}
-\end{align*}
-
-\item Positive-definiteness: let $A\neq0$ and then firstly note that
-\[
-\left\langle \left\langle -A\right\rangle \right\rangle _{p}=\left|-1\right|\left\langle \left\langle A\right\rangle \right\rangle _{p}=\left\langle \left\langle A\right\rangle \right\rangle _{p}
-\]
- and by the subadditivity of the $p$-norm 
-\begin{align*}
-0 & =\left\langle \left\langle A+\left(-A\right)\right\rangle \right\rangle _{p}\\
- & \leq\left\langle \left\langle A\right\rangle \right\rangle _{p}+\left\langle \left\langle -A\right\rangle \right\rangle _{p}\\
- & =2\left\langle \left\langle A\right\rangle \right\rangle _{p}
-\end{align*}
-hence $\left\langle \left\langle A\right\rangle \right\rangle _{p}\geq0$.
-\item Submultiplicativity: first note that for arbitrary $y$, by definition
-of $\left\langle \left\langle A\right\rangle \right\rangle _{p}$
-\begin{align*}
-\left\Vert Ay\right\Vert _{p} & \leq\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\Vert y\right\Vert _{p}
-\end{align*}
-Then let $y=Bx$ for $\left\Vert x\right\Vert =1$ and
-\begin{align*}
-\left\langle \left\langle AB\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert ABx\right\Vert _{p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ay\right\Vert _{p}\\
- & \leq\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\Vert y\right\Vert _{p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\Vert Bx\right\Vert _{p}\\
- & =\left\langle \left\langle A\right\rangle \right\rangle _{p}\left\langle \left\langle B\right\rangle \right\rangle _{p}
-\end{align*}
-
-\end{enumerate}
-\end{proof}
-\item Claim: The supremum of a set $A$ is equal to the infimum of the set
-$B$ of upperbounds on $A.$
-
-\begin{proof}
-By contradiction. Let $l=\sup\:A$. Then $l$ is an upperbound on
-$A$ and hence $l\in B$. Consider the set $B'$ of lower bounds of
-the set $B$. Note that $l$ is a lower bound on $B$, since if that
-were not the case there would exist some element $b\in B$ such that
-$b<l$, but $l$ is the least upper bound. Suppose $l\neq\inf\,B$.
-Then there exists $b$ such that $b$ is a lower bound on $B$ and
-$l<b$. But then $b$ is not a lower bound on $B$ since $l\in B$
-and $l<b$.\end{proof}
-\begin{cor*}
-The induced matrix $p$-norm is equivalent to $\left\langle \left\langle A\right\rangle \right\rangle _{p}=\inf\,\Lambda$
-where 
-\[
-\Lambda=\left\{ \lambda\Bigg|\frac{\left\Vert Ax\right\Vert _{p}}{\left\Vert x\right\Vert _{p}}\leq\lambda,x\in\mathbb{R}^{n},\lambda\in\mathbb{R}\right\} 
-\]
-\end{cor*}
-\begin{proof}
-By definition every $\lambda\in\Lambda$ is an upper bound on the
-set $C=\left\{ c\big|c=\left\Vert Ax\right\Vert _{p}/\left\Vert x\right\Vert _{p},x\in\mathbb{R}^{n}\right\} $.
-Since $\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup\left(C\right)$
-by the above we have that 
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{p}=\sup\,C=\inf\,\Lambda
-\]
-
-\end{proof}
-\item Claim: $\left\langle \left\langle I\right\rangle \right\rangle =1$.
-
-\begin{proof}
-To wit
-\[
-\left\langle \left\langle I\right\rangle \right\rangle _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert Ix\right\Vert _{p}=\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert x\right\Vert _{p}=1
-\]
-
-\end{proof}
-\item Claim: For $\left\langle \left\langle A\right\rangle \right\rangle _{2}$
-it's the case that 
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{2}=\sqrt{\lambda_{\max}\left(A^{T}A\right)}
-\]
-
-
-\begin{proof}
-Firstly 
-\begin{align*}
-\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}\left\Vert Ax\right\Vert _{2}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}\left(Ax\right)^{T}\left(Ax\right)\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}x^{T}\left(A^{T}A\right)x
-\end{align*}
-Since $A^{T}A$ is symmetric there exist $P,\Sigma$ such that $A^{T}A=P\Sigma P^{T}$
-and so
-\begin{align*}
-\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}x^{T}\left(P\Sigma P^{T}\right)x\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{2}=1}\left(P^{T}x\right)^{T}\Sigma\left(P^{T}x\right)
-\end{align*}
-Let $y=P^{T}x$ and note that $\left\Vert y\right\Vert _{2}=1$ since
-$P^{T}$ is an isometry. Further note that $A^{T}A$ is positive semi-definite
-since $x^{T}\left(A^{T}A\right)x=\left\Vert Ax\right\Vert \geq0$
-and therefore $\Sigma_{ii}\geq0$. Let $\left(\sqrt{\Sigma}\right)_{ij}=\sqrt{\Sigma_{ij}}$
-and then
-\begin{align*}
-\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{y\in\mathbb{R}^{n},\left\Vert y\right\Vert _{2}=1}\left(y^{T}\sqrt{\Sigma}\right)\left(\sqrt{\Sigma}y\right)\\
- & =\sup_{y\in\mathbb{R}^{n},\left\Vert y\right\Vert _{2}=1}\left(\sqrt{\Sigma}y\right)^{T}\left(\sqrt{\Sigma}y\right)
-\end{align*}
-since $\sqrt{\Sigma}$ is symmetric. Finally 
-\begin{align*}
-\left\langle \left\langle A\right\rangle \right\rangle _{2} & =\sup_{y\in\mathbb{R}^{n},\left\Vert y\right\Vert _{2}=1}\left\Vert \sqrt{\Sigma}y\right\Vert _{2}
-\end{align*}
-and under the constraint $\left\Vert y\right\Vert _{2}=1$ it's the
-case that $\left\Vert \sqrt{\Sigma}y\right\Vert _{2}$ is maximized
-at $y=e_{j}$ where $j$ corresponds to the $\left(\sqrt{\Sigma}\right)_{jj}$
-is maximum, i.e. the square root of the maximal eigenvalue of $A^{T}A$,
-and furthermore $\left\Vert \sqrt{\Sigma}e_{j}\right\Vert _{2}=\sqrt{\lambda_{j}}$.
-\end{proof}
-\item Claim:$\left\langle \left\langle A\right\rangle \right\rangle _{F}$
-is not an induced $p$-norm.
-
-\begin{proof}
-By counterexample: take 
-\[
-A=\begin{pmatrix}1 & 0\\
-0 & -1
-\end{pmatrix}
-\]
-Then
-\[
-A^{T}A=\begin{pmatrix}1 & 0\\
-0 & 1
-\end{pmatrix}
-\]
-and
-\[
-\left\langle \left\langle A\right\rangle \right\rangle _{F}=\sqrt{1+1}=\sqrt{2}
-\]
+and $x_{1},x_{2}\in S$. Fix an arbitrary $s_{2}\in S_{2}$. Since
+$x_{1}\in S$ it's the case that $x_{1}+s_{2}\in S_{1}$ and $x_{2}+s_{2}\in S_{1}$.
+Now consider $\lambda x_{1}+\left(1-\lambda\right)x_{2}$. Since $S_{1}$
+is convex $\lambda\left(x_{1}+s_{2}\right)+\left(1-\lambda\right)\left(x_{2}+s_{2}\right)\in S_{1}$
 but 
 \begin{align*}
-\left\langle \left\langle A\right\rangle \right\rangle _{p} & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \begin{pmatrix}1 & 0\\
-0 & -1
-\end{pmatrix}x\right\Vert _{p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert \begin{pmatrix}x_{1}\\
--x_{2}
-\end{pmatrix}\right\Vert _{p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left(\left|x_{1}\right|^{p}+\left|-x_{2}\right|^{p}\right)^{1/p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left(\left|x_{1}\right|^{p}+\left|x_{2}\right|^{p}\right)^{1/p}\\
- & =\sup_{x\in\mathbb{R}^{n},\left\Vert x\right\Vert _{p}=1}\left\Vert x\right\Vert _{p}\\
- & =1
+\lambda\left(x_{1}+s_{2}\right)+\left(1-\lambda\right)\left(x_{2}+s_{2}\right) & =\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)+\lambda s_{2}+\left(1-\lambda\right)s_{2}\\
+ & =\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)+s_{2}
+\end{align*}
+and therefore $S$ is convex.
+\item [1.3]The set is convex because it's actually the interior of a sphere.
+Fix $\theta$ and without loss of generality set $a=0$ and $b'=\left(0,\dots,\left\Vert b-a\right\Vert \right)\in\mathbb{R}^{n}$
+and consider the set of $x\in\mathbb{R}^{n}$ where 
+\[
+\left\Vert x\right\Vert _{2}=\theta\left\Vert x-b'\right\Vert _{2}
+\]
+Since distances are positive this itself is equivalent to 
+\begin{align*}
+\sum_{i=1}^{n}x_{i}^{2} & =\theta^{2}\left(\sum_{i=1}^{n-1}x_{i}^{2}+\left(x_{n}-\left\Vert b-a\right\Vert \right)^{2}\right)\\
+ & =\theta^{2}\left(\sum_{i=1}^{n-1}x_{i}^{2}+x_{n}^{2}-2x_{n}\left\Vert b-a\right\Vert +\left\Vert b-a\right\Vert ^{2}\right)\\
+ & =\theta^{2}\sum_{i=1}^{n}x_{i}^{2}-2x_{n}\theta^{2}\left\Vert b-a\right\Vert +\theta^{2}\left\Vert b-a\right\Vert ^{2}
+\end{align*}
+or
+\begin{align*}
+\sum_{i=1}^{n-1}x_{i}^{2}+x_{n}^{2}+2x_{n}\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}-\frac{\theta^{2}\left\Vert b-a\right\Vert ^{2}}{\left(1-\theta^{2}\right)} & =0
+\end{align*}
+or 
+\begin{align*}
+\sum_{i=1}^{n-1}x_{i}^{2}+x_{n}^{2}-2x_{n}\left(-\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}\right)+\left(-\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}\right)^{2}-\left(-\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}\right)^{2}-\frac{\theta^{2}\left\Vert b-a\right\Vert ^{2}}{\left(1-\theta^{2}\right)} & =0
+\end{align*}
+or
+\begin{align*}
+\sum_{i=1}^{n-1}x_{i}^{2}+\left(x_{n}-\left(-\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}\right)\right)^{2} & =\left(\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}\right)^{2}+\frac{\theta^{2}\left\Vert b-a\right\Vert ^{2}}{\left(1-\theta^{2}\right)}
+\end{align*}
+Therefore the boundary of the set is a sphere and since the center
+of the sphere $\left(0,\dots,-\frac{\theta^{2}\left\Vert b-a\right\Vert }{\left(1-\theta^{2}\right)}\right)$
+satisfies the inequality $\left\Vert x\right\Vert _{2}\leq\theta\left\Vert x-b'\right\Vert _{2}$
+the set must be the entire sphere, and hence convex.
+\item [1.4]The set is convex. Let $S\subset\mathbb{R}^{n}$ be the set
+\[
+\left\{ x\in\mathbb{R}^{n}\big|x^{\intercal}Ax+b^{\intercal}x+c\leq0,g^{\intercal}x+h=0\right\} 
+\]
+Since $A+\lambda gg^{\intercal}$ is PSD it's the case that 
+\[
+S'=\left\{ x\in\mathbb{R}^{n}\big|x^{\intercal}\left(A+\lambda gg^{\intercal}\right)x+b^{\intercal}x+c\leq0\right\} 
+\]
+is convex. Why? Diagonalize and complete the square to get the constraint
+into the form $x^{\intercal}Bx\leq k$ (note that $B\succeq0$) and
+some $k$. If $k\geq0$ then the set is convex. If $k<0$ then the
+set is empty and trivially convex. Then manipulating the constraint
+characterizing $S'$ 
+\begin{align*}
+x^{\intercal}\left(A+\lambda gg^{\intercal}\right)x+b^{\intercal}x+c & =x^{\intercal}Ax+x^{\intercal}\lambda gg^{\intercal}x+b^{\intercal}x+c\\
+ & =x^{\intercal}Ax+\lambda\left\Vert g^{\intercal}x\right\Vert ^{2}+b^{\intercal}+c\\
+ & =x^{\intercal}Ax+b^{\intercal}+c+\lambda h^{2}
+\end{align*}
+and therefore 
+\[
+x^{\intercal}\left(A+\lambda gg^{\intercal}\right)x+b^{\intercal}+c-\lambda h^{2}=x^{\intercal}Ax+b^{\intercal}+c
+\]
+but again since $A+\lambda gg^{\intercal}$ is PSD 
+\[
+\left\{ x\in\mathbb{R}^{n}\big|x^{\intercal}\left(A+\lambda gg^{\intercal}\right)x+b^{\intercal}+c-\lambda h^{2}\leq-\lambda h^{2}\right\} 
+\]
+is also convex (by the same argument as before except with $k'=k-\lambda h^{2}$).
+Hence 
+\[
+\left\{ x\in\mathbb{R}^{n}\big|x^{\intercal}Ax+b^{\intercal}+c\leq-\lambda h^{2}\right\} 
+\]
+is convex and since the intersection of two convex sets (the plane
+$g^{\intercal}x+h=0$ is convex) is convex the set $S$ is convex.
+\item [1.5]The set is convex. Let 
+\[
+S=\left\{ y\in\mathbb{R}^{n}\big|\sum y_{i}B_{i}-A\succeq0\right\} 
+\]
+for $A,B_{i}$ symmetric matrices in $\mathbb{R}^{p\times p}$. Assume
+$y_{1},y_{2}\in S$. Then 
+\begin{align*}
+x^{\intercal}\left[\left(\lambda y_{1}+\left(1-\lambda\right)y_{2}\right)\cdot\mathbf{B}-A\right]x & =x^{\intercal}\left[\left(\lambda y_{1}+\left(1-\lambda\right)y_{2}\right)\cdot\mathbf{B}-\lambda A-\left(1-\lambda\right)A\right]x\\
+ & =x^{\intercal}\left[\lambda y_{1}\cdot\mathbf{B}-\lambda A+\left(1-\lambda\right)y_{2}\cdot\mathbf{B}-\left(1-\lambda\right)A\right]x\\
+ & =\lambda x^{\intercal}\left(y_{1}\cdot\mathbf{B}-A\right)x+\left(1-\lambda\right)x^{\intercal}\left(y_{2}\cdot\mathbf{B}-A\right)x
+\end{align*}
+and since both $\lambda\geq0$ and $\left(1-\lambda\right)\geq0$
+and both $y_{1},y_{2}$ are such that $\left(y_{1}\cdot\mathbf{B}-A\right)\succeq0$
+and $\left(y_{2}\cdot\mathbf{B}-A\right)\succeq0$ it's the case that
+\begin{align*}
+x^{\intercal}\left[\left(\lambda y_{1}+\left(1-\lambda\right)y_{2}\right)\cdot\mathbf{B}-A\right]x & =\lambda x^{\intercal}\left(y_{1}\cdot\mathbf{B}-A\right)x+\left(1-\lambda\right)x^{\intercal}\left(y_{2}\cdot\mathbf{B}-A\right)x\\
+ & \geq0
 \end{align*}
 
-\end{proof}
-\end{enumerate}
-\item [4.1]The Laplacian is $L=D-A$ where $D$ is the degree matrix and
-$A$ is the adjacency matrix, hence
+\item [2.1]Claim: the conic hull $\text{coni}\left(C\right)$ of a convex
+set $C$ satisfies
 \[
-L=D-A=\begin{pmatrix}2 & 0 & 0 & 0 & 0 & 0\\
-0 & 3 & 0 & 0 & 0 & 0\\
-0 & 0 & 2 & 0 & 0 & 0\\
-0 & 0 & 0 & 3 & 0 & 0\\
-0 & 0 & 0 & 0 & 3 & 0\\
-0 & 0 & 0 & 0 & 0 & 1
-\end{pmatrix}-\begin{pmatrix}0 & 1 & 0 & 0 & 1 & 0\\
-1 & 0 & 1 & 0 & 1 & 0\\
-0 & 1 & 0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0 & 1 & 1\\
-1 & 1 & 0 & 1 & 0 & 0\\
-0 & 0 & 0 & 1 & 0 & 0
-\end{pmatrix}=\begin{pmatrix}2 & -1 & 0 & 0 & -1 & 0\\
--1 & 3 & -1 & 0 & -1 & 0\\
-0 & -1 & 2 & -1 & 0 & 0\\
-0 & 0 & -1 & 3 & -1 & -1\\
--1 & -1 & 0 & -1 & 3 & 0\\
-0 & 0 & 0 & -1 & 0 & 1
-\end{pmatrix}
+\text{coni}\left(C\right)=\bigcup_{x\in C}\left\{ \gamma x\big|\gamma\geq0\right\} 
 \]
-where
-\item [4.2]Claim: $L^{T}=L$.
+
 
 \begin{proof}
-For an undirected graph the adjacency matrix $A$ is symmetric since
-$A_{ij}=1$ iff $\left(i,j\right)\in E$ but by undirected $\left(i,j\right)\in E$
-implies $\left(j,i\right)\in E$ and so $A_{ij}=A_{ji}$. $D$ is
-symmetric since it is diagonal. Therefore 
+Let $y\in\text{coni}\left(C\right)$. Then $y=\sum_{i=1}^{m}\alpha_{i}x_{i}$
+where $\alpha_{i}\geq0$ and $x_{i}\in C$. If $\alpha_{i}=0$ for
+all $i$ then $y=0$ immediately in $\bigcup_{x\in C}\left\{ \gamma x\big|x\in C,\,\gamma\geq0\right\} $.
+Therefore assume not. Then dividing by $\sum\alpha_{i}$ we get that
 \[
-L^{T}=\left(D-A\right)^{T}=D^{T}-A^{T}=D-A=L
+y^{'}\coloneqq\frac{1}{\sum_{i}\alpha}y=\sum_{i=1}^{m}\alpha_{i}^{'}x_{i}
 \]
-
+is a convex combination of the $x_{i}$ and therefore $y^{'}\in C$
+(since $C$ is convex) and hence $y\in\left\{ \gamma y^{'}\big|\gamma\geq0\right\} $
+and hence $y\in\bigcup_{x\in C}\left\{ \gamma x\big|\gamma\geq0\right\} $.
+For the converse assume $y\in\bigcup_{x\in C}\left\{ \gamma x\big|\gamma\geq0\right\} $.
+Then $y=\gamma x$ for some $x\in C$ and $\gamma\geq0$. But this
+is a trivial conic combination of $x\in C$ and hence $y\in\text{coni}\left(C\right)$.
 \end{proof}
-\item [4.3]Claim: $L$ is PSD.
-
-\begin{proof}
-If for $L$ we can write 
-\[
-u^{T}Lu=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(u_{i}-u_{j}\right)^{2}
-\]
-for arbitrary $u$ then $L$ is PSD, since 
-\[
-\sum_{i,j\big|\left(i,j\right)\in E}\left(u_{i}-u_{j}\right)^{2}\geq0
-\]
-Let $u=\left(u_{1},\dots,u_{n}\right)$ and using $L=D-A$ we have
-\begin{align*}
-u^{T}\left(D-A\right)u & =u^{T}Du-u^{T}Au\\
- & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-u^{T}Au\\
- & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-\sum_{i,j}u_{i}u_{j}A_{ij}
-\end{align*}
-Since $A_{ij}=\delta_{\left\{ \left(i,j\right)\in E\right\} }$ 
-\begin{align*}
-u^{T}\left(D-A\right)u & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}
-\end{align*}
-Now $d\left(i\right)=\sum_{j=1}^{n}\delta_{\left(i,j\right)\in E}$
-(self edges are not in $E,$ i.e. there does not exist $i$ such that
-$\left(i,i\right)\in E$) and since the graph is undirected for all
-$i,j$ it's the case that $\delta_{\left\{ \left(i,j\right)\in E\right\} }=1\iff\delta_{\left\{ \left(j,i\right)\in E\right\} }=1$.
-Essentially there is double counting in the $d\left(i\right)$. Therefore
-\begin{align*}
-u^{T}\left(D-A\right)u & =\sum_{i=1}^{n}d\left(i\right)u_{i}^{2}-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}\\
- & ==\sum_{i=1}^{n}\left(\sum_{j=1}^{n}\delta_{\left(i,j\right)\in E}\right)u_{i}^{2}-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}\\
- & =\sum_{i,j\big|\left(i,j\right)\in E}^{n}2\left(u_{i}^{2}+u_{j}^{2}\right)-\sum_{i,j\big|\left(i,j\right)\in E}u_{i}u_{j}\\
- & =\frac{1}{2}\left(\sum_{i,j\big|\left(i,j\right)\in E}^{n}\left(u_{i}^{2}+u_{j}^{2}\right)-2u_{i}u_{j}\right)\\
- & =\frac{1}{2}\left(\sum_{i,j\big|\left(i,j\right)\in E}^{n}u_{i}^{2}-2u_{i}u_{j}+u_{j}^{2}\right)\\
- & =\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}^{n}\left(u_{i}-u_{j}\right)^{2}
-\end{align*}
-
-\end{proof}
-\item [4.4]Claim: $0$ is always an eigenvalue of $L$
-
-\begin{proof}
-If a matrix $A$ is diagonalizable then 0 is an eigenvalue iff $A$
-is singular, since 
-\begin{align*}
-\det\left(A\right) & =\det\left(PDP^{T}\right)\\
- & =\det\left(P^{T}PD\right)\\
- & =\det\left(D\right)\\
- & =\prod_{i}\lambda_{i}
-\end{align*}
-Therefore if the nullspace of $A$ is non-trivial then $A$ has an
-eigenvalue equal to zero. Note that summing across any row of a Laplacian
-matrix $L$, for an undirected graph, we get zero. Therefore let $u=\left(1,\dots,1\right)$
-implies $Lu=0$. Hence 0 is an eigenvalue.
-\end{proof}
-\item [4.5]Claim: If $G=\left(V,E\right)$ is path connected then the multiplicity
-of the zero eigenvalue is $1$.
-
-\begin{proof}
-If the graph is connected then every row of $L$, i.e. $L_{i}=D_{i}-A_{i}$,
-has non-zero entries and for $u=\left(\underbrace{1,\dots,1}_{\left|V\right|}\right)$
-it's the case that 
-\[
-L_{i}\cdot u=D_{i}\cdot u-A_{i}\cdot u=d\left(i\right)-2\left|\left\{ v\in V\big|\left(i,v\right)\in E\right\} \right|=0
-\]
-Therefore $Lu=0$. Assume $w_{h}\neq w_{g}$ for some $h,g$ and $Lw=0$.
-Then $w^{T}Lw=0$ but consider 
-\[
-w^{T}Lw=\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(w_{i}-w_{j}\right)^{2}
-\]
-because of connectedness there exists $E'=\left\{ \left(h,x_{0}\right),\left(x_{1},x_{2}\right),\dots,\left(x_{k},g\right)\right\} \subset E$
-where for some $t,v$ it's the case that $w_{v}\neq w_{t}$ (otherwise
-if no such $t,v$ existed then $w_{h}=w_{0}=\cdots=w_{k}=w_{g}$)
-\begin{align*}
-w^{T}Lw & =\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E}\left(w_{i}-w_{j}\right)^{2}\\
- & \geq\frac{1}{2}\sum_{i,j\big|\left(i,j\right)\in E'}\left(w_{i}-w_{j}\right)^{2}\\
- & \geq\frac{1}{2}\left(w_{t}-w_{v}\right)^{2}>0
-\end{align*}
-which is a contradiction. Therefore $Lu=0\iff u=\left(\underbrace{1,\dots,1}_{\left|V\right|}\right)$
-and so the dimension of the eigenspace is $\dim\left(\left\{ u\right\} \right)=1$.\end{proof}
-\begin{cor*}
-The dimension of the eigenspace associated with the eigenvalue 0 is
-the number of connected components of $G$. \end{cor*}
-\begin{proof}
-Indeed the number of connected components of the graph corresponds
-to the block structure of the Laplacian. If there exists more than
-one block, e.g. 
-\[
-L=\begin{pmatrix}L_{1} & 0\\
-0 & L_{2}
-\end{pmatrix}
-\]
-that means there's no path from connected component $L_{1}$ to $L_{2}$
-(since, up to relabeling\footnote{Simply write down the Laplacian for each connected component $L_{1},\dots,L_{k}$
-(with distinct labels for vertices in distinct connected components)
-and take the direct sum of the matrices $\varoplus_{i=1}^{k}L_{i}=\text{diag}\left(L_{1},\dots,L_{k}\right)$.}, there are no edges from any vertex in $L_{1}$ to any in $L_{2}$).
-Furthermore this clearly corresponds to the dimension of the nullspace,
-i.e. the degenerate eigenspace associated with eigenvalue $\lambda=0$.
-For example for the $L$ above, if $L_{1}\in\mathbb{R}^{m\times m}$
-and $L_{2}\in\mathbb{R}^{n\times n}$, then both 
-\[
-u_{1}=\left(\underbrace{1,\dots,1}_{m},\underbrace{0,\dots,0}_{n}\right)
-\]
-and 
-\[
-u_{2}=\left(\underbrace{0,\dots,0}_{m},\underbrace{1,\dots,1}_{n}\right)
-\]
-
-
-are eigenvectors corresponding to the eigenvalue $0$ and $u_{1}\cdot u_{2}=0$.
-\end{proof}
-\item [5.1]Claim: $A^{T}A$ is symmetric and PSD.
-
-\begin{proof}
-Firstly 
-\[
-\left(A^{T}A\right)^{T}=A^{T}\left(A^{T}\right)^{T}=A^{T}A
-\]
-Then consider
-\[
-x^{T}\left(A^{T}A\right)x=\left(Ax\right)^{T}\left(Ax\right)=\left|Ax\right|\geq0
-\]
-
-\end{proof}
-\item [5.2]Claim: Let $v_{j}$ be orthonormal eigenbasis of $A^{T}A$,
-$\lambda_{j}$ eigenvalue associated with $v_{j}$, $\sigma_{j}=\sqrt{\lambda_{j}}$,
-$w_{j}\in\text{span}\left\{ u_{1},\dots,u_{j-1}\right\} ^{\perp}$
-with $\left|w_{j}\right|=1$, and 
-\[
-u_{j}=\begin{cases}
-\frac{1}{\sigma_{j}}Av_{j} & \text{if }\sigma_{j}\neq0\\
-w_{j} & \text{otherwise}
-\end{cases}
-\]
-Then $u_{j}^{T}\cdot u_{i}=\delta_{ij}$.
-
-\begin{proof}
-If $\sigma_{i}\neq0$ and $\sigma_{j}\neq0$ consider
-\begin{align*}
-u_{j}^{T}\cdot u_{i} & =\left(\frac{1}{\sigma_{j}}Av_{j}\right)^{T}\cdot\left(\frac{1}{\sigma_{i}}Av_{i}\right)\\
- & =\frac{1}{\sigma_{j}\sigma_{i}}v_{j}^{T}\left(A^{T}A\right)v_{i}\\
- & =\frac{1}{\sigma_{j}\sigma_{i}}v_{j}^{T}\lambda_{i}v_{i}\\
- & =\frac{\lambda_{i}}{\sigma_{j}\sigma_{i}}v_{j}^{T}\cdot v_{i}\\
- & =\frac{\lambda_{i}}{\sigma_{j}\sigma_{i}}\delta_{ij}
-\end{align*}
-since $v_{i},v_{j}$ are orthonormal eigenvectors of $A^{T}A$. Then
-\begin{align*}
-u_{j}^{T}\cdot u_{i} & =\frac{\lambda_{i}}{\sigma_{j}\sigma_{i}}\delta_{ij}\\
- & =\frac{\lambda_{i}}{\left(\sigma_{i}\right)^{2}}\delta_{ij}\\
- & =\frac{\lambda_{i}}{\left(\sqrt{\lambda_{i}}\right)^{2}}\delta_{ij}\\
- & =\delta_{ij}
-\end{align*}
-Without loss of generality assume $0=\sigma_{j}\neq\sigma_{i}$ and
-$i<j$. Then $w_{j}\in\text{span}\left\{ u_{1},\dots,u_{j-1}\right\} ^{\perp}$.
-Then immediately
-\begin{align*}
-u_{j}^{T}\cdot u_{i} & =\left(w_{j}\right)^{T}\cdot u_{i}=0
-\end{align*}
-
-
-Assume $0=\sigma_{j}=\sigma_{i}$ and $i<j$, then by $w_{j}\in\text{span}\left\{ u_{1},\dots,u_{j-1}\right\} ^{\perp}$
-\begin{align*}
-u_{j}^{T}\cdot u_{i} & =\left(w_{j}\right)^{T}\cdot w_{i}=0
-\end{align*}
-
-\end{proof}
-\item [5.3]Reduced SVD
+\item [2.2]Claim: For $C_{1},C_{2}$ convex cones such that $0\in C_{1}\cap C_{2}$
 
 \begin{enumerate}
-\item Claim: There exist $U,\Sigma,V$ such that $A=U\Sigma V^{T}$ and
-$\Sigma$ is diagonal and 
-\[
-\Sigma=\begin{pmatrix}\sigma_{1} & 0 & \cdots & 0\\
-0 & \ddots & \ddots & \vdots\\
-\vdots & \ddots & \ddots & 0\\
-0 & \cdots & 0 & \sigma_{n}
-\end{pmatrix}
-\]
-
-
+\item $C_{1}\oplus C_{2}=\text{conv}\left(C_{1}\cup C_{2}\right)$\end{enumerate}
 \begin{proof}
-Let $\sigma_{j}$ for $j=1,\dots,m$, with $m\leq n$ be the non-zero
-square roots of the $A^{T}A$ and $v_{j}$ for $j=$. The by 5.2 we
-have that 
-\[
-Av_{j}=u_{j}\sigma_{j}
-\]
-Succintly this is
-\[
-A\left[v_{1}\big|\cdots\big|v_{m}\right]=\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{pmatrix}\sigma_{1} & 0 & \cdots & 0\\
-0 & \ddots & \ddots & \vdots\\
-\vdots & \ddots & \ddots & 0\\
-0 & \cdots & 0 & \sigma_{n}
-\end{pmatrix}
-\]
-i.e. $AV=U\Sigma$. Then since $V$ is an orthonormal matrix (since
-the $v_{j}$ are othonormal eigenvectors of $A^{T}A$)
-\[
-AVV^{T}=A=U\Sigma V^{T}
-\]
-
-\end{proof}
-\item Claim: $VV^{T}=V^{T}V=I$
-
-\begin{proof}
-As mentioned in part (a), since the $v_{j}$ are othonormal eigenvectors
-of $A^{T}A$ we have that 
-\[
-v_{j}^{T}\cdot v_{i}=v_{j}^{T}\cdot v_{i}=\delta_{ij}
-\]
-and so $VV^{T}=V^{T}V=I$.
-\end{proof}
-\item Claim: $U^{T}U=I$
-
-\begin{proof}
-By 5.2 $u_{j}^{T}\cdot u_{i}=\delta_{ij}$ and hence $U^{T}U=I$
-\end{proof}
-\end{enumerate}
-\item [5.4]For $r$ being the largest $i$ such that $\sigma_{i}\neq0$
-(note that $\sigma_{i}\geq\sigma_{i+1}$)
-
-\begin{enumerate}
-\item Claim: $\left\{ u_{1},\dots,u_{r}\right\} $ is a basis for $R\left[A\right]$.
-
-\begin{proof}
-Consider for $x\in\mathbb{R}^{n}$ 
-\begin{align*}
-Ax & =\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{pmatrix}\sigma_{1} & 0 & \cdots & 0\\
-0 & \ddots & \ddots & \vdots\\
-\vdots & \ddots & \ddots & 0\\
-0 & \cdots & 0 & \sigma_{n}
-\end{pmatrix}\begin{bmatrix}v_{1}^{T}\\
-\vdots\\
-v_{n}^{T}
-\end{bmatrix}x\\
- & =\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{bmatrix}\sigma_{1}v_{1}^{T}\\
-\vdots\\
-\sigma_{r}v_{r}^{T}\\
-0\\
-\vdots\\
-0
-\end{bmatrix}x\\
- & =\left[u_{1}\big|\cdots\big|u_{m}\right]\begin{pmatrix}\sigma_{1}v_{11} & \cdots & \sigma_{1}v_{1n}\\
-\vdots & \ddots & \vdots\\
-\sigma_{r}v_{r1} & \cdots & \sigma_{1}v_{1n}\\
-0 & \cdots & 0\\
-\vdots & \ddots & \vdots\\
-0 & \cdots & 0
-\end{pmatrix}x\\
- & =\left[\sum_{i=1}^{r}u_{i}\sigma_{i}v_{i1}\big|\cdots\big|\sum_{i=1}^{r}u_{i}\sigma_{i}v_{in}\right]\begin{pmatrix}x_{1}\\
-\vdots\\
-x_{n}
-\end{pmatrix}\\
- & =\sum_{j=1}^{n}\sum_{i=1}^{r}u_{i}\sigma_{i}v_{ij}x_{j}\\
- & =\sum_{i=1}^{r}u_{i}\left(\sum_{j=1}^{n}\sigma_{i}v_{ij}x_{j}\right)
-\end{align*}
-Let $k_{i}=\left(\sum_{j=1}^{n}\sigma_{i}v_{ij}x_{j}\right)$ and
-then $Ax=\sum_{i=1}^{r}u_{i}k_{i}$ and the image of $x$ is a linear
-combination of $\left\{ u_{1},\dots,u_{r}\right\} $. Therefore the
-range (column-space) of $A$ is spanned by $\left\{ u_{1},\dots,u_{r}\right\} $
-and since by 5.2 $u_{j}^{T}\cdot u_{i}=\delta_{ij}$ it's in fact
-a basis.
-\end{proof}
-\item Claim: $\left\{ u_{r+1},\dots,u_{m}\right\} $ is a basis for $\ker\left[A^{T}\right]$.
-
-\begin{proof}
-Firstly $\left\{ u_{1},\dots,u_{m}\right\} $ spans $\mathbb{R}^{m}$.
-By the fundamental theorem of linear algebra $R\left[A\right]\perp\ker\left[A^{T}\right]$
-and since by part (a) $\left\{ u_{1},\dots,u_{r}\right\} $ is a basis
-for $R\left[A\right]$ we have that $\left\{ u_{1},\dots,u_{r}\right\} \perp\ker\left[A^{T}\right]$.
-But by definition $\left\{ u_{r+1},\dots,u_{m}\right\} \perp\left\{ u_{1},\dots,u_{r}\right\} $
-and furthermore for $j=r+2,\dots,m$ it's the case that $u_{j}\perp\left\{ u_{r+1},\dots,u_{j-1}\right\} $
-and so $\left\{ u_{r+1},\dots,u_{m}\right\} $ are pairwise orthogonal.
-Hence $\left\{ u_{r+1},\dots,u_{m}\right\} $ is a suitable basis
-for $\ker\left[A^{T}\right]$.
-\end{proof}
-\item Claim: $\left\{ v_{1},\dots,v_{r}\right\} $ is a basis for $R\left[A^{T}\right]$.
-
-\begin{proof}
-Note that $A^{T}=\left(U\Sigma V^{T}\right)=V\Sigma U^{T}$, since
-$\Sigma$ is diagonal. Then by similar reasoning as in (a) we have
-that $\left\{ v_{1},\dots,v_{r}\right\} $ is a basis for $R\left[A^{T}\right]$.
-\end{proof}
-\item Claim: $\left\{ v_{r+1},\dots,v_{n}\right\} $ is a basis for $\ker\left[A\right]$.
-
-\begin{proof}
-By similar reasoning as in (b).
-\end{proof}
-\end{enumerate}
-\item [5.5]Claim: For $1\leq k\leq\text{rank}\left(A\right)$
-\[
-\min_{X\big|\text{rank}\left(X\right)=k}\left\langle \left\langle A-X\right\rangle \right\rangle _{2}=\sigma_{k+1}
-\]
-and
-\[
-\text{argmin}\left\langle \left\langle A-X\right\rangle \right\rangle _{2}=X_{k}=\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}
-\]
- 
-
-\begin{proof}
-In 3 parts:\end{proof}
-\begin{enumerate}
-\item Lemma: For $X$ such that $\text{rank}\left(X\right)=k$ there exists
-$z\in\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
-such that $\left\Vert z\right\Vert _{2}=1$.
-
-\begin{proof}
-By the rank-nullity theorem $\dim\left(\ker\left[X\right]\right)+\text{rank}=n$.
-Suppose $\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} =\left\{ 0\right\} $.
-Then we can find a basis $\left\{ x_{1},\dots,x_{n-k}\right\} $of
-$\ker\left[X\right]$ such that $\dim\left(\ker\left[X\right]\right)=n-k$
-and $\left\{ x_{1},\dots,x_{n-k}\right\} \perp\left\{ v_{1},\dots,v_{k+1}\right\} $.
-But then 
-\[
-\dim\left(\left\{ x_{1},\dots,x_{n-k}\right\} \right)+\dim\left(\left\{ v_{1},\dots,v_{k+1}\right\} \right)=n-k+k+1=n+1>n=\dim\left(\mathbb{R}^{n}\right)
-\]
-Hence there exists $z\in\ker\left[X\right]\cap\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
-and we are free to normalize it.
-\end{proof}
-\item Lemma: $\left\langle \left\langle A-X\right\rangle \right\rangle _{2}\geq\sigma_{k+1}$.
-
-\begin{proof}
-Using $z$, and the fact that $\left\Vert z\right\Vert _{2}=1$, from
-part (a) 
-\begin{align*}
-\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}\left\Vert \left(A-X\right)x\right\Vert _{2}\\
- & \geq\left\Vert \left(A-X\right)z\right\Vert _{2}\\
- & =\left\Vert Az-Xz\right\Vert _{2}\\
- & =\left\Vert Az\right\Vert _{2}
-\end{align*}
-since $z\in\ker\left(X\right)$. Then since $z\in V$ wher $V$ might
-be a strict subset (potentially many $\alpha_{i}=0$ but $\sum_{i}\left|\alpha_{i}\right|^{2}=1$)
-of $\text{span}\left\{ v_{1},\dots,v_{k+1}\right\} $
-\[
-z=\sum_{i=1}^{k+1}\alpha_{i}v_{i}
-\]
-. Then
-\begin{align*}
-\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert Az\right\Vert _{2}\\
- & =\left\Vert U\Sigma V^{T}\left(\sum_{i=1}^{k+1}\alpha_{i}v_{i}\right)\right\Vert _{2}\\
- & =\left\Vert U\Sigma\left(\sum_{i=1}^{k+1}\alpha_{i}V^{T}v_{i}\right)\right\Vert _{2}\\
- & =\left\Vert U\Sigma\left(\sum_{i=1}^{k+1}\alpha_{i}e_{i}\right)\right\Vert _{2}
-\end{align*}
-where $e_{i}\in\mathbb{R}^{n}$. Then
-\begin{align*}
-\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert U\left(\sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}e_{i}\right)\right\Vert _{2}\\
- & =\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}Ue_{i}\right\Vert _{2}\\
- & =\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}u_{i}\right\Vert _{2}
-\end{align*}
-Since $\sigma_{1}\geq\cdots\geq\sigma_{k+1}$
-\begin{align*}
-\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\sigma_{i}u_{i}\right\Vert _{2}\\
- & =\sigma_{k+1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\right\Vert _{2}
-\end{align*}
-Then since $\sum_{i}\left|\alpha_{i}\right|^{2}=1$ and $u_{j}^{T}\cdot u_{i}=\delta_{ij}$
-\begin{align*}
-\left\langle \left\langle A-X\right\rangle \right\rangle _{2} & \geq\sigma_{k+1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\right\Vert _{2}\\
- & =\sigma_{k+1}\left(\sum_{i=1}^{k+1}\alpha_{i}u_{i}\right)^{T}\left(\sum_{i=1}^{k+1}\alpha_{i}u_{i}\right)\\
- & =\sigma_{k+1}\left(\sum_{i,j=1}^{k+1}\alpha_{i}\alpha_{j}u_{j}^{T}u_{i}\right)\\
- & =\sigma_{k+1}\left(\sum_{i,j=1}^{k+1}\alpha_{i}\alpha_{j}\delta_{ij}\right)=\sigma_{k+1}\sum_{i=1}^{k+1}\left|\alpha_{i}\right|^{2}=\sigma_{k+1}
-\end{align*}
-
-\end{proof}
-\item Lemma: For $A_{k}=\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}$ 
-\[
-\left\langle \left\langle A-A_{k}\right\rangle \right\rangle =\sigma_{k+1}
-\]
-
-
-\begin{proof}
-Since $\left\{ v_{1},\dots,v_{k+1}\right\} $spans $\mathbb{R}^{k+1}$,
-consider for $x=\sum_{i=1}^{k+1}\alpha_{i}v_{i}$ such that $\sum_{i=1}^{k+1}\left|\alpha_{i}\right|^{2}=1$
-(so that $\left\Vert x\right\Vert _{2}=1$) 
-\begin{align*}
-\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{x\in\mathbb{R}^{n}\big|\left\Vert x\right\Vert =1}\left\Vert \left(A-A_{k}\right)x\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \left(A-A_{k}\right)\sum_{i=1}^{k+1}\alpha_{i}v_{i}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\left(A-A_{k}\right)v_{i}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k+1}\alpha_{i}\left(\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{T}\right)v_{i}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}
-\end{align*}
-Since $v_{j}^{T}\cdot v_{i}=\delta_{ij}$ and $v_{k+1}\perp\left\{ v_{1},\dots,v_{k}\right\} $.
-Then
-\begin{align*}
-\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}Av_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}\left(U\Sigma V^{T}\right)v_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}U\Sigma e_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}U\sigma_{i}e_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \sum_{i=1}^{k+1}\alpha_{i}u_{i}\sigma_{i}-\sum_{i=1}^{k}\alpha_{i}\sigma_{j}u_{j}\right\Vert _{2}\\
- & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\left\Vert \alpha_{k+1}u_{k+1}\sigma_{k+1}\right\Vert _{2}=\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\sigma_{k+1}\left\Vert \alpha_{k+1}u_{k+1}\right\Vert _{2}
-\end{align*}
-Clearly this is maximized for $\alpha_{k+1}=1$ and hence
-\begin{align*}
-\left\langle \left\langle A-A_{k}\right\rangle \right\rangle _{2} & =\sup_{\boldsymbol{\alpha}\big|\left\Vert \boldsymbol{\alpha}\right\Vert =1}\sigma_{k+1}\left\Vert \alpha_{k+1}u_{k+1}\right\Vert _{2}\\
- & =\sigma_{k+1}\left\Vert u_{k+1}\right\Vert _{2}\\
- & =\sigma_{k+1}
-\end{align*}
-
-\end{proof}
-\end{enumerate}
-\item [5.6]Durer and Escher
-\begin{figure}[H]
-\includegraphics[scale=0.75]{d5}\protect\caption{Durer rank 5 approximation}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.75]{d15}\protect\caption{Durer rank 15 approximation}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.75]{d30}\protect\caption{Durer rank 30 approximation}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.75]{e5}\protect\caption{Escher rank 5 approximation}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.75]{e15}\protect\caption{Escher rank 15 approximation}
-\end{figure}
-\begin{figure}[H]
-\includegraphics[scale=0.75]{e30}\protect\caption{Escher rank 30 approximation}
-\end{figure}
-
-\item [6.1]Claim: $U,V\in\mathbb{R}$ be open. Then $U\times V$ is open
-in $\mathbb{R}^{2}$.
-
-\begin{proof}
-Take $\mathbf{x}=\left(x_{1},x_{2}\right)\in U\times V$. We seek
-and open ball around $\mathbf{x}$ contained in $U\times V$. Let
-$U,V\in\mathbb{R}$ be open. Then $x_{1}\in U$ and there exists an
-openball centered on $x_{1}$such that $B_{x_{1}}\left(\epsilon_{1}\right)\subset U$.
-Similarly there exists an openball centered on $x_{1}$such that $B_{x_{2}}\left(\epsilon_{2}\right)\subset V$.
-Therefore $\left(x_{1},x_{2}\right)\in B_{x_{1}}\left(\epsilon_{1}\right)\times B_{x_{2}}\left(\epsilon_{2}\right)\subset U\times V$.
-Take $\epsilon=\min\left\{ \epsilon_{1},\epsilon_{2}\right\} $ and
-the openball centered on $\left(x_{1},x_{2}\right)$ with radius $\epsilon$
-contained in $U\times V$, i.e.
-\[
-B_{\left(x_{1},x_{2}\right)}\left(\epsilon\right)\subset U\times V
-\]
-
-\end{proof}
-\item [6.2]Claim: $\sum_{i=1}^{\infty}\frac{1}{k!}$ converges.
-
-\begin{proof}
-Note that $1/k!\leq2^{1-k}$ and 
-\[
-\frac{1}{2}\sum_{i=0}^{k}\frac{1}{2^{k}}=\frac{1}{2}\left(\frac{1-\left(\frac{1}{2}\right)^{k+1}}{1-\frac{1}{2}}\right)=1-\left(\frac{1}{2}\right)^{k+1}\leq1
-\]
-Therefore $\sum_{i=1}^{n}\frac{1}{k!}$ is monotonically increasing
-and bounded above by $1$ and hence converges.
-\end{proof}
-\item [6.3]Claim: $\sum_{i=1}^{\infty}\frac{1}{k^{2}}$ converges.
-
-\begin{proof}
-Without loss of generality consider, for $2\leq m\leq n$ 
-\begin{align*}
-\left|\sum_{i=1}^{n}\frac{1}{k^{2}}-\sum_{i=1}^{m-1}\frac{1}{k^{2}}\right| & =\left|\sum_{i=m}^{n}\frac{1}{k^{2}}\right|\\
- & \leq\left|\sum_{i=m}^{n}\frac{1}{k\left(k-1\right)}\right|\\
- & =\left|-\left(\sum_{i=m}^{n}\frac{1}{k}-\frac{1}{k-1}\right)\right|\\
- & =\left|-\left(\frac{1}{n}-\frac{1}{m-1}\right)\right|=\left|\frac{1}{n}-\frac{1}{m-1}\right|\\
- & \leq\left|\frac{1}{n}\right|+\left|\frac{1}{m-1}\right|
-\end{align*}
-Therefore pick $N$ such that $1/N\leq\epsilon/2$ and $m\geq N+1$
-then
-\[
-\left|\sum_{i=1}^{n}\frac{1}{k^{2}}-\sum_{i=1}^{m-1}\frac{1}{k^{2}}\right|\leq\left|\frac{1}{n}\right|+\left|\frac{1}{m-1}\right|\leq\frac{1}{N}+\frac{1}{N}\leq\epsilon
-\]
-Hence the sequence of partial sums is Cauchy and so the series converges.
-
-Actually we can show that this series converges by computing its limit
-explicitly. Let $f\left(x\right)=x$ be defined on $\left(-\pi,\pi\right)$.
-The Fourier series expansion of $f$
-\begin{align*}
-f\left(x\right) & =\left(\frac{1}{2}\int_{-\pi}^{\pi}xdx\right)+\sum_{n=1}^{\infty}\left(\left(\int_{-\pi}^{\pi}x\cos\left(nx\right)dx\right)\cos\left(nx\right)+\left(\int_{-\pi}^{\pi}x\sin\left(nx\right)dx\right)\sin\left(nx\right)\right)\\
- & =\sum_{n=1}^{\infty}\left(\left(\int_{-\pi}^{\pi}x\sin\left(nx\right)dx\right)\sin\left(nx\right)\right)
-\end{align*}
- by the ``oddness'' of $x\cos\left(nx\right)$ for all $n$, and
+Since $C_{1}\oplus C_{2}$ is convex and contains $C_{1}\cup C_{2}$
+($x+0=x\in C_{1}\oplus C_{2}$ for each $x\in C_{1}$ and $0+y=y\in C_{1}\oplus C_{2}$
+for each $y\in C_{2}$) and $\text{conv}\left(C_{1}\cup C_{2}\right)$
+is the smallest convex set that contains $C_{1}\cup C_{2}$ we have
+that $\text{conv}\left(C_{1}\cup C_{2}\right)\subset C_{1}\oplus C_{2}$.
+Conversely let $x\in C_{1}\oplus C_{2}$. Then $x=y+z$ for $y\in C_{1}$
+and $z\in C_{2}$. But since $C_{1}$and $C_{2}$ are convex cones
+$y^{'}\coloneqq2y\in C_{1}$ and $z^{'}\coloneqq2z\in C_{2}$ and
 so 
-\begin{align*}
-f\left(x\right) & =\sum_{n=1}^{\infty}\left(\left(\frac{2}{\pi n^{2}}\sin\left(n\pi\right)-\frac{2}{n}\cos\left(n\pi\right)\right)\sin\left(nx\right)\right)\\
- & =2\sum_{n=1}^{\infty}\frac{\left(-1\right)^{n+1}}{n}\sin\left(nx\right)
-\end{align*}
-Then by Parseval's identity 
 \[
-\frac{\pi^{2}}{3}=\frac{1}{2\pi}\int_{-\pi}^{\pi}x^{2}dx=\sum_{n=-\infty,n\eqcirc0}^{\infty}\left|\frac{\left(-1\right)^{n+1}}{n}\right|^{2}=\underset{n\neq0}{\sum_{n=\infty}^{\infty}}\frac{1}{n^{2}}=2\sum_{n=1}^{\infty}\frac{1}{n^{2}}
-\]
-and therefore
-\[
-\sum_{i=1}^{\infty}\frac{1}{n^{2}}=\frac{\pi^{2}}{6}
+x=\frac{1}{2}y^{'}+\frac{1}{2}z^{'}\in\text{conv}\left(C_{1}\cup C_{2}\right)
 \]
 \end{proof}
-\end{enumerate}
+\begin{enumerate}
+\item [(b)]$C_{1}\cap C_{2}=\bigcup_{\alpha\in\left[0,1\right]}\left[\left(\alpha C_{1}\right)\cap\left(\left(1-\alpha\right)C_{2}\right)\right]$\end{enumerate}
+\begin{proof}
+Let $z\in C_{1}\cap C_{2}$ and then $z\in C_{1}$ and $z\in C_{2}$
+and so trivially $z=\alpha z_{1}+\left(1-\alpha\right)z_{2}$ where
+$z_{1}\coloneqq z\in C_{1}$ and $z_{2}\coloneqq z\in C_{2}$for any
+$\alpha\in\left[0,1\right]$. Therefore $z\in\bigcup_{\alpha\in\left[0,1\right]}\left[\left(\alpha C_{1}\right)\cap\left(\left(1-\alpha\right)C_{2}\right)\right]$.
+Let $z\in\bigcup_{\alpha\in\left[0,1\right]}\left[\left(\alpha C_{1}\right)\cap\left(\left(1-\alpha\right)C_{2}\right)\right]$.
+If $\alpha\in\left\{ 0,1\right\} $ then $z\in C_{1}\cap\left\{ 0\right\} $
+or $z\in\left\{ 0\right\} \cap C_{2}$ and so $z=0$ and since $0\in C_{1}\cap C_{2}$
+it's immediate that $z\in C_{1}\cap C_{2}$. Assume $\alpha\in\left(0,1\right)$
+and then $z=\alpha x_{1}$ for some $x_{1}\in C_{1}$ and $z=\left(1-\alpha\right)x_{2}$
+and $x_{2}\in C_{2}$. Since $C_{1},C_{2}$ are cones $\alpha x_{1}\in C_{1}$
+and $\left(1-\alpha\right)x_{2}\in C_{2}$. Therefore $z\in C_{1}$
+and $z\in C_{2}$, i.e. $z\in C_{1}\cap C_{2}$. 
+\end{proof}
+\item [3.1]Let $A=\left\{ \left(x,y\right)\big|y\geq-1/x,x<0\right\} $
+and $B=\left\{ \left(x,y\right)\big|y\geq1/x,x>0\right\} $. Both
+sets are closed because they're the epigraphs of continuous convex
+functions and $d\left(A,B\right)=0$ because for any $\epsilon$ 
+\[
+\left\Vert \left(-\frac{1}{2\left(1/\epsilon\right)},\frac{\epsilon}{2}\right)-\left(\frac{1}{2\left(1/\epsilon\right)},\frac{\epsilon}{2}\right)\right\Vert =\left\Vert \left(-\frac{2}{2\left(1/\epsilon\right)},0\right)\right\Vert =\epsilon
+\]
+
+\item [3.2]Since $v=p_{K}0$ it's the case that $v$ is the vector in $K=B-A$
+that is closest to 0. Since $K$ is linear vector space (being a set
+of displacements) $v$ is therefore the vector in $K$ of smallest
+norm. Since $A$ is the $\infty$-norm ball (a square) shifted 2 units
+to the left and $B$ is the same ball shifted 2 units to the right
+$v$ must be $\left(2,0\right)$ (the smallest displacement from $B$
+to $A$). Furthermore $E$ is the set of points in $A$ closest to
+$B$ and hence it's the closed line segment from $\left(-1,1\right)$
+to $\left(-1,-1\right)$ and similarly $F$ is the closed line segment
+from $\left(1,1\right)$ to $\left(1,-1\right)$. Since $v$ is the
+displacement of $B$ from $A$ it must be the case that $B-v$ is
+$B$ translated in the direction $A$ the minimum such that they're
+in contact. Therefore $A\cap\left(B-v\right)$ is the closed line
+segment from $\left(-1,1\right)$ to $\left(-1,-1\right)$. Any point
+fixed by $p_{A}p_{B}$ is in $A$ (since $p_{A}x\in A$) and therefore
+any point fixed by $p_{A}p_{B}$ is a point in $A$ such that the
+nearest point to the point it is nearest to in $B$, is itself. Therefore
+$\text{Fix}\left(p_{A}p_{B}\right)$ is the closed line segment from
+$\left(-1,1\right)$ to $\left(-1,-1\right)$.
+\item [3.3]$v\coloneqq p_{K}0$ is the vector in $K=B-A$ that is ``closest''
+to 0, i.e. that for which its norm is minimal. Since $A,B$ are closed
+sets (infima are contained in the sets) there exists a $b^{*}\in B$
+such that 
+\[
+\left\Vert a-b^{*}\right\Vert _{2}=\inf_{b\in B}\left\Vert a-b\right\Vert _{2}
+\]
+and similarly there exists a $a^{*}\in A$ such that
+\[
+\left\Vert a^{*}-b^{*}\right\Vert _{2}=\inf_{a\in A}\left\Vert a-b^{*}\right\Vert _{2}
+\]
+Hence $k\coloneqq b^{*}-a^{*}\in K$ and by definition $\left\Vert k\right\Vert _{2}\leq\left\Vert k^{'}\right\Vert _{2}$
+for all $k^{'}\in K$. Therefore $d\left(A,B\right)=\left\Vert v\right\Vert _{2}$.
+\item [3.4]First
+
+\begin{lem*}
+$v=f-e$ where $f\in F$ and $e\in E$ for some $e,f$. \end{lem*}
+\begin{proof}
+Suppose $v=b-a$ where $b\notin F$. Then $d\left(b,A\right)>d\left(A,B\right)$
+and so by (3.3) 
+\[
+\left\Vert v\right\Vert _{2}=d\left(A,B\right)<d\left(b,A\right)=\inf_{a^{'}\in A}\left(\left\Vert b-a^{'}\right\Vert _{2}\right)\leq\left\Vert b-a\right\Vert _{2}=\left\Vert v\right\Vert _{2}
+\]
+a contradiction. Now suppose $a\notin E$. Then $d\left(a,B\right)>d\left(A,B\right)$
+and similarly 
+\[
+\left\Vert v\right\Vert _{2}=d\left(A,B\right)<d\left(a,B\right)=\inf_{b^{'}\in A}\left(\left\Vert b^{'}-a\right\Vert _{2}\right)\leq\left\Vert b-a\right\Vert _{2}=\left\Vert v\right\Vert _{2}
+\]
+a contradiction yet again.\end{proof}
+\begin{cor*}
+$E+v=F$. \end{cor*}
+\begin{proof}
+Fix $e^{'}\in E$. Then there exists some $v^{'}$ such that $e^{'}+v^{'}=f^{'}$
+for some $v^{'}$ and $f^{'}\in F$ (by definition of $E$, i.e. $d\left(e,B\right)=\left\Vert v\right\Vert _{2}$).
+Suppose $v^{'}\neq v$. By the lemma, $v=f-e$ for some $e\in E$
+and $f\in F$, we have that $v\in K$. Since the Minkowski difference
+is convex it's the case that $\frac{1}{2}\left(v^{'}+v\right)\in K$.
+But then 
+\begin{align*}
+\left\Vert \frac{1}{2}\left(v^{'}+v\right)\right\Vert ^{2} & =\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2v\cdot v^{'}\right)
+\end{align*}
+If $2v\cdot v^{'}\leq0$ then immediately we have then immediately
+we have that $\left\Vert \frac{1}{2}\left(v^{'}+v\right)\right\Vert <\left\Vert v\right\Vert $
+which implies there exist $e^{''}\in E$ and $f^{''}\in F$ such that
+$\left\Vert f^{''}-e^{''}\right\Vert _{2}<d\left(A,B\right)$ a contradiction.
+Then $v\cdot v^{'}>0$ and 
+\begin{align*}
+\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2v\cdot v^{'}\right) & =\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2\left|v\cdot v^{'}\right|\right)\\
+ & \leq\frac{1}{4}\left(\left\Vert v^{'}\right\Vert ^{2}+\left\Vert v\right\Vert ^{2}+2\left\Vert v\right\Vert \left\Vert v^{'}\right\Vert \right)
+\end{align*}
+If $2\left|v\cdot v^{'}\right|<2\left\Vert v\right\Vert \left\Vert v^{'}\right\Vert $
+then again we have that $\left\Vert \frac{1}{2}\left(v^{'}+v\right)\right\Vert <\left\Vert v\right\Vert $
+a contradiction. Then $2\left|v\cdot v^{'}\right|=2\left\Vert v\right\Vert \left\Vert v^{'}\right\Vert $.
+But Cauchy-Schwarz is saturated iff $v$ and $v^{'}$ are colinear
+and we've already assumed $v\cdot v^{'}>0$ and $\left\Vert v\right\Vert =\left\Vert v^{'}\right\Vert $.
+Therefore $v^{'}=v$ and hence $e^{'}+v=f^{'}$. Similarly for arbitrary
+$f^{'}\in F$ and $f^{'}-v^{'}=e^{'}$ with $v^{'}=-v$. Hence $E+v=F$.
+\end{proof}
+\item [3.5]Claim: $E=\text{Fix}\left(p_{A}p_{B}\right)=A\cap\left(B-v\right)$.
+
+\begin{proof}
+Firstly clearly $E\subset\text{Fix}\left(p_{A}p_{B}\right)$ since
+$p_{B}\left(\cdot\right)\subset B$ and $p_{A}B=E$ (hence for some
+$B^{'}\subset B$ it's the case that $p_{A}B^{'}\subset E$). Let
+$x\in\text{Fix}\left(p_{A}p_{B}\right)$. Note that $p_{B}\left(\cdot\right)\subset B$
+is the set of points $B$ ``closest'' to $\mathbb{R}^{n}\backslash B$,
+i.e. the boundary of $B$. Then $p_{A}\left(p_{B}\left(\cdot\right)\right)\subset A$
+is the set of points in $A$ closest the boundary of $B$, i.e. $E$.
+Hence $E=\text{Fix}\left(p_{A}p_{B}\right)$. Since $F-v=E$ and otherwise
+$\left(\left(B-v\right)\backslash F\right)\cap A=\emptyset$ (otherwise
+if $b\in B-v\backslash F$ would be such that $d\left(b,A\right)=d\left(A,B\right)$
+and $b\in F$) we have that $A\cap\left(B-v\right)=A\cap\left(F-v\right)=E\cap\left(F-v\right)=E$.
+Hence $E=A\cap\left(B-v\right)$. Therefore 
+\[
+\text{Fix}\left(p_{A}p_{B}\right)=E=A\cap\left(B-v\right)
+\]
+\end{proof}
+\begin{enumerate}
+\item [3.6]Claim: $p_{A}f=p_{E}f=f-v$.\end{enumerate}
+\begin{proof}
+Let $x=p_{A}f$, the nearest point in $A$ to $f$. Since $f\in F\subset B$,
+by definition of $E$, it must be the case that $x=e$ for some $e\in E$.
+Then for $y=p_{E}f$ it must be the case that $x=y$ since $y$ is
+the nearest point in $E$ to $f$ and $x$ is the point in all of
+$A$ that's nearest to $f$ . Finally by 3.4 for arbitrary $f\in F$
+there exists $e\in E$ such that $f-v=e$ and $e$ is the ``nearest''
+point in $E\subset A$ and hence by definition of $p_{E}\left(\cdot\right)$
+it's the case that $p_{E}f=e=f-v$ .
+\end{proof}
+\item [4.1]$\left\{ x\big|Ax=0\wedge x\succ0\right\} \neq\emptyset$ iff
+$\left\{ x\big|A\left(x-es\right)=A\left(\left(-e\right)s\right)\wedge\left(x-es\right)\succeq0\right\} \neq\emptyset$
+for $s>0$. By Farkas' lemma this is true iff $\left\{ y\big|A^{\intercal}y\succeq0\wedge\left(A\left(-e\right)s\right)^{\intercal}y<0\right\} =\emptyset$.
+But $\left(A\left(-e\right)s\right)^{\intercal}y<0$ is equivalent
+to $e^{\intercal}\left(A^{\intercal}y\right)>0$. So there does not
+exist $y$ such that $A^{\intercal}y\succeq0$ and $\sum_{i}A_{i}\cdot y>0$.
+This is true iff there does not exist $y$ such that $A^{\intercal}y\succ0$
+(since otherwise $\sum_{i}A_{i}\cdot y>0$ would be satisfied). 
+\item [4.2]Claim: if $K^{\intercal}=-K$ then 
+\[
+\left\{ x\in\mathbb{R}^{n}\big|Kx\succeq0,x\succeq0,\left(K+I\right)x\succ0\right\} \neq\emptyset
+\]
+
+
+\begin{proof}
+Assume $K^{\intercal}=-K$. Then $\left(K+I\right)x$............
+No clue?
+\end{proof}
+\item [5.1]Reference: Introduction to Algorithms by CLRS. The model is
+minimize the maximum flow of drugs from node 1 to node 10 given the
+constraint that arcs can be turned off at a maximum cost of 15 units.
+The adjacency/drug-flow matrix is 
+\[
+D=\begin{pmatrix}\backslash & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10\\
+1 & 0 & 4 & 8 & 16 & 0 & 0 & 0 & 0 & 0 &0\\
+2 & 0 & 0 & 0 & 9 & 0 & 0 & 9 & 0 & 0 &0\\
+3 & 0 & 0 & 0 & 3 & 6 & 0 & 0 & 0 & 19 &0\\
+4 & 0 & 0 & 0 & 0 & 19 & 6 & 0 & 0 & 0 &0\\
+5 & 0 & 0 & 0 & 0 & 0 & 16 & 0 & 0 & 9 &0\\
+6 & 0 & 0 & 0 & 0 & 0 & 0 & 6 & 0 & 16 &0\\
+7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 &3\\
+8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 13 &5\\
+9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &20\\
+10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &0
+\end{pmatrix}
+\]
+The checkpoint weight matrix is
+\[
+C=\begin{pmatrix}\backslash & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+1 & 0 & 11 & 3 & 17 & 0 & 0 & 0 & 0 & 0 & 0\\
+2 & 0 & 0 & 0 & 7 & 0 & 0 & 9 & 0 & 0 & 0\\
+3 & 0 & 0 & 0 & 8 & 12 & 0 & 0 & 0 & 20 & 0\\
+4 & 0 & 0 & 0 & 0 & 6 & 6 & 0 & 0 & 0 & 0\\
+5 & 0 & 0 & 0 & 0 & 0 & 7 & 0 & 0 & 6 & 0\\
+6 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 11 & 0\\
+7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 0 & 17\\
+8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 3 & 4\\
+9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 20\\
+10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+Let $G=\left(V,E\right)$ be the network and the flow from node $u$
+to node $v$ be $f_{uv}$. Then the flow of drugs across the network
+is 
+\[
+\left|f\right|=\sum_{v\in V}f_{1v}
+\]
+and optimization problem is 
+\begin{align*}
+\min_{\mathbf{B}} & \max_{f}\left(\left|f\right|\right)\\
+\text{s.t.} & f_{uv}\leq b_{uv}D_{uv}\\
+\text{s.t.} & \sum\nolimits _{\{u:(u,v)\in E\}}f_{uv}=\sum\nolimits _{\{u:(v,u)\in E\}}f_{vu}\ \forall v\in V\setminus\left\{ 1,10\right\} \\
+\text{s.t.} & \sum_{k=2}^{9}b_{uv}C_{uv}\leq15
+\end{align*}
+where $b_{uv}=0$ if the government chooses to put a checkpoint on
+edge $\left(u,v\right)$ and 1 otherwise. For the dual formulation
+let a $SR$-$SI$ \emph{cut} be be a partition of the nodes such that
+$1\in SR$ and $10\in SI$. The cut-set of the is the set of edges
+that cross the cut, i.e. $\left\{ \left(u,v\right)\in E\,\text{s.t. }u\in SR,v\in SI\right\} $.
+Alternatively use the \textbf{B }checkpoint indicators to ``turn
+on and off'' the edges. The capacity of a $SR$-$SI$ \emph{cut }is
+\[
+c\left(SR,SI\right)=\sum_{\left(u,v\right)\in E}D_{uv}b_{uv}
+\]
+The dual problem is to minimize $c\left(SR,SI\right)$ over $SR$-$SI$
+cuts and, i.e. 
+\begin{align*}
+\min_{\mathbf{B}} & \min_{SR,SI}\left(c\right)\\
+\text{s.t.} & \sum_{k=2}^{9}b_{uv}C_{uv}\leq15
+\end{align*}
+
+\item [5.2]Skip
+\item [6.1]Let $x_{n}$ be a sequence in $C$ such that $\left\Vert x_{n}-x\right\Vert _{2}\geq n$.
+Consider $z_{n}=\frac{x_{n}-x}{\left\Vert x_{n}-x\right\Vert _{2}}$.
+Then the sequence $z_{n}$ is bounded (contained in unit norm ball)
+and therefore by Bolzano-Weierstrass there exists a convergent subsequence
+$z_{n_{i}}$. Claim: 
+\[
+z=\lim_{i\rightarrow\infty}z_{n_{i}}\in R\left(x\right)
+\]
+
+
+\begin{proof}
+Fix $\lambda\geq0$ and let $N$ be such that $\left\Vert x_{n_{i}}-x\right\Vert _{2}\geq\lambda$
+for all $n_{i}\geq N$. Then since the $z_{n_{i}}$ converge to $z$
+it's the case that $z_{n_{i}}\left(\lambda\right)=\lambda\frac{x_{n_{i}}-x}{\left\Vert x_{n_{i}}-x\right\Vert _{2}}$
+converges to $\lambda z$. Finally since $C$ is convex we have that
+\[
+x+z_{n_{i}}=x+\alpha\left(x_{n_{i}}-x\right)=\alpha x_{n_{i}}+\left(1-\alpha\right)x
+\]
+where since $\left\Vert x_{n_{i}}-x\right\Vert _{2}\geq\lambda$ it's
+the case that 
+\[
+1\geq\frac{\lambda}{\left\Vert x_{n_{i}}-x\right\Vert _{2}}=\alpha\geq0
+\]
+and so since $x+z_{n_{i}}\in C$ for all $n_{i}$ it's the case that
+$\lambda z\in C$.
+\end{proof}
+\item [6.2]$R\left(x\right)$ is a cone since for any vector $z\in\mathbb{R}^{n}$
+such that $x+\lambda z\in C$ for all $\lambda$ it's the case that
+$\alpha z$ is also such a vector: just take $\lambda^{'}=\lambda/\alpha$
+then $x+\lambda^{'}\left(\alpha z\right)=x+\lambda z\in C$, since
+$\lambda,\alpha$ are both positive. $R\left(x\right)$ is convex
+since if $z_{1},z_{2}\in R\left(x\right)$ then, since $C$ is convex
+($\alpha x_{1}+\left(1-\alpha\right)x_{2}\in C$ for all $\alpha\in\left[0,1\right]$)
+\begin{align*}
+\alpha x_{1}+\left(1-\alpha\right)x_{2}+\lambda\left(\alpha z_{1}+\left(1-\alpha\right)z_{2}\right) & =\alpha\left(x_{1}+\lambda z_{1}\right)+\left(1-\alpha\right)\left(x_{2}+\lambda z_{2}\right)\\
+ & =\alpha y_{1}+\left(1-\alpha\right)y_{2}
+\end{align*}
+where $y_{1},y_{2}\in C$ and again because $C$ is convex we have
+that that $\alpha y_{1}+\left(1-\alpha\right)y_{2}\in C$ and so $\left(\alpha z_{1}+\left(1-\alpha\right)z_{2}\right)\in R\left(x\right)$
+for all $\alpha\in\left[0,1\right]$. Finally $R\left(x\right)$ is
+closed because $C$ is closed: let $z_{k}\rightarrow z$ be a convergent
+sequence in $R\left(x\right)$. Fix a $\lambda$ and then for each
+$k$ we have that $x_{k}=x+\lambda z_{k}\in C$. Then since $C$ is
+closed $\lim_{k\rightarrow\infty}x_{k}\in C$ and hence 
+\[
+\lim_{k\rightarrow\infty}x_{k}=\lim_{k\rightarrow\infty}\left(x+\lambda z_{k}\right)=x+\lambda\lim_{k\rightarrow\infty}z_{k}=x+\lambda z\in C
+\]
+
+\item [6.3]Let $z\in R\left(x\right)$ for arbitrary $x\in C$ and $x\neq\bar{x}$
+and such that $\left\Vert z\right\Vert _{2}=1$ and suppose $z\notin R\left(\bar{x}\right)$.
+Then there exists some $\lambda$ such that $\bar{x}+\lambda z\notin C$.
+Let $\lambda_{k}=k$. Then for every $k$ the point at the intersection
+of the line segement from $\bar{x}$ to $x+\lambda_{k}z$ and the
+line segement from $x$ to $\bar{x}+\lambda z$ is in $C$ (since
+both $\bar{x}$ and $x+\lambda_{k}z$ are in $C$). Call this point
+$x_{k}$. Then $\lim_{k\rightarrow\infty}x_{k}=\bar{x}+\lambda z$
+and since $C$ is closed $\bar{x}+\lambda z\in C$, which is a contradiction.
+So $R\left(x\right)\subset R\left(\bar{x}\right)$. By symmetry $R\left(\bar{x}\right)\subset R\left(x\right)$.
+\item [6.4]Assume $C$ is bounded but there exists some $z\in\mathcal{R}$
+and $x\in C$ such that $x+\lambda z\in C$ for $\lambda\geq0$. Let
+$y_{\lambda}=x+\lambda z$ and then 
+\[
+\left\Vert y_{\lambda}\right\Vert ^{2}=\left\Vert x\right\Vert ^{2}+\lambda^{2}\left\Vert z\right\Vert ^{2}+2\lambda x\cdot z
+\]
+Regardless of what $x\cdot z$ is $\lim_{\lambda\rightarrow\infty}\left\Vert y_{\lambda}\right\Vert ^{2}$
+doesn't exist and hence, by contradiction $C$ is unbounded. Assume
+$\mathcal{R}=\left\{ 0\right\} $. Then take $x\in C$ and $z,\lambda$
+such that $x+\lambda z\in C$ and $\left\Vert z\right\Vert _{2}=1$
+and $\lambda$ is maximal. This can be done since $C$ is closed (so
+any sequence of $x+\lambda_{i}z\in C$ for any fixed $z$ would converge
+to some $\lambda$ such that $x+\lambda z\in C$) and if $\lambda$
+were unbounded for any such $z$ then $z$ would be a recession direction.
+Note $x+\lambda z$ is the ``farthest'' point in $C$ from $x$.
+If there were some other point $y\in C$ such that $\left\Vert y-x\right\Vert _{2}>\left\Vert x+\lambda z\right\Vert _{2}$
+then $z^{'}=\frac{\left(y-x\right)}{\left\Vert y-x\right\Vert _{2}}$
+would have been a direction considered (since $C$ is convex and therefore
+$x+\lambda\left(y-x\right)=\lambda y+\left(1-\lambda\right)x\in C$).
+Therefore the closed ball $C\subset B_{x}\left(\lambda\right)$ and
+hence $C$ is bounded.\end{enumerate}
 
 \end{document}

@@ -1,0 +1,1120 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+%\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Midterm
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Linear Algebra
+\end_layout
+
+\begin_layout Subsection*
+Basics
+\end_layout
+
+\begin_layout Enumerate
+Swap lemma: let 
+\begin_inset Formula $A=\left\{ a_{1},\dots,a_{n}\right\} \subset V$
+\end_inset
+
+ is a set of linearly independent vectors and 
+\begin_inset Formula $B=\left\{ b_{1},\dots,b_{m}\right\} \subset V$
+\end_inset
+
+ spans 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ can be completed with elements of 
+\begin_inset Formula $B$
+\end_inset
+
+ to span 
+\begin_inset Formula $V$
+\end_inset
+
+: 
+\begin_inset Formula $A^{'}=\left\{ a_{1},\dots,a_{l},b_{l+1},\dots,b_{m}\right\} $
+\end_inset
+
+ for all 
+\begin_inset Formula $l\leq\min\left\{ n,m\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Lemma: let 
+\begin_inset Formula $A=\left\{ a_{1},\dots,a_{n}\right\} \subset V$
+\end_inset
+
+ is a set of linearly independent vectors and 
+\begin_inset Formula $B=\left\{ b_{1},\dots,b_{m}\right\} \subset V$
+\end_inset
+
+ spans 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $n\leq m$
+\end_inset
+
+.
+ This follows from the swap lemma: otherwise you could complete with more
+ linearly independent vectors from 
+\begin_inset Formula $B$
+\end_inset
+
+ and span 
+\begin_inset Formula $V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+All bases have the same number of elements (follows from the swap lemma,
+ less or equal, complete twice).
+\end_layout
+
+\begin_layout Enumerate
+You can always complete linearly independent vectors to form a basis.
+\end_layout
+
+\begin_layout Enumerate
+The representation of any vector in a basis is unique.
+\end_layout
+
+\begin_layout Subsection*
+Distances and Angles
+\end_layout
+
+\begin_layout Enumerate
+All 
+\begin_inset Formula $p$
+\end_inset
+
+-norms are equivalent: for any 
+\begin_inset Formula $p,p^{'}$
+\end_inset
+
+ there exist 
+\begin_inset Formula $C,D\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $C\left\Vert v\right\Vert _{p}\leq\left\Vert v\right\Vert _{p^{'}}\leq D\left\Vert v\right\Vert _{p}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Cauchy-Schwarz: 
+\begin_inset Formula $\left|\left\langle v,w\right\rangle \right|^{2}\leq\left\Vert v\right\Vert \left\Vert w\right\Vert $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Induced norms are real norms: 
+\begin_inset Formula $\left\Vert w\right\Vert =\sqrt{\left\langle w,w\right\rangle }$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+von-Neumann identity: 
+\begin_inset Formula 
+\[
+\left\langle v,w\right\rangle \coloneqq\frac{\left\Vert v+w\right\Vert ^{2}-\left\Vert v-w\right\Vert ^{2}}{4}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Gram-Schmidt: let 
+\begin_inset Formula $\left\{ v_{1},\dots,v_{k}\right\} $
+\end_inset
+
+ be a basis of 
+\begin_inset Formula $V$
+\end_inset
+
+ with 
+\begin_inset Formula $\left\langle \cdot,\cdot\right\rangle $
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+t_{i}=v_{i}-\sum_{j=1}^{i-1}\frac{\left\langle v_{i},t_{j}\right\rangle }{\left\langle t_{i},t_{j}\right\rangle }t_{j}
+\]
+
+\end_inset
+
+is an orthonormal basis.
+\end_layout
+
+\begin_layout Enumerate
+Orthogonal subspaces: for 
+\begin_inset Formula $v\in V$
+\end_inset
+
+ there exist 
+\begin_inset Formula $w_{1}\in W$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{2}\in W^{\perp}$
+\end_inset
+
+ such that 
+\begin_inset Formula $v=w_{1}+w_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left(W^{\perp}\right)^{\perp}=W$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\dim\left(W\right)+\dim\left(W^{\perp}\right)=\dim\left(V\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Linear Maps
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\ker\left(T\right)$
+\end_inset
+
+ is a linear subspace duh.
+ The nullity is defined to be the dimension of 
+\begin_inset Formula $\ker\left(T\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R\left(T\right)$
+\end_inset
+
+ is the range and is a linear subapce of 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ The rank of a map is defined to be the dimension of 
+\begin_inset Formula $R\left(T\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Rank-nullity theorem: 
+\begin_inset Formula $\text{rank}\left(T\right)+\text{null}\left(T\right)=\dim\left(V\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Matrices and linear systems
+\end_layout
+
+\begin_layout Enumerate
+Rank nullity theorem for matrices in 
+\begin_inset Formula $\mathbb{R}^{m\times n}$
+\end_inset
+
+, i.e.
+ a map from 
+\begin_inset Formula $\mathbb{R}^{n}\rightarrow\mathbb{R}^{m}$
+\end_inset
+
+: 
+\begin_inset Formula $\text{null}\left(A\right)+\text{rank}\left(A\right)=n$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{null}\left(A^{\intercal}\right)+\text{rank}\left(A^{\intercal}\right)=m$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The rowspace of 
+\begin_inset Formula $A$
+\end_inset
+
+ is orthogonal to the nullspace of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The columnspace of 
+\begin_inset Formula $A$
+\end_inset
+
+ is orthogonal to the nullspace of 
+\begin_inset Formula $A^{\intercal}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\text{rank}\left(A^{\intercal}\right)=\text{rank}\left(A\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Leibniz formula for determinant
+\begin_inset Formula 
+\[
+\det\left(A\right)=\sum_{\sigma\in\Sigma_{n}}\text{sgn}\left(\sigma\right)\prod_{i=1}^{n}A_{i,\sigma\left(i\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Laplace formula for determinant: for any 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\det\left(A\right)=\sum_{j=1}^{n}\left(-1\right)^{i+j}A_{ij}M_{ij}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Parallelpiped
+\begin_inset Formula 
+\[
+\left(\text{vol}\left(P\right)\right)^{2}=\det\left(AA^{\intercal}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Corollary: for a linear map 
+\begin_inset Formula $A$
+\end_inset
+
+ and a set 
+\begin_inset Formula $S$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\text{vol}\left(T_{A}S\right)=\left|\det\left(A\right)\right|\text{vol}\left(S\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Determinants scale if you scale one of the rows, are linear, 0 if two rows
+ are the same, and skew-symmetric.
+\end_layout
+
+\begin_layout Enumerate
+Furthermore 
+\begin_inset Formula $\det\left(A^{\intercal}\right)=\det\left(A\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\det\left(\lambda A\right)=\lambda^{n}\det\left(A\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\det\left(AB\right)=\det\left(A\right)\det\left(B\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Determinant is zero if 
+\begin_inset Formula $A$
+\end_inset
+
+ isn't full rank.
+\end_layout
+
+\begin_layout Enumerate
+Inverse of a matrix
+\begin_inset Formula 
+\[
+A^{-1}=\frac{\left(C\left(A\right)\right)^{\intercal}}{\det A}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $C\left(A\right)$
+\end_inset
+
+ is the adjugate of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Orthogonal matrices respect norms and inner products: 
+\begin_inset Formula $\left\langle Qx,Qy\right\rangle =\left\langle x,y\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert Qx\right\Vert =\left\Vert x\right\Vert $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+For orthogonal matrices 
+\begin_inset Formula $Q^{-1}=Q^{\intercal}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Eigenvalues
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\det\left(A\right)=\prod_{i=1}^{n}\lambda_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{tr}\left(A\right)=\sum_{i=1}^{n}\lambda_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Eigenvalues of symmetric matrices are all real.
+\end_layout
+
+\begin_layout Enumerate
+Eigenvectors corresponding to distinct eigenvalues of symmetric matrices
+ are orthogonal.
+\end_layout
+
+\begin_layout Enumerate
+Symmetric matrices have spectral decompositions but the eigenvalues aren't
+ necessarily distinct.
+\end_layout
+
+\begin_layout Enumerate
+A symmetric matrix is PSD iff all of its eigenvalues are nonnegative.
+ Super diagonalization is a way to check (row reduce diagonal entries noting
+ each time that they're positive).
+\end_layout
+
+\begin_layout Enumerate
+The program 
+\begin_inset Formula $\max\left\{ x^{\intercal}Ax\big|\left\Vert x\right\Vert _{2}=1\right\} $
+\end_inset
+
+ is maximized at 
+\begin_inset Formula $z^{*}=\lambda_{\max}\left(A\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Analysis
+\end_layout
+
+\begin_layout Subsection*
+Sequences
+\end_layout
+
+\begin_layout Enumerate
+Bolzano-Weierstrass: a bounded sequence has a convergent subsequence
+\end_layout
+
+\begin_layout Enumerate
+Cauchy-sequence iff convergent
+\end_layout
+
+\begin_layout Subsection*
+Topology
+\end_layout
+
+\begin_layout Enumerate
+Closed iff every the limit of every convergent sequence is in the set.
+\end_layout
+
+\begin_layout Subsection*
+Continuous functions
+\end_layout
+
+\begin_layout Enumerate
+A function is continuous iff 
+\begin_inset Formula $f\left(x_{k}\right)\rightarrow f\left(x\right)$
+\end_inset
+
+ iff 
+\begin_inset Formula $x_{k}\rightarrow x$
+\end_inset
+
+ for any sequence 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $C_{1}=\left\{ x\in\mathbb{R}^{n}\big|f\left(x\right)\geq a\right\} $
+\end_inset
+
+ is a closed set.
+ Similarly 
+\begin_inset Formula $C_{2}=\left\{ x\in\mathbb{R}^{n}\big|f\left(x\right)\in C\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $C$
+\end_inset
+
+ is a closed set, is a closed set.
+\end_layout
+
+\begin_layout Enumerate
+Weierstrass' theorem: continuous functions on closed and bounded sets attain
+ optima
+\end_layout
+
+\begin_layout Section*
+Convex Analysis
+\end_layout
+
+\begin_layout Subsection*
+Convex sets and conves
+\end_layout
+
+\begin_layout Enumerate
+Linear combination: no restriction on the 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+, conic combination: 
+\begin_inset Formula $\lambda_{i}\geq0$
+\end_inset
+
+, affine combination: 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ sum to 1, convex combination: affine and conic, i.e.
+ sum to 1 and positive.
+\end_layout
+
+\begin_layout Enumerate
+linear hull, conic hull, affine hull, convex hull.
+\end_layout
+
+\begin_layout Enumerate
+Polyhedra are intersection of half-spaces, i.e.
+ 
+\begin_inset Formula $\left\{ x\in\mathbb{R}\big|Ax\preceq b\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Intersection of PSD quadratic forms with plane (conic sections) are convex,
+ i.e.
+ 
+\begin_inset Formula $\left\{ x\in\mathbb{R}^{n}\big|x^{\intercal}Ax\leq b\right\} $
+\end_inset
+
+ if 
+\begin_inset Formula $b$
+\end_inset
+
+ is positive.
+\end_layout
+
+\begin_layout Enumerate
+Norm balls are convex sets.
+\end_layout
+
+\begin_layout Enumerate
+Optimal sets of LPs are convex sets, i.e.
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $c^{\intercal}x$
+\end_inset
+
+ subject to 
+\begin_inset Formula $Ax\leq b$
+\end_inset
+
+ is minimal.
+\end_layout
+
+\begin_layout Enumerate
+Intersection, minkowski sum, minkowski difference, linear function of convex
+ sets are all convex.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $C$
+\end_inset
+
+ be a cone.
+ Then 
+\begin_inset Formula $C$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $x+y\in C$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Polyhedral cones 
+\begin_inset Formula $C=\left\{ x\in\mathbb{R}^{n}\big|Ax\preceq0\right\} $
+\end_inset
+
+, i.e.
+ each of the planes defining the polytope intersections the origin.
+\end_layout
+
+\begin_layout Enumerate
+Lorentz cones are convex cones: 
+\begin_inset Formula $C_{k}=\left\{ \left(x,t\right)\in\mathbb{R}^{k-1}\times\mathbb{R}\big|\left\Vert x\right\Vert _{2}\leq t\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+affine independence is when no affine combination of the vectors such that
+ they sum to the zero vector and the weights sum to 0.
+ vectors are affine independent iff all 
+\begin_inset Formula $v_{1}-v_{0},\dots,v_{p}-v_{0}$
+\end_inset
+
+ are all linearly independent.
+\end_layout
+
+\begin_layout Enumerate
+Caratheodory's theorem: every point in the convex hull of a set can be written
+ as the convex combination of at most 
+\begin_inset Formula $n+1$
+\end_inset
+
+ points.
+\end_layout
+
+\begin_layout Enumerate
+for 
+\begin_inset Formula $S$
+\end_inset
+
+ a convex set 
+\begin_inset Formula $x\in\text{cl}\left(S\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $z\in\text{int}\left(S\right)$
+\end_inset
+
+ 
+\begin_inset Formula $y=\lambda x+\left(1-\lambda\right)z\in S$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Interiors of convex sets are convex.
+ If the set is non-empty then the closure is convex too.
+\end_layout
+
+\begin_layout Enumerate
+for 
+\begin_inset Formula $S$
+\end_inset
+
+ a convex set the closure of the interior of 
+\begin_inset Formula $S$
+\end_inset
+
+ is equal to the closure and the interior of the closure is equal to the
+ interior.
+\end_layout
+
+\begin_layout Subsection*
+Projections
+\end_layout
+
+\begin_layout Enumerate
+Projection theorem: for any convex 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $y\notin S$
+\end_inset
+
+ there exists a point 
+\begin_inset Formula $z\in S$
+\end_inset
+
+ with minimum distance to 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(y-z\right)\cdot\left(x-z\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ i.e.
+ 
+\begin_inset Formula $y-z$
+\end_inset
+
+ is the normal vector to a plane that separates 
+\begin_inset Formula $S$
+\end_inset
+
+ from 
+\begin_inset Formula $y$
+\end_inset
+
+ (all vectors 
+\begin_inset Formula $x-z$
+\end_inset
+
+ are on the other side of the plane, hence all points are on the other side
+ of the plane).
+\end_layout
+
+\begin_layout Enumerate
+separation means on either side of a plane.
+ proper separation means sets separated aren't wholly contained in the planes.
+ strict separation means both sets don't intersect the plane and strong
+ separation means there's distance between the two sets.
+\end_layout
+
+\begin_layout Enumerate
+point separation: you can separate a point and a convex set
+\end_layout
+
+\begin_layout Enumerate
+corollary: a convex set is the intersection of half spaces
+\end_layout
+
+\begin_layout Enumerate
+Farkas lemma: 
+\begin_inset Formula $\left\{ x\big|Ax\preceq0,c^{\intercal}x>0\right\} \neq\emptyset\iff\left\{ x\big|A^{\intercal}y=c,y\succeq0\right\} =\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+equivalent farkas: 
+\begin_inset Formula $\left\{ x\big|A^{\intercal}y\succeq0,b^{\intercal}x<0\right\} \neq\emptyset\iff\left\{ x\big|Ax=b,x\succeq0\right\} =\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Gordan's theorem: 
+\begin_inset Formula $\left\{ x\big|Ax\prec0\right\} \neq\emptyset\iff\left\{ y\big|A^{\intercal}y=0,y\succ0\right\} =\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+LP duality: let 
+\begin_inset Formula $P=\left\{ x\in\mathbb{R}^{n}\big|Ax\preceq b\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $D=\left\{ y\in\mathbb{R}^{m}\big|y^{\intercal}A\preceq c^{\intercal},y\succeq0\right\} $
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mathcal{P} & :\sup\left\{ c^{\intercal}x\big|x\in P\right\} \\
+\mathcal{D} & :\inf\left\{ y^{\intercal}b\big|y\in D\right\} 
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $\mathcal{P},D$
+\end_inset
+
+ both infeasible, 1 infeasible then other unbounded, or both feasible and
+ optima equal.
+\end_layout
+
+\begin_layout Enumerate
+Supporting hyperplane: let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a non-empty convex set and 
+\begin_inset Formula $z\in\partial S$
+\end_inset
+
+.
+ Then there exists a hyperplane that supports 
+\begin_inset Formula $S$
+\end_inset
+
+ at 
+\begin_inset Formula $z$
+\end_inset
+
+, i.e.
+ there exists 
+\begin_inset Formula $p\neq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $p^{\intercal}\left(x-z\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\text{cl}\left(S\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+two disjoint convex sets can be separated by a hyperplane.
+\end_layout
+
+\begin_layout Enumerate
+two sets such that the interior of one set is disjoint from the other set
+ can be separated by a hyperplane.
+\end_layout
+
+\begin_layout Enumerate
+two disjoint sets such that one is bounded can be strongly separated.
+\end_layout
+
+\begin_layout Subsection*
+Inner representations of convex sets
+\end_layout
+
+\begin_layout Enumerate
+an extreme point in a convex set is one that cannot be written as a linear
+ combination of two other points
+\end_layout
+
+\begin_layout Enumerate
+a point in a convex set is an extreme point iff it can be expressed as a
+ basic feasible solution with respect to some basis 
+\begin_inset Formula $B$
+\end_inset
+
+, i.e.
+ rearrange the columns of 
+\begin_inset Formula $A=\left[B,N\right]$
+\end_inset
+
+ for the polyhedron 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+, where 
+\begin_inset Formula $B$
+\end_inset
+
+ is maximum rank of 
+\begin_inset Formula $A$
+\end_inset
+
+ and then 
+\begin_inset Formula 
+\[
+x=\begin{pmatrix}x_{B}\\
+x_{N}
+\end{pmatrix}=\begin{pmatrix}B^{-1}b\\
+0
+\end{pmatrix}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $B^{-1}b\succeq0$
+\end_inset
+
+.
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ is called the basis of the solution.
+\end_layout
+
+\begin_layout Enumerate
+The number of extreme points of a polytope is finite (bounded above by how
+ many ways to choose the 
+\begin_inset Formula $m$
+\end_inset
+
+ columns of 
+\begin_inset Formula $A$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+If a polytope is non-empty then it has at least one extreme point.
+\end_layout
+
+\begin_layout Enumerate
+If a polytope has a line then it does not contain an extreme point.
+\end_layout
+
+\begin_layout Enumerate
+An extreme direction is one which is not the convex combination of two other
+ recession directions of the polyhedron.
+\end_layout
+
+\begin_layout Enumerate
+If an LP is unbounded then it has an extreme ray.
+\end_layout
+
+\begin_layout Enumerate
+Minkowski's theorem: any polyhedron can be represented as a linear combination
+ of extreme points and extreme directions:
+\begin_inset Formula 
+\begin{align*}
+x & =\text{conv}\left(\left\{ x_{1},\dots,x_{k}\right\} \right)+\text{coni}\left(\left\{ d_{1},\dots,d_{l}\right\} \right)\\
+ & =\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{j=1}^{l}\sum\mu_{j}d_{j}
+\end{align*}
+
+\end_inset
+
+convex combinations of extreme points and conic combinations of extreme
+ directions.
+\end_layout
+
+\begin_layout Enumerate
+Corollary: a polyhedron has at least one extreme direction iff the polyhedron
+ is unbounded
+\end_layout
+
+\begin_layout Enumerate
+For an LP 
+\begin_inset Formula $\min\left\{ c^{\intercal}x\big|x\in P\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $P=\left\{ x\big|Ax=b,x\succeq0\right\} \neq\emptyset$
+\end_inset
+
+ the LP has an optimal solution iff 
+\begin_inset Formula $c^{\intercal}d_{j}\geq0$
+\end_inset
+
+ for all extreme directions (otherwise you could head in the direction and
+ minimize forever).
+ Further an extreme point is the solution.
+\end_layout
+
+\begin_layout Enumerate
+
+\end_layout
+
+\end_body
+\end_document

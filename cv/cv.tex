@@ -1,0 +1,185 @@
+\documentclass[10pt, a4paper]{moderncv}
+\moderncvstyle{classic}
+% uncomment below for grayscale version, maybe nicer for printing
+\moderncvcolor{black}
+\renewcommand{\familydefault}{\rmdefault}
+
+% \usepackage{fancyhdr}
+
+\definecolor{color3}{rgb}{0.55,0.55,0.55}% dark grey
+
+% identical to what's in the classic style, but change the color to gray.
+\makeatletter
+\renewcommand*{\section}[1]{%
+  \vspace*{2.5ex}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color3}\rule{\hintscolumnwidth}{0.95ex}}}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{part}{#1}%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#1}}
+  \par\nobreak\vskip 1ex\@afterheading}
+\makeatother
+
+% http://www.tug.org/mactex/fonts/LaTeX_Preamble-Font_Choices.html
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled]{helvet}
+\usepackage[scaled]{beramono}
+% \usepackage{microtype} automatically used
+
+\usepackage[hmargin=20mm, vmargin=20mm]{geometry}
+
+% experiment below; widest text in left column right now is "summer
+% 2012" and "2012--present"
+\setlength{\hintscolumnwidth}{21mm}
+
+\renewcommand*{\today}{\number\year \space\ifcase\month \or
+  January\or February\or March\or April\or May\or
+  June\or July\or August\or September\or October\or
+  November\or December\fi \space\number\day}
+
+\firstname{Maksim}
+\familyname{Levental}
+\title{Research Assistant}
+\address{University of Florida\\}{}
+\phone{(954)-667-3666}
+\email{maksim.levental@gmail.com}
+\extrainfo{\href{https://github.com/ice109/}
+  {https://github.com/ice109/}}
+
+% used for "see also" bits and comments
+\definecolor{see}{rgb}{0.3, 0.3, 0.3}
+
+% does the little 'see also' bits
+\newcommand{\seealso}[1]{See \href{http://#1}{\path{#1}}}
+
+\nopagenumbers{}
+
+% use smaller font for my name
+\AtBeginDocument{\renewcommand*{\namefont}{%
+  \fontsize{22}{24}\sffamily\mdseries\upshape}}
+
+% required when changes are made to page layout lengths:
+\AtBeginDocument{\recomputelengths}
+
+\begin{document}
+
+% moderncv does a hypersetup AtBeginDocument and sets the title to the
+% \title above, which I don't want, and also kills the pdfborder, which
+% I do want.
+\hypersetup{pdftitle={Resume: Maksim Levental}, pdfborder={0 0 1}}
+
+% the theme explicitly sets this to pcr, which is usual Courier.
+% Override their overriding back to beramono
+\renewcommand{\ttdefault}{fvm}
+
+% make the address, phone, etc, in upright font; the slanted stuff
+% doesn't look very good when printed
+\renewcommand{\addressfont}{\normalsize\rmfamily\mdseries}
+
+% \thispagestyle{fancy}
+% \fancyhead{}
+% \fancyfoot[L]{search \#F12-19}
+
+\maketitle
+
+\vspace{-25pt}
+
+%\cventry{sidebar}{bold}{italic}{roman}{roman}{description}
+
+\section{Education}
+
+\cventry{2015}{MS, Computer Science}{University of Florida}{Gainesville,
+  FL, USA}{}{} \cvitem{project:}{\emph{Infrastructure development for TUF}} \cvitem{advisor:}{Joseph Wilson}
+
+\cventry{2010}{Bachelor of Science, Mathematics}{Florida State University}{Tallahssee, FL, USA}{}{} \cvitem{honors:}{Cum Laude; Sigma Pi Sigma; Dean's List}
+
+
+\section{Work experience}
+
+\cventry{2014--present}{Research Assistant}{University of
+  Florida}{Gainesville, FL}{}{I coordinate and develop the infrastructure for the TUF (Testing Unified Framework) system in the Computational Science and Intelligence Lab. I designed and implemented a Postgres Database backend for TUF, including a Java-MATLAB interface layer, and ported legacy database functionality (glorified hash table) to make use thereof. I also upgraded and migrated backend services, running on an obsolescent Ubuntu 10.04 server, to a robust, containered (VMs) system.  }
+
+\cventry{2011--2013}{Education Peace Corps Volunteer}{PCUganda}{Mbale, Uganda}{}{Taught Physics and Mathematics at the O-level and A-level, equivalent to 11-12th grade and college freshmen. Also taught MS Office and Excel to students in ICT (information and communications technology) classes. Maintained and repaired computers 
+and equipment in the WorldBank donated computer lab. Connected local intranet to WorldBank donated on-campus Wifi hotspot by means of a Linksys Tomato flashed router.  Trained teachers in computer use, Excel and Office and proprietary lab software, in order to help them incorporate computers into their lesson planning and course design. Designed experiments and learning aids for GirlTech, a summer camp for rural school girls. Specifically a demonstration of a Ruben's tube and water propulsion rockets. General IT and audio/visual (soundboard, projector, PA) maintenance during camp.}
+
+\cventry{2010}{Research Assistant}{High Performance Materials Institute}{Tallahssee, FL}{}{LABview programming to facilitate operation of laboratory equipment detailed below (AFM, Scanning electron microscope, gold evaporator). AFM (atomic force microscopy) to perform interface conduction measurements of carbon nanotubes. Acid doping experiments on single-walled nanotubes. Evaporative coating (by gold) of silicone substrate. Weekly presentations/lectures on progress of experiments.}
+
+\cventry{2009}{Research Assistant}{Center for Advanced Power Systems}{Tallahassee, FL}{}{Compiled data on dielectrics for capacitors in order to facilitate discharge experiments. RGA (residual gas analysis) for characterization of various dielectrics and further modeling in MATLAB of polarization curves. Boil-off calirometry testing on super-conducting cuprates.}
+
+%\cventry{2006--2007}{Postdoctoral Fellow}{ITCEP, University of
+%  Minnesota}{}{}{Taught honors calculus and linear algebra courses for
+%  UMTYMP, a program for advanced high school students, as well as linear
+%  algebra and differential equations for engineering students. Co-taught
+%  summer sessions on mathematics for elementary school teachers.
+%  \seealso{www.mathcep.umn.edu}}
+
+\closesection{}
+\providecommand{\MR}[1]{%
+\href{http://www.ams.org/mathscinet-getitem?mr=#1}{MR~#1}}
+\renewcommand{\MR}[1]{%
+\href{http://www.ams.org/mathscinet-getitem?mr=#1}{MR~#1}}
+\nocite{*}
+\bibliographystyle{amsplainurl}
+\bibliography{cv_publications}
+
+% \enlargethispage{2\baselineskip}
+
+% \section{Research interests}
+
+% \cvitem{}{I study combinatorics, especially of orthogonal polynomials
+%   and special functions, as well as $q$-series and $q$-analogues, and
+%   partition identities. I'm also interested in the development of
+%   software for combinatorics research and mathematics education.}
+
+\section{Selected talks}
+
+\cvitem{October 2015}{\emph{Stochastic Differential Equations and European Options Pricing}, Seminar, University of Florida, Gainesville, Florida}
+
+\cvitem{September 2014}{\emph{Quantum Computing and Shor's Algorithm}, Seminar, University of Florida, Gainesville, Florida}
+
+
+%\cvitem{October 2005}{\emph{Towards a combinatorial theory of multiple
+%    orthogonal polynomials}, U. of Minnesota combinatorics seminar}
+
+%\cvitem{October 2003}{\emph{Dirty children, unfaithful husbands, and
+%    numbers on your forehead}, U. of Minnesota Junior Colloquium}
+
+%\cvitem{April 2002}{\emph{What juggling taught me about number theory
+%and combinatorics}, U. of Minnesota All Topics Are Considered seminar}
+
+\section{Honors and awards}
+
+\cvitem{2010}{Pi Mu Epsilon}
+
+\cvitem{2009}{Sigma Pi Sigma}
+
+\cvitem{2008}{Southern Scholarship Foundation}
+
+\cvitem{2007 -- 2010}{Dean's list Florida State University}
+
+\section{Technologies/Languages}
+
+\cvline{}{Java, Python, Postgres, MATLAB, LDAP, Apache, Mathematica, \LaTeX}
+
+\section{References}
+
+\cvline{}{Joseph Wilson, jnw@cise.ufl.edu, (352) 514-2191}
+\cvline{}{Arunava Banerjee, arunava@cise.ufl.edu, (352)505-1556}
+\cvline{}{Scott McKinley, smckinl3@tulane.edu, (504) 862-3426}
+
+
+\closesection{}
+
+\vfill
+\enlargethispage{10pt}
+
+\noindent Resume: Maksim Levental
+\hfill \today
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-PDF-mode: t
+%%% End:
