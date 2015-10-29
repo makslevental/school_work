@@ -931,5 +931,163 @@ end
 
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[10.2]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+QR factorization by Householder orthogonal triangularization in MATLAB
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [W,R] = house( A )
+\end_layout
+
+\begin_layout Plain Layout
+
+%HOUSE computes implicit representation of QR using householder
+\end_layout
+
+\begin_layout Plain Layout
+
+%orthogonal trianglurization
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n]=size(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+W=zeros([m,n]);
+\end_layout
+
+\begin_layout Plain Layout
+
+R=A;
+\end_layout
+
+\begin_layout Plain Layout
+
+for k=1:n
+\end_layout
+
+\begin_layout Plain Layout
+
+    x = R(k:m,k);
+\end_layout
+
+\begin_layout Plain Layout
+
+    vk = sign(x(1))*norm(x)*vertcat(1,zeros(m-k,1)) + x;
+\end_layout
+
+\begin_layout Plain Layout
+
+    vk = vk/norm(vk);
+\end_layout
+
+\begin_layout Plain Layout
+
+    W(k:m,k) = vk;
+\end_layout
+
+\begin_layout Plain Layout
+
+    R(k:m,k:n) = R(k:m,k:n) - 2*vk*(vk'*R(k:m,k:n));
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Reconstruction of Q from Householder decomposition
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function Q=formQ(W)
+\end_layout
+
+\begin_layout Plain Layout
+
+%formQ reconstructs Q from W by computing Qe_i for i=1,..,m
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n]=size(W);
+\end_layout
+
+\begin_layout Plain Layout
+
+Q=eye(m);
+\end_layout
+
+\begin_layout Plain Layout
+
+for j=1:m
+\end_layout
+
+\begin_layout Plain Layout
+
+    for k=n:-1:1
+\end_layout
+
+\begin_layout Plain Layout
+
+        Q(k:m,j) = Q(k:m,j) - 2*W(k:m,k)*(W(k:m,k)'*Q(k:m,j));
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

@@ -1,0 +1,290 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1cm,bmargin=1cm,lmargin=1cm,rmargin=1cm,headheight=1cm,headsep=1cm,footskip=1cm}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\makeatother
+
+\usepackage{babel}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+\begin{document}
+
+\title{MAD6406 Homework Fall 2015}
+\maketitle
+\begin{enumerate}
+\item [1.3] Claim: $R$ upper triangular and nonsingular iff $R^{-1}$
+upper triangular.
+
+\begin{proof}
+$R$ nonsingular implies all diagonal entries of $R$ are non-zero.
+Therefore for $n<m$ the span of $\left\{ r_{1},\dots,r_{n}\right\} $,
+where $r_{i}$ are the columns of $R$, is $\mathbb{R}^{n}$. Therefore
+there exist $\rho_{jn}$ for $j=1,\dots,n$ such that 
+\[
+r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{n}\rho_{nn}=e_{n}
+\]
+Let $\rho_{jn}=0$ for $n<j<\leq m$ and hence 
+\begin{equation}
+r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{m}\rho_{mn}=e_{n}\label{eq:uppertriang}
+\end{equation}
+Then let 
+\[
+\rho_{i}=\begin{bmatrix}\rho_{1i}\\
+\vdots\\
+\rho_{ii}\\
+\vdots\\
+\rho_{mi}
+\end{bmatrix}=\begin{bmatrix}\rho_{1i}\\
+\vdots\\
+\rho_{ii}\\
+0\\
+\vdots\\
+0
+\end{bmatrix}
+\]
+and $P=\begin{bmatrix}\rho_{1} & \cdots & \rho_{m}\end{bmatrix}$.
+Note that $P$ is upper-triangular since for all $i$ it's the case
+that $\rho_{jn}=0$ for $j=n+1,\cdots,m$. Furthermore by \ref{eq:uppertriang}
+we have that $R\cdot P=I$ and by uniqueness of inverses $P=R^{-1}$. 
+\end{proof}
+\item [2.3] Claim: for self-adjoint $A\in\mathbb{C}^{m\times m}$
+
+\begin{enumerate}
+\item All eigenvalues of $A$ are real.
+\item Eigenvectors corresponding to distinct eigenvalues are orthogonal.\end{enumerate}
+\begin{proof}
+
+\begin{enumerate}
+\item Let $x\neq0$ and $\lambda$ such that $Ax=\lambda x$. Then by self-adjointness
+\[
+\left(x^{\dagger}Ax\right)^{\dagger}=\left(\left(Ax\right)^{\dagger}\left(x^{\dagger}\right)^{\dagger}\right)=\left(x^{\dagger}A^{\dagger}x\right)=\left(x^{\dagger}Ax\right)
+\]
+but
+\[
+x^{\dagger}Ax=x^{\dagger}\lambda x=\lambda\left\Vert x\right\Vert ^{2}
+\]
+and $\lambda\left\Vert x\right\Vert ^{2}=\left(\lambda\left\Vert x\right\Vert ^{2}\right)^{\dagger}=\lambda^{*}\left\Vert x\right\Vert ^{2}$.
+Therefore $\lambda=\lambda^{*}$ hence $\lambda\in\mathbb{R}$.
+\item Let $x\neq y\neq0$ and $\lambda,\lambda^{'}$ such that$Ax=\lambda x$
+and $Ay=\lambda^{'}y$. Then by self-adjointness
+\[
+x^{\dagger}Ay=\left(Ax\right)^{\dagger}y
+\]
+and so since $\lambda,\lambda^{'}\in\mathbb{R}$ 
+\[
+0=x^{\dagger}Ay-\left(Ax\right)^{\dagger}y=\lambda^{'}x^{\dagger}y-\lambda x^{\dagger}y=\left(\lambda^{'}-\lambda\right)x^{\dagger}y
+\]
+Therefore since $\lambda\neq\lambda^{'}$ it's the case that $\lambda^{'}-\lambda\neq0$
+and hence $x^{\dagger}y=0$.
+\end{enumerate}
+\end{proof}
+\item [3.5]Claim: $\left\Vert A\right\Vert _{F}=\left\Vert uv^{*}\right\Vert _{F}=\left\Vert u\right\Vert _{F}\left\Vert v\right\Vert _{F}$.
+
+\begin{proof}
+Since the Frobenius norm of a vector is just the 2-norm so it distributes
+over the product. To wit if $A=uv^{*}$ 
+\[
+\left\Vert A\right\Vert _{F}=\left\Vert uv^{*}\right\Vert _{F}=\sqrt{\sum_{i,j}\left|u_{j}v_{i}^{*}\right|^{2}}=\sqrt{\sum_{j}\left|u_{j}\right|^{2}\sum_{i}\left|v_{i}^{*}\right|^{2}}=\sqrt{\sum_{j}\left|u_{j}\right|^{2}}\sqrt{\sum_{i}\left|v_{i}^{*}\right|^{2}}
+\]
+Now since $\left|x^{*}\right|=\left|x\right|$
+\[
+\sqrt{\sum_{j}\left|u_{j}\right|^{2}}\sqrt{\sum_{i}\left|v_{i}^{*}\right|^{2}}=\sqrt{\sum_{j}\left|u_{j}\right|^{2}}\sqrt{\sum_{i}\left|v_{i}\right|^{2}}=\left\Vert u\right\Vert _{F}\left\Vert v\right\Vert _{F}
+\]
+
+\end{proof}
+\item [4.4]Claim: it is \textbf{false }that $A,B\in\mathbb{C}^{m}$ are
+unitary equivalent iff they have the same singular values.
+
+\begin{proof}
+$A$ and $-A$ have the same singular values: let $A=U\Sigma V^{-1}$,
+then 
+\[
+-A=U\Sigma\left(-V^{-1}\right)
+\]
+But $A$ and $-A$ cannot be unitarily equivalent since then 
+\begin{eqnarray*}
+\det\left(A\right) & = & \det\left(Q\left(-A\right)Q^{-1}\right)\\
+ & = & \det\left(Q\right)\det\left(-A\right)\det\left(Q^{-1}\right)\\
+ & = & \det\left(Q\right)\det\left(Q^{-1}\right)\det\left(-A\right)\\
+ & = & \left(-1\right)^{m}\det\left(A\right)
+\end{eqnarray*}
+which is only true if $m$ is even or $\det\left(A\right)=0$. Alternatively
+\begin{eqnarray*}
+\text{tr}\left(A\right) & = & \text{tr}\left(Q\left(-A\right)Q^{-1}\right)\\
+ & = & \text{tr}\left(Q^{-1}Q\left(-A\right)\right)\\
+ & = & -\text{tr}\left(A\right)
+\end{eqnarray*}
+which is only true if $\left(A\right)_{ii}=0$ for all $i$.
+\end{proof}
+\item [5.4]Claim: if $A\in\mathbb{C}^{m\times m}$, with $A=U\Sigma V^{-1}=U\Sigma V^{\dagger}$,
+and 
+\[
+B=\begin{pmatrix}0 & A^{\dagger}\\
+A & 0
+\end{pmatrix}
+\]
+then there exists $X,\Lambda$ such that $B=X\Lambda X^{-1}$ is an
+eigenvalue decomposition.
+
+\begin{proof}
+First note that $A^{\dagger}=\left(U\Sigma V^{\dagger}\right)^{\dagger}=V\Sigma^{\dagger}U^{\dagger}=V\Sigma U^{\dagger}$
+since singular values are always real\footnote{Thm. 4.1 in Trefethen: $\sigma_{1}=\left\Vert A\right\Vert $}.
+Since $A$ is square 
+\begin{eqnarray*}
+A^{\dagger}u_{j} & = & \sigma_{j}v_{j}\\
+Av_{j} & = & \sigma_{j}u_{j}
+\end{eqnarray*}
+Hence 
+\[
+B\begin{pmatrix}u_{j}\\
+v_{j}
+\end{pmatrix}=\begin{pmatrix}0 & A^{\dagger}\\
+A & 0
+\end{pmatrix}\begin{pmatrix}v_{j}\\
+u_{j}
+\end{pmatrix}=\begin{pmatrix}A^{\dagger}u_{j}\\
+Av_{j}
+\end{pmatrix}=\begin{pmatrix}\sigma_{j}v_{j}\\
+\sigma_{j}u_{j}
+\end{pmatrix}=\sigma_{j}\begin{pmatrix}v_{j}\\
+u_{j}
+\end{pmatrix}
+\]
+and 
+\[
+B\begin{pmatrix}v_{j}\\
+-u_{j}
+\end{pmatrix}=\begin{pmatrix}0 & A^{\dagger}\\
+A & 0
+\end{pmatrix}\begin{pmatrix}v_{j}\\
+-u_{j}
+\end{pmatrix}=\begin{pmatrix}-A^{\dagger}u_{j}\\
+Av_{j}
+\end{pmatrix}=\begin{pmatrix}-\sigma_{j}v_{j}\\
+\sigma_{j}u_{j}
+\end{pmatrix}=-\sigma_{j}\begin{pmatrix}v_{j}\\
+-u_{j}
+\end{pmatrix}
+\]
+Therefore the eigenvectors of $B$ are $\left\{ \begin{pmatrix}v_{1}\\
+u_{1}
+\end{pmatrix},\dots,\begin{pmatrix}v_{m}\\
+u_{m}
+\end{pmatrix},\begin{pmatrix}v_{1}\\
+-u_{1}
+\end{pmatrix},\dots,\begin{pmatrix}v_{m}\\
+-u_{m}
+\end{pmatrix}\right\} $ with eigenvalues $\left\{ \sigma_{1},\dots,\sigma_{m},-\sigma_{1},\dots,-\sigma_{m}\right\} $
+and hence 
+\[
+B=\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}\begin{pmatrix}\Sigma & 0\\
+0 & -\Sigma
+\end{pmatrix}\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}^{-1}
+\]
+
+\end{proof}
+\item [6.1]Claim: if $P$ is an orthogonal projector, the $I-2P$ is unitary.
+
+\begin{proof}
+Since $P$ is an orthogonal projector $P=P^{\dagger}$ and hence 
+\begin{eqnarray*}
+\left(I-2P\right)^{\dagger}\left(I-2P\right) & = & \left(I^{\dagger}-2P^{\dagger}\right)\left(I-2P\right)\\
+ & = & \left(I-2P\right)\left(I-2P\right)\\
+ & = & I-4P-4P^{2}\\
+ & = & I-4P-4P\\
+ & = & I
+\end{eqnarray*}
+Hence $P$ is unitary. The geometric intuition is that since $I-2P=\left(I-P\right)-P$
+it's the case that 
+\begin{eqnarray*}
+\left(I-2P\right)x & = & \left(I-P\right)x-Px
+\end{eqnarray*}
+Since in general $x=\left(I-P\right)x+Px$ it's obvious that $\left(I-P\right)x+\left(-Px\right)$
+is the reflection of $x$ across $\text{range}\left(I-P\right)$,
+which is what unitary transformations are (reflections and/or rotations).
+\end{proof}
+\item [7.4]Let $P_{1}=\left[x^{\left(1\right)},y^{\left(1\right)}\right]$
+and $P_{2}=\left[x^{\left(2\right)},y^{\left(2\right)}\right]$ be
+matrices. Then compute the full QR factorizations $P_{1}=Q_{1}R_{1}$
+and $P_{2}=Q_{2}R_{2}$. The third columns $z^{\left(1\right)},z^{\left(2\right)}$of
+$Q_{1},Q_{2}$ are orthogonal to $P^{\left(1\right)},P^{\left(2\right)}$
+respectively. Then let matrix $P_{3}=\left[z^{\left(1\right)},z^{\left(2\right)}\right]$
+and $P_{3}=Q_{3}R_{3}$. Then the third column $z^{\left(3\right)}$
+of $Q_{3}$ is orthogonal to $\left\langle z^{\left(1\right)},z^{\left(2\right)}\right\rangle $,
+i.e. in both $P^{\left(1\right)}$ and $P^{\left(2\right)}$.\\
+\\
+\\
+
+\item [8.2]QR factorization in MATLAB
+\begin{lstlisting}
+function [ Q,R ] = mgs( A )
+
+n=size(A,2); 
+V = A; 
+R = zeros(n); 
+Q = zeros(size(A));
+for i=1:n
+    R(i,i) = norm(V(:,i));
+    Q(:,i) = V(:,i)/R(i,i);
+    for j=i+1:n
+        R(i,j) = dot(conj(Q(:,i)),V(:,j));
+        V(:,j) = V(:,j) - R(i,j)*Q(:,i);
+    end
+end
+\end{lstlisting}
+
+\item [10.2]
+
+\begin{enumerate}
+\item QR factorization by Householder orthogonal triangularization in MATLAB
+\begin{lstlisting}
+function [W,R] = house( A )
+%HOUSE computes implicit representation of QR using householder
+%orthogonal trianglurization
+[m,n]=size(A);
+W=zeros([m,n]);
+R=A;
+for k=1:n
+    x = R(k:m,k);
+    vk = sign(x(1))*norm(x)*vertcat(1,zeros(m-k,1)) + x;
+    vk = vk/norm(vk);
+    W(k:m,k) = vk;
+    R(k:m,k:n) = R(k:m,k:n) - 2*vk*(vk'*R(k:m,k:n));
+end
+end
+\end{lstlisting}
+
+\item Reconstruction of Q from Householder decomposition
+\begin{lstlisting}
+function Q=formQ(W)
+%formQ reconstructs Q from W by computing Qe_i for i=1,..,m
+[m,n]=size(W);
+Q=eye(m);
+for j=1:m
+    for k=n:-1:1
+        Q(k:m,j) = Q(k:m,j) - 2*W(k:m,k)*(W(k:m,k)'*Q(k:m,j));
+    end
+end
+end
+\end{lstlisting}
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
