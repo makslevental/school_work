@@ -1089,5 +1089,43 @@ end
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[11.3]
+\end_layout
+
+\end_inset
+
+Spurious digits are bolded (since I don't have a color printer): 
+\size scriptsize
+
+\begin_inset Formula 
+\[
+\begin{bmatrix}\left(a\right) & \left(b\right) & \left(c\right) & \left(d\right) & \left(e\right) & \left(f\right)\\
+1.00000000\mathbf{9086630} & 1.00000000\mathbf{3504093} & 1.000000000996\mathbf{587} & 1.000000000996608 & 1.000000000996608 & 1.000000000996608\\
+-0.00000\mathbf{2750662343} & -0.00000\mathbf{1174057481} & -0.00000042274\mathbf{1833} & -0.000000422743\mathbf{026} & -0.000000422743\mathbf{275} & -0.000000422743\mathbf{001}\\
+-7.999\mathbf{89}\mathbf{4492799959} & -7.9999\mathbf{52810406654} & -7.999981235\mathbf{71290} & -7.9999812356\mathbf{85965} & -7.9999812356\mathbf{78261} & -7.9999812356\mathbf{86249}\\
+-0.00\mathbf{1590689263110} & -0.000\mathbf{740016335840} & -0.00031876\mathbf{291814} & -0.000318763\mathbf{229188} & -0.000318763\mathbf{323044} & -0.000318763\mathbf{219639}\\
+10.6\mathbf{79136235622181} & 10.6\mathbf{72671298569185} & 10.66943079\mathbf{3881475} & 10.66943079\mathbf{5827793} & 10.66943079\mathbf{6493874} & 10.66943079\mathbf{5835069}\\
+-0.0\mathbf{57518328803047} & -0.0\mathbf{28504501577117} & -0.0138202\mathbf{79709762} & -0.0138202\mathbf{87873386} & -0.0138202\mathbf{90333400} & -0.0138202\mathbf{87684212}\\
+-5.\mathbf{523385050168370} & -5.6\mathbf{05292580963578} & -5.6470756\mathbf{48652390} & -5.6470756\mathbf{28337916} & -5.6470756\mathbf{21454596} & -5.64707562\mathbf{7872255}\\
+-0.\mathbf{301565003570636} & -0.\mathbf{152076928527094} & -0.07531\mathbf{5987691283} & -0.07531\mathbf{6023081541} & -0.07531\mathbf{6034042584} & -0.07531\mathbf{6023197956}\\
+1.\mathbf{960696612857617} & 1.\mathbf{784557524020784} & 1.6936069\mathbf{2}\mathbf{2985055} & 1.6936069\mathbf{61518526} & 1.6936069\mathbf{73954336} & 1.6936069\mathbf{61169280}\\
+-0.\mathbf{190448171560849} & -0.0\mathbf{61084598070011} & 0.0060321\mathbf{36734575} & 0.0060321\mathbf{11588866} & 0.0060321\mathbf{01658104} & 0.0060321\mathbf{10657543}\\
+-0.\mathbf{292337307957861} & -0.3\mathbf{46187548770104} & -0.3742417\mathbf{14569507} & -0.3742417\mathbf{04121232} & -0.3742417\mathbf{00695669} & -0.3742417\mathbf{04441374}\\
+0.0\mathbf{73265312429369} & 0.08\mathbf{2967710732191} & 0.08804057\mathbf{7982611} & 0.08804057\mathbf{6170897} & 0.08804057\mathbf{5606148} & 0.08804057\mathbf{6163621}
+\end{bmatrix}
+\]
+
+\end_inset
+
+Clearly computing the normal equations directly is terribly unstable (and
+ my implementation of mgs is numerically unstable).
+\end_layout
+
 \end_body
 \end_document
