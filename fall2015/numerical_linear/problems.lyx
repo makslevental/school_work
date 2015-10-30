@@ -1140,6 +1140,15 @@ status open
 
 \end_inset
 
+Claim: 
+\begin_inset Formula $\kappa\left(A\right)\geq100$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
 Note 
 \begin_inset Formula $\left\Vert A\right\Vert _{F}=\sqrt{\sum_{i=1}^{n}\sigma_{i}^{2}}$
 \end_inset
@@ -1169,7 +1178,7 @@ Note
 Hence 
 \begin_inset Formula 
 \[
-101^{2}-101^{2}=201=\sum_{i=2}^{n}\sigma_{i}^{2}
+101^{2}-100^{2}=201=\sum_{i=2}^{n}\sigma_{i}^{2}
 \]
 
 \end_inset
@@ -1218,5 +1227,6 @@ and
 
 \end_layout
 
+\end_deeper
 \end_body
 \end_document
