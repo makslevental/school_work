@@ -1123,8 +1123,99 @@ Spurious digits are bolded (since I don't have a color printer):
 
 \end_inset
 
+
+\size default
 Clearly computing the normal equations directly is terribly unstable (and
  my implementation of mgs is numerically unstable).
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[12.1]
+\end_layout
+
+\end_inset
+
+Note 
+\begin_inset Formula $\left\Vert A\right\Vert _{F}=\sqrt{\sum_{i=1}^{n}\sigma_{i}^{2}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ are the singular values and 
+\begin_inset Formula $n=\text{rank}\left(A\right)$
+\end_inset
+
+.
+ And since 
+\begin_inset Formula $\left\Vert A\right\Vert _{2}=\sigma_{1}\left(A\right)$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left\Vert A\right\Vert _{F}^{2} & = & \sum_{i=1}^{n}\sigma_{i}^{2}\\
+ & = & \sum_{i=2}^{n}\sigma_{i}^{2}+\sigma_{1}^{2}
+\end{eqnarray*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula 
+\[
+101^{2}-101^{2}=201=\sum_{i=2}^{n}\sigma_{i}^{2}
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $\sigma_{i}\geq\sigma_{i+1}$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+201=\sum_{i=2}^{n}\sigma_{i}^{2}\geq\left(n-1\right)\sigma_{n}^{2}
+\]
+
+\end_inset
+
+the maximum 
+\begin_inset Formula $n=202$
+\end_inset
+
+ if 
+\begin_inset Formula $A$
+\end_inset
+
+ is full rank and so 
+\begin_inset Formula 
+\[
+201\geq201\sigma_{n}^{2}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\sigma_{n}\leq1$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+\kappa\left(A\right)=\frac{\sigma_{1}\left(A\right)}{\sigma_{n}\left(A\right)}\geq\frac{100}{1}=100
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
