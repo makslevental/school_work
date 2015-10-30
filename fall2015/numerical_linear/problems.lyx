@@ -1162,7 +1162,20 @@ Note
 \end_inset
 
 .
- And since 
+ Why? 
+\begin_inset Formula 
+\begin{eqnarray*}
+\left\Vert A\right\Vert _{F} & = & \sqrt{\text{tr}\left(A^{\intercal}A\right)}\\
+ & = & \sqrt{\text{tr}\left(\left(U\hat{S}V^{\intercal}\right)^{\intercal}\left(U\hat{S}V^{\intercal}\right)\right)}\\
+ & = & \sqrt{\text{tr}\left(V\hat{S}^{\intercal}U^{\intercal}U\hat{S}V^{\intercal}\right)}\\
+ & = & \sqrt{\text{tr}\left(V\hat{S}^{\intercal}\hat{S}V^{\intercal}\right)}\\
+ & = & \sqrt{\text{tr}\left(V^{\intercal}V\hat{S}^{\intercal}\hat{S}\right)}\\
+ & = & \sqrt{\text{tr}\left(\hat{S}^{\intercal}\hat{S}\right)}=\sqrt{\sum_{i=1}^{n}\sigma_{i}^{2}}
+\end{eqnarray*}
+
+\end_inset
+
+And since 
 \begin_inset Formula $\left\Vert A\right\Vert _{2}=\sigma_{1}\left(A\right)$
 \end_inset
 
