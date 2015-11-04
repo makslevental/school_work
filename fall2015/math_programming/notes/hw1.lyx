@@ -1,0 +1,1414 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+%\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Notes
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Convex Functions
+\end_layout
+
+\begin_layout Theorem*
+Epigraphs of functions over convex sets are convex iff the function is convex.
+\end_layout
+
+\begin_layout Proof
+Assume 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ is convex, and let 
+\begin_inset Formula $\left(x_{1},y_{1}\right),\left(x_{2},y_{2}\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{1}\geq f\left(x_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}\geq f\left(x_{2}\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+ and then 
+\begin_inset Formula 
+\[
+\lambda y_{1}+\left(1-\lambda\right)y_{2}\geq\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\geq f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\lambda\left(x_{1},y_{1}\right)+\left(1-\lambda\right)\left(x_{2},y_{2}\right)=\left(\lambda x_{1}+\left(1-\lambda\right)x_{2},\lambda y_{1}+\left(1-\lambda\right)y_{2}\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex.
+ Now assume 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex and then 
+\begin_inset Formula $\left(x_{1},f\left(x_{1}\right)\right),\left(x_{2},f\left(x_{2}\right)\right)$
+\end_inset
+
+ belong to 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ and moreover 
+\begin_inset Formula 
+\[
+\lambda\left(x_{1},f\left(x_{1}\right)\right)+\left(1-\lambda\right)\left(x_{2},f\left(x_{2}\right)\right)=\left(\lambda x_{1}+\left(1-\lambda\right)x_{2},\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\right)
+\]
+
+\end_inset
+
+belongs to 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Therefore for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\geq f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout Definition*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be convex.
+ Then 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is a 
+\emph on
+subgradient
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ if for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi\cdot\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+I.e.
+ 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is everywhere above the plane tangent to it at 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)$
+\end_inset
+
+ with normal 
+\begin_inset Formula $\xi$
+\end_inset
+
+? The collection of all subgradients 
+\begin_inset Formula $\partial f$
+\end_inset
+
+ is called the 
+\emph on
+subdifferential
+\emph default
+.
+ Note that that the subdifferential is a convex set: let 
+\begin_inset Formula $\xi_{1},\xi_{2}\in\partial f$
+\end_inset
+
+.
+ (Lemma: if 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is a subgradient then 
+\begin_inset Formula $\lambda\in\left(0,\infty\right)$
+\end_inset
+
+ is a subgradient).
+ Then 
+\begin_inset Formula 
+\begin{align*}
+f\left(x\right) & \geq f\left(\bar{x}\right)+\lambda\xi_{1}\cdot\left(x-\bar{x}\right)\\
+f\left(x\right) & \geq f\left(\bar{x}\right)+\left(1-\lambda\right)\xi_{1}\cdot\left(x-\bar{x}\right)\\
+2f\left(x\right) & \geq2f\left(\bar{x}\right)+\left(\lambda\xi_{1}+\left(1-\lambda\right)\xi_{2}\right)\cdot\left(x-\bar{x}\right)\\
+f\left(x\right) & \geq f\left(\bar{x}\right)+\frac{1}{2}\left(\lambda\xi_{1}+\left(1-\lambda\right)\xi_{2}\right)\cdot\left(x-\bar{x}\right)\\
+f\left(x\right) & \geq f\left(\bar{x}\right)+\left(\lambda\xi_{1}+\left(1-\lambda\right)\xi_{2}\right)\cdot\left(x-\bar{x}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Existance of subgradients for convex functions.
+ Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be convex.
+ Then for 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+, there exists a vector 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that the hyperplane 
+\begin_inset Formula 
+\[
+H=\left\{ \left(x,y\right):y=f\left(\bar{x}\right)+\xi\cdot\left(x-\bar{x}\right)\right\} 
+\]
+
+\end_inset
+
+supports 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ at 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)$
+\end_inset
+
+.
+ In particular for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi\cdot\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+that is, 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is a subgradient of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+By previous theorem 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex (because 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex over a convex set).
+ Since 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)$
+\end_inset
+
+ belongs to the boundary of 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ and so by the supporting hyperplane theorem there exists a nonzero vector
+ 
+\begin_inset Formula $\left(\xi_{0},\mu\right)\in\mathbb{R}^{n}\times\mathbb{R}$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $\left(x,y\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\xi_{0}\left(x-\bar{x}\right)+\mu\left(y-f\left(\bar{x}\right)\right)\leq0
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\mu\leq0$
+\end_inset
+
+, since otherwise we could choose 
+\begin_inset Formula $y\gg f\left(x\right)$
+\end_inset
+
+ and violate the inequality.
+ Now to prove that 
+\begin_inset Formula $\mu<0$
+\end_inset
+
+: suppose 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\xi_{0}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\bar{x}+\lambda\xi_{0}\in S$
+\end_inset
+
+ (just go a little bit in the 
+\begin_inset Formula $\xi_{0}$
+\end_inset
+
+ direction) and hence 
+\begin_inset Formula $\lambda\xi_{0}\cdot\xi_{0}\leq0$
+\end_inset
+
+ which implies that 
+\begin_inset Formula $\xi_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\xi_{0},\mu\right)=0$
+\end_inset
+
+ contradicting the result of the supporting hyperplane theorem (which guarantees
+ a non-zero hyperplane).
+ Therefore 
+\begin_inset Formula $\mu<0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\xi=\xi_{0}/\left|\mu\right|$
+\end_inset
+
+ and dividing the inequality by 
+\begin_inset Formula $\left|\mu\right|$
+\end_inset
+
+ we get for all 
+\begin_inset Formula $\left(x,y\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xi\left(x-\bar{x}\right)-y+f\left(\bar{x}\right)\le0
+\]
+
+\end_inset
+
+Letting 
+\begin_inset Formula $y=f\left(x\right)$
+\end_inset
+
+ we get that 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $y=f\left(\bar{x}\right)+\xi\left(x-\bar{x}\right)$
+\end_inset
+
+ is a supporting hyperplane.
+\end_layout
+
+\begin_layout Standard
+Basically the normal to the supporting hyperplane is a subgradient, is all
+ this says (hinges on the fact that it's an epigraph, which makes 
+\begin_inset Formula $y-f\left(\bar{x}\right)>0$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be strictly convex.
+ Then for 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+, there exists a vector 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f\left(x\right)>f\left(\bar{x}\right)+\xi\cdot\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By above theorem there exists 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi\cdot\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+Suppose there exists 
+\begin_inset Formula $\hat{x}\neq\bar{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f\left(\hat{x}\right)=f\left(\bar{x}\right)+\xi\cdot\left(\hat{x}-\bar{x}\right)
+\]
+
+\end_inset
+
+Then by strict convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ for 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\lambda\bar{x}+\left(1-\lambda\right)\hat{x}\right)<\lambda f\left(\bar{x}\right)+\left(1-\lambda\right)f\left(\hat{x}\right)=f\left(\bar{x}\right)+\left(1-\lambda\right)\xi\cdot\left(\hat{x}-\bar{x}\right)
+\]
+
+\end_inset
+
+but letting 
+\begin_inset Formula $x=\lambda\bar{x}+\left(1-\lambda\right)\hat{x}$
+\end_inset
+
+ and using the aforementioned prior result we have that 
+\begin_inset Formula 
+\begin{align*}
+f\left(\lambda\bar{x}+\left(1-\lambda\right)\hat{x}\right) & \geq f\left(\bar{x}\right)+\xi\cdot\left(\left(\lambda\bar{x}+\left(1-\lambda\right)\hat{x}\right)-\bar{x}\right)\\
+ & =f\left(\bar{x}\right)+\xi\cdot\left(\left(\lambda-1\right)\bar{x}+\left(1-\lambda\right)\hat{x}\right)\\
+ & =f\left(\bar{x}\right)+\left(1-\lambda\right)\xi\cdot\left(\hat{x}-\bar{x}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be strictly convex.
+ Suppose for 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+ there exists a subgradient 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex on 
+\begin_inset Formula $\text{int}\left(S\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $S$
+\end_inset
+
+ is convex 
+\begin_inset Formula $\text{int}\left(S\right)$
+\end_inset
+
+ is convex as well and therefore 
+\begin_inset Formula $\lambda x_{1}+\left(1-\lambda\right)x_{2}\in\text{int}\left(S\right)$
+\end_inset
+
+.
+ By assumption there exists a subgradient 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ In particular at 
+\begin_inset Formula $\lambda x_{1}+\left(1-\lambda\right)x_{2}$
+\end_inset
+
+ and hence two inequalities hold: 
+\begin_inset Formula 
+\begin{align*}
+f\left(x_{1}\right) & \geq f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)+\left(1-\lambda\right)\xi\left(x_{1}-x_{2}\right)\\
+f\left(x_{2}\right) & \geq f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)+\lambda\xi\left(x_{2}-x_{1}\right)
+\end{align*}
+
+\end_inset
+
+Multiplying by 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(1-\lambda\right)$
+\end_inset
+
+ respectively and adding we get that 
+\begin_inset Formula 
+\[
+\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\geq f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Basically if function has a subgradient at every point in 
+\begin_inset Formula $\text{int}\left(S\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $F_{\bar{x},d}\left(\lambda\right)=f\left(\bar{x}+\lambda d\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $F$
+\end_inset
+
+ is convex for all 
+\begin_inset Formula $\bar{x},d$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Assume 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+F_{\bar{x},d}\left(\alpha\lambda_{1}+\left(1-\alpha\right)\lambda_{2}\right) & =f\left(\bar{x}+\left(\alpha\lambda_{1}+\left(1-\alpha\right)\lambda_{2}\right)d\right)\\
+ & =f\left(\alpha\left(\lambda_{1}d+\bar{x}\right)+\left(1-\alpha\right)\left(\lambda_{2}d+\bar{x}\right)\right)\\
+ & \leq\alpha f\left(\lambda_{1}d+\bar{x}\right)+\left(1-\alpha\right)f\left(\lambda_{2}d+\bar{x}\right)\\
+ & =\alpha F_{\bar{x},d}\left(\lambda_{1}\right)+\left(1-\alpha\right)F_{\bar{x},d}\left(\lambda_{2}\right)
+\end{align*}
+
+\end_inset
+
+Assume 
+\begin_inset Formula $F_{\bar{x},d}\left(\lambda\right)$
+\end_inset
+
+ is convex for every 
+\begin_inset Formula $d,\bar{x}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+f\left(\alpha x_{1}+\left(1-\alpha\right)x_{2}\right) & =f\left(x_{2}+\alpha\left(x_{1}-x_{2}\right)\right)\\
+ & =F_{x_{2},\left(x_{1}-x_{2}\right)}\left(\alpha\right)\\
+ & =F_{x_{2},\left(x_{1}-x_{2}\right)}\left(\left(1-\alpha\right)\times0+\alpha\times1\right)\\
+ & \leq\left(1-\alpha\right)F_{x_{2},\left(x_{1}-x_{2}\right)}\left(0\right)+\alpha F_{x_{2},\left(x_{1}-x_{2}\right)}\left(1\right)\\
+ & =\left(1-\alpha\right)f\left(x_{2}\right)+\alpha f\left(x_{1}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Basically you can check for convexity by checking all lines.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be convex.
+ Let 
+\begin_inset Formula $S_{\alpha}=\left\{ x\in S\big|f\left(x\right)\leq\alpha\right\} $
+\end_inset
+
+.
+ Then the sublevel 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ sets of 
+\begin_inset Formula $f$
+\end_inset
+
+ is a convex set for each 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Take two points 
+\begin_inset Formula $x_{1},x_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(x_{1}\right)\leq\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(x_{2}\right)\leq\alpha$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right) & \leq\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\\
+ & \leq\lambda c+\left(1-\lambda\right)c\\
+ & =c
+\end{align*}
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\lambda x_{1}+\left(1-\lambda\right)x_{2}$
+\end_inset
+
+ is in the sublevel 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ set of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be convex.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex and let 
+\begin_inset Formula $\left(x_{1},y_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(x_{2},y_{2}\right)$
+\end_inset
+
+ be in 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right) & \leq\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\\
+ & \leq\lambda y_{1}+\left(1-\lambda\right)y_{2}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\lambda\left(x_{1},y_{1}\right)+\left(1-\lambda\right)\left(x_{2},y_{2}\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+.
+ Now suppose 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex.
+ Fix 
+\begin_inset Formula $x_{1},x_{2}$
+\end_inset
+
+ and pick 
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $y_{1}\geq f\left(x_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}\geq f\left(x_{2}\right)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula 
+\begin{align*}
+\lambda\left(x_{1},y_{1}\right)+\left(1-\lambda\right)\left(x_{2},y_{2}\right) & =\left(\lambda x_{1}+\left(1-\lambda\right)x_{2},y_{1}+\left(1-\lambda\right)y_{2}\right)\\
+ & \in\text{epi}\left(f\right)
+\end{align*}
+
+\end_inset
+
+ it follows that 
+\begin_inset Formula 
+\[
+f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)\leq y_{1}+\left(1-\lambda\right)y_{2}
+\]
+
+\end_inset
+
+Since we are free to choose 
+\begin_inset Formula $y_{1}\geq f\left(x_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}\geq f\left(x_{2}\right)$
+\end_inset
+
+ just fix 
+\begin_inset Formula $y_{1}=f\left(x_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}=f\left(x_{2}\right)$
+\end_inset
+
+ and we're done.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be convex.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $\text{int}\left(S\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+First show that 
+\begin_inset Formula 
+\[
+\frac{f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)}{\lambda}
+\]
+
+\end_inset
+
+is decreasing: note for 
+\begin_inset Formula $0<\lambda_{1}<\lambda_{2}$
+\end_inset
+
+ that 
+\begin_inset Formula $\bar{x}+\lambda_{1}d=\frac{\lambda_{1}}{\lambda_{2}}\left(\bar{x}+\lambda_{2}d\right)+\left(1-\frac{\lambda_{1}}{\lambda_{2}}\right)\bar{x}$
+\end_inset
+
+, hence by convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda_{1}d\right)\leq\frac{\lambda_{1}}{\lambda_{2}}f\left(\bar{x}+\lambda_{2}d\right)+\left(1-\frac{\lambda_{1}}{\lambda_{2}}\right)f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+which is equivalent to
+\begin_inset Formula 
+\[
+\frac{f\left(\bar{x}+\lambda_{1}d\right)-f\left(\bar{x}\right)}{\lambda_{1}}\leq\frac{f\left(\bar{x}+\lambda_{2}d\right)-f\left(\bar{x}\right)}{\lambda_{2}}
+\]
+
+\end_inset
+
+Hence the limit defining the directional derivative.
+ Then since 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex it has a subgradient at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ which bounds the slope below 
+\begin_inset Formula $\xi$
+\end_inset
+
+.
+ Hence the limit converges.
+\end_layout
+
+\begin_layout Lemma*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be convex and differentiable.
+ Then the subdifferential at 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+ is the singleton 
+\begin_inset Formula $\left\{ \nabla f\left(\bar{x}\right)\right\} $
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be differentiable.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Stricly if 
+\begin_inset Formula $>$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Mean Value Theorem: let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be differentiable.
+ Then there always exists 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f\left(x_{2}\right)=f\left(x_{1}\right)+\nabla f\left(\bar{x}\right)\left(x_{2}-x_{1}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be differentiable.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula 
+\[
+\left(\nabla f\left(x_{2}\right)-\nabla f\left(x_{1}\right)\right)^{\intercal}\left(x_{2}-x_{1}\right)\geq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Stricly if 
+\begin_inset Formula $>$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty 
+\series bold
+open
+\series default
+ convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be twice differentiable.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)\succeq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
+ Since 
+\begin_inset Formula $S$
+\end_inset
+
+ is open for any 
+\begin_inset Formula $\bar{x},x$
+\end_inset
+
+ we can find 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ small enough such that 
+\begin_inset Formula $\bar{x}+\lambda x$
+\end_inset
+
+.
+ By subgradient theorem we have that 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda x\right)\geq f\left(\bar{x}\right)+\lambda\nabla f\left(\bar{x}\right)x
+\]
+
+\end_inset
+
+(
+\begin_inset Formula $y=\bar{x}+\lambda x$
+\end_inset
+
+ implies 
+\begin_inset Formula $y-\bar{x}=\lambda x$
+\end_inset
+
+).
+ By differentiability we have that 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda x\right)=f\left(\bar{x}\right)+\lambda\nabla f\left(\bar{x}\right)x+\frac{1}{2}\lambda^{2}x\nabla^{2}f\left(\bar{x}\right)x+\lambda^{2}\left\Vert x\right\Vert ^{2}\alpha\left(\bar{x},\lambda x\right)
+\]
+
+\end_inset
+
+Subtracting the equality from the inequality and letting 
+\begin_inset Formula $\lambda\rightarrow0$
+\end_inset
+
+ makes 
+\begin_inset Formula $\alpha\rightarrow0$
+\end_inset
+
+ and we get that 
+\begin_inset Formula 
+\[
+x\nabla f\left(\bar{x}\right)x\geq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Suppose conversely that 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)\succeq0$
+\end_inset
+
+.
+ Consider 
+\begin_inset Formula $x,\bar{x}$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ and my Mean Value Theorem (applied to the first derivative, or think of
+ it as the mean value theorem form of the taylor series) we have that 
+\begin_inset Formula 
+\[
+f\left(x\right)=f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)+\frac{1}{2}\left(x-\bar{x}\right)\nabla^{2}f\left(\hat{x}\right)\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)\succeq0$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+and by subgradient theorem we have that 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex (subgradients being iff characterization).
+\end_layout
+
+\begin_layout Standard
+This theorem isn't and iff for strict convexity:
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty 
+\series bold
+open
+\series default
+ convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ be twice differentiable.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)\succ0$
+\end_inset
+
+ then 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly convex
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly convex then 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)\succeq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly convex and quadratic then 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)\succ0$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1100,6 +1100,107 @@ status open
 
 \end_inset
 
+The source 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+m=50;n=12;
+\end_layout
+
+\begin_layout Plain Layout
+
+t=linspace(0,1,m);
+\end_layout
+
+\begin_layout Plain Layout
+
+A=fliplr(vander(t));
+\end_layout
+
+\begin_layout Plain Layout
+
+A=A(:,1:n);
+\end_layout
+
+\begin_layout Plain Layout
+
+b=cos(4*t);
+\end_layout
+
+\begin_layout Plain Layout
+
+% (a)
+\end_layout
+
+\begin_layout Plain Layout
+
+xa = (A'*A)
+\backslash
+(A'*b');
+\end_layout
+
+\begin_layout Plain Layout
+
+% (b)
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q,R]=mgs(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+xb = inv(R)*Q'*b';
+\end_layout
+
+\begin_layout Plain Layout
+
+% (c)
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q,~,R]=house(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+xc = inv(R(1:n,:))*Q(:,1:n)'*b';
+\end_layout
+
+\begin_layout Plain Layout
+
+% (d)
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q,R]=qr(A,0); xd = inv(R)*Q'*b';
+\end_layout
+
+\begin_layout Plain Layout
+
+% (e) xe = A
+\backslash
+b';
+\end_layout
+
+\begin_layout Plain Layout
+
+% (f)
+\end_layout
+
+\begin_layout Plain Layout
+
+[U,S,V] = svd(A,0); xf = V*inv(S)*U';
+\end_layout
+
+\end_inset
+
 Spurious digits are bolded (since I don't have a color printer): 
 \size scriptsize
 
@@ -1241,5 +1342,244 @@ and
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[13.1]
+\end_layout
+
+\end_inset
+
+Claim: There are 
+\begin_inset Formula $2^{29}-1$
+\end_inset
+
+ double precision numbers between any two single precision numbers.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Since 
+\series bold
+F 
+\series default
+is self-similar (up to machine epsilon) we can without loss of generality
+ compute the number of double precision numbers in 
+\begin_inset Formula $\left[1,1+2^{-23}\right]$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\frac{2^{-23}}{2^{-52}}=2^{29}
+\]
+
+\end_inset
+
+Hence there are 
+\begin_inset Formula $2^{29}-1$
+\end_inset
+
+ double precision numbers in 
+\begin_inset Formula $\left[1,1+2^{-23}\right]$
+\end_inset
+
+.
+ Note that -1 is since 
+\begin_inset Formula 
+\[
+1+2^{29}\left(\frac{1}{2^{-52}}\right)=1+2^{-23}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[14.1]
+\end_layout
+
+\end_inset
+
+To wit:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+True: for 
+\begin_inset Formula $x\in\left[0,\infty\right]$
+\end_inset
+
+ it's the case that
+\begin_inset Formula $\left|\sin\left(x\right)\right|\leq C\times1$
+\end_inset
+
+ for 
+\begin_inset Formula $C=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+True: for 
+\begin_inset Formula $x\in\left[0,\infty\right]$
+\end_inset
+
+ it's the case that
+\begin_inset Formula $\left|\sin\left(x\right)\right|\leq C\times1$
+\end_inset
+
+ for 
+\begin_inset Formula $C=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+True: for 
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{dx}\left(\log\left(x\right)-x^{n}\right) & = & \frac{1}{x}-nx^{n-1}
+\end{eqnarray*}
+
+\end_inset
+
+which is 0 for 
+\begin_inset Formula $x=n^{-1/n}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\frac{d^{2}}{dx^{2}}\left(\log\left(x\right)-x^{n}\right)=-\frac{1}{x^{2}}-\left(n-1\right)n\frac{1}{x^{2-n}}<0
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $x>0$
+\end_inset
+
+.
+ So the critical point 
+\begin_inset Formula $x=n^{-1/n}$
+\end_inset
+
+ is a unique maximum and hence is montonic decreasing on 
+\begin_inset Formula $\left[n^{-1/n},\infty\right]$
+\end_inset
+
+ and unbounded.
+ Hence there exists some 
+\begin_inset Formula $T$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\frac{t^{n}}{\log\left(t\right)}\leq C
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t\leq T$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+False: Stirling's approximation gives that for 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+n!=O\left(\sqrt{n}\left(\frac{n}{e}\right)^{n}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+True: let 
+\begin_inset Formula $u_{1},u_{2}$
+\end_inset
+
+ be the units of the area and the volume.
+ Then 
+\begin_inset Formula $V=\frac{4}{3}\pi\left(u_{2}r\right)^{3},\,A=4\pi\left(u_{1}r\right)^{2}$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+\frac{A}{V^{2/3}}\approx\frac{r^{2}}{\left(\sqrt[3]{r^{3}}\right)^{2}}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+True: by definition of fl: 
+\begin_inset Formula 
+\[
+\text{fl}\left(\pi\right)-\pi=\pi\left(1+\epsilon\right)-\pi=\pi\epsilon\leq\pi\epsilon_{\text{machine}}=O\left(\epsilon_{\text{machine}}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+False: by definition of fl: for all 
+\begin_inset Formula $n$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\text{fl}\left(n\pi\right)-n\pi=n\pi\left(1+\epsilon\right)-n\pi=\pi n\epsilon\nleq\pi\epsilon_{\text{machine}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
