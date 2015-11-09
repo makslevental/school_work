@@ -5,11 +5,19 @@
 \usepackage[latin9]{inputenc}
 \usepackage{geometry}
 \geometry{verbose,tmargin=1cm,bmargin=1cm,lmargin=1cm,rmargin=1cm,headheight=1cm,headsep=1cm,footskip=1cm}
+\usepackage{float}
 \usepackage{amstext}
 \usepackage{amsthm}
 \usepackage{amssymb}
 
 \makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
@@ -233,7 +241,27 @@ i.e. in both $P^{\left(1\right)}$ and $P^{\left(2\right)}$.\\
 \\
 
 \item [8.2]QR factorization in MATLAB
-\begin{lstlisting}
+\begin{algorithm}[h]
+\noindent \centering{}
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},showstringspaces=false,tabsize=2]
+function [ Q,R ] = mgs( A )
+
+n=size(A,2); 
+V = A; 
+R = zeros(n); 
+Q = zeros(size(A));
+for i=1:n
+    R(i,i) = norm(V(:,i));
+    Q(:,i) = V(:,i)/R(i,i);
+    for j=i+1:n
+        R(i,j) = dot(conj(Q(:,i)),V(:,j));
+        V(:,j) = V(:,j) - R(i,j)*Q(:,i);
+    end
+end
+\end{lstlisting}
+\caption{Problem 8.2}
+\end{algorithm}
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=4]
 function [ Q,R ] = mgs( A )
 
 n=size(A,2); 
@@ -284,6 +312,146 @@ for j=1:m
 end
 end
 \end{lstlisting}
+
+\end{enumerate}
+\item [11.3]The source 
+\begin{lstlisting}[language=Matlab]
+m=50;n=12;
+t=linspace(0,1,m);
+A=fliplr(vander(t));
+A=A(:,1:n);
+b=cos(4*t);
+% (a)
+xa = (A'*A)\(A'*b');
+% (b)
+[Q,R]=mgs(A);
+xb = inv(R)*Q'*b';
+% (c)
+[Q,~,R]=house(A);
+xc = inv(R(1:n,:))*Q(:,1:n)'*b';
+% (d)
+[Q,R]=qr(A,0); xd = inv(R)*Q'*b';
+% (e) xe = A\b';
+% (f)
+[U,S,V] = svd(A,0); xf = V*inv(S)*U';
+\end{lstlisting}
+Spurious digits are bolded (since I don't have a color printer): {\scriptsize{}
+\[
+\begin{bmatrix}\left(a\right) & \left(b\right) & \left(c\right) & \left(d\right) & \left(e\right) & \left(f\right)\\
+1.00000000\mathbf{9086630} & 1.00000000\mathbf{3504093} & 1.000000000996\mathbf{587} & 1.000000000996608 & 1.000000000996608 & 1.000000000996608\\
+-0.00000\mathbf{2750662343} & -0.00000\mathbf{1174057481} & -0.00000042274\mathbf{1833} & -0.000000422743\mathbf{026} & -0.000000422743\mathbf{275} & -0.000000422743\mathbf{001}\\
+-7.999\mathbf{89}\mathbf{4492799959} & -7.9999\mathbf{52810406654} & -7.999981235\mathbf{71290} & -7.9999812356\mathbf{85965} & -7.9999812356\mathbf{78261} & -7.9999812356\mathbf{86249}\\
+-0.00\mathbf{1590689263110} & -0.000\mathbf{740016335840} & -0.00031876\mathbf{291814} & -0.000318763\mathbf{229188} & -0.000318763\mathbf{323044} & -0.000318763\mathbf{219639}\\
+10.6\mathbf{79136235622181} & 10.6\mathbf{72671298569185} & 10.66943079\mathbf{3881475} & 10.66943079\mathbf{5827793} & 10.66943079\mathbf{6493874} & 10.66943079\mathbf{5835069}\\
+-0.0\mathbf{57518328803047} & -0.0\mathbf{28504501577117} & -0.0138202\mathbf{79709762} & -0.0138202\mathbf{87873386} & -0.0138202\mathbf{90333400} & -0.0138202\mathbf{87684212}\\
+-5.\mathbf{523385050168370} & -5.6\mathbf{05292580963578} & -5.6470756\mathbf{48652390} & -5.6470756\mathbf{28337916} & -5.6470756\mathbf{21454596} & -5.64707562\mathbf{7872255}\\
+-0.\mathbf{301565003570636} & -0.\mathbf{152076928527094} & -0.07531\mathbf{5987691283} & -0.07531\mathbf{6023081541} & -0.07531\mathbf{6034042584} & -0.07531\mathbf{6023197956}\\
+1.\mathbf{960696612857617} & 1.\mathbf{784557524020784} & 1.6936069\mathbf{2}\mathbf{2985055} & 1.6936069\mathbf{61518526} & 1.6936069\mathbf{73954336} & 1.6936069\mathbf{61169280}\\
+-0.\mathbf{190448171560849} & -0.0\mathbf{61084598070011} & 0.0060321\mathbf{36734575} & 0.0060321\mathbf{11588866} & 0.0060321\mathbf{01658104} & 0.0060321\mathbf{10657543}\\
+-0.\mathbf{292337307957861} & -0.3\mathbf{46187548770104} & -0.3742417\mathbf{14569507} & -0.3742417\mathbf{04121232} & -0.3742417\mathbf{00695669} & -0.3742417\mathbf{04441374}\\
+0.0\mathbf{73265312429369} & 0.08\mathbf{2967710732191} & 0.08804057\mathbf{7982611} & 0.08804057\mathbf{6170897} & 0.08804057\mathbf{5606148} & 0.08804057\mathbf{6163621}
+\end{bmatrix}
+\]
+}Clearly computing the normal equations directly is terribly unstable
+(and my implementation of mgs is numerically unstable).
+\item [12.1]Claim: $\kappa\left(A\right)\geq100$.
+
+\begin{proof}
+Note $\left\Vert A\right\Vert _{F}=\sqrt{\sum_{i=1}^{n}\sigma_{i}^{2}}$
+where $\sigma_{i}$ are the singular values and $n=\text{rank}\left(A\right)$.
+Why? 
+\begin{eqnarray*}
+\left\Vert A\right\Vert _{F} & = & \sqrt{\text{tr}\left(A^{\intercal}A\right)}\\
+ & = & \sqrt{\text{tr}\left(\left(U\hat{S}V^{\intercal}\right)^{\intercal}\left(U\hat{S}V^{\intercal}\right)\right)}\\
+ & = & \sqrt{\text{tr}\left(V\hat{S}^{\intercal}U^{\intercal}U\hat{S}V^{\intercal}\right)}\\
+ & = & \sqrt{\text{tr}\left(V\hat{S}^{\intercal}\hat{S}V^{\intercal}\right)}\\
+ & = & \sqrt{\text{tr}\left(V^{\intercal}V\hat{S}^{\intercal}\hat{S}\right)}\\
+ & = & \sqrt{\text{tr}\left(\hat{S}^{\intercal}\hat{S}\right)}=\sqrt{\sum_{i=1}^{n}\sigma_{i}^{2}}
+\end{eqnarray*}
+And since $\left\Vert A\right\Vert _{2}=\sigma_{1}\left(A\right)$
+we have that 
+\begin{eqnarray*}
+\left\Vert A\right\Vert _{F}^{2} & = & \sum_{i=1}^{n}\sigma_{i}^{2}\\
+ & = & \sum_{i=2}^{n}\sigma_{i}^{2}+\sigma_{1}^{2}
+\end{eqnarray*}
+Hence 
+\[
+101^{2}-100^{2}=201=\sum_{i=2}^{n}\sigma_{i}^{2}
+\]
+and since $\sigma_{i}\geq\sigma_{i+1}$ we have that 
+\[
+201=\sum_{i=2}^{n}\sigma_{i}^{2}\geq\left(n-1\right)\sigma_{n}^{2}
+\]
+the maximum $n=202$ if $A$ is full rank and so 
+\[
+201\geq201\sigma_{n}^{2}
+\]
+and $\sigma_{n}\leq1$. Therefore
+\[
+\kappa\left(A\right)=\frac{\sigma_{1}\left(A\right)}{\sigma_{n}\left(A\right)}\geq\frac{100}{1}=100
+\]
+
+\end{proof}
+\item [13.1]Claim: There are $2^{29}-1$ double precision numbers between
+any two single precision numbers.
+
+\begin{proof}
+Since \textbf{F }is self-similar (up to machine epsilon) we can without
+loss of generality compute the number of double precision numbers
+in $\left[1,1+2^{-23}\right]$: 
+\[
+\frac{2^{-23}}{2^{-52}}=2^{29}
+\]
+Hence there are $2^{29}-1$ double precision numbers in $\left[1,1+2^{-23}\right]$.
+Note that -1 is since 
+\[
+1+2^{29}\left(\frac{1}{2^{-52}}\right)=1+2^{-23}
+\]
+
+\end{proof}
+\item [14.1]To wit:
+
+\begin{enumerate}
+\item True: for $x\in\left[0,\infty\right]$ it's the case that$\left|\sin\left(x\right)\right|\leq C\times1$
+for $C=1$.
+\item True: for $x\in\left[0,\infty\right]$ it's the case that$\left|\sin\left(x\right)\right|\leq C\times1$
+for $C=1$.
+\item True: for 
+\begin{eqnarray*}
+\frac{d}{dx}\left(\log\left(x\right)-x^{n}\right) & = & \frac{1}{x}-nx^{n-1}
+\end{eqnarray*}
+which is 0 for $x=n^{-1/n}$ and 
+\[
+\frac{d^{2}}{dx^{2}}\left(\log\left(x\right)-x^{n}\right)=-\frac{1}{x^{2}}-\left(n-1\right)n\frac{1}{x^{2-n}}<0
+\]
+for $x>0$. So the critical point $x=n^{-1/n}$ is a unique maximum
+and hence is montonic decreasing on $\left[n^{-1/n},\infty\right]$
+and unbounded. Hence there exists some $T$ such that 
+\[
+\frac{t^{n}}{\log\left(t\right)}\leq C
+\]
+for all $t\leq T$.
+\item False: Stirling's approximation gives that for $n\rightarrow\infty$
+\[
+n!=O\left(\sqrt{n}\left(\frac{n}{e}\right)^{n}\right)
+\]
+
+\item True: let $u_{1},u_{2}$ be the units of the area and the volume.
+Then $V=\frac{4}{3}\pi\left(u_{2}r\right)^{3},\,A=4\pi\left(u_{1}r\right)^{2}$
+implies
+\[
+\frac{A}{V^{2/3}}\approx\frac{r^{2}}{\left(\sqrt[3]{r^{3}}\right)^{2}}=1
+\]
+
+\item True: by definition of fl: 
+\[
+\text{fl}\left(\pi\right)-\pi=\pi\left(1+\epsilon\right)-\pi=\pi\epsilon\leq\pi\epsilon_{\text{machine}}=O\left(\epsilon_{\text{machine}}\right)
+\]
+
+\item False: by definition of fl: for all $n$ 
+\[
+\text{fl}\left(n\pi\right)-n\pi=n\pi\left(1+\epsilon\right)-n\pi=\pi n\epsilon\nleq\pi\epsilon_{\text{machine}}
+\]
 \end{enumerate}
 \end{enumerate}
 

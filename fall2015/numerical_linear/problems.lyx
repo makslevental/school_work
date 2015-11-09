@@ -852,8 +852,26 @@ status open
 
 \end_inset
 
-QR factorization in MATLAB
+MATLAB QR factorization code appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Problem-8.2"
+
+\end_inset
+
+.
+ 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},showstringspaces=false,tabsize=2"
 inline false
 status open
 
@@ -929,6 +947,27 @@ end
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problem 8.2
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Problem-8.2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -947,8 +986,25 @@ status open
 
 \begin_deeper
 \begin_layout Enumerate
-QR factorization by Householder orthogonal triangularization in MATLAB
+MATLAB QR factorization by Householder orthogonal triangularization code
+ appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Problem-10.2(a)"
+
+\end_inset
+
+.
+ 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},tabsize=2"
 inline false
 status open
 
@@ -1027,9 +1083,49 @@ end
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problem 10.2(a)
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Problem-10.2(a)"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Enumerate
-Reconstruction of Q from Householder decomposition
+Reconstruction of Q from Householder decomposition code appears in algorithm
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Problem-10.2(b)"
+
+\end_inset
+
+.
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},tabsize=2"
 inline false
 status open
 
@@ -1088,6 +1184,30 @@ end
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problem 10.2(b)
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Problem-10.2(b)"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \begin_layout Enumerate
 \begin_inset ERT
@@ -1100,8 +1220,24 @@ status open
 
 \end_inset
 
-The source 
+ Experimentation MATLAB code appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Problem-11.3"
+
+\end_inset
+
+.
+ 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},showstringspaces=false,tabsize=2"
 inline false
 status open
 
@@ -1201,7 +1337,32 @@ b';
 
 \end_inset
 
-Spurious digits are bolded (since I don't have a color printer): 
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problem 11.3
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Problem-11.3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Results appear below.
+ spurious digits are bolded (since I don't have a color printer): 
 \size scriptsize
 
 \begin_inset Formula 
@@ -1573,7 +1734,17 @@ status open
 
 \begin_layout Plain Layout
 
-[
+[16.2]
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1581,5 +1752,458 @@ status open
 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Experiment code appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Problem-16.2(a)"
+
+\end_inset
+
+.
+ 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+n=zeros(5,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:5
+\end_layout
+
+\begin_layout Plain Layout
+
+	S=diag(sort(rand(1,50),'descend'));
+\end_layout
+
+\begin_layout Plain Layout
+
+	U = orth(rand(50));
+\end_layout
+
+\begin_layout Plain Layout
+
+	V = orth(rand(50));
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(rank(U)+rank(V) ~= 100) 
+\end_layout
+
+\begin_layout Plain Layout
+
+		error('rank deficient');
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\begin_layout Plain Layout
+
+	A=U*S*V';
+\end_layout
+
+\begin_layout Plain Layout
+
+	[U2,S2,V2]=svd(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+	n(i,:)=[norm(U-U2),norm(S-S2),norm(V-V2),norm(A-U2*S2*V2')];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problem 16.2(a)
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Problem-16.2(a)"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The results appear in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Results-experiment-problem"
+
+\end_inset
+
+.
+ 
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\begin{array}{cccccc}
+\text{test} & \#1 & \#2 & \#3 & \#4 & \#5\\
+\left\Vert U-U2\right\Vert  & \sim2 & \sim2 & \sim2 & \sim2 & \sim2\\
+\left\Vert S-S2\right\Vert  & \sim0 & \sim0 & \sim0 & \sim0 & \sim0\\
+\left\Vert U-V2\right\Vert  & \sim2 & \sim2 & \sim2 & \sim2 & \sim2\\
+\left\Vert A-USV^{\intercal}\right\Vert  & \sim0 & \sim0 & \sim0 & \sim0 & \sim0
+\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results experiment problem 16.2(a)
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Results-experiment-problem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+It's the case that 
+\begin_inset Formula $\left\Vert S-S2\right\Vert _{2}\approx\left\Vert A-USV^{\intercal}\right\Vert _{2}\approx0$
+\end_inset
+
+ because the SVD is unique.
+ It's the case that 
+\begin_inset Formula $\left\Vert U-U2\right\Vert _{2}\approx\left\Vert U-V2\right\Vert _{2}\approx2$
+\end_inset
+
+ because the SVD is unique only upto reflections of the singular vectors
+ and each of the singular vectors is unit norm itself (therefore the maximum
+ distance between two singular vectors 
+\begin_inset Formula $\left\Vert u-v\right\Vert =2$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+Fixing the signs
+\begin_inset Quotes erd
+\end_inset
+
+ amounts to reflecting the vectors.
+ Figuring out which vectors are flipped amounts to computing which 
+\begin_inset Formula $u\cdot u'=-1$
+\end_inset
+
+ and which 
+\begin_inset Formula $v\cdot v'=-1$
+\end_inset
+
+.
+ We can do this by looking at the diagonals of 
+\begin_inset Formula $U\cdot U2$
+\end_inset
+
+ and 
+\begin_inset Formula $V\cdot V2$
+\end_inset
+
+.
+ Then reflecting those vector in 
+\begin_inset Formula $U,V$
+\end_inset
+
+.
+ The modified experiment code appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Problem-16.2(a)-1"
+
+\end_inset
+
+.
+ 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+n=zeros(5,5);
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:5
+\end_layout
+
+\begin_layout Plain Layout
+
+	S=diag(sort(rand(1,50),'descend'));
+\end_layout
+
+\begin_layout Plain Layout
+
+	U = orth(rand(50));
+\end_layout
+
+\begin_layout Plain Layout
+
+	V = orth(rand(50));
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(rank(U)+rank(V) ~= 100) 
+\end_layout
+
+\begin_layout Plain Layout
+
+		error('rank deficient');
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\begin_layout Plain Layout
+
+	A=U*S*V';
+\end_layout
+
+\begin_layout Plain Layout
+
+	[U2,S2,V2]=svd(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+    U2 = U2*diag(U2'*U);
+\end_layout
+
+\begin_layout Plain Layout
+
+    V2 = V2*diag(V2'*V));
+\end_layout
+
+\begin_layout Plain Layout
+
+	n(i,:)=[norm(U-U2),norm(S-S2),norm(V-V2),norm(A-U2*S2*V2'),cond(A)];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problem 16.2(b)
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Problem-16.2(a)-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The results appear in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Results-experiment-problem-1"
+
+\end_inset
+
+.
+ 
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\begin{array}{cccccc}
+\text{test} & \#1 & \#2 & \#3 & \#4 & \#5\\
+\left\Vert U-U2\right\Vert  & 1.0e-10*0.0041 & 0.8462 & 0.0041 & 0.0366 & 0.0047\\
+\left\Vert S-S2\right\Vert  & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000\\
+\left\Vert U-V2\right\Vert  & 0.0041 & 0.8463 & 0.0041 & 0.0366 & 0.0047\\
+\left\Vert A-USV^{\intercal}\right\Vert  & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000\\
+\text{cond}\left(A\right) & 215.456 & 59.075 & 24.323 & 1127.737 & 249.643
+\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results experiment problem 16.2(b)
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Results-experiment-problem-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The results look fairly independent of the condition number.
+\end_layout
+
+\begin_layout Enumerate
+Repeating with 
+\begin_inset Formula $S=S^{6}$
+\end_inset
+
+.
+ The results appear in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Results-experiment-problem-1-1"
+
+\end_inset
+
+.
+ Here now the results look much more sensitive to the condition of the matrix
+ 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset Formula 
+\[
+\begin{array}{cccccc}
+\text{test} & \#1 & \#2 & \#3 & \#4 & \#5\\
+\left\Vert U-U2\right\Vert  & 1.23083532529072e-08 & 4.95658588681006e-09 & 3.19742887927701e-07 & 4.76250736869276e-08 & 9.59965829808946e-10\\
+\left\Vert S-S2\right\Vert  & 1.11022302462516e-15 & 9.99200722162641e-16 & 9.99200722162641e-16 & 1.77635683940025e-15 & 1.33226762955019e-15\\
+\left\Vert U-V2\right\Vert  & 9.74527210757079e-09 & 1.52611523315702e-08 & 2.21076652308600e-07 & 4.08951840613976e-08 & 1.05715931615783e-09\\
+\left\Vert A-USV^{\intercal}\right\Vert  & 2.87373564968032e-15 & 3.11316106543579e-15 & 1.75963160900772e-15 & 2.76058725597979e-15 & 2.62241626890850e-15\\
+\text{cond}\left(A\right) & 486890343971.476 & 2398402399249.11 & 29918434446.6710 & 1279650527.62976 & 3914313388.25301
+\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results experiment problem 16.2(c)
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Results-experiment-problem-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
