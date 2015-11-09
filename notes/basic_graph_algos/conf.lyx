@@ -1,0 +1,1809 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Basic graph algorithms
+\end_layout
+
+\begin_layout Section
+A slew of definitions about graphs
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+graph
+\series default
+ 
+\begin_inset Formula $G$
+\end_inset
+
+ is a pair 
+\begin_inset Formula $\left(V,E\right)$
+\end_inset
+
+ of things: a set 
+\begin_inset Formula $V$
+\end_inset
+
+ of 
+\emph on
+vertices 
+\emph default
+and a set 
+\begin_inset Formula $E$
+\end_inset
+
+ of 
+\emph on
+edges
+\emph default
+.
+ Vertices are an abstraction: they can represent anything from cities, people,
+ jobs, classes, etc.
+ to other vertices.
+ The edges give relational information: if two vertices 
+\begin_inset Formula $u,v$
+\end_inset
+
+ are related then there will be an edge saying as much, usually written
+ 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+, in the set of edges.
+ If the relational information is symmetric
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Obvious example: relatives - if you're related to someone then they're related
+ to you.
+\end_layout
+
+\end_inset
+
+ - 
+\begin_inset Formula $u$
+\end_inset
+
+ related to 
+\begin_inset Formula $v$
+\end_inset
+
+ is the same as 
+\begin_inset Formula $v$
+\end_inset
+
+ related to 
+\begin_inset Formula $u$
+\end_inset
+
+ - then the edges are 
+\series bold
+undirected
+\series default
+ and the the graph is an undirected graph.
+ If the relational information isn't symmetric
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Obvious example: parents - if you're someone's parent they're not your parent.
+\end_layout
+
+\end_inset
+
+ - 
+\begin_inset Formula $u$
+\end_inset
+
+ related to 
+\begin_inset Formula $v$
+\end_inset
+
+ isn't the same as 
+\begin_inset Formula $v$
+\end_inset
+
+ related to 
+\begin_inset Formula $u$
+\end_inset
+
+ - then the edges are ordered pairs, meaning 
+\begin_inset Formula $\left(u,v\right)\neq\left(v,u\right)$
+\end_inset
+
+ (just like the 
+\begin_inset Formula $xy$
+\end_inset
+
+ plane ordered pairs 
+\begin_inset Formula $\left(1,2\right),\left(2,1\right)$
+\end_inset
+
+ aren't equal), are called 
+\series bold
+directed 
+\series default
+edges or arrows, and the graph is a directed graph.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ is a directed graph.
+ The vertices are clothes you would put on when getting dressed and the
+ edges (arrows) represent precedence (you have to put on your underwear
+ before your pants and your pants before your belt).
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename cloth_graph.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Order of dressing graph
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Order-of-dressing"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In an undirected graph the jargon is that the edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ is 
+\emph on
+incident
+\emph default
+ on the vertices 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ In a directed graph we need to convey information about the direction of
+ the edge so we say that edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ is 
+\emph on
+incident from
+\emph default
+ 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\emph on
+incident to
+\emph default
+ 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ I've never heard anyone say this but it is true that it's important to
+ convey direction for all edges when describing edges in an undirected graph.
+ If two vertices have an edge connecting them then they're 
+\series bold
+adjacent
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+subraph
+\series default
+ 
+\begin_inset Formula $G'=\left(V',E'\right)$
+\end_inset
+
+ of a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is any 
+\begin_inset Formula $E'\subset E$
+\end_inset
+
+ and 
+\begin_inset Formula $V'\subset V$
+\end_inset
+
+.
+ Given some 
+\begin_inset Formula $V'\subset V$
+\end_inset
+
+ the subgraph 
+\emph on
+induced
+\emph default
+ on 
+\begin_inset Formula $G$
+\end_inset
+
+ by 
+\begin_inset Formula $V'$
+\end_inset
+
+ is the graph 
+\begin_inset Formula $G'=\left(V',E'\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $E'$
+\end_inset
+
+ is the set of edges in 
+\begin_inset Formula $E$
+\end_inset
+
+ connecting vertices in 
+\begin_inset Formula $V'$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $E'=\left\{ \left(u,v\right)\in E\big|u,v\in V'\right\} $
+\end_inset
+
+.
+ It's basically the graph you get by throwing away some vertices.
+\end_layout
+
+\begin_layout Standard
+In a graph the 
+\series bold
+degree
+\series default
+ of a vertex is the number of edges incident on it (i.e.
+ just the number of edges connected to it).
+ In a directed graph we need to also distinguish between edges into the
+ vertex and edges leaving (but just the degree is still the total number):
+ the 
+\series bold
+in-degree
+\series default
+ of a vertex is number of edges coming into the vertex and the 
+\series bold
+out-degree
+\emph on
+ 
+\series default
+\emph default
+is the number of edges leaving the vertex.
+ An 
+\series bold
+isolated
+\series default
+ vertex is one whose degree is 0 (like `watch` in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+path
+\series default
+ of length 
+\begin_inset Formula $k$
+\end_inset
+
+ from vertex 
+\begin_inset Formula $v_{0}$
+\end_inset
+
+ to 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ is a sequence of vertices 
+\begin_inset Formula $\left(\underbrace{v_{0},v_{1},\dots,v_{k}}_{k+1}\right)$
+\end_inset
+
+ (i.e.
+ a walk along the edges from 
+\begin_inset Formula $v_{0}$
+\end_inset
+
+ to 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+).
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $k$
+\end_inset
+
+ length
+\begin_inset Quotes erd
+\end_inset
+
+ comes from the 
+\begin_inset Formula $k$
+\end_inset
+
+ edges connecting vertices not the 
+\begin_inset Formula $k+1$
+\end_inset
+
+ vertices: 
+\begin_inset Formula $\left\{ \underbrace{\left(v_{0},v_{1}\right)}_{\text{1st}},\underbrace{\left(v_{1},v_{2}\right)}_{\text{2nd}},\dots,\underbrace{\left(v_{k-1},v_{k}\right)}_{k\text{th}}\right\} $
+\end_inset
+
+.
+ Note also that there's no requirement that the edges or vertices be distinct,
+ meaning a path that retraces its steps is fine.
+ A 
+\series bold
+simple 
+\series default
+path is one where all the vertices in 
+\begin_inset Formula $\left(v_{0},v_{1},\dots,v_{k}\right)$
+\end_inset
+
+ are distinct, i.e.
+ that doesn't retrace its steps.
+ A 
+\series bold
+cycle
+\series default
+ is a path where 
+\begin_inset Formula $v_{0}=v_{k}$
+\end_inset
+
+, i.e.
+ ends up where it starts.
+ A 
+\series bold
+simple cycle
+\emph on
+ 
+\series default
+\emph default
+is a cycle that doesn't retrace its steps.
+ A graph with no cycles is called 
+\series bold
+acyclic
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A graph is 
+\series bold
+connected
+\series default
+ if there's a path from any vertex to any other vertex.
+ A graph that isn't connected isn't 
+\begin_inset Quotes eld
+\end_inset
+
+disconnected
+\begin_inset Quotes erd
+\end_inset
+
+! It's just not connected.
+ The graph in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ is not connected because there's no path from any vertex to `watch`.
+ Note in a directed graph you can't 
+\begin_inset Quotes eld
+\end_inset
+
+go backwards
+\begin_inset Quotes erd
+\end_inset
+
+ along edges so also there's no path from `pants` to `undershorts`.
+ A 
+\series bold
+connected component 
+\series default
+
+\begin_inset Formula $V'\subset V$
+\end_inset
+
+ is a set of vertices such that the graph 
+\begin_inset Formula $G'$
+\end_inset
+
+ induced on 
+\begin_inset Formula $G$
+\end_inset
+
+ by 
+\begin_inset Formula $V'$
+\end_inset
+
+ is connected, i.e.
+ it's a subset of the original vertices where any vertex in that subset
+ is reachable from any other in that subset.
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ if you flip the edge 
+\begin_inset Formula $\left(\text{undershorts},\text{shoes}\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\left(\text{shoes},\text{undershorts}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $V'=\left\{ \text{undershorts},\text{shorts},\text{shoes}\right\} $
+\end_inset
+
+ becomes a connected component because you can just 
+\begin_inset Quotes eld
+\end_inset
+
+go around the path
+\begin_inset Quotes erd
+\end_inset
+
+ from any of them to any other.
+ There can be several connected components in a graph.
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ if you also flip the edges 
+\begin_inset Formula $\left(\text{shirt},\text{tie}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\text{tie},\text{jacket}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $V'=\left\{ \text{undershorts},\text{shorts},\text{shoes}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $V''=\left\{ \text{shirt},\text{tie},\text{jacket}\right\} $
+\end_inset
+
+ become connected components (but are not connected to each other).
+ 
+\end_layout
+
+\begin_layout Standard
+Two graphs 
+\begin_inset Formula $G,G'$
+\end_inset
+
+ are 
+\series bold
+isomorphic
+\series default
+ if there's a bijection 
+\begin_inset Formula $f:V\rightarrow V'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left(u,v\right)\in E\iff\left(f\left(u\right),f\left(v\right)\right)\in E'$
+\end_inset
+
+, i.e.
+ essentially the same except for a relableing of the vertex names.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Isomorphic-graphs"
+
+\end_inset
+
+ shows two isomorphic graphs because the mapping 
+\begin_inset Formula 
+\begin{eqnarray*}
+f\left(u_{1}\right) & = & v_{1}\\
+f\left(u_{2}\right) & = & v_{4}\\
+f\left(u_{3}\right) & = & v_{3}\\
+f\left(u_{4}\right) & = & v_{2}
+\end{eqnarray*}
+
+\end_inset
+
+works (all you do is 
+\begin_inset Quotes eld
+\end_inset
+
+twist
+\begin_inset Quotes erd
+\end_inset
+
+ vertices 
+\begin_inset Formula $u_{2},u_{4}$
+\end_inset
+
+).
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename isomorphic.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Isomorphic graphs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Isomorphic-graphs"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Graphs with particular properties get fancy names.
+ A 
+\series bold
+complete 
+\series default
+graph is a graph where every edge has an edge to every other edge (how many
+ edges is that?).
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Complete-graphs-for"
+
+\end_inset
+
+ shows complete graphs for
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ is the number of vertices and 
+\begin_inset Formula $\left|E\right|$
+\end_inset
+
+ is the number of edges.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\left|V\right|=2,\dots,7$
+\end_inset
+
+, i.e.
+ 2 vertices, 3 vertices, ..., 7 vertices.
+ Are these unique? I.e is every other complete graph with 
+\begin_inset Formula $7$
+\end_inset
+
+ vertices isomorphic to 
+\begin_inset Formula $K_{7}$
+\end_inset
+
+? A 
+\series bold
+bipartite 
+\series default
+graph is a graph that can be divided into two sets 
+\begin_inset Formula $V_{1},V_{2}$
+\end_inset
+
+ such that the edges of the graph only connect vertices in 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ and vice versa (i.e.
+ vertices in 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ are not connected to each other).
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename complete_graphs.gif
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Complete graphs for number of vertices 
+\begin_inset Formula $2,\dots,7$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Complete-graphs-for"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+A 
+\series bold
+bipartite 
+\series default
+graph is a graph that can be divided into two sets 
+\begin_inset Formula $V_{1},V_{2}$
+\end_inset
+
+ such that the edges of the graph only connected vertices in 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ and vice versa (i.e.
+ vertices in 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ are not connected to each other).
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bipartite-graph"
+
+\end_inset
+
+ is a bipartite graph.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename bipartite.png
+	scale 7
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bipartite graph
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bipartite-graph"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ An acyclic undirected graph is a 
+\series bold
+forest 
+\series default
+(need not be connected) and a connected, acyclic, undirected graph is a
+ 
+\series bold
+tree
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+There are tons of refinements of tree, e.g.
+ binary tree, complete binary tree, full binary tree, etc.
+\end_layout
+
+\end_inset
+
+
+\series default
+.
+ A 
+\series bold
+d
+\series default
+irected 
+\series bold
+a
+\series default
+cyclic 
+\series bold
+g
+\series default
+raph is usually shortened to 
+\series bold
+dag
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally the 
+\series bold
+contraction
+\series default
+ of an undirected graph by an edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ is formed by removing the edge and making 
+\begin_inset Formula $u=v$
+\end_inset
+
+, i.e.
+ contract 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+ to be one vertex, with the edges connected to each of 
+\begin_inset Formula $u,v$
+\end_inset
+
+ now connected to the contracted vertex.
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+weighted 
+\series default
+graph is one where the edges have numbers associated with them called 
+\begin_inset Quotes eld
+\end_inset
+
+weights
+\begin_inset Quotes erd
+\end_inset
+
+.
+ For example if vertices were cities in Florida and edges represented 
+\begin_inset Quotes eld
+\end_inset
+
+being connected to by freeway
+\begin_inset Quotes erd
+\end_inset
+
+ (any number of freeways but only freeways) then the edge weights might
+ represent the number of highway changes you have to make when going from
+ one city to another.
+\end_layout
+
+\begin_layout Section
+Representations of graphs
+\end_layout
+
+\begin_layout Standard
+A representation of a graph is a data structure of some sort that captures
+ information about the vertices and the edges connecting the vertices.
+ The two standard representations are an 
+\series bold
+adjacency list
+\series default
+ (which uses a list of linked lists) and an 
+\series bold
+adjacency matrix
+\series default
+ (which uses a matrix obviously).
+ 
+\end_layout
+
+\begin_layout Standard
+How to construct the adjacency list representation: first enumerate all
+ the vertices of the graph (i.e.
+ give each vertex a unique numerical 
+\begin_inset Quotes eld
+\end_inset
+
+name
+\begin_inset Quotes erd
+\end_inset
+
+), then create a list or array type data structure of length 
+\begin_inset Formula $n$
+\end_inset
+
+ and for each entry in this list store another list.
+ The index of the first list corresponds to some vertex and the list fetched
+ upon indexing corresponds to all of the vertices its connected to.
+ For example consider the graph in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Adjacency-list"
+
+\end_inset
+
+.
+ The structure on the right is the adjacency list: the first column is an
+ array or vector or something with pointers to the heads of linked lists.
+ For example the 3rd position in the array corresponds to vertex 3 and hence
+ has a pointer to a linked list that contains nodes (linked list nodes not
+ graph nodes) that store the number identifying vertices that vertex 3 is
+ connected to (a node with the number 6 and a pointer to another node with
+ the number 5 [and the null pointer because vertex 3 isn't connected to
+ any other vertices]).
+ Note that the order of the vertices as they appear in the linked lists
+ don't mean anything (for example 2 precedes 4 in vertex 1's linked list
+ but vertex 6 precedes vertex 5 in vertex 3's linked list).
+ Also note that since this is a directed graph the adjacency lists respect
+ this: vertex 2 doesn't have vertex 1 in its adjacency list.
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename adjacency_list.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Adjacency list
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Adjacency-list"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How to construct adjacency matrix representation: create a 2d array (matrix)
+ of size 
+\begin_inset Formula $\left|V\right|^{2}$
+\end_inset
+
+ filled with zeros.
+ Then fill in 1s on row 
+\begin_inset Formula $i$
+\end_inset
+
+ position 
+\begin_inset Formula $j$
+\end_inset
+
+ if vertex 
+\begin_inset Formula $i$
+\end_inset
+
+ is connected to 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Adjacency-matrix"
+
+\end_inset
+
+ is the adjacency matrix representation for the graph in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Adjacency-list"
+
+\end_inset
+
+.
+ Note that since this graph is directed the adjacency matrix representation
+ respects this: just like for the adjacency list representation row 2 (correspon
+ding to vertex 2) doesn't have a 1 in the first position because there's
+ no edge from vertex 2 to vertex 1, but there is a 1 in the first row's
+ (the row corresponding to vertex 1) second position because there is an
+ edge from vertex 1 to vertex 2.
+ What would the graph look like if the graph was undirected? Hint: an undirected
+ graph is like a directed graph but for any directed edge 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ there also exists directed edge 
+\begin_inset Formula $\left(j,i\right)$
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename adjacency_matrix.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Adjacency matrix
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Adjacency-matrix"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When is an adjacency list representation better than an adjacency graph
+ representation? When the graph is 
+\begin_inset Quotes eld
+\end_inset
+
+sparse
+\begin_inset Quotes erd
+\end_inset
+
+, which means vertices are on average adjacent to a small percentage of
+ the other vertices.
+ Why? Because adjacency lists store only information about present edges
+ while the adjacency matrix explicitly stores zeros to indicate when 2 vertices
+ aren't adjacent.
+ Notice that the matrix in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Adjacency-matrix"
+
+\end_inset
+
+ has many more numbers in it (if you count the zeros) than the adjacency
+ list in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Adjacency-list"
+
+\end_inset
+
+.
+ Conversely when a graph is 
+\begin_inset Quotes eld
+\end_inset
+
+dense
+\begin_inset Quotes erd
+\end_inset
+
+, which means vertices are on average connected to a large percentage of
+ the other vertices, the adjacency matrix representation is better because
+ the added cost of traversing a linked list isn't worthwhile for example
+ if you're trying to figure out if two vertices are adjacent (in the adjacency
+ matrix representation you would just index directly to the other vertex
+ and check for a 0 or 1 whereas in the adjacency list you have to traverse
+ the list).
+ For the adjacency list the space cost
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Big 
+\begin_inset Formula $\Theta$
+\end_inset
+
+ means best and worst case.
+ Big 
+\begin_inset Formula $O$
+\end_inset
+
+ means worst case.
+ Big 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ means best case.
+ 
+\end_layout
+
+\end_inset
+
+ is 
+\begin_inset Formula $\Theta\left(\left|V\right|+\left|E\right|\right)$
+\end_inset
+
+ which means you need space proportional to the number of vertices (the
+ length of the 
+\begin_inset Quotes eld
+\end_inset
+
+top
+\begin_inset Quotes erd
+\end_inset
+
+ array) and the number of edges (one linked list node for each edge).
+ For the adjacency matrix representation the space cost is 
+\begin_inset Formula $\Theta\left(\left|V\right|^{2}\right)$
+\end_inset
+
+ regardless of the density or sparseness of the graph.
+ Notice that if 
+\begin_inset Formula $\left|E\right|=\left|V\right|\left(\left|V\right|-1\right)$
+\end_inset
+
+, the maximum number of edges, then 
+\begin_inset Formula 
+\[
+\Theta\left(\left|V\right|+\left|E\right|\right)=\Theta\left(\left|V\right|+\left|V\right|\left(\left|V\right|-1\right)\right)=\Theta\left(\left|V\right|^{2}\right)
+\]
+
+\end_inset
+
+So worst case the space cost of an adjacency list representation is the
+ same as that of the adjacency matrix representation.
+\end_layout
+
+\begin_layout Standard
+Both representation can be adapted to represent weighted graphs.
+ The linked list nodes in the adjacency list can be pointers to some other
+ data structure that has fields that store weight attributes and the adjacency
+ 2d array can similarly store pointers or simply have binary entries (the
+ entries can be real numbers but note that in that case 0 weight might be
+ semantically distinct from 
+\begin_inset Quotes eld
+\end_inset
+
+not adjacent to
+\begin_inset Quotes erd
+\end_inset
+
+ in which the case appropriate thing might be something like some entry
+ representing 
+\begin_inset Formula $\infty$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Breadth-first search
+\end_layout
+
+\begin_layout Standard
+Breadth-first search (BFS) is better called breadth-first discovery because
+ you're not necessarily searching for anything you're just exploring the
+ graph.
+ It's the simplest thing you could think of doing: if you're at some vertex
+ 
+\begin_inset Quotes eld
+\end_inset
+
+discover
+\begin_inset Quotes erd
+\end_inset
+
+ all of its adjacent vertices then for each one of those discover each of
+ its adjacent vertices, and so on.
+ Note you go in order of discovery.
+ So first discover all neighboring vertices 
+\begin_inset Formula $v_{1},v_{2},\dots,v_{k}$
+\end_inset
+
+ of some 
+\series bold
+source
+\series default
+ vertex 
+\begin_inset Formula $s$
+\end_inset
+
+, then discover all the neighboring vertices 
+\begin_inset Formula $v_{1,1},v_{1,2},\dots,v_{1,k'}$
+\end_inset
+
+ of 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ and then move on to discovering all adjacent vertices of 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+, not all adjacent vertices 
+\begin_inset Formula $v_{1,1}$
+\end_inset
+
+.
+ So the discovery process goes in frontiers of number of edges from the
+ source: discover all vertices within one edge of 
+\begin_inset Formula $s$
+\end_inset
+
+, then within two edges of 
+\begin_inset Formula $s$
+\end_inset
+
+, etc.
+ Consider figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BFS"
+
+\end_inset
+
+: The source is A from which B,H are discovered.
+ From B the vertices C,F are discovered and then from H the vertices I,J
+ are discovered.
+ The levels are circled in red and correspond to frontiers of discovery.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename bfs.jpg
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+BFS
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:BFS"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ The order of visiting the vertices in BFS suggests an implementation: you
+ want to discover the first vertex that's one edge away, then the second
+ vertex that's one edge away, etc.
+ until there are no more vertices one edge away.
+ Then you want to 
+\begin_inset Quotes eld
+\end_inset
+
+visit
+\begin_inset Quotes erd
+\end_inset
+
+ the first vertex discovered at the one edge frontier and discover its 
+\begin_inset Quotes eld
+\end_inset
+
+children
+\begin_inset Quotes erd
+\end_inset
+
+, then move on to the second vertex discovered at the one edge frontier
+ and discover its 
+\begin_inset Quotes eld
+\end_inset
+
+children
+\begin_inset Quotes erd
+\end_inset
+
+ and so on.
+ Hence you want to do the discovery process in a first in first out order:
+ the vertices discovered earlier should be visited earlier.
+ Obviously this suggests using a queue data structure.
+ It's also important to distinguish between vertices that have been discovered
+ and those which have been fully explored so that vertices that have been
+ discovered don't get 
+\begin_inset Quotes eld
+\end_inset
+
+re-discovered
+\begin_inset Quotes erd
+\end_inset
+
+ (since a vertex might have an incoming edge from two other vertices in
+ a preceding frontier) and those which have been fully explored don't get
+ explored again.
+ Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Breadth-first-search"
+
+\end_inset
+
+ lists pseudocode for a function that takes a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ and a source 
+\begin_inset Formula $s$
+\end_inset
+
+ (from which to start the BFS) and performs the breadth-first search
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+lstparams "language={C++},basicstyle={\footnotesize},showstringspaces=false,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+BFS(G,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+// initialize all vertices as undiscovered and unexplored
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in V
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.discovered = false
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.explored = false
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Q = queue
+\end_layout
+
+\begin_layout Plain Layout
+
+// the first vertex discovered is the source
+\end_layout
+
+\begin_layout Plain Layout
+
+s.discovered = true
+\end_layout
+
+\begin_layout Plain Layout
+
+Q.push(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+while Q.empty != false
+\end_layout
+
+\begin_layout Plain Layout
+
+	v = Q.pop
+\end_layout
+
+\begin_layout Plain Layout
+
+	// G's adjacency information is abstracted away here
+\end_layout
+
+\begin_layout Plain Layout
+
+	// i.e.
+ G.adj(v) queries either the adjacency list
+\end_layout
+
+\begin_layout Plain Layout
+
+	// or adjacency matrix for all vertices adjacent to v
+\end_layout
+
+\begin_layout Plain Layout
+
+	for u in G.adj(v)
+\end_layout
+
+\begin_layout Plain Layout
+
+		// u might be adjacent to some other vertex and hence
+\end_layout
+
+\begin_layout Plain Layout
+
+		// might have already been discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+		if u.discovered == false
+\end_layout
+
+\begin_layout Plain Layout
+
+			u.discovered = true
+\end_layout
+
+\begin_layout Plain Layout
+
+			Q.push(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+	// discovered all vertices adjacent to v hence
+\end_layout
+
+\begin_layout Plain Layout
+
+	// v is fully explored
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.explored = true
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Breadth-first search
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Breadth-first-search"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That's it - that's basic BFS.
+ Now there are variations on the theme: for example you could use BFS to
+ compute the number of edges from the source to every other vertex it's
+ connected to.
+ How? Note that every vertex is one frontier deeper than the vertex 
+\begin_inset Quotes eld
+\end_inset
+
+through which
+\begin_inset Quotes erd
+\end_inset
+
+ it was discovered: so if the number of edges 
+\begin_inset Formula $s.d$
+\end_inset
+
+ from the source to itself is 0 then the number of edges from the source
+ to each of the vertices discovered after exploring the source is 
+\begin_inset Formula $s.d+1$
+\end_inset
+
+.
+ Setting this 
+\begin_inset Quotes eld
+\end_inset
+
+distance
+\begin_inset Quotes erd
+\end_inset
+
+ upon discovering the vertices adjacent to some vertex gives the correct
+ distance of the discovered vertex from the source.
+ Why? Because no vertex is discovered twice and so when 
+\begin_inset Formula $u.d$
+\end_inset
+
+ is set it's set as early as it can be.
+ There is also the notion of a 
+\series bold
+breadth-first predecessor tree
+\series default
+.
+ This is basically a representation of which vertices were discovered by
+ exploring which vertices in a breadth-first search.
+ You can imagine rearranging the graph such that 
+\begin_inset Formula $s$
+\end_inset
+
+ at the center and the frontiers of vertices form concentric circles around
+ 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Breadth-first-predecessor-tree"
+
+\end_inset
+
+ demonstrates this.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename breadfirstpredecessor.gif
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Breadth-first predecessor tree
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Breadth-first-predecessor-tree"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ Formally for a graph 
+\begin_inset Formula $G=\left(V,E\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+ the breadth-first predecessor tree 
+\begin_inset Formula $G'$
+\end_inset
+
+ consists of all vertices 
+\begin_inset Formula $V'\subset V$
+\end_inset
+
+ that were discovered in a BFS emanating from 
+\begin_inset Formula $s$
+\end_inset
+
+ and edges 
+\begin_inset Formula $\left(u,v\right)\in E'\subset E$
+\end_inset
+
+ if 
+\begin_inset Formula $v$
+\end_inset
+
+ was discovered through exploring 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ It's called a tree because there are no cycles (why?), it's connected (why?).
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+root
+\begin_inset Quotes erd
+\end_inset
+
+ of the tree will be the source vertex 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ How would construct the tree? Just keep track of which vertex a vertex
+ was discovered through by storing a 
+\begin_inset Quotes eld
+\end_inset
+
+parent
+\begin_inset Quotes erd
+\end_inset
+
+ pointer that's set when the vertex is discovered.
+ Using the BFS predecessor tree you can also print out shortest paths to
+ the source, in the sense of fewest edges, by following the parent pointers
+ back to the source.
+\end_layout
+
+\end_body
+\end_document
