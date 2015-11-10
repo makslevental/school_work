@@ -2205,5 +2205,328 @@ name "tab:Results-experiment-problem-1-1"
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[20.1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Claim: Suppose 
+\begin_inset Formula $A\in\mathbb{C}^{m\times m}$
+\end_inset
+
+ nonsingular.
+ It's the case that 
+\begin_inset Formula $A=LU$
+\end_inset
+
+ iff 
+\begin_inset Formula $A_{1:k,1:k}$
+\end_inset
+
+ is nonsingular for all 
+\begin_inset Formula $1\leq k\leq m$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+Suppose 
+\begin_inset Formula $A=LU$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ is nonsingular.
+ Then since
+\begin_inset Formula 
+\begin{eqnarray*}
+\begin{pmatrix}A_{1:k,1:k} & A_{1:k,(k+1):m}\\
+A_{(k+1):m,1:k} & A_{(k+1):m,(k+1):m}
+\end{pmatrix} & = & \begin{pmatrix}L_{1:k,1:k} & \mathbf{0}\\
+L_{(k+1):m,1:k} & L_{(k+1):m,(k+1):m}
+\end{pmatrix}\begin{pmatrix}U_{1:k,1:k} & U_{1:k,(k+1):m}\\
+\mathbf{0} & U_{(k+1):m,(k+1):m}
+\end{pmatrix}\\
+ & = & \begin{pmatrix}L_{1:k,1:k}U_{1:k,1:k} & ?\\
+? & ?
+\end{pmatrix}
+\end{eqnarray*}
+
+\end_inset
+
+where the ? indicates we don't care.
+ So 
+\begin_inset Formula $A_{1:k,1:k}=L_{1:k,1:k}U_{1:k,1:k}$
+\end_inset
+
+ and hence 
+\begin_inset Formula 
+\[
+\det\left(A_{1:k,1:k}\right)=\det\left(L_{1:k,1:k}\right)\det\left(U_{1:k,1:k}\right)
+\]
+
+\end_inset
+
+Then since 
+\begin_inset Formula $L_{1:k,1:k}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{1:k,1:k}$
+\end_inset
+
+ are triangular matrices
+\begin_inset Formula 
+\[
+\det\left(A_{1:k,1:k}\right)=\prod_{i=1}^{k}L_{ii}\prod_{j=1}^{k}U_{ii}
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $A$
+\end_inset
+
+ is nonsingular for all 
+\begin_inset Formula $i=1,\dots,m$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $L_{ii}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{ii}\neq0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\det\left(A_{1:k,1:k}\right)\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $A_{1:k,1:k}$
+\end_inset
+
+ is nonsingular for all 
+\begin_inset Formula $1\leq k\leq m$
+\end_inset
+
+.
+ We proceed by induction: for 
+\begin_inset Formula 
+\[
+A_{1:1,1:1}=1\times A_{1:1,1:1}
+\]
+
+\end_inset
+
+and so setting 
+\begin_inset Formula $L_{1:1,1:1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{1:1,1:1}=A_{1:1,1:1}$
+\end_inset
+
+ he have an 
+\begin_inset Formula $LU$
+\end_inset
+
+ decomposition of 
+\begin_inset Formula $A_{1:1,1:1}$
+\end_inset
+
+.
+ Now we prove the inductive step.
+ Choose 
+\begin_inset Formula 
+\[
+L=\begin{pmatrix}L_{1:k,1:k} & \mathbf{0}\\
+a & 1
+\end{pmatrix},U=\begin{pmatrix}U_{1:k,1:k} & b\\
+\mathbf{0} & u
+\end{pmatrix}
+\]
+
+\end_inset
+
+Then for this to be an 
+\begin_inset Formula $LU$
+\end_inset
+
+ decomposition of 
+\begin_inset Formula $A_{1:\left(k+1\right),1:\left(k+1\right)}$
+\end_inset
+
+ it's clear that 
+\begin_inset Formula 
+\[
+\begin{pmatrix}L_{1:k,1:k} & \mathbf{0}\\
+a & 1
+\end{pmatrix}\begin{pmatrix}U_{1:k,1:k} & b\\
+\mathbf{0} & u
+\end{pmatrix}=\begin{pmatrix}L_{1:k,1:k}U_{1:k,1:k} & L_{1:k,1:k}b\\
+aU_{1:k,1:k} & ab+u
+\end{pmatrix}=\begin{pmatrix}A_{1:k,1:k} & A_{1:k,(k+1):\left(k+1\right)}\\
+A_{(k+1):\left(k+1\right),1:k} & A_{(k+1),(k+1)}
+\end{pmatrix}
+\]
+
+\end_inset
+
+and so it must be the case that 
+\begin_inset Formula 
+\begin{eqnarray*}
+L_{1:k,1:k}b & = & A_{1:k,(k+1):\left(k+1\right)}\Rightarrow b=\left(L_{1:k,1:k}\right)^{-1}A_{1:k,(k+1):\left(k+1\right)}\\
+aU_{1:k,1:k} & = & A_{(k+1):\left(k+1\right),1:k}\Rightarrow a=A_{(k+1):\left(k+1\right),1:k}\left(U_{1:k,1:k}\right)^{-1}\\
+ab+u & = & A_{(k+1),(k+1)}\Rightarrow u=A_{(k+1),(k+1)}-ab
+\end{eqnarray*}
+
+\end_inset
+
+which is feasible since 
+\begin_inset Formula $L_{1:k,1:k},U_{1:k,1:k}$
+\end_inset
+
+ are invertible.
+ Clearly 
+\begin_inset Formula $L$
+\end_inset
+
+ is lower triangular and 
+\begin_inset Formula $U$
+\end_inset
+
+ is upper triangular and by construction 
+\begin_inset Formula $A_{1:\left(k+1\right),1:\left(k+1\right)}=L_{1:\left(k+1\right),1:\left(k+1\right)}U_{1:\left(k+1\right),1:\left(k+1\right)}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $LU$
+\end_inset
+
+ decomposition is unique.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Assume there exist 
+\begin_inset Formula $L_{1},L_{2},U$
+\end_inset
+
+ such that 
+\begin_inset Formula $A=L_{1}U=L_{2}U$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\left(L_{1}U\right)U^{-1}=\left(L_{2}U\right)U^{-1}\Rightarrow L_{1}=L_{2}
+\]
+
+\end_inset
+
+Assume there exist 
+\begin_inset Formula $L,U_{1},U_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A=LU_{1}=LU_{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+L^{-1}\left(LU_{1}\right)=L^{-1}\left(LU_{2}\right)\Rightarrow U_{1}=U_{2}
+\]
+
+\end_inset
+
+Assume there exist 
+\begin_inset Formula $L_{1},L_{2},U_{1},U_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A=L_{1}U_{1}=L_{2}U_{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+U_{1}\left(U_{2}\right)^{-1}=\left(L_{1}\right)^{-1}L_{2}
+\]
+
+\end_inset
+
+The lefthand side is upper triangular and the righthand side is lower triangular.
+ The only way this could be true (and for them to be equal) is if each is
+ equal to the identity (since 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ [and therefore 
+\begin_inset Formula $\left(L_{1}\right)^{-1}$
+\end_inset
+
+] and 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ have ones on the diagonal) .
+ Therefore
+\begin_inset Formula 
+\[
+U_{1}\left(U_{2}\right)^{-1}=\left(L_{1}\right)^{-1}L_{2}=I
+\]
+
+\end_inset
+
+and hence 
+\begin_inset Formula $U_{1}=IU_{2}=U_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{2}=L_{1}I=L_{1}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
 \end_body
 \end_document
