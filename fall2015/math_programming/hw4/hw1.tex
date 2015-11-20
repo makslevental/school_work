@@ -1,0 +1,207 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside]{amsart}
+\usepackage[latin9]{inputenc}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{mathtools}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{esint}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+%
+\usepackage{amsfonts}
+\usepackage{xfrac}
+%\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+
+\makeatother
+
+\begin{document}
+
+\title{ESI 6420 Homework 4 Solutions}
+
+
+\author{Maksim Levental}
+
+
+\date{\today}
+
+\maketitle
+Time spent: 15 hours
+
+Collaborators: Chris Gianelli
+\begin{enumerate}
+\item [2.1]Claim: for a continuous $f\,:\,\mathbb{R}\rightarrow\mathbb{R}$
+and $h>0$ 
+\[
+f_{h}\left(x\right)\coloneqq\frac{1}{2h}\int_{x-h}^{x+h}f\left(t\right)dt\geq f\left(x\right)
+\]
+iff $f$ is convex.
+
+\begin{proof}
+$\Leftarrow$ Suppose $f$ is convex. Proceed by contradiction: suppose
+there exist $h_{0},x_{0}$ such that $f\left(x_{0}\right)>f_{h_{0}}\left(x_{0}\right)$.
+Since $f$ is convex there exists $g\left(x\right)=f\left(x_{0}\right)+m\left(x-x_{0}\right)$
+such that $g\leq f$. But then 
+\[
+f\left(x_{0}\right)=\frac{1}{2h}\int_{x_{0}-h_{0}}^{x_{0}+h_{0}}g\left(t\right)dt\leq\frac{1}{2h}\int_{x_{0}-h_{0}}^{x_{0}+h_{0}}f\left(t\right)dt=f_{h_{0}}\left(x_{0}\right)
+\]
+a contradiction. 
+
+$\Rightarrow$ Suppose $f_{h}\left(x\right)\geq f\left(x\right)$
+for all $h,x$. Towards a contradiction suppose $f$ is not convex.
+Then there exist $\lambda_{0},x_{1},x_{2}$ such that 
+\[
+f\left(\lambda_{0}x_{1}+\left(1-\lambda_{0}\right)x_{2}\right)>\lambda_{0}f\left(x_{1}\right)+\left(1-\lambda_{0}\right)f\left(x_{2}\right)
+\]
+where $\lambda_{0}\in\left(0,1\right)$. Consider the function 
+\[
+F\left(\lambda\right)=f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)-\left(\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\right)
+\]
+on $\left[0,1\right]$. Note that $F\left(0\right)=F\left(1\right)=0$
+and $F\left(\lambda_{0}\right)>0$. Therefore there exists an $h$-ball
+around $\lambda_{0}$ such that for $\lambda\in\left[\lambda_{0}-h,\lambda_{0}+h\right]$
+it's the case that $F\left(\lambda\right)>0$. Note also that $F$
+is continuous because it's a linear function of a continuous function
+$f$. Therefore $F$ achieves a maximum for some$\mbox{\ensuremath{\lambda}}^{*}\in\left[\lambda_{0}-h,\lambda_{0}+h\right]$
+(since $\left[\lambda_{0}-h,\lambda_{0}+h\right]$ is closed). Take
+a smaller ball $\left[\lambda^{*}-h',\lambda^{*}+h'\right]$ around
+$\lambda^{*}$ and suppose $F$ is not constant on this smaller ball
+(we'll relax this in a moment). Then since $F$ is positive on $\left[\lambda^{*}-h',\lambda^{*}+h'\right]$
+we have that 
+\[
+2h'F\left(\lambda^{*}\right)>\int_{\lambda^{*}-h'}^{\lambda^{*}+h'}F\left(\lambda\right)d\lambda
+\]
+which is equivalent to 
+\begin{align*}
+f\left(\lambda^{*}x_{1}+\left(1-\lambda^{*}\right)x_{2}\right)-\\
+\left(\lambda^{*}f\left(x_{1}\right)+\left(1-\lambda^{*}\right)f\left(x_{2}\right)\right) & >\frac{1}{2h'}\int_{\lambda^{*}-h'}^{\lambda^{*}+h'}\left[f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)-\left(\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\right)\right]d\lambda\\
+ & =\frac{1}{2h'}\int_{\lambda^{*}-h'}^{\lambda^{*}+h'}f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)d\lambda-\left(\lambda^{*}f\left(x_{1}\right)+\left(1-\lambda^{*}\right)f\left(x_{2}\right)\right)
+\end{align*}
+Cancelling $-\left(\lambda^{*}f\left(x_{1}\right)+\left(1-\lambda^{*}\right)f\left(x_{2}\right)\right)$
+we get that 
+\begin{align*}
+f\left(\lambda^{*}x_{1}+\left(1-\lambda^{*}\right)x_{2}\right) & >\frac{1}{2h'}\int_{\lambda^{*}-h'}^{\lambda^{*}+h'}f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)d\lambda
+\end{align*}
+
+\end{proof}
+\item [2.2]Let $f\left(X\right)=-\log\left(\det\left(X\right)\right)$. 
+
+\begin{enumerate}
+\item Claim: For $X,D\succeq0$ and $X\succ0$ and $g\left(t\right)=f\left(X+tD\right)$
+it's the case that 
+\[
+g\left(t\right)=-\log\left(\det\left(\sqrt{X}\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\sqrt{X}\right)\right)
+\]
+
+
+\begin{proof}
+Firstly since $X\succ0$ it's the case that $X$ is full rank (all
+nonzero eigenvalues) and there exists a matrix $\sqrt{X}$ such that
+$\sqrt{X}\sqrt{X}=X$ and $\sqrt{X}$ is full rank ($\sqrt{X}=Q\sqrt{\Sigma}Q^{T}$
+where $Q$ is the set of eigenvectors corresponding to $X$ and $\sqrt{\Sigma}\succ0$
+since $\Sigma\succ0$). Then $\left(\sqrt{X}\right)^{-1}$ exists
+and hence 
+\[
+\sqrt{X}\left(\left(I+t\right)\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\sqrt{X}=X+tD
+\]
+and so $g\left(t\right)=-\log\left(\det\left(X+tD\right)\right)=f\left(X+tD\right)$.
+\end{proof}
+\item Claim: $f\left(X\right)$ is convex.
+
+\begin{proof}
+Using the representation of $g$ proven to be appropriate in part
+(a) 
+\begin{align*}
+g\left(t\right) & =-\log\left(\det\left(\sqrt{X}\right)\det\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\det\left(\sqrt{X}\right)\right)\\
+ & =-\log\left(\det\left(X\right)\right)-\log\left(\det\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\right)
+\end{align*}
+Let $Y=\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}$, which
+is PSD since $D$ is PSD and $\left(\sqrt{X}\right)^{-1}$ is PD,
+and 
+\begin{align*}
+g\left(t\right) & =-\log\left(\det\left(X\right)\right)-\log\left(\det\left(I+tY\right)\right)\\
+ & =-\log\left(\det\left(X\right)\right)-\log\left(\prod_{i=1}^{n}\left(1+t\lambda_{i}\right)\right)\\
+ & =-\log\left(\det\left(X\right)\right)-\sum_{i=1}^{n}\log\left(1+t\lambda_{i}\right)
+\end{align*}
+Note $g$ is convex in $t$ since it's the sum of a constant and convex
+functions of linear transformations of $t$. Therefore $f\left(X\right)$
+is convex since it is convex on every line.
+\end{proof}
+\end{enumerate}
+\item Claim: Let $c\sim\mathcal{N}\left(\mu,\Sigma\right)$. Then assuming
+there exists $x$ such that $P\left(c^{\intercal}x\geq\alpha\right)\geq\frac{1}{2}$
+\begin{align*}
+\max_{x\in\mathbb{R}^{n}} & P\left(c^{\intercal}x\geq\alpha\right)\\
+\text{s.t.} & Fx\leq g\\
+ & Ax=b
+\end{align*}
+can be reformulated as a quadratic convex optimization problem.
+
+\begin{proof}
+Firstly since $c\sim\mathcal{N}\left(\mu,\Sigma\right)$ it's the
+case that $X=c^{\intercal}x\sim\mathcal{N}\left(\mu\cdot x,x^{\intercal}\Sigma x\right)$
+and hence
+\[
+P\left(X\geq\alpha\right)=P\left(\frac{X-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\geq\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\right)=P\left(Z\geq\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\right)
+\]
+ where $Z\sim\mathcal{N}\left(0,1\right)$. So the maximization problem
+is 
+\[
+\max_{x}\left[P\left(Z\geq\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\right)\right]
+\]
+Clearly maximizing this objective is equivalent to minimizing $\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}$.
+The fact that there exists $x_{0}$ such that 
+\[
+P\left(c^{\intercal}x_{0}\geq\alpha\right)\geq\frac{1}{2}
+\]
+means there exists $x_{0}$ such that 
+\[
+P\left(Z\geq\frac{\alpha-\mu\cdot x_{0}}{\sqrt{x_{0}^{\intercal}\Sigma x_{0}}}\right)\geq\frac{1}{2}
+\]
+and so there exists $x_{0}$ such that 
+\[
+\frac{\alpha-\mu\cdot x_{0}}{\sqrt{x_{0}^{\intercal}\Sigma x_{0}}}\leq0
+\]
+or 
+\[
+\alpha-\mu\cdot x_{0}\leq0
+\]
+So the problem now is 
+\begin{align*}
+\min_{x\in\mathbb{R}^{n}} & \frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\\
+\text{s.t.} & Fx\leq g\\
+ & Ax=b
+\end{align*}
+Let $z=\frac{1}{\sqrt{x^{\intercal}\Sigma x}}$ and $y=\frac{x}{\sqrt{x^{\intercal}\Sigma x}}$.
+Then the minimization problem is
+\begin{align*}
+\min_{\left(z,y\right)\in\mathbb{R}^{n}} & \alpha z-\mu\cdot y\\
+\text{s.t.} & Fx\leq g\\
+ & Ax=b
+\end{align*}
+\end{proof}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,801 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+\usepackage{xfrac}
+%\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+ESI 6420 Homework 4 Solutions
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Time spent: 15 hours
+\end_layout
+
+\begin_layout Standard
+Collaborators: Chris Gianelli
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.1]
+\end_layout
+
+\end_inset
+
+Claim: for a continuous 
+\begin_inset Formula $f\,:\,\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $h>0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f_{h}\left(x\right)\coloneqq\frac{1}{2h}\int_{x-h}^{x+h}f\left(t\right)dt\geq f\left(x\right)
+\]
+
+\end_inset
+
+iff 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
+ Proceed by contradiction: suppose there exist 
+\begin_inset Formula $h_{0},x_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(x_{0}\right)>f_{h_{0}}\left(x_{0}\right)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex there exists 
+\begin_inset Formula $g\left(x\right)=f\left(x_{0}\right)+m\left(x-x_{0}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $g\leq f$
+\end_inset
+
+.
+ But then 
+\begin_inset Formula 
+\[
+f\left(x_{0}\right)=\frac{1}{2h}\int_{x_{0}-h_{0}}^{x_{0}+h_{0}}g\left(t\right)dt\leq\frac{1}{2h}\int_{x_{0}-h_{0}}^{x_{0}+h_{0}}f\left(t\right)dt=f_{h_{0}}\left(x_{0}\right)
+\]
+
+\end_inset
+
+a contradiction.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f_{h}\left(x\right)\geq f\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $h,x$
+\end_inset
+
+.
+ Towards a contradiction suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is not convex.
+ Then there exist 
+\begin_inset Formula $\lambda_{0},x_{1},x_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f\left(\lambda_{0}x_{1}+\left(1-\lambda_{0}\right)x_{2}\right)>\lambda_{0}f\left(x_{1}\right)+\left(1-\lambda_{0}\right)f\left(x_{2}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda_{0}\in\left(0,1\right)$
+\end_inset
+
+.
+ Consider the function 
+\begin_inset Formula 
+\[
+F\left(\lambda\right)=f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)-\left(\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\right)
+\]
+
+\end_inset
+
+on 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $F\left(0\right)=F\left(1\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $F\left(\lambda_{0}\right)>0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $F$
+\end_inset
+
+ is continuous, being a linear function of 
+\begin_inset Formula $f$
+\end_inset
+
+, it must achieve a maximum 
+\begin_inset Formula $F\left(\lambda^{*}\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ (by the extreme value theorem) and 
+\begin_inset Formula $F\left(\lambda^{*}\right)>0$
+\end_inset
+
+ (since 
+\begin_inset Formula $F\left(\lambda_{0}\right)>0$
+\end_inset
+
+).
+ Therefore there exists an 
+\begin_inset Formula $h$
+\end_inset
+
+-ball around 
+\begin_inset Formula $\lambda^{*}$
+\end_inset
+
+ such that for 
+\begin_inset Formula $\lambda\in\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $F\left(\lambda\right)>0$
+\end_inset
+
+ and without loss of generality 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Why? If 
+\begin_inset Formula $F$
+\end_inset
+
+ is in fact constant on 
+\begin_inset Formula $\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+ then we can take the minimum 
+\begin_inset Formula $h'>h$
+\end_inset
+
+ such that either 
+\begin_inset Formula $\lambda^{*}-h'=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\lambda^{*}+h'=1$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ cannot be constant on 
+\begin_inset Formula $\left[\lambda^{*}-h',\lambda^{*}+h'\right]$
+\end_inset
+
+.
+ This is since, depending on whether 
+\begin_inset Formula $h'$
+\end_inset
+
+ is such that 
+\begin_inset Formula $\lambda^{*}-h'=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\lambda^{*}+h'=1$
+\end_inset
+
+, either 
+\begin_inset Formula $F\left(\lambda^{*}-h'\right)=F\left(0\right)=0$
+\end_inset
+
+ or 
+\begin_inset Formula $F\left(\lambda^{*}+h'\right)=F\left(1\right)=0$
+\end_inset
+
+ (and 
+\begin_inset Formula $F$
+\end_inset
+
+ cannot equal zero on all 
+\begin_inset Formula $\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+ since 
+\begin_inset Formula $F\left(\lambda_{0}\right)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ is continuous).
+\end_layout
+
+\end_inset
+
+we can assume 
+\begin_inset Formula $F$
+\end_inset
+
+ is not constant on 
+\begin_inset Formula $\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $F\left(\lambda^{*}\right)\geq F\left(\lambda\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\in\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $F\left(\lambda^{*}\right)>F\left(\lambda\right)$
+\end_inset
+
+ for at least one 
+\begin_inset Formula $\lambda\in\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+ (otherwise 
+\begin_inset Formula $F$
+\end_inset
+
+ would be constant on 
+\begin_inset Formula $\left[\lambda^{*}-h,\lambda^{*}+h\right]$
+\end_inset
+
+) we have that 
+\begin_inset Formula 
+\[
+2hF\left(\lambda^{*}\right)>\int_{\lambda^{*}-h}^{\lambda^{*}+h}F\left(\lambda\right)d\lambda
+\]
+
+\end_inset
+
+which is equivalent to 
+\begin_inset Formula 
+\begin{align*}
+f\left(\lambda^{*}x_{1}+\left(1-\lambda^{*}\right)x_{2}\right)-\\
+\left(\lambda^{*}f\left(x_{1}\right)+\left(1-\lambda^{*}\right)f\left(x_{2}\right)\right) & >\frac{1}{2h}\int_{\lambda^{*}-h}^{\lambda^{*}+h}\left[f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)-\left(\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\right)\right]d\lambda\\
+ & =\frac{1}{2h'}\int_{\lambda^{*}-h}^{\lambda^{*}+h}f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)d\lambda-\left(\lambda^{*}f\left(x_{1}\right)+\left(1-\lambda^{*}\right)f\left(x_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+Cancelling 
+\begin_inset Formula $-\left(\lambda^{*}f\left(x_{1}\right)+\left(1-\lambda^{*}\right)f\left(x_{2}\right)\right)$
+\end_inset
+
+ from both sides of the inequality we get that 
+\begin_inset Formula 
+\begin{align*}
+f\left(\lambda^{*}x_{1}+\left(1-\lambda^{*}\right)x_{2}\right) & >\frac{1}{2h}\int_{\lambda^{*}-h}^{\lambda^{*}+h}f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)d\lambda=f_{h'}\left(\lambda^{*}x_{1}+\left(1-\lambda^{*}\right)x_{2}\right)
+\end{align*}
+
+\end_inset
+
+contradicting that 
+\begin_inset Formula $f\left(x\right)\leq f_{h}\left(x\right)$
+\end_inset
+
+ for all.
+ Hence 
+\begin_inset Formula $f$
+\end_inset
+
+ must be convex.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[2.2]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $f\left(X\right)=-\log\left(\det\left(X\right)\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Claim: For 
+\begin_inset Formula $X,D\succeq0$
+\end_inset
+
+ and 
+\begin_inset Formula $X\succ0$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(t\right)=f\left(X+tD\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula 
+\[
+g\left(t\right)=-\log\left(\det\left(\sqrt{X}\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\sqrt{X}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Firstly since 
+\begin_inset Formula $X\succ0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X$
+\end_inset
+
+ is full rank (all nonzero eigenvalues) and there exists a matrix 
+\begin_inset Formula $\sqrt{X}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sqrt{X}\sqrt{X}=X$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{X}$
+\end_inset
+
+ is full rank (
+\begin_inset Formula $\sqrt{X}=Q\sqrt{\Sigma}Q^{T}$
+\end_inset
+
+ where 
+\begin_inset Formula $Q$
+\end_inset
+
+ is the set of eigenvectors corresponding to 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{\Sigma}\succ0$
+\end_inset
+
+ since 
+\begin_inset Formula $\Sigma\succ0$
+\end_inset
+
+).
+ Then 
+\begin_inset Formula $\left(\sqrt{X}\right)^{-1}$
+\end_inset
+
+ exists and hence 
+\begin_inset Formula 
+\[
+\sqrt{X}\left(\left(I+t\right)\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\sqrt{X}=X+tD
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $g\left(t\right)=-\log\left(\det\left(X+tD\right)\right)=f\left(X+tD\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Claim: 
+\begin_inset Formula $f\left(X\right)$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Using the representation of 
+\begin_inset Formula $g$
+\end_inset
+
+ proven to be appropriate in part (a) 
+\begin_inset Formula 
+\begin{align*}
+g\left(t\right) & =-\log\left(\det\left(\sqrt{X}\right)\det\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\det\left(\sqrt{X}\right)\right)\\
+ & =-\log\left(\det\left(X\right)\right)-\log\left(\det\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\right)
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}$
+\end_inset
+
+, which is PSD since 
+\begin_inset Formula $D$
+\end_inset
+
+ is PSD and 
+\begin_inset Formula $\left(\sqrt{X}\right)^{-1}$
+\end_inset
+
+ is PD, and 
+\begin_inset Formula 
+\begin{align*}
+g\left(t\right) & =-\log\left(\det\left(X\right)\right)-\log\left(\det\left(I+tY\right)\right)\\
+ & =-\log\left(\det\left(X\right)\right)-\log\left(\prod_{i=1}^{n}\left(1+t\lambda_{i}\right)\right)\\
+ & =-\log\left(\det\left(X\right)\right)-\sum_{i=1}^{n}\log\left(1+t\lambda_{i}\right)
+\end{align*}
+
+\end_inset
+
+Note 
+\begin_inset Formula $g$
+\end_inset
+
+ is convex in 
+\begin_inset Formula $t$
+\end_inset
+
+ since it's the sum of a constant and convex functions of linear transformations
+ of 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $f\left(X\right)$
+\end_inset
+
+ is convex since it is convex on every line.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Claim: Let 
+\begin_inset Formula $c\sim\mathcal{N}\left(\mu,\Sigma\right)$
+\end_inset
+
+.
+ Then assuming there exists 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $P\left(c^{\intercal}x\geq\alpha\right)\geq\frac{1}{2}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\max_{x\in\mathbb{R}^{n}} & P\left(c^{\intercal}x\geq\alpha\right)\\
+\text{s.t.} & Fx\leq g\\
+ & Ax=b
+\end{align*}
+
+\end_inset
+
+can be reformulated as a quadratic convex optimization problem.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Firstly since 
+\begin_inset Formula $c\sim\mathcal{N}\left(\mu,\Sigma\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $X=c^{\intercal}x\sim\mathcal{N}\left(\mu\cdot x,x^{\intercal}\Sigma x\right)$
+\end_inset
+
+ and hence
+\begin_inset Formula 
+\[
+P\left(X\geq\alpha\right)=P\left(\frac{X-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\geq\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\right)=P\left(Z\geq\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\right)
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $Z\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+.
+ So the maximization problem is 
+\begin_inset Formula 
+\[
+\max_{x}\left[P\left(Z\geq\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\right)\right]
+\]
+
+\end_inset
+
+Clearly maximizing this objective is equivalent to minimizing 
+\begin_inset Formula $\frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}$
+\end_inset
+
+.
+ So the problem now is 
+\begin_inset Formula 
+\begin{align*}
+\min_{x\in\mathbb{R}^{n}} & \frac{\alpha-\mu\cdot x}{\sqrt{x^{\intercal}\Sigma x}}\\
+\text{s.t.} & Fx\preceq g\\
+ & Ax=b
+\end{align*}
+
+\end_inset
+
+Alternatively we can maximize the reciprocal of the objective and hence
+ solve the problem
+\begin_inset Formula 
+\begin{align*}
+\max_{x\in\mathbb{R}^{n}} & \frac{\sqrt{x^{\intercal}\Sigma x}}{\alpha-\mu\cdot x}\\
+\text{s.t.} & Fx\preceq g\\
+ & Ax=b
+\end{align*}
+
+\end_inset
+
+Alternatively (flipping the sign) 
+\begin_inset Formula 
+\begin{align*}
+\min_{x\in\mathbb{R}^{n}} & \frac{\sqrt{x^{\intercal}\Sigma x}}{\mu\cdot x-\alpha}\\
+\text{s.t.} & Fx\preceq g\\
+ & Ax=b
+\end{align*}
+
+\end_inset
+
+The fact that there exists 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+P\left(c^{\intercal}x_{0}\geq\alpha\right)\geq\frac{1}{2}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+P\left(Z\geq\frac{\alpha-\mu\cdot x_{0}}{\sqrt{x_{0}^{\intercal}\Sigma x_{0}}}\right)\geq\frac{1}{2}
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\[
+\frac{\alpha-\mu\cdot x_{0}}{\sqrt{x_{0}^{\intercal}\Sigma x_{0}}}\leq0
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\alpha-\mu\cdot x_{0}\leq0
+\]
+
+\end_inset
+
+implies 
+\begin_inset Formula 
+\[
+\left\{ x\big|Fx\preceq g,Ax=b,\mu\cdot x-\alpha\geq0\right\} \neq\emptyset
+\]
+
+\end_inset
+
+Hence let 
+\begin_inset Formula $t=\frac{1}{\alpha-\mu\cdot x}$
+\end_inset
+
+and 
+\begin_inset Formula $y=xt$
+\end_inset
+
+.
+ Then an equivalent problem is
+\begin_inset Formula 
+\begin{align*}
+\min_{x\in\mathbb{R}^{n}} & \sqrt{y^{\intercal}\Sigma y}\\
+\text{s.t.} & Fy\preceq gt\\
+ & Ay=bt\\
+ & \mu\cdot x-\alpha t=1\\
+ & t\geq0
+\end{align*}
+
+\end_inset
+
+Squaring the objective we get a convex program with a quadratic constraint.
+\end_layout
+
+\end_deeper
+\end_body
+\end_document

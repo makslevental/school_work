@@ -789,5 +789,483 @@ and if
 
 \end_layout
 
+\begin_layout Section
+Reductions
+\end_layout
+
+\begin_layout Enumerate
+Set splitting: problem statement is for a given set can you construct subsets
+ such that not all elements in the subset are colored the same.
+ To prove NP complete the reduction is from 3SAT: let the set be all of
+ the literals plus a dummy variable 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Then the subsets are all the literals in a clause plus 
+\begin_inset Formula $y$
+\end_inset
+
+ (in each such set) and sets with the literal and its negation.
+ Then If 3SAT has a satisfying assignment color all literals which are true
+ to be red and 
+\begin_inset Formula $y$
+\end_inset
+
+ to be blue.
+ Then if all literals in a clause are true there will be at least one blue
+ colored object.
+ Further the clauses that have just the variables can't be one color.
+ Conversely if there's a coloring then pick those variables to be true which
+ are opposite of the color of 
+\begin_inset Formula $y$
+\end_inset
+
+ generates a satisfying assignment (since there will be at least 1 and hence
+ each clause will be satisfied).
+\end_layout
+
+\begin_layout Enumerate
+Factoring in poly time if P=NP: Let 
+\begin_inset Formula $F=\left\{ \left\langle a,b,c\right\rangle \big|a=pq\wedge b\leq p\leq c\right\} $
+\end_inset
+
+.
+ If P=NP then the polynomial hierarchy collapses and 
+\begin_inset Formula $F$
+\end_inset
+
+ is somewhere in P.
+ Then we can just binary search from 
+\begin_inset Formula $b=1\leq p\leq c=a$
+\end_inset
+
+ to find a 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Generate a satisfying assignment for SAT if P=NP: alternatively choose 
+\begin_inset Formula $x_{i}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{i}=0$
+\end_inset
+
+ and check for satisfying assignment using polynomial time algo for SAT.
+\end_layout
+
+\begin_layout Enumerate
+MAXCLIQUE in polynomial time if P=NP: use clique iterating through numbers
+ 
+\begin_inset Formula $k=1,\dots,\left|V\right|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $U=\left\{ \left(M,x,1^{t}\right)\big|\text{M accepts x in time less than t}\right\} $
+\end_inset
+
+ is NP-complete.
+ 
+\begin_inset Formula $U$
+\end_inset
+
+ is in NP because we can use an NTM to simulate 
+\begin_inset Formula $M$
+\end_inset
+
+ on 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $U$
+\end_inset
+
+ will be polynomial in its input because 
+\begin_inset Formula $1^{t}$
+\end_inset
+
+ padding pushes up the size of the input.
+ 
+\begin_inset Formula $U$
+\end_inset
+
+ is NP-hard because 3SAT reduces to it: let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an NTM that decides 3SAT in 
+\begin_inset Formula $cn^{k}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $U$
+\end_inset
+
+ decides 
+\begin_inset Formula $\left(M,\phi,1^{c\left|\phi\right|^{k}}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Puzzle: reduce 3SAT to it: let there be 2 columns with number of rows equal
+ to number of clauses.
+ 1 punch card for each variable.
+ Then punch out those holes where 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ nor 
+\begin_inset Formula $\overline{x_{i}}$
+\end_inset
+
+ is not in the clause and leaves not punched out rows in column 1 where
+ 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ appears and rows in column 2 where 
+\begin_inset Formula $\overline{x_{i}}$
+\end_inset
+
+ appears.
+ Also add a card with column two completely filled and column 1 completely
+ empty.
+ Then a satisfying assignment solves the puzzle with the hack card left
+ anywhere and if there's a solution to the puzzle just flip the deck of
+ cards so that the hack card lies on the right hand side and assign true
+ to the values that appear not punched out in the other column.
+\end_layout
+
+\begin_layout Enumerate
+MODEXP is in P: use repeated squaring to test
+\end_layout
+
+\begin_layout Enumerate
+P is closed under star: use the DP algorithm that checks characters 
+\begin_inset Formula $w_{1}\cdots w_{n}$
+\end_inset
+
+ by checking for 
+\begin_inset Formula $w_{i}\cdots w_{j}$
+\end_inset
+
+ being in the language (while iterating through all possible choices of
+ break and word length).
+\end_layout
+
+\begin_layout Enumerate
+NP is closed under star: the NTM can just guess the number of substrings
+ and where to split and check in original language.
+\end_layout
+
+\begin_layout Enumerate
+SUBSETSUM: the dumb dp algorithm is to construct all sums: let 
+\begin_inset Formula $L_{i}$
+\end_inset
+
+ be the set of possible sums made from 
+\begin_inset Formula $i$
+\end_inset
+
+ elements.
+ Then 
+\begin_inset Formula $L_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{i}=L_{i-1}\cup\left\{ a+x_{i}\big|a\in L_{i-1}\right\} $
+\end_inset
+
+.
+ Then check iterate through and look.
+ The fast algorithm is construct a table 
+\begin_inset Formula $Q\left(i,s\right)$
+\end_inset
+
+ which is boolean for whether there's a subset in the first 
+\begin_inset Formula $i$
+\end_inset
+
+ elements that sums to 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+Q\left(i,s\right)=Q\left(i-1,s\right)\vee\left(x_{i}==s\right)\vee Q\left(i-1,s-x_{i}\right)
+\]
+
+\end_inset
+
+Note that at any point you can set entries to zero if 
+\begin_inset Formula $s<A$
+\end_inset
+
+ or 
+\begin_inset Formula $s>B$
+\end_inset
+
+ where 
+\begin_inset Formula $A$
+\end_inset
+
+ is the sum of all the negative numbers and 
+\begin_inset Formula $B$
+\end_inset
+
+ is the sum of the positive numbers.
+ Runs in 
+\begin_inset Formula $O\left(tN\right)$
+\end_inset
+
+ time.
+\end_layout
+
+\begin_layout Enumerate
+SPATH: shortest path: use dijkstra's using min priority queue (based on
+ fib heap) which has running time 
+\begin_inset Formula $O\left(\left|E\right|+\left|V\right|\log\left|V\right|\right)$
+\end_inset
+
+ (update the distance in the min priority queue of all neighbors of currently
+ being explored node).
+\end_layout
+
+\begin_layout Enumerate
+LPATH: NP-complete by asking if there's a path that includes 
+\begin_inset Formula $k$
+\end_inset
+
+ vertices (because that's a hamiltonian cycle) since LPATH is about simple
+ paths.
+\end_layout
+
+\begin_layout Enumerate
+3SAT 
+\begin_inset Formula $\leq_{m}^{p}$
+\end_inset
+
+ Clique: each literal is a node and edges connect all pairs of nodes in
+ different clusters (except a variable to its negation).
+ Then a 
+\begin_inset Formula $k$
+\end_inset
+
+ clique where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the number of clauses is a satisfying assignment.
+\end_layout
+
+\begin_layout Enumerate
+Vertex-cover 
+\begin_inset Formula $\leq_{m}^{p}$
+\end_inset
+
+ clique by looking at the complement graph: 
+\begin_inset Formula $\left(v,u\right)\in E'$
+\end_inset
+
+ iff 
+\begin_inset Formula $\left(v,u\right)\notin E$
+\end_inset
+
+.
+ If there's a clique in 
+\begin_inset Formula $E$
+\end_inset
+
+ of size 
+\begin_inset Formula $k$
+\end_inset
+
+ the there's a vertex cover of size 
+\begin_inset Formula $\left|V\right|-k$
+\end_inset
+
+ in 
+\begin_inset Formula $G'$
+\end_inset
+
+.
+ and vice versa.
+\end_layout
+
+\begin_layout Enumerate
+Vertex-cover 
+\begin_inset Formula $\leq_{m}^{p}$
+\end_inset
+
+ dominating set: add triangle that associates spurious node with edge.
+\end_layout
+
+\begin_layout Enumerate
+Connected: in P by using BFS and scanning afterward to see if all nodes
+ visited.
+\end_layout
+
+\begin_layout Enumerate
+3 Clique: try all triplets of vertices checking for edges: 
+\begin_inset Formula ${m \choose 3}=\frac{m!}{3!\left(m-3\right)!}\approx m^{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+ISOMORPHISM is in NP by checking whether hte permutation is such that 
+\begin_inset Formula $\left(x,y\right)\in E$
+\end_inset
+
+ iff 
+\begin_inset Formula $\left(\pi\left(x\right),\pi\left(y\right)\right)\in E'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+DOUBLESAT: take on 
+\begin_inset Formula $\phi\wedge\left(x\vee\bar{x}\right)$
+\end_inset
+
+ then there are two satisfying assignments.
+\end_layout
+
+\begin_layout Enumerate
+PERMUTATION: use repeated squaring.
+\end_layout
+
+\begin_layout Enumerate
+HALF-CLIQUE: if 
+\begin_inset Formula $k=m/2$
+\end_inset
+
+ then just pass to half clique.
+ If 
+\begin_inset Formula $k<m/2$
+\end_inset
+
+ then add a complete graph (with edges to every vertex) of 
+\begin_inset Formula $\left(m-2k\right)$
+\end_inset
+
+ vertices.
+ Then if a 
+\begin_inset Formula $k$
+\end_inset
+
+ clique exists it's a half clique because 
+\begin_inset Formula $k+\left(m-2k\right)=m-k=\frac{2\left(m-k\right)}{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $2m-2k$
+\end_inset
+
+ is the total number of vertices.
+ If 
+\begin_inset Formula $k>m/2$
+\end_inset
+
+ then add a complete graph with 
+\begin_inset Formula $2k-m$
+\end_inset
+
+ edges.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\neq$
+\end_inset
+
+assignment: reduce from 3SAT 
+\begin_inset Formula $\left(y_{1}\vee y_{2}\vee y_{3}\right)\rightarrow\left(y_{1}\vee y_{2}\vee z_{i}\right)\wedge\left(\bar{z}_{i}\vee y_{3}\vee b\right)$
+\end_inset
+
+.
+ Since any satisfying assignment of neq sat can be negated to produce another
+ one we can select 
+\begin_inset Formula $b=0$
+\end_inset
+
+ (just flip).
+\end_layout
+
+\begin_layout Enumerate
+Poly with integer root is NP-hard: reduce from 3SAT: create polynomials
+ simulating the boolean formula with 
+\begin_inset Formula $x_{i}=x_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{x_{i}}=1-x_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{i}\wedge x_{j}=x_{i}x_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{i}\vee x_{j}=\left(1-\left(1-x_{i}\right)\left(1-x_{j}\right)\right)$
+\end_inset
+
+.
+ But enforce integer roots with 
+\begin_inset Formula $r=\left(x_{1}\left(1-x_{i}\right)\right)^{2}\cdots\left(x_{n}\left(1-x_{n}\right)\right)^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+2CNF: 
+\begin_inset Formula $\left(x\vee y\right)\iff\left(\bar{x}\Rightarrow y\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\bar{y}\Rightarrow x\right)$
+\end_inset
+
+.
+ Then look for cycles that include 
+\begin_inset Formula $\bar{x}\Rightarrow x\Rightarrow\bar{x}$
+\end_inset
+
+.
+ To construct a satisfying assignment look for 
+\begin_inset Formula $x\Rightarrow\bar{x}$
+\end_inset
+
+.
+ If exists then set 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ to true.
+ Otherwise set 
+\begin_inset Formula $x$
+\end_inset
+
+ to true.
+ set all other implications true.
+ Then repeat.
+\end_layout
+
 \end_body
 \end_document
