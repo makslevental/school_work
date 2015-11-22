@@ -1,0 +1,1266 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+
+%
+\usepackage{amsfonts}
+%\usepackage{mathabx}
+\usepackage{nopageno}%%%  The following few lines affect the margin sizes. 
+\usepackage{bm}
+\addtolength{\topmargin}{-.5in}
+\setlength{\textwidth}{6in}       
+\setlength{\oddsidemargin}{.25in}              
+\setlength{\evensidemargin}{.25in}         
+  
+\setlength{\textheight}{9in}
+\renewcommand{\baselinestretch}{1}
+\reversemarginpar   
+%
+%
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 2
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Convex Sets
+\end_layout
+
+\begin_layout Enumerate
+The set of optima for a min LP is a convex set (just use linearity of the
+ matrix defining the constraints, i.e.
+ since 
+\begin_inset Formula $Ax\preceq b$
+\end_inset
+
+ defines the polyhedron).
+\end_layout
+
+\begin_layout Enumerate
+Intersection, Minkowski sum, Minkowski difference, preserve convexity of
+ sets.
+\end_layout
+
+\begin_layout Enumerate
+Caratheodory's theorem: for a convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ any point can be expressed as a convex combination of at most 
+\begin_inset Formula $n+1$
+\end_inset
+
+ points (prove using linear independence of differences between points).
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $S$
+\end_inset
+
+ a convex set with non-empty interior, 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in the closure of 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ in the interior then the 
+\begin_inset Quotes eld
+\end_inset
+
+weak
+\begin_inset Quotes erd
+\end_inset
+
+ convex combination, i.e.
+ (
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+) is always in the interior.
+\end_layout
+
+\begin_layout Enumerate
+The interior of a convex set is convex and if the interior is non-empty
+ then so is the closure.
+\end_layout
+
+\begin_layout Enumerate
+For a convex set with non-empty interior 
+\begin_inset Formula $cl\left(int\left(S\right)\right)=cl\left(S\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $int\left(cl\left(S\right)\right)=int\left(S\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Hyperplanes
+\end_layout
+
+\begin_layout Enumerate
+Projection theorem: for any closed convex set 
+\begin_inset Formula $S$
+\end_inset
+
+ and for any point not in the convex set 
+\begin_inset Formula $y$
+\end_inset
+
+ there exists a projection 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ of 
+\begin_inset Formula $y$
+\end_inset
+
+ onto 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is such that 
+\begin_inset Formula $\left(y-\bar{x}\right)^{\intercal}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+, i.e.
+ the plane defined by 
+\begin_inset Formula $\left(y-\bar{x}\right)$
+\end_inset
+
+ separates 
+\begin_inset Formula $S$
+\end_inset
+
+ from 
+\begin_inset Formula $y$
+\end_inset
+
+.
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename projection_hyperplane.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Projection theorem
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+We seek to minimize 
+\begin_inset Formula $\left\Vert x-y\right\Vert $
+\end_inset
+
+ over 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ This is equivalent to minimizing over the set
+\begin_inset Formula 
+\[
+\left\{ x\big|\left\Vert x-y\right\Vert \leq\left\Vert x-w\right\Vert \right\} 
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $w\in S$
+\end_inset
+
+.
+ Why? Because 
+\begin_inset Formula $\left\{ x\big|\left\Vert x-y\right\Vert \leq\left\Vert x-w\right\Vert \right\} \subset S$
+\end_inset
+
+ and the 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ that minimizes 
+\begin_inset Formula $\left\Vert x-y\right\Vert $
+\end_inset
+
+ is definitely in it (since it's smaller than all 
+\begin_inset Formula $\left\Vert x-y\right\Vert $
+\end_inset
+
+).
+ This is a bounded closed set (since 
+\begin_inset Formula $S$
+\end_inset
+
+ is closed) and norms are continuous and so by extreme value theorem there
+ exists a minimum.
+ 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is unique: suppose there exist two such points 
+\begin_inset Formula $\bar{x}_{1},\bar{x}_{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+0 & <\left\Vert \left(\bar{x}_{1}-y\right)-\left(\bar{x}_{2}-y\right)\right\Vert ^{2}\\
+ & =2\left\Vert \bar{x}_{1}-y\right\Vert ^{2}+2\left\Vert \bar{x}_{2}-y\right\Vert ^{2}-4\left\Vert \frac{1}{2}\left[\left(\bar{x}_{1}-y\right)-\left(\bar{x}_{2}-y\right)\right]\right\Vert ^{2}\\
+ & =2\left\Vert \bar{x}_{1}-y\right\Vert ^{2}+2\left\Vert \bar{x}_{2}-y\right\Vert ^{2}-4\left\Vert \frac{\left(\bar{x}_{1}+\bar{x}_{2}\right)}{2}-y\right\Vert ^{2}\\
+ & =2\left\Vert \bar{x}_{1}-y\right\Vert ^{2}+2\left\Vert \bar{x}_{2}-y\right\Vert ^{2}-4\left\Vert \hat{x}-y\right\Vert ^{2}
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\left\Vert \bar{x}_{1}-y\right\Vert =\left\Vert \bar{x}_{2}-y\right\Vert =s$
+\end_inset
+
+ rearranging we have 
+\begin_inset Formula $\left\Vert \hat{x}-y\right\Vert <s$
+\end_inset
+
+ contradicting that 
+\begin_inset Formula $x_{1},x_{2}$
+\end_inset
+
+ are minimal projections.
+ 
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be the column space of some matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $y\notin S$
+\end_inset
+
+.
+ Then for the projection 
+\begin_inset Formula $\bar{z}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left(y-\bar{z}\right)\perp z$
+\end_inset
+
+ for all 
+\begin_inset Formula $z\in col\left(A\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{\intercal}\bar{z}=A^{\intercal}y$
+\end_inset
+
+ (i.e.
+ the projection is the perpendicular projector).
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+Least squares.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Improper separation
+\series default
+ is when possibly both sets are in the the separating hyperplane.
+ 
+\series bold
+Proper separation
+\series default
+ is when the union of the two sets isn't contained in the separating hyperplane.
+ 
+\series bold
+Strict separation 
+\series default
+is when the convex sets don't intersect the separating hyperplane (but their
+ closures might).
+ 
+\series bold
+Strong separation
+\series default
+ is when there's 
+\begin_inset Quotes eld
+\end_inset
+
+fat
+\begin_inset Quotes erd
+\end_inset
+
+ in between the sets and the hyperplane.
+\end_layout
+
+\begin_layout Enumerate
+Point-to-set separation: for any non-empty closed convex set 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $y\notin S$
+\end_inset
+
+ there's a separating hyperplane.
+ Proof: use the projection theorem to find the projection.
+ Keep in mind the obtuseness (
+\begin_inset Formula $\left(y-\bar{x}\right)^{\intercal}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ says that every vector from 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ to 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is obtuse to the normal vector to the separating hyperplane 
+\begin_inset Formula $p=y-\bar{x}$
+\end_inset
+
+).
+\end_layout
+
+\begin_deeper
+\begin_layout Corollary*
+Every closed convex set is the intersection of halfspaces (take all the
+ separation hyperplanes and intersection the half spaces that the set is
+ in).
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be nonempty and 
+\begin_inset Formula $y$
+\end_inset
+
+ not in the closure of the convex hull of 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Then you can stronly separate.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Farkas' lemma: exactly one of the two following systems has a solution
+\begin_inset Formula 
+\begin{align*}
+x\text{ s.t. } & Ax\preceq0\text{ and }c^{\intercal}x>0\\
+y\text{ s.t. } & A^{\intercal}y=c\text{ and }y\succeq0
+\end{align*}
+
+\end_inset
+
+The intuition here is if the columns of 
+\begin_inset Formula $A^{\intercal}$
+\end_inset
+
+ by 
+\begin_inset Formula $a_{1},\dots,a_{m}$
+\end_inset
+
+ the second system has a solution iff 
+\begin_inset Formula $c$
+\end_inset
+
+ lies in the conic cone??? of 
+\begin_inset Formula $a_{1},\dots,a_{m}$
+\end_inset
+
+.
+ Apparently a convex cone is a cone closed under conic combinations and
+ a cone is any set closed under positive scalings.
+ If 
+\begin_inset Formula $c$
+\end_inset
+
+ doesn't lie in the cone then the polyhedral convex cone
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Why is this a polyhedral cone? Well 
+\begin_inset Formula $x$
+\end_inset
+
+ that satisfies 
+\begin_inset Formula $Ax\preceq b$
+\end_inset
+
+ is the intersection of half-spaces (think hyperplanes defined by the rows
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+).
+ If 
+\begin_inset Formula $b=0$
+\end_inset
+
+ then all of those halfspaces go through the origin.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $Ax\preceq0$
+\end_inset
+
+ and the halfspace 
+\begin_inset Formula $c^{\intercal}x>0$
+\end_inset
+
+ have a nonempty intersection.
+ Note that cone defined by this system is actually the polar of the vectors
+ themselves (since these vectors actually define the 
+\series bold
+normals
+\series default
+ to the plane).
+ This is basically all about polar cones.
+ Either a vector is in the convex cone or there exists a vector in the polar
+ cone that makes an accute angle with it (though not necessarily in the
+ polar cone).
+ 
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename farkas.jpg
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Farkas lemma
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Suppose system 2 has a solution, i.e.
+ 
+\begin_inset Formula $c$
+\end_inset
+
+ is in the polar cone of the rows of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then there exists 
+\begin_inset Formula $y\succeq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $A^{\intercal}y=c$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x$
+\end_inset
+
+ be in the other cone, i.e.
+ 
+\begin_inset Formula $Ax\preceq0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $c^{\intercal}x=y^{\intercal}Ax\preceq0$
+\end_inset
+
+ (since 
+\begin_inset Formula $y\succeq0$
+\end_inset
+
+ times 
+\begin_inset Formula $Ax\preceq0$
+\end_inset
+
+ is 
+\begin_inset Formula $\preceq0$
+\end_inset
+
+).
+ Hence system 1 has no solution.
+ 
+\end_layout
+
+\begin_layout Proof
+Suppose system 2 doesn't have a solution.
+ I.e.
+ 
+\begin_inset Formula $c$
+\end_inset
+
+ doesn't lie in the convex cone of the rows of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $S=\left\{ x\big|x=A^{\intercal}y,y\succeq0\right\} $
+\end_inset
+
+ i.e.
+ the convex cone.
+ 
+\begin_inset Formula $S$
+\end_inset
+
+ is closed convex set and 
+\begin_inset Formula $c\notin S$
+\end_inset
+
+.
+ By point set separation there exists a vector 
+\begin_inset Formula $p$
+\end_inset
+
+ and scalar 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ such that 
+\begin_inset Formula $p^{\intercal}c>\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{\intercal}x\leq\alpha$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ (
+\begin_inset Formula $p$
+\end_inset
+
+ is the projection vector from 
+\begin_inset Formula $S$
+\end_inset
+
+ to 
+\begin_inset Formula $c$
+\end_inset
+
+ and all this says is that there's a plane defined by the normal vector
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ that separates 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $S$
+\end_inset
+
+ with 
+\begin_inset Formula $S$
+\end_inset
+
+ on the 
+\begin_inset Quotes eld
+\end_inset
+
+negative
+\begin_inset Quotes erd
+\end_inset
+
+ side of that plane.
+ Since 
+\begin_inset Formula $0\in S$
+\end_inset
+
+ (since we're talking about a convex cone, 
+\begin_inset Formula $y=0$
+\end_inset
+
+) 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+ (just take one of the faces of 
+\begin_inset Formula $S$
+\end_inset
+
+) so 
+\begin_inset Formula $p^{\intercal}c>0$
+\end_inset
+
+.
+ Also 
+\begin_inset Formula $\alpha\geq p^{\intercal}A^{\intercal}y=y^{\intercal}Ap$
+\end_inset
+
+ (because 
+\begin_inset Formula $x=A^{\intercal}y$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\geq p^{\intercal}x$
+\end_inset
+
+) for all 
+\begin_inset Formula $y\succeq0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $y$
+\end_inset
+
+ can be made arbitrarily large the last inequality implies that's really
+ negative is 
+\begin_inset Formula $Ap$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $Ap\preceq0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $p$
+\end_inset
+
+ is a vector such that 
+\begin_inset Formula $Ap\preceq0$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{\intercal}c=c^{\intercal}p<0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+Gordan's theorem
+\begin_inset Formula 
+\begin{align*}
+\left\{ x\big|Ax\prec0\right\}  & =\emptyset\\
+ & \iff\\
+\left\{ y\big|A^{\intercal}y=0,y\succ0\right\}  & =\emptyset
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Note 
+\begin_inset Formula $Ax\prec0$
+\end_inset
+
+ iff 
+\begin_inset Formula $A\mathbf{x}+\mathbf{e}s\preceq0$
+\end_inset
+
+ which is equivalent to 
+\begin_inset Formula 
+\[
+\left[A\,\mathbf{e}\right]\begin{bmatrix}\mathbf{x}\\
+s
+\end{bmatrix}\preceq0\quad\left(0,\dots,0,1\right)\begin{bmatrix}\mathbf{x}\\
+s
+\end{bmatrix}\succ0
+\]
+
+\end_inset
+
+By Farkas' lemma the associated system is 
+\begin_inset Formula 
+\[
+\begin{bmatrix}A^{\intercal}\\
+\mathbf{e}^{\intercal}
+\end{bmatrix}y=\left(0,\dots,0,1\right)\,y\succeq0
+\]
+
+\end_inset
+
+I.e.
+ 
+\begin_inset Formula $A^{\intercal}y=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{e}^{\intercal}y=1$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $y\neq0$
+\end_inset
+
+.
+ By Farkas' lemma these two systems are alternative systems.
+\end_layout
+
+\begin_layout Corollary*
+Another form of Farkas' lemma
+\begin_inset Formula 
+\begin{align*}
+\left\{ x\big|Ax\succeq b\right\}  & =\emptyset\\
+ & \iff\\
+\left\{ y\big|A^{\intercal}y=0,b^{\intercal}y\succ0\right\}  & =\emptyset
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Duality of LPs.
+ Consider the primary system 
+\begin_inset Formula 
+\begin{align*}
+\max & 2x_{1}+3x_{2}\\
+\text{s.t} & 4x_{1}+8x_{2}\leq12\\
+ & 2x_{1}+x_{2}\leq3\\
+ & 3x_{1}+2x_{2}\leq4\\
+ & x_{1},x_{2}\geq0
+\end{align*}
+
+\end_inset
+
+Consider solving the problem by successively bounding it from above.
+ Note that since 
+\begin_inset Formula 
+\[
+2x_{1}+3x_{2}\leq4x_{1}+8x_{2}\leq12
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\max\left(2x_{1}+3x_{2}\right)\leq12$
+\end_inset
+
+.
+ Similarly 
+\begin_inset Formula 
+\[
+2x_{1}+3x_{2}\leq\frac{1}{2}\left(4x_{1}+8x_{2}\right)\leq6
+\]
+
+\end_inset
+
+or even more creatively
+\begin_inset Formula 
+\[
+2x_{1}+3x_{2}\leq\frac{1}{3}\left(4x_{1}+8x_{2}\right)+\left(2x_{1}+x_{2}\right)\leq5
+\]
+
+\end_inset
+
+So basically the game is equating coefficients.
+ You can see that if we let 
+\begin_inset Formula $y_{1},y_{2},y_{3}$
+\end_inset
+
+ be the linear combination coefficents and enforce that after equating the
+ coeffients they don't fall below 
+\begin_inset Formula $2$
+\end_inset
+
+ for 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $3$
+\end_inset
+
+ for 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+2x_{1}+3x_{2}\leq y_{1}\left(4x_{1}+8x_{2}\right)+y_{2}\left(2x_{1}+x_{2}\right)+y_{3}\left(3x_{1}+2x_{2}\right)\leq y_{1}12+y_{2}3+y_{3}4
+\]
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\begin{align*}
+4y_{1}+2y_{2}+3y_{3} & \geq2\\
+8y_{1}+y_{2}+2y_{3} & \geq3\\
+y_{1},y_{2},y_{3} & \geq0
+\end{align*}
+
+\end_inset
+
+and we minimize 
+\begin_inset Formula $12y_{1}+3y_{2}+4y_{3}$
+\end_inset
+
+ we should get a tight upper bound on the object of the original problem.
+ This is obviously an LP as well (called the dual).
+ And you can go backwards as well.
+ In general we have the 
+\series bold
+primal
+\series default
+ 
+\begin_inset Formula 
+\begin{align*}
+\max_{x} & c^{\intercal}x\\
+\text{s.t} & Ax\preceq b\\
+ & x\succeq0
+\end{align*}
+
+\end_inset
+
+and the 
+\series bold
+dual
+\series default
+
+\begin_inset Formula 
+\begin{align*}
+\min_{y} & b^{\intercal}y\\
+\text{s.t} & A^{\intercal}y\succeq c\\
+ & y\succeq0
+\end{align*}
+
+\end_inset
+
+and what holds is that either both problems are infeasible, infeasible and
+ unbounded respectively (or vice versa) or both feasible and with optima
+ equal.
+ This is called 
+\series bold
+strong
+\series default
+ 
+\series bold
+duality
+\series default
+ in LPs.
+ On the way to proving that we need to prove 
+\series bold
+weak duality
+\series default
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem*
+Weak duality: for the primal solution 
+\begin_inset Formula $x$
+\end_inset
+
+ and dual problem solution 
+\begin_inset Formula $y$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+c^{\intercal}x\leq b^{\intercal}y
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+To wit
+\begin_inset Formula 
+\begin{align*}
+c^{\intercal}x & =x^{\intercal}c\\
+ & \leq x^{\intercal}\left(A^{\intercal}y\right)\text{ since \ensuremath{y}\text{ is feasible for the dual and }\ensuremath{x\succeq0}}\\
+ & =\left(Ax\right)^{\intercal}y\\
+ & \leq b^{\intercal}y\text{ since \ensuremath{x}\text{ is feasible for the primal and }\ensuremath{y\succeq0}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Strong duality for LPs.
+ We have to rewrite the dual and primal a little: primal
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t} & Ax\succeq b
+\end{align*}
+
+\end_inset
+
+and the dual
+\begin_inset Formula 
+\begin{align*}
+\max_{y} & b^{\intercal}y\\
+\text{s.t} & A^{\intercal}y=c\\
+ & y\succeq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Suppose the dual is feasible and its max is 
+\begin_inset Formula $\delta$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+P'=\left\{ x\big|Ax\succeq b,c^{\intercal}x\leq\delta\right\} 
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $P'$
+\end_inset
+
+ is nonempty then the primal must have a feasible solution with value at
+ most 
+\begin_inset Formula $\delta$
+\end_inset
+
+ (since 
+\begin_inset Formula $P'$
+\end_inset
+
+ is basically the reduced feasible region of the primal.
+ Note that 
+\begin_inset Formula $P'=\left\{ x\big|Ax\succeq b,-c^{\intercal}x\geq-\delta\right\} $
+\end_inset
+
+.
+ Towards a contradiction suppose 
+\begin_inset Formula $P'$
+\end_inset
+
+ is empty.
+ Then by Farkas' lemma (form 2) there exist 
+\begin_inset Formula $y,\lambda$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\begin{bmatrix}A^{\intercal}\\
+-c
+\end{bmatrix}\begin{pmatrix}y\\
+\lambda
+\end{pmatrix}=0\text{ and }\left(b,-\delta\right)^{\intercal}\begin{pmatrix}y\\
+\lambda
+\end{pmatrix}>0
+\]
+
+\end_inset
+
+This implies that 
+\begin_inset Formula $A^{\intercal}y-c\lambda=0$
+\end_inset
+
+ and 
+\begin_inset Formula $b^{\intercal}y-\lambda\delta>0$
+\end_inset
+
+.
+ There are two cases
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ then 
+\begin_inset Formula $A^{\intercal}y=0$
+\end_inset
+
+ and 
+\begin_inset Formula $b^{\intercal}y>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $z\succeq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $A^{\intercal}z=c$
+\end_inset
+
+ and 
+\begin_inset Formula $b^{\intercal}z=\delta$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+A^{\intercal}\left(z+\varepsilon y\right) & =0\\
+z+\varepsilon y & \succeq0\text{ since }y\succeq0\\
+b^{\intercal}\left(z+\varepsilon y\right) & =\delta+\varepsilon b^{\intercal}y>\delta
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $\left(z+\varepsilon y\right)$
+\end_inset
+
+ is a feasible solution of the dual with value greater than 
+\begin_inset Formula $\delta,$
+\end_inset
+
+ a contradiction.
+\end_layout
+
+\begin_layout Enumerate
+Otherwise scale 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ such that 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ (since both 
+\begin_inset Formula $y,\lambda$
+\end_inset
+
+ are nonegative) and so 
+\begin_inset Formula $A^{\intercal}y=c$
+\end_inset
+
+ and 
+\begin_inset Formula $b^{\intercal}y>\delta$
+\end_inset
+
+.
+ This means 
+\begin_inset Formula $y$
+\end_inset
+
+ is a solution of the dual with value greater than 
+\begin_inset Formula $\delta$
+\end_inset
+
+, a contradiction.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Therefore 
+\begin_inset Formula $P'$
+\end_inset
+
+ is feasible, so the primal is feasible with value at most 
+\begin_inset Formula $\delta$
+\end_inset
+
+.
+ By weak duality its value is at least 
+\begin_inset Formula $\delta$
+\end_inset
+
+.
+ Hence the primal solution and the dual solution are equal.
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
