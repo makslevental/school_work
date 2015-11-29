@@ -138,6 +138,130 @@ status open
 
 \begin_layout Plain Layout
 
+[1.1]
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $q=b-Ax$
+\end_inset
+
+ to simplify notation.
+ Then by LP duality if 
+\begin_inset Formula $\mathcal{P}\coloneqq\min_{y}\left\{ d^{\intercal}y\big|Dy\succeq q,y\succeq0\right\} $
+\end_inset
+
+ is infeasible for some 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ then the dual 
+\begin_inset Formula $\mathcal{D}\coloneqq\max_{u}\left\{ u^{\intercal}q\big|u^{\intercal}D\preceq d^{\intercal},u\succeq0\right\} $
+\end_inset
+
+ is unbounded.
+ By characterization of unbounded LPs 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+ being unbounded is equivalent there existing 
+\begin_inset Formula $u$
+\end_inset
+
+ satisfying the constraints for which 
+\begin_inset Formula $u^{\intercal}q>0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $u=v^{s}$
+\end_inset
+
+ for some 
+\begin_inset Formula $s$
+\end_inset
+
+ is an extreme ray.
+ Therefore 
+\begin_inset Formula $x$
+\end_inset
+
+ is such that 
+\begin_inset Formula $\left(v^{s}\right)^{\intercal}Ax>\left(v^{s}\right)^{\intercal}b$
+\end_inset
+
+ for some 
+\begin_inset Formula $s\in\left\{ 1,\dots,S\right\} $
+\end_inset
+
+.
+ Conversely if 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is feasible for some 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ then, by LP duality, 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+ is feasible and their optima are equal.
+ For such 
+\begin_inset Formula $u$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $u^{\intercal}q\leq0$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+ is an extreme point and hence 
+\begin_inset Formula $\left(u^{p}\right)^{\intercal}b\leq\left(u^{p}\right)^{\intercal}Ax$
+\end_inset
+
+ for some 
+\begin_inset Formula $p\in\left\{ 1,\dots,P\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[1.2]
+\end_layout
+
+\end_inset
+
+The reformulated problem is
+\begin_inset Formula 
+\begin{align*}
+\min_{z} & z\\
+\text{s.t.} & c^{\intercal}x+\left(u^{p}\right)^{\intercal}q\leq z\\
+ & \left(v^{s}\right)^{\intercal}q\leq0\\
+ & x\in X
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 [2.1]
 \end_layout
 
@@ -580,7 +704,7 @@ Using the representation of
 \begin_inset Formula $g$
 \end_inset
 
- proven to be appropriate in part (a) 
+ proven to be appropriate in part (1) 
 \begin_inset Formula 
 \begin{align*}
 g\left(t\right) & =-\log\left(\det\left(\sqrt{X}\right)\det\left(I+t\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\det\left(\sqrt{X}\right)\right)\\
@@ -803,15 +927,11 @@ status open
 
 \begin_layout Plain Layout
 
+[4.1]
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
 Let 
 \begin_inset Formula $x_{1}=\ln\left(r\right)$
 \end_inset
@@ -851,12 +971,32 @@ Hence the two problems are equivalent.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.2]
+\end_layout
+
+\end_inset
+
 The new problem is a convex optimization problem because the objective is
  convex (being the sum of two convex functions of linear transformations)
  and the constraints are linear.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[4.3]
+\end_layout
+
+\end_inset
+
 Since everything is differentiable we can just use calculus: let 
 \begin_inset Formula $f\left(x_{1},x_{2}\right)=2\pi\left(e^{2x_{1}}+e^{x_{1}+x_{2}}\right)$
 \end_inset
@@ -916,31 +1056,17 @@ h & =e^{\ln\left(2\right)+\frac{2}{3}\ln\left(\frac{V}{2\pi}\right)}=2\left(\fra
 
 \end_layout
 
-\end_deeper
 \begin_layout Enumerate
-Let 
-\begin_inset Formula $P$
-\end_inset
+\begin_inset ERT
+status open
 
- be the program 
-\begin_inset Formula 
-\begin{align*}
-\min_{\left(x,y\right)} & c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\\
-\text{s.t.} & x\in X,y\in Y
-\end{align*}
+\begin_layout Plain Layout
 
-\end_inset
-
-where 
-\begin_inset Formula $X,Y$
-\end_inset
-
- are bounded polyhedra.
- 
+[5.1]
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
+\end_inset
+
 Claim: There exists an extreme point 
 \begin_inset Formula $\left(\bar{x},\bar{y}\right)$
 \end_inset
@@ -957,7 +1083,10 @@ Full disclosure:
 \series default
 For this part I looked at Thieu's paper here http://journals.math.ac.vn/acta/pdf/
  198002106.pdf.
- The problem can be restated as 
+\end_layout
+
+\begin_layout Proof
+The problem can be restated as 
 \begin_inset Formula 
 \[
 \min_{x\in X}\left(c^{\intercal}x+\min_{y\in Y}\left(\left(d^{\intercal}+x^{\intercal}H\right)y\right)\right)
@@ -1047,6 +1176,16 @@ is the minimization of a piecewise linear function of
 
 \end_deeper
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.2]
+\end_layout
+
+\end_inset
+
 Claim: 
 \begin_inset Formula $\left(\hat{x},\hat{y}\right)$
 \end_inset
@@ -1190,7 +1329,7 @@ c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+\left(x^
 
 \end_inset
 
-Finally since, by part (a), since a solution exists at an extreme point,
+Finally since, by part (1), since a solution exists at an extreme point,
  these inequalities hold for all 
 \begin_inset Formula $\left(x,y\right)\in X\times Y$
 \end_inset
@@ -1198,6 +1337,7 @@ Finally since, by part (a), since a solution exists at an extreme point,
 .
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 \begin_inset Formula $\Leftarrow$
 \end_inset
@@ -1249,7 +1389,39 @@ c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy & \geq c^{\intercal}\hat{x}+d^{\in
 \end_layout
 
 \end_deeper
+\end_deeper
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.3]
+\end_layout
+
+\end_inset
+
+Claim: 
+\begin_inset Formula $\left(\hat{x},\hat{y}\right)$
+\end_inset
+
+ is a KKT point iff 
+\begin_inset Formula $\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)\geq0$
+\end_inset
+
+ for 
+\begin_inset Formula $x,y\in X,Y$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
 \begin_inset Formula $\Leftarrow$
 \end_inset
 
@@ -1330,7 +1502,18 @@ This is only the case iff
 
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[5.4]
+\end_layout
+
+\end_inset
+
 For 
 \begin_inset Formula $f\left(x_{1},x_{2},y_{1},y_{2}\right)=x_{2}+y_{1}+x_{2}y_{1}-x_{1}y_{2}+x_{2}y_{2}$
 \end_inset
@@ -1422,7 +1605,7 @@ x_{2}+y_{1}=0+0\not>0
 
 \end_inset
 
-and hence by part (b) 
+and hence by part (2) 
 \begin_inset Formula $\left(a,0,0,b\right)$
 \end_inset
 
@@ -1474,8 +1657,17 @@ The global minimum is indeed at
 .
 \end_layout
 
-\end_deeper
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.1]
+\end_layout
+
+\end_inset
+
 Let 
 \begin_inset Formula $P$
 \end_inset
@@ -1498,11 +1690,6 @@ which is equivalent
 
 \end_inset
 
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
 Since the objective is differentiable and each of the constraints is differentia
 ble the KKT conditions are
 \begin_inset Formula 
@@ -1523,12 +1710,22 @@ with
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.2]
+\end_layout
+
+\end_inset
+
 Let 
 \begin_inset Formula $x=\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)$
 \end_inset
 
 .
- Since the problem is convex if a point satisfies the KKT conditions then
+ Since the problem is convex, if a point satisfies the KKT conditions then
  it's a global minimum.
  To wit 
 \begin_inset Formula 
@@ -1554,7 +1751,7 @@ Therefore
 \end_inset
 
  and 
-\begin_inset Formula $u_{i}=-\left(2\frac{a_{i}-\frac{a_{1}a_{n}}{a_{i}}}{\left(a_{1}+a_{n}\right)}-2\right)$
+\begin_inset Formula $u_{i}=-\left(2\left(\frac{a_{i}-\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}}\right)-2\right)$
 \end_inset
 
  for 
@@ -1565,22 +1762,53 @@ Therefore
 \begin_inset Formula 
 \begin{align*}
 -\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}-u_{0}\mathbf{1}-\left(0,u_{2}\dots,u_{n-1},0\right) & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a+a_{1}a_{n}b\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
- & =-2\left(1,\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)},\dots,1\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
- & =-\left(2+u_{0},2\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)}+u_{0}+u_{2},\dots,2+u_{0}\right)\\
- & =-\left(2+\left(-2\right),2\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)}+u_{0}-\left(2\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)}-2\right),\dots,2+\left(-2\right)\right)\\
+ & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{1}a_{n}b_{1},a_{2}+a_{1}a_{n}b_{2},a_{n}+a_{1}a_{n}b_{n}\right)\\
+ & -\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
+ & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{n},a_{2}+a_{1}a_{n}b_{2},a_{n}+a_{1}\right)\\
+ & -\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
+ & =-2\left(1,\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}},\dots,1\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
+ & =-\left(2+u_{0},2\left(\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)+u_{0}+u_{2},\dots,2+u_{0}\right)\\
+ & =-\left(2+\left(-2\right),2\left(\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)+\left(-2\right)-\left(2\left(\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)-2\right),\dots,2+\left(-2\right)\right)\\
  & =0
 \end{align*}
 
 \end_inset
 
 Then 
-\begin_inset Formula $z^{*}=-\ln\left(\frac{a_{1}+a_{n}}{2}\right)-\ln\left(\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)\right)$
+\begin_inset Formula $z^{*}=-\ln\left(\frac{a_{1}}{2}+\frac{a_{n}}{2}\right)-\ln\left(\frac{1}{2a_{1}}+\frac{1}{2a_{n}}\right)=-\ln\left(\frac{\left(a_{1}+a_{n}\right)^{2}}{4a_{1}a_{n}}\right)$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[6.3]
+\end_layout
+
+\end_inset
+
+Claim: for Hermitian pd 
+\begin_inset Formula $A$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+2\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}\leq\sqrt{\frac{\lambda_{1}}{\lambda_{n}}}+\sqrt{\frac{\lambda_{n}}{\lambda_{1}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
 Let 
 \begin_inset Formula $A=V\Sigma V^{\intercal}$
 \end_inset
@@ -1596,7 +1824,7 @@ Let
  
 \begin_inset Formula 
 \[
-2\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}=2\sqrt{u^{\intercal}V^{\intercal}\Sigma Vu}\sqrt{u^{\intercal}V^{\intercal}\Sigma^{-1}Vu}=
+\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}=\sqrt{u^{\intercal}V^{\intercal}\Sigma Vu}\sqrt{u^{\intercal}V^{\intercal}\Sigma^{-1}Vu}
 \]
 
 \end_inset
@@ -1606,7 +1834,27 @@ Let
 \end_inset
 
 .
- Since 
+ Therefore 
+\begin_inset Formula 
+\[
+\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}=\sqrt{v^{\intercal}\Sigma v}\sqrt{v^{\intercal}\Sigma^{-1}v}
+\]
+
+\end_inset
+
+Taking log of 
+\begin_inset Formula $\sqrt{v^{\intercal}\Sigma v}\sqrt{v^{\intercal}\Sigma^{-1}v}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v^{\intercal}\Sigma^{-1}v\right)=\ln\left(\sum_{i=1}^{n}\lambda_{i}v_{i}^{2}\right)+\ln\left(\sum_{i=1}^{n}\frac{1}{\lambda_{i}}v_{i}^{2}\right)
+\]
+
+\end_inset
+
+Since 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1614,36 +1862,30 @@ Let
 \begin_inset Formula $\left\Vert v\right\Vert _{2}=1$
 \end_inset
 
-.
- Taking log
+ and hence it's the case that 
 \begin_inset Formula 
 \[
-\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v\Sigma^{-1}v\right)=\ln\left(\left(\sigma_{1}v_{1}^{2},\dots,\sigma_{n}v_{n}^{2}\right)\right)+\ln\left(\left(\frac{1}{\sigma_{1}}v_{1}^{2},\dots,\frac{1}{\sigma_{n}}v_{n}^{2}\right)\right)
+\mathbf{1}^{\intercal}\left(v_{1}^{2},\dots,v_{n}^{2}\right)=\sum_{i=1}^{n}v_{i}^{2}=\left\Vert v\right\Vert _{2}^{2}=1\geq1
 \]
 
 \end_inset
 
-Note that since 
-\begin_inset Formula $\left\Vert v\right\Vert _{2}=1$
+Therefore by part (2) with 
+\begin_inset Formula $a_{i}=\lambda_{i}$
 \end_inset
 
- it's the case that 
-\begin_inset Formula $\left\Vert \left(v_{1}^{2},\dots,v_{n}^{2}\right)\right\Vert _{2}=1$
+ (with 
+\begin_inset Formula $a_{i}>0$
 \end_inset
 
- and therefore 
-\begin_inset Formula $\mathbf{1}^{\intercal}\left(v_{1}^{2},\dots,v_{n}^{2}\right)\geq1$
+ since 
+\begin_inset Formula $A$
 \end_inset
 
- and clearly 
-\begin_inset Formula $v_{i}^{2}\geq0$
-\end_inset
-
-.
- Therefore
+ is pd) 
 \begin_inset Formula 
 \[
--\ln\left(\frac{\lambda_{1}+\lambda_{n}}{2}\right)-\ln\left(\frac{1}{2}\left(\frac{1}{\lambda_{1}}+\frac{1}{\lambda_{n}}\right)\right)\leq-\left(\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v\Sigma^{-1}v\right)\right)
+-\ln\left(\frac{\left(\lambda_{1}+\lambda_{n}\right)^{2}}{4\lambda_{1}\lambda_{n}}\right)\leq-\ln\left(v^{\intercal}\Sigma v\right)-\ln\left(v^{\intercal}\Sigma^{-1}v\right)
 \]
 
 \end_inset
@@ -1651,17 +1893,17 @@ Note that since
 or
 \begin_inset Formula 
 \[
-\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v\Sigma^{-1}v\right)\leq\ln\left(\frac{\lambda_{1}+\lambda_{n}}{2}\right)+\ln\left(\frac{1}{2}\left(\frac{1}{\lambda_{1}}+\frac{1}{\lambda_{n}}\right)\right)
+\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v^{\intercal}\Sigma^{-1}v\right)\leq\ln\left(\frac{\left(\lambda_{1}+\lambda_{n}\right)^{2}}{4\lambda_{1}\lambda_{n}}\right)
 \]
 
 \end_inset
 
-Taking exponentials (since the exponential is positive increasing) on both
- sides
+Taking exponentials (since the exponential is positive increasing) and square
+ roots on both sides
 \begin_inset Formula 
 \begin{align*}
-v^{\intercal}\Sigma vv^{\intercal}\Sigma^{-1}v & \leq\frac{1}{4}\left(\lambda_{1}+\lambda_{n}\right)\left(\frac{1}{\lambda_{1}}+\frac{1}{\lambda_{n}}\right)\\
-\\
+\sqrt{\left(v^{\intercal}\Sigma v\right)\left(v^{\intercal}\Sigma^{-1}v\right)} & \leq\sqrt{\frac{\left(\lambda_{1}+\lambda_{n}\right)^{2}}{4\lambda_{1}\lambda_{n}}}\\
+ & =\frac{1}{2}\frac{\left(\lambda_{1}+\lambda_{n}\right)}{\sqrt{\lambda_{1}\lambda_{n}}}=\frac{1}{2}\left(\sqrt{\frac{\lambda_{1}}{\lambda_{n}}}+\sqrt{\frac{\lambda_{n}}{\lambda_{1}}}\right)
 \end{align*}
 
 \end_inset
