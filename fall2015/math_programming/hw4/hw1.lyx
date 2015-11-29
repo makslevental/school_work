@@ -925,7 +925,7 @@ Let
  be the program 
 \begin_inset Formula 
 \begin{align*}
-\min_{x.y} & c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\\
+\min_{\left(x,y\right)} & c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\\
 \text{s.t.} & x\in X,y\in Y
 \end{align*}
 
@@ -936,20 +936,113 @@ where
 \end_inset
 
  are bounded polyhedra.
+ 
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-Claim: 
-\begin_inset Formula $P$
+Claim: There exists an extreme point 
+\begin_inset Formula $\left(\bar{x},\bar{y}\right)$
 \end_inset
 
+ that solves the bilinear program.
  
 \end_layout
 
 \begin_deeper
 \begin_layout Proof
-sdf
+
+\series bold
+Full disclosure: 
+\series default
+For this part I looked at Thieu's paper here http://journals.math.ac.vn/acta/pdf/
+ 198002106.pdf.
+ The problem can be restated as 
+\begin_inset Formula 
+\[
+\min_{x\in X}\left(c^{\intercal}x+\min_{y\in Y}\left(\left(d^{\intercal}+x^{\intercal}H\right)y\right)\right)
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\left(\left(d^{\intercal}+x^{\intercal}H\right)y\right)$
+\end_inset
+
+ is linear in 
+\begin_inset Formula $y$
+\end_inset
+
+ over the polyhedron 
+\begin_inset Formula $Y$
+\end_inset
+
+ hence the optimium is attained at an extreme point.
+ Let 
+\begin_inset Formula $V\left(Y\right)$
+\end_inset
+
+ be the set of extreme points 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Then the problem can be restated again as 
+\begin_inset Formula 
+\[
+\min_{x\in X}\left(c^{\intercal}x+\min_{y\in V\left(Y\right)}\left(\left(d^{\intercal}+x^{\intercal}H\right)y\right)\right)
+\]
+
+\end_inset
+
+For each 
+\begin_inset Formula $\bar{y}\in V\left(Y\right)$
+\end_inset
+
+ the function 
+\begin_inset Formula 
+\begin{align*}
+g\left(x\right) & =\left(\bar{y}H+c^{\intercal}\right)x+d^{\intercal}\bar{y}
+\end{align*}
+
+\end_inset
+
+is a linear function of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Hence the problem 
+\begin_inset Formula 
+\[
+\min_{x\in X}g\left(x\right)
+\]
+
+\end_inset
+
+is the minimization of a piecewise linear function of 
+\begin_inset Formula $x$
+\end_inset
+
+ over a polyhedron and therefore attains its minimum at an extreme point
+ 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\left(\bar{x},\bar{y}\right)$
+\end_inset
+
+ is a solution of the original bilinear problem and both 
+\begin_inset Formula $\bar{x},\bar{y}$
+\end_inset
+
+ are extreme points of 
+\begin_inset Formula $X,Y$
+\end_inset
+
+ respectively.
 \end_layout
 
 \end_deeper
@@ -959,11 +1052,11 @@ Claim:
 \end_inset
 
  is a local minimum iff 
-\begin_inset Formula $c^{\intercal}\left(x-\hat{x}\right)\geq0$
+\begin_inset Formula $\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)\geq0$
 \end_inset
 
  and 
-\begin_inset Formula $d^{\intercal}\left(y-\hat{y}\right)\geq0$
+\begin_inset Formula $\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)\geq0$
 \end_inset
 
  for 
@@ -971,7 +1064,7 @@ Claim:
 \end_inset
 
  and 
-\begin_inset Formula $c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)>0$
+\begin_inset Formula $\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)>0$
 \end_inset
 
  when 
@@ -983,7 +1076,10 @@ Claim:
 
 \begin_deeper
 \begin_layout Proof
-Assume 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Assume 
 \begin_inset Formula $\left(\hat{x},\hat{y}\right)$
 \end_inset
 
@@ -1005,9 +1101,574 @@ c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\geq c^{\intercal}\hat{x}+d^{\inter
 \end_inset
 
 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ being optimal implies that for any 
+\begin_inset Formula $\left(x,\hat{y}\right)\in\mathcal{N}_{\varepsilon}\left(\left(\hat{x},\hat{y}\right)\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+c^{\intercal}x+d^{\intercal}\hat{y}+x^{\intercal}H\hat{y} & \geq c^{\intercal}\hat{x}+d^{\intercal}\hat{y}+\hat{x}^{\intercal}H\hat{y}\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+x^{\intercal}H\hat{y} & \geq\hat{x}^{\intercal}H\hat{y}\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+\left(x-\hat{x}\right)^{\intercal}H\hat{y} & \geq0
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $u^{\intercal}Av=\left(u^{\intercal}Av\right)^{\intercal}=v^{\intercal}A^{\intercal}u$
+\end_inset
+
+ for all 
+\begin_inset Formula $u,v,A$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+c^{\intercal}\left(x-\hat{x}\right)+\left(x-\hat{x}\right)^{\intercal}H\hat{y} & \geq0\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+\hat{y}^{\intercal}H^{\intercal}\left(x-\hat{x}\right) & \geq0\\
+ & \iff\\
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right) & \geq0
+\end{align*}
+
+\end_inset
+
+Similarly for 
+\begin_inset Formula $\left(\hat{x},y\right)\in\mathcal{N}_{\varepsilon}\left(\left(\hat{x},\hat{y}\right)\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+d^{\intercal}y+\hat{x}^{\intercal}Hy & \geq d^{\intercal}\hat{y}+\hat{x}^{\intercal}H\hat{y}\\
+ & \iff\\
+d^{\intercal}\left(y-\hat{y}\right)+\hat{x}^{\intercal}Hy-\hat{x}^{\intercal}H\hat{y} & \geq0\\
+ & \iff\\
+d^{\intercal}\left(y-\hat{y}\right)+\hat{x}^{\intercal}H\left(y-\hat{y}\right) & \geq0\\
+ & \iff\\
+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right) & \geq0
+\end{align*}
+
+\end_inset
+
+Further if 
+\begin_inset Formula $\left(\hat{x},\hat{y}\right)$
+\end_inset
+
+ is a local minimum
+\begin_inset Formula 
+\begin{align*}
+c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy & \geq c^{\intercal}\hat{x}+d^{\intercal}\hat{y}+\hat{x}^{\intercal}H\hat{y}\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+x^{\intercal}Hy-\hat{x}^{\intercal}H\hat{y} & \geq0\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+\left(x^{\intercal}-\hat{x}^{\intercal}\right)H\left(y-\hat{y}\right)+\left(-2\hat{x}^{\intercal}H\hat{y}+x^{\intercal}H\hat{y}+\hat{x}^{\intercal}Hy\right) & \geq0
+\end{align*}
+
+\end_inset
+
+Now since 
+\begin_inset Formula $\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)<0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+\left(-2\hat{x}^{\intercal}H\hat{y}+x^{\intercal}H\hat{y}+\hat{x}^{\intercal}Hy\right) & >0\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+\left(x^{\intercal}-\hat{x}^{\intercal}\right)H\hat{y}+\hat{x}^{\intercal}H\left(y-\hat{y}\right) & >0\\
+ & \iff\\
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right) & >0
+\end{align*}
+
+\end_inset
+
+Finally since, by part (a), since a solution exists at an extreme point,
+ these inequalities hold for all 
+\begin_inset Formula $\left(x,y\right)\in X\times Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Assume the inequalities hold for 
+\begin_inset Formula $\left(x,y\right)\in X\times Y$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)\geq0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)+\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right) & \geq0\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)\cancel{+\hat{y}^{\intercal}H^{\intercal}x}-\hat{y}^{\intercal}H^{\intercal}\hat{x}\cancel{+\hat{x}^{\intercal}Hy}\cancel{-\hat{x}^{\intercal}H\hat{y}}+x^{\intercal}Hy\cancel{-\hat{x}^{\intercal}Hy}\cancel{-x^{\intercal}H\hat{y}}\cancel{+\hat{x}^{\intercal}H\hat{y}} & \geq0\\
+ & \iff\\
+c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+x^{\intercal}Hy & \geq\hat{y}^{\intercal}H^{\intercal}\hat{x}\\
+ & \iff\\
+c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy & \geq c^{\intercal}\hat{x}+d^{\intercal}\hat{y}+\hat{y}^{\intercal}H^{\intercal}\hat{x}
+\end{align*}
+
+\end_inset
+
+If for 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)<0$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\begin{align*}
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right) & >0\\
+ & \iff\\
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)+\left(x^{\intercal}-\hat{x}^{\intercal}\right)H\left(y-\hat{y}\right) & \geq0\\
+ & \iff\\
+c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy & \geq c^{\intercal}\hat{x}+d^{\intercal}\hat{y}+\hat{x}^{\intercal}H\hat{y}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose the inequalities hold.
+ 
+\begin_inset Formula 
+\[
+d=\frac{x-\hat{x}}{\left\Vert x-\hat{x}\right\Vert _{2}}
+\]
+
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda=\left\Vert x-\hat{x}\right\Vert _{2}$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right) & =\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\lambda d\geq0\Rightarrow
+\end{align*}
+
+\end_inset
+
+This is only the case iff 
+\begin_inset Formula $c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}=0$
+\end_inset
+
+.
+ Similarly 
+\begin_inset Formula $d^{\intercal}+\hat{x}^{\intercal}H=0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\[
+\left.\nabla\left(c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\right)\right|_{\left(\hat{x},\hat{y}\right)}=\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal},d^{\intercal}+\hat{x}^{\intercal}H\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\left(\bar{x},\hat{y}\right)$
+\end_inset
+
+ is a KKT point.
+ Let 
+\begin_inset Formula $\left\{ g_{i},f_{i}\right\} $
+\end_inset
+
+ be constraints that define 
+\begin_inset Formula $X,Y$
+\end_inset
+
+ respectively and then 
+\begin_inset Formula 
+\begin{align*}
+\left.\nabla\left(c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\right)\right|_{\left(\hat{x},\hat{y}\right)}+\left(\sum_{i=1}^{n}u_{i}\left.\nabla g_{i}\right|_{\hat{x}},\sum_{i=1}^{m}v_{i}\left.\nabla f_{i}\right|_{\hat{y}}\right) & =0\\
+ & \iff\\
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal},d^{\intercal}+\hat{x}^{\intercal}H\right) & =-\left(\sum_{i=1}^{n}u_{i}\left.\nabla g_{i}\right|_{\hat{x}},\sum_{i=1}^{m}v_{i}\left.\nabla f_{i}\right|_{\hat{y}}\right)\\
+ & \iff\\
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal},d^{\intercal}+\hat{x}^{\intercal}H\right)\cdot\left(x-\hat{x},y-\hat{y}\right) & =-\left(\sum_{i=1}^{n}u_{i}\left.\nabla g_{i}\right|_{\hat{x}},\sum_{i=1}^{m}v_{i}\left.\nabla f_{i}\right|_{\hat{y}}\right)\cdot\left(x-\hat{x},y-\hat{y}\right)\\
+ & \geq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $f\left(x_{1},x_{2},y_{1},y_{2}\right)=x_{2}+y_{1}+x_{2}y_{1}-x_{1}y_{2}+x_{2}y_{2}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $c=\left(0,1\right),d=\left(1,0\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+H=\begin{pmatrix}0 & -1\\
+1 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+The point 
+\begin_inset Formula $\left(x_{1},x_{2},y_{1},y_{2}\right)=\left(0,0,0,0\right)$
+\end_inset
+
+ is a KKT point since 
+\begin_inset Formula 
+\[
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)=\left(0,1\right)^{\intercal}x\geq0
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $\left(x_{1},x_{2}\right)\in X$
+\end_inset
+
+ (since 
+\begin_inset Formula $x_{2}\geq0$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in X$
+\end_inset
+
+) and
+\begin_inset Formula 
+\[
+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)=\left(1,0\right)^{\intercal}y\geq0
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $\left(y_{1},y_{2}\right)\in Y$
+\end_inset
+
+ (since 
+\begin_inset Formula $y_{1}\geq0$
+\end_inset
+
+ for 
+\begin_inset Formula $y\in Y$
+\end_inset
+
+).
+ The point 
+\begin_inset Formula $\left(0,0,0,0\right)$
+\end_inset
+
+ is not a local minimum though since for 
+\begin_inset Formula $\left(x_{1},x_{2}\right)=\left(a,0\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(y_{1},y_{2}\right)=\left(0,b\right)$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)=x^{\intercal}Hy=x_{2}y_{1}-x_{1}y_{2}+x_{2}y_{2}=-ab<0
+\]
+
+\end_inset
+
+and yet 
+\begin_inset Formula 
+\[
+x_{2}+y_{1}=0+0\not>0
+\]
+
+\end_inset
+
+and hence by part (b) 
+\begin_inset Formula $\left(a,0,0,b\right)$
+\end_inset
+
+ is not a local minimum.
+ On the other hand for 
+\begin_inset Formula $\left(x_{1},x_{2},y_{1},y_{2}\right)=\left(3,0,1,5\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(0,1\right)^{\intercal}\left(3,0\right)=0\geq0
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\left(1,0\right)^{\intercal}\left(1,5\right)=1\geq0
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)=x^{\intercal}Hy=-3\times5<0
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\left(0,1\right)^{\intercal}\left(3,0\right)+\left(1,0\right)^{\intercal}\left(1,5\right)=1>0
+\]
+
+\end_inset
+
+The global minimum is indeed at 
+\begin_inset Formula $\left(3,0,1,5\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $f\left(3,0,1,5\right)=-14$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $P$
+\end_inset
+
+ be the program 
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & -\ln\left(a^{\intercal}x\right)-\ln\left(b^{\intercal}x\right)\\
+\text{s.t.} & \mathbf{1}^{\intercal}x\geq1,x\succeq0
+\end{align*}
+
+\end_inset
+
+which is equivalent
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & -\ln\left(a^{\intercal}x\right)-\ln\left(b^{\intercal}x\right)\\
+\text{s.t.} & -\mathbf{1}^{\intercal}x+1\leq0,-x\preceq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Since the objective is differentiable and each of the constraints is differentia
+ble the KKT conditions are
+\begin_inset Formula 
+\begin{align*}
+-\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}-u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =0\\
+u_{0}\left(-\mathbf{1}^{\intercal}x+1\right) & =0\\
+-\left(u_{1}x_{1},\dots,u_{n}x_{n}\right) & =0\\
+\left(u_{0},\dots,u_{n}\right) & \succeq0
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $\left\{ -\mathbf{1}^{\intercal}x+1,u_{1}x_{1},\dots,u_{n}x_{n}\right\} $
+\end_inset
+
+ linearly independent.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x=\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)$
+\end_inset
+
+.
+ Since the problem is convex if a point satisfies the KKT conditions then
+ it's a global minimum.
+ To wit 
+\begin_inset Formula 
+\begin{align*}
+-\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}-u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}-u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right)=0\\
+u_{0}\left(-\mathbf{1}^{\intercal}\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)+1\right) & =u_{0}\times0=0\\
+-\left(\frac{1}{2}u_{1},0,\dots,0,\frac{1}{2}u_{n}\right) & =0
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $u_{1}=u_{n}=0$
+\end_inset
+
+ and otherwise 
+\begin_inset Formula $u_{i}\neq0$
+\end_inset
+
+.
+ Hence for 
+\begin_inset Formula $u_{0}=-2$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{i}=-\left(2\frac{a_{i}-\frac{a_{1}a_{n}}{a_{i}}}{\left(a_{1}+a_{n}\right)}-2\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $i=2,\dots,n-1$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}-u_{0}\mathbf{1}-\left(0,u_{2}\dots,u_{n-1},0\right) & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a+a_{1}a_{n}b\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
+ & =-2\left(1,\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)},\dots,1\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
+ & =-\left(2+u_{0},2\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)}+u_{0}+u_{2},\dots,2+u_{0}\right)\\
+ & =-\left(2+\left(-2\right),2\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)}+u_{0}-\left(2\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{\left(a_{1}+a_{n}\right)}-2\right),\dots,2+\left(-2\right)\right)\\
+ & =0
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $z^{*}=-\ln\left(\frac{a_{1}+a_{n}}{2}\right)-\ln\left(\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A=V\Sigma V^{\intercal}$
+\end_inset
+
+ then 
+\begin_inset Formula $V^{\intercal}\Sigma V=A$
+\end_inset
+
+ and 
+\begin_inset Formula $V^{\intercal}\Sigma^{-1}V=A^{-1}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+2\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}=2\sqrt{u^{\intercal}V^{\intercal}\Sigma Vu}\sqrt{u^{\intercal}V^{\intercal}\Sigma^{-1}Vu}=
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $v=Vu$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $V$
+\end_inset
+
+ is orthonormal 
+\begin_inset Formula $\left\Vert v\right\Vert _{2}=1$
+\end_inset
+
+.
+ Taking log
+\begin_inset Formula 
+\[
+\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v\Sigma^{-1}v\right)=\ln\left(\left(\sigma_{1}v_{1}^{2},\dots,\sigma_{n}v_{n}^{2}\right)\right)+\ln\left(\left(\frac{1}{\sigma_{1}}v_{1}^{2},\dots,\frac{1}{\sigma_{n}}v_{n}^{2}\right)\right)
+\]
+
+\end_inset
+
+Note that since 
+\begin_inset Formula $\left\Vert v\right\Vert _{2}=1$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\left\Vert \left(v_{1}^{2},\dots,v_{n}^{2}\right)\right\Vert _{2}=1$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\mathbf{1}^{\intercal}\left(v_{1}^{2},\dots,v_{n}^{2}\right)\geq1$
+\end_inset
+
+ and clearly 
+\begin_inset Formula $v_{i}^{2}\geq0$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+-\ln\left(\frac{\lambda_{1}+\lambda_{n}}{2}\right)-\ln\left(\frac{1}{2}\left(\frac{1}{\lambda_{1}}+\frac{1}{\lambda_{n}}\right)\right)\leq-\left(\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v\Sigma^{-1}v\right)\right)
+\]
+
+\end_inset
+
+or
+\begin_inset Formula 
+\[
+\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v\Sigma^{-1}v\right)\leq\ln\left(\frac{\lambda_{1}+\lambda_{n}}{2}\right)+\ln\left(\frac{1}{2}\left(\frac{1}{\lambda_{1}}+\frac{1}{\lambda_{n}}\right)\right)
+\]
+
+\end_inset
+
+Taking exponentials (since the exponential is positive increasing) on both
+ sides
+\begin_inset Formula 
+\begin{align*}
+v^{\intercal}\Sigma vv^{\intercal}\Sigma^{-1}v & \leq\frac{1}{4}\left(\lambda_{1}+\lambda_{n}\right)\left(\frac{1}{\lambda_{1}}+\frac{1}{\lambda_{n}}\right)\\
+\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \end_deeper
 \end_body
 \end_document

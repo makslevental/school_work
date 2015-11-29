@@ -177,6 +177,10 @@ For a convex set with non-empty interior
 Hyperplanes
 \end_layout
 
+\begin_layout Subsection
+Projection theorem
+\end_layout
+
 \begin_layout Enumerate
 Projection theorem: for any closed convex set 
 \begin_inset Formula $S$
@@ -481,6 +485,10 @@ Let
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+LP Duality
+\end_layout
+
 \begin_layout Enumerate
 Farkas' lemma: exactly one of the two following systems has a solution
 \begin_inset Formula 
@@ -1262,5 +1270,631 @@ Therefore
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Supporting hyperplanes
+\end_layout
+
+\begin_layout Enumerate
+A hyperplane supports a set if it intersects the set and the entire set
+ is on one side of the set.
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem*
+Supporting hyperplane theorem: if 
+\begin_inset Formula $S$
+\end_inset
+
+ is a convex set then there exists a supporting hyperplane.
+ I.e.
+ for every 
+\begin_inset Formula $\bar{x}\in\partial S$
+\end_inset
+
+ there exists 
+\begin_inset Formula $p\neq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $p^{\intercal}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in cl\left(S\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $\bar{x}\in\partial S$
+\end_inset
+
+ there exists a sequence 
+\begin_inset Formula $\left\{ y_{k}\right\} $
+\end_inset
+
+ not in 
+\begin_inset Formula $cl\left(S\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $y_{k}\rightarrow\bar{x}$
+\end_inset
+
+ (since 
+\begin_inset Formula $\partial S$
+\end_inset
+
+ is also the boundary of the complement of 
+\begin_inset Formula $S$
+\end_inset
+
+).
+ By the point separation theorem there exists a 
+\begin_inset Formula $p_{k}$
+\end_inset
+
+ (that we can normalize) such that 
+\begin_inset Formula 
+\[
+p_{k}^{\intercal}\left(y_{k}-x\right)>0\iff p_{k}^{\intercal}y_{k}>p_{k}^{\intercal}x
+\]
+
+\end_inset
+
+for each 
+\begin_inset Formula $x\in cl\left(S\right)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\left\{ p_{k}\right\} $
+\end_inset
+
+ are bounded there exists a convergent subsequence 
+\begin_inset Formula $p_{k_{j}}$
+\end_inset
+
+ with a limit 
+\begin_inset Formula $p$
+\end_inset
+
+ whose norm is equal to 1.
+ Taking both limits simultaneously we get that 
+\begin_inset Formula $p^{\intercal}\left(\bar{x}-x\right)\geq0$
+\end_inset
+
+ or 
+\begin_inset Formula $p^{\intercal}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+.
+ Basically you want to construct the hyperplane that goes through the point
+ on the boundary but using the point set separation theorem takes using
+ a limit to hone in on it (i.e.
+ the plane should have wellbehaved properties under taking limit of all
+ the planes for points not in).
+\end_layout
+
+\begin_layout Corollary*
+For a nonempty convex set 
+\begin_inset Formula $S$
+\end_inset
+
+ if 
+\begin_inset Formula $x\notin int\left(S\right)$
+\end_inset
+
+ then there exists a separating hyperplane.
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $x\notin cl\left(S\right)$
+\end_inset
+
+ then just use point set separation.
+ Otherwise just use the immediately previous theorem.
+\end_layout
+
+\begin_layout Corollary*
+For a nonempty 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $y\notin int\left(conv\left(S\right)\right)$
+\end_inset
+
+ there exists a separating hyperplane that separates 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+By immediately prior since 
+\begin_inset Formula $conv\left(S\right)$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ be two nonempty convex sets such that 
+\begin_inset Formula $S_{1}\cap S_{2}=\emptyset$
+\end_inset
+
+.
+ Then there exists a separating hyperplane, i.e.
+ there exists 
+\begin_inset Formula $p$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\inf\left\{ p^{\intercal}x\big|x\in S_{1}\right\} \geq\sup\left\{ p^{\intercal}x\big|x\in S_{2}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $S=S_{1}\ominus S_{2}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $S$
+\end_inset
+
+ is convex and 
+\begin_inset Formula $0\in S$
+\end_inset
+
+ (since otherwise 
+\begin_inset Formula $S_{1}\cap S_{2}$
+\end_inset
+
+ would nonempty).
+ By the first corollary there exists a separating hyperplane between 
+\begin_inset Formula $S$
+\end_inset
+
+ and 0, i.e.
+ 
+\begin_inset Formula $p^{\intercal}\left(0-x\right)\leq0$
+\end_inset
+
+ which is the same as 
+\begin_inset Formula $p^{\intercal}x\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ which is the same 
+\begin_inset Formula 
+\[
+p^{\intercal}x_{1}\geq p^{\intercal}x_{2}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x_{1}\in S_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}\in S_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ be two nonempty convex sets such that 
+\begin_inset Formula $S_{1}\cap int\left(S_{2}\right)=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $int\left(S_{2}\right)\neq\emptyset$
+\end_inset
+
+.
+ Then there exists a separating hyperplane.
+\end_layout
+
+\begin_layout Proof
+Interior of nonempty convex sets are convex so apply the previous result.
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ be two nonempty closed convex sets such that 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ is bounded and 
+\begin_inset Formula $S_{1}\cap S_{2}=\emptyset$
+\end_inset
+
+.
+ Then there exists a separating hyperplane that strongly separates.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Inner Representation of convex sets
+\end_layout
+
+\begin_layout Standard
+How to characterize a vertex of a polyhedron defined by inequality and equality
+ constraints? An extreme point is a unique solution to a set of constraints.
+ Why? If it weren't unique then it would be free (a line) and therefore
+ not an extreme point.
+ The question is how many constraints? For 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ it has to be at least 
+\begin_inset Formula $n$
+\end_inset
+
+ constraints (otherwise some coordinate of the solution would be free).
+ And the constraints have to be linearly independent (again otherwise there
+ would be many solutions).
+ But could there be more? For example 3 lines intersecting? There's definitely
+ a unique point satisfying that (if no two are colinear) but one of the
+ lines is linearly dependent on the other two, i.e.
+ redundant.
+ More than 
+\begin_inset Formula $n$
+\end_inset
+
+ equations can't be linearly independent in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ A procedure for finding extreme points:
+\end_layout
+
+\begin_layout Enumerate
+Start with the system 
+\begin_inset Formula $Ax\preceq b$
+\end_inset
+
+ with 
+\begin_inset Formula $x\succeq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Create the system 
+\begin_inset Formula $\hat{A}x\preceq\hat{b}$
+\end_inset
+
+ i.e.
+\begin_inset Formula 
+\[
+\begin{bmatrix}A\\
+-I
+\end{bmatrix}x\preceq\begin{bmatrix}b\\
+0
+\end{bmatrix}
+\]
+
+\end_inset
+
+This enforces the convex constraints and positivity.
+\end_layout
+
+\begin_layout Enumerate
+Identify 
+\begin_inset Formula $n$
+\end_inset
+
+ constraints and denote their index set by 
+\begin_inset Formula $S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\hat{A}_{S}$
+\end_inset
+
+ are not invertible then stop.
+\end_layout
+
+\begin_layout Enumerate
+Otherwise solve 
+\begin_inset Formula $x_{S}^{*}=\hat{A}_{S}^{-1}\hat{b}_{S}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $x_{S}^{*}$
+\end_inset
+
+ is feasible then 
+\begin_inset Formula $x_{S}^{*}$
+\end_inset
+
+ is an extreme point (otherwise it's an intersection that's not an extreme
+ point).
+\end_layout
+
+\begin_layout Standard
+This doesn't really work.
+ How do you find extreme points? After adding slack we can convert any 
+\begin_inset Formula $Ax\preceq b$
+\end_inset
+
+ we can convert to 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+.
+ Looking at the picture you can see that you can find extreme points by
+ setting enough variables to 0.
+ In the 2d case it's clear we can have at most 2 active constraints and
+ be at an extreme point (in 2d at most two lines can intersect on the boundary
+ of a polyhedron).
+ This corresponds to setting 5-3=2 variables to 0 (I have no idea why?).
+ 
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename bfs.jpg
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Basic feasible solutions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Here's a revised method
+\end_layout
+
+\begin_layout Enumerate
+Start with 
+\begin_inset Formula $Ax=b,x\succeq0$
+\end_inset
+
+ with 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Fix 
+\begin_inset Formula $n-m$
+\end_inset
+
+ (number of variables minus number of constraints) variables to be 0.
+ Call their indices 
+\begin_inset Formula $N$
+\end_inset
+
+ and the other set of indices 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The remaining relevant system is 
+\begin_inset Formula $A_{B}x_{B}=b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $A_{B}$
+\end_inset
+
+ is not invertible stop.
+ Otherwise 
+\begin_inset Formula $x_{B}^{*}=A_{B}^{-1}b$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $x_{B}^{*}\succeq0$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(x_{B}^{*},x_{N}^{*}\right)=\left(A_{B}^{-1}b,0\right)$
+\end_inset
+
+ is an extreme point.
+\end_layout
+
+\begin_layout Enumerate
+Otherwise 
+\begin_inset Formula $\left(A_{B}^{-1}b,0\right)$
+\end_inset
+
+ is not an extreme point.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Formula $B$
+\end_inset
+
+ is the set of basic solutions? 
+\end_layout
+
+\begin_layout Standard
+Every basic feasible solution corresponds to an extreme point but an extreme
+ point might be represented by several extreme points.
+ The number of extreme points of a polytope is 
+\begin_inset Formula ${n \choose m}$
+\end_inset
+
+ where 
+\begin_inset Formula $rank\left(A\right)=m$
+\end_inset
+
+.
+ Nonempty polyhedra of represented by LPs have at least one extreme point.
+ A 
+\series bold
+recession direction
+\series default
+ is 
+\begin_inset Formula $d$
+\end_inset
+
+ such that 
+\begin_inset Formula $x+\lambda d\in P$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\geq0$
+\end_inset
+
+.
+ A recession direction is one such that 
+\begin_inset Formula 
+\[
+d\neq\lambda_{1}d_{1}+\lambda_{2}d_{2}
+\]
+
+\end_inset
+
+for any distinct directions.
+ The set of all recession directions is a cone.
+ If 
+\begin_inset Formula $P=\left\{ x\big|Ax=b,x\succeq0\right\} $
+\end_inset
+
+ then 
+\begin_inset Formula $rec\left(P\right)=\left\{ d\big|Ad=0,x\succeq0\right\} $
+\end_inset
+
+, since 
+\begin_inset Formula 
+\[
+A(x+\lambda d)=Ax+\lambda Ad)=b
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ necessitates that 
+\begin_inset Formula $Ad=0$
+\end_inset
+
+.
+ Also 
+\begin_inset Formula $d$
+\end_inset
+
+ is a recession direction iff it's in the recession cone.
+ To find extreme directions chop the recession cone and look for extreme
+ points.
+ An extreme ray is the entire ray while an extreme direction is just the
+ direction.
+\end_layout
+
+\begin_layout Theorem*
+Minkowski's theorem: every point in a polyhedron can be represented as the
+ convex combination of extreme points plus conic combination of extreme
+ directions, i.e.
+ 
+\begin_inset Formula 
+\[
+x=\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{j=1}^{l}\mu_{j}d_{j}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+ are extreme points and 
+\begin_inset Formula $d_{j}$
+\end_inset
+
+ are extreme directions and 
+\begin_inset Formula $\sum_{j=1}^{k}\lambda_{j}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{j},\lambda_{j}\geq0$
+\end_inset
+
+.
+ This is the inner representation of the polygon.
+\end_layout
+
 \end_body
 \end_document
