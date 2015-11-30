@@ -2,8 +2,13 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass article
+\textclass amsart
 \use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -1488,6 +1493,16 @@ status open
 
 \begin_layout Plain Layout
 
+// G is a graph and s is the vertex from which
+\end_layout
+
+\begin_layout Plain Layout
+
+// the search "emanates"
+\end_layout
+
+\begin_layout Plain Layout
+
 BFS(G,s)
 \end_layout
 
@@ -1498,17 +1513,17 @@ BFS(G,s)
 
 \begin_layout Plain Layout
 
-for v in V
+// G.V is the set of vertices of the graph
 \end_layout
 
 \begin_layout Plain Layout
 
-	v.discovered = false
+for v in G.V
 \end_layout
 
 \begin_layout Plain Layout
 
-	v.explored = false
+	v.status = undiscovered
 \end_layout
 
 \begin_layout Plain Layout
@@ -1517,7 +1532,11 @@ for v in V
 
 \begin_layout Plain Layout
 
-Q = queue
+\end_layout
+
+\begin_layout Plain Layout
+
+Q = Queue
 \end_layout
 
 \begin_layout Plain Layout
@@ -1527,7 +1546,7 @@ Q = queue
 
 \begin_layout Plain Layout
 
-s.discovered = true
+s.status = discovered
 \end_layout
 
 \begin_layout Plain Layout
@@ -1537,7 +1556,7 @@ Q.push(s)
 
 \begin_layout Plain Layout
 
-while Q.empty != false
+while Q.empty != true
 \end_layout
 
 \begin_layout Plain Layout
@@ -1578,12 +1597,12 @@ while Q.empty != false
 
 \begin_layout Plain Layout
 
-		if u.discovered == false
+		if u.status == undiscovered
 \end_layout
 
 \begin_layout Plain Layout
 
-			u.discovered = true
+			u.status = discovered
 \end_layout
 
 \begin_layout Plain Layout
@@ -1603,7 +1622,7 @@ while Q.empty != false
 
 \begin_layout Plain Layout
 
-	v.explored = true
+	v.status = explored
 \end_layout
 
 \end_inset
@@ -1624,10 +1643,6 @@ name "alg:Breadth-first-search"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1743,7 +1758,7 @@ name "fig:Breadth-first-predecessor-tree"
 
 \end_inset
 
- Formally for a graph 
+Formally for a graph 
 \begin_inset Formula $G=\left(V,E\right)$
 \end_inset
 
@@ -1785,12 +1800,19 @@ root
 \begin_inset Quotes erd
 \end_inset
 
- of the tree will be the source vertex 
+ of the tree (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Breadth-first-predecessor-tree"
+
+\end_inset
+
+) will be the source vertex 
 \begin_inset Formula $s$
 \end_inset
 
 .
- How would construct the tree? Just keep track of which vertex a vertex
+ How would you construct the tree? Just keep track of which vertex a vertex
  was discovered through by storing a 
 \begin_inset Quotes eld
 \end_inset
@@ -1803,6 +1825,1070 @@ parent
  Using the BFS predecessor tree you can also print out shortest paths to
  the source, in the sense of fewest edges, by following the parent pointers
  back to the source.
+\end_layout
+
+\begin_layout Section
+Depth-first search
+\end_layout
+
+\begin_layout Standard
+Depth-first search is almost exactly like breadth-first search except that
+ it explores as deeply as possible (as opposed to as broadly as possible)
+ on each iteration.
+ Practically speaking the only difference is the replacement of the Queue
+ with a Stack.
+ Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Breadth-first-search-1"
+
+\end_inset
+
+ shows the algorithm.
+ Why should it be a Stack? The easiest way to see it intuitively is to go
+ through an example on a small graph.
+ Consider figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Depth-first-search-example"
+
+\end_inset
+
+: first A is pushed (so it's at the top of the stack), then popped and explored,
+ then C and B are pushed (so B is at the top of the stack), then B is popped
+ and explored, then E and D are pushed (so D is at the top of the stack,
+ followed by E).
+ D has no neighbors so E is the next to be popped and explored, pushing
+ I and then H.
+ The current state of the stack from bottom to top is (C,I,H).
+ You get the idea.
+ Essentially the Stack orders which vertices are to be explored by which
+ were explored most recently (they appear at the top of the Stack!).
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename depth_search.gif
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Depth-first search example
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Depth-first-search-example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+lstparams "language={C++},basicstyle={\footnotesize},showstringspaces=false,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+DFS(G,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in G.V
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.status = undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+T = Stack
+\end_layout
+
+\begin_layout Plain Layout
+
+s.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+T.push(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+while T.empty != true
+\end_layout
+
+\begin_layout Plain Layout
+
+	v = T.pop
+\end_layout
+
+\begin_layout Plain Layout
+
+	for u in G.adj(v)
+\end_layout
+
+\begin_layout Plain Layout
+
+		if u.stats == undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+			u.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+			T.push(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.status = explored
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Depth-first search
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Breadth-first-search-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Finally just like for breadth-first search you can construct a depth-first
+ predecessor tree by keeping pointers.
+\end_layout
+
+\begin_layout Section
+Tangent: parentheses
+\end_layout
+
+\begin_layout Standard
+The standard DFS algorithm can be easily modified to make it infinitely
+ more useful: let's keep track of when a vertex is first discovered, its
+ 
+\begin_inset Quotes eld
+\end_inset
+
+open
+\begin_inset Quotes erd
+\end_inset
+
+ time, and when all of its children are done being explored, i.e.
+ when it is 
+\begin_inset Quotes eld
+\end_inset
+
+closed
+\begin_inset Quotes erd
+\end_inset
+
+.
+ To enable this bookkeeping some trivial modifications need to made.
+ Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:modified-Breadth-first-search-1-1"
+
+\end_inset
+
+ is the modified algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+How does the modified algorithm work? Keeping track of open times is easy:
+ just keep a global timer (which you increment constantly) and assign the
+ value of the timer to each vertex when it is discovered.
+ The more difficult task is keeping track of the close time.
+ Before even attempting to figure out what times to assign as close times
+ note that in the unmodified algorithm the vertex is popped and disappears
+ (in the sense that we don't keep track of it anymore) so we couldn't assign
+ a time to it (whatever time) even if we wanted to.
+ The solution is to 
+\begin_inset Quotes eld
+\end_inset
+
+save
+\begin_inset Quotes erd
+\end_inset
+
+ the vertex, i.e.
+ don't pop it.
+ Hence peaking at it instead of outright popping it.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+lstparams "language={C++},basicstyle={\footnotesize},showstringspaces=false,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+MDFS(G,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in G.V
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.status = undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+time = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+T = Stack
+\end_layout
+
+\begin_layout Plain Layout
+
+s.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+s.open = time
+\end_layout
+
+\begin_layout Plain Layout
+
+T.push(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+while T.empty != true
+\end_layout
+
+\begin_layout Plain Layout
+
+	// peak looks at the top of the stack
+\end_layout
+
+\begin_layout Plain Layout
+
+	// without popping
+\end_layout
+
+\begin_layout Plain Layout
+
+	v = T.peak
+\end_layout
+
+\begin_layout Plain Layout
+
+	// if not explored then business as usual
+\end_layout
+
+\begin_layout Plain Layout
+
+	if v.status != explored
+\end_layout
+
+\begin_layout Plain Layout
+
+		for u in G.adj(v)
+\end_layout
+
+\begin_layout Plain Layout
+
+			// enforces distinct open times
+\end_layout
+
+\begin_layout Plain Layout
+
+			time = time + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+			if u.status == undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+				u.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+				u.begin = time
+\end_layout
+
+\begin_layout Plain Layout
+
+				T.push(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+		v.status = explored
+\end_layout
+
+\begin_layout Plain Layout
+
+	// if explored then we're done
+\end_layout
+
+\begin_layout Plain Layout
+
+	// exploring all children and hence
+\end_layout
+
+\begin_layout Plain Layout
+
+	// time to close
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+		time = time + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+		v.close = time
+\end_layout
+
+\begin_layout Plain Layout
+
+		// don't store result of pop because
+\end_layout
+
+\begin_layout Plain Layout
+
+		// don't need now
+\end_layout
+
+\begin_layout Plain Layout
+
+		T.pop
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Modified depth-first search
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:modified-Breadth-first-search-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+But now we need to distinguish between vertices on the stack because they
+ are yet to be explored and those we're saving just in order to assign close
+ times to; hence the conditional.
+ If the top of the stack is a vertex that hasn't been explored then we do
+ the same thing as the unmodified algorithm and if it's one that has been
+ explored then we know it's one of those that we're holding onto in order
+ to assign it a close time.
+ Also (coincidentally enough) if the top of stack is a vertex we've already
+ explored that means that all of its children have been explored too (that's
+ the only way you 
+\begin_inset Quotes eld
+\end_inset
+
+come back
+\begin_inset Quotes erd
+\end_inset
+
+ to a vertex) and it should be closed.
+ Note the counter is always incremented so that every open and close time
+ is unique (i.e.
+ no set of vertices has the same open time for example; it's not possible
+ for two vertices to have the same close time since the algorithm isn't
+ parallel).
+ 
+\end_layout
+
+\begin_layout Standard
+What's the use of all of this bookkeeping? We can the open and close times
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+parenthesize
+\begin_inset Quotes erd
+\end_inset
+
+ the vertices:
+\end_layout
+
+\begin_layout Theorem*
+
+\series bold
+Parenthesis theorem
+\series default
+.
+ Given a DFS of a graph 
+\begin_inset Formula $G=\left(V,E\right)$
+\end_inset
+
+ for any two 
+\begin_inset Formula $u,v\in V$
+\end_inset
+
+ 
+\series bold
+either
+\series default
+ the intervals 
+\begin_inset Formula $\left[u.open,u.close\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[v.open,v.close\right]$
+\end_inset
+
+ are entirely disjoint, i.e.
+ 
+\begin_inset Formula $u.close<v.open$
+\end_inset
+
+ 
+\series bold
+or 
+\series default
+one of 
+\begin_inset Formula $\left[u.open,u.close\right],\left[v.open,v.close\right]$
+\end_inset
+
+ is entirely contained in the other, i.e.
+ 
+\begin_inset Formula $u.open<v.open<v.close<u.close$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+What this theorem says is that for any two vertices 
+\begin_inset Formula $u,v$
+\end_inset
+
+ either they're completely unrelated (e.g.
+ 
+\begin_inset Formula $u$
+\end_inset
+
+ opens and closes before 
+\begin_inset Formula $v$
+\end_inset
+
+ opens and closes) or one of 
+\begin_inset Formula $u,v$
+\end_inset
+
+ is a ancestor of the other (e.g.
+ 
+\begin_inset Formula $v$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+down the graph
+\begin_inset Quotes erd
+\end_inset
+
+ from 
+\begin_inset Formula $u$
+\end_inset
+
+ and hence 
+\begin_inset Formula $u$
+\end_inset
+
+ opens, sometime later 
+\begin_inset Formula $v$
+\end_inset
+
+ opens, then eventually 
+\begin_inset Formula $v$
+\end_inset
+
+ closes, and sometime later 
+\begin_inset Formula $u$
+\end_inset
+
+ closes).
+ Note this is not just about direct descendents, i.e.
+ parents and children, but applies to any depth of descendance.
+ Why is this called the parenthesis theorem? Look at this sequence of parenthese
+s
+\begin_inset Formula 
+\[
+\left(\left(\right)\left(\right)\left(\mathbf{\boldsymbol{(}\boldsymbol{)}}\left(\mathbf{\boldsymbol{(}}\left(\left(\right)\left(\right)\right)\mathbf{\boldsymbol{)}}\right)\right)\right)
+\]
+
+\end_inset
+
+and notice how for any two sets of parenthesesare disjoint (for example
+ the bolded ones) or one is nested in the other.
+\end_layout
+
+\begin_layout Standard
+In a sort-of but not completely related interesting tidbit if you wanted
+ to test whether a set of parentheses was parenthesized correctly, i.e.
+ nothing like )(()(, you'd use a stack.
+ Can you think up how?
+\end_layout
+
+\begin_layout Section
+Topological Sort
+\end_layout
+
+\begin_layout Standard
+A topological sort of a directed graph is a sorting of the vertices by precedenc
+e (i.e.
+ which vertices 
+\begin_inset Quotes eld
+\end_inset
+
+globally
+\begin_inset Quotes erd
+\end_inset
+
+ precede which).
+ For example figure 
+\begin_inset Formula $\ref{fig:Topological-sort-of}$
+\end_inset
+
+ is a topological sort of the graph in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ that represents an order in which you can successfully get dressed: first
+ socks, then undershorts, then pants, then shoes, then watch, etc.
+ Note the edges are just reproduced from the graph - the topological sort
+ is the order of vertices from left to right.
+ I say an order because for example undershorts could be put on before socks
+ because there's no precedence relationship (no edge or sequence of edges)
+ between socks and undershorts.
+ Another name for a topological sort is a 
+\emph on
+linearization
+\emph default
+ of a graph (because it kind of arranges the vertices in a line).
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename topsort.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Topological sort of clothing precedence
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Topological-sort-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A topological sort only makes sense for a directed graph - there is no notion
+ of precedence in an undirected graph.
+ Furthermore a topological sort is only possible in a directed acyclic graph.
+ Why? If there's a cycle in the graph then which vertex in the cycle really
+ precedes which other vertex? The precedence of the vertices in the cycle
+ with respect to each other is ill-defined.
+ How do you detect a cycle in a directed graph? Easy: if at some point during
+ a depth-first search you were about to 
+\begin_inset Quotes eld
+\end_inset
+
+discover
+\begin_inset Quotes erd
+\end_inset
+
+ a vertex that had already been discovered (i.e.
+ but not explored) then there's a cycle.
+ Why? Since all discovered vertices get turned into explored vertices as
+ the DFS 
+\begin_inset Quotes eld
+\end_inset
+
+comes back up
+\begin_inset Quotes erd
+\end_inset
+
+ the only way to see a discovered vertex that hasn't been fully explored
+ is if the DFS has looped back.
+ Therefore assume without loss of generality that the directed graphs in
+ this are directed acyclic graphs (meaning before you try to do a topological
+ sort of a graph check to see if it's acyclic).
+\end_layout
+
+\begin_layout Standard
+How do you do a topological sort of an acyclic graph? Easily! Do a depth-first
+ search and just list the vertices in reverse order of their closing times.
+ I'll repeat that again: list the vertices in reverse order of their closing
+ times 
+\series bold
+not their opening times!!! 
+\series default
+Why? As a warm-up think about it like this: what is the closing time of
+ `undershorts` in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ is if I start the depth-first search at it? It'll be one of the last ones
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+And in fact if you look at figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Topological-sort-of"
+
+\end_inset
+
+ you'll see it's the second item.
+\end_layout
+
+\end_inset
+
+ because everything below it will close before it (since everything below
+ it is a descendent of it and by the parenthesis theorem).
+ Now figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Order-of-dressing"
+
+\end_inset
+
+ is kind of strange because `socks` is never discovered by a depth-first
+ search starting at `undershorts`.
+ The solution is essentially to rerun depth-first search start at vertices
+ that remain undiscovered while keeping the timer global.
+ The algorithm appears in Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:topsort"
+
+\end_inset
+
+.
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+lstparams "language={C++},basicstyle={\footnotesize},showstringspaces=false,tabsize=2"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+TopSort(G)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in G.V
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.status = undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// for use in keeping track of whether
+\end_layout
+
+\begin_layout Plain Layout
+
+// some vertices haven't been discovered in
+\end_layout
+
+\begin_layout Plain Layout
+
+// the DFS.
+ it's kind of a made up data structure
+\end_layout
+
+\begin_layout Plain Layout
+
+// that supports indexing and direct removal
+\end_layout
+
+\begin_layout Plain Layout
+
+unsearched_vertices = Set(G.V)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// this linked list will store
+\end_layout
+
+\begin_layout Plain Layout
+
+// the vertices in reverse order
+\end_layout
+
+\begin_layout Plain Layout
+
+// of their closing times
+\end_layout
+
+\begin_layout Plain Layout
+
+L = LinkedList
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+time = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+// the outer loop reinitializes everything
+\end_layout
+
+\begin_layout Plain Layout
+
+// except time for each DFS
+\end_layout
+
+\begin_layout Plain Layout
+
+while unsearched_vertices.empty != true
+\end_layout
+
+\begin_layout Plain Layout
+
+	s = unsearched_vertices[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+	// this removes s from unsearched_vertices
+\end_layout
+
+\begin_layout Plain Layout
+
+	// since it's been discovered (so that another DFS
+\end_layout
+
+\begin_layout Plain Layout
+
+	// won't be run starting at s)
+\end_layout
+
+\begin_layout Plain Layout
+
+	unsearched_vertices.remove(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+	T = Stack
+\end_layout
+
+\begin_layout Plain Layout
+
+	s.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+	s.open = time
+\end_layout
+
+\begin_layout Plain Layout
+
+	T.push(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+	while T.empty != true
+\end_layout
+
+\begin_layout Plain Layout
+
+		v = T.peak
+\end_layout
+
+\begin_layout Plain Layout
+
+		if v.status != explored
+\end_layout
+
+\begin_layout Plain Layout
+
+			for u in G.adj(v)
+\end_layout
+
+\begin_layout Plain Layout
+
+				time = time + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+				if u.status == undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+					u.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+					unsearched_vertices.remove(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+					u.begin = time
+\end_layout
+
+\begin_layout Plain Layout
+
+					T.push(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+			v.status = explored
+\end_layout
+
+\begin_layout Plain Layout
+
+		else
+\end_layout
+
+\begin_layout Plain Layout
+
+			time = time + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+			v.close = time
+\end_layout
+
+\begin_layout Plain Layout
+
+			// the first stored v will eventually
+\end_layout
+
+\begin_layout Plain Layout
+
+			// be pushed all the way to the end of the 
+\end_layout
+
+\begin_layout Plain Layout
+
+			// list
+\end_layout
+
+\begin_layout Plain Layout
+
+			L.push(v)
+\end_layout
+
+\begin_layout Plain Layout
+
+			T.pop
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Modified depth-first search
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:topsort"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
