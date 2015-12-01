@@ -912,10 +912,10 @@ and
  Then an equivalent problem is
 \begin_inset Formula 
 \begin{align*}
-\min_{x\in\mathbb{R}^{n}} & \sqrt{y^{\intercal}\Sigma y}\\
+\min_{y\in\mathbb{R}^{n}} & \sqrt{y^{\intercal}\Sigma y}\\
 \text{s.t.} & Fy\preceq gt\\
  & Ay=bt\\
- & \mu\cdot x-\alpha t=1\\
+ & \mu\cdot y-\alpha t=1\\
  & t\geq0
 \end{align*}
 
@@ -1016,7 +1016,7 @@ Since everything is differentiable we can just use calculus: let
 
 Since this is never zero the constraint must be active (or the problem unbounded
 ).
- On the constaint boundary 
+ On the constraint boundary 
 \begin_inset Formula 
 \[
 g\left(x_{1}\right)=f\left(\ln\left(\frac{V}{\pi}\right)-2x_{1},x_{1}\right)=2\pi\left(e^{2x_{1}}+e^{x_{1}+\ln\left(\frac{V}{\pi}\right)-2x_{1}}\right)=2\pi\left(e^{2x_{1}}+e^{\ln\left(\frac{V}{\pi}\right)-x_{1}}\right)=2\pi\left(e^{2x_{1}}+\frac{V}{\pi}e^{-x_{1}}\right)
@@ -1135,7 +1135,7 @@ For each
  the function 
 \begin_inset Formula 
 \begin{align*}
-g\left(x\right) & =\left(\bar{y}H+c^{\intercal}\right)x+d^{\intercal}\bar{y}
+g_{\bar{y}}\left(x\right) & =\left(\bar{y}H+c^{\intercal}\right)x+d^{\intercal}\bar{y}
 \end{align*}
 
 \end_inset
@@ -1680,7 +1680,7 @@ Let
 \begin_inset Formula 
 \begin{align*}
 \min_{x} & -\ln\left(a^{\intercal}x\right)-\ln\left(b^{\intercal}x\right)\\
-\text{s.t.} & \mathbf{1}^{\intercal}x\geq1,x\succeq0
+\text{s.t.} & \mathbf{1}^{\intercal}x=1,x\succeq0
 \end{align*}
 
 \end_inset
@@ -1689,7 +1689,7 @@ which is equivalent
 \begin_inset Formula 
 \begin{align*}
 \min_{x} & -\ln\left(a^{\intercal}x\right)-\ln\left(b^{\intercal}x\right)\\
-\text{s.t.} & -\mathbf{1}^{\intercal}x+1\leq0,-x\preceq0
+\text{s.t.} & \mathbf{1}^{\intercal}x-1=0,-x\preceq0
 \end{align*}
 
 \end_inset
@@ -1698,16 +1698,17 @@ Since the objective is differentiable and each of the constraints is differentia
 ble the KKT conditions are
 \begin_inset Formula 
 \begin{align*}
--\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}-u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =0\\
-u_{0}\left(-\mathbf{1}^{\intercal}x+1\right) & =0\\
+-\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}+u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =0\\
+u_{0}\left(\mathbf{1}^{\intercal}x-1\right) & =0\\
 -\left(u_{1}x_{1},\dots,u_{n}x_{n}\right) & =0\\
-\left(u_{0},\dots,u_{n}\right) & \succeq0
+\left(u_{1},\dots,u_{n}\right) & \succeq0\\
+u_{0} & \in\mathbb{R}
 \end{align*}
 
 \end_inset
 
 with 
-\begin_inset Formula $\left\{ -\mathbf{1}^{\intercal}x+1,u_{1}x_{1},\dots,u_{n}x_{n}\right\} $
+\begin_inset Formula $\left\{ \mathbf{1}^{\intercal}x-1,-u_{1}x_{1},\dots,-u_{n}x_{n}\right\} $
 \end_inset
 
  linearly independent.
@@ -1734,8 +1735,8 @@ Let
  To wit 
 \begin_inset Formula 
 \begin{align*}
--\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}-u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}-u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right)=0\\
-u_{0}\left(-\mathbf{1}^{\intercal}\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)+1\right) & =u_{0}\times0=0\\
+-\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}+u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}+u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right)=0\\
+u_{0}\left(\mathbf{1}^{\intercal}\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)-1\right) & =u_{0}\times0=0\\
 -\left(\frac{1}{2}u_{1},0,\dots,0,\frac{1}{2}u_{n}\right) & =0
 \end{align*}
 
@@ -1751,11 +1752,11 @@ Therefore
 
 .
  Hence for 
-\begin_inset Formula $u_{0}=-2$
+\begin_inset Formula $u_{0}=2$
 \end_inset
 
  and 
-\begin_inset Formula $u_{i}=-\left(2\left(\frac{a_{i}-\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}}\right)-2\right)$
+\begin_inset Formula $u_{i}=2\left(1-\frac{a_{i}+\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}}\right)$
 \end_inset
 
  for 
@@ -1765,15 +1766,76 @@ Therefore
 
 \begin_inset Formula 
 \begin{align*}
--\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}-u_{0}\mathbf{1}-\left(0,u_{2}\dots,u_{n-1},0\right) & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a+a_{1}a_{n}b\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
- & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{1}a_{n}b_{1},a_{2}+a_{1}a_{n}b_{2},a_{n}+a_{1}a_{n}b_{n}\right)\\
- & -\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
- & =-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{n},a_{2}+a_{1}a_{n}b_{2},a_{n}+a_{1}\right)\\
- & -\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
- & =-2\left(1,\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}},\dots,1\right)-\left(u_{0},u_{0}+u_{2}\dots,u_{0}+u_{n-1},u_{0}\right)\\
- & =-\left(2+u_{0},2\left(\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)+u_{0}+u_{2},\dots,2+u_{0}\right)\\
- & =-\left(2+\left(-2\right),2\left(\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)+\left(-2\right)-\left(2\left(\frac{a_{2}-\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)-2\right),\dots,2+\left(-2\right)\right)\\
+-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}+u_{0}\mathbf{1}-\left(0,u_{2}\dots,u_{n-1},0\right) & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a+a_{1}a_{n}b\right)\\
+ & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)\\
+ & -\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{1}a_{n}b_{1},a_{2}+a_{1}a_{n}b_{2},\dots,a_{n}+a_{1}a_{n}b_{n}\right)\\
+ & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)\\
+ & -\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{n},a_{2}+a_{1}a_{n}b_{2},\dots,a_{n}+a_{1}\right)\\
+ & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)-2\left(1,\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}},\dots,1\right)\\
+ & =\left(u_{0}-2,u_{0}-2\left(\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)-u_{2},\dots,u_{0}-2\right)\\
+ & =\left(0,2\left(1-\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)-u_{2},\dots,0\right)\\
  & =0
+\end{align*}
+
+\end_inset
+
+All that remains is to show that 
+\begin_inset Formula $u_{i}\geq0$
+\end_inset
+
+ (since 
+\begin_inset Formula $u_{0}$
+\end_inset
+
+ is free).
+ Note that 
+\begin_inset Formula 
+\[
+2\left(1-\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+(ai-(a1+an)/2)^{2}<=(an-(a1+an)/2)^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+a_{1}+a_{n}-\left(a_{i}+\frac{a_{1}a_{n}}{a_{i}}\right)=a_{1}-a_{i}+\left(a_{n}-\frac{a_{1}a_{n}}{a_{i}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+a_{i}\left(a_{1}+a_{n}\right)-\left(a_{i}^{2}+a_{1}a_{n}\right)=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+a_{i}^{2}-a_{i}\left(a_{1}+a_{n}\right)+a_{1}a_{n} & \leq0\\
+a_{i}^{2}-a_{i}\left(a_{1}+a_{n}\right)+\left(\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2} & \leq\left(\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}-a_{1}a_{n}\\
+a_{i}^{2}+a_{1}a_{n}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{a_{i}+\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}} & =\frac{a_{i}^{2}+a_{1}a_{n}}{a_{i}a_{1}+a_{i}a_{n}}\\
+ & =\frac{a_{1}+a_{1}}{a_{1}+a_{n}}\\
+ & \geq\frac{a_{1}+a_{1}}{a_{1}+a_{n}}
 \end{align*}
 
 \end_inset
