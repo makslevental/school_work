@@ -4,11 +4,13 @@
 \usepackage[latin9]{inputenc}
 \setlength{\parskip}{\medskipamount}
 \setlength{\parindent}{0pt}
+\usepackage{float}
 \usepackage{mathtools}
 \usepackage{amstext}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{cancel}
+\usepackage{graphicx}
 \usepackage{esint}
 
 \makeatletter
@@ -48,10 +50,158 @@
 \date{\today}
 
 \maketitle
-Time spent: 15 hours
+Time spent: 30 hours but I don't care because this is the last homework
+assignment I'll ever do in my life!
 
 Collaborators: Chris Gianelli
 \begin{enumerate}
+\item [1.1]Let $q=b-Ax$ to simplify notation. Then by LP duality if $\mathcal{P}\coloneqq\min_{y}\left\{ d^{\intercal}y\big|Dy\succeq q,y\succeq0\right\} $
+is infeasible for some $x\in X$ the dual $\mathcal{D}\coloneqq\max_{u}\left\{ u^{\intercal}q\big|u^{\intercal}D\preceq d^{\intercal},u\succeq0\right\} $
+is unbounded. By characterization of unbounded LPs $\mathcal{D}$
+being unbounded is equivalent there existing $u$ satisfying the constraints
+and for which $u^{\intercal}q>0$ i.e. $u$ is an extreme ray. Therefore
+$x$ is such that $\left(v^{s}\right)^{\intercal}\left(b-Ax\right)>0$
+for some $s\in\left\{ 1,\dots,S\right\} $. Conversely if $\mathcal{P}$
+is feasible for some $x\in X$ then, by LP duality, $\mathcal{D}$
+is feasible and their optima are equal. Furthermore the optimal $u$
+it's the case that $u^{\intercal}q\leq0$ and $u$ is an extreme point
+and hence $\left(u^{p}\right)^{\intercal}\left(b-Ax\right)\leq0$
+for some $p\in\left\{ 1,\dots,P\right\} $. Therefore both $\left(u^{p}\right)^{\intercal}\left(b-Ax\right)\leq0$
+and $\left(v^{s}\right)^{\intercal}\left(b-Ax\right)\leq0$ for all
+$u^{p},v^{s}$ should be the case.
+\item [1.2]Let $z$ be such that $z\geq u^{\intercal}\left(b-Ax\right)=\left(u^{p}\right)^{\intercal}\left(b-Ax\right)$
+since the optimum for the inner maximization is at an extreme point
+of $U$. Then reformulated problem is
+\begin{align*}
+\min_{x,z} & \left\{ c^{\intercal}x+z\right\} \\
+\text{s.t.} & \left(v^{s}\right)^{\intercal}\left(b-Ax\right)\leq0\,\forall s\\
+ & \left(u^{s}\right)^{\intercal}\left(b-Ax\right)\leq z\,\forall p\\
+ & x\in X
+\end{align*}
+or
+\begin{align*}
+\min_{x,z} & \left\{ c^{\intercal}x+z\right\} \\
+\text{s.t.} & \left(v^{s}\right)^{\intercal}b-\left(\left(v^{s}\right)^{\intercal}A\right)x\leq0\,\forall s\\
+ & \left(u^{p}\right)^{\intercal}b-\left(\left(u^{p}\right)^{\intercal}A\right)x-z\leq0\,\forall p\\
+ & x\in X
+\end{align*}
+which is clearly linear in $x,z$.
+\item [1.3]The problem is 
+\begin{align*}
+\min_{\mathbf{x},\mathbf{y}} & -\left(3,7\right)\cdot\mathbf{x}+\left(1,2\right)\cdot\mathbf{y}\\
+\text{s.t.} & -\mathbf{1}\cdot\mathbf{x}+-\mathbf{1}\cdot\mathbf{y}\geq-4.5\\
+ & -x_{1}+y_{1}\geq-1.5\\
+ & -x_{2}+y_{2}\geq-.5\\
+ & \mathbf{x}\in\mathbb{Z}^{+}\times\mathbb{Z}^{+}\\
+ & \mathbf{y}\in\mathbb{R}^{+}\times\mathbb{R}^{+}
+\end{align*}
+In this instance 
+\[
+A=\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix},D=\begin{pmatrix}-1 & -1\\
+1 & 0\\
+0 & 1
+\end{pmatrix},b=\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix},c=\left(-3,-7\right),d=\left(1,2\right)
+\]
+Then 
+\begin{align*}
+U & =\left\{ u\in\mathbb{R}^{3}\big|D^{\intercal}u\leq d,u\geq0\right\} \\
+ & =\left\{ u\in\mathbb{R}^{3}\big|\begin{pmatrix}-1 & 1 & 0\\
+-1 & 0 & 1
+\end{pmatrix}\begin{pmatrix}u_{1}\\
+u_{2}\\
+u_{3}
+\end{pmatrix}\preceq\left(1,2\right),u\geq0\right\} 
+\end{align*}
+ the polyhedron appears in figure \ref{fig:Bender-Polyhedron}. 
+\begin{figure}[H]
+\noindent \begin{centering}
+\includegraphics[scale=0.5]{Untitled-1.jpeg}\caption{Bender Polyhedron\label{fig:Bender-Polyhedron}}
+
+\par\end{centering}
+
+\end{figure}
+Clearly the vertices are 
+\begin{align*}
+u^{1} & =\left(0,0,0\right)\\
+u^{2} & =\left(0,1,0\right)\\
+u^{3} & =\left(0,0,2\right)\\
+u^{4} & =\left(0,1,2\right)
+\end{align*}
+and the extreme directions 
+\begin{align*}
+v^{1} & =\left(1,1,0\right)\\
+v^{2} & =\left(1,0,1\right)\\
+v^{3} & =\left(0,1,1\right)\\
+v^{4} & =\left(0,0,0\right)
+\end{align*}
+. Therefore the Bender reformulation is 
+\begin{align*}
+\min_{\mathbf{x},z} & -\left(3,7\right)\cdot\mathbf{x}+z\\
+\text{s.t.} & \left(0,0,0\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(0,0,0\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}\leq0\\
+ & \left(0,1,0\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(0,1,0\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}\leq0\\
+ & \left(0,0,2\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(0,0,2\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}\leq0\\
+ & \left(0,1,2\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(0,1,2\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}\leq0\\
+ & \left(1,1,0\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(1,1,0\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}-z\leq0\\
+ & \left(1,0,1\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(1,0,1\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}-z\leq0\\
+ & \left(0,1,1\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(0,1,1\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}-z\leq0\\
+ & \left(1,0,0\right)\cdot\begin{pmatrix}-4.5\\
+-1.5\\
+-.5
+\end{pmatrix}-\left(1,0,0\right)\cdot\begin{pmatrix}-1 & -1\\
+-1 & 0\\
+0 & -1
+\end{pmatrix}\mathbf{x}-z\leq0\\
+ & \mathbf{x}\in\mathbb{Z}^{+}\times\mathbb{Z}^{+}
+\end{align*}
+
 \item [2.1]Claim: for a continuous $f\,:\,\mathbb{R}\rightarrow\mathbb{R}$
 and $h>0$ 
 \[
@@ -130,10 +280,10 @@ g\left(t\right)=-\log\left(\det\left(\sqrt{X}\left(I+t\left(\sqrt{X}\right)^{-1}
 \begin{proof}
 Firstly since $X\succ0$ it's the case that $X$ is full rank (all
 nonzero eigenvalues) and there exists a matrix $\sqrt{X}$ such that
-$\sqrt{X}\sqrt{X}=X$ and $\sqrt{X}$ is full rank ($\sqrt{X}=Q\sqrt{\Sigma}Q^{T}$
-where $Q$ is the set of eigenvectors corresponding to $X$ and $\sqrt{\Sigma}\succ0$
-since $\Sigma\succ0$). Then $\left(\sqrt{X}\right)^{-1}$ exists
-and hence 
+$\sqrt{X}\sqrt{X}=X$ and $\sqrt{X}$ is full rank\footnote{\begin{proof}
+$\sqrt{X}=Q\sqrt{\Sigma}Q^{T}$ where $Q$ is the set of eigenvectors
+corresponding to $X$ and $\sqrt{\Sigma}\succ0$ since $\Sigma\succ0$.\end{proof}
+}. Then $\left(\sqrt{X}\right)^{-1}$ exists and hence 
 \[
 \sqrt{X}\left(\left(I+t\right)\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}\right)\sqrt{X}=X+tD
 \]
@@ -150,14 +300,14 @@ g\left(t\right) & =-\log\left(\det\left(\sqrt{X}\right)\det\left(I+t\left(\sqrt{
 \end{align*}
 Let $Y=\left(\sqrt{X}\right)^{-1}D\left(\sqrt{X}\right)^{-1}$, which
 is PSD since $D$ is PSD and $\left(\sqrt{X}\right)^{-1}$ is PD,
-and 
+and then 
 \begin{align*}
 g\left(t\right) & =-\log\left(\det\left(X\right)\right)-\log\left(\det\left(I+tY\right)\right)\\
  & =-\log\left(\det\left(X\right)\right)-\log\left(\prod_{i=1}^{n}\left(1+t\lambda_{i}\right)\right)\\
  & =-\log\left(\det\left(X\right)\right)-\sum_{i=1}^{n}\log\left(1+t\lambda_{i}\right)
 \end{align*}
-Note $g$ is convex in $t$ since it's the sum of a constant and convex
-functions of linear transformations of $t$. Therefore $f\left(X\right)$
+So $g$ is convex in $t$ since it's the sum of a constant and convex
+functions of linear transformations of $t$. Hence $f\left(X\right)$
 is convex since it is convex on every line.
 \end{proof}
 \end{enumerate}
@@ -225,19 +375,16 @@ implies
 Hence let $t=\frac{1}{\alpha-\mu\cdot x}$and $y=xt$. Then an equivalent
 problem is
 \begin{align*}
-\min_{x\in\mathbb{R}^{n}} & \sqrt{y^{\intercal}\Sigma y}\\
+\min_{y\in\mathbb{R}^{n}} & \sqrt{y^{\intercal}\Sigma y}\\
 \text{s.t.} & Fy\preceq gt\\
  & Ay=bt\\
- & \mu\cdot x-\alpha t=1\\
+ & \mu\cdot y-\alpha t=1\\
  & t\geq0
 \end{align*}
 Squaring the objective we get a convex program with a quadratic constraint.
 \end{proof}
-\item 
-
-\begin{enumerate}
-\item Let $x_{1}=\ln\left(r\right)$ and $x_{2}=\ln\left(h\right)$. Note
-this transformation is a bijection since $r,h>0$ and $r\in\left(0,\infty\right)$
+\item [4.1]Let $x_{1}=\ln\left(r\right)$ and $x_{2}=\ln\left(h\right)$.
+Note this transformation is a bijection since $r,h>0$ and $r\in\left(0,\infty\right)$
 implies $x_{1}\in\left(-\infty,\infty\right)$ and similarly for $x_{2}$.
 Further 
 \begin{align*}
@@ -245,16 +392,17 @@ Further
 \pi r^{2}h\geq V & \iff2x_{1}+x_{2}\geq\ln\left(\frac{V}{\pi}\right)
 \end{align*}
 Hence the two problems are equivalent.
-\item The new problem is a convex optimization problem because the objective
-is convex (being the sum of two convex functions of linear transformations)
-and the constraints are linear.
-\item Since everything is differentiable we can just use calculus: let $f\left(x_{1},x_{2}\right)=2\pi\left(e^{2x_{1}}+e^{x_{1}+x_{2}}\right)$.
+\item [4.2]The new problem is a convex optimization problem because the
+objective is convex (being the sum of two convex functions of linear
+transformations) and the constraints are linear.
+\item [4.3]Since everything is differentiable we can just use calculus:
+let $f\left(x_{1},x_{2}\right)=2\pi\left(e^{2x_{1}}+e^{x_{1}+x_{2}}\right)$.
 Then 
 \[
 \nabla f=\left(2e^{2x_{1}}+e^{x_{1}+x_{2}},e^{x_{1}+x_{2}}\right)
 \]
 Since this is never zero the constraint must be active (or the problem
-unbounded). On the constaint boundary 
+unbounded). On the constraint boundary 
 \[
 g\left(x_{1}\right)=f\left(\ln\left(\frac{V}{\pi}\right)-2x_{1},x_{1}\right)=2\pi\left(e^{2x_{1}}+e^{x_{1}+\ln\left(\frac{V}{\pi}\right)-2x_{1}}\right)=2\pi\left(e^{2x_{1}}+e^{\ln\left(\frac{V}{\pi}\right)-x_{1}}\right)=2\pi\left(e^{2x_{1}}+\frac{V}{\pi}e^{-x_{1}}\right)
 \]
@@ -276,22 +424,14 @@ r & =e^{\frac{1}{3}\ln\left(\frac{V}{2\pi}\right)}=\left(\frac{V}{2\pi}\right)^{
 h & =e^{\ln\left(2\right)+\frac{2}{3}\ln\left(\frac{V}{2\pi}\right)}=2\left(\frac{V}{2\pi}\right)^{\frac{1}{3}}
 \end{align*}
 
-\end{enumerate}
-\item Let $P$ be the program 
-\begin{align*}
-\min_{\left(x,y\right)} & c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy\\
-\text{s.t.} & x\in X,y\in Y
-\end{align*}
-where $X,Y$ are bounded polyhedra. 
-
-\begin{enumerate}
-\item Claim: There exists an extreme point $\left(\bar{x},\bar{y}\right)$
+\item [5.1]Claim: There exists an extreme point $\left(\bar{x},\bar{y}\right)$
 that solves the bilinear program. 
 
 \begin{proof}
 \textbf{Full disclosure: }For this part I looked at Thieu's paper
-here http://journals.math.ac.vn/acta/pdf/ 198002106.pdf. The problem
-can be restated as 
+here http://journals.math.ac.vn/acta/pdf/ 198002106.pdf.
+
+The problem can be restated as 
 \[
 \min_{x\in X}\left(c^{\intercal}x+\min_{y\in Y}\left(\left(d^{\intercal}+x^{\intercal}H\right)y\right)\right)
 \]
@@ -304,7 +444,7 @@ points $Y$. Then the problem can be restated again as
 \]
 For each $\bar{y}\in V\left(Y\right)$ the function 
 \begin{align*}
-g\left(x\right) & =\left(\bar{y}H+c^{\intercal}\right)x+d^{\intercal}\bar{y}
+g_{\bar{y}}\left(x\right) & =\left(\bar{y}H+c^{\intercal}\right)x+d^{\intercal}\bar{y}
 \end{align*}
 is a linear function of $x$. Hence the problem 
 \[
@@ -316,7 +456,8 @@ Therefore $\left(\bar{x},\bar{y}\right)$ is a solution of the original
 bilinear problem and both $\bar{x},\bar{y}$ are extreme points of
 $X,Y$ respectively.
 \end{proof}
-\item Claim: $\left(\hat{x},\hat{y}\right)$ is a local minimum iff $\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)\geq0$
+\item [5.2]Claim: $\left(\hat{x},\hat{y}\right)$ is a local minimum iff
+$\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)\geq0$
 and $\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)\geq0$
 for $x,y\in X,Y$ and $\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)>0$
 when $\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)<0$.
@@ -374,7 +515,7 @@ c^{\intercal}\left(x-\hat{x}\right)+d^{\intercal}\left(y-\hat{y}\right)+\left(x^
 \end{align*}
 Finally since, by part (1), since a solution exists at an extreme
 point, these inequalities hold for all $\left(x,y\right)\in X\times Y$.
-
+\begin{proof}
 $\Leftarrow$ Assume the inequalities hold for $\left(x,y\right)\in X\times Y$
 and $\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)\geq0$.
 Then 
@@ -396,8 +537,194 @@ then
  & \iff\\
 c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy & \geq c^{\intercal}\hat{x}+d^{\intercal}\hat{y}+\hat{x}^{\intercal}H\hat{y}
 \end{align*}
+
 \end{proof}
-\end{enumerate}
+\end{proof}
+\item [5.3]Claim: $\left(\hat{x},\hat{y}\right)$ is a KKT point iff $\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)\geq0$
+and $\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)\geq0$
+for $x,y\in X,Y$
+
+\begin{proof}
+Suppose $\left(\hat{x},\hat{y}\right)$ is a KKT point. By Gordan's
+theorem there exists no feasible $\left(x,y\right)$ such that 
+\[
+\left(\left.\nabla f\left(x,y\right)\right|_{\left(x,y\right)=\left(\hat{x},\hat{y}\right)}\right)^{\intercal}\left(x-\hat{x},y-\hat{y}\right)<0
+\]
+where $f\left(x,y\right)=c^{\intercal}x+d^{\intercal}y+x^{\intercal}Hy$.
+Therefore for feasible all $\left(x,y\right)$
+\[
+\left(\left.\nabla f\left(x,y\right)\right|_{\left(x,y\right)=\left(\hat{x},\hat{y}\right)}\right)^{\intercal}\left(x-\hat{x},y-\hat{y}\right)\geq0
+\]
+Finally note that 
+\[
+\left(\left.\nabla f\left(x,y\right)\right|_{\left(x,y\right)=\left(\hat{x},\hat{y}\right)}\right)^{\intercal}=\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal},d^{\intercal}+\hat{x}^{\intercal}H\right)^{\intercal}
+\]
+
+
+Since Gordan's theorem is iff the proof works in both directions.
+\end{proof}
+\item [5.4]For $f\left(x_{1},x_{2},y_{1},y_{2}\right)=x_{2}+y_{1}+x_{2}y_{1}-x_{1}y_{2}+x_{2}y_{2}$
+we have that $c=\left(0,1\right),d=\left(1,0\right)$ and 
+\[
+H=\begin{pmatrix}0 & -1\\
+1 & 1
+\end{pmatrix}
+\]
+The point $\left(x_{1},x_{2},y_{1},y_{2}\right)=\left(0,0,0,0\right)$
+is a KKT point since 
+\[
+\left(c^{\intercal}+\hat{y}^{\intercal}H^{\intercal}\right)\left(x-\hat{x}\right)=\left(0,1\right)^{\intercal}x\geq0
+\]
+for $\left(x_{1},x_{2}\right)\in X$ (since $x_{2}\geq0$ for $x\in X$)
+and
+\[
+\left(d^{\intercal}+\hat{x}^{\intercal}H\right)\left(y-\hat{y}\right)=\left(1,0\right)^{\intercal}y\geq0
+\]
+for $\left(y_{1},y_{2}\right)\in Y$ (since $y_{1}\geq0$ for $y\in Y$).
+The point $\left(0,0,0,0\right)$ is not a local minimum though since
+for $\left(x_{1},x_{2}\right)=\left(a,0\right)$ and $\left(y_{1},y_{2}\right)=\left(0,b\right)$
+we have that 
+\[
+\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)=x^{\intercal}Hy=x_{2}y_{1}-x_{1}y_{2}+x_{2}y_{2}=-ab<0
+\]
+and yet 
+\[
+x_{2}+y_{1}=0+0\not>0
+\]
+and hence by part (2) $\left(a,0,0,b\right)$ is not a local minimum.
+On the other hand for $\left(x_{1},x_{2},y_{1},y_{2}\right)=\left(3,0,1,5\right)$
+\[
+\left(0,1\right)^{\intercal}\left(3,0\right)=0\geq0
+\]
+and
+\[
+\left(1,0\right)^{\intercal}\left(1,5\right)=1\geq0
+\]
+and
+\[
+\left(x-\hat{x}\right)^{\intercal}H\left(y-\hat{y}\right)=x^{\intercal}Hy=-3\times5<0
+\]
+and
+\[
+\left(0,1\right)^{\intercal}\left(3,0\right)+\left(1,0\right)^{\intercal}\left(1,5\right)=1>0
+\]
+The global minimum is indeed at $\left(3,0,1,5\right)$ with $f\left(3,0,1,5\right)=-14$.
+\item [6.1]Let $P$ be the program 
+\begin{align*}
+\min_{x} & -\ln\left(a^{\intercal}x\right)-\ln\left(b^{\intercal}x\right)\\
+\text{s.t.} & \mathbf{1}^{\intercal}x=1,x\succeq0
+\end{align*}
+which is equivalent
+\begin{align*}
+\min_{x} & -\ln\left(a^{\intercal}x\right)-\ln\left(b^{\intercal}x\right)\\
+\text{s.t.} & \mathbf{1}^{\intercal}x-1=0,-x\preceq0
+\end{align*}
+Since the objective is differentiable and each of the constraints
+is differentiable the KKT conditions are
+\begin{align*}
+-\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}+u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =0\\
+u_{0}\left(\mathbf{1}^{\intercal}x-1\right) & =0\\
+-\left(u_{1}x_{1},\dots,u_{n}x_{n}\right) & =0\\
+\left(u_{1},\dots,u_{n}\right) & \succeq0\\
+u_{0} & \in\mathbb{R}
+\end{align*}
+with $\left\{ \mathbf{1}^{\intercal}x-1,-u_{1}x_{1},\dots,-u_{n}x_{n}\right\} $
+linearly independent.
+\item [6.2]Let $x=\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)$. Since
+the problem is convex, if a point satisfies the KKT conditions then
+it's a global minimum. To wit 
+\begin{align*}
+-\frac{a}{a^{\intercal}x}-\frac{b}{b^{\intercal}x}+u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right) & =-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}+u_{0}\mathbf{1}-\left(u_{1},\dots,u_{n}\right)=0\\
+u_{0}\left(\mathbf{1}^{\intercal}\left(\frac{1}{2},0,\dots,0,\frac{1}{2}\right)-1\right) & =u_{0}\times0=0\\
+-\left(\frac{1}{2}u_{1},0,\dots,0,\frac{1}{2}u_{n}\right) & =0
+\end{align*}
+Therefore $u_{1}=u_{n}=0$ and otherwise $u_{i}\neq0$. Hence for
+$u_{0}=2$ and $u_{i}=2\left(1-\frac{a_{i}+\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}}\right)$
+for $i=2,\dots,n-1$
+\begin{align*}
+-\frac{a}{\frac{1}{2}\left(a_{1}+a_{n}\right)}-\frac{b}{\frac{1}{2}\left(\frac{1}{a_{1}}+\frac{1}{a_{n}}\right)}+u_{0}\mathbf{1}-\left(0,u_{2}\dots,u_{n-1},0\right) & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)-\frac{2}{\left(a_{1}+a_{n}\right)}\left(a+a_{1}a_{n}b\right)\\
+ & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)\\
+ & -\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{1}a_{n}b_{1},a_{2}+a_{1}a_{n}b_{2},\dots,a_{n}+a_{1}a_{n}b_{n}\right)\\
+ & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)\\
+ & -\frac{2}{\left(a_{1}+a_{n}\right)}\left(a_{1}+a_{n},a_{2}+a_{1}a_{n}b_{2},\dots,a_{n}+a_{1}\right)\\
+ & =\left(u_{0},u_{0}-u_{2},\dots,u_{0}-u_{n-1},u_{0}\right)-2\left(1,\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}},\dots,1\right)\\
+ & =\left(u_{0}-2,u_{0}-2\left(\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)-u_{2},\dots,u_{0}-2\right)\\
+ & =\left(0,2\left(1-\frac{a_{2}+\frac{a_{1}a_{n}}{a_{2}}}{a_{1}+a_{n}}\right)-u_{2},\dots,0\right)\\
+ & =0
+\end{align*}
+All that remains is to show that $u_{i}\geq0$ (since $u_{0}$ is
+free). Note that 
+\[
+\left(a_{i}-\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}\leq\left(a_{n}-\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}
+\]
+since $a_{1}\leq a_{i}\leq a_{n}$ (i.e. any $a_{i}$ is closer to
+the ``middle'' {[}average{]} than $a_{n}$). And I claim I'm done.
+Why?
+\[
+\left(a_{i}-\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}=a_{i}^{2}-a_{i}\left(a_{1}+a_{n}\right)+\left(\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}
+\]
+and
+\[
+\left(a_{n}-\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}=\left(\frac{\left(a_{1}+a_{n}\right)}{2}\right)^{2}-a_{1}a_{n}
+\]
+and therefore
+\[
+a_{i}^{2}-a_{i}\left(a_{1}+a_{n}\right)\leq-a_{1}a_{n}
+\]
+or
+\[
+a_{i}^{2}+a_{1}a_{n}\leq a_{i}\left(a_{1}+a_{n}\right)
+\]
+or
+\[
+\frac{a_{i}+\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}}\leq1
+\]
+Hence
+\[
+u_{i}=2\left(1-\frac{a_{i}+\frac{a_{1}a_{n}}{a_{i}}}{a_{1}+a_{n}}\right)\geq2\left(1-1\right)=0
+\]
+Finally $z^{*}=-\ln\left(\frac{a_{1}}{2}+\frac{a_{n}}{2}\right)-\ln\left(\frac{1}{2a_{1}}+\frac{1}{2a_{n}}\right)=-\ln\left(\frac{\left(a_{1}+a_{n}\right)^{2}}{4a_{1}a_{n}}\right)$.
+\item [6.3]Claim: for Hermitian pd $A$ 
+\[
+2\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}\leq\sqrt{\frac{\lambda_{1}}{\lambda_{n}}}+\sqrt{\frac{\lambda_{n}}{\lambda_{1}}}
+\]
+
+
+\begin{proof}
+Let $A=V\Sigma V^{\intercal}$ then $V^{\intercal}\Sigma V=A$ and
+$V^{\intercal}\Sigma^{-1}V=A^{-1}$ 
+\[
+\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}=\sqrt{u^{\intercal}V^{\intercal}\Sigma Vu}\sqrt{u^{\intercal}V^{\intercal}\Sigma^{-1}Vu}
+\]
+Let $v=Vu$. Therefore 
+\[
+\sqrt{u^{\intercal}Au}\sqrt{u^{\intercal}A^{-1}u}=\sqrt{v^{\intercal}\Sigma v}\sqrt{v^{\intercal}\Sigma^{-1}v}
+\]
+Taking log of $\sqrt{v^{\intercal}\Sigma v}\sqrt{v^{\intercal}\Sigma^{-1}v}$
+\[
+\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v^{\intercal}\Sigma^{-1}v\right)=\ln\left(\sum_{i=1}^{n}\lambda_{i}v_{i}^{2}\right)+\ln\left(\sum_{i=1}^{n}\frac{1}{\lambda_{i}}v_{i}^{2}\right)
+\]
+Since $V$ is orthonormal $\left\Vert v\right\Vert _{2}=1$ and hence
+it's the case that 
+\[
+\mathbf{1}^{\intercal}\left(v_{1}^{2},\dots,v_{n}^{2}\right)=\sum_{i=1}^{n}v_{i}^{2}=\left\Vert v\right\Vert _{2}^{2}=1\geq1
+\]
+Therefore by part (2) with $a_{i}=\lambda_{i}$ (with $a_{i}>0$ since
+$A$ is pd) 
+\[
+-\ln\left(\frac{\left(\lambda_{1}+\lambda_{n}\right)^{2}}{4\lambda_{1}\lambda_{n}}\right)\leq-\ln\left(v^{\intercal}\Sigma v\right)-\ln\left(v^{\intercal}\Sigma^{-1}v\right)
+\]
+or
+\[
+\ln\left(v^{\intercal}\Sigma v\right)+\ln\left(v^{\intercal}\Sigma^{-1}v\right)\leq\ln\left(\frac{\left(\lambda_{1}+\lambda_{n}\right)^{2}}{4\lambda_{1}\lambda_{n}}\right)
+\]
+Taking exponentials (since the exponential is positive increasing)
+and square roots on both sides
+\begin{align*}
+\sqrt{\left(v^{\intercal}\Sigma v\right)\left(v^{\intercal}\Sigma^{-1}v\right)} & \leq\sqrt{\frac{\left(\lambda_{1}+\lambda_{n}\right)^{2}}{4\lambda_{1}\lambda_{n}}}\\
+ & =\frac{1}{2}\frac{\left(\lambda_{1}+\lambda_{n}\right)}{\sqrt{\lambda_{1}\lambda_{n}}}=\frac{1}{2}\left(\sqrt{\frac{\lambda_{1}}{\lambda_{n}}}+\sqrt{\frac{\lambda_{n}}{\lambda_{1}}}\right)
+\end{align*}
+\end{proof}
 \end{enumerate}
 
 \end{document}

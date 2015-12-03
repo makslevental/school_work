@@ -1828,6 +1828,322 @@ parent
 \end_layout
 
 \begin_layout Section
+Dijkstra's Shortest Path (Optional)
+\end_layout
+
+\begin_layout Standard
+You haven't read the section on depth-first search, nor topological sort,
+ nor strongly connected components, but this section apperas here because
+ topological sort and strongly connected components are applications of
+ depth-first search and Dijkstra's shortest path algorithm is an application
+ of bread-first search.
+\end_layout
+
+\begin_layout Standard
+As alluded to at the end of the BFS section you can use BFS to compute shortest
+ paths from a single source to all vertices using a BFS tree.
+ One way to think about the problem that that solves is computing the shortest
+ path from a single source to all vertices on a weighted graph where all
+ the edges have weight 1.
+ But what if the edge weights aren't one? It won't work.
+ BFS only gives you shortest path in the sense of fewest number of edges,
+ not in terms of sum of edge weights (obviously since the algorithm never
+ checks the edge weights).
+ How could you use BFS to solve the problem of single source all vertices
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Compute shortest paths from a single source to all other vertices.
+\end_layout
+
+\end_inset
+
+ in terms of sum of all edge weights? Well if the edge weights are integral
+ (have whole number values) one hack would be to insert 
+\begin_inset Formula $k-1$
+\end_inset
+
+ vertices on any edge with weight 
+\begin_inset Formula $k$
+\end_inset
+
+ and then the number of edges distance matches the edge weight distance.
+ But that would blow up the run time of BFS since it's 
+\begin_inset Formula $O\left(\left|V\right|+\left|E\right|\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|E\right|$
+\end_inset
+
+ will blow up.
+ 
+\end_layout
+
+\begin_layout Standard
+The smarter way is to make BFS a little smarter: expand the frontier in
+ the direction of the 
+\begin_inset Quotes eld
+\end_inset
+
+nearest
+\begin_inset Quotes erd
+\end_inset
+
+ vertices, where nearest now means those for which the path is shortest
+ in the sense of sum of edge weights.
+ In addition to expanding in the direction of the nearest vertices you should
+ always update your current assessments of shortest paths to all vertices
+ seen so far.
+ Effecting the first part is easy: just replace the Queue in BFS with a
+ Min-Heap where the priority ranking of each vertex its current shortest
+ path distance from the source.
+ Then the nearest vertices will be popped.
+ To effect the second part is easy too: after popping a vertex update all
+ of the distances to all of its neighbors if the shortest path to them (from
+ the source) is shorter through the vertex that just got popped.
+ The code appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Dijkstra's-shortest-path"
+
+\end_inset
+
+.
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+lstparams "language={C++},basicstyle={\footnotesize},showstringspaces=false,tabsize=2,mathescape=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Dijkstras(G,s)
+\end_layout
+
+\begin_layout Plain Layout
+
+// each entry in this array will store
+\end_layout
+
+\begin_layout Plain Layout
+
+// the distance from the source to this vertex
+\end_layout
+
+\begin_layout Plain Layout
+
+// the vertices are numbered 1 to |G.V|
+\end_layout
+
+\begin_layout Plain Layout
+
+dist = array(|G.V|)
+\end_layout
+
+\begin_layout Plain Layout
+
+prev = array(|G.V|)
+\end_layout
+
+\begin_layout Plain Layout
+
+Q = minHeap
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+dist[s] = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// for each vertex except the source
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in {G.V - s}
+\end_layout
+
+\begin_layout Plain Layout
+
+	// initialize every vertex to be infinitely far from the source
+\end_layout
+
+\begin_layout Plain Layout
+
+	dist[v] = $
+\backslash
+infty$
+\end_layout
+
+\begin_layout Plain Layout
+
+	// in order to construct the paths we need the predecessor vertex for every
+ vertex
+\end_layout
+
+\begin_layout Plain Layout
+
+	// on the shortest path to that vertex  from the source
+\end_layout
+
+\begin_layout Plain Layout
+
+	// initialize to null in case some vertex is unreachable and to prevent
+\end_layout
+
+\begin_layout Plain Layout
+
+	// garbage in the array from giving incorrect answers
+\end_layout
+
+\begin_layout Plain Layout
+
+	prev[v] = null
+\end_layout
+
+\begin_layout Plain Layout
+
+	// the current priority rank of each vertex except the source
+\end_layout
+
+\begin_layout Plain Layout
+
+	// is $
+\backslash
+infty$
+\end_layout
+
+\begin_layout Plain Layout
+
+	Q.add(v,dist[v])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+while Q.empty != true
+\end_layout
+
+\begin_layout Plain Layout
+
+	// pop the closest (lowest rank) vertex
+\end_layout
+
+\begin_layout Plain Layout
+
+	v = Q.pop
+\end_layout
+
+\begin_layout Plain Layout
+
+	// update only those vertices we're not done with
+\end_layout
+
+\begin_layout Plain Layout
+
+	for u in G.adj(v) where u $
+\backslash
+in$ Q
+\end_layout
+
+\begin_layout Plain Layout
+
+		// if the distance (sum of edge weights) along path path from s to u through
+ v)
+\end_layout
+
+\begin_layout Plain Layout
+
+		// is less than the current distance to u then shortest path should go
+ through
+\end_layout
+
+\begin_layout Plain Layout
+
+		// v
+\end_layout
+
+\begin_layout Plain Layout
+
+		dvu = dist[v] + weight(v, u)
+\end_layout
+
+\begin_layout Plain Layout
+
+		if dvu < dist[u]
+\end_layout
+
+\begin_layout Plain Layout
+
+			dist[u] = dvu + weight(v, u)
+\end_layout
+
+\begin_layout Plain Layout
+
+			prev[u] = v
+\end_layout
+
+\begin_layout Plain Layout
+
+			Q.change_priority(u,dvu)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dijkstra's shortest path
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Dijkstra's-shortest-path"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Depth-first search
 \end_layout
 
@@ -2577,7 +2893,7 @@ reference "fig:Order-of-dressing"
 
 \end_inset
 
- is if I start the depth-first search at it? It'll be one of the last ones
+ if I start the depth-first search at it? It'll be one of the last ones
 \begin_inset Foot
 status open
 
@@ -2889,6 +3205,10 @@ name "alg:topsort"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Strongly Connected Components
 \end_layout
 
 \end_body
