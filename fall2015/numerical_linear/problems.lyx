@@ -2528,5 +2528,485 @@ and hence
 
 \end_deeper
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[23.1]
+\end_layout
+
+\end_inset
+
+Claim: For 
+\begin_inset Formula $A=QR$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{\dagger}A=U^{\dagger}U$
+\end_inset
+
+ a Cholesky decomposition of 
+\begin_inset Formula $A^{\dagger}A$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $R=U$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Firstly 
+\begin_inset Formula 
+\[
+U^{\dagger}U=A^{\dagger}A=\left(QR\right)^{\dagger}\left(QR\right)=R^{\dagger}Q^{\dagger}QR=R^{\dagger}R
+\]
+
+\end_inset
+
+So if 
+\begin_inset Formula $U^{\dagger}U$
+\end_inset
+
+ is a unique Cholesky decomposition then 
+\begin_inset Formula $U=R$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $A^{\dagger}A$
+\end_inset
+
+ is obviously Hermitian.
+ It's also pd since 
+\begin_inset Formula $A$
+\end_inset
+
+ is nonsingular and 
+\begin_inset Formula $x^{\dagger}\left(A^{\dagger}A\right)x=\left(Ax\right)^{\dagger}\left(Ax\right)=\left\Vert Ax\right\Vert _{2}>0$
+\end_inset
+
+ if 
+\begin_inset Formula $x\neq0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $A^{\dagger}A=U^{\dagger}U$
+\end_inset
+
+ is a unique Cholesky decomposition.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[24.4]
+\end_layout
+
+\end_inset
+
+For 
+\begin_inset Formula $A\in\mathbb{C}^{m\times m}$
+\end_inset
+
+ and norm 
+\begin_inset Formula $\left\Vert \cdot\right\Vert $
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Where 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is the spectral radius it's the case that 
+\begin_inset Formula $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =0\iff\rho\left(A\right)<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =0$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho\left(A\right)\geq1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A=QTQ^{\dagger}$
+\end_inset
+
+ be a Schur decomposition of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert  & = & \lim_{n\rightarrow\infty}\left\Vert \left(QTQ^{\dagger}\right)^{n}\right\Vert \\
+ & = & \lim_{n\rightarrow\infty}\left\Vert T^{n}\right\Vert 
+\end{eqnarray*}
+
+\end_inset
+
+Without loss of generality suppose the larges eigenvalue of 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $\left|\mbox{\lambda}_{1}\right|=1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert T^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cc}
+1 & \mathbf{t}\\
+0 & T'
+\end{array}\right)^{n}\right\Vert =
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $T'\in\mathbb{C}^{\left(m-1\right)\times\left(m-1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{t}\in\mbox{\mathbb{C}}^{m-1}$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\left(\begin{array}{cc}
+1 & \mathbf{t}\\
+0 & T'
+\end{array}\right)^{n}\neq0
+\]
+
+\end_inset
+
+and hence 
+\begin_inset Formula $\left\Vert \left(\begin{array}{cc}
+1 & \mathbf{t}\\
+0 & T'
+\end{array}\right)^{n}\right\Vert \neq0$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert \neq0$
+\end_inset
+
+ a contradiction.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\rho\left(A\right)<1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert T^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\mbox{\lambda}_{1} & a & b & c\\
+0 & \ddots & d & e\\
+\vdots & \ddots & \ddots & f\\
+0 & \cdots & 0 & \lambda_{m}
+\end{array}\right)^{n}\right\Vert 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda_{i}<1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\lambda_{1} & a & b & c\\
+0 & \ddots & d & e\\
+\vdots & \ddots & \ddots & f\\
+0 & \cdots & 0 & \lambda_{m}
+\end{array}\right)^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\left(\lambda_{1}\right)^{n} & a\left(n\right) & b\left(n\right) & c\left(n\right)\\
+0 & \ddots & d\left(n\right) & e\left(n\right)\\
+\vdots & \ddots & \ddots & f\left(n\right)\\
+0 & \cdots & 0 & \left(\lambda_{m}\right)^{n}
+\end{array}\right)\right\Vert 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a,b,c,d,e,f$
+\end_inset
+
+ are unknown functions of 
+\begin_inset Formula $n$
+\end_inset
+
+ of appropriate dimension.
+ Since 
+\begin_inset Formula $\lambda_{i}<1$
+\end_inset
+
+ clearly 
+\begin_inset Formula $\lim_{n\rightarrow\infty}\left(\lambda_{i}\right)^{n}=0$
+\end_inset
+
+ and since the eigenvalues of an uppertriangular matrix are the entries
+ on the diagonal the limit has the 0 eigenvalue with multiplicity 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is the spectral abscissa it's the case that 
+\begin_inset Formula $\lim_{t\rightarrow\infty}\left\Vert e^{tA}\right\Vert =0\iff\alpha\left(A\right)<0$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\lim_{t\rightarrow\infty}\left\Vert e^{tA}\right\Vert =0$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\left(A\right)\geq0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A=QTQ^{\dagger}$
+\end_inset
+
+ be a Schur decomposition of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert  & = & \lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\lambda_{1}t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\lambda_{1}t}
+\end{array}\right)\right\Vert =\lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Re}\left(\lambda_{1}\right)t}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Re}\left(\lambda_{m}\right)t}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert 
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $a,b,c,d,e,f$
+\end_inset
+
+ are unknown functions of 
+\begin_inset Formula $t$
+\end_inset
+
+ of appropriate dimension and 
+\begin_inset Formula $\left|e^{\text{Im}\left(\lambda_{m}\right)t}\right|=1$
+\end_inset
+
+ .
+ Without loss of generality suppose the larges eigenvalue of 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $\text{Re}\left(\lambda_{i}\right)=0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Re}\left(\lambda_{1}\right)t}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Re}\left(\lambda_{m}\right)t}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert =\lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert 
+\]
+
+\end_inset
+
+and hence clearly 
+\begin_inset Formula $\left(e^{A}\right)^{t}\neq0$
+\end_inset
+
+ and so
+\begin_inset Formula $\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert \neq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\alpha\left(A\right)<0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert  & = & \lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Re}\left(\lambda_{1}\right)t}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Re}\left(\lambda_{m}\right)t}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert \\
+ & = & \lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\frac{1}{e^{\left|\text{Re}\left(\lambda_{1}\right)\right|t}}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & \frac{1}{e^{\left|\text{Re}\left(\lambda_{m}\right)\right|t}}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert 
+\end{eqnarray*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $\lim_{t\rightarrow\infty}\frac{1}{e^{\left|\text{Re}\left(\lambda_{m}\right)\right|t}}=0$
+\end_inset
+
+ and since the eigenvalues of an uppertriangular matrix are the entries
+ on the diagonal the limit has the 0 eigenvalue with multiplicity 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert =0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[26.2]
+\end_layout
+
+\end_inset
+
+The 2-norm 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ pseudospectrum of 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $\left\{ z\big|\sigma_{m}\left(zI-A\right)\leq\epsilon\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma_{m}$
+\end_inset
+
+ is the minimal singular value of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The boundary of 
+\begin_inset Formula $\left\{ z\big|\sigma_{m}\left(zI-A\right)\leq\epsilon\right\} $
+\end_inset
+
+ is 
+\begin_inset Formula $z$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(z\right)=\sigma_{m}\left(zI-A\right)-\epsilon=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

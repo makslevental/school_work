@@ -1870,7 +1870,7 @@ Compute shortest paths from a single source to all other vertices.
 
  and then the number of edges distance matches the edge weight distance.
  But that would blow up the run time of BFS since it's 
-\begin_inset Formula $O\left(\left|V\right|+\left|E\right|\right)$
+\begin_inset Formula $O\left(\left|E\right|\right)$
 \end_inset
 
  and 
