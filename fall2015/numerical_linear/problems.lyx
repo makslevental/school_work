@@ -85,6 +85,10 @@ figs-within-sections
 MAD6406 Homework Fall 2015
 \end_layout
 
+\begin_layout Author
+Maksim Levental
+\end_layout
+
 \begin_layout Enumerate
 \begin_inset ERT
 status open
@@ -164,9 +168,9 @@ Let
 
  and hence 
 \begin_inset Formula 
-\begin{equation}
-r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{m}\rho_{mn}=e_{n}\label{eq:uppertriang}
-\end{equation}
+\[
+r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{m}\rho_{mn}=e_{n}
+\]
 
 \end_inset
 
@@ -2868,7 +2872,7 @@ where
 \end_inset
 
  .
- Without loss of generality suppose the larges eigenvalue of 
+ Without loss of generality suppose the largest eigenvalue of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -2960,53 +2964,727 @@ status open
 
 \begin_layout Plain Layout
 
-[26.2]
+[30.7]
 \end_layout
 
 \end_inset
 
-The 2-norm 
-\begin_inset Formula $\epsilon$
+The log plot of the absolute values of the eigenvectors appears in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Localization"
+
 \end_inset
 
- pseudospectrum of 
-\begin_inset Formula $A$
+.
+ 42.13% of 
+\begin_inset Formula $Q$
 \end_inset
 
- is 
-\begin_inset Formula $\left\{ z\big|\sigma_{m}\left(zI-A\right)\leq\epsilon\right\} $
+ has magnitude greater or equal to 
+\begin_inset Formula $10^{-10}$
 \end_inset
 
- where 
-\begin_inset Formula $\sigma_{m}$
+.
+ The localization for the Laplacian appears in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Localization-for"
+
 \end_inset
 
- is the minimal singular value of 
-\begin_inset Formula $A$
+.
+ The code appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Localization-source"
+
 \end_inset
 
 .
  
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename localization.jpg
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Localization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Localization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename localization_2.jpg
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Localization for 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Localization-for"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "language=Matlab"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+t=randn(1,100); t1=randn(1,99); T = diag(t)+diag(t1,1)+diag(t1,-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+[V,D]=eig(T);
+\end_layout
+
+\begin_layout Plain Layout
+
+figure; axes; hold on;
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:10
+\end_layout
+
+\begin_layout Plain Layout
+
+    plot(1:100,log(abs(V(:,i))),'color',[rand rand rand]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+W = abs(V) >= 10.^(-10); sum(W(:))/10000
+\end_layout
+
+\begin_layout Plain Layout
+
+% part 2
+\end_layout
+
+\begin_layout Plain Layout
+
+T = diag(2.*ones(1,100))+diag(-ones(1,99),-1)+diag(-ones(1,99),1);
+\end_layout
+
+\begin_layout Plain Layout
+
+[V,D]=eig(T);
+\end_layout
+
+\begin_layout Plain Layout
+
+figure; axes; hold on;
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:5
+\end_layout
+
+\begin_layout Plain Layout
+
+    plot(1:100,log(abs(V(:,i))),'color',[rand rand rand]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+W = abs(V) >= 10.^(-10); sum(W(:))/10000
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Localization source
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Localization-source"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[32.2]
+\end_layout
+
+\end_inset
+
+Gauss-Legendre Quadrature
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-The boundary of 
-\begin_inset Formula $\left\{ z\big|\sigma_{m}\left(zI-A\right)\leq\epsilon\right\} $
-\end_inset
+Do I get extra credit for getting it down to 4 lines? Algorithm appears
+ in Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Gauss-Legendre-Quadrature"
 
- is 
-\begin_inset Formula $z$
-\end_inset
-
- such that 
-\begin_inset Formula $f\left(z\right)=\sigma_{m}\left(zI-A\right)-\epsilon=0$
 \end_inset
 
 .
  
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[Q,D]=eig(diag(.5./sqrt(1-(2*(1:n-1)).^(-2)),1)+diag(.5./sqrt(1-(2*(1:n-1)).^(-2)),-1)
+);
+\end_layout
+
+\begin_layout Plain Layout
+
+x = diag(D);
+\end_layout
+
+\begin_layout Plain Layout
+
+w = 2*(Q(1,:).^2);
+\end_layout
+
+\begin_layout Plain Layout
+
+I = dot(w,f(x));
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gauss-Legendre Quadrature
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Gauss-Legendre-Quadrature"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $I_{4}\left(e^{x}\right)=2.350402092156378$
+\end_inset
+
+ and results of 
+\begin_inset Formula $\log\left(\left|I\left(e^{x}\right)-I_{n}\left(e^{x}\right)\right|\right)$
+\end_inset
+
+ appear in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gauss-Legendre-Quad"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gauss_quad.jpg
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gauss-Legendre Quad 
+\begin_inset Formula $e^{x}$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gauss-Legendre-Quad"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Obviously the error in approximating the integral by the quadrature goes
+ to zero very quickly.
+\end_layout
+
+\begin_layout Enumerate
+The integral of 
+\begin_inset Formula $e^{\left|x\right|}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\int_{-1}^{1}e^{\left|x\right|}dx=2\int_{0}^{1}e^{x}dx=2\left(e-1\right)
+\]
+
+\end_inset
+
+The results of the comparison appear in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gauss-Legendre-Quad-1"
+
+\end_inset
+
+.
+ The error goes to zero slowly and erratically probably because 
+\begin_inset Formula $e^{\left|x\right|}$
+\end_inset
+
+ is not differentiable at 
+\begin_inset Formula $x=0$
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gauss_quad2.jpg
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gauss-Legendre Quad 
+\begin_inset Formula $e^{x}$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gauss-Legendre-Quad-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[38.6]
+\end_layout
+
+\end_inset
+
+Source appears in algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Conjugate-gradients"
+
+\end_inset
+
+.
+ Log plot appears in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Conjugate-gradients-log"
+
+\end_inset
+
+.
+ For some reason gradient descent hits a brick wall in the minimization.
+ Conjugate gradients doesn't and improves quickly but eventually (at about
+ iteration 80) stops improving as well.
+ 
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "language=Matlab,basicstyle={\footnotesize},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+A=diag(1:100)+diag(ones(1,99),1)+diag(ones(1,99),-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+b=ones(100,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+CGx={};CGr={};CGp={};
+\end_layout
+
+\begin_layout Plain Layout
+
+CGx{1} = zeros(100,1); CGr{1} = b; CGp{1} = CGr{1};
+\end_layout
+
+\begin_layout Plain Layout
+
+for n=2:100
+\end_layout
+
+\begin_layout Plain Layout
+
+    an = (CGr{n-1}'*CGr{n-1})/(CGp{n-1}'*A*CGp{n-1});
+\end_layout
+
+\begin_layout Plain Layout
+
+    CGx{n} = CGx{n-1} + an.*CGp{n-1};
+\end_layout
+
+\begin_layout Plain Layout
+
+    CGr{n} = CGr{n-1} - an.*(A*CGp{n-1});
+\end_layout
+
+\begin_layout Plain Layout
+
+    bn = (CGr{n}'*CGr{n})/(CGr{n-1}'*CGr{n-1});
+\end_layout
+
+\begin_layout Plain Layout
+
+    CGp{n} = CGr{n} + bn.*CGp{n-1};
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+SDx={};SDr={};
+\end_layout
+
+\begin_layout Plain Layout
+
+SDx{1} = zeros(100,1); SDr{1} = b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+for n=2:100
+\end_layout
+
+\begin_layout Plain Layout
+
+    an = (SDr{n-1}'*SDr{n-1})/(SDr{n-1}'*A*SDr{n-1});
+\end_layout
+
+\begin_layout Plain Layout
+
+    SDr{n} = SDr{n-1} - an.*(A*SDr{n-1});
+\end_layout
+
+\begin_layout Plain Layout
+
+    SDx{n} = SDx{n-1} + an.*SDr{n}; end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ka = max(eig(A))/min(eig(A));
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(1:100,cellfun(@(x)(log(norm(x))),CGr),'-.r*',...
+\end_layout
+
+\begin_layout Plain Layout
+
+    	1:100,cellfun(@(x)(log(norm(x))),cellfun(@(x)(b-A*x),CGx,'UniformOutput',fa
+lse)),'--mo',...
+\end_layout
+
+\begin_layout Plain Layout
+
+    	1:100,cellfun(@(x)(log(norm(x))),SDr),':bs',...
+\end_layout
+
+\begin_layout Plain Layout
+
+    	1:100,log(2*((sqrt(ka)-1)/(sqrt(ka)+1)).^(1:100)),':gx')
+\end_layout
+
+\begin_layout Plain Layout
+
+legend('est resid norms CG','act resid norms CG','resid norms SD','k');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Conjugate gradients
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Conjugate-gradients"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename cg.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Conjugate gradients log plot
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Conjugate-gradients-log"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
