@@ -9,6 +9,8 @@
 \usepackage{amstext}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
 
 \makeatletter
 
@@ -31,6 +33,9 @@
 \begin{document}
 
 \title{MAD6406 Homework Fall 2015}
+
+
+\author{Maksim Levental}
 \maketitle
 \begin{enumerate}
 \item [1.3] Claim: $R$ upper triangular and nonsingular iff $R^{-1}$
@@ -45,9 +50,9 @@ there exist $\rho_{jn}$ for $j=1,\dots,n$ such that
 r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{n}\rho_{nn}=e_{n}
 \]
 Let $\rho_{jn}=0$ for $n<j<\leq m$ and hence 
-\begin{equation}
-r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{m}\rho_{mn}=e_{n}\label{eq:uppertriang}
-\end{equation}
+\[
+r_{1}\rho_{1n}+r_{2}\rho_{2n}+\cdots+r_{m}\rho_{mn}=e_{n}
+\]
 Then let 
 \[
 \rho_{i}=\begin{bmatrix}\rho_{1i}\\
@@ -240,7 +245,7 @@ i.e. in both $P^{\left(1\right)}$ and $P^{\left(2\right)}$.\\
 \\
 \\
 
-\item [8.2]QR factorization in MATLAB
+\item [8.2]MATLAB QR factorization code appears in algorithm \ref{alg:Problem-8.2}.
 \begin{algorithm}[h]
 \noindent \centering{}
 \begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},showstringspaces=false,tabsize=2]
@@ -259,30 +264,16 @@ for i=1:n
     end
 end
 \end{lstlisting}
-\caption{Problem 8.2}
+\caption{Problem 8.2\label{alg:Problem-8.2}}
 \end{algorithm}
-\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=4]
-function [ Q,R ] = mgs( A )
-
-n=size(A,2); 
-V = A; 
-R = zeros(n); 
-Q = zeros(size(A));
-for i=1:n
-    R(i,i) = norm(V(:,i));
-    Q(:,i) = V(:,i)/R(i,i);
-    for j=i+1:n
-        R(i,j) = dot(conj(Q(:,i)),V(:,j));
-        V(:,j) = V(:,j) - R(i,j)*Q(:,i);
-    end
-end
-\end{lstlisting}
 
 \item [10.2]
 
 \begin{enumerate}
-\item QR factorization by Householder orthogonal triangularization in MATLAB
-\begin{lstlisting}
+\item MATLAB QR factorization by Householder orthogonal triangularization
+code appears in algorithm \ref{alg:Problem-10.2(a)}. 
+\begin{algorithm}[h]
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=2]
 function [W,R] = house( A )
 %HOUSE computes implicit representation of QR using householder
 %orthogonal trianglurization
@@ -299,8 +290,14 @@ end
 end
 \end{lstlisting}
 
-\item Reconstruction of Q from Householder decomposition
-\begin{lstlisting}
+
+\caption{Problem 10.2(a)\label{alg:Problem-10.2(a)}}
+\end{algorithm}
+
+\item Reconstruction of Q from Householder decomposition code appears in
+algorithm \ref{alg:Problem-10.2(b)}.
+\begin{algorithm}[h]
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=2]
 function Q=formQ(W)
 %formQ reconstructs Q from W by computing Qe_i for i=1,..,m
 [m,n]=size(W);
@@ -313,9 +310,14 @@ end
 end
 \end{lstlisting}
 
+
+\caption{Problem 10.2(b)\label{alg:Problem-10.2(b)}}
+\end{algorithm}
+
 \end{enumerate}
-\item [11.3]The source 
-\begin{lstlisting}[language=Matlab]
+\item [11.3] Experimentation MATLAB code appears in algorithm \ref{alg:Problem-11.3}.
+\begin{algorithm}[h]
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},showstringspaces=false,tabsize=2]
 m=50;n=12;
 t=linspace(0,1,m);
 A=fliplr(vander(t));
@@ -335,7 +337,12 @@ xc = inv(R(1:n,:))*Q(:,1:n)'*b';
 % (f)
 [U,S,V] = svd(A,0); xf = V*inv(S)*U';
 \end{lstlisting}
-Spurious digits are bolded (since I don't have a color printer): {\scriptsize{}
+
+
+\caption{Problem 11.3\label{alg:Problem-11.3}}
+\end{algorithm}
+Results appear below. spurious digits are bolded (since I don't have
+a color printer): {\scriptsize{}
 \[
 \begin{bmatrix}\left(a\right) & \left(b\right) & \left(c\right) & \left(d\right) & \left(e\right) & \left(f\right)\\
 1.00000000\mathbf{9086630} & 1.00000000\mathbf{3504093} & 1.000000000996\mathbf{587} & 1.000000000996608 & 1.000000000996608 & 1.000000000996608\\
@@ -452,7 +459,485 @@ implies
 \[
 \text{fl}\left(n\pi\right)-n\pi=n\pi\left(1+\epsilon\right)-n\pi=\pi n\epsilon\nleq\pi\epsilon_{\text{machine}}
 \]
+
 \end{enumerate}
+\item [16.2]
+
+\begin{enumerate}
+\item Experiment code appears in algorithm \ref{alg:Problem-16.2(a)}. 
+\begin{algorithm}[h]
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=2]
+n=zeros(5,4);
+for i=1:5
+	S=diag(sort(rand(1,50),'descend'));
+	U = orth(rand(50));
+	V = orth(rand(50));
+	if(rank(U)+rank(V) ~= 100) 
+		error('rank deficient');
+	end
+	A=U*S*V';
+	[U2,S2,V2]=svd(A);
+	n(i,:)=[norm(U-U2),norm(S-S2),norm(V-V2),norm(A-U2*S2*V2')];
+end
+\end{lstlisting}
+\caption{Problem 16.2(a)\label{alg:Problem-16.2(a)}}
+
+
+\end{algorithm}
+The results appear in table \ref{tab:Results-experiment-problem}.
+\begin{table}
+\[
+\begin{array}{cccccc}
+\text{test} & \#1 & \#2 & \#3 & \#4 & \#5\\
+\left\Vert U-U2\right\Vert  & \sim2 & \sim2 & \sim2 & \sim2 & \sim2\\
+\left\Vert S-S2\right\Vert  & \sim0 & \sim0 & \sim0 & \sim0 & \sim0\\
+\left\Vert U-V2\right\Vert  & \sim2 & \sim2 & \sim2 & \sim2 & \sim2\\
+\left\Vert A-USV^{\intercal}\right\Vert  & \sim0 & \sim0 & \sim0 & \sim0 & \sim0
+\end{array}
+\]
+
+
+\caption{Results experiment problem 16.2(a)\label{tab:Results-experiment-problem}}
+\end{table}
+It's the case that $\left\Vert S-S2\right\Vert _{2}\approx\left\Vert A-USV^{\intercal}\right\Vert _{2}\approx0$
+because the SVD is unique. It's the case that $\left\Vert U-U2\right\Vert _{2}\approx\left\Vert U-V2\right\Vert _{2}\approx2$
+because the SVD is unique only upto reflections of the singular vectors
+and each of the singular vectors is unit norm itself (therefore the
+maximum distance between two singular vectors $\left\Vert u-v\right\Vert =2$).
+\item ``Fixing the signs'' amounts to reflecting the vectors. Figuring
+out which vectors are flipped amounts to computing which $u\cdot u'=-1$
+and which $v\cdot v'=-1$. We can do this by looking at the diagonals
+of $U\cdot U2$ and $V\cdot V2$. Then reflecting those vector in
+$U,V$. The modified experiment code appears in algorithm \ref{alg:Problem-16.2(a)-1}.
+\begin{algorithm}[h]
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=2]
+n=zeros(5,5);
+for i=1:5
+	S=diag(sort(rand(1,50),'descend'));
+	U = orth(rand(50));
+	V = orth(rand(50));
+	if(rank(U)+rank(V) ~= 100) 
+		error('rank deficient');
+	end
+	A=U*S*V';
+	[U2,S2,V2]=svd(A);
+    U2 = U2*diag(U2'*U);
+    V2 = V2*diag(V2'*V));
+	n(i,:)=[norm(U-U2),norm(S-S2),norm(V-V2),norm(A-U2*S2*V2'),cond(A)];
+end
+\end{lstlisting}
+\caption{Problem 16.2(b)\label{alg:Problem-16.2(a)-1}}
+\end{algorithm}
+The results appear in table \ref{tab:Results-experiment-problem-1}.
+\begin{table}
+\[
+\begin{array}{cccccc}
+\text{test} & \#1 & \#2 & \#3 & \#4 & \#5\\
+\left\Vert U-U2\right\Vert  & 1.0e-10*0.0041 & 0.8462 & 0.0041 & 0.0366 & 0.0047\\
+\left\Vert S-S2\right\Vert  & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000\\
+\left\Vert U-V2\right\Vert  & 0.0041 & 0.8463 & 0.0041 & 0.0366 & 0.0047\\
+\left\Vert A-USV^{\intercal}\right\Vert  & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000\\
+\text{cond}\left(A\right) & 215.456 & 59.075 & 24.323 & 1127.737 & 249.643
+\end{array}
+\]
+
+
+\caption{Results experiment problem 16.2(b)\label{tab:Results-experiment-problem-1}}
+\end{table}
+The results look fairly independent of the condition number.
+\item Repeating with $S=S^{6}$. The results appear in table \ref{tab:Results-experiment-problem-1-1}.
+Here now the results look much more sensitive to the condition of
+the matrix $A$. 
+\begin{table}
+{\footnotesize{}
+\[
+\begin{array}{cccccc}
+\text{test} & \#1 & \#2 & \#3 & \#4 & \#5\\
+\left\Vert U-U2\right\Vert  & 1.23083532529072e-08 & 4.95658588681006e-09 & 3.19742887927701e-07 & 4.76250736869276e-08 & 9.59965829808946e-10\\
+\left\Vert S-S2\right\Vert  & 1.11022302462516e-15 & 9.99200722162641e-16 & 9.99200722162641e-16 & 1.77635683940025e-15 & 1.33226762955019e-15\\
+\left\Vert U-V2\right\Vert  & 9.74527210757079e-09 & 1.52611523315702e-08 & 2.21076652308600e-07 & 4.08951840613976e-08 & 1.05715931615783e-09\\
+\left\Vert A-USV^{\intercal}\right\Vert  & 2.87373564968032e-15 & 3.11316106543579e-15 & 1.75963160900772e-15 & 2.76058725597979e-15 & 2.62241626890850e-15\\
+\text{cond}\left(A\right) & 486890343971.476 & 2398402399249.11 & 29918434446.6710 & 1279650527.62976 & 3914313388.25301
+\end{array}
+\]
+}{\footnotesize \par}
+
+\caption{Results experiment problem 16.2(c)\label{tab:Results-experiment-problem-1-1}}
+\end{table}
+
+\end{enumerate}
+\item [20.1]
+
+\begin{enumerate}
+\item Claim: Suppose $A\in\mathbb{C}^{m\times m}$ nonsingular. It's the
+case that $A=LU$ iff $A_{1:k,1:k}$ is nonsingular for all $1\leq k\leq m$.
+
+\begin{proof}
+$\Rightarrow$Suppose $A=LU$ and $A$ is nonsingular. Then since
+\begin{eqnarray*}
+\begin{pmatrix}A_{1:k,1:k} & A_{1:k,(k+1):m}\\
+A_{(k+1):m,1:k} & A_{(k+1):m,(k+1):m}
+\end{pmatrix} & = & \begin{pmatrix}L_{1:k,1:k} & \mathbf{0}\\
+L_{(k+1):m,1:k} & L_{(k+1):m,(k+1):m}
+\end{pmatrix}\begin{pmatrix}U_{1:k,1:k} & U_{1:k,(k+1):m}\\
+\mathbf{0} & U_{(k+1):m,(k+1):m}
+\end{pmatrix}\\
+ & = & \begin{pmatrix}L_{1:k,1:k}U_{1:k,1:k} & ?\\
+? & ?
+\end{pmatrix}
+\end{eqnarray*}
+where the ? indicates we don't care. So $A_{1:k,1:k}=L_{1:k,1:k}U_{1:k,1:k}$
+and hence 
+\[
+\det\left(A_{1:k,1:k}\right)=\det\left(L_{1:k,1:k}\right)\det\left(U_{1:k,1:k}\right)
+\]
+Then since $L_{1:k,1:k}$ and $U_{1:k,1:k}$ are triangular matrices
+\[
+\det\left(A_{1:k,1:k}\right)=\prod_{i=1}^{k}L_{ii}\prod_{j=1}^{k}U_{ii}
+\]
+Since $A$ is nonsingular for all $i=1,\dots,m$ it's the case that
+$L_{ii}=1$ and $U_{ii}\neq0$ and hence $\det\left(A_{1:k,1:k}\right)\neq0$. 
+
+$\Leftarrow$ Suppose $A_{1:k,1:k}$ is nonsingular for all $1\leq k\leq m$.
+We proceed by induction: for 
+\[
+A_{1:1,1:1}=1\times A_{1:1,1:1}
+\]
+and so setting $L_{1:1,1:1}=1$ and $U_{1:1,1:1}=A_{1:1,1:1}$ he
+have an $LU$ decomposition of $A_{1:1,1:1}$. Now we prove the inductive
+step. Choose 
+\[
+L=\begin{pmatrix}L_{1:k,1:k} & \mathbf{0}\\
+a & 1
+\end{pmatrix},U=\begin{pmatrix}U_{1:k,1:k} & b\\
+\mathbf{0} & u
+\end{pmatrix}
+\]
+Then for this to be an $LU$ decomposition of $A_{1:\left(k+1\right),1:\left(k+1\right)}$
+it's clear that 
+\[
+\begin{pmatrix}L_{1:k,1:k} & \mathbf{0}\\
+a & 1
+\end{pmatrix}\begin{pmatrix}U_{1:k,1:k} & b\\
+\mathbf{0} & u
+\end{pmatrix}=\begin{pmatrix}L_{1:k,1:k}U_{1:k,1:k} & L_{1:k,1:k}b\\
+aU_{1:k,1:k} & ab+u
+\end{pmatrix}=\begin{pmatrix}A_{1:k,1:k} & A_{1:k,(k+1):\left(k+1\right)}\\
+A_{(k+1):\left(k+1\right),1:k} & A_{(k+1),(k+1)}
+\end{pmatrix}
+\]
+and so it must be the case that 
+\begin{eqnarray*}
+L_{1:k,1:k}b & = & A_{1:k,(k+1):\left(k+1\right)}\Rightarrow b=\left(L_{1:k,1:k}\right)^{-1}A_{1:k,(k+1):\left(k+1\right)}\\
+aU_{1:k,1:k} & = & A_{(k+1):\left(k+1\right),1:k}\Rightarrow a=A_{(k+1):\left(k+1\right),1:k}\left(U_{1:k,1:k}\right)^{-1}\\
+ab+u & = & A_{(k+1),(k+1)}\Rightarrow u=A_{(k+1),(k+1)}-ab
+\end{eqnarray*}
+which is feasible since $L_{1:k,1:k},U_{1:k,1:k}$ are invertible.
+Clearly $L$ is lower triangular and $U$ is upper triangular and
+by construction $A_{1:\left(k+1\right),1:\left(k+1\right)}=L_{1:\left(k+1\right),1:\left(k+1\right)}U_{1:\left(k+1\right),1:\left(k+1\right)}$.
+\end{proof}
+\item Claim: $LU$ decomposition is unique.
+
+\begin{proof}
+Assume there exist $L_{1},L_{2},U$ such that $A=L_{1}U=L_{2}U$.
+Then 
+\[
+\left(L_{1}U\right)U^{-1}=\left(L_{2}U\right)U^{-1}\Rightarrow L_{1}=L_{2}
+\]
+Assume there exist $L,U_{1},U_{2}$ such that $A=LU_{1}=LU_{2}$.
+Then
+\[
+L^{-1}\left(LU_{1}\right)=L^{-1}\left(LU_{2}\right)\Rightarrow U_{1}=U_{2}
+\]
+Assume there exist $L_{1},L_{2},U_{1},U_{2}$ such that $A=L_{1}U_{1}=L_{2}U_{2}$.
+Then
+\[
+U_{1}\left(U_{2}\right)^{-1}=\left(L_{1}\right)^{-1}L_{2}
+\]
+The lefthand side is upper triangular and the righthand side is lower
+triangular. The only way this could be true (and for them to be equal)
+is if each is equal to the identity (since $L_{1}$ {[}and therefore
+$\left(L_{1}\right)^{-1}${]} and $L_{2}$ have ones on the diagonal)
+. Therefore
+\[
+U_{1}\left(U_{2}\right)^{-1}=\left(L_{1}\right)^{-1}L_{2}=I
+\]
+and hence $U_{1}=IU_{2}=U_{2}$ and $L_{2}=L_{1}I=L_{1}$.
+\end{proof}
+\end{enumerate}
+\item [23.1]Claim: For $A=QR$ and $A^{\dagger}A=U^{\dagger}U$ a Cholesky
+decomposition of $A^{\dagger}A$ it's the case that $R=U$.
+
+\begin{proof}
+Firstly 
+\[
+U^{\dagger}U=A^{\dagger}A=\left(QR\right)^{\dagger}\left(QR\right)=R^{\dagger}Q^{\dagger}QR=R^{\dagger}R
+\]
+So if $U^{\dagger}U$ is a unique Cholesky decomposition then $U=R$.
+Note that $A^{\dagger}A$ is obviously Hermitian. It's also pd since
+$A$ is nonsingular and $x^{\dagger}\left(A^{\dagger}A\right)x=\left(Ax\right)^{\dagger}\left(Ax\right)=\left\Vert Ax\right\Vert _{2}>0$
+if $x\neq0$. Therefore $A^{\dagger}A=U^{\dagger}U$ is a unique Cholesky
+decomposition. 
+\end{proof}
+\item [24.4]For $A\in\mathbb{C}^{m\times m}$ and norm $\left\Vert \cdot\right\Vert $
+
+\begin{enumerate}
+\item Where $\rho$ is the spectral radius it's the case that $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =0\iff\rho\left(A\right)<1$.
+
+\begin{proof}
+$\Rightarrow$ Suppose $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =0$
+and $\rho\left(A\right)\geq1$. Let $A=QTQ^{\dagger}$ be a Schur
+decomposition of $A$. Then 
+\begin{eqnarray*}
+\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert  & = & \lim_{n\rightarrow\infty}\left\Vert \left(QTQ^{\dagger}\right)^{n}\right\Vert \\
+ & = & \lim_{n\rightarrow\infty}\left\Vert T^{n}\right\Vert 
+\end{eqnarray*}
+Without loss of generality suppose the larges eigenvalue of $A$ is
+$\left|\mbox{\ensuremath{\lambda}}_{1}\right|=1$. Then
+\[
+\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert T^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cc}
+1 & \mathbf{t}\\
+0 & T'
+\end{array}\right)^{n}\right\Vert =
+\]
+where $T'\in\mathbb{C}^{\left(m-1\right)\times\left(m-1\right)}$
+and $\mathbf{t}\in\mbox{\ensuremath{\mathbb{C}}}^{m-1}$. Clearly
+\[
+\lim_{n\rightarrow\infty}\left(\begin{array}{cc}
+1 & \mathbf{t}\\
+0 & T'
+\end{array}\right)^{n}\neq0
+\]
+and hence $\left\Vert \left(\begin{array}{cc}
+1 & \mathbf{t}\\
+0 & T'
+\end{array}\right)^{n}\right\Vert \neq0$ and therefore $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert \neq0$
+a contradiction. 
+
+$\Leftarrow$ Suppose $\rho\left(A\right)<1$. Then 
+\[
+\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert T^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\mbox{\ensuremath{\lambda}}_{1} & a & b & c\\
+0 & \ddots & d & e\\
+\vdots & \ddots & \ddots & f\\
+0 & \cdots & 0 & \lambda_{m}
+\end{array}\right)^{n}\right\Vert 
+\]
+where $\lambda_{i}<1$. Then 
+\[
+\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\lambda_{1} & a & b & c\\
+0 & \ddots & d & e\\
+\vdots & \ddots & \ddots & f\\
+0 & \cdots & 0 & \lambda_{m}
+\end{array}\right)^{n}\right\Vert =\lim_{n\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\left(\lambda_{1}\right)^{n} & a\left(n\right) & b\left(n\right) & c\left(n\right)\\
+0 & \ddots & d\left(n\right) & e\left(n\right)\\
+\vdots & \ddots & \ddots & f\left(n\right)\\
+0 & \cdots & 0 & \left(\lambda_{m}\right)^{n}
+\end{array}\right)\right\Vert 
+\]
+where $a,b,c,d,e,f$ are unknown functions of $n$ of appropriate
+dimension. Since $\lambda_{i}<1$ clearly $\lim_{n\rightarrow\infty}\left(\lambda_{i}\right)^{n}=0$
+and since the eigenvalues of an uppertriangular matrix are the entries
+on the diagonal the limit has the 0 eigenvalue with multiplicity $m$.
+Therefore $\lim_{n\rightarrow\infty}\left\Vert A^{n}\right\Vert =0$.
+\end{proof}
+\item Where $\alpha$ is the spectral abscissa it's the case that $\lim_{t\rightarrow\infty}\left\Vert e^{tA}\right\Vert =0\iff\alpha\left(A\right)<0$.
+
+\begin{proof}
+$\Rightarrow$ Suppose $\lim_{t\rightarrow\infty}\left\Vert e^{tA}\right\Vert =0$
+and $\alpha\left(A\right)\geq0$. Let $A=QTQ^{\dagger}$ be a Schur
+decomposition of $A$. Then 
+\begin{eqnarray*}
+\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert  & = & \lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\lambda_{1}t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\lambda_{1}t}
+\end{array}\right)\right\Vert =\lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Re}\left(\lambda_{1}\right)t}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Re}\left(\lambda_{m}\right)t}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert 
+\end{eqnarray*}
+where $a,b,c,d,e,f$ are unknown functions of $t$ of appropriate
+dimension and $\left|e^{\text{Im}\left(\lambda_{m}\right)t}\right|=1$
+. Without loss of generality suppose the largest eigenvalue of $A$
+is $\text{Re}\left(\lambda_{i}\right)=0$. Then
+\[
+\lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Re}\left(\lambda_{1}\right)t}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Re}\left(\lambda_{m}\right)t}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert =\lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert 
+\]
+and hence clearly $\left(e^{A}\right)^{t}\neq0$ and so$\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert \neq0$.
+
+$\Leftarrow$ Suppose $\alpha\left(A\right)<0$. Then 
+\begin{eqnarray*}
+\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert  & = & \lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+e^{\text{Re}\left(\lambda_{1}\right)t}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & e^{\text{Re}\left(\lambda_{m}\right)t}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert \\
+ & = & \lim_{t\rightarrow\infty}\left\Vert \left(\begin{array}{cccc}
+\frac{1}{e^{\left|\text{Re}\left(\lambda_{1}\right)\right|t}}e^{\text{Im}\left(\lambda_{1}\right)t} & a\left(t\right) & b\left(t\right) & c\left(t\right)\\
+0 & \ddots & d\left(n\right) & e\left(t\right)\\
+\vdots & \ddots & \ddots & f\left(t\right)\\
+0 & \cdots & 0 & \frac{1}{e^{\left|\text{Re}\left(\lambda_{m}\right)\right|t}}e^{\text{Im}\left(\lambda_{m}\right)t}
+\end{array}\right)\right\Vert 
+\end{eqnarray*}
+Then $\lim_{t\rightarrow\infty}\frac{1}{e^{\left|\text{Re}\left(\lambda_{m}\right)\right|t}}=0$
+and since the eigenvalues of an uppertriangular matrix are the entries
+on the diagonal the limit has the 0 eigenvalue with multiplicity $m$.
+Therefore $\lim_{t\rightarrow\infty}\left\Vert \left(e^{A}\right)^{t}\right\Vert =0$. 
+\end{proof}
+\end{enumerate}
+\item [30.7]The log plot of the absolute values of the eigenvectors appears
+in figure \ref{fig:Localization}. 42.13\% of $Q$ has magnitude greater
+or equal to $10^{-10}$. The localization for the Laplacian appears
+in figure \ref{fig:Localization-for}. The code appears in algorithm
+\ref{alg:Localization-source}. 
+\begin{figure}[H]
+
+
+\begin{centering}
+\includegraphics[scale=0.4]{localization}\caption{Localization\label{fig:Localization}}
+
+\par\end{centering}
+
+\end{figure}
+\begin{figure}[H]
+
+
+\begin{centering}
+\includegraphics[scale=0.3]{localization_2}\caption{Localization for $\nabla^{2}$\label{fig:Localization-for}}
+
+\par\end{centering}
+
+\end{figure}
+\begin{algorithm}[H]
+
+
+\begin{lstlisting}[language=Matlab]
+t=randn(1,100); t1=randn(1,99); T = diag(t)+diag(t1,1)+diag(t1,-1);
+[V,D]=eig(T);
+figure; axes; hold on;
+for i=1:10
+    plot(1:100,log(abs(V(:,i))),'color',[rand rand rand]);
+end
+W = abs(V) >= 10.^(-10); sum(W(:))/10000
+% part 2
+T = diag(2.*ones(1,100))+diag(-ones(1,99),-1)+diag(-ones(1,99),1);
+[V,D]=eig(T);
+figure; axes; hold on;
+for i=1:5
+    plot(1:100,log(abs(V(:,i))),'color',[rand rand rand]);
+end
+W = abs(V) >= 10.^(-10); sum(W(:))/10000
+\end{lstlisting}
+\caption{Localization source\label{alg:Localization-source}}
+
+
+\end{algorithm}
+
+\item [32.2]Gauss-Legendre Quadrature
+
+\begin{enumerate}
+\item Do I get extra credit for getting it down to 4 lines? Algorithm appears
+in Algorithm \ref{alg:Gauss-Legendre-Quadrature}. 
+\begin{algorithm}[H]
+\begin{centering}
+\begin{lstlisting}
+[Q,D]=eig(diag(.5./sqrt(1-(2*(1:n-1)).^(-2)),1)+diag(.5./sqrt(1-(2*(1:n-1)).^(-2)),-1));
+x = diag(D);
+w = 2*(Q(1,:).^2);
+I = dot(w,f(x));
+\end{lstlisting}
+\caption{Gauss-Legendre Quadrature\label{alg:Gauss-Legendre-Quadrature}}
+
+\par\end{centering}
+
+\end{algorithm}
+
+\item $I_{4}\left(e^{x}\right)=2.350402092156378$ and results of $\log\left(\left|I\left(e^{x}\right)-I_{n}\left(e^{x}\right)\right|\right)$
+appear in figure \ref{fig:Gauss-Legendre-Quad} 
+\begin{figure}[H]
+
+
+\begin{centering}
+\includegraphics[scale=0.3]{gauss_quad}\caption{Gauss-Legendre Quad $e^{x}$\label{fig:Gauss-Legendre-Quad}}
+
+\par\end{centering}
+
+\end{figure}
+Obviously the error in approximating the integral by the quadrature
+goes to zero very quickly.
+\item The integral of $e^{\left|x\right|}$
+\[
+\int_{-1}^{1}e^{\left|x\right|}dx=2\int_{0}^{1}e^{x}dx=2\left(e-1\right)
+\]
+The results of the comparison appear in figure \ref{fig:Gauss-Legendre-Quad-1}.
+The error goes to zero slowly and erratically probably because $e^{\left|x\right|}$
+is not differentiable at $x=0$. 
+\begin{figure}[H]
+\centering{}\includegraphics[scale=0.3]{gauss_quad2}\caption{Gauss-Legendre Quad $e^{x}$\label{fig:Gauss-Legendre-Quad-1}}
+\end{figure}
+
+\end{enumerate}
+\item [38.6]Source appears in algorithm \ref{alg:Conjugate-gradients}.
+Log plot appears in figure \ref{fig:Conjugate-gradients-log}. For
+some reason gradient descent hits a brick wall in the minimization.
+Conjugate gradients doesn't and improves quickly but eventually (at
+about iteration 80) stops improving as well. 
+\begin{algorithm}
+\begin{lstlisting}[language=Matlab,basicstyle={\footnotesize},tabsize=4]
+A=diag(1:100)+diag(ones(1,99),1)+diag(ones(1,99),-1);
+b=ones(100,1);
+CGx={};CGr={};CGp={};
+CGx{1} = zeros(100,1); CGr{1} = b; CGp{1} = CGr{1};
+for n=2:100
+    an = (CGr{n-1}'*CGr{n-1})/(CGp{n-1}'*A*CGp{n-1});
+    CGx{n} = CGx{n-1} + an.*CGp{n-1};
+    CGr{n} = CGr{n-1} - an.*(A*CGp{n-1});
+    bn = (CGr{n}'*CGr{n})/(CGr{n-1}'*CGr{n-1});
+    CGp{n} = CGr{n} + bn.*CGp{n-1};
+end
+
+SDx={};SDr={};
+SDx{1} = zeros(100,1); SDr{1} = b; 
+for n=2:100
+    an = (SDr{n-1}'*SDr{n-1})/(SDr{n-1}'*A*SDr{n-1});
+    SDr{n} = SDr{n-1} - an.*(A*SDr{n-1});
+    SDx{n} = SDx{n-1} + an.*SDr{n}; end
+
+ka = max(eig(A))/min(eig(A));
+plot(1:100,cellfun(@(x)(log(norm(x))),CGr),'-.r*',...
+    	1:100,cellfun(@(x)(log(norm(x))),cellfun(@(x)(b-A*x),CGx,'UniformOutput',false)),'--mo',...
+    	1:100,cellfun(@(x)(log(norm(x))),SDr),':bs',...
+    	1:100,log(2*((sqrt(ka)-1)/(sqrt(ka)+1)).^(1:100)),':gx')
+legend('est resid norms CG','act resid norms CG','resid norms SD','k');
+\end{lstlisting}
+
+
+\caption{Conjugate gradients\label{alg:Conjugate-gradients}}
+
+
+\end{algorithm}
+\begin{figure}[H]
+
+
+\centering{}\includegraphics[scale=0.5]{cg}\caption{Conjugate gradients log plot\label{fig:Conjugate-gradients-log}}
+\end{figure}
 \end{enumerate}
 
 \end{document}
