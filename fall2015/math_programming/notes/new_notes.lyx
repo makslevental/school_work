@@ -181,7 +181,7 @@ Hyperplanes
 Projection theorem
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 Projection theorem: for any closed convex set 
 \begin_inset Formula $S$
 \end_inset
@@ -268,7 +268,6 @@ Projection theorem
 
 \end_layout
 
-\begin_deeper
 \begin_layout Proof
 We seek to minimize 
 \begin_inset Formula $\left\Vert x-y\right\Vert $
@@ -351,6 +350,7 @@ Since
  
 \end_layout
 
+\begin_deeper
 \begin_layout Corollary*
 Let 
 \begin_inset Formula $S$
@@ -394,7 +394,7 @@ Least squares.
 \end_layout
 
 \end_deeper
-\begin_layout Enumerate
+\begin_layout Standard
 
 \series bold
 Improper separation
@@ -426,7 +426,7 @@ fat
  in between the sets and the hyperplane.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 Point-to-set separation: for any non-empty closed convex set 
 \begin_inset Formula $S$
 \end_inset
@@ -456,7 +456,6 @@ Point-to-set separation: for any non-empty closed convex set
 ).
 \end_layout
 
-\begin_deeper
 \begin_layout Corollary*
 Every closed convex set is the intersection of halfspaces (take all the
  separation hyperplanes and intersection the half spaces that the set is
@@ -484,12 +483,11 @@ Let
  Then you can stronly separate.
 \end_layout
 
-\end_deeper
 \begin_layout Subsection
 LP Duality
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Theorem*
 Farkas' lemma: exactly one of the two following systems has a solution
 \begin_inset Formula 
 \begin{align*}
@@ -574,7 +572,7 @@ normals
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -610,7 +608,6 @@ Farkas lemma
 
 \end_layout
 
-\begin_deeper
 \begin_layout Proof
 Suppose system 2 has a solution, i.e.
  
@@ -659,11 +656,7 @@ Suppose system 2 has a solution, i.e.
 
 ).
  Hence system 1 has no solution.
- 
-\end_layout
-
-\begin_layout Proof
-Suppose system 2 doesn't have a solution.
+ Suppose system 2 doesn't have a solution.
  I.e.
  
 \begin_inset Formula $c$
@@ -892,10 +885,13 @@ Another form of Farkas' lemma
 
 \end_layout
 
-\end_deeper
-\begin_layout Enumerate
+\begin_layout Subsection
 Duality of LPs.
- Consider the primary system 
+ 
+\end_layout
+
+\begin_layout Standard
+Consider the primary system 
 \begin_inset Formula 
 \begin{align*}
 \max & 2x_{1}+3x_{2}\\
@@ -1032,7 +1028,6 @@ weak duality
  
 \end_layout
 
-\begin_deeper
 \begin_layout Theorem*
 Weak duality: for the primal solution 
 \begin_inset Formula $x$
@@ -1053,6 +1048,7 @@ c^{\intercal}x\leq b^{\intercal}y
 
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 To wit
 \begin_inset Formula 
@@ -1065,6 +1061,11 @@ c^{\intercal}x & =x^{\intercal}c\\
 
 \end_inset
 
+
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
 
 \end_layout
 
@@ -1092,6 +1093,7 @@ and the dual
 
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 Suppose the dual is feasible and its max is 
 \begin_inset Formula $\delta$
@@ -1161,7 +1163,7 @@ This implies that
 \end_layout
 
 \begin_deeper
-\begin_layout Enumerate
+\begin_layout Case
 If 
 \begin_inset Formula $\lambda=0$
 \end_inset
@@ -1213,7 +1215,7 @@ so
  a contradiction.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Case
 Otherwise scale 
 \begin_inset Formula $y$
 \end_inset
@@ -1248,10 +1250,11 @@ Otherwise scale
 \end_inset
 
 , a contradiction.
+ 
 \end_layout
 
 \end_deeper
-\begin_layout Standard
+\begin_layout Proof
 Therefore 
 \begin_inset Formula $P'$
 \end_inset
@@ -1270,16 +1273,353 @@ Therefore
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+Another way to look at it is a generalization of Lagrange multipliers: consider
+ the following constained minimization problem 
+\begin_inset Formula 
+\begin{align*}
+\max_{x} & x^{2}+y^{2}\\
+\text{s.t.} & x+y=1
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $L\left(x,y,\lambda\right)=x^{2}+y^{2}+\lambda\left(1-x-y\right)$
+\end_inset
+
+.
+ Think of solving the original problem by, instead of enforcing 
+\begin_inset Formula $x+y=1$
+\end_inset
+
+, allow it to be violated and associate a cost 
+\begin_inset Formula $\lambda\left(1-x-y\right)$
+\end_inset
+
+, with cost rate 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ This is then an unconstrained minimization problem over 
+\begin_inset Formula $x,y,\lambda$
+\end_inset
+
+: first minimize with respect to 
+\begin_inset Formula $x,y$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\nabla_{x,y}L=\left(2x-\lambda x,2y-\lambda y\right)=0
+\]
+
+\end_inset
+
+Solving for 
+\begin_inset Formula $x,y$
+\end_inset
+
+ we get that
+\begin_inset Formula $x=y=\frac{p}{2}$
+\end_inset
+
+.
+ Then the constraint 
+\begin_inset Formula $x+y=1$
+\end_inset
+
+ gives the additional relation 
+\begin_inset Formula $p=1$
+\end_inset
+
+ and hence the optimal solution to the original problem is 
+\begin_inset Formula $x=y=1/2$
+\end_inset
+
+.
+ Another way of interpreting this is: when the costrate is properly chosen
+ (
+\begin_inset Formula $p=1$
+\end_inset
+
+) the optimal solution to the constrained problem is also the optimal solution
+ to the unconstrained problem.
+\end_layout
+
+\begin_layout Standard
+For LPs consider the standard form problem
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t.} & Ax=b\\
+ & x\succeq0
+\end{align*}
+
+\end_inset
+
+called the primal problem.
+ Assume an optimal 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ exists.
+ A relaxed problem is
+\begin_inset Formula 
+\begin{align*}
+\min_{x,\lambda} & c^{\intercal}x+\lambda^{\intercal}\left(b-Ax\right)\\
+\text{s.t.} & x\succeq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Why is this a relaxed problem? Well there are fewer constraints for one,
+ and it turns out the objective always lower than the optimal value of the
+ primal:
+\begin_inset Formula 
+\[
+g\left(\lambda\right)=\min_{x\succeq0}\left[c^{\intercal}x+\lambda^{\intercal}\left(b-Ax\right)\right]\leq c^{\intercal}x^{*}+\lambda^{\intercal}\left(b-Ax^{*}\right)
+\]
+
+\end_inset
+
+where the inequality follows because of the min.
+ Then 
+\begin_inset Formula $c^{\intercal}x^{*}+\lambda^{\intercal}\left(b-Ax^{*}\right)=c^{\intercal}x^{*}$
+\end_inset
+
+ since 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ is assumed to satisfy the original system.
+ Therefore 
+\begin_inset Formula $g\left(\lambda\right)$
+\end_inset
+
+ is always a lower bound for the primal and maximizing over 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ then yields the tightest lower bound.
+ What does this look like?
+\begin_inset Formula 
+\begin{align*}
+g\left(\lambda\right) & =\min_{x\succeq0}\left[c^{\intercal}x+\lambda^{\intercal}\left(b-Ax\right)\right]\\
+ & =\lambda^{\intercal}b+\min_{x\succeq0}\left(c^{\intercal}-\lambda^{\intercal}A\right)x
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\min_{x\succeq0}\left(c^{\intercal}-\lambda^{\intercal}A\right)x=\min_{x\succeq0}\left(c^{'}\right)^{\intercal}x$
+\end_inset
+
+ is an LP over the positive orthant polyhedron.
+ So if 
+\begin_inset Formula $\left(c^{\intercal}-\lambda^{\intercal}A\right)\succeq0$
+\end_inset
+
+ then the minimum is at 
+\begin_inset Formula $x=0$
+\end_inset
+
+, otherwise if there exists a coordinate of 
+\begin_inset Formula $\left(c_{i}^{\intercal}-\lambda^{\intercal}A_{i}\right)<0$
+\end_inset
+
+ then we can crank 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ arbitrarily large and the problem is unbounded.
+ Hence 
+\begin_inset Formula 
+\[
+\min_{x\succeq0}\left(c^{\intercal}-\lambda^{\intercal}A\right)x=\begin{cases}
+0 & \text{if }\left(c^{\intercal}-\lambda^{\intercal}A\right)\succeq0\\
+-\infty & \text{o/w}
+\end{cases}
+\]
+
+\end_inset
+
+Clearly maximizing 
+\begin_inset Formula $g\left(\lambda\right)$
+\end_inset
+
+ can only happen when the inner minimization isn't equal to 
+\begin_inset Formula $-\infty$
+\end_inset
+
+.
+ So
+\begin_inset Formula 
+\begin{align*}
+\max_{\lambda} & \lambda^{\intercal}b\\
+\text{s.t.} & \left(c^{\intercal}-\lambda^{\intercal}A\right)\succeq0
+\end{align*}
+
+\end_inset
+
+or
+\begin_inset Formula 
+\begin{align*}
+\max_{\lambda} & \lambda^{\intercal}b\\
+\text{s.t.} & \lambda^{\intercal}A\preceq c^{\intercal}\\
+ & \lambda\text{ free} 
+\end{align*}
+
+\end_inset
+
+Compare with
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t.} & Ax=b\\
+ & x\succeq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general with 
+\begin_inset Formula $A$
+\end_inset
+
+ rows 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ and columns 
+\begin_inset Formula $A_{j}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{array}{cccccc}
+\min_{x} & c^{\intercal}x &  & \max_{p} & p^{\intercal}b\\
+\text{s.t.} & a_{i}x\geq b_{i}\quad & i\in M_{1} &  & p_{i}\geq0 & i\in M_{1}\\
+ & a_{i}x\leq b_{i}\quad & i\in M_{2} &  & p_{i}\leq0 & i\in M_{2}\\
+ & a_{i}x=b_{i}\quad & i\in M_{3} &  & p_{i}\text{ free} & i\in M_{3}\\
+ & x_{j}\geq0 & j\in N_{1} &  & p^{\intercal}A_{j}\leq c_{j}\quad & j\in N_{1}\\
+ & x_{j}\leq0 & j\in N_{2} &  & p^{\intercal}A_{j}\geq c_{j}\quad & j\in N_{2}\\
+ & x_{j}\text{ free} & j\in N_{3} &  & p^{\intercal}A_{j}=c_{j}\quad & j\in N_{3}
+\end{array}
+\]
+
+\end_inset
+
+Why? Consider 
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t.} & Ax\preceq b\\
+ & x\succeq0
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t.} & 0\preceq\left(b-Ax\right)\\
+ & x\succeq0
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+g\left(\lambda\right)=\min_{x\succeq0}\left[c^{\intercal}x+\lambda^{\intercal}\left(b-Ax\right)\right]\leq c^{\intercal}x^{*}+\lambda^{\intercal}\left(b-Ax^{*}\right)\leq c^{\intercal}x^{*}
+\]
+
+\end_inset
+
+iff 
+\begin_inset Formula $\lambda\preceq0$
+\end_inset
+
+ since 
+\begin_inset Formula $\left(b-Ax^{*}\right)\succeq0$
+\end_inset
+
+.
+ Then the rest of the proof goes through the same.
+ What about if 
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t.} & Ax\preceq b\\
+ & x\preceq0
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+\min_{x\preceq0}\left(c^{\intercal}-\lambda^{\intercal}A\right)x=\begin{cases}
+-\infty & \text{if }\left(c^{\intercal}-\lambda^{\intercal}A\right)\not\preceq0\\
+0 & \text{o/w}
+\end{cases}
+\]
+
+\end_inset
+
+i.e.
+ if there exists a component of 
+\begin_inset Formula $\left(c^{\intercal}-\lambda^{\intercal}A\right)$
+\end_inset
+
+ that's positive (because then we could crank that components to negative
+ infinity).
+ Therefore 
+\begin_inset Formula $\left(c^{\intercal}-\lambda^{\intercal}A\right)\preceq0$
+\end_inset
+
+ or 
+\begin_inset Formula 
+\begin{align*}
+\max_{\lambda} & \lambda^{\intercal}b\\
+\text{s.t.} & \left(c^{\intercal}-\lambda^{\intercal}A\right)\preceq0
+\end{align*}
+
+\end_inset
+
+or
+\begin_inset Formula 
+\begin{align*}
+\max_{\lambda} & \lambda^{\intercal}b\\
+\text{s.t.} & c^{\intercal}\preceq\lambda^{\intercal}A
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Supporting hyperplanes
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 A hyperplane supports a set if it intersects the set and the entire set
  is on one side of the set.
 \end_layout
 
-\begin_deeper
 \begin_layout Theorem*
 Supporting hyperplane theorem: if 
 \begin_inset Formula $S$
@@ -1306,6 +1646,7 @@ Supporting hyperplane theorem: if
 .
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 Since 
 \begin_inset Formula $\bar{x}\in\partial S$
@@ -1378,6 +1719,7 @@ for each
  the planes for points not in).
 \end_layout
 
+\end_deeper
 \begin_layout Corollary*
 For a nonempty convex set 
 \begin_inset Formula $S$
@@ -1390,6 +1732,7 @@ For a nonempty convex set
  then there exists a separating hyperplane.
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 If 
 \begin_inset Formula $x\notin cl\left(S\right)$
@@ -1397,6 +1740,11 @@ If
 
  then just use point set separation.
  Otherwise just use the immediately previous theorem.
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
 \end_layout
 
 \begin_layout Corollary*
@@ -1419,12 +1767,18 @@ For a nonempty
 .
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 By immediately prior since 
 \begin_inset Formula $conv\left(S\right)$
 \end_inset
 
  is convex.
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
 \end_layout
 
 \begin_layout Corollary*
@@ -1453,6 +1807,7 @@ Let
 
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 Let 
 \begin_inset Formula $S=S_{1}\ominus S_{2}$
@@ -1508,6 +1863,11 @@ for all
 .
 \end_layout
 
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
 \begin_layout Corollary*
 Let 
 \begin_inset Formula $S_{1},S_{2}$
@@ -1525,8 +1885,14 @@ Let
  Then there exists a separating hyperplane.
 \end_layout
 
+\begin_deeper
 \begin_layout Proof
 Interior of nonempty convex sets are convex so apply the previous result.
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
 \end_layout
 
 \begin_layout Corollary*
@@ -1546,17 +1912,99 @@ Let
  Then there exists a separating hyperplane that strongly separates.
 \end_layout
 
-\end_deeper
 \begin_layout Section
 Inner Representation of convex sets
 \end_layout
 
+\begin_layout Subsection
+Extreme points
+\end_layout
+
 \begin_layout Standard
-How to characterize a vertex of a polyhedron defined by inequality and equality
- constraints? An extreme point is a unique solution to a set of constraints.
- Why? If it weren't unique then it would be free (a line) and therefore
- not an extreme point.
- The question is how many constraints? For 
+Consider the polyhedral set 
+\begin_inset Formula $S=\left\{ x\big|Ax=b,x\succeq0\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+.
+ Assume 
+\begin_inset Formula $\text{rank}\left(A\right)=m$
+\end_inset
+
+.
+ If not, assuming 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ is consistent, you can throw away linearly dependent rows in order to get
+ a full row rank matrix.
+ Rearrange the columns of 
+\begin_inset Formula $A$
+\end_inset
+
+ so that 
+\begin_inset Formula $A=\left[B,N\right]$
+\end_inset
+
+ where 
+\begin_inset Formula $B\in\mathbb{R}^{m\times m}$
+\end_inset
+
+ and full rank and 
+\begin_inset Formula $N\in\mathbb{R}^{m\times\left(n-m\right)}$
+\end_inset
+
+ is the rest of the matrix.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+Ax & =Bx_{B}+Nx_{N}=b\\
+ & x_{B}\succeq0\\
+ & x_{N}\succeq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+x is an extreme point of 
+\begin_inset Formula $S$
+\end_inset
+
+ iff 
+\begin_inset Formula $A$
+\end_inset
+
+ can be decomposed into 
+\begin_inset Formula $\left[B,N\right]$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+x=\begin{bmatrix}x_{B}\\
+x_{N}
+\end{bmatrix}=\begin{bmatrix}B^{-1}b\\
+0
+\end{bmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Why would this be true? A vertex (i.e.
+ extreme point) of a polyhedron is a unique solution to a set of constraints.
+ If it weren't unique then it would be free (a line) and therefore not a
+ vertex.
+ The question is how many constraints? For a polyhedron in 
 \begin_inset Formula $\mathbb{R}^{n}$
 \end_inset
 
@@ -1564,9 +2012,33 @@ How to characterize a vertex of a polyhedron defined by inequality and equality
 \begin_inset Formula $n$
 \end_inset
 
- constraints (otherwise some coordinate of the solution would be free).
- And the constraints have to be linearly independent (again otherwise there
- would be many solutions).
+ constraints (a 
+\begin_inset Quotes eld
+\end_inset
+
+point
+\begin_inset Quotes erd
+\end_inset
+
+ with 
+\begin_inset Formula $n-1$
+\end_inset
+
+ entries constrained and 
+\begin_inset Formula $1$
+\end_inset
+
+ free is a line in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+).
+ And the constraints have to be linearly independent (otherwise you could
+ get rid of redundancies and you'd only be satisfying 
+\begin_inset Formula $n'<n$
+\end_inset
+
+ constraints).
  But could there be more? For example 3 lines intersecting? There's definitely
  a unique point satisfying that (if no two are colinear) but one of the
  lines is linearly dependent on the other two, i.e.
@@ -1580,212 +2052,494 @@ How to characterize a vertex of a polyhedron defined by inequality and equality
 \end_inset
 
 .
- A procedure for finding extreme points:
+ Therefore for a polyhedron in 
+\begin_inset Formula $n$
+\end_inset
+
+ variables, i.e.
+ some number of constraints on 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+, we need at least 
+\begin_inset Formula $n$
+\end_inset
+
+ constraints to force a unique solution.
+ If the rank of 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $m$
+\end_inset
+
+ then we can get a unique solution to 
+\begin_inset Formula $m$
+\end_inset
+
+ constraints by solving that system of 
+\begin_inset Formula $m$
+\end_inset
+
+ equations.
+ Where do we get the rest from? We set the positivity constraints to be
+ tight, i.e.
+ 
+\begin_inset Formula $x_{i}=0$
+\end_inset
+
+.
+ This partitioning of 
+\begin_inset Formula $x=\left[x_{B},x_{N}\right]=\left[x_{B},0\right]$
+\end_inset
+
+ effects exactly this.
+ Such solutions 
+\begin_inset Formula $x$
+\end_inset
+
+ are called 
+\series bold
+basic feasible solutions
+\series default
+.
+ 
 \end_layout
 
-\begin_layout Enumerate
-Start with the system 
-\begin_inset Formula $Ax\preceq b$
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+Suppose that 
+\begin_inset Formula $A$
+\end_inset
+
+ can decomposed 
+\begin_inset Formula $A=\left[B,N\right]$
 \end_inset
 
  with 
-\begin_inset Formula $x\succeq0$
+\begin_inset Formula $x=\begin{bmatrix}x_{B}\\
+x_{N}
+\end{bmatrix}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Enumerate
-Create the system 
-\begin_inset Formula $\hat{A}x\preceq\hat{b}$
+ and 
+\begin_inset Formula $x_{B}\succeq0$
 \end_inset
 
- i.e.
+.
+ Then immediately 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Suppose, towards a contradiction, that 
+\begin_inset Formula $x=\lambda x_{1}+\left(1-\lambda\right)x_{2}$
+\end_inset
+
+ for some 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+ for some 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ is not an extreme point.
+ Then 
 \begin_inset Formula 
 \[
-\begin{bmatrix}A\\
--I
-\end{bmatrix}x\preceq\begin{bmatrix}b\\
-0
+x_{1}=\begin{bmatrix}x_{1B}\\
+x_{1N}
+\end{bmatrix},x_{2}=\begin{bmatrix}x_{2B}\\
+x_{2N}
 \end{bmatrix}
 \]
 
 \end_inset
 
-This enforces the convex constraints and positivity.
-\end_layout
+and 
+\begin_inset Formula 
+\[
+\begin{bmatrix}B^{-1}b\\
+0
+\end{bmatrix}=\lambda\begin{bmatrix}x_{1B}\\
+x_{1N}
+\end{bmatrix}+\left(1-\lambda\right)\begin{bmatrix}x_{2B}\\
+x_{2N}
+\end{bmatrix}
+\]
 
-\begin_layout Enumerate
-Identify 
-\begin_inset Formula $n$
 \end_inset
 
- constraints and denote their index set by 
-\begin_inset Formula $S$
+Then 
+\begin_inset Formula $0=\lambda x_{1N}+\left(1-\lambda\right)x_{2N}$
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Enumerate
-If 
-\begin_inset Formula $\hat{A}_{S}$
+ and 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
 \end_inset
 
- are not invertible then stop.
-\end_layout
-
-\begin_layout Enumerate
-Otherwise solve 
-\begin_inset Formula $x_{S}^{*}=\hat{A}_{S}^{-1}\hat{b}_{S}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-If 
-\begin_inset Formula $x_{S}^{*}$
-\end_inset
-
- is feasible then 
-\begin_inset Formula $x_{S}^{*}$
-\end_inset
-
- is an extreme point (otherwise it's an intersection that's not an extreme
- point).
-\end_layout
-
-\begin_layout Standard
-This doesn't really work.
- How do you find extreme points? After adding slack we can convert any 
-\begin_inset Formula $Ax\preceq b$
-\end_inset
-
- we can convert to 
-\begin_inset Formula $Ax=b$
+ forces 
+\begin_inset Formula $x_{1N}=x_{2N}=0$
 \end_inset
 
 .
- Looking at the picture you can see that you can find extreme points by
- setting enough variables to 0.
- In the 2d case it's clear we can have at most 2 active constraints and
- be at an extreme point (in 2d at most two lines can intersect on the boundary
- of a polyhedron).
- This corresponds to setting 5-3=2 variables to 0 (I have no idea why?).
+ But then 
+\begin_inset Formula $\lambda x_{1B}+\left(1-\lambda\right)x_{2B}=B^{-1}b$
+\end_inset
+
+ and 
+\begin_inset Formula $B^{-1}b$
+\end_inset
+
+ is unique and hence 
+\begin_inset Formula $x_{1B}=x_{2B}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}=x_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ is therefore an extreme point.
  
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename bfs.jpg
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Basic feasible solutions
 \end_layout
 
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+Suppose 
+\begin_inset Formula $x$
 \end_inset
 
-Here's a revised method
-\end_layout
-
-\begin_layout Enumerate
-Start with 
-\begin_inset Formula $Ax=b,x\succeq0$
+ is an extreme point (vertex).
+ Without loss of generality 
+\begin_inset Formula $x=\left(x_{1},\dots,x_{k},0,\dots,0\right)$
 \end_inset
 
- with 
-\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+ where 
+\begin_inset Formula $x_{i}\geq0$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Enumerate
-Fix 
-\begin_inset Formula $n-m$
+ (we allow 
+\begin_inset Formula $k=n$
 \end_inset
 
- (number of variables minus number of constraints) variables to be 0.
- Call their indices 
-\begin_inset Formula $N$
+).
+ Firstly 
+\begin_inset Formula $a_{1},\dots,a_{k}$
 \end_inset
 
- and the other set of indices 
-\begin_inset Formula $B$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-The remaining relevant system is 
-\begin_inset Formula $A_{B}x_{B}=b$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-If 
-\begin_inset Formula $A_{B}$
-\end_inset
-
- is not invertible stop.
- Otherwise 
-\begin_inset Formula $x_{B}^{*}=A_{B}^{-1}b$
-\end_inset
-
-
+ are linearly independent: 
 \end_layout
 
 \begin_deeper
-\begin_layout Enumerate
-If 
-\begin_inset Formula $x_{B}^{*}\succeq0$
+\begin_layout Proof
+Towards a contradiction, suppose 
+\begin_inset Formula $\sum_{j=1}^{k}\lambda_{j}a_{j}=0$
 \end_inset
 
- then 
-\begin_inset Formula $\left(x_{B}^{*},x_{N}^{*}\right)=\left(A_{B}^{-1}b,0\right)$
+ with 
+\begin_inset Formula $\lambda_{j}$
+\end_inset
+
+ not all equal to 0.
+ Let 
+\begin_inset Formula 
+\[
+\lambda=\left(\lambda_{1},\dots,\lambda_{k},0,\dots,0\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{1},x_{2}\succeq0$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+x_{1}=x+\alpha\lambda\text{ and }x_{2}=x-\alpha\lambda
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula 
+\[
+Ax_{1}=Ax+\alpha A\lambda=Ax+\alpha\sum_{j=1}^{k}\lambda_{i}a_{j}=b
+\]
+
+\end_inset
+
+and similarly 
+\begin_inset Formula $Ax_{2}=b$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+ and since 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}\neq x_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $x=\left(1/2\right)x_{1}+\left(1/2\right)x_{2}$
+\end_inset
+
+ contradicting that 
+\begin_inset Formula $x$
 \end_inset
 
  is an extreme point.
 \end_layout
 
-\begin_layout Enumerate
-Otherwise 
-\begin_inset Formula $\left(A_{B}^{-1}b,0\right)$
+\end_deeper
+\begin_layout Proof
+Thus 
+\begin_inset Formula $a_{1},\dots,a_{k}$
 \end_inset
 
- is not an extreme point.
-\end_layout
+ are linearly independent and since 
+\begin_inset Formula $A$
+\end_inset
 
-\end_deeper
-\begin_layout Standard
+ has rank 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $m-k$
+\end_inset
+
+ of the last 
+\begin_inset Formula $n-k$
+\end_inset
+
+ columns may be chosen such that they, together with the first 
+\begin_inset Formula $k$
+\end_inset
+
+ columns, form a linearly independent set of 
+\begin_inset Formula $m$
+\end_inset
+
+ vectors; suppose 
+\begin_inset Formula $a_{k+1},\dots,a_{m}$
+\end_inset
+
+ are these columns.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+A & =\left[\left[a_{1},\dots,a_{m}\right],N\right]\\
+ & =\left[B,N\right]
+\end{align*}
+
+\end_inset
+
+where 
 \begin_inset Formula $B$
 \end_inset
 
- is the set of basic solutions? 
+ is full rank 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Furthermore for 
+\begin_inset Formula $x=\left(x_{1},\dots,x_{k},0\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Ax=Bx+N0=b
+\]
+
+\end_inset
+
+and therefore 
+\begin_inset Formula $\left(x,0\right)=\left(B^{-1}b,0\right)$
+\end_inset
+
+ and since 
+\begin_inset Formula $x_{j}>0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $B^{-1}b\succeq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+The number of extreme points of a polyhedron is less than or equal to
+\begin_inset Formula 
+\[
+{n \choose n-m}={n \choose m}
+\]
+
+\end_inset
+
+because you can choose 
+\begin_inset Formula $n-m$
+\end_inset
+
+ constraints to set to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S=\left\{ x\big|Ax=b,x\succeq0\right\} $
+\end_inset
+
+ be nonempty and 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{rank}\left(A\right)=m$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $S$
+\end_inset
+
+ has at least one extreme point.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $x\in S$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+, and without loss of generality, suppose that 
+\begin_inset Formula $x=\left(x_{1},\dots,x_{k},0,\dots,0\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{j}>0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $a_{1},\dots,a_{k}$
+\end_inset
+
+ are linearly independent then 
+\begin_inset Formula $k\leq m$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ is an extreme point (since 
+\begin_inset Formula $x$
+\end_inset
+
+ is a unique solution to 
+\begin_inset Formula $A\left(x_{1},\dots,x_{k},0\right)=b$
+\end_inset
+
+).
+ Otherwise 
+\begin_inset Formula $\sum_{j=1}^{k}\lambda_{j}a_{j}=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+\alpha=\min_{1\leq j\leq k}\left\{ \frac{x_{j}}{\lambda_{j}}\bigg|\lambda_{j}>0\right\} =\frac{x_{i}}{\lambda_{i}}
+\]
+
+\end_inset
+
+Consider the point 
+\begin_inset Formula $x'$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+x_{j}^{'}=\begin{cases}
+x_{j}-\alpha\lambda_{j} & j=1,\dots,k\\
+0 & j=k+1,\dots,n
+\end{cases}
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $x_{i}^{'}=0$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\sum_{j=1}^{n}a_{j}x_{j}^{'}=\sum_{j=1}^{n}a_{j}\left(x_{j}-\alpha\lambda_{j}\right)=b-0=b
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $x'$
+\end_inset
+
+ is feasible and has at most 
+\begin_inset Formula $k-1$
+\end_inset
+
+ positive components.
+ Repeat the process until the number of components corresponds to the number
+ of linearly independent columns in 
+\begin_inset Formula $A$
+\end_inset
+
+ and you have an extreme point.
 \end_layout
 
 \begin_layout Standard
@@ -1796,12 +2550,15 @@ Every basic feasible solution corresponds to an extreme point but an extreme
 \end_inset
 
  where 
-\begin_inset Formula $rank\left(A\right)=m$
+\begin_inset Formula $\text{rank}\left(A\right)=m$
 \end_inset
 
 .
- Nonempty polyhedra of represented by LPs have at least one extreme point.
- A 
+ 
+\end_layout
+
+\begin_layout Standard
+A 
 \series bold
 recession direction
 \series default
@@ -1858,16 +2615,84 @@ for all
 \end_inset
 
  is a recession direction iff it's in the recession cone.
- To find extreme directions chop the recession cone and look for extreme
- points.
+ To find extreme directions find the extreme points (i.e.
+ basic feasible solutions of the system 
+\begin_inset Formula $Ad=0$
+\end_inset
+
+).
  An extreme ray is the entire ray while an extreme direction is just the
  direction.
 \end_layout
 
 \begin_layout Theorem*
-Minkowski's theorem: every point in a polyhedron can be represented as the
- convex combination of extreme points plus conic combination of extreme
- directions, i.e.
+Characterization of extreme directions.
+ Let 
+\begin_inset Formula $S=\left\{ x\big|Ax=b,x\succeq0\right\} $
+\end_inset
+
+ be nonempty and 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{rank}\left(A\right)=m$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\bar{d}$
+\end_inset
+
+ is an extreme direction of 
+\begin_inset Formula $S$
+\end_inset
+
+ iff 
+\begin_inset Formula $A=\left[B,N\right]$
+\end_inset
+
+ such that 
+\begin_inset Formula $B^{-1}a_{j}\preceq0$
+\end_inset
+
+ for some column of 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\bar{d}=\lambda\begin{pmatrix}-B^{-1}a_{j}\\
+e_{j}
+\end{pmatrix}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Minkowski's theorem (representation theorem): every point in a polyhedron
+ can be represented as the 
+\series bold
+convex
+\series default
+ combination of extreme points plus 
+\series bold
+conic
+\series default
+ combination of extreme directions, i.e.
  
 \begin_inset Formula 
 \[
@@ -1894,6 +2719,1485 @@ where
 
 .
  This is the inner representation of the polygon.
+\end_layout
+
+\begin_layout Corollary*
+If 
+\begin_inset Formula $S$
+\end_inset
+
+ is nonempty of the form 
+\begin_inset Formula $\left\{ x\big|Ax=b,x\succeq0\right\} $
+\end_inset
+
+, i.e.
+ a nonempty polyhedron.
+ Then 
+\begin_inset Formula $S$
+\end_inset
+
+ has at least one extreme direction iff it's unbounded.
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $S$
+\end_inset
+
+ has no extreme directions then by Minkowski's representation theorem (and
+ Cauchy-Schwartz since 
+\begin_inset Formula $\lambda_{j}\geq0$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\left\Vert x\right\Vert =\left\Vert \sum_{j=1}^{k}\lambda_{j}x_{j}\right\Vert \leq\sum_{j=1}^{k}\lambda_{j}\left\Vert x_{j}\right\Vert =\sum_{j=1}^{k}\left\Vert x_{j}\right\Vert 
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $S$
+\end_inset
+
+ is bounded.
+ If 
+\begin_inset Formula $S$
+\end_inset
+
+ has an extreme direction then obviously it's unbounded.
+\end_layout
+
+\begin_layout Corollary*
+The linear program 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & c^{\intercal}x\\
+\text{s.t.} & Ax=b\\
+ & x\succeq0
+\end{align*}
+
+\end_inset
+
+with nonempty feasible region.
+ Let 
+\begin_inset Formula $\left\{ x_{j}\right\} $
+\end_inset
+
+ be the set of extreme points of the feasible region and 
+\begin_inset Formula $\left\{ d_{j}\right\} $
+\end_inset
+
+ be the set of extreme directions.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ has a finite optimal solution iff 
+\begin_inset Formula $c^{\intercal}d_{j}\geq0$
+\end_inset
+
+, i.e.
+ the objective normal makes an acute angle with each extreme direction.
+ Why does this make sense? For a minimization LP 
+\begin_inset Formula $c$
+\end_inset
+
+ is opposite of the direction in which the objective increases.
+ If there exists 
+\begin_inset Formula $c^{\intercal}d_{j}<0$
+\end_inset
+
+ then 
+\begin_inset Formula $\left(-c\right)^{\intercal}d_{j}>0$
+\end_inset
+
+ and therefore going in the direction 
+\begin_inset Formula $d_{j}$
+\end_inset
+
+ decreases the objective arbitrarily.
+\end_layout
+
+\begin_layout Enumerate
+If no extreme directions ruin it then there exists an extreme point 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+ that's optimal.
+\end_layout
+
+\begin_layout Proof
+By representation theorem 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ and 
+\begin_inset Formula $x\succeq0$
+\end_inset
+
+ iff 
+\begin_inset Formula 
+\begin{align*}
+x & =\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{j=1}^{l}\mu_{j}d_{j}\\
+ & \in\text{conv}\left(x_{1},\dots,x_{k}\right)\cup\text{coni}\left(d_{1},\dots,d_{l}\right)
+\end{align*}
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula $\sum_{j=1}^{k}\lambda_{j}=1$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{j}\geq0$
+\end_inset
+
+, 
+\begin_inset Formula $\mu_{j}\geq0$
+\end_inset
+
+ and the LP ca be re-expressed as 
+\begin_inset Formula 
+\begin{align*}
+\min_{\boldsymbol{\lambda},\boldsymbol{\mu}} & c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{j=1}^{l}\mu_{j}d_{j}\right)\\
+\text{s.t.} & \sum_{i=1}^{k}\lambda_{i}=1\\
+ & \lambda_{i}\geq0\\
+ & \mu_{j}\geq0
+\end{align*}
+
+\end_inset
+
+So if 
+\begin_inset Formula $c^{\intercal}d_{q}<0$
+\end_inset
+
+ for some 
+\begin_inset Formula $q$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{j=1}^{l}\mu_{j}d_{j}\right)=c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{\underset{j\neq q}{j=1}}^{l}\mu_{j}d_{j}\right)+\mu_{q}\left(c^{\intercal}d_{q}\right)
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $u_{q}$
+\end_inset
+
+ could be chosen arbitrarily large in order to decrease the objective.
+ So feasibility iff 
+\begin_inset Formula $c^{\intercal}d_{j}\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $j=1,\dots,l$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+\min_{\boldsymbol{\mathbf{\lambda}}}\,c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}\right)\leq\min_{\boldsymbol{\lambda},\boldsymbol{\mu}}\,c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}+\sum_{j=1}^{l}\mu_{j}d_{j}\right)
+\]
+
+\end_inset
+
+(again since 
+\begin_inset Formula $\mu_{j}c^{\intercal}d_{j}\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+), i.e.
+ choose 
+\begin_inset Formula $\mu_{j}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+\min_{\boldsymbol{\mathbf{\lambda}}}\,c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}\right)
+\]
+
+\end_inset
+
+Clearly this is minimized by choosing 
+\begin_inset Formula $\lambda_{q}=1$
+\end_inset
+
+ for 
+\begin_inset Formula $q$
+\end_inset
+
+ such that 
+\begin_inset Formula $c^{\intercal}x_{q}=\min_{1\leq j\leq k}c^{\intercal}x_{j}$
+\end_inset
+
+.
+ Why?
+\begin_inset Formula 
+\begin{align*}
+\min_{\boldsymbol{\mathbf{\lambda}}}\,c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{j}\right)\geq & \min_{\boldsymbol{\mathbf{\lambda}}}\,c^{\intercal}\left(\sum_{j=1}^{k}\lambda_{j}x_{q}\right)\\
+ & =\min_{\boldsymbol{\mathbf{\lambda}}}\,c^{\intercal}x_{q}\left(\sum_{j=1}^{k}\lambda_{j}\right)\\
+ & =c^{\intercal}x_{q}\times1
+\end{align*}
+
+\end_inset
+
+ The smallest weighted average is found by putting all of the weight on
+ the smallest object (since all the objects are positive).
+\end_layout
+
+\begin_layout Subsection
+Exposed points
+\end_layout
+
+\begin_layout Definition*
+Let 
+\begin_inset Formula $C$
+\end_inset
+
+ be a nonempty closed convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $x^{*}\in C$
+\end_inset
+
+ is called an exposed solution if there exists a linear objective 
+\begin_inset Formula $f\left(x\right)=c^{t}x$
+\end_inset
+
+ for which 
+\begin_inset Formula $x^{*}=\min_{x\in C}f\left(X\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Straszewicz's theorem.
+ For any closed convex set 
+\begin_inset Formula $C$
+\end_inset
+
+, the set of exposed solutions of 
+\begin_inset Formula $C$
+\end_inset
+
+ is a dense subset of the set of extreme points of 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ Thus every extreme point of 
+\begin_inset Formula $C$
+\end_inset
+
+ is the limit point of some sequence of exposed points.
+\end_layout
+
+\begin_layout Corollary*
+Any closed bounded convex set 
+\begin_inset Formula $C$
+\end_inset
+
+ can be expressed as the closure of the convex hull of its exposed points.
+\end_layout
+
+\begin_layout Section
+Convex functions
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+A function 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ is said to be 
+\emph on
+convex
+\emph default
+ if for all 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\in\left[0,1\right]$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)\leq\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition*
+A function 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ is said to be 
+\emph on
+strictly convex
+\emph default
+ if for all 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+, 
+\begin_inset Formula $x_{1}\ne x_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)<\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A strictly convex function basically has no linear pieces.
+\end_layout
+
+\begin_layout Standard
+Facts: 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left\{ f_{i}\right\} $
+\end_inset
+
+ convex a conic 
+\begin_inset Formula $\alpha_{j}>0$
+\end_inset
+
+ combination 
+\begin_inset Formula $f\left(\mathbf{x}\right)=\sum_{j=1}^{k}\alpha_{j}f_{j}\left(\mathbf{x}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g$
+\end_inset
+
+ concave then 
+\begin_inset Formula $f:\left\{ x\big|g\left(x\right)>0\right\} \rightarrow\mathbb{R}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $f\left(x\right)=1/g\left(x\right)$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g$
+\end_inset
+
+ be nondecreasing, convex, and 
+\begin_inset Formula $h$
+\end_inset
+
+ convex then 
+\begin_inset Formula $f\left(x\right)=g\left(h\left(x\right)\right)$
+\end_inset
+
+ is convex.
+ 
+\begin_inset Formula $g$
+\end_inset
+
+ has to be nondecreasing!
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g$
+\end_inset
+
+ be convex and 
+\begin_inset Formula $h\left(x\right)=Ax+b$
+\end_inset
+
+ then 
+\begin_inset Formula $f\left(x\right)=g\left(Ax+b\right)$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout Theorem*
+Multivariable 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex on any line, i.e.
+ 
+\begin_inset Formula $F_{\bar{x},d}\left(\lambda\right)=f\left(\bar{x}+\lambda d\right)$
+\end_inset
+
+ is convex for all 
+\begin_inset Formula $\bar{x},d\in\mathbb{R}^{n}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a convex function.
+ Then the 
+\begin_inset Formula $\alpha$
+\end_inset
+
+-level-set of 
+\begin_inset Formula $f$
+\end_inset
+
+ is a convex for each 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $S_{\alpha}=\left\{ x\in S\big|f\left(x\right)\leq\alpha\right\} \subset\mathbb{R}^{n}$
+\end_inset
+
+ is convex.
+ The 
+\begin_inset Formula $\alpha$
+\end_inset
+
+-level-set is in the domain of the function.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $x_{1},x_{2}\in S_{\alpha}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $x_{1},x_{2}\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(x_{i}\right)\leq\alpha$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+f\left(\lambda x_{1}+\left(1-\lambda\right)x_{2}\right)\leq\lambda f\left(x_{1}\right)+\left(1-\lambda\right)f\left(x_{2}\right)\leq\lambda\alpha+\left(1-\lambda\right)\alpha=\alpha
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+Let 
+\begin_inset Formula $S\subset\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+, then 
+\begin_inset Formula $\left\{ \left(x,f\left(x\right)\right)\big|x\in S\right\} \subset\mathbb{R}^{n+1}$
+\end_inset
+
+ is the 
+\emph on
+graph
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition*
+Let 
+\begin_inset Formula $S\subset\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $S\neq\emptyset$
+\end_inset
+
+.
+ The 
+\emph on
+epigraph
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left\{ \left(x,y\right)\big|y\geq f\left(x\right),x\in S\right\} \subset\mathbb{R}^{n+1}$
+\end_inset
+
+.
+ The 
+\emph on
+hypograph
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\text{hypo}\left(f\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left\{ \left(x,y\right)\big|y\leq f\left(x\right),x\in S\right\} \subset\mathbb{R}^{n+1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a convex function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a convex function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous on the interior of 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ But only the interior!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename conv_cont.jpg
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Convex functions are continuous on interiors of convex sets.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Convex-functions-are"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a convex function.
+ Then 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is a 
+\emph on
+subgradient
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ if
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+I.e.
+ 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is above the plane defined by 
+\begin_inset Formula $f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is the 
+\series bold
+slope of the line or the gradient
+\series default
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition*
+The set of all subgradients 
+\begin_inset Formula $\partial f\left(\bar{x}\right)$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is called the 
+\emph on
+subdifferential
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a convex function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ has a subgradient 
+\begin_inset Formula $\xi$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+.
+ In particular, the hyperplane 
+\begin_inset Formula 
+\[
+\mathcal{H}=\left\{ \left(x,y\right)\big|y=f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)\right\} 
+\]
+
+\end_inset
+
+supports 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ at 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Note that 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ is convex and 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)$
+\end_inset
+
+ belongs to its boundary.
+ Therefore by separation theorem there exists 
+\begin_inset Formula $\left(\xi_{0},\mu\right)\in\mathbb{R}^{n}\times\mathbb{R}$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $\left(\mathbf{x},y\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+\xi_{0}^{t}\left(x-\bar{x}\right)+\mu\left(y-f\left(\bar{x}\right)\right)\leq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Note that 
+\begin_inset Formula $\mu\leq0$
+\end_inset
+
+ because otherwise take 
+\begin_inset Formula $y$
+\end_inset
+
+ large enough and the inequality would be violated.
+ In fact 
+\begin_inset Formula $\mu<0$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+Toward a contradiction suppose 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\xi_{0}^{t}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $x=\bar{x}+\lambda\xi_{0}\in S$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\lambda\xi_{0}^{t}\xi_{0}\leq0$
+\end_inset
+
+.
+ This implies that 
+\begin_inset Formula $\xi_{0}=0$
+\end_inset
+
+ (otherwise how could 
+\begin_inset Formula $\lambda\xi_{0}^{t}\xi_{0}$
+\end_inset
+
+ negative or equal to zero with 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ strictly positive).
+ But then 
+\begin_inset Formula $\left(\xi_{0},\mu\right)=0$
+\end_inset
+
+ contradicting the separation theorem.
+ Therefore 
+\begin_inset Formula $\mu<0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Dividing 
+\begin_inset Formula $\xi_{0}^{t}\left(x-\bar{x}\right)+\mu\left(y-f\left(\bar{x}\right)\right)\leq0$
+\end_inset
+
+ by 
+\begin_inset Formula $\left|\mu\right|$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xi^{t}\left(x-\bar{x}\right)+-1\left(y-f\left(\bar{x}\right)\right)=\xi^{t}\left(x-\bar{x}\right)-y+f\left(\bar{x}\right)\leq0
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\left(x,y\right)\in\text{epi}\left(f\right)$
+\end_inset
+
+.
+ Then by letting 
+\begin_inset Formula $y\rightarrow f\left(x\right)$
+\end_inset
+
+ we satisfy the theorem
+\begin_inset Formula 
+\[
+\xi^{t}\left(x-\bar{x}\right)+f\left(\bar{x}\right)\leq f\left(x\right)
+\]
+
+\end_inset
+
+In particular, the hyperplane 
+\begin_inset Formula $H=\left\{ \left(x,y\right)\big|y=f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)\right\} $
+\end_inset
+
+ supports 
+\begin_inset Formula $\text{epi}\left(f\right)$
+\end_inset
+
+ at 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a strictly convex function.
+ Then for 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+, there exists a vector 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f\left(x\right)>f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Partial converse: let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+.
+ Suppose for each 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\xi$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex on 
+\begin_inset Formula $\text{int}\left(S\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+The 
+\emph on
+directional derivative
+\emph default
+ is 
+\begin_inset Formula 
+\[
+f'\left(\bar{x},d\right)=\lim_{\lambda\rightarrow0^{+}}\frac{f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)}{\lambda}
+\]
+
+\end_inset
+
+Alternatively it's 
+\begin_inset Formula $d\cdot\nabla f\left(\bar{x}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$
+\end_inset
+
+ be a convex function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ has all directional derivatives.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $\lambda_{2}>\lambda_{1}>0$
+\end_inset
+
+.
+ By convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+f\left(\bar{x}+\lambda d\right) & =f\left(\frac{\lambda_{1}}{\lambda_{2}}\left(\bar{x}+\lambda_{2}d\right)+\left(1-\frac{\lambda_{1}}{\lambda_{2}}\right)\bar{x}\right)\\
+ & \leq\frac{\lambda_{1}}{\lambda_{2}}f\left(\bar{x}+\lambda_{2}d\right)+\left(1-\frac{\lambda_{1}}{\lambda_{2}}\right)f\left(\bar{x}\right)
+\end{align*}
+
+\end_inset
+
+which implies
+\begin_inset Formula 
+\[
+\frac{f\left(\bar{x}+\lambda_{1}d\right)-f\left(\bar{x}\right)}{\lambda_{1}}\leq\frac{f\left(\bar{x}+\lambda_{2}d\right)-f\left(\bar{x}\right)}{\lambda_{2}}
+\]
+
+\end_inset
+
+Thus the difference quotient is monotonically decreasing.
+ Then since the function is convex it has a subgradient at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and so bounded below.
+ Therefore the limit converges.
+\end_layout
+
+\begin_layout Definition*
+A function is called differentiable if there exists 
+\begin_inset Formula $v$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+f\left(x\right)=f\left(\bar{x}\right)+v^{t}\left(x-\bar{x}\right)+\alpha\left(\bar{x},x-\bar{x}\right)\left\Vert x-\bar{x}\right\Vert 
+\]
+
+\end_inset
+
+The function 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is the Lagrange form of the first order remainder term in the Taylor series
+ approximation of 
+\begin_inset Formula $f$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+\alpha\left(\bar{x},x-\bar{x}\right)\left\Vert x-\bar{x}\right\Vert =\frac{f^{''}\left(\bar{x}\right)}{3!}\left(x-\bar{x}\right)^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $v$
+\end_inset
+
+ is called the gradient and duh is 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=\left(\frac{\partial f\left(\bar{x}\right)}{\partial x_{1}},\dots,\frac{\partial f\left(\bar{x}\right)}{\partial x_{n}}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ a convex function and differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Then the subdifferential at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is the singleton 
+\begin_inset Formula $\left\{ \nabla f\left(\bar{x}\right)\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is a convex set the subdifferential at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is not empty.
+ Let 
+\begin_inset Formula $\xi$
+\end_inset
+
+ be a subgradient of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Again by the same theorem (existence of subgradients)
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)\geq f\left(\bar{x}\right)+\xi^{t}\left(\lambda d\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By differentiability at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)=f\left(\bar{x}\right)+\left(\nabla f\left(\bar{x}\right)\right)^{t}\left(\lambda d\right)+\alpha\left(\bar{x},\lambda d\right)\left\Vert \lambda d\right\Vert 
+\]
+
+\end_inset
+
+Subtracting the equation from the inequality we get that 
+\begin_inset Formula 
+\[
+0\geq\xi^{t}\left(\lambda d\right)-\left(\nabla f\left(\bar{x}\right)\right)^{t}\left(\lambda d\right)-\alpha\left(\bar{x},\lambda d\right)\left\Vert \lambda d\right\Vert 
+\]
+
+\end_inset
+
+Dividing by 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and letting 
+\begin_inset Formula $\lambda\rightarrow0^{+}$
+\end_inset
+
+ we get that 
+\begin_inset Formula $\left(\xi-\nabla f\left(\bar{x}\right)\right)^{t}d\leq0$
+\end_inset
+
+.
+ Since this is true for all 
+\begin_inset Formula $d$
+\end_inset
+
+, choosing 
+\begin_inset Formula $d=\xi-\nabla f\left(\bar{x}\right)$
+\end_inset
+
+ proves that 
+\begin_inset Formula $\xi-\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+ (how else would the norm squared of it be nonpositive).
+\end_layout
+
+\begin_layout Standard
+In light of the lemma, and supporting hyperplane, and the partial converse
+ we have another characterization of convex functions:
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty open (or 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+) convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ differentiable.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $\forall\bar{x}\in S$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\left(\nabla f\left(\bar{x}\right)\right)^{t}\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty open (or 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+) convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ differentiable.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $\forall x_{1},x_{2}\in S$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(\nabla f\left(x_{2}\right)-\nabla f\left(x_{1}\right)\right)^{t}\left(x_{2}-x_{1}\right)\geq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By characterization of convexity we have that 
+\begin_inset Formula 
+\begin{align*}
+f\left(x_{1}\right) & \geq f\left(x_{2}\right)+\left(\nabla f\left(x_{2}\right)\right)^{t}\left(x_{1}-x_{2}\right)\\
+f\left(x_{2}\right) & \geq f\left(x_{1}\right)+\left(\nabla f\left(x_{1}\right)\right)^{t}\left(x_{2}-x_{1}\right)
+\end{align*}
+
+\end_inset
+
+Adding the two inequalities gets the result.
+ To prove the converse use the mean value theorem:
+\begin_inset Formula 
+\[
+f\left(x_{2}\right)-f\left(x_{1}\right)=\left(\nabla f\left(x\right)\right)^{t}\left(x_{2}-x_{1}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $x=\lambda x_{1}+\left(1-\lambda\right)x_{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $\lambda\in\left(0,1\right)$
+\end_inset
+
+.
+ By assumption 
+\begin_inset Formula $\left(\nabla f\left(x\right)-\nabla f\left(x_{1}\right)\right)^{t}\left(x-x_{1}\right)\geq0$
+\end_inset
+
+ which is equivalent to 
+\begin_inset Formula 
+\[
+\left(1-\lambda\right)\left(\nabla f\left(x\right)-\nabla f\left(x_{1}\right)\right)^{t}\left(x_{2}-x_{1}\right)\geq0
+\]
+
+\end_inset
+
+This implies that 
+\begin_inset Formula 
+\[
+\left(\nabla f\left(x\right)\right)^{t}\left(x_{2}-x_{1}\right)\geq\left(\nabla f\left(x_{1}\right)\right)^{t}\left(x_{2}-x_{1}\right)
+\]
+
+\end_inset
+
+But by mean value theorem result we get that 
+\begin_inset Formula 
+\[
+f\left(x_{2}\right)-f\left(x_{1}\right)\geq\left(\nabla f\left(x_{1}\right)\right)^{t}\left(x_{2}-x_{1}\right)
+\]
+
+\end_inset
+
+and so by previous characterization we get that 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex.
 \end_layout
 
 \end_body
