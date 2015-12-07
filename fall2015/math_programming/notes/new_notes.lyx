@@ -1403,7 +1403,11 @@ where the inequality follows because of the min.
 \begin_inset Formula $g\left(\lambda\right)$
 \end_inset
 
- is always a lower bound for the primal and maximizing over 
+ is always a lower bound for the primal and 
+\series bold
+maximizing
+\series default
+ over 
 \begin_inset Formula $\lambda$
 \end_inset
 
@@ -1473,7 +1477,7 @@ or
 \begin{align*}
 \max_{\lambda} & \lambda^{\intercal}b\\
 \text{s.t.} & \lambda^{\intercal}A\preceq c^{\intercal}\\
- & \lambda\text{ free} 
+ & \lambda\text{ free}
 \end{align*}
 
 \end_inset
@@ -4198,6 +4202,806 @@ and so by previous characterization we get that
 \end_inset
 
  is convex.
+\end_layout
+
+\begin_layout Standard
+This is a first order condition on convexity.
+ How about second order conditions?
+\end_layout
+
+\begin_layout Definition*
+A function 
+\begin_inset Formula $f$
+\end_inset
+
+ is twice differentiable if 
+\begin_inset Formula 
+\[
+f\left(x\right)=f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)+\frac{1}{2}\left(x-\bar{x}\right)^{t}H\left(\bar{x}\right)\left(x-\bar{x}\right)+\alpha\left(\bar{x},x-\bar{x}\right)\left\Vert x-\bar{x}\right\Vert ^{2}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\lim_{x\rightarrow\bar{x}}\alpha\left(\bar{x},x-\bar{x}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty open (or 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+) convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ twice differentiable.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex iff 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)$
+\end_inset
+
+ is psd.
+\end_layout
+
+\begin_layout Standard
+For strict convexity you need something stronger.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty open (or 
+\begin_inset Formula $\bar{x}\in\text{int}\left(S\right)$
+\end_inset
+
+) convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ twice differentiable.
+ Then 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)$
+\end_inset
+
+ is pd then 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly convex.
+\end_layout
+
+\begin_layout Enumerate
+f is strictly convex then 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)$
+\end_inset
+
+ is psd.
+\end_layout
+
+\begin_layout Enumerate
+f is strictly convex and quadratic then 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)$
+\end_inset
+
+ is pd.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Optimality conditions for Convex programs
+\end_layout
+
+\begin_layout Definition*
+Consider 
+\begin_inset Formula 
+\begin{align*}
+\min_{x} & f\left(x\right)\\
+\text{s.t.} & x\in S
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ is a 
+\series bold
+feasible solution
+\series default
+ to the problem.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\bar{x}\right)\leq f\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ is a 
+\series bold
+globally optimal solution
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\bar{x}\right)\leq f\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+, i.e.
+ in some neighborhood of 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a 
+\series bold
+locally optimal
+\series default
+ 
+\series bold
+solution
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\bar{x}\right)<f\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+, i.e.
+ in some neighborhood of 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a 
+\series bold
+strict locally optimal
+\series default
+ 
+\series bold
+solution
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\bar{x}\right)<f\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+, i.e.
+ in some neighborhood of 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is the only such point is an 
+\series bold
+isolated locally optimal
+\series default
+ 
+\series bold
+solution
+\series default
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename solns.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Characterizing solutions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty convex set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:S\rightarrow\mathbb{R}$
+\end_inset
+
+ convex and 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ be a locally optimal solution (optimal, but not uniquely, within an 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+-ball) to 
+\begin_inset Formula $\min_{x\in S}f\left(x\right)$
+\end_inset
+
+.
+ Then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is globally optimal.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is strictly locally optimal (
+\begin_inset Formula $f\left(\bar{x}\right)<f\left(x\right)$
+\end_inset
+
+ in the 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+-ball).
+ or 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly convex then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is uniquely globally optimal.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is strongly (isolated) locally optimal.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Proof
+Towards a contradiction suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is not globally optimal.
+ Note 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ locally optimal means 
+\begin_inset Formula $f\left(\bar{x}\right)\leq f\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+.
+ Then not being global means there exists 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\hat{x}\right)<f\left(\bar{x}\right)$
+\end_inset
+
+.
+ By convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\lambda\hat{x}+\left(1-\lambda\right)\bar{x}\right)\leq\lambda f\left(\hat{x}\right)+\left(1-\lambda\right)f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+Then using 
+\begin_inset Formula $f\left(\hat{x}\right)<f\left(\bar{x}\right)$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(\lambda\hat{x}+\left(1-\lambda\right)\bar{x}\right)\leq\lambda f\left(\hat{x}\right)+\left(1-\lambda\right)f\left(\bar{x}\right)<\lambda f\left(\bar{x}\right)+\left(1-\lambda\right)f\left(\bar{x}\right)=f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+Taking 
+\begin_inset Formula $\lambda<\epsilon$
+\end_inset
+
+ we get a contradiction.
+ That handles part 1.
+\end_layout
+
+\begin_layout Proof
+Part 2(a): Suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a strict local optimal.
+ Then by part 1 it's a global optimum.
+ Suppose there exists 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\bar{x}\right)=f\left(\hat{x}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+f\left(x_{\lambda}\right)=f\left(\lambda\hat{x}+\left(1-\lambda\right)\bar{x}\right)\leq\lambda f\left(\hat{x}\right)+\left(1-\lambda\right)f\left(\bar{x}\right)=\lambda f\left(\bar{x}\right)+\left(1-\lambda\right)f\left(\bar{x}\right)=f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+and by taking 
+\begin_inset Formula $\lambda<\epsilon$
+\end_inset
+
+ we get a contradiction to strict local optimality.
+ Hence 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is the unique global minimum.
+ 
+\end_layout
+
+\begin_layout Proof
+Part 2(b): Since it's a unique global minimum it must be isolated since
+ any other local minimum 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ in 
+\begin_inset Formula $S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ would be a global minimum.
+\end_layout
+
+\begin_layout Proof
+Part 2'(a/b): Suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local optimum and 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly convex.
+ Since strictly convex implies convexity 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is still a global minimum.
+ Towards a contradiction suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is not unique, i.e.
+ there exists 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\hat{x}\right)=f\left(\bar{x}\right)$
+\end_inset
+
+.
+ By strict convexity
+\begin_inset Formula 
+\[
+f\left(\frac{\bar{x}+\hat{x}}{2}\right)<\frac{1}{2}f\left(\bar{x}\right)+\frac{1}{2}f\left(\hat{x}\right)=f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+By convexity of 
+\begin_inset Formula $S$
+\end_inset
+
+ we have 
+\begin_inset Formula $\frac{\bar{x}+\hat{x}}{2}\in S$
+\end_inset
+
+ and therefore a contradiction of global optimality.
+ Further similarly 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is also isolated.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$
+\end_inset
+
+ be a convex function and 
+\begin_inset Formula $S\neq\emptyset$
+\end_inset
+
+ a convex subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+.
+ Then for 
+\begin_inset Formula 
+\[
+\min_{x\in S}\,f\left(x\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is globally optimal iff 
+\begin_inset Formula $f$
+\end_inset
+
+ has a supporting subgradient 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose there exists 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ By convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)\geq f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is optimal.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is optimal.
+ Let 
+\begin_inset Formula 
+\begin{align*}
+\Lambda_{1} & =\left\{ \left(x-\bar{x},y\right)\big|x\in\mathbb{R}^{n},y>f\left(x\right)-f\left(\bar{x}\right)\right\} \\
+\Lambda_{2} & =\left\{ \left(x-\bar{x},y\right)\big|x\in S,y\leq0\right\} 
+\end{align*}
+
+\end_inset
+
+Both 
+\begin_inset Formula $\Lambda_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda_{2}$
+\end_inset
+
+ are convex (I have no idea why?).
+ Also 
+\begin_inset Formula $\Lambda_{1}\cap\Lambda_{2}=\emptyset$
+\end_inset
+
+ since otherwise there exists 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $0>y>f\left(x\right)-f\left(\bar{x}\right)$
+\end_inset
+
+ contradicting 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is optimal (since 
+\begin_inset Formula $0>f\left(x\right)-f\left(\bar{x}\right)\iff f\left(\bar{x}\right)>f\left(x\right)$
+\end_inset
+
+).
+ By separating hyperplane theorem there exists a hyperplane that separates:
+ there exists nonzero 
+\begin_inset Formula $\left(\xi_{0},\mu\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\neq0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{align*}
+\xi_{0}^{t}\left(x-\bar{x}\right)+\mu y & \leq\alpha,\,\forall x\in\mathbb{R}^{n},\,y>f\left(x\right)-f\left(\bar{x}\right)\\
+\xi_{0}^{t}\left(x-\bar{x}\right)+\mu y & \geq\alpha,\,\forall x\in S,\,y\leq0
+\end{align*}
+
+\end_inset
+
+Then letting 
+\begin_inset Formula $x=\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $y=0$
+\end_inset
+
+ in the second inequality you get that 
+\begin_inset Formula $\alpha\leq0$
+\end_inset
+
+.
+ Now letting 
+\begin_inset Formula $x=\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $y=\epsilon>0$
+\end_inset
+
+ in the first inequality and you get 
+\begin_inset Formula $\mu\epsilon\leq\alpha$
+\end_inset
+
+.
+ Since this is true for every 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+ and therefore
+\begin_inset Formula $\mu\leq0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\mu\leq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+.
+ So summarizing 
+\begin_inset Formula 
+\begin{align*}
+\xi_{0}^{t}\left(x-\bar{x}\right)+\mu y & \leq0,\,\forall x\in\mathbb{R}^{n},\,y>f\left(x\right)-f\left(\bar{x}\right)\\
+\xi_{0}^{t}\left(x-\bar{x}\right)+\mu y & \geq0,\,\forall x\in S,\,y\leq0
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mu$
+\end_inset
+
+ were 0 then 
+\begin_inset Formula $\xi_{0}^{t}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+ and then letting 
+\begin_inset Formula $x=\bar{x}+\xi_{0}$
+\end_inset
+
+ shows that 
+\begin_inset Formula $\xi_{0}=0$
+\end_inset
+
+ which isn't possible.
+ So 
+\begin_inset Formula $\mu<0$
+\end_inset
+
+.
+ Dividing by 
+\begin_inset Formula $\left|\mu\right|$
+\end_inset
+
+ everywhere we get that 
+\begin_inset Formula 
+\begin{align*}
+\xi^{t}\left(x-\bar{x}\right)-y & \leq0,\,\forall x\in\mathbb{R}^{n},\,y>f\left(x\right)-f\left(\bar{x}\right)\\
+\xi^{t}\left(x-\bar{x}\right)-y & \geq0,\,\forall x\in S,\,y\leq0
+\end{align*}
+
+\end_inset
+
+Letting 
+\begin_inset Formula $y=0$
+\end_inset
+
+ in the second inequality we get that 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Then 
 \end_layout
 
 \end_body
