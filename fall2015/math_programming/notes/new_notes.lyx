@@ -4840,7 +4840,28 @@ since
 
 \end_inset
 
-Both 
+Note that 
+\begin_inset Formula $\Lambda_{1}$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+shifted
+\begin_inset Quotes erd
+\end_inset
+
+ epigraph of 
+\begin_inset Formula $f$
+\end_inset
+
+, shifted such that 
+\begin_inset Formula $\left(\bar{x},f\left(\bar{x}\right)\right)=\left(0,0\right)$
+\end_inset
+
+.
+ Both 
 \begin_inset Formula $\Lambda_{1}$
 \end_inset
 
@@ -4848,7 +4869,7 @@ Both
 \begin_inset Formula $\Lambda_{2}$
 \end_inset
 
- are convex (I have no idea why?).
+ are convex.
  Also 
 \begin_inset Formula $\Lambda_{1}\cap\Lambda_{2}=\emptyset$
 \end_inset
@@ -5001,7 +5022,1277 @@ Letting
 \end_inset
 
 .
+ From the first inequality we conclude that since 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)-y\leq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ in the 
+\begin_inset Quotes eld
+\end_inset
+
+shifted
+\begin_inset Quotes erd
+\end_inset
+
+ strict epigraph of 
+\begin_inset Formula $f$
+\end_inset
+
+ it must therefore also hold in the closure, i.e.
+ where 
+\begin_inset Formula $y=f\left(x\right)-f\left(\bar{x}\right)$
+\end_inset
+
+, which gives us
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Corollary*
+If 
+\begin_inset Formula $S$
+\end_inset
+
+ is open then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is global optimal iff 
+\begin_inset Formula $0\in\partial f\left(\bar{x}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is optimal iff there exists 
+\begin_inset Formula $\xi$
+\end_inset
+
+ such that 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $S$
+\end_inset
+
+ is open take 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ such that 
+\begin_inset Formula $x=\bar{x}-\lambda\xi\in S$
+\end_inset
+
+ and then 
+\begin_inset Formula 
+\[
+-\lambda\left\Vert \xi\right\Vert ^{2}\geq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ differentiable (and convex) then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is globally optimal iff 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $S$
+\end_inset
+
+ is open then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is globally optimal iff 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Obvious since 
+\begin_inset Formula $\partial f\left(\bar{x}\right)=\left\{ \nabla f\left(\bar{x}\right)\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename grad_dir.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gradient angle
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gradient-angle"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gradient-angle"
+
+\end_inset
+
+.
+ Suppose the problem is to minimize 
+\begin_inset Formula $f$
+\end_inset
+
+ subject to 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable and convex but 
+\begin_inset Formula $S$
+\end_inset
+
+ is arbitrary.
+ Suppose at some 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ the directional derivative 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Then going in any direction in 
+\begin_inset Formula $S$
+\end_inset
+
+ would potentially increase the objective, regardless of what 
+\begin_inset Formula $S$
+\end_inset
+
+ is like.
+ Why? By convexity
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+At every 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ we have that 
+\begin_inset Formula $f\left(x\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+and differentiability of 
+\begin_inset Formula $f$
+\end_inset
+
+ any solution 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ (anywhere in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, which is a convex set) that improves on 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(\bar{x}\right)>f\left(\hat{x}\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)
+\]
+
+\end_inset
+
+which implies 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)<f\left(\bar{x}\right)-f\left(\bar{x}\right)=0$
+\end_inset
+
+ but 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Hence the hyperplane 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)=0$
+\end_inset
+
+ separates 
+\begin_inset Formula $S$
+\end_inset
+
+ (arbitrary 
+\begin_inset Formula $S$
+\end_inset
+
+) from solutions that improve cost.
+ In the non-differentiable case the supporting hyperplane 
+\begin_inset Formula $\xi$
+\end_inset
+
+ plays the same role as 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)$
+\end_inset
+
+.
+ Conversely suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable but arbitrary otherwise and 
+\begin_inset Formula $S$
+\end_inset
+
+ is convex.
  Then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a global minimum then again 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+ since otherwise if there exists 
+\begin_inset Formula $x\in\text{int}\left(S\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)<0$
+\end_inset
+
+ you could do go in the direction 
+\begin_inset Formula $d=x-\bar{x}$
+\end_inset
+
+, improve cost, and still satisfy constraints.
+ The general take away is: if 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable and otherwise 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $S$
+\end_inset
+
+ are arbitrary and 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum then for any feasible direction 
+\begin_inset Formula $d$
+\end_inset
+
+ such that 
+\begin_inset Formula $x=\bar{x}+\lambda d$
+\end_inset
+
+ it must be the case that 
+\begin_inset Formula 
+\[
+\nabla f\left(\bar{x}\right)^{t}d\geq0
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $0<\lambda\leq\delta$
+\end_inset
+
+ i.e.
+ going in that direction for a small enough step does not improve the objective.
+ 
+\end_layout
+
+\begin_layout Standard
+Back to your original program:
+\end_layout
+
+\begin_layout Standard
+What characterizes the set of optimal solutions to 
+\begin_inset Formula $\min\left\{ f\left(x\right)\big|x\in S\right\} $
+\end_inset
+
+ when 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex and differentiable and so is 
+\begin_inset Formula $S$
+\end_inset
+
+? 
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex and differentiable and 
+\begin_inset Formula $S$
+\end_inset
+
+ is convex.
+ Suppose there exists an optimal solution 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Then the set of optimal solution 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+S^{*}=\left\{ x\in S\big|\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)\leq0,\nabla f\left(x\right)=\nabla f\left(\bar{x}\right)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Denote the candidate set of optimal solutions by 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ and note that 
+\begin_inset Formula $\bar{x}\in\bar{S}$
+\end_inset
+
+.
+ Consider 
+\begin_inset Formula $\hat{x}\in S^{*}$
+\end_inset
+
+.
+ By convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ (and convexity of 
+\begin_inset Formula $S$
+\end_inset
+
+) and definition of 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+, it's the case that 
+\begin_inset Formula $\hat{x}\in S$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(\bar{x}\right)\geq f\left(\hat{x}\right)+\nabla f\left(\hat{x}\right)^{t}\left(\bar{x}-\hat{x}\right)=f\left(\hat{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(\bar{x}-\hat{x}\right)=f\left(\hat{x}\right)+\left(-\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)\right)\geq f\left(\hat{x}\right)
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\hat{x}\in\bar{S}$
+\end_inset
+
+ and so 
+\begin_inset Formula $S^{*}\subset\bar{S}$
+\end_inset
+
+.
+ Conversely, suppose 
+\begin_inset Formula $\hat{x}\in\bar{S}$
+\end_inset
+
+ then 
+\begin_inset Formula $f\left(\hat{x}\right)=f\left(\bar{x}\right)$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+f\left(\bar{x}\right)=f\left(\hat{x}\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)
+\]
+
+\end_inset
+
+and hence 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)\leq0$
+\end_inset
+
+ but by corollary above 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)\geq0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)=0$
+\end_inset
+
+.
+ Interchanging 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ we get that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\bar{x}-\hat{x}\right)=0$
+\end_inset
+
+ and subtracting we get
+\begin_inset Formula 
+\[
+\left(\nabla f\left(\bar{x}\right)-\nabla f\left(\hat{x}\right)\right)^{t}\left(\bar{x}-\hat{x}\right)=0
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula 
+\begin{align*}
+\left(\nabla f\left(\bar{x}\right)-\nabla f\left(\hat{x}\right)\right) & =\left.\nabla f\left(\hat{x}+\lambda\left(\bar{x}-\hat{x}\right)\right)\right|_{\lambda=0}^{\lambda=1}\\
+ & =\int_{0}^{1}\nabla^{2}f\left(\hat{x}+\lambda\left(\bar{x}-\hat{x}\right)\right)\left(\bar{x}-\hat{x}\right)d\lambda\eqqcolon G\left(\bar{x}-\hat{x}\right)
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $G$
+\end_inset
+
+ is psd since 
+\begin_inset Formula $\nabla^{2}f$
+\end_inset
+
+ is psd (since 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex).
+ Then 
+\begin_inset Formula 
+\[
+0=\left(\bar{x}-\hat{x}\right)^{t}\left(\nabla f\left(\bar{x}\right)-\nabla f\left(\hat{x}\right)\right)=\left(\bar{x}-\hat{x}\right)^{t}G\left(\bar{x}-\hat{x}\right)
+\]
+
+\end_inset
+
+and by psd-ness 
+\begin_inset Formula $G\left(\bar{x}-\hat{x}\right)$
+\end_inset
+
+ must be 0 and hence 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)-\nabla f\left(\hat{x}\right)=0$
+\end_inset
+
+ (and 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(\hat{x}-\bar{x}\right)\leq0$
+\end_inset
+
+) and hence 
+\begin_inset Formula $\hat{x}\in S^{*}$
+\end_inset
+
+ and so 
+\begin_inset Formula $\bar{S}\subset S^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+The set of alternative solutions 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+ for convex, twice differentiable, and convex 
+\begin_inset Formula $S$
+\end_inset
+
+ can be characterized as
+\begin_inset Formula 
+\[
+S^{*}=\left\{ x\in S\big|\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)=0,\nabla f\left(x\right)=\nabla f\left(\bar{x}\right)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Follows from previous theorem and for optimal 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+, and all other 
+\begin_inset Formula $x\in S$
+\end_inset
+
+, 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)\geq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+Suppose 
+\begin_inset Formula $f=c^{t}x+\frac{1}{2}x^{t}Hx$
+\end_inset
+
+ and 
+\begin_inset Formula $S$
+\end_inset
+
+ is polyhedral.
+ Then 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+ is the polyhedral set given by
+\begin_inset Formula 
+\[
+S^{*}=\left\{ x\in S\big|c^{t}\left(x-\bar{x}\right)=0,H\left(x-\bar{x}\right)=0\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\nabla f\left(x\right)=c+Hx$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For maxima of convex functions similar things apply (but for different reasons).
+ 
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex and 
+\begin_inset Formula $S$
+\end_inset
+
+ a nonempty convex set, if 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local optimal then for all 
+\begin_inset Formula $\xi$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\xi^{t}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+ for each 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+ is a local optimum.
+ Then for all 
+\begin_inset Formula $x\in S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $f\left(x\right)\leq f\left(\bar{x}\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\lambda<\epsilon$
+\end_inset
+
+ and then
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda\left(x-\bar{x}\right)\right)\le f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+Then by convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ for all 
+\begin_inset Formula $\xi$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda\left(x-\bar{x}\right)\right)\geq f\left(\bar{x}\right)+\lambda\xi^{t}\left(x-\bar{x}\right)
+\]
+
+\end_inset
+
+implying 
+\begin_inset Formula $\lambda\xi^{t}\left(x-\bar{x}\right)\leq0$
+\end_inset
+
+.
+ Divinding by 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ we have it.
+\end_layout
+
+\begin_layout Corollary*
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable them 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)\left(x-\bar{x}\right)\le0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The result is necessary but not sufficient for gradients to be as such.
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is a convex function and 
+\begin_inset Formula $S$
+\end_inset
+
+ a nonempty polyhedral set then the solution to a maximization problem is
+ at the boudary (i.e.
+ extreme point).
+\end_layout
+
+\begin_layout Proof
+Note 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous because it's convex and 
+\begin_inset Formula $S$
+\end_inset
+
+ is compact (bounded over 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+) and hence 
+\begin_inset Formula $f$
+\end_inset
+
+ achieves its maximum at 
+\begin_inset Formula $x'\in S$
+\end_inset
+
+.
+ By the representation theorem 
+\begin_inset Formula $S$
+\end_inset
+
+ is defined only as a convex combination of extreme points hence 
+\begin_inset Formula 
+\[
+x^{'}=\sum_{j=1}^{k}\lambda_{j}x_{j},\sum_{j=1}^{k}\lambda_{j}=1
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\lambda_{j}\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+ are extreme points.
+ By convexity of 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\sum_{j=1}^{k}\lambda_{j}x_{j}\right)\leq\sum_{j=1}^{k}\lambda_{j}f\left(x_{j}\right)
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula $f\left(x^{'}\right)\geq f\left(x_{j}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+ and thus 
+\begin_inset Formula $f\left(x^{'}\right)=f\left(x_{j}\right)$
+\end_inset
+
+.
+ Therefore the solutions are all at the bounday points.
+\end_layout
+
+\begin_layout Section
+Optimality conditions for unconstrained problems
+\end_layout
+
+\begin_layout Definition*
+Consider 
+\begin_inset Formula $\min_{x\in\mathbb{R}^{n}}f\left(x\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $d$
+\end_inset
+
+ is an 
+\emph on
+improving
+\emph default
+ direction at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ if 
+\begin_inset Formula $f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $0<\lambda<\epsilon$
+\end_inset
+
+ for some 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $d$
+\end_inset
+
+ be such that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $d$
+\end_inset
+
+ is an improving direction.
+\end_layout
+
+\begin_layout Proof
+Why? This says that going in the direction of is strictly acute with 
+\begin_inset Formula $-\nabla f\left(\bar{x}\right)$
+\end_inset
+
+, i.e.
+ sort of aligned with the direction of steepest descent.
+ By differentiability of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)=f\left(\bar{x}\right)+\lambda\nabla f\left(\bar{x}\right)^{t}d+\lambda\left\Vert d\right\Vert \alpha\left(\bar{x},\lambda d\right)
+\]
+
+\end_inset
+
+Re-arranging terms we get
+\begin_inset Formula 
+\[
+\frac{f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)}{\lambda}=\nabla f\left(\bar{x}\right)^{t}d+\left\Vert d\right\Vert \alpha\left(\bar{x},\lambda d\right)
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\rightarrow0$
+\end_inset
+
+ as 
+\begin_inset Formula $\lambda\rightarrow0$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ such that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d+\left\Vert d\right\Vert \alpha\left(\bar{x},\lambda d\right)<0$
+\end_inset
+
+ (we can make 
+\begin_inset Formula $\left\Vert d\right\Vert \alpha\left(\bar{x},\lambda d\right)$
+\end_inset
+
+ smaller than 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d$
+\end_inset
+
+) for all 
+\begin_inset Formula $0<\lambda<\epsilon$
+\end_inset
+
+ and therefore 
+\begin_inset Formula 
+\[
+\frac{f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)}{\lambda}<0
+\]
+
+\end_inset
+
+ and since 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ we have that 
+\begin_inset Formula $f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)<0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum then 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Towards a contradiction suppose 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)\neq0$
+\end_inset
+
+ and set 
+\begin_inset Formula $d=-\nabla f\left(\bar{x}\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d=-\left\Vert \nabla f\left(\bar{x}\right)\right\Vert ^{2}<0$
+\end_inset
+
+, hence satisfying the previous result for this direction, hence 
+\begin_inset Formula $d$
+\end_inset
+
+ is an improving direction contradicting that 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+The converse is not true!
+\end_layout
+
+\begin_layout Standard
+Second order necessary conditions
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be twice differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum of 
+\begin_inset Formula $f$
+\end_inset
+
+ then 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)$
+\end_inset
+
+ is psd.
+\end_layout
+
+\begin_layout Proof
+First part follows from above.
+ For the second part consider and arbitrary direction 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)=f\left(\bar{x}\right)+\lambda\nabla f\left(\bar{x}\right)^{t}d+\frac{1}{2}\lambda^{2}d^{t}H\left(\bar{x}\right)d+\lambda^{2}\left\Vert d\right\Vert ^{2}\alpha\left(\bar{x},\lambda d\right)
+\]
+
+\end_inset
+
+Again 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\frac{f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)}{\lambda^{2}}=+\frac{1}{2}d^{t}H\left(\bar{x}\right)d+\left\Vert d\right\Vert ^{2}\alpha\left(\bar{x},\lambda d\right)
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is local minimum 
+\begin_inset Formula $f\left(\bar{x}+\lambda d\right)-f\left(\bar{x}\right)\geq0$
+\end_inset
+
+ for sufficiently small 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula 
+\[
+\frac{1}{2}d^{t}H\left(\bar{x}\right)d+\left\Vert d\right\Vert ^{2}\alpha\left(\bar{x},\lambda d\right)\geq0
+\]
+
+\end_inset
+
+Taking the limit as 
+\begin_inset Formula $\lambda\rightarrow0$
+\end_inset
+
+ we get that 
+\begin_inset Formula $d^{t}H\left(\bar{x}\right)d\geq0$
+\end_inset
+
+ for all directions 
+\begin_inset Formula $d$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+The converse is not true! But there is a partial converse
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be twice differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla^{2}f\left(\bar{x}\right)$
+\end_inset
+
+ pd then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a strict local minimum.
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is twice differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)=f\left(\bar{x}\right)+\lambda\nabla f\left(\bar{x}\right)^{t}d+\frac{1}{2}\lambda^{2}d^{t}H\left(\bar{x}\right)d+\lambda^{2}\left\Vert d\right\Vert ^{2}\alpha\left(\bar{x},\lambda d\right)
+\]
+
+\end_inset
+
+Towards a contradiction suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is not a strict local minimum.
+ We want find a direction along which 
+\begin_inset Formula $d^{t}Hd\leq0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is not a strict local minimum there exists a sequence 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(x_{k}\right)\le f\left(\bar{x}\right)$
+\end_inset
+
+.
+ Denote 
+\begin_inset Formula 
+\[
+d_{k}=\frac{x_{k}-\bar{x}}{\left\Vert x_{k}-\bar{x}\right\Vert }
+\]
+
+\end_inset
+
+and noting that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+ we have that 
+\begin_inset Formula 
+\[
+\frac{1}{2}d_{k}^{t}H\left(\bar{x}\right)d+\alpha\left(\bar{x},x_{k}-\bar{x}\right)\leq0
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ is bounded (norm 1) and therefore there exists a subsequence that converges
+ to a direction 
+\begin_inset Formula $d$
+\end_inset
+
+ such that 
+\begin_inset Formula $d^{t}Hd\leq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In certain instances we can say stronger things: 
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be 
+\series bold
+convex
+\series default
+ and differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a global minimum iff 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By corollary to two theorems ago if global minimum then 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+.
+ For the converse suppose that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)=0$
+\end_inset
+
+ so that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)=0$
+\end_inset
+
+.
+ By convexity 
+\begin_inset Formula 
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)=f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
