@@ -988,9 +988,9 @@ primal
  
 \begin_inset Formula 
 \begin{align*}
-\max_{x} & c^{\intercal}x\\
-\text{s.t} & Ax\preceq b\\
- & x\succeq0
+\max_{x} & \,c^{\intercal}x\\
+\text{s.t} & \,Ax\preceq b\\
+ & \,x\succeq0
 \end{align*}
 
 \end_inset
@@ -1002,9 +1002,9 @@ dual
 
 \begin_inset Formula 
 \begin{align*}
-\min_{y} & b^{\intercal}y\\
-\text{s.t} & A^{\intercal}y\succeq c\\
- & y\succeq0
+\min_{y} & \,b^{\intercal}y\\
+\text{s.t} & \,A^{\intercal}y\succeq c\\
+ & \,y\succeq0
 \end{align*}
 
 \end_inset
@@ -1074,8 +1074,8 @@ Strong duality for LPs.
  We have to rewrite the dual and primal a little: primal
 \begin_inset Formula 
 \begin{align*}
-\min_{x} & c^{\intercal}x\\
-\text{s.t} & Ax\succeq b
+\min_{x} & \,c^{\intercal}x\\
+\text{s.t} & \,Ax\succeq b
 \end{align*}
 
 \end_inset
@@ -1083,9 +1083,9 @@ Strong duality for LPs.
 and the dual
 \begin_inset Formula 
 \begin{align*}
-\max_{y} & b^{\intercal}y\\
-\text{s.t} & A^{\intercal}y=c\\
- & y\succeq0
+\max_{y} & \,b^{\intercal}y\\
+\text{s.t} & \,A^{\intercal}y=c\\
+ & \,y\succeq0
 \end{align*}
 
 \end_inset
@@ -1278,8 +1278,8 @@ Another way to look at it is a generalization of Lagrange multipliers: consider
  the following constained minimization problem 
 \begin_inset Formula 
 \begin{align*}
-\max_{x} & x^{2}+y^{2}\\
-\text{s.t.} & x+y=1
+\max_{x} & \,x^{2}+y^{2}\\
+\text{s.t.} & \,x+y=1
 \end{align*}
 
 \end_inset
@@ -6288,6 +6288,1561 @@ By corollary to two theorems ago if global minimum then
 \begin_inset Formula 
 \[
 f\left(x\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)=f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Optimality conditions for constrained problems
+\end_layout
+
+\begin_layout Definition*
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a nonempty set in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{x}\in\text{cl}\left(S\right)$
+\end_inset
+
+.
+ The 
+\series bold
+\emph on
+cone of feasible directions
+\series default
+\emph default
+ of 
+\begin_inset Formula $S$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $D$
+\end_inset
+
+, is given by
+\begin_inset Formula 
+\[
+D=\left\{ d\big|\exists_{\delta}\forall_{0<\lambda<\delta}\,d\neq0,x+\lambda d\in S\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition*
+Given a function 
+\begin_inset Formula $f$
+\end_inset
+
+ and a minimization problem the 
+\series bold
+\emph on
+cone of improving directions 
+\series default
+\emph default
+at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+F=\left\{ d\big|f\left(\bar{x}+\lambda\right)<f\left(\bar{x}\right)\text{ for all }\lambda\in\left(0,\delta\right)\text{ for some }\delta\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition*
+For differentiable 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ a subset of the improving directions (by theorem that says that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+ is an improving direction; 
+\begin_inset Formula $d$
+\end_inset
+
+ makes a strictly acute angle with 
+\begin_inset Formula $-\nabla f\left(\bar{x}\right)$
+\end_inset
+
+ the direction of steepest descent) is
+\begin_inset Formula 
+\[
+F_{0}=\left\{ d\big|\nabla f\left(\bar{x}\right)^{t}d<0\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+For 
+\begin_inset Formula $\min\left\{ f\left(x\right)\big|x\in S\right\} $
+\end_inset
+
+ with 
+\begin_inset Formula $f$
+\end_inset
+
+ differentiable at 
+\begin_inset Formula $\bar{x}\in S$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local optimal solution then 
+\begin_inset Formula $F_{0}\cap D=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Towards a contradiction suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is locally optimal and there exists 
+\begin_inset Formula $d\in F_{0}\cap D$
+\end_inset
+
+.
+ Then by improving direction theorem (
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0\Rightarrow\exists_{\delta>0}\forall_{\lambda\in\left(0,\delta\right)}\,f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)$
+\end_inset
+
+) there exists 
+\begin_inset Formula $\delta_{1}$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $\lambda\in\left(0,\delta_{1}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+Then by definition of 
+\begin_inset Formula $D$
+\end_inset
+
+ it's the case that there exists 
+\begin_inset Formula $\delta_{2}$
+\end_inset
+
+ (possibly different from 
+\begin_inset Formula $\delta_{1}$
+\end_inset
+
+) such that 
+\begin_inset Formula 
+\[
+\bar{x}+\lambda d\in S
+\]
+
+\end_inset
+
+Taking 
+\begin_inset Formula $\delta=\min\left\{ \delta_{1},\delta_{2}\right\} $
+\end_inset
+
+ and we have that for 
+\begin_inset Formula $\lambda\in\left(0,\delta\right)$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $\bar{x}+\lambda d\in S$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+contradicting local optimality, a contradiction.
+\end_layout
+
+\begin_layout Standard
+There's a partial converse in the case of convex 
+\begin_inset Formula $f$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Suppose 
+\begin_inset Formula $F_{0}\cap D=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and there exists a neighborhood 
+\begin_inset Formula $\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left(x-\bar{x}\right)\in D$
+\end_inset
+
+ for any 
+\begin_inset Formula $x\in S\cap\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ (i.e.
+ feasible direction in the neighborhood).
+ Then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum.
+\end_layout
+
+\begin_layout Proof
+Towards a contradiction suppose 
+\begin_inset Formula $F_{0}\cap D=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $x-\bar{x}\in D$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathcal{N}_{\epsilon}\left(\bar{x}\right)\cap S$
+\end_inset
+
+ and there exists 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(\hat{x}\right)<f\left(\bar{x}\right)$
+\end_inset
+
+ for some 
+\begin_inset Formula $\hat{x}\in\mathcal{N}_{\epsilon}\left(\bar{x}\right)\cap S$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is not a local minimum.
+ By assumption on 
+\begin_inset Formula $\mathcal{N}_{\epsilon}\left(\bar{x}\right)\cap S$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $d=\hat{x}-\bar{x}\in D$
+\end_inset
+
+.
+ Furthermore by convexity 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+ (Suppose 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d\geq0$
+\end_inset
+
+ we would have 
+\begin_inset Formula $f\left(\hat{x}\right)=f\left(\bar{x}+d\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}d\geq f\left(\bar{x}\right)$
+\end_inset
+
+).
+ Therefore 
+\begin_inset Formula $d\in D$
+\end_inset
+
+ and 
+\begin_inset Formula $d\in F_{0}$
+\end_inset
+
+ which is a contradiction.
+\end_layout
+
+\begin_layout Standard
+The cone 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+ is an algebraic description of the set of improving directions but 
+\begin_inset Formula $F_{0}\subset F$
+\end_inset
+
+.
+ There's another inclusion: if 
+\begin_inset Formula $d\in F$
+\end_inset
+
+ then 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d\leq0$
+\end_inset
+
+ (since 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d>0$
+\end_inset
+
+ would make 
+\begin_inset Formula $d$
+\end_inset
+
+ an ascent direction).
+ Therefore
+\begin_inset Formula 
+\[
+F_{0}\subset F\subset F_{0}^{'}\coloneqq\left\{ d\neq0\big|\nabla f\left(\bar{x}\right)^{t}d\leq0\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The unknown directions are those for which 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d=0$
+\end_inset
+
+.
+ But in instances of convexity (concavity) we have tightness
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex(concave) at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ then 
+\begin_inset Formula $F=F_{0}$
+\end_inset
+
+ (
+\begin_inset Formula $F=F_{0}^{'}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ then if 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d\geq0$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $f\left(\bar{x}+\lambda d\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(\lambda d\right)\geq f\left(\bar{x}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula 
+\[
+F=\left\{ d\big|f\left(\bar{x}+\lambda\right)<f\left(\bar{x}\right)\text{ for all }\lambda\in\left(0,\delta\right)\text{ for some }\delta\right\} 
+\]
+
+\end_inset
+
+and hence negating the above we get that 
+\begin_inset Formula $d\in F$
+\end_inset
+
+ implies 
+\begin_inset Formula $d\in F_{0}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $F\subset F_{0}$
+\end_inset
+
+ and so 
+\begin_inset Formula $F=F_{0}$
+\end_inset
+
+.
+ Now if 
+\begin_inset Formula $f$
+\end_inset
+
+ is strictly concave then we know that whenever 
+\begin_inset Formula $d\in F_{0}^{'}$
+\end_inset
+
+ we have 
+\begin_inset Formula $f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $F_{0}^{'}\subset F$
+\end_inset
+
+ and hence 
+\begin_inset Formula $F=F_{0}^{'}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+From the improving directions theorem if 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+ then 
+\begin_inset Formula $d$
+\end_inset
+
+ is an improving direction ).
+\end_layout
+
+\begin_layout Standard
+Specify the feasible region using functions 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ now
+\begin_inset Formula 
+\[
+S=\left\{ x\in X\big|g_{i}\left(x\right)\leq0\right\} 
+\]
+
+\end_inset
+
+We'd like to characterize 
+\begin_inset Formula $D$
+\end_inset
+
+ algebraically so that we can establish algebraic constraints on the objective
+ and constraints for optimality.
+\end_layout
+
+\begin_layout Lemma*
+Let 
+\begin_inset Formula 
+\[
+S=\left\{ x\in X\big|g_{i}\left(x\right)\leq0,i\in M=\left\{ 1,\dots,m\right\} \right\} 
+\]
+
+\end_inset
+
+Given a feasible 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ let 
+\begin_inset Formula $I\subset M$
+\end_inset
+
+ be set of 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $g_{i}\left(\bar{x}\right)=0$
+\end_inset
+
+ (the set of binding constraints) and assume 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $M-I$
+\end_inset
+
+ are continuous at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $G_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{0}^{'}$
+\end_inset
+
+ analogously to 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{0}^{'}$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\begin{align*}
+G_{0} & =\left\{ d\big|d\neq0,\nabla g_{i}\left(\bar{x}\right)^{t}d<0,i\in I\right\} \\
+G_{0}^{'} & =\left\{ d\big|d\neq0,\nabla g_{i}\left(\bar{x}\right)^{t}d\leq0,i\in I\right\} 
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula 
+\[
+G_{0}\subset D\subset G_{0}^{'}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $d\in G_{0}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\bar{x}\in X$
+\end_inset
+
+ and 
+\begin_inset Formula $X$
+\end_inset
+
+ is open there exists 
+\begin_inset Formula $\delta_{1}>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\bar{x}+\lambda d\in X$
+\end_inset
+
+ for 
+\begin_inset Formula $\lambda\in\left(0,\delta_{1}\right)$
+\end_inset
+
+.
+ Also, since 
+\begin_inset Formula $g_{M-I}\left(\bar{x}\right)<0$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{M-I}$
+\end_inset
+
+ are continuous at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\delta_{2}>0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+g_{M-I}\left(\bar{x}+\lambda d\right)<0\text{ for }\lambda\in\left(0,\delta_{2}\right)
+\]
+
+\end_inset
+
+Furthermore since 
+\begin_inset Formula $d\in G_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $\nabla g_{I}\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+ and so by the increasing direction theorem there exists 
+\begin_inset Formula $\delta_{3}>0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+g_{I}\left(\bar{x}+\lambda d\right)<g_{I}\left(\bar{x}\right)=0\text{ for }\lambda\in\left(0,\delta_{3}\right)
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\delta=\min\left\{ \delta_{1},\delta_{2},\delta_{3}\right\} >0$
+\end_inset
+
+ and it's clear that 
+\begin_inset Formula $x=\bar{x}+\lambda d\in S$
+\end_inset
+
+ for 
+\begin_inset Formula $\lambda\in\left(0,\delta\right)$
+\end_inset
+
+ (why? all constraints are satisfied).
+ Thus 
+\begin_inset Formula $d\in D$
+\end_inset
+
+, where 
+\begin_inset Formula $D$
+\end_inset
+
+ is the cone of feasible directions of the feasible region at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ .
+ Thus 
+\begin_inset Formula $G_{0}\subset D$
+\end_inset
+
+.
+ Similarly if 
+\begin_inset Formula $d\in G_{0}^{'}$
+\end_inset
+
+ if 
+\begin_inset Formula $\nabla g_{i}\left(\bar{x}\right)^{t}d>0$
+\end_inset
+
+ for any 
+\begin_inset Formula $i\in I$
+\end_inset
+
+ then 
+\begin_inset Formula $g_{i}\left(\bar{x}+\lambda d\right)>g_{i}\left(\bar{x}\right)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ sufficiently small, contradicting that 
+\begin_inset Formula $d\in D$
+\end_inset
+
+, and thus 
+\begin_inset Formula $D\subset G_{0}^{'}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Finer results in the case of convexity/concavity
+\end_layout
+
+\begin_layout Lemma*
+If 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are strictly convex at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ then 
+\begin_inset Formula $D=G_{0}$
+\end_inset
+
+ and if 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are concave then 
+\begin_inset Formula $D=G_{0}^{'}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are strictly convex at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and let 
+\begin_inset Formula $d\in D$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $d\not\in G_{0}$
+\end_inset
+
+ then 
+\begin_inset Formula $\nabla g_{i}\left(\bar{x}\right)^{t}d\geq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $i\in I$
+\end_inset
+
+ we would have 
+\begin_inset Formula $g_{i}\left(\bar{x}+\lambda d\right)>g_{i}\left(\bar{x}\right)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ condtradicting 
+\begin_inset Formula $d\in D$
+\end_inset
+
+.
+ Hence in this case 
+\begin_inset Formula $D=G_{0}$
+\end_inset
+
+.
+ Now suppose 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are concave at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and let 
+\begin_inset Formula $d\in G_{0}^{'}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $g_{I}\left(\bar{x}+\lambda d\right)\leq g_{I}\left(\bar{x}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\geq0$
+\end_inset
+
+ and by continuity of 
+\begin_inset Formula $g_{M-I}$
+\end_inset
+
+ and since 
+\begin_inset Formula $X$
+\end_inset
+
+ is open we obtain 
+\begin_inset Formula $\bar{x}+\lambda d\in S$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ sufficiently small and hence 
+\begin_inset Formula $d\in D$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $G_{0}^{'}\subset D\subset G_{0}^{'}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Consider
+\begin_inset Formula 
+\[
+\min\left\{ f\left(x\right)\big|g_{i}\left(x\right)\leq0,i\in M=\left\{ 1,\dots,m\right\} \right\} 
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ be feasible and 
+\begin_inset Formula $I$
+\end_inset
+
+ as before.
+ Assume that 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are differentiable at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{M-I}$
+\end_inset
+
+ are continuous at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ Then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is locally optimal then 
+\begin_inset Formula $F_{0}\cap G_{0}=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $F_{0}\cap G_{0}=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex, 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ strictly convex in some neighborhood of 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+, then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Let 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ be locally optimal then 
+\begin_inset Formula $F_{0}\cap D=\emptyset$
+\end_inset
+
+ by two theorems above and by 
+\begin_inset Formula $G_{0}\subset D$
+\end_inset
+
+ we have 
+\begin_inset Formula $F_{0}\cap G_{0}=\emptyset$
+\end_inset
+
+.
+ Conversely suppose 
+\begin_inset Formula $F_{0}\cap G_{0}=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $f,g_{i}$
+\end_inset
+
+ are as specified.
+ Redefining the feasible region as those 
+\begin_inset Formula $x$
+\end_inset
+
+ which satisfy the binding constraints we have that 
+\begin_inset Formula $G_{0}=D$
+\end_inset
+
+ by above lemma about strict convexity and hence 
+\begin_inset Formula $F_{0}\cap D=\emptyset$
+\end_inset
+
+.
+ Further since the level sets 
+\begin_inset Formula $g_{I}\left(x\right)\le0$
+\end_inset
+
+ are convex over some 
+\begin_inset Formula $\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ it follows that 
+\begin_inset Formula $S\cap N_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ is convex (
+\begin_inset Formula $S$
+\end_inset
+
+ is the feasible region spanned by feasible directions).
+ Since 
+\begin_inset Formula $F_{0}\cap D=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ from the converse of improving directions set theorem that 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum.
+ Throwing the nonbinding constraints back in doesn't change anything.
+\end_layout
+
+\begin_layout Standard
+Now to finally turn the geometric constraint 
+\begin_inset Formula $F_{0}\cap G_{0}=\emptyset$
+\end_inset
+
+ into something useful:
+\end_layout
+
+\begin_layout Theorem*
+Fritz-John 
+\begin_inset Quotes eld
+\end_inset
+
+necessary
+\begin_inset Quotes erd
+\end_inset
+
+ conditions.
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be nonempty open.
+ Consider 
+\begin_inset Formula 
+\[
+\min\left\{ f\left(x\right)\big|x\in X,g_{i}\left(x\right)\leq0,i\in M=\left\{ 1,\dots,m\right\} \right\} 
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ be feasible and 
+\begin_inset Formula $g_{I}\left(\bar{x}\right)=0$
+\end_inset
+
+.
+ Furthermore suppose that 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are differentiable and 
+\begin_inset Formula $g_{M-I}$
+\end_inset
+
+ are continuous at 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is locally optimal then there exist Lagrange multipliers 
+\begin_inset Formula $u_{0},u_{I}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\begin{align*}
+u_{0}\nabla f\left(\bar{x}\right)+\sum_{i=I}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{0},u_{I} & \geq0\\
+\left(u_{0},u_{I}\right) & \neq\left(0,0\right)
+\end{align*}
+
+\end_inset
+
+Alternatively this can be rewritten as 
+\begin_inset Formula 
+\begin{align*}
+u_{0}\nabla f\left(\bar{x}\right)+\sum_{i=1}^{m}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{I}g_{I}\left(\bar{x}\right) & =0\\
+u_{0},u_{I} & \geq0\\
+\left(u_{0},u\right) & \neq\left(0,0\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is locally optimal 
+\begin_inset Formula $F_{0}\cap G_{0}=\emptyset$
+\end_inset
+
+, i.e.
+ there exists no 
+\begin_inset Formula $d$
+\end_inset
+
+ such that 
+\begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla g_{I}\left(\bar{x}\right)^{t}d<0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+\nabla L=\begin{bmatrix}\nabla f\left(\bar{x}\right)^{t}\\
+\nabla g_{i}\left(\bar{x}\right)^{t}
+\end{bmatrix}
+\]
+
+\end_inset
+
+Then this is equivalent to 
+\begin_inset Formula 
+\[
+\left\{ d\big|\nabla Ld<0\right\} =\emptyset
+\]
+
+\end_inset
+
+By Gordan's theorem there exists non-zero 
+\begin_inset Formula $p\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left(\nabla L\right)^{t}p=0$
+\end_inset
+
+.
+ Denoted the components of 
+\begin_inset Formula $p=\left(u_{0},u_{I}\right)$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+u_{0}\nabla f\left(\bar{x}\right)+\sum_{i=I}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{0},u_{I} & \geq0\\
+\left(u_{0},u_{I}\right) & \neq\left(0,0\right)
+\end{align*}
+
+\end_inset
+
+Complementary slackeness gives us
+\begin_inset Formula 
+\begin{align*}
+u_{0}\nabla f\left(\bar{x}\right)+\sum_{i=1}^{m}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{M}g_{M}\left(\bar{x}\right) & =0\\
+u_{0},u & \geq0\\
+\left(u_{0},u\right) & \neq\left(0,0\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+Consider the problem 
+\begin_inset Formula 
+\[
+S=\left\{ \left(x,y\right)\in\mathbb{R}^{2}\bigg|\begin{array}{c}
+g_{1}\left(x,y\right)=x+y^{2}-1\leq0\\
+g_{2}\left(x,y\right)=4x+3y-3\leq0\\
+g_{3}\left(x,y\right)=-x\leq0
+\end{array}\right\} 
+\]
+
+\end_inset
+
+The figure is 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Inequality-constrained-feasible"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename constrained_opt.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Inequality constrained feasible region
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Inequality-constrained-feasible"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note a trick: we can make any feasible 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ point to some minimization problem a Fritz-John point of a related system
+ by adding the constraints 
+\begin_inset Formula $\left\lVert x-\bar{x}\right\rVert ^{2}\geq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem*
+KKT conditions.
+ Suppose all the conditions of Fritz-John are met and 
+\begin_inset Formula $\nabla g_{I}\left(\bar{x}\right)$
+\end_inset
+
+ are linearly independent.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\nabla f\left(\bar{x}\right)+\sum_{i=1}^{m}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{i}g_{i}\left(\bar{x}\right) & =0\\
+u_{i} & \geq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By Fritz-John there exist 
+\begin_inset Formula 
+\begin{align*}
+u_{0}\nabla f\left(\bar{x}\right)+\sum_{i=I}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{0},u_{I} & \geq0\\
+\left(u_{0},u_{I}\right) & \neq\left(0,0\right)
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $u_{0}>0$
+\end_inset
+
+ since otherwise 
+\begin_inset Formula $\left\{ \nabla g_{i}\left(\bar{x}\right)\right\} $
+\end_inset
+
+ would be linearly dependent.
+ Hence dividing by 
+\begin_inset Formula $u_{0}$
+\end_inset
+
+ we get the conclusion.
+\end_layout
+
+\begin_layout Standard
+Connection of KKT to first-order LP approximations to NLPs:
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be nonempty open.
+ Consider 
+\begin_inset Formula 
+\[
+\min\left\{ f\left(x\right)\big|x\in X,g_{i}\left(x\right)\leq0,i\in M=\left\{ 1,\dots,m\right\} \right\} 
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $f,g_{i}$
+\end_inset
+
+ differentiable.
+ Let 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ be feasible and 
+\begin_inset Formula $g_{I}\left(\bar{x}\right)=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $F_{0},G_{0}^{'}=\left\{ d\neq0\big|\nabla g_{I}\left(\bar{x}\right)^{t}d\leq0\right\} ,G^{'}=G^{'}\cup\left\{ 0\right\} $
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is 
+\begin_inset Formula $KKT$
+\end_inset
+
+ iff 
+\begin_inset Formula $F_{0}\cap G^{'}=\emptyset\iff F_{0}\cap G_{0}^{'}=\emptyset$
+\end_inset
+
+.
+ Further 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is KKT iff 
+\begin_inset Formula 
+\[
+\bar{x}=\min_{x}\left\{ f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)\big|g_{I}\left(\bar{x}\right)+\nabla g_{I}\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)\leq0\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Sufficient conditions for KKT point to be locally optimal.
+ If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a KKT solution and there exists a neighborhood 
+\begin_inset Formula $\mathcal{N}_{\epsilon}\left(\bar{x}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex over 
+\begin_inset Formula $\mathcal{N}_{\epsilon}\left(\bar{x}\right)\cap S$
+\end_inset
+
+, the 
+\begin_inset Formula $g_{I}$
+\end_inset
+
+ are differentiable and convex over 
+\begin_inset Formula $\mathcal{N}_{\epsilon}\left(\bar{x}\right)\cap S$
+\end_inset
+
+, then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Sufficient conditions for KKT point to be globally optimal.
+ If 
+\begin_inset Formula 
+\[
+\min\left\{ f\left(x\right)\big|x\in X,g_{i}\left(x\right)\leq0,i\in M=\left\{ 1,\dots,m\right\} \right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+is convex (i.e.
+ 
+\begin_inset Formula $f,g_{i}$
+\end_inset
+
+ are convex everywhere) and 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a KKT point.
+ Then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is globally optimal.
+\end_layout
+
+\begin_layout Standard
+Note that not every every globally optimal point of a convex program is
+ a KKT point.
+ Also if the constraints are equalities then the multipliers are free (not
+ necessarily positive) and if the constraints are greater than then the
+ multipliers are negative.
+\end_layout
+
+\begin_layout Subsection
+Second order conditions for local optimality of KKT points
+\end_layout
+
+\begin_layout Definition*
+The 
+\emph on
+Lagrangian 
+\emph default
+is 
+\begin_inset Formula 
+\[
+L\left(x,u,v\right)=f\left(x\right)+\sum_{i\in I}u_{i}g_{i}\left(x\right)+\sum_{j\in J}v_{j}h_{j}\left(x\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a KKT point with Lagrange multipliers 
+\begin_inset Formula $\bar{u},\bar{v}$
+\end_inset
+
+.
+ Then
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
+\end_inset
+
+ is psd for all 
+\begin_inset Formula $x\in S$
+\end_inset
+
+, then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a global minimum.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
+\end_inset
+
+ is psd for all 
+\begin_inset Formula $x\in\mathcal{N}_{\epsilon}\left(\bar{x}\right)\cap S$
+\end_inset
+
+, then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
+\end_inset
+
+ is pd then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a strict local minimum.
+\end_layout
+
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Suppose 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a local minimum Lagrange multipliers 
+\begin_inset Formula $\bar{u},\bar{v}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla g_{I}\left(\bar{x}\right)$
+\end_inset
+
+ (where 
+\begin_inset Formula $I$
+\end_inset
+
+ is the set of binding constraints) are linearly independent and 
+\begin_inset Formula $\nabla h_{J}\left(\bar{x}\right)$
+\end_inset
+
+ are linearly independent.
+ Then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a KKT point having Lagrange multipliers 
+\begin_inset Formula $\bar{u}\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla^{2}L\left(\bar{x}\right)$
+\end_inset
+
+ is psd over
+\begin_inset Formula 
+\[
+C=\left\{ d\neq0\bigg|\begin{array}{cc}
+\nabla g_{I^{+}}\left(\bar{x}\right)^{t}d=0 & I^{+}=\left\{ i\in I\big|\bar{u}_{i}\geq0\right\} \\
+\nabla g_{I^{0}}\left(\bar{x}\right)^{t}d\leq0 & I^{0}=\left\{ i\in I\big|\bar{u}_{i}=0\right\} \\
+\nabla h_{J}\left(\bar{x}\right)^{t}d=0
+\end{array}\right\} 
 \]
 
 \end_inset
