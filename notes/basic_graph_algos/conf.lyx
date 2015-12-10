@@ -1648,12 +1648,16 @@ name "alg:Breadth-first-search"
 
 \end_inset
 
+That's it - that's basic BFS.
+ What's the runtime of BFS? Since you have to traverse each edge it's 
+\begin_inset Formula $O\left(\left|E\right|\right)$
+\end_inset
 
+.
 \end_layout
 
 \begin_layout Standard
-That's it - that's basic BFS.
- Now there are variations on the theme: for example you could use BFS to
+Now there are variations on the theme: for example you could use BFS to
  compute the number of edges from the source to every other vertex it's
  connected to.
  How? Note that every vertex is one frontier deeper than the vertex 
@@ -1903,7 +1907,7 @@ nearest
  To effect the second part is easy too: after popping a vertex update all
  of the distances to all of its neighbors if the shortest path to them (from
  the source) is shorter through the vertex that just got popped.
- The code appears in algorithm 
+ The code appears in Algorithm 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "alg:Dijkstra's-shortest-path"
@@ -2140,7 +2144,34 @@ name "alg:Dijkstra's-shortest-path"
 
 \end_inset
 
+What's the runtime of Dijkstra's shortest path algorithm? The breadth-first
+ search costs 
+\begin_inset Formula $O\left(\left|E\right|\right)$
+\end_inset
 
+ but since you have to do 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ insertions in the MinHeap, which each cost at most
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Using a Fibonacci heap.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\log\left(\left|V\right|\right)$
+\end_inset
+
+ (for example when the heap is almost full) the total runtime is 
+\begin_inset Formula $O\left(\left|E\right|+\left|V\right|\log\left(\left|V\right|\right)\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -2181,7 +2212,7 @@ reference "fig:Depth-first-search-example"
  Essentially the Stack orders which vertices are to be explored by which
  were explored most recently (they appear at the top of the Stack!).
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -2224,7 +2255,7 @@ name "fig:Depth-first-search-example"
 
  
 \begin_inset Float algorithm
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -2332,8 +2363,15 @@ name "alg:Breadth-first-search-1"
 
 \end_inset
 
-Finally just like for breadth-first search you can construct a depth-first
+What's the runtime of the algorithm? Since you need to traverse each edge
+ in the worst case it's 
+\begin_inset Formula $O\left(\left|E\right|\right)$
+\end_inset
+
+.
+ Finally just like for breadth-first search you can construct a depth-first
  predecessor tree by keeping pointers.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2932,7 +2970,7 @@ reference "alg:topsort"
 
 .
 \begin_inset Float algorithm
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -3187,7 +3225,7 @@ while unsearched_vertices.empty != true
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Modified depth-first search
+Topological Sort
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:topsort"
@@ -3205,6 +3243,14 @@ name "alg:topsort"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+What's the runtime? Since it's essentially a DFS the runtime is 
+\begin_inset Formula $O\left(\left|E\right|\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -3447,7 +3493,7 @@ second to last
 \end_layout
 
 \begin_layout Standard
-This almost the answer 
+This is almost the answer 
 \series bold
 but it's not, unfortunately
 \series default
@@ -3524,7 +3570,19 @@ first
 \end_inset
 
  part to the graph (at least relative to where you start the DFS from)!
- A topological sort gives you the 
+ A topological sort
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We're not really going to do a topological sort since the graph obviously
+ has cycles, but what is true is that the graph of strongly connected components
+ is a dag.
+\end_layout
+
+\end_inset
+
+ gives you the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3557,7 +3615,11 @@ reference "fig:Strongly-connected-components"
 
 \begin_layout Standard
 The solution is to use, for the second depth-first search the transpose
- graph 
+ graph
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
 \begin_inset Formula $G^{T}=\left(V,E^{T}\right)$
 \end_inset
 
@@ -3565,9 +3627,14 @@ The solution is to use, for the second depth-first search the transpose
 \begin_inset Formula $E^{T}=\left\{ \left(v,u\right)\big|\left(u,v\right)\in E\right\} $
 \end_inset
 
+.
+\end_layout
+
+\end_inset
+
 , i.e.
  flip all the edges in the original graph.
- Note that the connected components of 
+ Note that the strongly connected components of 
 \begin_inset Formula $G^{T}$
 \end_inset
 
@@ -3648,9 +3715,17 @@ first
 
  part of the graph, remove all those vertices and do the same thing with
  the next highest finishing time vertex that's still left.
- The source appears in algorithm 
+ The source appears in Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:topsort-1"
+
+\end_inset
+
+.
+ 
 \begin_inset Float algorithm
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -3713,6 +3788,11 @@ for v in G'.V
 
 \begin_layout Plain Layout
 
+	v.parent = nil
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -3766,6 +3846,25 @@ while T.empty != true
 
 \begin_layout Plain Layout
 
+// each connected component is rooted at the vertex
+\end_layout
+
+\begin_layout Plain Layout
+
+// that was explored in the above dfs
+\end_layout
+
+\begin_layout Plain Layout
+
+dfsForest = Map
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
 for v in G'.V
 \end_layout
 
@@ -3791,7 +3890,26 @@ for v in G'.V
 
 \begin_layout Plain Layout
 
+	// v.root will be "name" of the connected
+\end_layout
+
+\begin_layout Plain Layout
+
+	// component that v is a member of
+\end_layout
+
+\begin_layout Plain Layout
+
+	dfsForest[v.root].add(v)
+\end_layout
+
+\begin_layout Plain Layout
+
 	
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3800,7 +3918,7 @@ for v in G'.V
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Modified depth-first search
+Strongly connected components
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:topsort-1"
@@ -3818,6 +3936,22 @@ name "alg:topsort-1"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+What's the runtime of the algorithm? Each DFS takes 
+\begin_inset Formula $O\left(\left|E\right|\right)$
+\end_inset
+
+ but the computation of the transpose graph takes 
+\begin_inset Formula $O\left(\left|V\right|+\left|E\right|\right)$
+\end_inset
+
+ so the total runtime is 
+\begin_inset Formula $O\left(\left|V\right|+\left|E\right|\right)$
+\end_inset
+
+.
 \end_layout
 
 \end_body
