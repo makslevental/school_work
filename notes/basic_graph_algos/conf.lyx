@@ -540,7 +540,7 @@ connected component
 \begin_inset Formula $V'\subset V$
 \end_inset
 
- is a set of vertices such that the graph 
+ of an undirected graph is a set of vertices such that the graph 
 \begin_inset Formula $G'$
 \end_inset
 
@@ -3209,6 +3209,615 @@ name "alg:topsort"
 
 \begin_layout Section
 Strongly Connected Components
+\end_layout
+
+\begin_layout Standard
+Recall that a connected component of a undirected graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is a subgraph 
+\begin_inset Formula $G'$
+\end_inset
+
+ that's connected, i.e.
+ each vertex can reach each other vertex.
+ A 
+\emph on
+strongly 
+\emph default
+connected component is the same thing in a directed graph.
+ A graph could have many distinct (unreachable from each other) connected
+ components.
+ How would you find them all? For an undirected graph it's easy: use either
+ breadth-first search or depth-first search.
+ Since the graph is undirected any path from a vertex 
+\begin_inset Formula $u$
+\end_inset
+
+ to a vertex 
+\begin_inset Formula $v$
+\end_inset
+
+ can be similarly used by 
+\begin_inset Formula $v$
+\end_inset
+
+ to reach 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ For directed graphs it's a little more difficult...
+\end_layout
+
+\begin_layout Standard
+How about an intuition pump
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+An intuition pump is a thought experiment structured to allow the thinker
+ to use their intuition to develop an answer to a problem.
+ The term was coined by Daniel Dennett.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+: consider the directed graph in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Strongly-connected-components"
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename strong.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Strongly connected components
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Strongly-connected-components"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ First of all do you recognize the connected components? They are 
+\begin_inset Formula 
+\begin{eqnarray*}
+C_{1} & = & \left\{ A,B,C,D\right\} \\
+C_{2} & = & \left\{ E,F,G\right\} \\
+C_{3} & = & \left\{ H,I,J,K,L\right\} 
+\end{eqnarray*}
+
+\end_inset
+
+Note that the entire graph is not strongly connected (since, for example,
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ is unreachable from 
+\begin_inset Formula $K$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+So how would algorithmically decide all of the connected components in this
+ graph? Maybe a first guess would be to perform a depth-first search from
+ and see which vertices are discovered by that depth first search.
+ That clearly doesn't work because all vertices are reachable from 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ In contrast how about a performing a depth-first search that starts at
+ 
+\begin_inset Formula $H$
+\end_inset
+
+? Well then the only vertices discovered will be 
+\begin_inset Formula $\left\{ H,I,J,K,L\right\} $
+\end_inset
+
+.
+ That's 
+\begin_inset Formula $C_{1}$
+\end_inset
+
+ the connected component 
+\begin_inset Formula $H$
+\end_inset
+
+ is a member of! This is very close to what we need but this doesn't work
+ iforms a cycle.
+ All of the vertices you can reach from some fixed vertex (e.g.
+ 
+\begin_inset Formula $F$
+\end_inset
+
+) are not all in that vertex's strongly connected component.
+ To drive the point home: if you had started the DFS at 
+\begin_inset Formula $F$
+\end_inset
+
+ you would have discovered
+\begin_inset Formula 
+\[
+\left\{ E,F,G,H,I,J,K,L\right\} =C_{1}\cup C_{2}
+\]
+
+\end_inset
+
+
+\series bold
+Not all of the discovered vertices are in 
+\begin_inset Formula $F$
+\end_inset
+
+'s connected component but all of vertices in 
+\begin_inset Formula $F$
+\end_inset
+
+'s connected component are discovered!
+\series default
+ 
+\end_layout
+
+\begin_layout Standard
+What's the key feature here? Look again at 
+\begin_inset Formula $C_{3}$
+\end_inset
+
+ and think about what happens when you perform the depth-first search starting
+ at 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ The DFS discovers all the vertices in the 
+\begin_inset Quotes eld
+\end_inset
+
+last
+\begin_inset Quotes erd
+\end_inset
+
+ part of the graph only because it's stuck; because the edge 
+\begin_inset Formula $\left(G,I\right)$
+\end_inset
+
+ only goes one direction the DFS can't get out.
+ This is the key.
+ If you knew what the 
+\begin_inset Quotes eld
+\end_inset
+
+last
+\begin_inset Quotes erd
+\end_inset
+
+ part of the graph was you could run DFS on it, collect all the vertices
+ discovered and label them as one strongly connected component, remove all
+ of them, then rerun DFS on the 
+\begin_inset Quotes eld
+\end_inset
+
+second to last
+\begin_inset Quotes erd
+\end_inset
+
+ part, etc.
+ 
+\end_layout
+
+\begin_layout Standard
+This almost the answer 
+\series bold
+but it's not, unfortunately
+\series default
+.
+ Consider the graph in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Counter-example"
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename counter_strong.jpg
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Counter-example
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Counter-example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ A plausible DFS that starts at 
+\begin_inset Formula $0$
+\end_inset
+
+ gives finishing ordering of first 1, then 2, then 0.
+ Then your second DFS, starting at 1, would produce 
+\begin_inset Formula $\left\{ 1,0,2\right\} $
+\end_inset
+
+ as a strongly connected component since both 0 and 2 are reachable from
+ 1.
+ The reason for this, vaguely, is that there's no well defined 
+\begin_inset Quotes eld
+\end_inset
+
+last
+\begin_inset Quotes erd
+\end_inset
+
+ part of the graph.
+ But there is a well defined 
+\begin_inset Quotes eld
+\end_inset
+
+first
+\begin_inset Quotes erd
+\end_inset
+
+ part to the graph (at least relative to where you start the DFS from)!
+ A topological sort gives you the 
+\begin_inset Quotes eld
+\end_inset
+
+first
+\begin_inset Quotes erd
+\end_inset
+
+ part as the vertex with the highest finishing time.
+ But how can we use this since the whole algorithm hinges on 
+\begin_inset Quotes eld
+\end_inset
+
+getting stuck
+\begin_inset Quotes erd
+\end_inset
+
+ and clearly for graphs like in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Strongly-connected-components"
+
+\end_inset
+
+ you wouldn't get stuck if you started at 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The solution is to use, for the second depth-first search the transpose
+ graph 
+\begin_inset Formula $G^{T}=\left(V,E^{T}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $E^{T}=\left\{ \left(v,u\right)\big|\left(u,v\right)\in E\right\} $
+\end_inset
+
+, i.e.
+ flip all the edges in the original graph.
+ Note that the connected components of 
+\begin_inset Formula $G^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $G$
+\end_inset
+
+ are the same
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Since if you can reach 
+\begin_inset Formula $v$
+\end_inset
+
+ from 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+ from 
+\begin_inset Formula $v$
+\end_inset
+
+ then flipping all the edges means the paths have just switched roles; the
+ path from 
+\begin_inset Formula $u$
+\end_inset
+
+ to 
+\begin_inset Formula $v$
+\end_inset
+
+ because the path from 
+\begin_inset Formula $v$
+\end_inset
+
+ to 
+\begin_inset Formula $u$
+\end_inset
+
+ and vice-versa.
+\end_layout
+
+\end_inset
+
+so there's no loss of reachable paths.
+ So now you can effect the same idea (using the 
+\begin_inset Quotes eld
+\end_inset
+
+getting stuck
+\begin_inset Quotes erd
+\end_inset
+
+ nature of the second DFS) on the 
+\begin_inset Quotes eld
+\end_inset
+
+first
+\begin_inset Quotes erd
+\end_inset
+
+ part of the graph: just start the second DFS on the vertex with the highest
+ finishing time (i.e.
+ the one that's topologically sorted to be the first in order).
+ Once you identify the strongly connected component of the 
+\begin_inset Quotes eld
+\end_inset
+
+first
+\begin_inset Quotes erd
+\end_inset
+
+ part of the graph, remove all those vertices and do the same thing with
+ the next highest finishing time vertex that's still left.
+ The source appears in algorithm 
+\begin_inset Float algorithm
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset listings
+lstparams "language={C++},basicstyle={\footnotesize},showstringspaces=false,tabsize=2,mathescape=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+StronglyConnected(G)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// augment TopSort to return a stack with the vertices in
+\end_layout
+
+\begin_layout Plain Layout
+
+// topologically sorted order, i.e.
+ first at the top
+\end_layout
+
+\begin_layout Plain Layout
+
+T = TopSort(G)
+\end_layout
+
+\begin_layout Plain Layout
+
+$G' = G^T$
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// the rest is basically DFS except in topological order
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in G'.V
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.status = undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+while T.empty != true
+\end_layout
+
+\begin_layout Plain Layout
+
+	v = T.pop
+\end_layout
+
+\begin_layout Plain Layout
+
+	for u in G'.adj(v)
+\end_layout
+
+\begin_layout Plain Layout
+
+		if u.stats == undiscovered
+\end_layout
+
+\begin_layout Plain Layout
+
+			u.status = discovered
+\end_layout
+
+\begin_layout Plain Layout
+
+			// construct a DFS predecessor tree
+\end_layout
+
+\begin_layout Plain Layout
+
+			// so that you can identify the strongly connected
+\end_layout
+
+\begin_layout Plain Layout
+
+			// components
+\end_layout
+
+\begin_layout Plain Layout
+
+			u.parent = v
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for v in G'.V
+\end_layout
+
+\begin_layout Plain Layout
+
+	pred = v.parent
+\end_layout
+
+\begin_layout Plain Layout
+
+	while pred != nil
+\end_layout
+
+\begin_layout Plain Layout
+
+		pred = pred.parent
+\end_layout
+
+\begin_layout Plain Layout
+
+	v.root = pred
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Modified depth-first search
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:topsort-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
