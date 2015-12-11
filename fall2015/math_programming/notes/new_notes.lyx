@@ -6754,7 +6754,7 @@ and hence negating the above we get that
 .
 \end_layout
 
-\begin_layout Definition*
+\begin_layout Theorem*
 From the improving directions theorem if 
 \begin_inset Formula $\nabla f\left(\bar{x}\right)^{t}d<0$
 \end_inset
@@ -6763,7 +6763,7 @@ From the improving directions theorem if
 \begin_inset Formula $d$
 \end_inset
 
- is an improving direction ).
+ is an improving direction.
 \end_layout
 
 \begin_layout Standard
@@ -6962,7 +6962,7 @@ Let
 \end_inset
 
  .
- Thus 
+ Thus 
 \begin_inset Formula $G_{0}\subset D$
 \end_inset
 
@@ -7719,7 +7719,21 @@ Note that not every every globally optimal point of a convex program is
 \end_layout
 
 \begin_layout Subsection
-Second order conditions for local optimality of KKT points
+Second order conditions for local optimality 
+\end_layout
+
+\begin_layout Standard
+Consider the problem
+\begin_inset Formula 
+\begin{align*}
+\min & \,f\left(x\right)\\
+\text{s.t.} & g_{I}\left(x\right)\leq0\\
+ & h_{J}\left(x\right)=0
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Definition*
@@ -7739,7 +7753,8 @@ L\left(x,u,v\right)=f\left(x\right)+\sum_{i\in I}u_{i}g_{i}\left(x\right)+\sum_{
 \end_layout
 
 \begin_layout Theorem*
-Suppose 
+Sufficient conditions.
+ Suppose 
 \begin_inset Formula $\bar{x}$
 \end_inset
 
@@ -7754,7 +7769,7 @@ Suppose
 \begin_deeper
 \begin_layout Enumerate
 If 
-\begin_inset Formula $\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
+\begin_inset Formula $\nabla L^{2}\left(x\right)=\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
 \end_inset
 
  is psd for all 
@@ -7770,7 +7785,7 @@ If
 
 \begin_layout Enumerate
 If 
-\begin_inset Formula $\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
+\begin_inset Formula $\nabla L^{2}\left(x\right)=\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
 \end_inset
 
  is psd for all 
@@ -7786,7 +7801,7 @@ If
 
 \begin_layout Enumerate
 If 
-\begin_inset Formula $\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
+\begin_inset Formula $\nabla L^{2}\left(x\right)=\nabla L^{2}\left(x,\bar{u},\bar{v}\right)$
 \end_inset
 
  is pd then 
@@ -7802,7 +7817,8 @@ If
 \end_layout
 
 \begin_layout Theorem*
-Suppose 
+Necessary conditions.
+ Suppose 
 \begin_inset Formula $\bar{x}$
 \end_inset
 
@@ -7848,6 +7864,1059 @@ C=\left\{ d\neq0\bigg|\begin{array}{cc}
 \end_inset
 
 
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ be a KKT point.
+ If 
+\begin_inset Formula $\nabla^{2}L\left(\bar{x}\right)$
+\end_inset
+
+ is pd over 
+\begin_inset Formula $C$
+\end_inset
+
+ then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ is a strict local minimum.
+\end_layout
+
+\begin_layout Standard
+In summary
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Unconstrained
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Constrained
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Problem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\min\,f\left(x\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\min & \,f\left(x\right)\\
+\text{s.t.} & g_{i}\left(x\right)\leq0\\
+ & h_{i}\left(x\right)=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+First Order
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla f\left(x\right)=0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\nabla_{x,v}L\left(x,\bar{u},v\right) & =0\\
+\lambda_{i}g_{i}\left(x\right) & =0\\
+\lambda_{i} & \geq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Second order necessary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla^{2}f\left(x\right)$
+\end_inset
+
+ psd
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla^{2}L\left(x\right)$
+\end_inset
+
+ psd for all 
+\begin_inset Formula $d\in C$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Second order sufficient
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla^{2}f\left(x\right)$
+\end_inset
+
+ pd
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla^{2}L\left(x\right)$
+\end_inset
+
+ pd for all 
+\begin_inset Formula $d\in C$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Optimality conditions summary
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Lagrangian Duality
+\end_layout
+
+\begin_layout Definition*
+Consider the following related pair of optimization problems
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula 
+\begin{align*}
+z^{P} & =\min\left\{ f\left(x\right)\big|x\in X\right\} \\
+z^{R} & =\min\left\{ g\left(x\right)\big|x\in Y\right\} 
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\emph on
+relaxation
+\emph default
+ of 
+\begin_inset Formula $P$
+\end_inset
+
+ if 
+\begin_inset Formula $f\left(x\right)\geq g\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ and 
+\begin_inset Formula $X\subset Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a relaxation of 
+\begin_inset Formula $P$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $R$
+\end_inset
+
+ is infeasible then so is 
+\begin_inset Formula $P$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ have optimal solutions then 
+\begin_inset Formula $z^{P}\geq z^{R}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $x^{R}$
+\end_inset
+
+ is an optimal solution to 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $x^{R}\in X$
+\end_inset
+
+ and 
+\begin_inset Formula $g\left(x^{R}\right)=f\left(x^{R}\right)$
+\end_inset
+
+, then 
+\begin_inset Formula $x^{R}$
+\end_inset
+
+ is an optimal solution for 
+\begin_inset Formula $P$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Definition*
+Consider the primal optimization problem
+\begin_inset Formula 
+\begin{align*}
+\min & \,f\left(x\right)\\
+\text{s.t.} & g_{i}\left(x\right)\leq0\text{ for all }i=1,\dots,m\\
+ & h_{j}\left(x\right)=0\text{ for all }j=1,\dots,n\\
+ & x\in X
+\end{align*}
+
+\end_inset
+
+The Lagrangian dual is
+\begin_inset Formula 
+\begin{align*}
+\max & \,\theta\left(u,v\right)\\
+\text{s.t.} & u\in\mathbb{R}_{+}^{m},v\in\mathbb{R}^{n}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\[
+\theta\left(u,v\right)=\min_{x}\,L\left(x,u,v\right)
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+L\left(x,u,v\right)=f\left(x\right)+\sum_{i=1}^{m}u_{i}g_{i}\left(x\right)+\sum_{j=1}^{n}v_{j}h_{j}\left(x\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+Consider the problem
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula 
+\begin{align*}
+\min & \,x_{1}^{2}+x_{2}^{2}\\
+\text{s.t.} & -x_{1}-x_{2}+4\leq0\\
+ & x_{1},x_{2}\geq0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+Dualize
+\begin_inset Quotes erd
+\end_inset
+
+ the first constraint: 
+\begin_inset Formula 
+\[
+L\left(u,x_{1},x_{2}\right)=x_{1}^{2}+x_{2}^{2}+u\left(-x_{1}-x_{2}+4\right)
+\]
+
+\end_inset
+
+Then the dual function is 
+\begin_inset Formula 
+\begin{align*}
+\theta\left(u\right) & =\min_{x_{1},x_{2}}\,L\left(u,x_{1},x_{2}\right)\\
+ & =\min_{x_{1},x_{2}}\,\left(x_{1}^{2}-ux_{1}+x_{2}^{2}-ux_{2}+4u\right)\\
+ & =4u+\min_{x_{1}\ge0}\,\left(x_{1}^{2}-ux_{1}\right)+\min_{x_{2}\ge0}\,\left(x_{2}^{2}-ux_{2}\right)\\
+ & =4u+\left\{ \begin{alignedat}{1}-\frac{u^{2}}{4} & \text{ if }u\geq0\\
+0 & \text{ if }u<0
+\end{alignedat}
+\right\} +\left\{ \begin{alignedat}{1}-\frac{u^{2}}{4} & \text{ if }u\geq0\\
+0 & \text{ if }u<0
+\end{alignedat}
+\right\} \\
+ & =\left\{ \begin{alignedat}{1}4u-\frac{u^{2}}{2} & \text{ if }u\geq0\\
+4u & \text{ if }u<0
+\end{alignedat}
+\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+A general procedure for deriving duals
+\end_layout
+
+\begin_layout Standard
+Procedure:
+\end_layout
+
+\begin_layout Enumerate
+Build the Lagrangian function (choose the appropriate constraints to 
+\begin_inset Quotes eld
+\end_inset
+
+dualize
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+For fixed Langrange multipliers do the minimization (or maximization).
+\end_layout
+
+\begin_layout Enumerate
+Simplify the description of the Lagrangian.
+\end_layout
+
+\begin_layout Enumerate
+Express the dual.
+\end_layout
+
+\begin_layout Subsection
+Deriving duals
+\end_layout
+
+\begin_layout Example*
+The Langrangian dual of the QP 
+\begin_inset Formula 
+\[
+\min\left\{ d^{t}x+\frac{1}{2}x^{t}Hx\big|Ax\preceq b\right\} 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $H$
+\end_inset
+
+ is pd and symmetric is 
+\begin_inset Formula 
+\[
+\max\left\{ \frac{1}{2}u^{t}Du+u^{t}C-\frac{1}{2}d^{t}H^{-1}d\big|u\succeq0\right\} 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $D=-AH^{-1}A^{t},C=-b-AH^{-1}d$
+\end_inset
+
+.
+ Why? 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Build the Lagrangian
+\begin_inset Formula 
+\begin{align*}
+L\left(u\right) & =\min_{x\in\mathbb{R}^{n}}\left\{ d^{t}x+\frac{1}{2}x^{t}Hx+u^{t}\left(Ax-b\right)\right\} \\
+ & =\min_{x\in\mathbb{R}^{n}}\left\{ \frac{1}{2}x^{t}Hx+\left(d^{t}+u^{t}A\right)x-u^{t}b\right\} \\
+ & =-u^{t}b+\min_{x\in\mathbb{R}^{n}}\left\{ \frac{1}{2}x^{t}Hx+\left(d^{t}+u^{t}A\right)x\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For a fixed 
+\begin_inset Formula $u$
+\end_inset
+
+ the inner minimization is convex and unconstrained, so we can use first
+ order conditions: solve for 
+\begin_inset Formula $x$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Hx+\left(d^{t}+u^{t}A\right)=0
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula $x^{*}=-H^{-1}\left(d+A^{t}u\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Simplifying 
+\begin_inset Formula $L\left(u\right)$
+\end_inset
+
+ we get
+\begin_inset Formula 
+\[
+L\left(u\right)=-\frac{1}{2}d^{t}H^{-1}d+u^{t}\left(-b-AH^{-1}d\right)-\frac{1}{2}u^{t}AH^{-1}A^{t}u
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Express the dual
+\begin_inset Formula 
+\[
+\max\left\{ \frac{1}{2}u^{t}Du+u^{t}C-\frac{1}{2}d^{t}H^{-1}d\big|u\succeq0\right\} 
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $u\succeq0$
+\end_inset
+
+ because 
+\begin_inset Formula $Ax-b\preceq0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $u$
+\end_inset
+
+s should be positive in order for 
+\begin_inset Formula $u\left(Ax-b\right)$
+\end_inset
+
+ to be a relaxation.
+\end_layout
+
+\end_deeper
+\begin_layout Definition*
+Given a closed convex cone 
+\begin_inset Formula $K\subset\mathbb{R}^{n}$
+\end_inset
+
+, the 
+\emph on
+dual cone
+\emph default
+ 
+\begin_inset Formula $K^{*}$
+\end_inset
+
+ of 
+\begin_inset Formula $K$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+K^{*}=\left\{ y\in\mathbb{R}^{n}\big|y^{t}x\geq0,\forall x\in K\right\} 
+\]
+
+\end_inset
+
+I.e.
+ all vectors that make an acute angle with every vector in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+Some cones are 
+\begin_inset Quotes eld
+\end_inset
+
+self-dual
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\left(\mathbb{R}_{+}^{n}\right)^{*}=\mathbb{R}_{+}^{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left(\mathcal{C}_{n}\right)^{*}=\mathcal{C}_{n}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathcal{C}_{n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensional second order cone.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left(S_{+}^{n\times n}\right)^{*}=S_{+}^{n\times n}$
+\end_inset
+
+ where 
+\begin_inset Formula $S_{+}^{n\times n}$
+\end_inset
+
+ is the cone of 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ psd matrices.
+\end_layout
+
+\end_deeper
+\begin_layout Theorem*
+If 
+\begin_inset Formula $K$
+\end_inset
+
+ is a nonempty closed convex cone then so is 
+\begin_inset Formula $K^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+The Lagrangian dual of the conic LP
+\begin_inset Formula 
+\[
+\min\left\{ c^{t}x\big|Ax=b,x\in K\right\} 
+\]
+
+\end_inset
+
+is
+\begin_inset Formula 
+\[
+\max\left\{ b^{t}v\big|A^{t}v+s=c,s\in K^{*}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+Why?
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Build the Lagrangian dual
+\begin_inset Formula 
+\begin{align*}
+L\left(v\right) & =\min_{x\in K}\ c^{t}x+v^{t}\left(b-Ax\right)\\
+ & =v^{t}b+\min_{x\in K}\ \left(c^{t}-v^{t}A\right)x
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For a fixed 
+\begin_inset Formula $u$
+\end_inset
+
+ this is optimizing a linear function over a cone 
+\begin_inset Formula $K$
+\end_inset
+
+, therefore the problem will be bounded iff
+\begin_inset Formula 
+\[
+c-A^{t}v\in K^{*}
+\]
+
+\end_inset
+
+(otherwise we could just 
+\begin_inset Quotes eld
+\end_inset
+
+runaway
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Similarly as in the straightforward LP case we have that if there is an
+ optimal solution it's at 0.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Simplify the Lagrangian
+\begin_inset Formula 
+\[
+L\left(v\right)=\begin{cases}
+b^{t}v & \text{ if }c-A^{t}v\in K^{*}\\
+-\infty & \text{ if }c-A^{t}v\not\in K^{*}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Theorem*
+The dual of the dual of the conic LP
+\begin_inset Formula 
+\[
+\min\left\{ c^{t}x\big|Ax=b,x\in K\right\} 
+\]
+
+\end_inset
+
+is
+\begin_inset Formula 
+\[
+\min\left\{ c^{t}x\big|Ax=b,x\in\left(K^{*}\right)^{*}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $K$
+\end_inset
+
+ is a nonempty closed convex cone then 
+\begin_inset Formula $\left(K^{*}\right)^{*}=K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The strength of duals
+\end_layout
+
+\begin_layout Theorem*
+Weak duality.
+ Let 
+\begin_inset Formula $x$
+\end_inset
+
+ be a feasible solution to a primal problem and 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ be a feasible solution to the dual.
+ Then 
+\begin_inset Formula $f\left(x\right)\geq L\left(u,v\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Corollary*
+The optimal solution to the primal is greater or equal to the optimal solution
+ to the dual.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+If 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\bar{u},\bar{v}\right)$
+\end_inset
+
+ are such that 
+\begin_inset Formula $f\left(\bar{x}\right)=L\left(\bar{u},\bar{v}\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ solves the primal and 
+\begin_inset Formula $\left(\bar{u},\bar{v}\right)$
+\end_inset
+
+ solves the dual.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+If the primal is unbounded then 
+\begin_inset Formula $L\left(u,v\right)=-\infty$
+\end_inset
+
+ for all 
+\begin_inset Formula $u,v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Corollary*
+If the dual is unbounded then the primal is infeasible.
+\end_layout
+
+\begin_layout Definition*
+When the optimal solution to the primal and the optimal solution to the
+ dual differ there's a duality gap.
+\end_layout
+
+\begin_layout Lemma*
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a nonempty convex subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha:\mathbb{R}^{n}\rightarrow\mathbb{R}$
+\end_inset
+
+, 
+\begin_inset Formula $g:\mathbb{R}^{n}\rightarrow\mathbb{R}^{m}$
+\end_inset
+
+ convex functions and 
+\begin_inset Formula $h=Ax-b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Lemma*
+\begin_inset Formula 
+\begin{align*}
+\left\{ \alpha<0,g\left(x\right)\leq0,h\left(x\right)=0\right\}  & =\emptyset\\
+ & \Rightarrow\\
+\left\{ u_{0}\alpha\left(x\right)+u^{t}g\left(x\right)+v^{t}h\left(x\right)\geq0,\forall x\in X,\left(u_{0},u\right)\geq0,\left(u_{0},u,v\right)\neq0\right\}  & \neq\emptyset
+\end{align*}
+
+\end_inset
+
+The converse holds if 
+\begin_inset Formula $u_{0}>0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Strong Duality.
+ There is no duality gap if there exists 
+\begin_inset Formula $\hat{x}\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $g\left(\hat{x}\right)<0,h\left(\hat{x}\right)=0,0\in\text{int}\left(h\left(X\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+A 
+\emph on
+saddle point of the Lagrangian is 
+\begin_inset Formula $\left(\bar{x},\bar{u},\bar{v}\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+L\left(\bar{x},u,v\right)\leq L\left(\bar{x},\bar{u},\bar{v}\right)\leq L\left(x,\bar{u},\bar{v}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+A solution 
+\begin_inset Formula $\left(\bar{u},\bar{v},\bar{x}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\bar{u}\geq0$
+\end_inset
+
+ is a saddle point for the Lagrangian iff
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $L\left(\bar{u},\bar{v},\bar{x}\right)=\min\left\{ L\left(\bar{u},\bar{v},x\right)\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g\left(\bar{x}\right)\le0$
+\end_inset
+
+ and 
+\begin_inset Formula $h\left(\bar{x}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{u}^{t}g\left(\bar{x}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bar{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\bar{u},\bar{v}\right)$
+\end_inset
+
+ are optimal for the primal problem and the dual problem respectively and
+ there's no duality gap.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Fact: the dual function is always concave and it's differentiable when something
+ something something is unique.
 \end_layout
 
 \end_body
