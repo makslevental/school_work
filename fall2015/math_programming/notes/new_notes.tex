@@ -40,6 +40,10 @@
   \newtheorem*{lem*}{\protect\lemmaname}
   \theoremstyle{definition}
   \newtheorem*{example*}{\protect\examplename}
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+  \theoremstyle{plain}
+  \newtheorem{fact}[thm]{\protect\factname}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 
@@ -64,9 +68,11 @@
   \providecommand{\corollaryname}{Corollary}
   \providecommand{\definitionname}{Definition}
   \providecommand{\examplename}{Example}
+  \providecommand{\factname}{Fact}
   \providecommand{\lemmaname}{Lemma}
   \providecommand{\theoremname}{Theorem}
  \providecommand{\casename}{Case}
+\providecommand{\theoremname}{Theorem}
 
 \begin{document}
 
@@ -1714,10 +1720,10 @@ and hence negating the above we get that $d\in F$ implies $d\in F_{0}$,
 i.e. $F\subset F_{0}$ and so $F=F_{0}$. Now if $f$ is strictly
 concave then we know that whenever $d\in F_{0}^{'}$ we have $f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)$
 and therefore $F_{0}^{'}\subset F$ and hence $F=F_{0}^{'}$.\end{proof}
-\begin{defn*}
+\begin{thm*}
 From the improving directions theorem if $\nabla f\left(\bar{x}\right)^{t}d<0$
-then $d$ is an improving direction ).
-\end{defn*}
+then $d$ is an improving direction.
+\end{thm*}
 Specify the feasible region using functions $g_{i}$ now
 \[
 S=\left\{ x\in X\big|g_{i}\left(x\right)\leq0\right\} 
@@ -2292,4 +2298,436 @@ gap.
 \end{thm*}
 Fact: the dual function is always concave and it's differentiable
 when something something something is unique.
+
+
+\section{Sundry things}
+\begin{thm*}
+Suppose $H$ is symmetric and psd and $x^{t}Hx=0$ then $Hx=0$.\end{thm*}
+\begin{proof}
+Let $QDQ^{t}$ be the eigenvalue decomposition of $H$. Since $H$
+is psd $D=\sqrt{D}\sqrt{D}$. Then 
+\begin{align*}
+x^{t}Hx & =0\\
+ & \iff\\
+x^{t}Q\sqrt{D}\sqrt{D}Q^{t}x & =0\\
+ & \iff\\
+\left\Vert \sqrt{D}Q^{t}x\right\Vert  & =0\\
+ & \iff\\
+\sqrt{D}Q^{t}x & =0\\
+ & \iff\\
+Q\sqrt{D}\sqrt{D}Q^{t}x & =0\\
+ & \iff\\
+Hx & =0
+\end{align*}
+\end{proof}
+\begin{example*}
+Consider 
+\[
+\min_{x}\ \left\Vert Ax-b\right\Vert ^{2}
+\]
+
+
+If $b$ is in the column space then this is just solving $Ax=b$.
+If the system is underdetermined then this finds the min norm solution.
+If $b$ is not in the column space of $A$ then this find the projection
+$b$ onto the column space of $A$. If the norm is the 2norm then
+the objective 
+\[
+f\left(x\right)=b^{t}b-2x^{t}A^{t}b+x^{t}A^{t}Ax
+\]
+and the first order necessary condition $\nabla f\left(x\right)=0$
+is $A^{t}Ax=A^{t}b$. The Hessian of $f$ is $A^{t}A$, which is psd
+($x^{t}A^{t}Ax=\left\Vert Ax\right\Vert $). Therefore $f$ is convex
+and hence the necessary condition is also sufficient. If $A$ is full
+rank then $A^{t}A$ is invertible. If $A$ is not full rank but is
+fullrow rank then additional criteria can be used to invert: solve
+the problem
+\begin{align*}
+\min_{x} & \ x^{t}x\\
+\text{s.t.} & Ax=b
+\end{align*}
+Using again $KKT$ you get $x=A^{t}\left(AA^{t}\right)^{-1}b$.
+\end{example*}
+
+\begin{example*}
+Consider minimizing $f$ subject to $g_{i}\left(x\right)\leq0$. Verifying
+$\bar{x}$ is a KKT point is equivalent to finding a solution $u\geq0$
+\[
+\nabla f\left(\bar{x}\right)+\sum_{i\in I}u_{i}g_{i}\left(\bar{x}\right)=0
+\]
+where $I$ is the set of binding constraints. Restated this is 
+\[
+A^{t}u=c,\ u\geq0
+\]
+where $A^{t}=\left[\nabla g_{i}\left(\bar{x}\right),i\in I\right]$
+and $c=-\nabla f\left(\bar{x}\right)$. This is equivalent to the
+following LP
+\begin{align*}
+\min_{y} & \ e^{t}y\\
+\text{s.t.} & A^{t}u\pm y=c\\
+ & u\geq0,y\geq0
+\end{align*}
+having objective value 0, where $e=\left(1,\dots,1\right)$ and $y$
+is slack that has the same signs as $c$.
+\end{example*}
+
+\begin{example*}
+Prove the AM-GM inequality
+
+\[
+\frac{1}{n}\sum_{j=1}^{n}x_{j}\geq\left(\prod_{j=1}^{n}x_{j}\right)^{1/n}
+\]
+using KKT. Consider the problem 
+\begin{align*}
+\min & \ \sum_{j=1}^{n}x_{j}\\
+\text{s.t.} & \prod_{j=1}^{n}x_{j}=b\\
+ & x_{j}\geq0
+\end{align*}
+where $b>0$. Therefore $x_{j}>0$ and the only active constraint
+is the equality constraint and by linear independence the KKT conditions
+are necessary. The KKT system is
+\begin{align*}
+1+v\prod_{i\neq j}^{n}x_{i} & =0\\
+\prod_{j=1}^{n}x_{j} & =b
+\end{align*}
+Primal feasible constraints. Multiplying the $j$th equation by $x_{j}$
+we get
+\[
+x_{j}+vb=0
+\]
+and therefore 
+\[
+\sum_{j=1}^{n}x_{j}+nbv=0
+\]
+which gives the unique value for the Lagrange multiplier of 
+\[
+v=-\frac{1}{nb}\sum_{j=1}^{n}x_{j}
+\]
+Substituting into each KKT equation we get
+\[
+x_{j}=\frac{1}{n}\sum_{j=1}^{n}x_{j}=\bar{x}
+\]
+and which shows the values of all of the $\bar{x}\coloneqq x_{j}$
+are all identical 
+\[
+\prod_{j=1}^{n}x_{j}=\left(\bar{x}\right)^{n}=b\Rightarrow\bar{x}=b^{1/n}
+\]
+and since the KKT conditions are necessary this gives the unique optimum?
+I.e. 
+\[
+\frac{1}{n}\sum_{j=1}^{n}\bar{x}=b^{1/n}
+\]
+is the optimal objective. Thus 
+\[
+\frac{1}{n}\sum_{j=1}^{n}x_{j}\geq\min\left\{ \frac{1}{n}\sum_{j=1}^{n}x_{j}\big|\prod_{j=1}^{n}x_{j}=b\right\} =b^{1/n}=\left(\prod_{j=1}^{n}x_{j}\right)^{1/n}
+\]
+
+\end{example*}
+
+\section{Summary}
+\begin{fact}
+\textbf{Min LP at extreme points}
+\begin{enumerate}
+\item For a Minimization LP there's a solution iff $c^{t}d_{j}\ge0$ for
+all extreme directions $d$ and objective $c$. Why? Intuitively no
+extreme direction (if any exist at all) should be aligned with $-c$
+(because otherwise you could minimize forever).
+\item The solution is at a vertex of the polytope (Minkowski's representation
+theorem since all the $c^{t}d_{j}\geq0$).
+\end{enumerate}
+\end{fact}
+
+\begin{fact}
+\textbf{Convex iff convex for every direction}: a multivariate function
+$f$ is convex iff it's convex on every line, i.e. iff
+\[
+F_{\bar{x},d}\left(\lambda\right)\coloneqq f\left(\bar{x}+\lambda d\right)
+\]
+is a convex function of $\lambda$ for all $\bar{x},d$.
+\end{fact}
+
+\begin{fact}
+\textbf{Alpha level sets of convex functions are convex}: for convex
+$S$ and convex $f$, the set 
+\[
+S_{\alpha}\coloneqq\left\{ x\in S\big|f\left(x\right)\leq\alpha\right\} 
+\]
+ is convex. Easy to prove just from the definitions.
+\end{fact}
+
+\begin{fact}
+\textbf{Epigraphs}. A function is convex iff its epigraph is convex.
+\end{fact}
+
+\begin{fact}
+\textbf{Convex functions are continuous on their interiors}. How to
+remember this? If it weren't continuous (had a jump discontinuity)
+it wouldn't be convex. 
+\end{fact}
+
+\begin{fact}
+\textbf{Seperating hyperplane theorem}. For convex $S$ and all $\bar{x}\in\partial S$
+there exists $p\neq0$ such that $p^{t}\left(x-\bar{x}\right)\leq0$.
+\end{fact}
+
+\begin{fact}
+\textbf{Subgradients}. Convex functions over convex sets have supporting
+hyperplanes, i.e. 
+\[
+f\left(x\right)\ge f\left(\bar{x}\right)+\xi^{t}\left(x-\bar{x}\right)
+\]
+Note that $\text{epi}\left(f\right)$ is convex and $\left(\bar{x},f\left(\bar{x}\right)\right)$
+belongs to its boundary. Therefore by separation theorem there exists
+$\left(\xi_{0},\mu\right)\in\mathbb{R}^{n}\times\mathbb{R}$. For
+all $\left(\mathbf{x},y\right)\in\text{epi}\left(f\right)$. 
+\[
+\xi_{0}^{t}\left(x-\bar{x}\right)+\mu\left(y-f\left(\bar{x}\right)\right)\leq0
+\]
+
+
+Note that $\mu\leq0$ because otherwise take $y$ large enough and
+the inequality would be violated. 
+\end{fact}
+
+\begin{fact}
+\textbf{Converse about subgradients}. If there exists a supporting
+hyperplane for the epigraph of $f$ at every point $x\in S$ a convex
+set then $f$ is convex.
+\end{fact}
+
+\begin{fact}
+\textbf{Farkas' Lemma}. Only one of these systems has a solution
+\[
+\begin{array}{c}
+\left\{ x\big|Ax\preceq0,c^{t}x>0\right\} \\
+\left\{ y\big|A^{t}y=c,y\succeq0\right\} 
+\end{array}
+\]
+
+\end{fact}
+
+\begin{fact}
+\textbf{Extreme points}. For $A\in\mathbb{R}^{m\times n}$, $m$ constraints,
+$n$ variables. $x$ is an extreme point iff $A$ can be partitioned
+\[
+A=\left[B,N\right]
+\]
+
+
+where $B\in\mathbb{R}^{m\times m}$ and invertible and $Ax=Bx_{B}+Nx_{N}$
+where $x_{N}=0$ and $x_{B}=B^{-1}b$.
+\end{fact}
+
+\begin{fact}
+\textbf{Simplex method}. \textbf{For a maximization problem}: write
+down the tableua with the top row being $z-c^{t}x$. If any of the
+coefficients are negative then you can increase the objective pivoting
+on that column. Choose which row to pivot by using the ``smallest
+ratio'' test.
+\end{fact}
+
+\begin{fact}
+\textbf{Extreme directions}. The extreme directions of a polyhedron
+are the extreme points of 
+\[
+D=\left\{ d\big|Ad\preceq0,d\succeq0,1^{t}d=1\right\} 
+\]
+
+\end{fact}
+
+\begin{fact}
+\textbf{Directional derivatives}. Convex functions have all directional
+derivatives.
+\end{fact}
+
+\begin{fact}
+\textbf{Subdifferential of differentiable function}. Using the supporting
+hyperplane theorem for convex epigraphs we have that the subgradient
+of a differentiable function is unique, i.e. $\nabla f\left(\bar{x}\right)$.
+Therefore for differentiable $f$
+\[
+f\left(x\right)\geq f\left(\bar{x}\right)+\nabla f\left(\bar{x}\right)^{t}\left(x-\bar{x}\right)
+\]
+
+\end{fact}
+
+\begin{fact}
+\textbf{Another weird convexity condition}. If $f$ is differentiable
+then $f$ is convex iff
+\[
+\left(\nabla f\left(x_{2}\right)-\nabla f\left(x_{1}\right)\right)^{t}\left(x_{2}-x_{1}\right)\geq0
+\]
+
+\end{fact}
+
+\begin{fact}
+\textbf{Twice differentiable}. If $f$ is twice differentiable then
+$f$ is convex iff $\nabla^{2}f\left(\bar{x}\right)$ is psd everywhere.
+If $\nabla^{2}f\left(\bar{x}\right)$ is pd everywhere then $f$ is
+strictly convex.
+\end{fact}
+
+\begin{fact}
+\textbf{Optimality conditions}. If $f$ is convex and $\bar{x}$ is
+locally optimal then (\textbf{the obvious convex thing}).
+\begin{enumerate}
+\item $\bar{x}$ is globally optimal.
+\item If furthermore $\bar{x}$ is strictly locally optimal then
+
+\begin{enumerate}
+\item $\bar{x}$ is unique.
+\item $\bar{x}$ is isolated.
+\end{enumerate}
+\end{enumerate}
+\end{fact}
+
+\begin{fact}
+\textbf{More optimality conditions}. For minimization problem if $f$
+is convex then $\bar{x}$ is globally optimal iff there exists a subgradient
+$\xi$ such that $\xi^{t}\left(x-\bar{x}\right)\geq0$. \end{fact}
+\begin{cor*}
+$\bar{x}$ is globally optimal iff $0\in\partial f\left(\bar{x}\right)$.\end{cor*}
+\begin{fact}
+For a maximization problem if $\bar{x}$ is lcoally optimal then $\xi^{t}\left(x-\bar{x}\right)\leq0$.
+If $f$ is convex then the maxima occur at the boundary (obvious type
+thing).
+\end{fact}
+
+\begin{fact}
+For an unconstrained minimization problem if $d$ is such that $\nabla f\left(\bar{x}\right)^{t}d<0$
+then $d$ is non-improving. If $\bar{x}$ is a local optimum then
+$\nabla f\left(\bar{x}\right)=0$ and $\nabla^{2}f\left(\bar{x}\right)$
+is psd (these are necessary and sufficient in the unconstrained case).
+Think calculus. For strict local minima $\nabla^{2}f\left(\bar{x}\right)$
+must be pd.
+\end{fact}
+
+\begin{fact}
+Let 
+\[
+F=\left\{ d\big|f\left(\bar{x}+\lambda d\right)<f\left(\bar{x}\right)\ \text{s.t.}\ \exists_{\delta}\forall_{\lambda}\ \lambda\in\left(0,\delta\right)\right\} 
+\]
+be the cone of improving directions and
+\[
+D=\left\{ d\big|\bar{x}+\lambda d\in S\ \text{s.t.}\ \exists_{\delta}\forall_{\lambda}\ \lambda\in\left(0,\delta\right)\right\} 
+\]
+be the set of feasible directions 
+\[
+F_{0}=\left\{ d\big|\nabla f\left(\bar{x}\right)^{t}d<0\right\} 
+\]
+then $F_{0}\subseteq F$.
+\end{fact}
+
+\begin{fact}
+\textbf{Improving directions intersect $F_{0}$}. If $\bar{x}$ is
+a local optimum then $F_{0}\cap D=\emptyset$.
+\end{fact}
+
+\begin{fact}
+\textbf{Converse}. If $f$ is convex and $F_{0}\cap D=\emptyset$
+and there exists a neighborhood such that every direction is feasible
+then $\bar{x}$ is a local optimum.
+\end{fact}
+
+\begin{fact}
+Let $F_{0}^{'}=\left\{ d\neq0\big|\nabla f\left(\bar{x}\right)^{t}d\leq0\right\} $.
+If $F$ is convex then $F_{0}=F$. If $f$ is concave then $F=F_{0}^{'}$.
+\end{fact}
+
+\begin{fact}
+Let $G_{0}=\left\{ d\big|\nabla g_{i}\left(\bar{x}\right)^{t}d<0\right\} $
+and $G_{0}^{'}=\left\{ d\big|\nabla g_{i}\left(\bar{x}\right)^{t}d\leq0\right\} $.
+Let $I$ be the subset of constraints that are binding. If $g_{I}$
+are strictly convex then $G_{0}=D$ and if $g_{I}$ are strictly concave
+then $D=G_{0}^{'}$.
+\end{fact}
+
+\begin{fact}
+\textbf{Geometric optimality necessary conditions}. If $\bar{x}$
+is feasible and locally optimal and $f$ and $g_{I}$ are differentiable
+and nonbinding $g_{i}$ are continuous then $F_{0}\cap G_{0}=\emptyset$.
+\end{fact}
+
+\begin{fact}
+\textbf{Geometric optimality sufficient conditions}. If $F_{0}\cap G_{0}=\emptyset$
+and $f$ is convex and $g_{I}$ binding strictly convex ($F=F_{0}$
+and $D=G_{0}$) then $\bar{x}$ is locally optimal.
+\end{fact}
+
+\begin{fact}
+\textbf{Algebraic optimality necessary conditions}.\textbf{ FJ conditions}.
+If $\bar{x}$ is locally optimal and every differentiable and continuous
+then there exists $u_{0},u$ such that 
+\begin{align*}
+u_{0}\nabla f\left(\bar{x}\right)+\sum_{i}u_{i}\nabla g_{i}\left(\bar{x}\right) & =0\\
+u_{i}g_{i}\left(\bar{x}\right) & =0\\
+u_{0},u & \succeq0\\
+\left(u_{0},u\right) & \neq0
+\end{align*}
+The second row is called the complementary slackness condition, i.e.
+binding constraints for that to always be zero and otherwise the $u_{i}=0$. 
+\end{fact}
+
+\begin{fact}
+\textbf{KKT ``necessary'' conditions}. KKT conditions are the same
+as FJ except the binding $\nabla g_{i}\left(\bar{x}\right)$ should
+be zero.
+\end{fact}
+
+\begin{fact}
+\textbf{KKT sufficient condtions}. If $g_{i},f_{i}$ are convex and
+$\bar{x}$ is a KKT point then $\bar{x}$ is globally optimal.
+\end{fact}
+
+\begin{fact}
+\textbf{Reiterating}. 
+\[
+\text{Local optimality}\rightarrow F_{0}\cap D=\emptyset\underset{\text{Gordan's theorem}}{\rightarrow}\rightarrow FJ
+\]
+Let $T$ be the cone of tangents. Then local optimality implies $F_{0}\cap T=\emptyset$.
+Under constraint qualifications $T=G_{0}^{'}$
+\[
+\text{Local optimality}\rightarrow F_{0}\cap G_{0}^{'}=\emptyset\underset{\text{Farkas' lemma}}{\rightarrow}\rightarrow KKT
+\]
+
+\end{fact}
+
+\begin{fact}
+\textbf{Weak duality}. Let $L\left(x,u,v\right)$ be the Lagrangian.
+Then
+\[
+f\left(x\right)\geq L\left(x,u,v\right)
+\]
+
+\end{fact}
+
+\begin{fact}
+The dual function, for a min problem is
+\[
+\phi\left(u,v\right)=f\left(x\right)+L\left(u,v\right)=\min_{x}\left(c^{t}x+u^{t}\left(b-Ax\right)+v^{t}\left(e-Dx\right)\right)=u^{t}b+v^{t}e+\min_{x}\left(\left(c^{t}-A-D\right)x\right)
+\]
+and the dual problem is 
+\begin{align*}
+\max_{u,v} & \ \phi\left(u,v\right)\\
+\text{s.t.} & u\geq0\\
+ & v\text{ free}
+\end{align*}
+If the dual primal are equal then the solution is the optimum, i.e.
+there's no duality gap. If there's a saddle point
+\[
+L\left(\bar{x},u,v\right)\leq L\left(\bar{x},\bar{u},\bar{v}\right)\leq L\left(x,\bar{u},\bar{v}\right)
+\]
+in Lagrangian then there's no duality gap. 
+\end{fact}
+
+\begin{fact}
+\textbf{Abadie's Constraints qualification}. Tangent cone = Linearized
+cone of constraints.
+\end{fact}
+
+\begin{fact}
+\textbf{Slater's condition}. This is for there to be no duality gap.
+There exists a point in the interior of the feasible region, i.e.
+$g_{i}\left(x\right)<0$.\end{fact}
+
 \end{document}

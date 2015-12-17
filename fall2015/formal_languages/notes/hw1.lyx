@@ -1267,5 +1267,3600 @@ Poly with integer root is NP-hard: reduce from 3SAT: create polynomials
  Then repeat.
 \end_layout
 
+\begin_layout Section
+Stupid proofs
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $NP=coNP$
+\end_inset
+
+ iff there exists some 
+\begin_inset Formula $NP$
+\end_inset
+
+-complete problem whose compliment is in 
+\begin_inset Formula $NP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ If 
+\begin_inset Formula $NP=coNP$
+\end_inset
+
+ then for all 
+\begin_inset Formula $L\in NP$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $L\in coNP$
+\end_inset
+
+ but then 
+\begin_inset Formula $\bar{L}\in NP$
+\end_inset
+
+ and so, for example, 
+\begin_inset Formula $\overline{3SAT}\in NP$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Leftarrow$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $P$
+\end_inset
+
+ is an 
+\begin_inset Formula $NP$
+\end_inset
+
+-complete problem such that 
+\begin_inset Formula $\bar{P}\in NP$
+\end_inset
+
+.
+ Note that for all 
+\begin_inset Formula $L\in NP$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $L\leq_{m}P$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\bar{L}\leq_{m}\bar{P}$
+\end_inset
+
+.
+ We prove containment in both directions
+\end_layout
+
+\begin_layout Case
+\begin_inset Formula $NP\subseteq coNP$
+\end_inset
+
+: Let 
+\begin_inset Formula $L\in NP$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\bar{L}\in coNP$
+\end_inset
+
+.
+ By the chain of reductions above we have 
+\begin_inset Formula $\bar{L}\in NP$
+\end_inset
+
+.
+ Hence for all 
+\begin_inset Formula $L\in NP$
+\end_inset
+
+ we have 
+\begin_inset Formula $\bar{L}\in NP$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $L$
+\end_inset
+
+ is the complement of a language in 
+\begin_inset Formula $NP$
+\end_inset
+
+, hence 
+\begin_inset Formula $L\in coNP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Case
+\begin_inset Formula $coNP\subseteq NP$
+\end_inset
+
+: Let 
+\begin_inset Formula $L\in coNP$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\bar{L}\in NP$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{L}\leq_{m}P$
+\end_inset
+
+ and 
+\begin_inset Formula $L\leq_{m}\bar{P}$
+\end_inset
+
+ and hence 
+\begin_inset Formula $L\in NP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Exercise*
+Consider a function 
+\begin_inset Formula $f$
+\end_inset
+
+ that is 1injective such that 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ can be computed in polynomial time and 
+\begin_inset Formula $f^{-1}\left(x\right)$
+\end_inset
+
+ cannot be computed in polynomial time.
+ Show that the language of 
+\begin_inset Formula $L=\left\{ \left(x,y\right)\big|f^{-1}\left(x\right)<y\right\} \in\left(NP\cap coNP\right)-P$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $L\in NP$
+\end_inset
+
+: given 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ guess 
+\begin_inset Formula $z$
+\end_inset
+
+ and compute 
+\begin_inset Formula $f\left(z\right)$
+\end_inset
+
+ in polynomial time and check whether 
+\begin_inset Formula $f\left(x\right)=z$
+\end_inset
+
+.
+ When the guess is correct we have 
+\begin_inset Formula $f^{-1}\left(x\right)$
+\end_inset
+
+ and we can compare against 
+\begin_inset Formula $y$
+\end_inset
+
+ to accept or reject.
+ 
+\begin_inset Formula $L\in coNP$
+\end_inset
+
+: we have to show that 
+\begin_inset Formula $\bar{L}=\left\{ \left(x,y\right)\big|f^{-1}\left(x\right)\geq y\right\} \in NP$
+\end_inset
+
+.
+ Similar trick: guess the correct 
+\begin_inset Formula $z$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(z\right)=x$
+\end_inset
+
+ then compare 
+\begin_inset Formula $z$
+\end_inset
+
+ with 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ 
+\begin_inset Formula $L\notin P$
+\end_inset
+
+: if 
+\begin_inset Formula $L\in P$
+\end_inset
+
+ then we could use binary search to compute 
+\begin_inset Formula $f^{-1}\left(x\right)$
+\end_inset
+
+ in polynomial time: first test 
+\begin_inset Formula $\left(x,2^{n-1}\right)$
+\end_inset
+
+, i.e.
+ the rough midpoint of 
+\begin_inset Formula $n$
+\end_inset
+
+-bit integers.
+ If yes then next test 
+\begin_inset Formula $\left(x,2^{n-2}\right)$
+\end_inset
+
+ otherwise test 
+\begin_inset Formula $\left(x,3\times2^{n-2}\right)$
+\end_inset
+
+, etc.
+\end_layout
+
+\begin_layout Proposition*
+\begin_inset Formula $P\subseteq PSPACE$
+\end_inset
+
+ and 
+\begin_inset Formula $NP\subseteq NPSPACE$
+\end_inset
+
+: if a 
+\begin_inset Formula $TM$
+\end_inset
+
+ takes only a polynomial number of steps then it can only visit (at most)
+ a polynomial number of cells in its tape.
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $NPSPACE=PSPACE$
+\end_inset
+
+ we actually have 
+\begin_inset Formula $P\subseteq NP\subseteq NPSPACE=PSPACE$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proposition*
+A PSPACE TM can only take an exponential number of steps before it must
+ repeat an instantaneous description, more precisely if it halts then it
+ does so within 
+\begin_inset Formula $c^{1+p\left(n\right)}$
+\end_inset
+
+ steps, where 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ is the polynomial space bound.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $t$
+\end_inset
+
+ be the number of tape symbols of 
+\begin_inset Formula $M$
+\end_inset
+
+ and let 
+\begin_inset Formula $s$
+\end_inset
+
+ be the number of states of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then the number of different instantaneous descriptions of 
+\begin_inset Formula $M$
+\end_inset
+
+ when only 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ tape cells are used is 
+\begin_inset Formula $s\times p\left(n\right)\times t^{p\left(n\right)}$
+\end_inset
+
+; choose one of 
+\begin_inset Formula $s$
+\end_inset
+
+ states, place the head on any of 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ tape positions, and fill 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ with any of 
+\begin_inset Formula $t$
+\end_inset
+
+ symbols.
+ Let 
+\begin_inset Formula $c=s+t$
+\end_inset
+
+ and look at the binomial expansion
+\begin_inset Formula 
+\[
+\left(t+s\right)^{1+p\left(n\right)}=t^{1+p\left(n\right)}+\left(1+p\left(n\right)\right)st^{p\left(n\right)}+\cdots
+\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $c^{1+p\left(n\right)}$
+\end_inset
+
+ is at least as large the number of possible instantaneous descriptions
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ by a sequence of instantaneous descriptions that does not repeat any
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If the sequence is 
+\begin_inset Formula $\alpha\vdash\beta\vdash\beta\vdash\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is accepting then 
+\begin_inset Formula $\alpha\vdash\beta\vdash\gamma$
+\end_inset
+
+ is also.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can use this proposition to convert any polyonomially space bounded 
+\begin_inset Formula $TM$
+\end_inset
+
+ into an equivalent one that always halts, by stopping it after some exponential
+ number of steps.
+\end_layout
+
+\begin_layout Standard
+Savitch's theorem shows that 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)\subseteq DSPACE\left(f^{2}\left(n\right)\right)$
+\end_inset
+
+.
+ How? First an auxiliary routine
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "mathescape=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+reach(instantaneous desc I,instantaneous desc  J, int m)
+\end_layout
+
+\begin_layout Plain Layout
+
+	if m==1
+\end_layout
+
+\begin_layout Plain Layout
+
+		if I==J or I$
+\backslash
+vdash$J in 1 step
+\end_layout
+
+\begin_layout Plain Layout
+
+			return true
+\end_layout
+
+\begin_layout Plain Layout
+
+		else 
+\end_layout
+
+\begin_layout Plain Layout
+
+			return false
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+		for each instantaneous description K
+\end_layout
+
+\begin_layout Plain Layout
+
+			if reach(I,K,m/2) and reach(K,J,m/2)
+\end_layout
+
+\begin_layout Plain Layout
+
+				return true
+\end_layout
+
+\begin_layout Plain Layout
+
+			else
+\end_layout
+
+\begin_layout Plain Layout
+
+				return false	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+reach recursively tests whether you can reach instantaneous description
+ 
+\begin_inset Formula $J$
+\end_inset
+
+ from 
+\begin_inset Formula $I$
+\end_inset
+
+ by testing intermediate description 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ A deterministic 
+\begin_inset Formula $PSPACE$
+\end_inset
+
+ machine 
+\begin_inset Formula $D$
+\end_inset
+
+ will use reach as such: it will have a tape that's a stack frame that has
+ 
+\begin_inset Formula $\left[I_{i},J_{i},m/2^{i}\right]$
+\end_inset
+
+.
+ Clearly the length of this 
+\begin_inset Quotes eld
+\end_inset
+
+stack tape
+\begin_inset Quotes erd
+\end_inset
+
+ is 
+\begin_inset Formula $\log_{2}m$
+\end_inset
+
+.
+ Then since each 
+\begin_inset Formula $NSPACE$
+\end_inset
+
+ 
+\begin_inset Formula $TM$
+\end_inset
+
+ has at most 
+\begin_inset Formula $c^{p\left(n\right)}$
+\end_inset
+
+ configurations that it goes through the number of 
+\begin_inset Quotes eld
+\end_inset
+
+stack frames
+\begin_inset Quotes erd
+\end_inset
+
+ is 
+\begin_inset Formula $\log_{2}c^{p\left(n\right)}=O\left(p\left(n\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Savitch's theorem.
+ 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)\subseteq DSPACE\left(f^{2}\left(n\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Given an input 
+\begin_inset Formula $w$
+\end_inset
+
+ to 
+\begin_inset Formula $M$
+\end_inset
+
+, and 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ machine we construct 
+\begin_inset Formula $D$
+\end_inset
+
+ to call reach with arguments
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $I_{0}$
+\end_inset
+
+ is the initial instantaneous description of 
+\begin_inset Formula $M$
+\end_inset
+
+ with input 
+\begin_inset Formula $w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $J$
+\end_inset
+
+ is any accepting state instantaneous description that uses at most 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ tape cells; the different 
+\begin_inset Formula $J$
+\end_inset
+
+s are enumerated by 
+\begin_inset Formula $D$
+\end_inset
+
+ using a scratch tape.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $m=c^{1+f\left(n\right)}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+As previously argued the tape length is 
+\begin_inset Formula $O\left(f\left(n\right)\right)$
+\end_inset
+
+ and the each entry in the tape length is 
+\begin_inset Formula $O\left(f\left(n\right)\right)$
+\end_inset
+
+.
+ Why? The two instantaneous descriptions take 
+\begin_inset Formula $1+f\left(n\right)$
+\end_inset
+
+ to write down and in binary 
+\begin_inset Formula $\log_{2}m=\log_{2}c^{1+f\left(n\right)}$
+\end_inset
+
+ cells, which is 
+\begin_inset Formula $O\left(f\left(n\right)\right)$
+\end_inset
+
+.
+ Therefore we have 
+\begin_inset Formula $O\left(f\left(n\right)\right)\times O\left(f\left(n\right)\right)=O\left(f^{2}\left(n\right)\right)$
+\end_inset
+
+ space.
+\end_layout
+
+\begin_layout Theorem*
+TQBF (true qualified boolean formula) is PSPACE complete.
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $RP$
+\end_inset
+
+: randomized polynomial class.
+ 
+\begin_inset Formula $L\in RP$
+\end_inset
+
+ iff 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $w\notin L$
+\end_inset
+
+, then the probability that 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ is 0.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $w\in L$
+\end_inset
+
+, then the probability that 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ is at least 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+There exists 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $M$
+\end_inset
+
+ always halts after at most 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ steps.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Another name for these algorithms is 
+\emph on
+Monte-Carlo
+\emph default
+ algorithms, i.e.
+ runs in polynomial time and correct most of the time.
+\end_layout
+
+\begin_layout Example*
+Consider the Monte-Carlo algorithm of finding a 3-clique: given a graph
+ 
+\begin_inset Formula $G$
+\end_inset
+
+ pick an edge 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+ at random and then pick another vertex 
+\begin_inset Formula $z$
+\end_inset
+
+ at random.
+ Then test whether 
+\begin_inset Formula $\left(u,z\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(v,z\right)$
+\end_inset
+
+ exist.
+ Suppose some fixed number 
+\begin_inset Formula $k$
+\end_inset
+
+ choices are made.
+ This is a Monte-Carlo algorithm since
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If no 3-cliques exist certainly the algorithm never accepts, i.e.
+ accepts with probability 0.
+\end_layout
+
+\begin_layout Enumerate
+Suppose the graph has 
+\begin_inset Formula $\left|V\right|$
+\end_inset
+
+ vertices and 
+\begin_inset Formula $\left|E\right|$
+\end_inset
+
+ edges.
+ If the graph has at least one 3-clique then the probability those 3 nodes
+ are selected is 
+\begin_inset Formula $\left(\frac{3}{\left|E\right|}\right)\left(\frac{1}{\left|V\right|-2}\right)$
+\end_inset
+
+ since there are 3 edges in the triangle and if any of the 3 edges are picked
+ then there are 
+\begin_inset Formula $\left|V\right|-2$
+\end_inset
+
+ vertices to pick from.
+ Then the probability, given one 3-clique, that the never happens over 
+\begin_inset Formula $k$
+\end_inset
+
+ trials is 
+\begin_inset Formula 
+\[
+\left(1-\left(\frac{3}{\left|E\right|}\right)\left(\frac{1}{\left|V\right|-2}\right)\right)^{k}
+\]
+
+\end_inset
+
+and therefore the probability that it does happen is
+\begin_inset Formula 
+\[
+1-\left(1-\left(\frac{3}{\left|E\right|}\right)\left(\frac{1}{\left|V\right|-2}\right)\right)^{k}
+\]
+
+\end_inset
+
+Using 
+\begin_inset Formula $\left(1-x\right)^{k}\approx e^{-kx}$
+\end_inset
+
+ for small 
+\begin_inset Formula $x$
+\end_inset
+
+ we get that 
+\begin_inset Formula 
+\[
+1-e^{-\frac{3k}{\left|E\right|\left(\left|V\right|-2\right)}}
+\]
+
+\end_inset
+
+Thus picking 
+\begin_inset Formula 
+\[
+k=\frac{\left|E\right|\left(\left|V\right|-2\right)}{3}
+\]
+
+\end_inset
+
+we get that the probability of accepting is 
+\begin_inset Formula 
+\[
+1-e^{-1}\approx.63>\frac{1}{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $k\propto\left|E\right|\left|V\right|$
+\end_inset
+
+ and each run checks for two more edges in the edge set.
+ Therefore total running time is 
+\begin_inset Formula $O\left(\left|E\right|^{2}\left|V\right|\right)$
+\end_inset
+
+ cubic in the input size.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Therefore 
+\begin_inset Formula $L\in RP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In general suppose we have an 
+\begin_inset Formula $RP$
+\end_inset
+
+ machine 
+\begin_inset Formula $M$
+\end_inset
+
+ and we want to decide whether 
+\begin_inset Formula $w\in L\left(M\right)$
+\end_inset
+
+.
+ If we run 
+\begin_inset Formula $M$
+\end_inset
+
+ on 
+\begin_inset Formula $w$
+\end_inset
+
+ and believe it then we might get a false negative (rejecting when we should
+ have accepted).
+ We can never completely avoid false negatives but we can use boosting to
+ reduce the probability of false negatives to as low as possible.
+ Suppose the probability of accepting, given 
+\begin_inset Formula $w\in L\left(M\right)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\frac{1}{2}+\epsilon
+\]
+
+\end_inset
+
+Then the probability of a false negative is 
+\begin_inset Formula 
+\[
+1-\left(\frac{1}{2}+\epsilon\right)
+\]
+
+\end_inset
+
+If we run the machine 
+\begin_inset Formula $M$
+\end_inset
+
+ over and over again, 
+\begin_inset Formula $k$
+\end_inset
+
+ times, the probability of a false negative is 
+\begin_inset Formula 
+\[
+1-\left(\frac{1}{2}+\epsilon\right)^{k}\rightarrow0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $L$
+\end_inset
+
+ is in 
+\begin_inset Formula $RP$
+\end_inset
+
+, then for any constant 
+\begin_inset Formula $c>0$
+\end_inset
+
+, no matter how small, there is a polynomial time randomized algorithm that
+ renders a decision on whether 
+\begin_inset Formula $w\in L$
+\end_inset
+
+, makes no false positive errors, and makes false-negative errors with probabili
+ty no greater than 
+\begin_inset Formula $c$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Zero-error, probabilistic, polynomial-expected-time or 
+\begin_inset Formula $ZPP$
+\end_inset
+
+ is a class of language for which the machines always give the right answer
+ but only the expected running time is polynomial in the input length.
+ Another name for the algorithms is 
+\emph on
+Las-Vegas
+\emph default
+ algorithms.
+\end_layout
+
+\begin_layout Theorem*
+ZPP is closed under complementation.
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $L\in ZPP$
+\end_inset
+
+ then it has a Las-Vegas TM 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+ is accepted by 
+\begin_inset Formula $M'$
+\end_inset
+
+ which simulates 
+\begin_inset Formula $M$
+\end_inset
+
+, rejects if 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts and accepts if 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects.
+ Either of these could take polynomial-expected-time to run and that's fine.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $ZPP=RP\cap coRP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\supseteq$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $L\in RP\cap coRP$
+\end_inset
+
+.
+ That is 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+ both have Monte-Carlo TMs, each with polynomial running times and assume
+ 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+ bounds both their running times.
+ The Las-Vegas machine functions as follows:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Run the Monte-Carlo TM for 
+\begin_inset Formula $L$
+\end_inset
+
+; if it accepts then accept and halt.
+\end_layout
+
+\begin_layout Enumerate
+If not (it will halt in polynomial time), run the Monte-Carlo TM for 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+; if it accepts then reject and if it rejects then go to step 1.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Certainly 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ iff 
+\begin_inset Formula $w\in L$
+\end_inset
+
+ and only rejects if 
+\begin_inset Formula $w\notin L$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $w\in\bar{L}$
+\end_inset
+
+.
+ The expected running time on one round is 
+\begin_inset Formula $2p\left(n\right)$
+\end_inset
+
+ and the probability that 
+\begin_inset Formula $w$
+\end_inset
+
+ is decided on any one round is 
+\begin_inset Formula $>1/2$
+\end_inset
+
+: if 
+\begin_inset Formula $w\in L$
+\end_inset
+
+ then step 1 has at least 50% chance of accepting and if 
+\begin_inset Formula $w\notin L$
+\end_inset
+
+ then step 2 has at least a 50% chance of rejecting.
+ Thus the expected running time is no more than 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{2}2p\left(n\right)+\frac{1}{2}\frac{1}{2}\left(2p\left(n\right)+2p\left(n\right)\right)+\frac{1}{2}\frac{1}{2}\frac{1}{2}\left(2p\left(n\right)+2p\left(n\right)+2p\left(n\right)\right)+\frac{1}{2}\frac{1}{2}\frac{1}{2}\frac{1}{2}\left(2p\left(n\right)+2p\left(n\right)+2p\left(n\right)+2p\left(n\right)\right)+\cdots & =\sum_{i=1}^{\infty}\frac{i}{2^{i}}2p\left(n\right)\\
+ & =2p\left(n\right)\sum_{i=1}^{\infty}\frac{i}{2^{i}}\\
+ & =2p\left(n\right)\times2
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=0}^{n}r^{i} & =\frac{1-r^{n+1}}{1-r}\\
+\frac{d}{dr}\sum_{i=0}^{n}r^{i} & =\frac{1}{r}\sum_{i=1}^{n}ir^{i}=blahblahblah
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\subseteq$
+\end_inset
+
+ Assume 
+\begin_inset Formula $L\in ZPP$
+\end_inset
+
+.
+ Then there's a Las-Vegas machine 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ that recognizes it with expected running time 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+.
+ The Monte-Carlo machine 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ that accepts 
+\begin_inset Formula $L$
+\end_inset
+
+ is as follows: 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ simulates 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ for 
+\begin_inset Formula $2p\left(n\right)$
+\end_inset
+
+ steps.
+ If 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ accepts during that time then so does 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, otherwise it rejects.
+ Let's verify it works correctly: suppose 
+\begin_inset Formula $w\notin L$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|w\right|=n$
+\end_inset
+
+; 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ will reject and therefore so will 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ (if the timer doesn't run out then 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ will reject as a consequence and if it does then 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ will reject out of hand).
+ How about if 
+\begin_inset Formula $w\in L$
+\end_inset
+
+? 
+\end_layout
+
+\begin_layout Proposition*
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ within 
+\begin_inset Formula $2p\left(n\right)$
+\end_inset
+
+ steps with probability at least 
+\begin_inset Formula $1/2$
+\end_inset
+
+ (and therefore so does 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Proof
+Towards a contradiction suppose the probability was less, i.e.
+ some 
+\begin_inset Formula $c<1/2$
+\end_inset
+
+.
+ Then the expected running time of 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ on input 
+\begin_inset Formula $w$
+\end_inset
+
+ is at least 
+\begin_inset Formula $\left(1-c\right)2p\left(n\right)$
+\end_inset
+
+, since 
+\begin_inset Formula $1-c$
+\end_inset
+
+ is the probability that 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ will take more than 
+\begin_inset Formula $2p\left(n\right)$
+\end_inset
+
+ time and 
+\begin_inset Formula $E\left(t\right)=c\times2p\left(n\right)+\left(1-c\right)2p\left(n\right)$
+\end_inset
+
+.
+ However if 
+\begin_inset Formula $c<1/2$
+\end_inset
+
+ then 
+\begin_inset Formula $2\left(1-c\right)>1$
+\end_inset
+
+, and the expected running time on 
+\begin_inset Formula $w$
+\end_inset
+
+ is greater than 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+, a contradiction that 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ has expected running time 
+\begin_inset Formula $p\left(n\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Thus 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ accepts in 
+\begin_inset Formula $2p\left(n\right)$
+\end_inset
+
+ steps with probability at least 1/2 and therefore 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ is a polynomial-time-bounded Monte-Carlo TM, proving 
+\begin_inset Formula $L\in RP$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+For the proof that 
+\begin_inset Formula $L\in coRP$
+\end_inset
+
+ use the same construction but complement 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ is a TM for 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+ which means 
+\begin_inset Formula $L\in coRP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $P\subseteq ZPP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Any deterministic, polynomial-time bounded TM is also a Las-Vegas, polynomial-ti
+me bounded TM, that doesn't make random choices.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $RP\subseteq NP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Suppose we are given a polynomial-time-bounded Monte-Carlo TM 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ for a language 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ We can construct an NTM for 
+\begin_inset Formula $L$
+\end_inset
+
+ with the same time bound: whenever 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ examines a random bit for the first time, 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ chooses, nondeterministically, both possible values for that bit, and writes
+ it on a tape of its own that simulates the random tape of 
+\begin_inset Formula $M_{1}.$
+\end_inset
+
+ 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ accepts whenever 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ accepts, and not otherwise.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $w\in L$
+\end_inset
+
+.
+ The since 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ accepts with at least 
+\begin_inset Formula $P=.5$
+\end_inset
+
+ there must be some sequence of bits on its random tape that leads to acceptance
+ of 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ will therefore choose that sequence of bits and therefore also accepts.
+ Thus 
+\begin_inset Formula $w\in L\left(M_{2}\right)$
+\end_inset
+
+.
+ However if 
+\begin_inset Formula $w\notin L$
+\end_inset
+
+ then there's no such sequence and no sequence of choices makes 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ accept (i.e.
+ each branch of 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ simulating 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ will reject).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename counter_strong23.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relationship of 
+\begin_inset Formula $ZPP$
+\end_inset
+
+ and 
+\begin_inset Formula $RP$
+\end_inset
+
+ to other classes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Random-Polynomial Primality testing
+\end_layout
+
+\begin_layout Standard
+We show that the language of composite numbers is in 
+\begin_inset Formula $RP$
+\end_inset
+
+.
+ The method to generate 
+\begin_inset Formula $n$
+\end_inset
+
+-bit primes is to pick an 
+\begin_inset Formula $n$
+\end_inset
+
+-bit number at random and apply the Monte-Carlo algorithm to recognize composite
+ numbers some large number of times (e.g.
+ 50).
+ If none of the tests fail then there's no more than a 
+\begin_inset Formula $2^{-50}$
+\end_inset
+
+ probability that the number is composite.
+\end_layout
+
+\begin_layout Standard
+Euler's theorem
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Euler's theorem: the residue classes 
+\begin_inset Formula $\mod\,p$
+\end_inset
+
+ that are coprime to 
+\begin_inset Formula $p$
+\end_inset
+
+ form a group under multiplication.
+ Lagrange's theorem states that the order of any subgroup of a finite group
+ divides the order of the group.
+ If 
+\begin_inset Formula $a$
+\end_inset
+
+ is any of the residue classes then the order cyclic group generated by
+ 
+\begin_inset Formula $a$
+\end_inset
+
+,
+\begin_inset Formula $\left\langle a\right\rangle $
+\end_inset
+
+, divides 
+\begin_inset Formula $\varphi\left(n\right)=p-1$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $a^{p-1}=1\mod\,p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+ says that if 
+\begin_inset Formula $p$
+\end_inset
+
+ is prime then 
+\begin_inset Formula $x^{p-1}\mod\ p$
+\end_inset
+
+ is always 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Further if 
+\begin_inset Formula $p$
+\end_inset
+
+ is a composite number, and there are any 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $x^{p-1}\mod\,p\neq1$
+\end_inset
+
+, then for at least half the values 
+\begin_inset Formula $y$
+\end_inset
+
+ in 
+\begin_inset Formula $\left\{ 1,\dots,p-1\right\} $
+\end_inset
+
+, we shall find that 
+\begin_inset Formula $y^{p-1}\mod\,p\neq1$
+\end_inset
+
+.
+ Thus the algorithm is
+\end_layout
+
+\begin_layout Enumerate
+Pick an 
+\begin_inset Formula $x$
+\end_inset
+
+ at random in 
+\begin_inset Formula $\left\{ 1,\dots,p-1\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Compute 
+\begin_inset Formula $x^{p-1}\mod\,p$
+\end_inset
+
+.
+ This takes 
+\begin_inset Formula $O\left(n^{3}\right)$
+\end_inset
+
+ time if 
+\begin_inset Formula $p$
+\end_inset
+
+ is an 
+\begin_inset Formula $n$
+\end_inset
+
+-bit integer.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $x^{p-1}\mod\,p\neq1$
+\end_inset
+
+, accept; 
+\begin_inset Formula $x$
+\end_inset
+
+ is composite.
+ Otherwise, reject.
+\end_layout
+
+\begin_layout Standard
+Too bad there exist 
+\emph on
+Carmichael
+\emph default
+ numbers, which require a more complex test to detect they're composite.
+ But anyway.
+\end_layout
+
+\begin_layout Section
+Undecidability
+\end_layout
+
+\begin_layout Standard
+Assume there exists an enumeration for 
+\begin_inset Formula $TM$
+\end_inset
+
+s that associates to each 
+\begin_inset Formula $TM$
+\end_inset
+
+ an integer; 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ is then the 
+\begin_inset Formula $i$
+\end_inset
+
+th TM.
+ Further assume there exists an enumeration of all binary strings.
+ Consider the table
+\begin_inset Formula 
+\[
+\begin{array}{ccccccc}
+ &  &  & j\rightarrow\\
+ &  & w_{1} & w_{2} & w_{3} & w_{4}\\
+i & M_{1} & 0 & 1 & 1 & 0 & \cdots\\
+\downarrow & M_{2} & 1 & 1 & 0 & 0 & \cdots\\
+ & M_{3} & 0 & 0 & 1 & 1 & \cdots\\
+ & M_{4} & 0 & 1 & 0 & 1\\
+ & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+\]
+
+\end_inset
+
+Along the rows we the indicator function for each TM 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+, i.e.
+ whether 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ or not.
+ 
+\end_layout
+
+\begin_layout Definition*
+The language 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+, the diagonalization language, is the set of strings 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ is not in 
+\begin_inset Formula $L\left(M_{i}\right)$
+\end_inset
+
+.
+ I.e.
+ negative the diagonal in the above table and call that 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $L_{d}$
+\end_inset
+
+ is not recognized by any TM.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $L_{d}=L\left(M\right)$
+\end_inset
+
+ for some TM 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+ is a language over 
+\begin_inset Formula $\left\{ 0,1\right\} $
+\end_inset
+
+ it would be some 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $M=M_{i}$
+\end_inset
+
+.
+ Consider what 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ does one 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Case
+If 
+\begin_inset Formula $w_{i}\in L_{d}$
+\end_inset
+
+, then 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+.
+ But then by definition of 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+, 
+\begin_inset Formula $w_{i}\notin L_{d}$
+\end_inset
+
+, because 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+ contains only those 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{j}$
+\end_inset
+
+ does not accept 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Case
+If 
+\begin_inset Formula $w_{i}\notin L_{d}$
+\end_inset
+
+, then 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ rejects 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+, thus by definition of 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+ 
+\begin_inset Formula $w_{i}\in L_{d}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Theorem*
+If both 
+\begin_inset Formula $L\in RE$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{L}\in RE$
+\end_inset
+
+ then 
+\begin_inset Formula $L\in REC$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ be the 
+\begin_inset Formula $RE$
+\end_inset
+
+ machine for 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ be the 
+\begin_inset Formula $RE$
+\end_inset
+
+ machine for 
+\begin_inset Formula $\bar{L}$
+\end_inset
+
+.
+ Run them in parallel (dove tailing).
+ If 
+\begin_inset Formula $w\in L$
+\end_inset
+
+ then 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ will halt and accept (so accept).
+ If 
+\begin_inset Formula $w\notin L$
+\end_inset
+
+ then 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ will halt and accept, since 
+\begin_inset Formula $w\in\bar{L}$
+\end_inset
+
+ (so reject).
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $L_{u}$
+\end_inset
+
+ is the set such that 
+\begin_inset Formula $\left\langle M,w\right\rangle \in L_{u}$
+\end_inset
+
+ iff 
+\begin_inset Formula $w\in L\left(M\right)$
+\end_inset
+
+.
+ The machine 
+\begin_inset Formula $U$
+\end_inset
+
+ such that 
+\begin_inset Formula $L_{u}=L\left(U\right)$
+\end_inset
+
+ is the universal TM.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $L_{u}\in RE$
+\end_inset
+
+ but 
+\begin_inset Formula $L_{u}\notin REC$
+\end_inset
+
+, i.e.
+ undecidable.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $L_{u}$
+\end_inset
+
+ is in 
+\begin_inset Formula $RE$
+\end_inset
+
+ because it just simulates the machine.
+ Suppose 
+\begin_inset Formula $L_{u}$
+\end_inset
+
+ were recursive.
+ Then 
+\begin_inset Formula $\overline{L_{u}}$
+\end_inset
+
+ would be recursive as well.
+ However if 
+\begin_inset Formula $\overline{L_{u}}$
+\end_inset
+
+ is recursive we can reduce 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+ to it, which is a contradiction because 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+ is not 
+\begin_inset Formula $RE$
+\end_inset
+
+.
+ What's the reduction from 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+? Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be such that 
+\begin_inset Formula $L\left(M\right)=L_{u}$
+\end_inset
+
+.
+ We construct 
+\begin_inset Formula $M'$
+\end_inset
+
+ that accepts 
+\begin_inset Formula $L_{d}$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Given 
+\begin_inset Formula $w$
+\end_inset
+
+ the TM 
+\begin_inset Formula $M'$
+\end_inset
+
+ changes it to 
+\begin_inset Formula $w111w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $M'$
+\end_inset
+
+ simulates 
+\begin_inset Formula $M$
+\end_inset
+
+ on 
+\begin_inset Formula $w111w$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $w$
+\end_inset
+
+ is 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ then 
+\begin_inset Formula $M'$
+\end_inset
+
+ determines whether 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $\overline{L_{u}}$
+\end_inset
+
+, it will accept iff 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ does not accept 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+, i.e.
+ iff 
+\begin_inset Formula $w_{i}\in L_{d}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Definition*
+A 
+\emph on
+property 
+\emph default
+of the 
+\begin_inset Formula $RE$
+\end_inset
+
+ languages is a set of 
+\begin_inset Formula $RE$
+\end_inset
+
+ languages.
+ A property is trivial if it is either empty or is all of 
+\begin_inset Formula $RE$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We only discuss recognizing TMs that recognize the languages in a property
+ since we cannot recognize whole languages since they would be infinite
+ string (e.g.
+ the characteristic function).
+ Decidability of a property 
+\begin_inset Formula $P$
+\end_inset
+
+ we mean decidability of the language 
+\begin_inset Formula $L_{P}$
+\end_inset
+
+ which is the set of codes for Turing machines 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $L\left(M_{i}\right)\in P$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+Every nontrivial property of the RE languages is undecidable.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $P$
+\end_inset
+
+ be a nontrivial property of the 
+\begin_inset Formula $RE$
+\end_inset
+
+ languages.
+ Assume that 
+\begin_inset Formula $\emptyset\in P$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $P$
+\end_inset
+
+ is nontrivial there must be some nonempty language 
+\begin_inset Formula $L\in P$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $M_{L}$
+\end_inset
+
+ be the TM accepting 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ We shall reduce 
+\begin_inset Formula $L_{u}$
+\end_inset
+
+ to 
+\begin_inset Formula $L_{P}$
+\end_inset
+
+.
+ The reduction takes as an argument 
+\begin_inset Formula $\left\langle M,w\right\rangle $
+\end_inset
+
+ and produces a TM 
+\begin_inset Formula $M'$
+\end_inset
+
+.
+ How should it work? 
+\begin_inset Formula $L\left(M'\right)=\emptyset$
+\end_inset
+
+ if 
+\begin_inset Formula $M$
+\end_inset
+
+ does not accept 
+\begin_inset Formula $w$
+\end_inset
+
+ and 
+\begin_inset Formula $L\left(M'\right)=L$
+\end_inset
+
+ if 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $M'$
+\end_inset
+
+ is a two-tape TM.
+ One tape is used to simulate 
+\begin_inset Formula $M$
+\end_inset
+
+ on 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ The other tape is used to simulate 
+\begin_inset Formula $M_{L}$
+\end_inset
+
+ (the machine that accepts a language in the property) on the input 
+\begin_inset Formula $x$
+\end_inset
+
+ to 
+\begin_inset Formula $M'$
+\end_inset
+
+ (
+\begin_inset Formula $M'$
+\end_inset
+
+ is passed input and which 
+\begin_inset Formula $x$
+\end_inset
+
+s it accepts determine its language).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Simulate 
+\begin_inset Formula $M$
+\end_inset
+
+ on 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ You can use the universal turing machine without running afoul of the language
+ that 
+\begin_inset Formula $U$
+\end_inset
+
+ accepts being decidable.
+ Just run 
+\begin_inset Formula $U$
+\end_inset
+
+ 
+\begin_inset Formula $\left\langle M,w\right\rangle $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $M$
+\end_inset
+
+ does not accept (loops potentially since 
+\begin_inset Formula $L_{u}\in RE$
+\end_inset
+
+), then 
+\begin_inset Formula $M'$
+\end_inset
+
+ does nothing else.
+ 
+\begin_inset Formula $M'$
+\end_inset
+
+ never accepts its own input 
+\begin_inset Formula $x$
+\end_inset
+
+, i.e.
+ any input, so 
+\begin_inset Formula $L\left(M'\right)=\emptyset$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\left\langle M'\right\rangle \notin L_{P}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+, then 
+\begin_inset Formula $M'$
+\end_inset
+
+ begin simulation 
+\begin_inset Formula $M_{L}$
+\end_inset
+
+ on its own input 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $M'$
+\end_inset
+
+ will accept exactly the language 
+\begin_inset Formula $L$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\left\langle M'\right\rangle \in L_{P}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Thus 
+\begin_inset Formula $\left\langle M'\right\rangle \in L_{P}$
+\end_inset
+
+ iff 
+\begin_inset Formula $w\in L\left(M\right)$
+\end_inset
+
+ and thus 
+\begin_inset Formula $P$
+\end_inset
+
+ is undecidable.
+ Suppose 
+\begin_inset Formula $\emptyset\in P$
+\end_inset
+
+.
+ Then consider the complement property 
+\begin_inset Formula $\bar{P}$
+\end_inset
+
+.
+ By the foregoing 
+\begin_inset Formula $\bar{P}$
+\end_inset
+
+ is undecidable, i.e.
+ 
+\begin_inset Formula $L_{\bar{P}}$
+\end_inset
+
+ is undecidable.
+ Suppose 
+\begin_inset Formula $L_{P}$
+\end_inset
+
+ were decidable.
+ Then so would 
+\begin_inset Formula $L_{\bar{P}}$
+\end_inset
+
+ be because recursive languages are closed under complementation.
+\end_layout
+
+\begin_layout Definition*
+
+\emph on
+Bounded-error probabilistic polynomial time: the class of languages recognized
+ by a probabilistic polynomial time TM with an error probability of 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+, i.e
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $w\in L$
+\end_inset
+
+ implies 
+\begin_inset Formula $P\left(M\text{ accepts }w\right)\geq1-\frac{1}{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $w\notin L$
+\end_inset
+
+ implies 
+\begin_inset Formula $P\left(M\text{ rejects }w\right)\geq1-\frac{1}{3}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+The 
+\begin_inset Formula $1/3$
+\end_inset
+
+ bound is irrelevant.
+\end_layout
+
+\begin_layout Theorem*
+Amplification lemma: for 
+\begin_inset Formula $0<\epsilon<1/2$
+\end_inset
+
+ and any probabilistic polynomial time TM that operates with error probability
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ and any polynomial 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ there exists an equivalent probabilistic polynomial time TM that operates
+ with error probability 
+\begin_inset Formula $2^{-f\left(n\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+How to use a 
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+ oracle, the machine that decides whether 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ for arbitrary 
+\begin_inset Formula $M,w$
+\end_inset
+
+ ,i.e.
+ 
+\begin_inset Formula $\left\langle M,w\right\rangle \in L\left(A_{TM}\right)\iff w\in L\left(M\right)$
+\end_inset
+
+, in order to compute the Kolmogorov complexity of a string.
+ We will find a machine and an encoding of the string:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Go through all binary strings 
+\begin_inset Formula $s$
+\end_inset
+
+ in lexicographic order and parse each into 
+\begin_inset Formula $\left\langle M,w\right\rangle $
+\end_inset
+
+.
+ If some 
+\begin_inset Formula $s$
+\end_inset
+
+ doesn't parse then skip that 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Modify the 
+\begin_inset Formula $M$
+\end_inset
+
+ encoded in 
+\begin_inset Formula $\left\langle M,w\right\rangle $
+\end_inset
+
+ so that all rejecting states are now accepting states.
+ This modified machine 
+\begin_inset Formula $M'$
+\end_inset
+
+ now accepts iff 
+\begin_inset Formula $M$
+\end_inset
+
+ halts.
+\end_layout
+
+\begin_layout Enumerate
+Query 
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+ on 
+\begin_inset Formula $\left\langle M',w\right\rangle $
+\end_inset
+
+.
+ If rejects then 
+\begin_inset Formula $M$
+\end_inset
+
+ doesn't halt on 
+\begin_inset Formula $w$
+\end_inset
+
+ and we can't use it for what we want.
+ If it accepts then 
+\begin_inset Formula $M$
+\end_inset
+
+ halts on 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ Simulate 
+\begin_inset Formula $M$
+\end_inset
+
+ on 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ If the string 
+\begin_inset Formula $x$
+\end_inset
+
+ appears on its output tape then output 
+\begin_inset Formula $\left|s\right|=\left|\left\langle M,w\right\rangle \right|$
+\end_inset
+
+, otherwise go to step 1.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example*
+If 
+\begin_inset Formula $R$
+\end_inset
+
+ is the set of Kolmogorov random strings 
+\begin_inset Formula $\left\{ x\in\Sigma^{*}\big|K\left(x\right)\geq\left|x\right|\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $A\subseteq R$
+\end_inset
+
+ is decidable, then 
+\begin_inset Formula $A$
+\end_inset
+
+ is finite.
+\end_layout
+
+\begin_layout Proof
+Towards a contradiction suppose 
+\begin_inset Formula $A$
+\end_inset
+
+ is infinite.
+ Then for all 
+\begin_inset Formula $k>0$
+\end_inset
+
+ there exists 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left|x\right|>k$
+\end_inset
+
+.
+ Also since 
+\begin_inset Formula $A\subseteq R$
+\end_inset
+
+ we know that 
+\begin_inset Formula $K\left(x\right)\geq\left|x\right|$
+\end_inset
+
+.
+ Hence, constructing a machine that decides 
+\begin_inset Formula $A$
+\end_inset
+
+, on input 
+\begin_inset Formula $x$
+\end_inset
+
+, we enumerate all 
+\begin_inset Formula $x$
+\end_inset
+
+ strings 
+\begin_inset Formula $y$
+\end_inset
+
+ of length at least 
+\begin_inset Formula $k$
+\end_inset
+
+ and check if 
+\begin_inset Formula $y\in A$
+\end_inset
+
+.
+ On finding some 
+\begin_inset Formula $y^{*}\in A$
+\end_inset
+
+, we output 
+\begin_inset Formula $y^{*}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $K\left(y^{*}\right)\geq\left|x\right|\geq k$
+\end_inset
+
+, and our algorithm produces it on an input length 
+\begin_inset Formula $\log\left(k\right)$
+\end_inset
+
+, this is a contradiction for large enough 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+If 
+\begin_inset Formula $f:\Sigma^{*}\rightarrow\mathbb{Z}_{+}$
+\end_inset
+
+ is a computable function such that 
+\begin_inset Formula $f\left(x\right)\leq K\left(x\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x$
+\end_inset
+
+, then 
+\begin_inset Formula $f$
+\end_inset
+
+ must be founded.
+\end_layout
+
+\begin_layout Proof
+Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is not bounded.
+ Then for every 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+ there is a string 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(x\right)\geq k$
+\end_inset
+
+.
+ Then the following algorithm outputs a string of Kolmogorov complexity
+ at least 
+\begin_inset Formula $k$
+\end_inset
+
+ given 
+\begin_inset Formula $k$
+\end_inset
+
+ as input.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Enumerate all strings 
+\begin_inset Formula $x$
+\end_inset
+
+ of length at least 
+\begin_inset Formula $k$
+\end_inset
+
+ in lexicographic order and compute 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ for each till finding 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\left(x^{*}\right)\geq k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Output 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Clearly the Kolmogorov complexity of 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ is at least 
+\begin_inset Formula $k$
+\end_inset
+
+ since 
+\begin_inset Formula $f\left(x^{*}\right)\leq K\left(x^{*}\right)$
+\end_inset
+
+.
+ Since the length of the input is 
+\begin_inset Formula $\text{ceil}\left(\log\left(k\right)\right)$
+\end_inset
+
+ bits bits and the Kolmogorov complexity is at least 
+\begin_inset Formula $k$
+\end_inset
+
+ this is a contradiction for large enough 
+\begin_inset Formula $k$
+\end_inset
+
+ since this says the minimal length description of it is 
+\begin_inset Formula $\text{ceil}\left(\log\left(k\right)\right)$
+\end_inset
+
+ bits which is strictly less than 
+\begin_inset Formula $k$
+\end_inset
+
+ for large enough 
+\begin_inset Formula $k$
+\end_inset
+
+? 2 takes 2 bits, 3 takes 2 bits, 4 takes 2 bits.
+ The question is when is 
+\begin_inset Formula $\text{ceil}\left(\log\left(k\right)\right)$
+\end_inset
+
+ bits less than 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)=coNSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+We do this by showing that if we can count in 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ then we can detect rejection as well as acceptance.
+\end_layout
+
+\begin_layout Lemma*
+Given an 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ machine 
+\begin_inset Formula $M$
+\end_inset
+
+, a size 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ initial configuration called START, and the exact number 
+\begin_inset Formula $N$
+\end_inset
+
+ of configurations of size 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ reachable by 
+\begin_inset Formula $M$
+\end_inset
+
+ from START, we can test in 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ if 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects, i.e.
+ there's an 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ machine that tests whether 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects starting from START (i.e.
+ I guess given some input 
+\begin_inset Formula $x$
+\end_inset
+
+ of size 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Proof
+The 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ tester counts the number of reachable accept configurations.
+ It initializes a counter to 0 and a target configuration counter to the
+ lexicographically first string of length 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Why should the target configurations be of length 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+? Probably because of how the lemma will be used in the second lemma.
+\end_layout
+
+\end_inset
+
+.
+ For each target 
+\begin_inset Quotes eld
+\end_inset
+
+guess
+\begin_inset Quotes erd
+\end_inset
+
+ the path to the target and increment both the target and the counter, or
+ increment the target if no path exists.
+ If any of the targets is an accepting configuration then reject
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Remember we're testing to see whether 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects.
+ Therefore if there's an accepting path (the path we guessed to the accepting
+ configuration) then it doesn't and hence reject that 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects.
+\end_layout
+
+\end_inset
+
+.
+ Finally, if when we've gone through all of the target configurations the
+ counter is equal to 
+\begin_inset Formula $N$
+\end_inset
+
+, we accept, otherwise we reject.
+ I.e.
+ if we've seen all of reachable configurations from START and none of them
+ are accepting.
+\end_layout
+
+\begin_layout Lemma*
+Given START we can calculate 
+\begin_inset Formula $N$
+\end_inset
+
+ - the total number of size 
+\begin_inset Formula $f\left(n\right)$
+\end_inset
+
+ configurations reachable by 
+\begin_inset Formula $M$
+\end_inset
+
+ from START - using an 
+\begin_inset Formula $NSPACE\left(f\left(n\right)\right)$
+\end_inset
+
+ machine.
+\end_layout
+
+\begin_layout Proof
+This will be an inductive proof.
+ Let 
+\begin_inset Formula $N_{d}$
+\end_inset
+
+ be the number of configurations reachable from START in at most 
+\begin_inset Formula $d$
+\end_inset
+
+ steps.
+ Keep a counter of the number of 
+\begin_inset Formula $d+1$
+\end_inset
+
+ reachable configurations (this is the number we're computing) and cycle
+ through all the target configurations in lexicographic order.
+ For each target iterate through all 
+\begin_inset Formula $N_{d}$
+\end_inset
+
+ configurations reachable in at most 
+\begin_inset Formula $d$
+\end_inset
+
+ steps (do the same thing as in lemma 1, i.e.
+ guess paths to configurations, while incrementing another counter to make
+ sure you've gone through all 
+\begin_inset Formula $N_{d}$
+\end_inset
+
+) and check whether the target is equal to the configuration reached, or
+ reachable by one more step.
+ If so then increment the counter, and go to the next target.
+ If we finish visiting all 
+\begin_inset Formula $N_{d}$
+\end_inset
+
+ configurations without reaching the target, then just start again on the
+ next target, without increment in the counter.
+ 
+\end_layout
+
+\begin_layout Proof
+The algorithm stops when 
+\begin_inset Formula $N_{d}=N_{d+1}$
+\end_inset
+
+.
+ When we've completed this algorithm for all targets the counter contains
+ 
+\begin_inset Formula $N_{d+1}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $N$
+\end_inset
+
+ is bounded above by 
+\begin_inset Formula $c^{f\left(n\right)}$
+\end_inset
+
+ the space needed for the counter is 
+\begin_inset Formula $O\left(f\left(n\right)\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Probabilistic method
+\end_layout
+
+\begin_layout Theorem*
+For small enough 
+\begin_inset Formula $n$
+\end_inset
+
+,
+\begin_inset Formula $K_{n}$
+\end_inset
+
+ there exists a 2-coloring so that there is no complete subgraph on 
+\begin_inset Formula $r$
+\end_inset
+
+ vertices which monochromatic.
+\end_layout
+
+\begin_layout Proof
+Color the edges randomly (
+\begin_inset Formula $P\left(\text{red}\right)=P\left(\text{blue}\right)=1/2$
+\end_inset
+
+) and compute the expected (over random colorings) number of monochromatic
+ subgraphs (since 
+\begin_inset Formula $K_{n}$
+\end_inset
+
+ is complete any induced subgraph is complete) on 
+\begin_inset Formula $r$
+\end_inset
+
+ vertices.
+ If the expectation is less than 1 then there must exist at least one coloring
+ such that the number of monochromatic subgraphs is 0 (and therefore the
+ number of complete monochromatic subgraphs is 0).
+\end_layout
+
+\begin_layout Proof
+For any set 
+\begin_inset Formula $S$
+\end_inset
+
+ of 
+\begin_inset Formula $r$
+\end_inset
+
+ vertices from the graph let 
+\begin_inset Formula $X\left(S\right)$
+\end_inset
+
+ be 1 if it is monochromatic and 0 otherwise.
+ Note that the number of monochromatic 
+\begin_inset Formula $r$
+\end_inset
+
+-subgraphs is 
+\begin_inset Formula $\sum_{S}X\left(S\right)$
+\end_inset
+
+ over 
+\begin_inset Formula $S\in2^{V}$
+\end_inset
+
+ where 
+\begin_inset Formula $2^{V}$
+\end_inset
+
+ is the set of all subsets of vertices of the graph.
+ Since 
+\begin_inset Formula $X\left(S\right)$
+\end_inset
+
+ is 0-1 the expected value of 
+\begin_inset Formula $X\left(S\right)$
+\end_inset
+
+ is the probability that all 
+\begin_inset Formula ${r \choose 2}$
+\end_inset
+
+ edges (
+\begin_inset Formula $S$
+\end_inset
+
+ induces a complete subgraph) in 
+\begin_inset Formula $S$
+\end_inset
+
+ are the same is 
+\begin_inset Formula 
+\[
+E_{colorings}\left[X\left(S\right)\right]=\left(\frac{1}{2}\right)^{{r \choose 2}}+\left(\frac{1}{2}\right)^{{r \choose 2}}=2\cdot\left(\frac{1}{2}\right)^{{r \choose 2}}
+\]
+
+\end_inset
+
+The leading factor of 
+\begin_inset Formula $2$
+\end_inset
+
+ comes from the fact that they could either be all red or all blue.
+ This holds for any of the 
+\begin_inset Formula ${n \choose r}$
+\end_inset
+
+ subsets and so 
+\begin_inset Formula 
+\[
+\sum_{S}E_{colorings}\left[X\left(S\right)\right]={n \choose r}2^{1-{r \choose 2}}
+\]
+
+\end_inset
+
+By linearity of expectation
+\begin_inset Formula 
+\[
+E_{colorings}\left[\sum_{S}X\left(S\right)\right]=\sum_{S}E_{colorings}\left[X\left(S\right)\right]={n \choose r}2^{1-{r \choose 2}}
+\]
+
+\end_inset
+
+What if this number is less than 1? Then there exists some coloring for
+ which the number of monochromatic subgraphs is less than 1.
+ But the number of monochromatic subgraphs is always an integer and therefore
+ in that instance it must be 0.
+ Hence if 
+\begin_inset Formula 
+\[
+{n \choose r}2^{1-{r \choose 2}}<1\iff{n \choose r}<2^{{r \choose 2}-1}
+\]
+
+\end_inset
+
+such as when 
+\begin_inset Formula $n=5$
+\end_inset
+
+ and 
+\begin_inset Formula $r=4$
+\end_inset
+
+ there must exist a coloring such that there are no monochromatic subgraphs.
+\end_layout
+
+\begin_layout Definition*
+The complexity class 
+\emph on
+PP
+\emph default
+, which stands for probabilistic polynomial time, is the class of languages
+ such that there exists a probabilistic turing machine 
+\begin_inset Formula $M$
+\end_inset
+
+, such that
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $M$
+\end_inset
+
+ runs in polynomial time on all inputs.
+\end_layout
+
+\begin_layout Itemize
+For all 
+\begin_inset Formula $x\in L$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts with probability strictly greater than 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+For all 
+\begin_inset Formula $x\notin L$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects with probability greater than or equal to 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Definition*
+Alternatively, using deterministic machines, a 
+\begin_inset Formula $L\in PP$
+\end_inset
+
+ iff there exists a deterministic TM 
+\begin_inset Formula $M$
+\end_inset
+
+, such that
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $M$
+\end_inset
+
+ runs in polynomial time on all inputs.
+\end_layout
+
+\begin_layout Itemize
+For all 
+\begin_inset Formula $x\in L$
+\end_inset
+
+, the fraction of strings 
+\begin_inset Formula $y$
+\end_inset
+
+ of length 
+\begin_inset Formula $p\left(\left|x\right|\right)$
+\end_inset
+
+ on which satisfy 
+\begin_inset Formula $M\left(x,y\right)$
+\end_inset
+
+ accepts is strictly greater than 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $y$
+\end_inset
+
+ is the random bit string.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+For all 
+\begin_inset Formula $x\notin L$
+\end_inset
+
+, the fraction of strings 
+\begin_inset Formula $y$
+\end_inset
+
+ of length 
+\begin_inset Formula $p\left(\left|x\right|\right)$
+\end_inset
+
+ on which satisfy 
+\begin_inset Formula $M\left(x,y\right)$
+\end_inset
+
+ rejects is greater than or equal to 
+\begin_inset Formula $1/2$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Again alternatively 
+\begin_inset Formula $L\in PP$
+\end_inset
+
+ if there exists NTM 
+\begin_inset Formula $M$
+\end_inset
+
+ that runs in polynomial time where a majority of computation paths accept
+ (hence sometimes being called 
+\emph on
+Majority-P
+\emph default
+).
+\end_layout
+
+\begin_layout Standard
+What's the difference between 
+\begin_inset Formula $PP$
+\end_inset
+
+ and 
+\begin_inset Formula $BPP$
+\end_inset
+
+? For 
+\begin_inset Formula $BPP$
+\end_inset
+
+ the probability of accepting is independent of the length of the string
+ while for 
+\begin_inset Formula $PP$
+\end_inset
+
+ the probability of accepting 
+\begin_inset Formula $x$
+\end_inset
+
+ could be 
+\begin_inset Formula $\frac{1}{2}+\left(\frac{1}{2}\right)^{\left|x\right|}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $NP\subseteq PP$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+We construct a 
+\begin_inset Formula $PP$
+\end_inset
+
+ machine for 
+\begin_inset Formula $SAT$
+\end_inset
+
+.
+ The machine randomly picks an assignment to the the formula and checks
+ it.
+ If it evaluates to true then accept otherwise flip a coin and accept if
+ heads and reject if tails.
+ Since the coin gives 50/50 probability of accepting the true assignments
+ push that a little up.
+\end_layout
+
+\begin_layout Corollary*
+\begin_inset Formula $coNP\subseteq PP$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $PP$
+\end_inset
+
+ is closed under complementation.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $PP$
+\end_inset
+
+ is closed under complementation.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula $L\in PP$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{L}\in coPP$
+\end_inset
+
+.
+ By definition of 
+\begin_inset Formula $PP$
+\end_inset
+
+ there is a polynomial time TM 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula $x\in L\Rightarrow P\left(M\text{ accepts }x\right)>1/2$
+\end_inset
+
+ and 
+\begin_inset Formula $x\notin L\Rightarrow P\left(M\text{ rejects }x\right)>1/2$
+\end_inset
+
+.
+ WLOG this inequality can be made strict.
+ Let 
+\begin_inset Formula $M'$
+\end_inset
+
+ be the machine which negates 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then since the inequality is strict we get 
+\begin_inset Formula $x\notin\bar{L}=x\in L\Rightarrow P\left(M\text{ rejects }x\right)>1/2$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in\bar{L}=x\notin L\Rightarrow P\left(M\text{ accepts }x\right)>1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Now to justify WLOG: let 
+\begin_inset Formula $f\left(\left|x\right|\right)$
+\end_inset
+
+ be the polynomial upperbound on the running time of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $M$
+\end_inset
+
+ makes at most 
+\begin_inset Formula $f\left(\left|x\right|\right)$
+\end_inset
+
+ coin flips during its execution, i.e.
+ 
+\begin_inset Formula 
+\[
+x\in L\Rightarrow P\left(M\text{ accepts }x\right)\geq\frac{1}{2}+\left(\frac{1}{2}\right)^{f\left(\left|x\right|\right)}
+\]
+
+\end_inset
+
+Define a machine 
+\begin_inset Formula $M'$
+\end_inset
+
+ as follows: on input 
+\begin_inset Formula $x$
+\end_inset
+
+ 
+\begin_inset Formula $M'$
+\end_inset
+
+ runs machine 
+\begin_inset Formula $M$
+\end_inset
+
+ and rejects if 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects, and otherwise if 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts then 
+\begin_inset Formula $M'$
+\end_inset
+
+ flips 
+\begin_inset Formula $f\left(\left|x\right|\right)+1$
+\end_inset
+
+ coins and rejects if they're all heads, and accepts otherwise.
+ Then
+\begin_inset Formula 
+\[
+x\notin L\Rightarrow P\left(M'\text{ accepts }x\right)\leq\frac{1}{2}\left(1-\left(\frac{1}{2}\right)^{f\left(\left|x\right|+1\right)}\right)<\frac{1}{2}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+x\in L\Rightarrow P\left(M'\text{ accepts }x\right)\leq\left(\frac{1}{2}+\left(\frac{1}{2}\right)^{f\left(\left|x\right|+1\right)}\right)\cdot\left(1-\left(\frac{1}{2}\right)^{f\left(\left|x\right|+1\right)}\right)>\frac{1}{2}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $M'$
+\end_inset
+
+ accepts the same language.
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $\#P$
+\end_inset
+
+ is the class of counting problems associated with decision problems in
+ 
+\begin_inset Formula $NP$
+\end_inset
+
+, e.g.
+ number of not satisfying assignments for SAT.
+\end_layout
+
 \end_body
 \end_document
