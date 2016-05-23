@@ -10,7 +10,7 @@
 \setlength{\parindent}{0pt}
 \usepackage{array}
 \usepackage{mathrsfs}
-\usepackage{amstext}
+\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{esint}
 
@@ -80,10 +80,13 @@
 \lyxframeend{}\section{S. Differential Equations}
 
 
+\lyxframeend{}\section{References}
+
+
 \lyxframeend{}\section{Appendix}
 
 
-\lyxframeend{}\subsection{Laplace-De Moivre}
+\lyxframeend{}\subsection{Laplace - De Moivre}
 
 
 \lyxframeend{}\subsection{Differentiable nowhere}
@@ -105,7 +108,7 @@
 is a collection of random variables $X_{t}\triangleq X\left(\omega,t\right)$
 indexed by an index set $T$ such that $\left|T\right|\geq\left|\mathbb{N}\right|$.
 For fixed $\omega$, $X_{t}\left(\omega\right)$ is a }\emph{\footnotesize{}sample
-path}{\footnotesize{} or }\emph{\footnotesize{}trajectory}{\footnotesize{}.}{\footnotesize \par}\end{block}
+path}{\footnotesize{} or }\emph{\footnotesize{}realization }{\footnotesize{}.}{\footnotesize \par}\end{block}
 \begin{itemize}
 \item {\footnotesize{}A finite collection of random variables is just a
 random vector}{\footnotesize \par}
@@ -565,15 +568,15 @@ Then
 X\left(t\right)\coloneqq X\left(n\Delta t\right)\coloneqq\underbrace{S_{n}\Delta x}_{\text{positive dist}}-\underbrace{\left(n-S_{n}\right)\left(-\Delta x\right)}_{\text{negative dist}}=\left(2S_{n}-n\right)\Delta x
 \]
 is the position of the particle at time $n\Delta t$. To use Laplace
-- De moivre%
-\footnote{{\tiny{}$X_{i}\sim$ Bernoulli$\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}/\sqrt{np^{2}})\leq b=\frac{1}{\sqrt{2\pi}}\int_{a}^{b}e^{-\frac{x^{2}}{2}dx}$}%
+- De Moivre%
+\footnote{{\tiny{}$X_{i}\sim$ Bernoulli$\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}-np/\sqrt{npp})\leq b=\left(2\pi\right)^{-1/2}\int_{a}^{b}e^{-\frac{x^{2}}{2}}dx$}%
 } we need 
 \begin{eqnarray*}
 \text{Var}\left(X\left(n\Delta t\right)\right) & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
 \end{eqnarray*}
-Then
+with, $D\triangleq\frac{\left(\Delta x\right)^{2}}{\Delta t}$. Then
 \begin{eqnarray*}
-X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
+X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\right]
 \end{eqnarray*}
 
 
@@ -582,7 +585,7 @@ X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{
 
 and finally 
 \begin{eqnarray*}
-\lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
+\lim_{\underset{t=n\Delta t,\Delta tD=\left(\Delta x\right)^{2}}{n\rightarrow\infty}}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
  & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
  & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
 \end{eqnarray*}
@@ -870,6 +873,31 @@ to pay for the option? Problem solved by Fischer Black and Myron Scholes
 where $V$ is the price of the option as a function of the price of
 the asset, $r$ is the risk-free interest rate (free money - tbills
 for example), and $\sigma$ is the volatility of the stock.
+\end{itemize}
+
+\lyxframeend{}\lyxframe{References}
+\begin{itemize}
+\item Probability/Measure theory
+
+\begin{itemize}
+\item Schilling \emph{Measures, Integrals, and Martingales}
+\item Resnick \emph{A Probability Path}
+\item Pollard \emph{A User's Guide to Measure Theoretic Probability}
+\item Billingsley \emph{Probability and Measure}
+\end{itemize}
+\item Stochastic processes
+
+\begin{itemize}
+\item Ross \emph{Introduction to Probability Models}
+\item Lawler \emph{Introduction to Stochastic Processes}
+\end{itemize}
+\item Stochastic Differential Equations
+
+\begin{itemize}
+\item Klebaner \emph{Introduction to Stochastic Calculus with Applications}
+\item Shreve \emph{Stochastic Calculus for Finance II: Continuous-Time Models}
+\item Oksendal \emph{Stochastic Differential Equations}
+\end{itemize}
 \end{itemize}
 
 \lyxframeend{}\lyxframe{}

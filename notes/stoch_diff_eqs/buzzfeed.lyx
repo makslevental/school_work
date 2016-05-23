@@ -154,11 +154,15 @@ S.
 \end_layout
 
 \begin_layout Section
+References
+\end_layout
+
+\begin_layout Section
 Appendix
 \end_layout
 
 \begin_layout Subsection
-Laplace-De Moivre
+Laplace - De Moivre
 \end_layout
 
 \begin_layout Subsection
@@ -229,7 +233,7 @@ sample path
 \emph default
  or 
 \emph on
-trajectory
+realization 
 \emph default
 .
 \end_layout
@@ -3768,7 +3772,7 @@ is the position of the particle at time
 \end_inset
 
 .
- To use Laplace - De moivre
+ To use Laplace - De Moivre
 \begin_inset Foot
 status open
 
@@ -3779,7 +3783,7 @@ status open
 \end_inset
 
  Bernoulli
-\begin_inset Formula $\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}/\sqrt{np^{2}})\leq b=\frac{1}{\sqrt{2\pi}}\int_{a}^{b}e^{-\frac{x^{2}}{2}dx}$
+\begin_inset Formula $\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}-np/\sqrt{npp})\leq b=\left(2\pi\right)^{-1/2}\int_{a}^{b}e^{-\frac{x^{2}}{2}}dx$
 \end_inset
 
 
@@ -3795,10 +3799,15 @@ status open
 
 \end_inset
 
-Then
+with, 
+\begin_inset Formula $D\triangleq\frac{\left(\Delta x\right)^{2}}{\Delta t}$
+\end_inset
+
+.
+ Then
 \begin_inset Formula 
 \begin{eqnarray*}
-X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{i=1}^{n}X_{i}\right)-\frac{1}{2}}{\sqrt{1/4}/\sqrt{n}}\right)\right]
+X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\right]
 \end{eqnarray*}
 
 \end_inset
@@ -3814,7 +3823,7 @@ X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{
 and finally 
 \begin_inset Formula 
 \begin{eqnarray*}
-\lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
+\lim_{\underset{t=n\Delta t,\Delta tD=\left(\Delta x\right)^{2}}{n\rightarrow\infty}}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
  & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
  & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
 \end{eqnarray*}
@@ -6050,6 +6059,82 @@ where
  is the volatility of the stock.
 \end_layout
 
+\begin_layout BeginFrame
+References
+\end_layout
+
+\begin_layout Itemize
+Probability/Measure theory
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Schilling 
+\emph on
+Measures, Integrals, and Martingales
+\end_layout
+
+\begin_layout Itemize
+Resnick 
+\emph on
+A Probability Path
+\end_layout
+
+\begin_layout Itemize
+Pollard 
+\emph on
+A User's Guide to Measure Theoretic Probability
+\end_layout
+
+\begin_layout Itemize
+Billingsley 
+\emph on
+Probability and Measure
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Stochastic processes
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ross 
+\emph on
+Introduction to Probability Models
+\end_layout
+
+\begin_layout Itemize
+Lawler 
+\emph on
+Introduction to Stochastic Processes
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Stochastic Differential Equations
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Klebaner 
+\emph on
+Introduction to Stochastic Calculus with Applications
+\end_layout
+
+\begin_layout Itemize
+Shreve 
+\emph on
+Stochastic Calculus for Finance II: Continuous-Time Models
+\end_layout
+
+\begin_layout Itemize
+Oksendal 
+\emph on
+Stochastic Differential Equations
+\end_layout
+
+\end_deeper
 \begin_layout BeginFrame
 
 \end_layout
