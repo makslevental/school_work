@@ -13,7 +13,6 @@
 \usepackage{amstext}
 \usepackage{amssymb}
 \usepackage{esint}
-\beamertemplatenavigationsymbolsempty
 
 \makeatletter
 
@@ -32,6 +31,15 @@
    \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
    \def\gobbletableofcontents#1{\origtableofcontents}
  }
+ \long\def\lyxframe#1{\@lyxframe#1\@lyxframestop}%
+ \def\@lyxframe{\@ifnextchar<{\@@lyxframe}{\@@lyxframe<*>}}%
+ \def\@@lyxframe<#1>{\@ifnextchar[{\@@@lyxframe<#1>}{\@@@lyxframe<#1>[]}}
+ \def\@@@lyxframe<#1>[{\@ifnextchar<{\@@@@@lyxframe<#1>[}{\@@@@lyxframe<#1>[<*>][}}
+ \def\@@@@@lyxframe<#1>[#2]{\@ifnextchar[{\@@@@lyxframe<#1>[#2]}{\@@@@lyxframe<#1>[#2][]}}
+ \long\def\@@@@lyxframe<#1>[#2][#3]#4\@lyxframestop#5\lyxframeend{%
+   \frame<#1>[#2][#3]{\frametitle{#4}#5}}
+ \def\lyxframeend{} % In case there is a superfluous frame end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \usetheme{Madrid}
 \hypersetup{pdfpagemode=None}
@@ -41,6 +49,7 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usepackage{mathtools}
 \usepackage{algorithm,algorithmic}
+\beamertemplatenavigationsymbolsempty
 
 \makeatother
 
@@ -55,42 +64,42 @@
 
 \date{May 2016}
 
-\maketitle
+\makebeamertitle
 
-\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \tableofcontents{}
 
 
-\section{Stochastic Processes}
+\lyxframeend{}\section{Stochastic Processes}
 
 
-\section{Brownian Motion}
+\lyxframeend{}\section{Brownian Motion}
 
 
-\section{S. Differential Equations}
+\lyxframeend{}\section{S. Differential Equations}
 
 
-\section{Appendix}
+\lyxframeend{}\section{Appendix}
 
 
-\subsection{Laplace-De Moivre}
+\lyxframeend{}\subsection{Laplace-De Moivre}
 
 
-\subsection{Differentiable nowhere}
+\lyxframeend{}\subsection{Differentiable nowhere}
 
 
-\subsection{Motivation}
+\lyxframeend{}\subsection{Motivation}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \noindent \begin{center}
 \textbf{Stochastic Processes}
 \par\end{center}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{block}
 {Definition}{\footnotesize{} A}\emph{\footnotesize{} stochastic process}{\footnotesize{}
 is a collection of random variables $X_{t}\triangleq X\left(\omega,t\right)$
@@ -124,7 +133,7 @@ Poisson process (queuing)}\tabularnewline
 field}{\footnotesize \par}
 \end{itemize}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{block}
 {Definition}{\footnotesize{}A stochastic process is }\emph{\footnotesize{}Markov}{\footnotesize{}
 if $P\left(X_{t}\in A|\mathcal{F}_{s}\right)=P\left(X_{t}\in A|X_{s}\right)$.} \end{block}
@@ -159,11 +168,11 @@ Stag. & 0.25 & 0.25 & 0.5\tabularnewline
 \end{minipage}
 \end{figure}
 
-\item {\footnotesize{}Hiddern Markov models (hierarchical model) great for
+\item {\footnotesize{}Hidden Markov models (hierarchical model) great for
 speech recognition}{\footnotesize \par}
 \end{itemize}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{block}
 {Definition} {\scriptsize{}A random variable $N$ is distributed
 Poisson$\left(\lambda\right)$ on some unit interval $u$ if at 
@@ -197,7 +206,7 @@ plot(stepfun(x1,y1),xlim = c(0,50),do.points = F)
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \begin{figure}
 \scalebox{0.7}{
@@ -479,7 +488,7 @@ plot(stepfun(x1,y1),xlim = c(0,50),do.points = F)
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{exampleblock}
 {Example}{\small{}A }\emph{\small{}random walk}{\small{} on $\mathbb{Z}$
 is a stochastic process $S_{0},S_{1},\dots$ such that 
@@ -496,7 +505,7 @@ involve discrete uniform distribution on directions}{\small \par}
 \item {\small{}Drunk man, Drunk bird}{\small \par}
 \end{itemize}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \begin{figure}
 \noindent \centering{}\scalebox{.7}{
@@ -535,15 +544,16 @@ involve discrete uniform distribution on directions}{\small \par}
 }
 \end{figure}
 
-\end{frame}\begin{frame}
+
+
+\lyxframeend{}\lyxframe{}
 
 \noindent \begin{center}
 \textbf{Brownian Motion}
 \par\end{center}
 
 
-
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \textbf{``Rigorous'' Brownian motion}
 
@@ -554,13 +564,10 @@ Then
 \[
 X\left(t\right)\coloneqq X\left(n\Delta t\right)\coloneqq\underbrace{S_{n}\Delta x}_{\text{positive dist}}-\underbrace{\left(n-S_{n}\right)\left(-\Delta x\right)}_{\text{negative dist}}=\left(2S_{n}-n\right)\Delta x
 \]
-is the position of the particle at time $n\Delta t$. To use Laplace - De moivre
-
-\footnote{\tiny{}$X_{i}\sim$ Bernoulli$\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq/\sqrt{np^{2}}\leq b)$ $=\frac{1}{\sqrt{2\pi}}\int_{a}^{b}e^{-\frac{x^{2}}{2}dx}$
-} 
-
-
-we need 
+is the position of the particle at time $n\Delta t$. To use Laplace
+- De moivre%
+\footnote{{\tiny{}$X_{i}\sim$ Bernoulli$\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}/\sqrt{np^{2}})\leq b=\frac{1}{\sqrt{2\pi}}\int_{a}^{b}e^{-\frac{x^{2}}{2}dx}$}%
+} we need 
 \begin{eqnarray*}
 \text{Var}\left(X\left(n\Delta t\right)\right) & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
 \end{eqnarray*}
@@ -571,7 +578,7 @@ X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{\frac{1}{n}\left(\sum_{
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 and finally 
 \begin{eqnarray*}
@@ -582,7 +589,7 @@ and finally
 So $X\left(t\right)\sim N\left(0,Dt\right)$
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \textbf{Rigorous Brownian motion}
 
@@ -608,7 +615,7 @@ B\left(t\right)\triangleq B\left(\omega,t\right)\triangleq\left\langle \omega,\m
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{block}
 {Definition}\textbf{ }A stochastic process $B\left(t\right)$ is
 a Brownian motion if
@@ -627,7 +634,7 @@ from $\mathbb{R}^{+}\rightarrow\mathbb{R}$
 probability of ``drawing'' a differentiable function is 0)
 \end{itemize}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \begin{figure}
 \noindent \centering{}\scalebox{.7}{
@@ -718,14 +725,14 @@ probability of ``drawing'' a differentiable function is 0)
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \noindent \begin{center}
 \textbf{Stochastic Differential Equations}
 \par\end{center}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \textbf{Motivation}
 
@@ -750,7 +757,7 @@ depend on $\tau$.
 \item $E\left[W_{t}\right]=0$ for all $t$.
 \end{enumerate}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 Unfortunately property 1 not possible for continuous processes%
 \footnote{It is possible to represent $W_{t}$ as a \emph{generalized }process,
@@ -775,7 +782,7 @@ norm
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{theorem}%{}
 Some properties of the Ito integral: let $f,g\in\mathcal{V}\left(0,T\right)$
 and $0\le Q<U<T$. Then
@@ -795,14 +802,14 @@ i.e. ``fair''; $E\left(X_{t}-X_{s}\big|X_{s}\right)=0$, so $E\left(X_{t}\right)=
 for all $t$.
 \end{definition}%{}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{theorem}%{}
-[Ito formula]Let $X_{t}$ be an ito process and $g\left(t,x\right)\in C^{2}\left(\left[0,\infty\right)\times\mathbb{R}\right)$
+[Ito formula]Let $X_{t}$ be an Ito process and $g\left(t,x\right)\in C^{2}\left(\left[0,\infty\right)\times\mathbb{R}\right)$
 then 
 \[
 Y_{t}=g\left(t,X_{t}\right)
 \]
-is again an ito process and 
+is again an Ito process and 
 \begin{equation}
 dY_{t}=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dX_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(dX_{t}\right)^{2}\label{eq:itosformula}
 \end{equation}
@@ -818,7 +825,7 @@ dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
 Kind of like change of variables from single variable calculus.
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 Four problems
 \begin{itemize}
@@ -828,7 +835,7 @@ LQ''\left(t\right)+RQ'\left(t\right)+\frac{1}{C}Q\left(t\right)=F\left(t\right),
 \end{equation}
 If $F\left(t\right)=G\left(t\right)+\text{"noise"}$. How to solve
 for $Q\left(t\right)$? 
-\item Noisey measurements 
+\item Noisy measurements 
 \[
 Z\left(s\right)=Q\left(s\right)+\text{"noise"}
 \]
@@ -843,13 +850,13 @@ based on $Z\left(s\right)$? Kalman Filter.
 \begin{eqnarray*}
 \frac{dX_{t}}{dt} & = & rX_{t}+\alpha X_{t}\cdot\text{"noise"}
 \end{eqnarray*}
-Know $X_{s}$ up to present $t$ - when to sell? Since noisey \emph{optimal
+Know $X_{s}$ up to present $t$ - when to sell? Since noisy \emph{optimal
 stopping strategy} maximizes expected returns. Can be solved by solving
-a corresponding semielliptic second order PDE with Dirichlet boundary
+a corresponding semi-elliptic second order PDE with Dirichlet boundary
 conditions.
 \end{itemize}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{itemize}
 \item Suppose at some time $t$ the person in problem 3 is offered the right
 (without obligation) to buy one unit of the risky asset at a specified
@@ -865,16 +872,16 @@ the asset, $r$ is the risk-free interest rate (free money - tbills
 for example), and $\sigma$ is the volatility of the stock.
 \end{itemize}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \noindent \begin{center}
 \textbf{Appendix}
 \par\end{center}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
-\textbf{Laplace- De Moivre}
+\textbf{Laplace - De Moivre}
 
 \begin{eqnarray*}
 \text{Var}\left(X\left(n\Delta t\right)\right) & = & \text{Var}\left(\left(2S_{n}-n\right)\Delta x\right)=\left(\Delta x\right)^{2}\text{Var}\left(\left(2S_{n}-n\right)\right)\\
@@ -884,7 +891,7 @@ for example), and $\sigma$ is the volatility of the stock.
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \begin{eqnarray*}
 X\left(n\Delta t\right) & = & \left(2S_{n}-n\right)\Delta x=\sqrt{n}\Delta x\left(\frac{S_{n}-\frac{n}{2}}{\sqrt{n/4}}\right)\\
@@ -894,7 +901,7 @@ X\left(n\Delta t\right) & = & \left(2S_{n}-n\right)\Delta x=\sqrt{n}\Delta x\lef
 
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \textbf{\scriptsize{}Differentiable nowhere}{\scriptsize \par}
 
@@ -920,7 +927,7 @@ and so
 }{\scriptsize \par}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 {\scriptsize{}and hence any continuous $f$ that has non-zero quadratic
 variation has infinite total variation}%
@@ -948,7 +955,7 @@ Then if the variance goes to 0 }%
 }{\scriptsize \par}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 {\scriptsize{}and so
 \begin{eqnarray*}
@@ -966,7 +973,7 @@ which is the definition of convergence in $L^{2}$.}{\scriptsize \par}
 }{\scriptsize \par}
 \end{fact}%{}
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 {\scriptsize{}Proof: 
 \begin{eqnarray*}
@@ -980,7 +987,7 @@ which is the definition of convergence in $L^{2}$.}{\scriptsize \par}
 which goes to 0 as the mesh is refined.}{\scriptsize \par}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 \begin{theorem}%{}
 {\scriptsize{}For $f=B_{t}$ it's the case that $\lim_{n\rightarrow\infty}QV\left(f\right)=T-Q$
 almost surely.}{\scriptsize \par}
@@ -1006,7 +1013,7 @@ but $E\left[X_{i}^{\left(n\right)}X_{j}^{\left(n\right)}\right]=0$
 so}{\scriptsize \par}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 {\scriptsize{}
 \[
@@ -1025,7 +1032,7 @@ P\left(\left|Y_{n}\right|\geq\epsilon\right) & \leq & \frac{E\left[\left(Y_{n}\r
 }{\scriptsize \par}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 {\scriptsize{}and finally using Borel-Cantelli}%
 \footnote{{\scriptsize{}If $\sum_{n=1}^{\infty}P\left(E_{n}\right)<\infty$
@@ -1047,7 +1054,7 @@ would keep happening once in a while).}%
 }{\scriptsize{} of $Y_{n}\rightarrow0$.}{\scriptsize \par}
 
 
-\end{frame}\begin{frame}
+\lyxframeend{}\lyxframe{}
 
 \textbf{Motivation}
 
@@ -1084,5 +1091,5 @@ X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(
 
 
 
-\end{frame}
+\lyxframeend{}
 \end{document}

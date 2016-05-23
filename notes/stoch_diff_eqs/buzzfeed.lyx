@@ -733,7 +733,7 @@ Stag.
 \begin_layout Itemize
 
 \size footnotesize
-Hiddern Markov models (hierarchical model) great for speech recognition
+Hidden Markov models (hierarchical model) great for speech recognition
 \end_layout
 
 \begin_layout BeginFrame
@@ -3768,7 +3768,7 @@ is the position of the particle at time
 \end_inset
 
 .
- To use Laplace-De moivre
+ To use Laplace - De moivre
 \begin_inset Foot
 status open
 
@@ -5850,7 +5850,7 @@ Let
 \begin_inset Formula $X_{t}$
 \end_inset
 
- be an ito process and 
+ be an Ito process and 
 \begin_inset Formula $g\left(t,x\right)\in C^{2}\left(\left[0,\infty\right)\times\mathbb{R}\right)$
 \end_inset
 
@@ -5862,7 +5862,7 @@ Y_{t}=g\left(t,X_{t}\right)
 
 \end_inset
 
-is again an ito process and 
+is again an Ito process and 
 \begin_inset Formula 
 \begin{equation}
 dY_{t}=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dX_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\cdot\left(dX_{t}\right)^{2}\label{eq:itosformula}
@@ -5927,7 +5927,7 @@ If
 \end_layout
 
 \begin_layout Itemize
-Noisey measurements 
+Noisy measurements 
 \begin_inset Formula 
 \[
 Z\left(s\right)=Q\left(s\right)+\text{"noise"}
@@ -5992,12 +5992,12 @@ Know
 \begin_inset Formula $t$
 \end_inset
 
- - when to sell? Since noisey 
+ - when to sell? Since noisy 
 \emph on
 optimal stopping strategy
 \emph default
  maximizes expected returns.
- Can be solved by solving a corresponding semielliptic second order PDE
+ Can be solved by solving a corresponding semi-elliptic second order PDE
  with Dirichlet boundary conditions.
 \end_layout
 
