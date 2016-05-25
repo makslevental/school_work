@@ -13,6 +13,7 @@
 \usepackage{mathtools}
 \usepackage{algorithm,algorithmic}
 \beamertemplatenavigationsymbolsempty
+\usepackage{cancel}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -171,6 +172,10 @@ Differentiable nowhere
 
 \begin_layout Subsection
 Motivation
+\end_layout
+
+\begin_layout Subsection
+Martingale
 \end_layout
 
 \begin_layout BeginFrame
@@ -3783,7 +3788,7 @@ status open
 \end_inset
 
  Bernoulli
-\begin_inset Formula $\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}-np/\sqrt{npp})\leq b=\left(2\pi\right)^{-1/2}\int_{a}^{b}e^{-\frac{x^{2}}{2}}dx$
+\begin_inset Formula $\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}-np/\sqrt{np\left(1-p\right)})\leq b=\left(2\pi\right)^{-1/2}\int_{a}^{b}e^{-\frac{x^{2}}{2}}dx$
 \end_inset
 
 
@@ -3823,7 +3828,7 @@ X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{S_{n}-\frac{n}{2}}{\sqr
 and finally 
 \begin_inset Formula 
 \begin{eqnarray*}
-\lim_{\underset{t=n\Delta t,\Delta tD=\left(\Delta x\right)^{2}}{n\rightarrow\infty}}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
+\lim_{\underset{\underset{,\Delta tD=\left(\Delta x\right)^{2}}{t=n\Delta t}}{n\rightarrow\infty}}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{\underset{\underset{,\Delta tD=\left(\Delta x\right)^{2}}{t=n\Delta t}}{n\rightarrow\infty}}P\left(\sqrt{Dt}a\leq X\left(t\right)\leq\sqrt{Dt}b\right)\\
  & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
  & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
 \end{eqnarray*}
@@ -4028,7 +4033,7 @@ Interesting facts
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $X_{t}\left(\omega\right)$
+\begin_inset Formula $X_{\omega}\left(t\right)\triangleq X\left(\omega_{0},t\right)$
 \end_inset
 
  as a sample path is a continuous function from 
@@ -5610,9 +5615,9 @@ noise
 
  and so 
 \begin_inset Formula 
-\begin{equation}
-\frac{dX_{t}}{dt}=b\left(t,X_{t}\right)+\sigma\left(t,X_{t}\right)\cdot W_{t}\label{eq:sde}
-\end{equation}
+\[
+\frac{dX_{t}}{dt}=b\left(t,X_{t}\right)+\sigma\left(t,X_{t}\right)\cdot W_{t}
+\]
 
 \end_inset
 
@@ -5792,7 +5797,11 @@ name "enu:prop3ito"
 
 \end_deeper
 \begin_layout Standard
-Property 3 says that Ito integrals are martingales.
+Property 3 
+\emph on
+implies
+\emph default
+ that Ito integrals are martingales.
 \end_layout
 
 \begin_layout Definition
@@ -5900,6 +5909,58 @@ dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
 
 \begin_layout Standard
 Kind of like change of variables from single variable calculus.
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+One example
+\end_layout
+
+\begin_layout Standard
+Does 
+\begin_inset Formula 
+\[
+\int_{0}^{T}B\left(t\right)dB_{t}=\frac{1}{2}\left(B\left(t\right)\right)^{2}
+\]
+
+\end_inset
+
+If this were regular calculus it would but we're not in Kansas anymore;
+ using Ito's formula with 
+\begin_inset Formula $Y\left(t\right)=\frac{1}{2}\left(B\left(t\right)\right)^{2}$
+\end_inset
+
+ we get that 
+\begin_inset Formula 
+\begin{eqnarray*}
+d\left(Y\left(t\right)\right) & = & d\left(\frac{1}{2}\left(B\left(t\right)\right)^{2}\right)=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dB_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\left(dB_{t}\right)^{2}\\
+ & = & B\left(t\right)dB_{t}+\frac{1}{2}\left(dB_{t}\right)^{2}=B\left(t\right)dB_{t}+\frac{1}{2}dt
+\end{eqnarray*}
+
+\end_inset
+
+and so
+\begin_inset Formula 
+\[
+\int d\left(\frac{1}{2}\left(B\left(t\right)\right)^{2}\right)=\int_{0}^{T}B\left(t\right)dB_{t}+\int_{0}^{T}\frac{1}{2}dt
+\]
+
+\end_inset
+
+implies
+\begin_inset Formula 
+\[
+\int_{0}^{T}B\left(t\right)dB_{t}=\frac{1}{2}\left(\left(B\left(t\right)\right)^{2}-T\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout BeginFrame
@@ -6760,6 +6821,56 @@ X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(
 \end_inset
 
 
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Martingale
+\end_layout
+
+\begin_layout Standard
+First for 
+\begin_inset Formula $I_{n}\left(s,\omega\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\phi_{n}\left(\omega,t\right)=\sum_{j}a_{j}^{\left(n\right)}\left(\omega\right)\mathbf{1}_{\left[t_{j}^{\left(n\right)},t_{j+1}^{\left(n\right)}\right)}\left(t\right)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left(I_{n}\left(\omega,s\right)\big|\mathcal{F}_{t}\right) & = & E\left(\int_{0}^{t}\phi_{n}dB+\int_{s}^{t}\phi_{n}dB\big|\mathcal{F}_{t}\right)\\
+ & = & \int_{0}^{t}\phi_{n}dB+E\left(\sum_{t\leq t_{j}^{\left(n\right)}\leq t_{j+1}^{\left(n\right)}\leq s}a_{j}^{\left(n\right)}\Delta B_{j}\Bigg|\mathcal{F}_{t}\right)\\
+ & = & \int_{0}^{t}\phi_{n}dB+\sum_{j}E\left(E\left(a_{j}^{\left(n\right)}\Delta B_{j}\Bigg|\mathcal{F}_{t_{j}^{\left(n\right)}}\right)\Bigg|\mathcal{F}_{t}\right)\\
+ & = & \int_{0}^{t}\phi_{n}dB+\sum_{j}E\left(a_{j}^{\left(n\right)}\cancel{E\left(\Delta B_{j}\Bigg|\mathcal{F}_{t_{j}^{\left(n\right)}}\right)}\Bigg|\mathcal{F}_{t}\right)\\
+ & = & I_{n}\left(\omega,t\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+Then by convergence of a.s convergence of 
+\begin_inset Formula $I_{n}\left(\omega,t\right)\rightarrow I\left(\omega,t\right)$
+\end_inset
+
+ we get that 
+\begin_inset Formula $I\left(\omega,t\right)$
+\end_inset
+
+ is a martingale.
 \end_layout
 
 \begin_layout EndFrame

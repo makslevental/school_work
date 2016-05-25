@@ -50,6 +50,7 @@
 \usepackage{mathtools}
 \usepackage{algorithm,algorithmic}
 \beamertemplatenavigationsymbolsempty
+\usepackage{cancel}
 
 \makeatother
 
@@ -93,6 +94,9 @@
 
 
 \lyxframeend{}\subsection{Motivation}
+
+
+\lyxframeend{}\subsection{Martingale}
 
 
 \lyxframeend{}\lyxframe{}
@@ -569,7 +573,7 @@ X\left(t\right)\coloneqq X\left(n\Delta t\right)\coloneqq\underbrace{S_{n}\Delta
 \]
 is the position of the particle at time $n\Delta t$. To use Laplace
 - De Moivre%
-\footnote{{\tiny{}$X_{i}\sim$ Bernoulli$\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}-np/\sqrt{npp})\leq b=\left(2\pi\right)^{-1/2}\int_{a}^{b}e^{-\frac{x^{2}}{2}}dx$}%
+\footnote{{\tiny{}$X_{i}\sim$ Bernoulli$\left(p\right)\Rightarrow\lim_{n\rightarrow\infty}P(a\leq\sum X_{i}-np/\sqrt{np\left(1-p\right)})\leq b=\left(2\pi\right)^{-1/2}\int_{a}^{b}e^{-\frac{x^{2}}{2}}dx$}%
 } we need 
 \begin{eqnarray*}
 \text{Var}\left(X\left(n\Delta t\right)\right) & = & \left(\Delta x\right)^{2}n=\frac{\left(\Delta x\right)^{2}}{\Delta t}t=Dt
@@ -585,7 +589,7 @@ X\left(n\Delta t\right) & = & \sqrt{Dt}\left[\left(\frac{S_{n}-\frac{n}{2}}{\sqr
 
 and finally 
 \begin{eqnarray*}
-\lim_{\underset{t=n\Delta t,\Delta tD=\left(\Delta x\right)^{2}}{n\rightarrow\infty}}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{n\rightarrow\infty}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right)\\
+\lim_{\underset{\underset{,\Delta tD=\left(\Delta x\right)^{2}}{t=n\Delta t}}{n\rightarrow\infty}}P\left(a\leq\sqrt{Dt}X\left(t\right)\leq b\right) & = & \lim_{\underset{\underset{,\Delta tD=\left(\Delta x\right)^{2}}{t=n\Delta t}}{n\rightarrow\infty}}P\left(\sqrt{Dt}a\leq X\left(t\right)\leq\sqrt{Dt}b\right)\\
  & = & \frac{1}{\sqrt{2\pi}}\int_{\frac{a}{\sqrt{Dt}}}^{\frac{b}{\sqrt{Dt}}}e^{-\frac{x^{2}}{2}}dx\\
  & = & \frac{1}{\sqrt{2\pi Dt}}\int_{a}^{b}e^{-\frac{x^{2}}{2Dt}}dx
 \end{eqnarray*}
@@ -630,8 +634,8 @@ a Brownian motion if
 \end{block}
 \textbf{Interesting facts}
 \begin{itemize}
-\item $X_{t}\left(\omega\right)$ as a sample path is a continuous function
-from $\mathbb{R}^{+}\rightarrow\mathbb{R}$
+\item $X_{\omega}\left(t\right)\triangleq X\left(\omega_{0},t\right)$ as
+a sample path is a continuous function from $\mathbb{R}^{+}\rightarrow\mathbb{R}$
 \item Brownian motion ``induces'' a measure on functions $\mathbb{R}^{+}\rightarrow\mathbb{R}$
 \item Concentrated on continuous but nowhere differentiable functions (i.e.
 probability of ``drawing'' a differentiable function is 0)
@@ -745,9 +749,9 @@ Consider the problem of finding an interpretation of
 \]
 It turns out it's reasonable to model ``noise'' as some stochastic
 process $W_{t}$ and so 
-\begin{equation}
-\frac{dX_{t}}{dt}=b\left(t,X_{t}\right)+\sigma\left(t,X_{t}\right)\cdot W_{t}\label{eq:sde}
-\end{equation}
+\[
+\frac{dX_{t}}{dt}=b\left(t,X_{t}\right)+\sigma\left(t,X_{t}\right)\cdot W_{t}
+\]
 
 
 $x\rightarrow X$ a random variable because noise is stochastic. Empirical
@@ -795,7 +799,7 @@ and $0\le Q<U<T$. Then
 \item \label{enu:prop3ito}$E\left[\int_{Q}^{T}fdB\right]=0$
 \end{enumerate}
 \end{theorem}%{}
-Property 3 says that Ito integrals are martingales.
+Property 3 \emph{implies} that Ito integrals are martingales.
 \begin{definition}%{}
 A stochastic process $X_{t}$ is a \emph{martingale }if for $s\leq t$
 \[
@@ -826,6 +830,32 @@ dt\cdot dt=dt\cdot dB_{t}=dB_{t}\cdot dt=0\quad dB_{t}\cdot dB_{t}=dt
 
 \end{theorem}%{}
 Kind of like change of variables from single variable calculus.
+
+
+\lyxframeend{}\lyxframe{}
+
+\textbf{One example}
+
+Does 
+\[
+\int_{0}^{T}B\left(t\right)dB_{t}=\frac{1}{2}\left(B\left(t\right)\right)^{2}
+\]
+If this were regular calculus it would but we're not in Kansas anymore;
+using Ito's formula with $Y\left(t\right)=\frac{1}{2}\left(B\left(t\right)\right)^{2}$
+we get that 
+\begin{eqnarray*}
+d\left(Y\left(t\right)\right) & = & d\left(\frac{1}{2}\left(B\left(t\right)\right)^{2}\right)=\frac{\partial g}{\partial t}dt+\frac{\partial g}{\partial x}dB_{t}+\frac{1}{2}\frac{\partial^{2}g}{\partial x^{2}}\left(dB_{t}\right)^{2}\\
+ & = & B\left(t\right)dB_{t}+\frac{1}{2}\left(dB_{t}\right)^{2}=B\left(t\right)dB_{t}+\frac{1}{2}dt
+\end{eqnarray*}
+and so
+\[
+\int d\left(\frac{1}{2}\left(B\left(t\right)\right)^{2}\right)=\int_{0}^{T}B\left(t\right)dB_{t}+\int_{0}^{T}\frac{1}{2}dt
+\]
+implies
+\[
+\int_{0}^{T}B\left(t\right)dB_{t}=\frac{1}{2}\left(\left(B\left(t\right)\right)^{2}-T\right)
+\]
+
 
 
 \lyxframeend{}\lyxframe{}
@@ -1122,6 +1152,27 @@ like
 X_{k}=X_{0}+\int_{0}^{t}b\left(s,X_{s}\right)ds+\text{"}\int_{0}^{t}\sigma\left(s,X_{s}\right)dB_{s}\text{"}\label{eq:stochint-1}
 \end{equation}
 
+
+
+\lyxframeend{}\lyxframe{}
+
+\textbf{Martingale}
+
+First for $I_{n}\left(s,\omega\right)$ with $\phi_{n}\left(\omega,t\right)=\sum_{j}a_{j}^{\left(n\right)}\left(\omega\right)\mathbf{1}_{\left[t_{j}^{\left(n\right)},t_{j+1}^{\left(n\right)}\right)}\left(t\right)$:
+\begin{eqnarray*}
+E\left(I_{n}\left(\omega,s\right)\big|\mathcal{F}_{t}\right) & = & E\left(\int_{0}^{t}\phi_{n}dB+\int_{s}^{t}\phi_{n}dB\big|\mathcal{F}_{t}\right)\\
+ & = & \int_{0}^{t}\phi_{n}dB+E\left(\sum_{t\leq t_{j}^{\left(n\right)}\leq t_{j+1}^{\left(n\right)}\leq s}a_{j}^{\left(n\right)}\Delta B_{j}\Bigg|\mathcal{F}_{t}\right)\\
+ & = & \int_{0}^{t}\phi_{n}dB+\sum_{j}E\left(E\left(a_{j}^{\left(n\right)}\Delta B_{j}\Bigg|\mathcal{F}_{t_{j}^{\left(n\right)}}\right)\Bigg|\mathcal{F}_{t}\right)\\
+ & = & \int_{0}^{t}\phi_{n}dB+\sum_{j}E\left(a_{j}^{\left(n\right)}\cancel{E\left(\Delta B_{j}\Bigg|\mathcal{F}_{t_{j}^{\left(n\right)}}\right)}\Bigg|\mathcal{F}_{t}\right)\\
+ & = & I_{n}\left(\omega,t\right)
+\end{eqnarray*}
+
+
+
+\lyxframeend{}\lyxframe{}
+
+Then by convergence of a.s convergence of $I_{n}\left(\omega,t\right)\rightarrow I\left(\omega,t\right)$
+we get that $I\left(\omega,t\right)$ is a martingale.
 
 
 \lyxframeend{}
