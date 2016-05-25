@@ -171,7 +171,7 @@ Differentiable nowhere
 \end_layout
 
 \begin_layout Subsection
-Motivation
+Baby steps
 \end_layout
 
 \begin_layout Subsection
@@ -5589,7 +5589,121 @@ Stochastic Differential Equations
 \begin_layout Standard
 
 \series bold
-Motivation
+Two problems
+\end_layout
+
+\begin_layout Itemize
+Charge 
+\begin_inset Formula $Q\left(t\right)$
+\end_inset
+
+ in a capacitor an LRC circuit 
+\begin_inset Formula 
+\begin{equation}
+LQ''\left(t\right)+RQ'\left(t\right)+\frac{1}{C}Q\left(t\right)=F\left(t\right),\; Q\left(0\right)=Q_{0},\; Q'\left(0\right)=I_{0}\label{eq:lrc-1}
+\end{equation}
+
+\end_inset
+
+If 
+\begin_inset Formula $F\left(t\right)=\cos\left(\omega t\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $F\left(0\right)=F_{0}$
+\end_inset
+
+ the solution is simple: 
+\begin_inset Formula 
+\[
+Q\left(t\right)=c_{1}e^{r_{1}t}+c_{2}e^{r_{2}t}+A\sin\left(\omega t-\phi\right)
+\]
+
+\end_inset
+
+for some constants
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Each are constant functions of boundary values 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $Q_{0},I_{0},F_{0}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $c_{1},r_{1},c_{2},r_{2},A,\phi$
+\end_inset
+
+.
+ But what if 
+\begin_inset Formula $F\left(t\right)=G\left(t\right)+\text{"noise"}$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Itemize
+Consider taking noisy measurements 
+\begin_inset Formula $Z\left(t\right)$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+Z\left(t\right)=Q\left(t\right)+\text{"noise"}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+What is the best estimate of 
+\begin_inset Formula $Q\left(t\right)$
+\end_inset
+
+ satisfying eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lrc-1"
+
+\end_inset
+
+ based on 
+\begin_inset Formula $Z\left(t\right)$
+\end_inset
+
+? Kalman Filter.
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Baby steps
 \end_layout
 
 \begin_layout Standard
@@ -5968,67 +6082,11 @@ implies
 \end_layout
 
 \begin_layout Standard
-Four problems
+
+\series bold
+Two more problems
 \end_layout
 
-\begin_layout Itemize
-Charge 
-\begin_inset Formula $Q\left(t\right)$
-\end_inset
-
- in a capacitor an LRC circuit 
-\begin_inset Formula 
-\begin{equation}
-LQ''\left(t\right)+RQ'\left(t\right)+\frac{1}{C}Q\left(t\right)=F\left(t\right),\; Q\left(0\right)=Q_{0},\; Q'\left(0\right)=I_{0}\label{eq:lrc}
-\end{equation}
-
-\end_inset
-
-If 
-\begin_inset Formula $F\left(t\right)=G\left(t\right)+\text{"noise"}$
-\end_inset
-
-.
- How to solve for 
-\begin_inset Formula $Q\left(t\right)$
-\end_inset
-
-? 
-\end_layout
-
-\begin_layout Itemize
-Noisy measurements 
-\begin_inset Formula 
-\[
-Z\left(s\right)=Q\left(s\right)+\text{"noise"}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-What is the best estimate of 
-\begin_inset Formula $Q\left(t\right)$
-\end_inset
-
- satisfying eqn 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:lrc"
-
-\end_inset
-
- based on 
-\begin_inset Formula $Z\left(s\right)$
-\end_inset
-
-? Kalman Filter.
-\end_layout
-
-\end_deeper
 \begin_layout Itemize
 Equity price 
 \begin_inset Formula $X_{t}$

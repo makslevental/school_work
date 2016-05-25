@@ -93,7 +93,7 @@
 \lyxframeend{}\subsection{Differentiable nowhere}
 
 
-\lyxframeend{}\subsection{Motivation}
+\lyxframeend{}\subsection{Baby steps}
 
 
 \lyxframeend{}\subsection{Martingale}
@@ -741,7 +741,35 @@ probability of ``drawing'' a differentiable function is 0)
 
 \lyxframeend{}\lyxframe{}
 
-\textbf{Motivation}
+\textbf{Two problems}
+\begin{itemize}
+\item Charge $Q\left(t\right)$ in a capacitor an LRC circuit 
+\begin{equation}
+LQ''\left(t\right)+RQ'\left(t\right)+\frac{1}{C}Q\left(t\right)=F\left(t\right),\; Q\left(0\right)=Q_{0},\; Q'\left(0\right)=I_{0}\label{eq:lrc-1}
+\end{equation}
+If $F\left(t\right)=\cos\left(\omega t\right)$ and $F\left(0\right)=F_{0}$
+the solution is simple: 
+\[
+Q\left(t\right)=c_{1}e^{r_{1}t}+c_{2}e^{r_{2}t}+A\sin\left(\omega t-\phi\right)
+\]
+for some constants%
+\footnote{Each are constant functions of boundary values \textrm{$Q_{0},I_{0},F_{0}$.}%
+} $c_{1},r_{1},c_{2},r_{2},A,\phi$. But what if $F\left(t\right)=G\left(t\right)+\text{"noise"}$?
+\item Consider taking noisy measurements $Z\left(t\right)$ where 
+\[
+Z\left(t\right)=Q\left(t\right)+\text{"noise"}
+\]
+
+
+
+What is the best estimate of $Q\left(t\right)$ satisfying eqn \ref{eq:lrc-1}
+based on $Z\left(t\right)$? Kalman Filter.
+
+\end{itemize}
+
+\lyxframeend{}\lyxframe{}
+
+\textbf{Baby steps}
 
 Consider the problem of finding an interpretation of 
 \[
@@ -860,24 +888,8 @@ implies
 
 \lyxframeend{}\lyxframe{}
 
-Four problems
+\textbf{Two more problems}
 \begin{itemize}
-\item Charge $Q\left(t\right)$ in a capacitor an LRC circuit 
-\begin{equation}
-LQ''\left(t\right)+RQ'\left(t\right)+\frac{1}{C}Q\left(t\right)=F\left(t\right),\; Q\left(0\right)=Q_{0},\; Q'\left(0\right)=I_{0}\label{eq:lrc}
-\end{equation}
-If $F\left(t\right)=G\left(t\right)+\text{"noise"}$. How to solve
-for $Q\left(t\right)$? 
-\item Noisy measurements 
-\[
-Z\left(s\right)=Q\left(s\right)+\text{"noise"}
-\]
-
-
-
-What is the best estimate of $Q\left(t\right)$ satisfying eqn \ref{eq:lrc}
-based on $Z\left(s\right)$? Kalman Filter.
-
 \item Equity price $X_{t}$ obeys SDE with known $r$ drift, $\alpha$ volatility
 (and discount rate $\rho$) 
 \begin{eqnarray*}
