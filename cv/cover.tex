@@ -1,0 +1,117 @@
+\documentclass[10pt, a4paper]{moderncv}
+\moderncvstyle{classic}
+% uncomment below for grayscale version, maybe nicer for printing
+\moderncvcolor{black}
+\renewcommand{\familydefault}{\rmdefault}
+
+% \usepackage{fancyhdr}
+
+\definecolor{color3}{rgb}{0.55,0.55,0.55}% dark grey
+
+% identical to what's in the classic style, but change the color to gray.
+\makeatletter
+\renewcommand*{\section}[1]{%
+  \vspace*{2.5ex}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color3}\rule{\hintscolumnwidth}{0.95ex}}}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{part}{#1}%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#1}}
+  \par\nobreak\vskip 1ex\@afterheading}
+\makeatother
+
+% http://www.tug.org/mactex/fonts/LaTeX_Preamble-Font_Choices.html
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[scaled]{helvet}
+\usepackage[scaled]{beramono}
+% \usepackage{microtype} automatically used
+
+\usepackage[hmargin=20mm, vmargin=20mm]{geometry}
+
+% experiment below; widest text in left column right now is "summer
+% 2012" and "2012--present"
+\setlength{\hintscolumnwidth}{21mm}
+
+\renewcommand*{\today}{\number\year \space\ifcase\month \or
+  January\or February\or March\or April\or May\or
+  June\or July\or August\or September\or October\or
+  November\or December\fi \space\number\day}
+
+\firstname{Maksim}
+\familyname{Levental}
+\title{Research Associate}
+\address{University of Florida\\}{}
+\phone{(954)-667-3666}
+\email{maksim.levental@gmail.com}
+\extrainfo{\href{https://github.com/makslevental/}
+  {https://github.com/makslevental/}}
+
+% used for "see also" bits and comments
+\definecolor{see}{rgb}{0.3, 0.3, 0.3}
+
+% does the little 'see also' bits
+\newcommand{\seealso}[1]{See \href{http://#1}{\path{#1}}}
+
+\nopagenumbers{}
+
+% use smaller font for my name
+\AtBeginDocument{\renewcommand*{\namefont}{%
+  \fontsize{22}{24}\sffamily\mdseries\upshape}}
+
+% required when changes are made to page layout lengths:
+\AtBeginDocument{\recomputelengths}
+
+\begin{document}
+
+% moderncv does a hypersetup AtBeginDocument and sets the title to the
+% \title above, which I don't want, and also kills the pdfborder, which
+% I do want.
+\hypersetup{pdftitle={Resume: Maksim Levental}, pdfborder={0 0 1}}
+
+% the theme explicitly sets this to pcr, which is usual Courier.
+% Override their overriding back to beramono
+\renewcommand{\ttdefault}{fvm}
+
+% make the address, phone, etc, in upright font; the slanted stuff
+% doesn't look very good when printed
+\renewcommand{\addressfont}{\normalsize\rmfamily\mdseries}
+
+% \thispagestyle{fancy}
+% \fancyhead{}
+% \fancyfoot[L]{search \#F12-19}
+
+\maketitle
+
+
+
+\raggedright
+Dear Sir or Madam:\\[1.5em]
+%
+
+I'm a mathematically minded engineer with with almost three years of academic experience in machine learning (ML), data analysis, and back-end development. I graduated from University of Florida (UF) with a Masters of Science in Computer Science in the Fall of 2015. Since then I've continued to work under my MS adviser, but now I'm transitioning from academia to industry. I'd love to bring my expertise and enthusiasm to your growing development team. I'm interested particularly in [blank] because of [blank]. 
+
+\vskip 1em
+
+At UF, funded by an Army Night Vision and Electronic Sensors Directorate (N.V.E.S.D.) grant, I worked on a ~300KLOC MATLAB codebase. The system is a ML pipeline framework (prescreening, featurization, discrimination, and scoring) with modules written by researchers, for landmine detection using various sensor platforms deployed in Iraq, Afghanistan, and civilian areas (Laos, Cambodia, Vietnam). I was the sole developer tasked with extending its functionality by implementing a true RDBMS data back-end. The first iteration I wrote was a SQLite back-end in Java, with MATLAB interop, ready for beta testing in two months. After project goals changed (as they're wont to do) I replaced Sqlite with Postgres. It was further decided that prior to bringing a new service online (Postgres) was the right time to migrat all of the DevOps services (Redmine for project management, LDAP for authentication, Rhodecode for CVS management) provided by the lab from a monolothic, aging, single Ubuntu 10 server to a KVM container system. I did all of this as well, including staggered backups for the VMs and web front-ends for the various services (Flask and Apache).
+
+\vskip 1em
+
+Suffice it so say I'm more than comfortable taking on large projects completely independently, and have no fear of diving right into technologies unknown (to me).
+
+\vskip 2em
+
+
+
+
+Yours sincerely, % if the opening is "Dear Mr(s) Doe,"
+
+%
+%\includegraphics[scale=0.75]{signature_blue}\\
+{\bfseries Maksim Levental}\\
+%
+\vfill%
+\noindent Resume: Maksim Levental
+\hfill \today
+
+\end{document}
