@@ -1,0 +1,388 @@
+<!DOCTYPE html> <html>
+    <head>
+        <meta charset='utf-8' />
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+        <meta name="description" content= />
+        <link rel="stylesheet" type="text/css" media="screen"
+              href="stylesheets/stylesheet.css">
+        <title>Morphing Faces</title>
+        <!-- MathJax -->
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+    </head>
+
+    <body>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="forkme_banner" href="">
+                    View on GitHub
+                </a>
+                <h1 id="project_title">Morphing Faces</h1>
+                <h2 id="project_tagline"></h2>
+                <section id="downloads">
+                    <a class="zip_download_link"
+                        href="/zipball/master">
+                        Download this project as a .zip file
+                    </a>
+                    <a class="tar_download_link"
+                        href="/tarball/master">
+                        Download this project as a tar.gz file
+                    </a>
+                </section>
+            </header>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+
+
+    <h2 id="try-the-online-demo-here">Try the online demo <a href="online_demo.html">here</a></h2>
+
+<h3 id="table-of-contents">Table of contents</h3>
+
+<ul>
+  <li><a href="#what-is-morphing-faces">What is Morphing Faces?</a>
+    <ul>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#running-the-demo">Running the demo</a></li>
+    </ul>
+  </li>
+  <li><a href="#how-does-it-work">How does it work?</a>
+    <ul>
+      <li><a href="#probabilistic-graphical-models-and-bayesian-networks">Probabilistic graphical models and Bayesian networks</a></li>
+      <li><a href="#learning-bayesian-networks-and-the-inference-problem">Learning bayesian networks, and the inference problem</a></li>
+      <li><a href="#variational-autoencoders">Variational autoencoders</a>
+        <ul>
+          <li><a href="#formal-setup">Formal setup</a></li>
+          <li><a href="#the-vae-criterion">The VAE criterion</a></li>
+          <li><a href="#the-reparametrization-trick">The reparametrization trick</a></li>
+          <li><a href="#a-concrete-example">A concrete example</a></li>
+          <li><a href="#demo-model">Demo model</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="what-is-morphing-faces">What is Morphing Faces?</h1>
+
+<p>Morphing Faces is an interactive Python demo allowing to generate images of
+faces using a trained variational autoencoder and is a display of the capacity
+of this type of model to capture high-level, abstract concepts.</p>
+
+<p>The program maps a point in 400-dimensional space to an image and displays it on
+screen. The point’s position is initialized at random, and its coordinates can
+be varied two dimensions at a time by hovering the mouse over the image, which
+produces smooth and plausible transitions between different lighting conditions,
+physical features and facial configurations.</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>Installation is as simple as downloading the code uncompressing it wherever you
+want. In addition to Python, Morphing Faces depends on the following Python
+packages:</p>
+
+<ul>
+  <li><a href="http://www.numpy.org/">numpy</a></li>
+  <li><a href="http://matplotlib.org/">matplotlib</a></li>
+</ul>
+
+<h2 id="running-the-demo">Running the demo</h2>
+
+<p>In the <code class="highlighter-rouge">morphing_faces</code> directory, type</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python visualize.py
+</code></pre></div></div>
+
+<p>You should see a matplotlib figure appearing. Now, hover the mouse over the
+picture and the face should transform.</p>
+
+<p>The mouse’s relative position in the image is tied to the coordinates of two of
+the 400 dimensions: bottom-left corresponds to (-1, -1) and top-right
+corresponds to (1, 1).</p>
+
+<p>What about other dimensions? 400 is quite a large number, and most of them don’t
+do much (this a consequence of the training procedure), but the 29 most
+interesting dimensions are available to try. Simply type <code class="highlighter-rouge">d D1 D2</code> in the
+command line interface, where <code class="highlighter-rouge">D1</code> and <code class="highlighter-rouge">D2</code> are two numbers between 0 and 28, in
+order to select dimensions <code class="highlighter-rouge">D1</code> and <code class="highlighter-rouge">D2</code> to experiment with.</p>
+
+<p>Maybe by now you found a way to create a funny facial expression and you would
+like to keep it that way while you play with other dimensions. In that case,
+click on the image to freeze it, change the selected dimensions and click the
+image again to unfreeze it. The coordinates in the two previous dimensions will
+be kept frozen, while you can interact with the newly selected dimensions.</p>
+
+<p>If you’re bored with the current face and would like to see something else, type
+<code class="highlighter-rouge">r</code> in the command line interface to pick another face at random. Behind the
+scenes, a new point in the 400-dimensional space was chosen, and you can
+move around it the usual way.</p>
+
+<p>Finally, when you’ve had enough, simply type <code class="highlighter-rouge">q</code> in the command line interface
+to quit.</p>
+
+<h1 id="how-does-it-work">How does it work?</h1>
+
+<p>This section supposes a background in probabilities and recapitulates basic
+concepts of probabilistic graphical models before introducing variational
+autoencoders. For a (much) more thorough treatment of probabilistic graphical
+models, see the excellent
+<a href="http://pgm.stanford.edu/">Probabilistic Graphical Models - Principles and Techniques</a>
+textbook written by Daphne Koller and Nir Friedman.</p>
+
+<h2 id="probabilistic-graphical-models-and-bayesian-networks">Probabilistic graphical models and Bayesian networks</h2>
+
+<p><em>For the sake of simplicity, we will assume that all variables introduced in
+this section are discrete. Note that everything also applies for continuous
+variables if sums are replaced by integrals where appropriate.</em></p>
+
+<p>A probabilistic graphical model is a way to encode a distribution over random
+variables as a graph, which can potentially yield a very compact representation
+compared to regular probability tables. It does so by encoding dependences
+between variables as edges between nodes.</p>
+
+<p>Bayesian networks are a category of probabilistic graphical models whose
+graphical representations are directed acyclic graphs (DAGs). The probability
+distributions they encode are of the form</p>
+
+<p>\[
+    P(X_1, X_2, \cdots, X_n) = \prod_{i=1}^n P(X_i \mid \mathcal{Pa}(X_i))
+\]</p>
+
+<p>where \( \mathcal{Pa}(X_i) \) is the set of \( X_i \)’s parents in the
+graph.</p>
+
+<p>This concept is better illustrated by an example:</p>
+
+<p><img src="/images/bayesian_network_example.png" alt="An example Bayesian network" /></p>
+
+<p>Here, \( A\) has no parents, \( B \)’s parent is \( A\), \( C \)’s
+parent is \( A\) and \( D \)’s parents are \( A \) and \( B \). The
+probability distribution encoded by this graph is therefore</p>
+
+<p>\[
+    P(A, B, C, D) = P(A) P(B \mid A) P(C \mid A) P(D \mid A, B)
+\]</p>
+
+<h2 id="learning-bayesian-networks-and-the-inference-problem">Learning bayesian networks, and the inference problem</h2>
+
+<p>Bayesian networks are interesting by themselves, but what’s even more
+interesting is that they can be used to learn something about the distribution
+of the random variables they model. Suppose you are given a set of observations
+\( \mathcal{D} \), and suppose that the conditional distributions required by
+your bayesian network are parametrized by some set of parameters
+\( \theta \). The act of learning the distribution which generated the
+observations could be described as follows: a parametrization of the model that
+approaches the true distribution is a parametrization under which observations
+in \( \mathcal{D} \) have a high probability, or alternatively, a high
+log-probability (because the logarithm is a monotonically increasing function).
+More formally, we are searching \( \theta^* \) such that</p>
+
+<p>\[
+    \theta^* = \arg\max_\theta \log P(X_1, \cdots, X_n)
+              = \arg\max_\theta \sum_{i=1}^n
+                \log P(X_i \mid \mathcal{Pa}(X_i))
+\]</p>
+
+<p>This parameter search can be done by various ways, for instance by gradient
+descent.</p>
+
+<p>This problem is straightforward if all variables are observed. Unfortunately,
+this is not always the case. Suppose that in the example presented earlier only
+\( C \) and \( D \) are observed, and the value of \( A \) and \( B \)
+is always unknown (we would say that the former are <em>visible</em> or <em>observed</em>
+variables, while the latter are <em>hidden</em> or <em>latent</em> variables). In that case,
+all we’re really interested in is to maximize the likelihood of \( C \) and
+\( D \) under the model, i.e. maximize</p>
+
+<p>\[
+    P(C, D) = \sum_{A}\sum_{B} P(A, B, C, D)
+\]</p>
+
+<p>Now things get hairy. What if \( A \) and \( B \) can take a great number of
+values? What if, instead of the toy example presented above, the bayesian
+network contains thousands of nodes, only a dozen of which are observed?
+The summation quickly becomes <em>untractable</em>, and this does not bode well: how
+can you maximize a quantity you cannot even evaluate?</p>
+
+<p>One way out of this, which is oftentimes used in practice, is a technique known
+as <a href="http://en.wikipedia.org/wiki/Expectation-maximization_algorithm">expectation-maximization</a>.
+Unfortunately, it assumes that the conditional distribution of the hidden variables given the
+observed ones is easy to compute, and this is not always the case.
+What can we do, then?</p>
+
+<h2 id="variational-autoencoders">Variational autoencoders</h2>
+
+<p>Instead of seeking to maximize the likelihood, we could maximize a <em>lower bound</em>
+of the likelihood: if the lower bound increases to a given level, we’re
+guaranteed the likelihood is <em>at least</em> as high.</p>
+
+<p>If your hidden variables are continuous, you can use one such lower bound,
+introduced by <a href="http://arxiv.org/abs/1312.6114">(Kingma and Welling, 2014)</a>
+and <a href="http://arxiv.org/abs/1401.4082">(Rezende <em>et al.</em>, 2014)</a>: <strong>variational
+autoencoders (VAEs)</strong>.</p>
+
+<h3 id="formal-setup">Formal setup</h3>
+
+<p>Let \( \mathbf{x} \) be a random vector of \( D \) observed variables,
+which are either discrete or continuous. Let \( \mathbf{z} \) be a random
+vector of \( N \) latent variables, which are <strong>continuous</strong>. Let the
+relationships between \( \mathbf{x} \) and \( \mathbf{z} \) be described
+by the figure below:</p>
+
+<p><img src="/images/vae_generative_network_figure.png" alt="The DAG learned by a VAE" /></p>
+
+<p>The probability distribution encoded by this DAG has the form</p>
+
+<p>\[
+    p_\theta(\mathbf{x}, \mathbf{z})
+    = p_\theta(\mathbf{z}) p_\theta(\mathbf{x} \mid \mathbf{z})
+\]</p>
+
+<p>where the \( \theta \) subscript indicates that \( p \) is parametrized by
+\( \theta \).</p>
+
+<p>Furthermore, let \( q_\phi(\mathbf{z} \mid \mathbf{x}) \) be a
+<em>recognition model</em> whose goal is to approximate the true and intractable
+posterior distribution \( p_\theta(\mathbf{z} \mid \mathbf{x}) \).</p>
+
+<h3 id="the-vae-criterion">The VAE criterion</h3>
+
+<p>In such a setting, the following expression is a lower-bound on the
+log-likelihood of \( \mathbf{x} \):</p>
+
+<p>\[
+    \mathcal{L}(\mathbf{x}) =
+    - D_{KL}(q_\phi(\mathbf{z} \mid \mathbf{x}) \mid\mid
+              p_\theta(\mathbf{z}))
+    + \mathrm{E}_{q_\phi(\mathbf{z} \mid \mathbf{x})}
+      [\log p_\theta(\mathbf{x} \mid \mathbf{z})]
+\]</p>
+
+<p>For a complete and very well-written derivation, see
+<a href="http://arxiv.org/abs/1312.6114">(Kingma and Welling, 2014)</a>.</p>
+
+<p>We note that the expression contains two terms. The first term, which can
+sometimes be integrated analytically, encourages
+\( q_\phi(\mathbf{z} \mid \mathbf{x}) \) to be close to
+\( p_\theta(\mathbf{z}) \). The second term, which needs to be approximated
+by sampling from \( q_\phi(\mathbf{z} \mid \mathbf{x}) \), can be viewed
+as a form of reconstruction cost.</p>
+
+<p>Without the first term, this model is simply an autoencoder. It can learn any 
+perfectly invertible representation, including the identity, and nothing
+encourages it to learn a representation which is compatible with the prior
+distribution \(p_\theta(\mathbf{z}) \). The first term ensures that while
+training, the autoencoder learns a decoder that, at generation time, will
+be able to invert samples from the prior distribution such that they come from
+the right distribution, i.e. they look just like the training data.</p>
+
+<h3 id="the-reparametrization-trick">The reparametrization trick</h3>
+
+<p>The most <strong>crucial</strong> detail about VAEs is called the <strong>reparametrization trick</strong>
+and deals with gradient propagation: since the reconstruction term is estimated
+by sampling, how can we propagate the gradient signal through the sampling
+process and through \( q_\phi(\mathbf{z} \mid \mathbf{x}) \)?</p>
+
+<p>We do so by making \( \mathbf{z} \) be a deterministic function of
+\( \phi \) and some noise \( \mathbf{\epsilon} \):</p>
+
+<p>\[
+    \mathbf{z} = f(\phi, \mathbf{\epsilon})
+\]</p>
+
+<p>such that \( \mathbf{z} \) has the right distribution. For instance, sampling
+from an isotropic normal distribution can be done like so:</p>
+
+<p>\[
+    \mathbf{z} = \mu + \sigma \mathbf{\epsilon}
+\]</p>
+
+<p>This is what allows VAEs to be trained properly: without the reparametrization
+trick, there is no efficient way of adapting
+\( q_\phi(\mathbf{z} \mid \mathbf{x}) \) to help improve the
+reconstruction.</p>
+
+<h3 id="a-concrete-example">A concrete example</h3>
+
+<p>Let the prior distribution on \( \mathbf{z} \) be an isotropic gaussian:</p>
+
+<p>\[
+    p_\theta(\mathbf{z}) = \prod_{i=1}^N \mathcal{N}(z_i \mid 0, 1)
+\]</p>
+
+<p>and let the approximate posterior distributions be normal and factorized:</p>
+
+<p>\[
+    q_\phi(\mathbf{z} \mid \mathbf{x}) =
+    \prod_{i=1}^N \mathcal{N}(z_i \mid \mu_i(\mathbf{x}),
+                                            \sigma_i^2(\mathbf{x}))
+\]</p>
+
+<p>Then the KL-divergence term integrates to</p>
+
+<p>\[
+    D_{KL} = \frac{1}{2} \sum_{i=1}^N
+              1 + \log(\sigma_i^2(\mathbf{x})) - \mu_i^2(\mathbf{x}) -
+              \sigma_i^2(\mathbf{x}) 
+\]</p>
+
+<p>Once again, a complete derivation of this result can be found in
+<a href="http://arxiv.org/abs/1312.6114">(Kingma and Welling, 2014)</a>.</p>
+
+<p>Note that the functional form of parameters in \( \theta \) and \( \phi \)
+has not been specified yet. This means the encoding and decoding networks
+that output parameters can have any differentiable form you’d like.</p>
+
+<h3 id="demo-model">Demo model</h3>
+
+<p>The model trained for this demonstration is exactly like the model described in
+the previous section and has the following properties:</p>
+
+<ul>
+  <li>400-dimensional latent space</li>
+  <li>Encoding network has two hidden layers with 2000 rectified linear units each</li>
+  <li>Decoding network has two hidden layers with 2000 rectified linear units each</li>
+  <li>Isotropic gaussian prior distribution:
+\[
+    p(\mathbf{z}) = \prod_{i} \mathcal{N}(z_i \mid 0, 1)
+\]</li>
+  <li>Isotropic gaussian approximate posterior distribution:
+\[
+    q(\mathbf{z} \mid \mathbf{x}) = \prod_{i}
+        \mathcal{N}(z_i \mid \mu(\mathbf{x}), \sigma^2(\mathbf{x}))
+\]</li>
+  <li>Isotropic gaussian conditional distribution:
+\[
+    p(\mathbf{x} \mid \mathbf{z}) = \prod_{i}
+        \mathcal{N}(x_i \mid \mu(\mathbf{z}), \sigma^2(\mathbf{z}))
+\]</li>
+  <li>Trained on the unlabel set of images of the
+<a href="http://aclab.ca/users/josh/TFD.html">Toronto Face Database</a></li>
+</ul>
+
+
+            </section>
+        </div>
+
+        <!-- FOOTER  -->
+        <div id="footer_wrap" class="outer">
+            <footer class="inner">
+                <p class="copyright">
+                    Morphing Faces maintained by
+                    <a href="">
+                        
+                    </a>
+                </p>
+                <p>
+                    Published with
+                    <a href="http://pages.github.com">
+                        GitHub Pages
+                    </a>
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>
+
