@@ -1,0 +1,295 @@
+<html>
+
+<head>
+    <title>Linear Regression</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.15.1/dist/tf.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
+    <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
+
+    <style>
+        .button {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .svg-container {
+            margin: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+<div style="text-align: center;">
+    <div>
+        <div>
+            <label for="separable">
+                Data
+                <select id="separable">
+                    <option value="true">Separable</option>
+                    <option value="false">Non-separable</option>
+                </select>
+            </label>
+
+        </div>
+        <br>
+        <div>
+            <label for="model">
+                Model
+                <select id="model">
+                    <option value="linear">Linear</option>
+                    <option value="nonlinear">Non-linear</option>
+                </select>
+            </label>
+        </div>
+        <br>
+        <div>
+            <label for="epochs">
+                Epochs
+                <input id="epochs" type="number" value="30">
+            </label>
+
+        </div>
+        <br>
+        <div>
+            <label for="plotEvery">
+                Plot every
+                <input id="plotEvery" type="number" value="10">
+            </label>
+
+        </div>
+        <br>
+        <div>
+            <label>
+                Reset
+                <input id="reset" type="checkbox">
+            </label>
+            <button id="train">Train</button>
+        </div>
+    </div>
+    <div id="plot"></div>
+    <div>
+        <img width="250" height="200" id="linear" src="linear.svg">
+    </div>
+    <div>
+        <img width="350" height="200" id="nonlinear" src="nonlinear.svg">
+    </div>
+</div>
+<script>
+    tf.disableDeprecationWarnings();
+    let classes = [];
+    let xs = [];
+    let losses = [];
+    const N = 10;
+    let model;
+
+    function createData(separable, linear) {
+        classes = [];
+        xs = [];
+        for (let i = 0; i < N; i++) {
+            xs.push([2 * Math.random() - 2, 2 * Math.random() - 2]);
+
+            classes.push(linear ? 0 : [1, 0]);
+            if (separable) {
+                xs.push([2 * Math.random() + 2, 2 * Math.random() + 2]);
+                classes.push(linear ? 1 : [0, 1]);
+                xs.push([2 * Math.random() + 2, 2 * Math.random() - 2]);
+                classes.push(linear ? 0 : [1, 0]);
+            } else {
+                xs.push([2 * Math.random() + 2, 2 * Math.random() + 2]);
+                classes.push(linear ? 0 : [1, 0]);
+                xs.push([2 * Math.random() + 2, 2 * Math.random() - 2]);
+                classes.push(linear ? 1 : [0, 1]);
+            }
+            xs.push([2 * Math.random() - 2, 2 * Math.random() + 2]);
+            classes.push(linear ? 1 : [0, 1]);
+        }
+
+    }
+
+    function resetModel() {
+        model = tf.sequential();
+        losses = [];
+        const learningRate = 0.01;
+        const optimizer = tf.train.adam(learningRate);
+        if (modelSelect.options[modelSelect.selectedIndex].value === "linear") {
+            document.getElementById("linear").style = "";
+            document.getElementById("nonlinear").style = "display: none";
+            model.add(tf.layers.dense({units: 1, inputShape: [2]}));
+            model.compile({optimizer, loss: "meanSquaredError"});
+        } else {
+            document.getElementById("linear").style = "display:none";
+            document.getElementById("nonlinear").style = "";
+            model.add(tf.layers.dense({units: 2, inputShape: [2], activation: 'relu'}));
+            model.add(tf.layers.dense({units: 2, activation: 'softmax'}));
+            model.compile({optimizer, loss: "categoricalCrossentropy"});
+        }
+    }
+
+    function resetPlot() {
+        losses = [];
+        const separable = document.getElementById("separable");
+        const modelSelect = document.getElementById("model");
+        createData(
+            separable.options[separable.selectedIndex].value === "true",
+            modelSelect.options[modelSelect.selectedIndex].value === "linear"
+        );
+        plot();
+    }
+
+    function reset() {
+        resetModel();
+        resetPlot();
+    }
+
+
+    async function train() {
+        resetModel();
+        const epochs = parseInt(document.getElementById("epochs").value);
+        const plotEvery = parseInt(document.getElementById("plotEvery").value);
+        const resetButton = document.getElementById("reset");
+        try {
+            await model.fit(tf.tensor(xs), tf.tensor(classes), {
+                batchSize: 4,
+                epochs: epochs,
+                callbacks: {
+                    onEpochEnd: async (epoch, logs) => {
+                        losses.push([epoch, logs.loss]);
+                        if (epoch % plotEvery === 0)
+                            plot(true);
+                        await tf.nextFrame();
+                    },
+                    onBatchEnd: async (epoch, logs) => {
+                        if (resetButton.checked) throw "STOP_TRAINING";
+                    }
+                }
+            });
+            plot(true)
+        } catch (e) {
+            if (e !== "STOP_TRAINING") throw e;
+        }
+    }
+
+    function classMap(classi) {
+        const modelSelect = document.getElementById("model").options[document.getElementById("model").selectedIndex].value;
+        if (modelSelect === "linear") {
+            return classi;
+        } else {
+            return tf.argMax(classi).dataSync()[0];
+        }
+    }
+
+    async function showModel() {
+        const surface = {name: 'Model Summary', tab: 'Model'};
+        tfvis.show.modelSummary(surface, model);
+    }
+
+    async function plot(highPrecision) {
+        let [w1, w2] = model.layers[0].getWeights()[0].dataSync();
+        let [b] = model.layers[0].getWeights()[1].dataSync();
+
+        const modelSelect = document.getElementById("model").options[document.getElementById("model").selectedIndex].value;
+        var step = highPrecision ? .1 : 1;
+        var size = highPrecision ? 121 : 13;
+        var z = [];
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                z.push([-6 + i * step, -6 + j * step]);
+            }
+        }
+
+        model.predict(tf.tensor(z)).print();
+        let output = model.predict(tf.tensor(z));
+        output.print();
+        if (modelSelect === "linear") {
+            output = model.predict(tf.tensor(z)).round().dataSync();
+        } else {
+            output = model.predict(tf.tensor(z)).argMax(1).dataSync();
+        }
+
+        const data = [
+            {
+                x: xs.filter((x, i) => classMap(classes[i]) === 1).map(x => x[0]),
+                y: xs.filter((x, i) => classMap(classes[i]) === 1).map(x => x[1]),
+                name: 'Class 1',
+                mode: 'markers'
+            },
+            {
+                x: xs.filter((x, i) => classMap(classes[i]) === 0).map(x => x[0]),
+                y: xs.filter((x, i) => classMap(classes[i]) === 0).map(x => x[1]),
+                name: 'Class 2',
+                mode: 'markers'
+            },
+            {
+                z: output,
+                x: z.map(z => z[0]),
+                y: z.map(z => z[1]),
+                type: 'contour',
+                showscale: false,
+                autocontour: false,
+                contours: {
+                    start: 0,
+                    end: 0,
+                    size: 1
+                }
+
+            },
+            {
+                x: losses.map(l => l[0]),
+                y: losses.map(l => l[1]),
+                name: 'Loss',
+                mode: 'lines',
+                xaxis: 'x2',
+                yaxis: 'y2',
+            }
+        ];
+
+        if (modelSelect === "linear") {
+            data.push({
+                x: [-5, 5],
+                y: [(0.5 - w1 * -5 - b) / w2, (0.5 - w1 * 5 - b) / w2],
+                name: 'Decision Surface',
+                mode: 'lines'
+            });
+        }
+
+        var layout = {
+            title: 'Linear Regression',
+            autosize: false,
+            width: 800,
+            height: 500,
+            xaxis: {
+                range: [-5, 5],
+                autorange: false
+            },
+            yaxis: {
+                range: [-5, 5],
+                autorange: false
+            },
+            yaxis2: {
+                type: 'log',
+                autorange: true
+
+            },
+            grid: {rows: 1, columns: 2, pattern: 'independent'},
+
+        };
+
+        Plotly.newPlot('plot', data, layout);
+    }
+
+    const resetButton = document.getElementById("reset");
+    resetButton.addEventListener("change", reset);
+    const trainButton = document.getElementById("train");
+    trainButton.addEventListener("click", train);
+    const separable = document.getElementById("separable");
+    separable.addEventListener("change", reset);
+    const modelSelect = document.getElementById("model");
+    modelSelect.addEventListener("change", reset);
+    reset();
+</script>
+</body>
+
+</html>
