@@ -1,0 +1,302 @@
+@article{ChaudhuriRandomSampling,
+  author     = {Chaudhuri, Surajit and Motwani, Rajeev and Narasayya, Vivek},
+  title      = {On Random Sampling over Joins},
+  year       = {1999},
+  issue_date = {June 1999},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {28},
+  number     = {2},
+  issn       = {0163-5808},
+  url        = {https://doi.org/10.1145/304181.304206},
+  doi        = {10.1145/304181.304206},
+  abstract   = {A major bottleneck in implementing sampling as a primitive relational operation is the inefficiency of sampling the output of a query. It is not even known whether it is possible to generate a sample of a join tree without first evaluating the join tree completely. We undertake a detailed study of this problem and attempt to analyze it in a variety of settings. We present theoretical results explaining the difficulty of this problem and setting limits on the efficiency that can be achieved. Based on new insights into the interaction between join and sampling, we develop join sampling techniques for the settings where our negative results do not apply. Our new sampling algorithms are significantly more efficient than those known earlier. We present experimental evaluation of our techniques on Microsoft's SQL Server 7.0.},
+  journal    = {SIGMOD Rec.},
+  month      = jun,
+  pages      = {263-274},
+  numpages   = {12}
+}
+
+@inproceedings{10.1145/3183713.3183739,
+  author    = {Zhao, Zhuoyue and Christensen, Robert and Li, Feifei and Hu, Xiao and Yi, Ke},
+  title     = {Random Sampling over Joins Revisited},
+  year      = {2018},
+  isbn      = {9781450347037},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3183713.3183739},
+  doi       = {10.1145/3183713.3183739},
+  abstract  = {Joins are expensive, especially on large data and/or multiple relations. One promising approach in mitigating their high costs is to just return a simple random sample of the full join results, which is sufficient for many tasks. Indeed, in as early as 1999, Chaudhuri et al. posed the problem of sampling over joins as a fundamental challenge in large database systems. They also pointed out a fundamental barrier for this problem, that the sampling operator cannot be pushed through a join, i.e., sample( R bowtie S )≠ sample( R ) bowtie sample( S ). To overcome this barrier, they used precomputed statistics to guide the sampling process, but only showed how this works for two-relation joins.This paper revisits this classic problem for both acyclic and cyclic multi-way joins. We build upon the idea of Chaudhuri et al., but extend it in several nontrivial directions. First, we propose a general framework for random sampling over multi-way joins, which includes the algorithm of Chaudhuri et al. as a special case. Second, we explore several ways to instantiate this framework, depending on what prior information is available about the underlying data, and offer different tradeoffs between sample generation latency and throughput. We analyze the properties of different instantiations and evaluate them against the baseline methods; the results clearly demonstrate the superiority of our new techniques.},
+  booktitle = {Proceedings of the 2018 International Conference on Management of Data},
+  pages     = {1525-1539},
+  numpages  = {15},
+  keywords  = {random sampling, multi-way joins, join sampling framework},
+  location  = {Houston, TX, USA},
+  series    = {SIGMOD '18}
+}
+
+@inproceedings{wanderjoin,
+  author    = {Li, Feifei and Wu, Bin and Yi, Ke and Zhao, Zhuoyue},
+  title     = {Wander Join: Online Aggregation via Random Walks},
+  year      = {2016},
+  isbn      = {9781450335317},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/2882903.2915235},
+  doi       = {10.1145/2882903.2915235},
+  abstract  = {Joins are expensive, and online aggregation over joins was proposed to mitigate the cost, which offers users a nice and flexible tradeoff between query efficiency and accuracy in a continuous, online fashion. However, the state-of-the-art approach, in both internal and external memory, is based on ripple join, which is still very expensive and even needs unrealistic assumptions (e.g., tuples in a table are stored in random order). This paper proposes a new approach, the wander join algorithm, to the online aggregation problem by performing random walks over the underlying join graph. We also design an optimizer that chooses the optimal plan for conducting the random walks without having to collect any statistics a priori. Compared with ripple join, wander join is particularly efficient for equality joins involving multiple tables, but also supports θ-joins. Selection predicates and group-by clauses can be handled as well. Extensive experiments using the TPC-H benchmark have demonstrated the superior performance of wander join over ripple join. In particular, we have integrated and tested wander join in the latest version of PostgreSQL, demonstrating its practicality in a full-fledged database system.},
+  booktitle = {Proceedings of the 2016 International Conference on Management of Data},
+  pages     = {615-629},
+  numpages  = {15},
+  keywords  = {joins, random walks, online aggregation},
+  location  = {San Francisco, California, USA},
+  series    = {SIGMOD '16}
+}
+
+@misc{Veldhuizen14leapfrogtriejoin:,
+  author = {Todd L. Veldhuizen},
+  title  = {Leapfrog Triejoin: A Simple, Worst-Case Optimal Join Algorithm},
+  year   = {2014}
+}
+
+@article{10.14778/3372716.3372726,
+  author     = {Huang, Dawei and Yoon, Dong Young and Pettie, Seth and Mozafari, Barzan},
+  title      = {Joins on Samples: A Theoretical Guide for Practitioners},
+  year       = {2019},
+  issue_date = {December 2019},
+  publisher  = {VLDB Endowment},
+  volume     = {13},
+  number     = {4},
+  issn       = {2150-8097},
+  url        = {https://doi.org/10.14778/3372716.3372726},
+  doi        = {10.14778/3372716.3372726},
+  abstract   = {Despite decades of research on AQP (approximate query processing), our understanding of sample-based joins has remained limited and, to some extent, even superficial. The common belief in the community is that joining random samples is futile. This belief is largely based on an early result showing that the join of two uniform samples is not an independent sample of the original join, and that it leads to quadratically fewer output tuples. Unfortunately, this early result has little applicability to the key questions practitioners face. For example, the success metric is often the final approximation's accuracy, rather than output cardinality. Moreover, there are many non-uniform sampling strategies that one can employ. Is sampling for joins still futile in all of these settings? If not, what is the best sampling strategy in each case? To the best of our knowledge, there is no formal study answering these questions.This paper aims to improve our understanding of sample-based joins and offer a guideline for practitioners building and using real-world AQP systems. We study limitations of offline samples in approximating join queries: given an offline sampling budget, how well can one approximate the join of two tables? We answer this question for two success metrics: output size and estimator variance. We show that maximizing output size is easy, while there is an information-theoretical lower bound on the lowest variance achievable by any sampling strategy. We then define a hybrid sampling scheme that captures all combinations of stratified, universe, and Bernoulli sampling, and show that this scheme with our optimal parameters achieves the theoretical lower bound within a constant factor. Since computing these optimal parameters requires shuffling statistics across the network, we also propose a decentralized variant in which each node acts autonomously using minimal statistics. We also empirically validate our findings on popular SQL and AQP engines.},
+  journal    = {Proc. VLDB Endow.},
+  month      = dec,
+  pages      = {547-560},
+  numpages   = {14}
+}
+
+@misc{krishnan2019learning,
+  title         = {Learning to Optimize Join Queries With Deep Reinforcement Learning},
+  author        = {Sanjay Krishnan and Zongheng Yang and Ken Goldberg and Joseph Hellerstein and Ion Stoica},
+  year          = {2019},
+  eprint        = {1808.03196},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.DB}
+}
+
+@inproceedings{10.1145/3035918.3056097,
+  author    = {Chaudhuri, Surajit and Ding, Bolin and Kandula, Srikanth},
+  title     = {Approximate Query Processing: No Silver Bullet},
+  year      = {2017},
+  isbn      = {9781450341974},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3035918.3056097},
+  doi       = {10.1145/3035918.3056097},
+  abstract  = {In this paper, we reflect on the state of the art of Approximate Query Processing. Although much technical progress has been made in this area of research, we are yet to see its impact on products and services. We discuss two promising avenues to pursue towards integrating Approximate Query Processing into data platforms.},
+  booktitle = {Proceedings of the 2017 ACM International Conference on Management of Data},
+  pages     = {511-519},
+  numpages  = {9},
+  keywords  = {approximate query processing, query processing, pre-computation, big data, error guarantee, sampling, query optimization, olap, transformation rules},
+  location  = {Chicago, Illinois, USA},
+  series    = {SIGMOD '17}
+}
+
+@article{DBLP:journals/corr/KamatN16,
+  author        = {Niranjan Kamat and
+               Arnab Nandi},
+  title         = {Perfect and Maximum Randomness in Stratified Sampling over Joins},
+  journal       = {CoRR},
+  volume        = {abs/1601.05118},
+  year          = {2016},
+  url           = {http://arxiv.org/abs/1601.05118},
+  archiveprefix = {arXiv},
+  eprint        = {1601.05118},
+  timestamp     = {Mon, 13 Aug 2018 16:48:03 +0200},
+  biburl        = {https://dblp.org/rec/journals/corr/KamatN16.bib},
+  bibsource     = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{10.1145/3267809.3267834,
+  author    = {Quoc, Do Le and Akkus, Istemi Ekin and Bhatotia, Pramod and Blanas, Spyros and Chen, Ruichuan and Fetzer, Christof and Strufe, Thorsten},
+  title     = {ApproxJoin: Approximate Distributed Joins},
+  year      = {2018},
+  isbn      = {9781450360111},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3267809.3267834},
+  doi       = {10.1145/3267809.3267834},
+  abstract  = {A distributed join is a fundamental operation for processing massive datasets in parallel. Unfortunately, computing an equi-join over such datasets is very resource-intensive, even when done in parallel. Given this cost, the equi-join operator becomes a natural candidate for optimization using approximation techniques, which allow users to trade accuracy for latency. Finding the right approximation technique for joins, however, is a challenging task. Sampling, in particular, cannot be directly used in joins; na\"{\i}vely performing a join over a sample of the dataset will not preserve statistical properties of the query result.To address this problem, we introduce ApproxJoin. We interweave Bloom filter sketching and stratified sampling with the join computation in a new operator that preserves statistical properties of an aggregation over the join output. ApproxJoin leverages Bloom filters to avoid shuffling non-joinable data items around the network, and then applies stratified sampling to obtain a representative sample of the join output. We implemented ApproxJoin in Apache Spark, and evaluated it using microbenchmarks and real-world workloads. Our evaluation shows that ApproxJoin scales well and significantly reduces data movement, without sacrificing tight error bounds on the accuracy of the final results. ApproxJoin achieves a speedup of up to 9x over unmodified Spark-based joins with the same sampling ratio. Furthermore, the speedup is accompanied by a significant reduction in the shuffled data volume, which is up to 82x less than unmodified Spark-based joins.},
+  booktitle = {Proceedings of the ACM Symposium on Cloud Computing},
+  pages     = {426-438},
+  numpages  = {13},
+  keywords  = {approximate computing and distributed systems, Approximate join processing, multi-way joins, stratified sampling},
+  location  = {Carlsbad, CA, USA},
+  series    = {SoCC '18}
+}
+
+@article{DBS-004,
+  url     = {http://dx.doi.org/10.1561/1900000004},
+  year    = {2011},
+  volume  = {4},
+  journal = {Foundations and Trends® in Databases},
+  title   = {Synopses for Massive Data: Samples, Histograms, Wavelets, Sketches},
+  doi     = {10.1561/1900000004},
+  issn    = {1931-7883},
+  number  = {1-3},
+  pages   = {1-294},
+  author  = {Graham Cormode and Minos Garofalakis and Peter J. Haas and Chris Jermaine}
+}
+
+@inproceedings{kandula2016quickr,
+  author    = {Kandula, Srikanth and Shanbhag, Anil and Vitorovic, Aleksandar and Olma, Matthaios and Grandl, Robert and Chaudhuri, Surajit and Ding, Bolin},
+  title     = {Quickr: Lazily Approximating Complex Ad-Hoc Queries in Big Data Clusters},
+  booktitle = {Proceedings of the ACM SIGMOD International Conference on Management of Data (SIGMOD 2016)},
+  year      = {2016},
+  month     = {June},
+  abstract  = {We present a system that approximates the answer to complex ad-hoc queries in big-data clusters by injecting samplers on-the-fly and without requiring pre-existing samples. Improvements can be substantial when big-data queries take multiple passes over data and when samplers execute early in the query plan. We present a new universe sampler which is able to sample multiple join inputs. By incorporating samplers natively into a cost-based query optimizer, we automatically generate plans with appropriate samplers at appropriate locations. We devise an accuracy analysis method using which we ensure that query plans with samplers will not miss groups and that aggregate values are within a small ratio of their true value. An implementation on a cluster with tens of thousands of machines shows that queries in the TPC-DS benchmark use a median of 2x fewer resources. In contrast, approaches that construct input samples even when given 10x the size of the input to store samples improve only 22% of the queries, i.e. a median speed up of 0x.
+
+SIGMOD talk slides.
+
+Some errata in the conference version and proofs are here.
+
+Ships with Azure Data Lake Analytics; reference documentation is here and there.},
+  publisher = {ACM - Association for Computing Machinery},
+  url       = {https://www.microsoft.com/en-us/research/publication/quickr-lazily-approximating-complex-ad-hoc-queries-in-big-data-clusters/},
+  edition   = {Proceedings of the ACM SIGMOD International Conference on Management of Data (SIGMOD 2016)}
+}
+
+@article{10.1145/198429.198435,
+author = {Li, Kim-Hung},
+title = {Reservoir-Sampling Algorithms of Time Complexity O(n(1 + Log(N/n)))},
+year = {1994},
+issue_date = {Dec. 1994},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {20},
+number = {4},
+issn = {0098-3500},
+url = {https://doi.org/10.1145/198429.198435},
+doi = {10.1145/198429.198435},
+abstract = {One-pass algorithms for sampling n records without replacement from a population of unknown size n are known as reservoir-sampling algorithms. In this article, Vitter's reservoir-sampling algorithm, algorithm Z, is modified to give a more efficient algorithm, algorithm K. Additionally, two new algorithms, algorithm L and algorithm M, are proposed. If the time for scanning the population is ignored, all the four algorithms have expected CPU time O(n(1 + log(N/n))), which is optimum up to a constant factor. Expressions of the expected CPU time for the algorithms are presented. Among the four, algorithm L is the simplest, and algorithm M is the most efficient when n and N/n are large and N is O(n2).},
+journal = {ACM Trans. Math. Softw.},
+month = dec,
+pages = {481-493},
+numpages = {13},
+keywords = {random sampling, reservoir, analysis of algorithms}
+}
+
+@article{codd_relational,
+author = {Codd, E. F.},
+title = {A Relational Model of Data for Large Shared Data Banks},
+year = {1970},
+issue_date = {June 1970},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {13},
+number = {6},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/362384.362685},
+doi = {10.1145/362384.362685},
+abstract = {Future users of large data banks must be protected from having to know how the data is organized in the machine (the internal representation). A prompting service which supplies such information is not a satisfactory solution. Activities of users at terminals and most application programs should remain unaffected when the internal representation of data is changed and even when some aspects of the external representation are changed. Changes in data representation will often be needed as a result of changes in query, update, and report traffic and natural growth in the types of stored information.Existing noninferential, formatted data systems provide users with tree-structured files or slightly more general network models of the data. In Section 1, inadequacies of these models are discussed. A model based on n-ary relations, a normal form for data base relations, and the concept of a universal data sublanguage are introduced. In Section 2, certain operations on relations (other than logical inference) are discussed and applied to the problems of redundancy and consistency in the user's model.},
+journal = {Commun. ACM},
+month = jun,
+pages = {377-387},
+numpages = {11},
+keywords = {data bank, retrieval language, relations, composition, predicate calculus, redundancy, data structure, join, security, networks of data, data integrity, data base, derivability, hierarchies of data, consistency, data organization}
+}
+
+@phdthesis{olken1993random,
+  title={Random sampling from databases},
+  author={Olken, Frank},
+  year={1993},
+  school={University of California, Berkeley}
+}
+
+@article{adapativereject,
+ ISSN = {00359254, 14679876},
+ URL = {http://www.jstor.org/stable/2347565},
+ abstract = {We propose a method for rejection sampling from any univariate log-concave probability density function. The method is adaptive: as sampling proceeds, the rejection envelope and the squeezing function converge to the density function. The rejection envelope and squeezing function are piece-wise exponential functions, the rejection envelope touching the density at previously sampled points, and the squeezing function forming arcs between those points of contact. The technique is intended for situations where evaluation of the density is computationally expensive, in particular for applications of Gibbs sampling to Bayesian models with non-conjugacy. We apply the technique to a Gibbs sampling analysis of monoclonal antibody reactivity.},
+ author = {W. R. Gilks and P. Wild},
+ journal = {Journal of the Royal Statistical Society. Series C (Applied Statistics)},
+ number = {2},
+ pages = {337-348},
+ publisher = {[Wiley, Royal Statistical Society]},
+ title = {Adaptive Rejection Sampling for Gibbs Sampling},
+ volume = {41},
+ year = {1992}
+}
+
+
+@inproceedings{ripplejoin,
+author = {Haas, Peter J. and Hellerstein, Joseph M.},
+title = {Ripple Joins for Online Aggregation},
+year = {1999},
+isbn = {1581130848},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/304182.304208},
+doi = {10.1145/304182.304208},
+abstract = {We present a new family of join algorithms, called ripple joins, for online processing of multi-table aggregation queries in a relational database management system (DBMS). Such queries arise naturally in interactive exploratory decision-support applications.Traditional offline join algorithms are designed to minimize the time to completion of the query. In contrast, ripple joins are designed to minimize the time until an acceptably precise estimate of the query result is available, as measured by the length of a confidence interval. Ripple joins are adaptive, adjusting their behavior during processing in accordance with the statistical properties of the data. Ripple joins also permit the user to dynamically trade off the two key performance factors of on-line aggregation: the time between successive updates of the running aggregate, and the amount by which the confidence-interval length decreases at each update. We show how ripple joins can be implemented in an existing DBMS using iterators, and we give an overview of the methods used to compute confidence intervals and to adaptively optimize the ripple join “aspect-ratio” parameters. In experiments with an initial implementation of our algorithms in the POSTGRES DBMS, the time required to produce reasonably precise online estimates was up to two orders of magnitude smaller than the time required for the best offline join algorithms to produce exact answers.},
+booktitle = {Proceedings of the 1999 ACM SIGMOD International Conference on Management of Data},
+pages = {287-298},
+numpages = {12},
+location = {Philadelphia, Pennsylvania, USA},
+series = {SIGMOD '99}
+}
+
+
+
+@article{onlineaggregation,
+author = {Hellerstein, Joseph M. and Haas, Peter J. and Wang, Helen J.},
+title = {Online Aggregation},
+year = {1997},
+issue_date = {June 1997},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {26},
+number = {2},
+issn = {0163-5808},
+url = {https://doi.org/10.1145/253262.253291},
+doi = {10.1145/253262.253291},
+abstract = {Aggregation in traditional database systems is performed in batch mode: a query is submitted, the system processes a large volume of data over a long period of time, and, eventually, the final answer is returned. This archaic approach is frustrating to users and has been abandoned in most other areas of computing. In this paper we propose a new online aggregation interface that permits users to both observe the progress of their aggregation queries and control execution on the fly. After outlining usability and performance requirements for a system supporting online aggregation, we present a suite of techniques that extend a database system to meet these requirements. These include methods for returning the output in random order, for providing control over the relative rate at which different aggregates are computed, and for computing running confidence intervals. Finally, we report on an initial implementation of online aggregation in POSTGRES.},
+journal = {SIGMOD Rec.},
+month = jun,
+pages = {171-182},
+numpages = {12}
+}
+
+@article{horvitzestimator,
+ ISSN = {01621459},
+ URL = {http://www.jstor.org/stable/2280784},
+ abstract = {This paper presents a general technique for the treatment of samples drawn without replacement from finite universes when unequal selection probabilities are used. Two sampling schemes are discussed in connection with the problem of determining optimum selection probabilities according to the information available in a supplementary variable. Admittedly, these two schemes have limited application. They should prove useful, however, for the first stage of sampling with multi-stage designs, since both permit unbiased estimation of the sampling variance without resorting to additional assumptions.},
+ author = {D. G. Horvitz and D. J. Thompson},
+ journal = {Journal of the American Statistical Association},
+ number = {260},
+ pages = {663--685},
+ publisher = {[American Statistical Association, Taylor & Francis, Ltd.]},
+ title = {A Generalization of Sampling Without Replacement From a Finite Universe},
+ volume = {47},
+ year = {1952}
+}
+
+@inproceedings{corrsampling,
+author = {Kamat, Niranjan and Nandi, Arnab},
+title = {A Unified Correlation-Based Approach to Sampling Over Joins},
+year = {2017},
+isbn = {9781450352826},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3085504.3085524},
+doi = {10.1145/3085504.3085524},
+abstract = {Supporting sampling in the presence of joins is an important problem in data analysis, but is inherently challenging due to the need to avoid correlation between output tuples. Current solutions provide either correlated or non-correlated samples. Sampling might not always be feasible in the non-correlated sampling-based approaches -- the sample size or intermediate data size might be exceedingly large. On the other hand, a correlated sample may not be representative of the join. This paper presents a unified strategy towards join sampling, while considering sample correlation every step of the way. We provide two key contributions. First, in the case where a correlated sample is acceptable, we provide techniques, for all join types, to sample base relations so that their join is as random as possible. Second, in the case where a correlated sample is not acceptable, we provide enhancements to the state-of-the-art algorithms to reduce their execution time and intermediate data size.},
+booktitle = {Proceedings of the 29th International Conference on Scientific and Statistical Database Management},
+articleno = {20},
+numpages = {12},
+keywords = {Random, Join, Correlation, Sampling, Randomness},
+location = {Chicago, IL, USA},
+series = {SSDBM '17}
+}
+

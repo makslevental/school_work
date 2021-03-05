@@ -1,0 +1,6783 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass IEEEtran-CompSoc
+\use_default_options true
+\begin_modules
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Sampling through Joins
+\end_layout
+
+\begin_layout Author
+Maksim Levental, Greg Pauloski
+\end_layout
+
+\begin_layout Abstract
+In most relational databases joins 
+\begin_inset Formula $\mathtt{JOIN}\text{\left(R_{1},R_{2}\right)}$
+\end_inset
+
+ between two tables 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ are expensive, especially on large tables (owing to the join having maximum
+ cardinality 
+\begin_inset Formula $\lvert R_{1}\rvert\times\lvert R_{2}\rvert$
+\end_inset
+
+).
+ Often joins are used for the purposes of computing aggregations (e.g.
+ 
+\family typewriter
+SUM
+\family default
+, 
+\family typewriter
+AVG
+\family default
+, 
+\family typewriter
+COUNT
+\family default
+).
+ One potential optimization is to 
+\family typewriter
+SAMPLE
+\family default
+ the operand tables.
+ Unfortunately, in general, 
+\family typewriter
+SAMPLE
+\family default
+ doesn’t commute with 
+\family typewriter
+JOIN
+\family default
+, i.e.
+ 
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Formula 
+\[
+\mathtt{SAMPLE}\left(\mathtt{JOIN}\text{\left(R_{1},R_{2}\right)}\right)\ne\mathtt{JOIN}\left(\mathtt{SAMPLE}\left(R_{1}\right),\mathtt{SAMPLE}\left(R_{2}\right)\right)
+\]
+
+\end_inset
+
+We aim to study the regimes under which the operations do commute and what
+ are the tradeoffs when they don’t.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+words about why sampling joins is important e.g.
+ online aggregation problem.
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Online aggregation.
+ The concept of online aggregation was first proposed in the classic work
+ by Hellerstein et al.
+ in the late 90’s [19].
+ The idea is to provide approximate answers with error guarantees (in the
+ form of confidence intervals) continuously during the query execution process,
+ where the approximation quality improves gradually over time.
+ Rather than having a user wait for the exact answer, which may take an
+ unknown amount of time, this allows the user to explore the efficiency-accuracy
+ tradeoff, and termi- nate the query execution whenever s/he is satisfied
+ with the approximation quality.
+ Online aggregation for joins.
+ For join queries, the prob- lem becomes much harder.
+ When we sample tuples from each table and join the sampled tuples, we get
+ a sample of the join results.
+ The sample mean can still serve as an un- biased estimator of the full
+ join (after appropriate scaling), but these samples are not independently
+ chosen from the full join results, even though the joining tuples are sampled
+ from each table independently.
+ Haas et al.
+ [14,16] studied this problem in depth, and derived new formulas for com-
+ puting the confidence intervals for such estimators, and later proposed
+ the ripple join algorithm [15].
+ Ripple join repeat- edly takes random samples from each table in a round-robin
+ fashion, and keep all the sampled tuples in memory.
+ Ev- ery time a new tuple is taken from one table, it is joined with all
+ the tuples taken from other tables so far.
+ Figure 1 illustrates how the algorithm works on two tables, which intuitively
+ explains why it is called “ripple” join.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R\left(A_{i}\right)$
+\end_inset
+
+, be a relation over some attributes 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+, with cardinality 
+\begin_inset Formula $n\coloneqq\left|R\right|$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $0\leq f\leq1$
+\end_inset
+
+, 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R,f\right)$
+\end_inset
+
+ is defined to be a uniform random sample of tuples in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ This produces a subset 
+\begin_inset Formula $R'\subseteq R$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|R'\right|=f\cdot n$
+\end_inset
+
+.
+ A priori the sampling semantics are unspecified; indeed, there are three
+ distinct interpretations of sampling: 
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Sampling with Replacement 
+\shape default
+(WR): sample 
+\begin_inset Formula $f\cdot n$
+\end_inset
+
+ tuples uniformly and independently with replacement.
+ The result is bag (multiset) of tuples.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Sampling without Replacement 
+\shape default
+(WoR): sample 
+\begin_inset Formula $f\cdot n$
+\end_inset
+
+ 
+\shape italic
+distinct
+\shape default
+ tuples, i.e.
+ each successive tuple is sampled from the remaining set of tuples.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Independent Coin Flip
+\shape default
+ (CF): for each tuple in 
+\begin_inset Formula $R$
+\end_inset
+
+, choose that tuple with probability 
+\begin_inset Formula $f$
+\end_inset
+
+ (and reject with probability 
+\begin_inset Formula $1-f$
+\end_inset
+
+).
+ This essentially produces a draw from a binomial distribution 
+\begin_inset Formula $B(n,f)$
+\end_inset
+
+ where heads correspond to chosen tuples.
+\end_layout
+
+\begin_layout Standard
+Note we can transform amongst these interpretations for various input, output
+ pairs
+\end_layout
+
+\begin_layout Itemize
+Given a WR sampling process we can transform to WoR by performing duplicate
+ removal (
+\shape italic
+deduplication
+\shape default
+).
+\end_layout
+
+\begin_layout Itemize
+Given a CF sampling process we can transform to WoR by CF sampling with
+ 
+\begin_inset Formula $f'=f+\varepsilon$
+\end_inset
+
+ and then WoR sampling the CF sample down to a 
+\begin_inset Formula $f$
+\end_inset
+
+ fraction 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Given WoR sampling process we can transform to WR by sampling with replacement
+ from the WoR sample.
+\end_layout
+
+\begin_layout Itemize
+Given a WR or WoR sampling process 
+\series bold
+it is impossible 
+\series default
+to produce a CF sample since with CF there is a small, but nonzero, probability
+ that the sample is empty (which is impossible for both WR and WoR given
+ 
+\begin_inset Formula $f>0$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Another dimension of sampling is whether the samples are 
+\shape italic
+correlated
+\shape default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Inclusion of a member of the sample implies, with some probability, inclusion
+ of some other member.
+\end_layout
+
+\end_inset
+
+ or 
+\shape italic
+uncorrelated
+\shape default
+; we will see that correlated samples lead to higher error rates than uncorrelat
+ed samples (see sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Correlation-based-sampling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+
+\shape italic
+ 
+\shape default
+We are also particularly interested in 
+\shape italic
+streaming
+\shape default
+ or 
+\shape italic
+sequential sampling
+\shape default
+, which is the act of sampling a relation as it streams by, for example
+ in instances where the relation is never materialized (as in when it's
+ produced by some long running process).
+ We will also have need of 
+\shape italic
+weighted sampling
+\shape default
+, wherein elements are sampled with probability proportional to some weight
+ assigned to those elements.
+\end_layout
+
+\begin_layout Standard
+Joins are defined according to Codd's relational model 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "codd_relational"
+literal "false"
+
+\end_inset
+
+; the 
+\shape italic
+natural join
+\shape default
+ 
+\begin_inset Formula $R\bowtie S$
+\end_inset
+
+ of two relations 
+\begin_inset Formula $R,S$
+\end_inset
+
+ is defined as the set of all pairs of tuples in 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $S$
+\end_inset
+
+ that are equal on their common attributes.
+ If 
+\begin_inset Formula $R,S$
+\end_inset
+
+ have no common attributes then 
+\begin_inset Formula $R\bowtie S\equiv R\times S$
+\end_inset
+
+, the cartesian product
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Sometimes called the 
+\shape italic
+cross join
+\shape default
+ of
+\shape italic
+ 
+\shape default
+
+\begin_inset Formula $R,S$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $R,S$
+\end_inset
+
+.
+ We will also have need of considering joins between relations that have
+ a predicated relationship between some colums; define a 
+\begin_inset Formula $\theta$
+\end_inset
+
+-join 
+\begin_inset Formula $R\bowtie_{A\theta B}S$
+\end_inset
+
+ of relations 
+\begin_inset Formula $R(A,\dots),S(B,\dots)$
+\end_inset
+
+ on attributes 
+\begin_inset Formula $A,B$
+\end_inset
+
+ and some binary operator 
+\begin_inset Formula $\left\{ <,≤,=,≠,>,≥\right\} $
+\end_inset
+
+ as all tuples in 
+\begin_inset Formula $R\bowtie S$
+\end_inset
+
+ such that 
+\begin_inset Formula $a\theta b$
+\end_inset
+
+, for 
+\begin_inset Formula $a\in A,b\in B$
+\end_inset
+
+ evaluates to true.
+ The particular case of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ being the equality operator 
+\begin_inset Formula $=$
+\end_inset
+
+ is called an 
+\shape italic
+equijoin
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Let 
+\begin_inset Formula $J_{t}\left(R_{2}\right)\coloneqq\left\{ t'\in R_{2}\mid t'.A=t.A\right\} $
+\end_inset
+
+ be the set of tuples in 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ that join with 
+\begin_inset Formula $t\in R_{1}$
+\end_inset
+
+ and, furthermore, define 
+\begin_inset Formula $t\bowtie R_{2}\coloneqq t\bowtie J_{t}\left(R_{2}\right)$
+\end_inset
+
+ i.e.
+ the set of tuples in 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+ contributed by matching against 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Thus, almost tautoligically 
+\begin_inset Formula 
+\[
+\left|t\bowtie R_{2}\right|=\left|t\bowtie J_{t}\left(R_{2}\right)\right|=\left|J_{t}\left(R_{2}\right)\right|=m_{2}\left(t.A\right)
+\]
+
+\end_inset
+
+Similarly define 
+\begin_inset Formula $J_{t}\left(R_{1}\right),R_{1}\bowtie t$
+\end_inset
+
+ for 
+\begin_inset Formula $t\in R_{2}$
+\end_inset
+
+ and observe 
+\begin_inset Formula $\left|J_{t}\left(R_{1}\right)\right|=m_{1}\left(t.A\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The join sampling problem
+\end_layout
+
+\begin_layout Standard
+First we make some elementary observations.
+ Let 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+ be two relations of cardinalities 
+\begin_inset Formula $n_{1},n_{2}$
+\end_inset
+
+ respectively and 
+\begin_inset Formula $J\coloneqq R_{1}\bowtie R_{2}$
+\end_inset
+
+,
+\shape italic
+ 
+\shape default
+with 
+\shape italic
+
+\begin_inset Formula $n\coloneqq\left|J\right|$
+\end_inset
+
+,
+\shape default
+ and further suppose 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+ only have in common attribute 
+\begin_inset Formula $A\subseteq D$
+\end_inset
+
+ for some domain 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $v\in D$
+\end_inset
+
+, let 
+\begin_inset Formula $m_{1}(v),m_{2}(v)$
+\end_inset
+
+ be the quantities (frequencies) of tuples in 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+, respectively, for which attribute 
+\begin_inset Formula $A$
+\end_inset
+
+ takes on value 
+\begin_inset Formula $v$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For 
+\begin_inset Formula $v\in D\backslash A$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $v\in D$
+\end_inset
+
+ but 
+\begin_inset Formula $v\notin A$
+\end_inset
+
+, we have 
+\begin_inset Formula $m_{i}\left(v\right)=0$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\sum_{v\in D}m_{i}(v)=n_{i}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+.
+ That is to say, projecting from 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ to 
+\begin_inset Formula $A$
+\end_inset
+
+ partitions the relation 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula 
+\[
+n=\sum_{v\in D}m_{1}(v)\cdot m_{2}(v)
+\]
+
+\end_inset
+
+since each tuple in 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ that contributes to 
+\begin_inset Formula $m_{1}(v)$
+\end_inset
+
+ joins with 
+\begin_inset Formula $m_{2}(v)$
+\end_inset
+
+ tuples in 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ and vice-versa.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider sampling from relations 
+\begin_inset Formula $R_{1}\left(A,B\right),R_{2}\left(B,C\right)$
+\end_inset
+
+ defined as such
+\begin_inset Formula 
+\[
+\begin{aligned}R_{1} & \coloneqq\left\{ \left(a_{1},b_{0}\right),\left(a_{2},b_{1}\right),\left(a_{2},b_{2}\right),\dots,\left(a_{2},b_{K}\right)\right\} \\
+R_{2} & \coloneqq\left\{ \left(a_{2},c_{0}\right),\left(a_{1},c_{1}\right),\left(a_{1},c_{2}\right),\dots,\left(a_{1},c_{K}\right)\right\} 
+\end{aligned}
+\]
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $m_{1}\left(a_{1}\right)=m_{2}\text{\left(a_{2}\right)}=K$
+\end_inset
+
+ and thus 
+\begin_inset Formula 
+\begin{align*}
+\left|R_{1}\bowtie R_{2}\right| & =\sum_{v\in D}m_{1}(v)\cdot m_{2}(v)\\
+ & =m_{1}(a_{1})\cdot m_{2}(a_{1})+m_{1}(a_{2})\cdot m_{2}(a_{2})\\
+ & =K+K=2K
+\end{align*}
+
+\end_inset
+
+This shows that there is 
+\shape italic
+skew 
+\shape default
+on the different attribute values for which the join occurs.
+ Then, suppose we wish to construct 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+; we should expect that half the tuples in such a sample will have attribute
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ equal to 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ and the other half will have attribute 
+\begin_inset Formula $A$
+\end_inset
+
+ equal to 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+.
+ Unfortunately, if we attempt to sample each of 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+ independently and then perform the join we are unlikely to get the correct
+ result; the probability that a uniform sample from 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ contains the tuple 
+\begin_inset Formula $\left(a_{1},b_{0}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $1/(K+1)$
+\end_inset
+
+ and similarly for 
+\begin_inset Formula $\left(a_{2},c_{0}\right)\in R_{2}$
+\end_inset
+
+.
+ Indeed, with high probability
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left(1-\frac{1}{k+1}\right)\cdot\left(1-\frac{1}{k+1}\right)=1-O\left(\frac{1}{k}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\mathtt{SAMPLE}\left(R_{1},f\right)\bowtie\mathtt{SAMPLE}\left(R_{2},f\right)=\emptyset
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The crux of the join sampling problem (and it's potential solution) is that,
+ for a sample 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+, each tuple 
+\begin_inset Formula $t_{1}\in R_{1}$
+\end_inset
+
+ is sampled in direct proportion to the quantity of tuples 
+\begin_inset Formula $t_{2}\in R_{2}$
+\end_inset
+
+ that join with it, and vice-versa.
+ To wit:
+\begin_inset Formula 
+\begin{multline}
+R_{1}\bowtie R_{2}=\left\{ \left(a_{1},b_{0},c_{1}\right),\dots,\left(a_{1},b_{0},c_{K}\right),\right.\\
+\left.\left(a_{2},b_{1},c_{0}\right),\dots,\left(a_{2},b_{K},c_{0}\right)\right\} \label{eq:correlatedsample}
+\end{multline}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\left(a_{1},b_{0}\right)\in R_{1}$
+\end_inset
+
+ is sampled from 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1/2$
+\end_inset
+
+ while the remaining tuples in 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ are sampled each with probability 
+\begin_inset Formula $1/2K$
+\end_inset
+
+.
+ That is to say, 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+ corresponds to a weighted sample of 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ rather than a uniform random sample.
+ This demonstrates the impossibility of constructing a uniform random sample
+ of 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+ by first uniformly sampling each of 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Theorem
+Given uniform random samples 
+\begin_inset Formula $S_{i}\coloneqq\mathtt{SAMPLE}\left(R_{i},f_{i}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $f_{i}<1$
+\end_inset
+
+ it is impossible to construct a uniform random 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+ from 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ for any 
+\begin_inset Formula $f>0$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:Given-uniform-random"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+In fact even if we bound the skew we cannot hope to achieve such sampling
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+Given a common attribute value 
+\begin_inset Formula $v$
+\end_inset
+
+ for relations 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+ and attribute frequencies 
+\begin_inset Formula $m_{1}\left(v\right),m_{2}\left(v\right)$
+\end_inset
+
+, it is impossible to construct a uniform random 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+ from 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ (as defined in thm.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Given-uniform-random"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) unless
+\shape up
+
+\begin_inset Formula 
+\[
+\begin{array}{c}
+f_{1}\geq\frac{f\cdot m_{2}}{2}\mbox{ and }f_{2}\geq\frac{f\cdot m_{1}}{2}\mbox{ for }f\leq\frac{1}{\max\left\{ m_{1},m_{2}\right\} }\\
+\\
+\mbox{ or }\\
+\\
+f_{1}\geq\frac{1}{2}\mbox{ and }f_{2}\geq\frac{1}{2}\mbox{ for }f\leq\frac{1}{\min\left\{ m_{1},m_{2}\right\} }
+\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+In effect, this shows that we cannot commute 
+\begin_inset Formula $\mathtt{SAMPLE}$
+\end_inset
+
+ with 
+\begin_inset Formula $\bowtie$
+\end_inset
+
+.
+ However, this does not preclude the possibility of 
+\shape italic
+non-uniform
+\shape default
+ random samples of 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+ being used to construct a uniform random sample of 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+.
+ Though, even with such non-uniform sampling there are minimum lower bounds
+ on what fractions of operand relations need to be sampled:
+\end_layout
+
+\begin_layout Theorem
+To produce 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+ from 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ it's the case that 
+\begin_inset Formula $f_{1},f_{2}$
+\end_inset
+
+ need to be such that 
+\begin_inset Formula $f_{1}\times f_{2}\geq f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Online aggregation for joins
+\end_layout
+
+\begin_layout Standard
+Consider a SQL query of the form
+\end_layout
+
+\begin_layout LyX-Code
+SELECT g, AGG
+\begin_inset Formula $\left(g\left(R_{1},R_{2},\dots,R_{K}\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+FROM 
+\begin_inset Formula $R_{1},R_{2},\dots,R_{K}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+WHERE 
+\begin_inset Formula $\theta\left(R_{1},R_{2},\dots,R_{K}\right)$
+\end_inset
+
+ AND 
+\begin_inset Formula $\sigma_{\varphi}\left(R_{1},R_{2},\dots,R_{K}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+GROUP BY g
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathtt{AGG}\in\left\{ \mathtt{SUM},\mathtt{AVG},\mathtt{COUNT},\dots\right\} $
+\end_inset
+
+, 
+\family typewriter
+
+\begin_inset Formula $g\left(R_{1},R_{2},\dots,R_{K}\right)$
+\end_inset
+
+ 
+\family default
+is an expression that involves any attributes of the relations 
+\begin_inset Formula $R_{1},R_{2},\dots,R_{K}$
+\end_inset
+
+,
+\family typewriter
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+ 
+\family default
+is the aforementioned join condition operator, and 
+\begin_inset Formula $\sigma_{\varphi}$
+\end_inset
+
+ 
+\shape italic
+selects
+\shape default
+ tuples that satisfy the predicate 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ An effective online aggregation algorithm produces an estimator 
+\begin_inset Formula $\hat{Y}_{n}$
+\end_inset
+
+ for 
+\family typewriter
+AGG
+\family default
+
+\begin_inset Formula $\left(g\right)$
+\end_inset
+
+, at every iteration 
+\begin_inset Formula $n$
+\end_inset
+
+, along with confidence intervals (CIs)
+\begin_inset Formula 
+\[
+I_{n}\coloneqq\left[\hat{Y}_{n}-\epsilon_{n},\hat{Y}_{n}+\epsilon_{n}\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon_{n}$
+\end_inset
+
+, called the 
+\shape italic
+precision
+\shape default
+, or 
+\shape italic
+margin of error
+\shape default
+ is defined as a function of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, the 
+\shape italic
+confidence level
+\shape default
+,
+\shape italic
+ 
+\shape default
+by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P\left(\left|\hat{Y}_{n}-\mathtt{AGG}\left(g\right)\right|\leq\epsilon_{n}\right)\geq\alpha
+\]
+
+\end_inset
+
+For example, if estimators are derived by using the Central Limit Theorem,
+ then 
+\begin_inset Formula 
+\[
+\epsilon_{n}\coloneqq\frac{z_{p}\hat{\sigma}_{n}}{\sqrt{n}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $z_{p}$
+\end_inset
+
+ is the 
+\shape italic
+z-score
+\shape default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The unique number such that 
+\begin_inset Formula $P\left(-z_{p}\leq Z\leq z_{p}\right)=p$
+\end_inset
+
+ for 
+\begin_inset Formula $Z\sim\mathcal{N}\left(0,1\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathcal{N}\left(0,1\right)$
+\end_inset
+
+ is the standard Normal distribution.
+\end_layout
+
+\end_inset
+
+ corresponding to a 
+\begin_inset Formula $100p\%$
+\end_inset
+
+ confidence level.
+ Typically one of 
+\begin_inset Formula $\epsilon_{n},\alpha$
+\end_inset
+
+ (but not both) is specified by the user and the algorithm reports the other
+ as it proceeds; the user terminates the query when the unspecified parameter
+ reaches a desired value.
+ 
+\end_layout
+
+\begin_layout Section
+Techniques
+\end_layout
+
+\begin_layout Standard
+As in previous sections we consider the problem of constructing a uniform
+ random 
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+ (for various sampling semantics) by means of sampling the constituent relations
+ 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+.
+ We also restrict ourselves to joins over one common attribute 
+\begin_inset Formula $A\subseteq D$
+\end_inset
+
+; where the extension to more complicated joins isn't obvious we discuss
+ necessary adjustments.
+ In the proceeding we partition the approaches to resolving the sampling
+ problem according to how much information exists for each of the relations
+ 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Frequencies
+\series default
+: complete frequencies (for each possible value) for all relevant attributes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Partial frequencies
+\series default
+: frequencies for only the high frequency values; this is a useful category
+ since it is in fact these values that distort the ultimate sample.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Index
+\series default
+: a means to perform indexed access (as opposed to sequential) on tuples
+ of a relation according to values of some attribute; crucially we require
+ the ability to also evaluate predicates on said attribute.
+\end_layout
+
+\begin_layout Standard
+We therefore have a classification for strategies according to whether we
+ have statistics (full or partial) and indices for both 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+, neither, or some in between (see tbl.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tbl:techniques"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sampling techniques
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tbl:techniques"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Strategy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Complexity
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Olken sample 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "olken1993random"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index and frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(M\left|R_{1}\right|/\left|R_{1}\bowtie R_{2}\right|\right)$
+\end_inset
+
+ per tuple in result 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stream sample 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+—
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index and frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+ per tuple in result
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Group sample 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+—
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(\alpha_{1}\left|R_{1}\bowtie R_{2}\right|\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frequency-partition sample 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+—
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+End-biased frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(\alpha_{2}\left|R_{1}\bowtie R_{2}\right|\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index sample 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+—
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index 
+\begin_inset Formula $R_{2}^{hi}$
+\end_inset
+
+ and end-biased frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(\alpha_{3}\left|R_{1}\bowtie R_{2}\right|\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ripple join
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ripplejoin"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(\sqrt{\left|R_{1}\right|/d}\right)$
+\end_inset
+
+ per tuple in result 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hash ripple join
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ripplejoin"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(\sqrt{\left|R_{1}\right|/d}\right)$
+\end_inset
+
+ per tuple in result 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wander join
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wanderjoin"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(1/2^{K-1}\right)$
+\end_inset
+
+ per tuple in result for 
+\begin_inset Formula $K$
+\end_inset
+
+ relations
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MaxRand join 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "corrsampling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index and frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Index and frequencies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O\left(\left|D\right|\left|K\right|+\sum_{i=1}^{K}N\left(1+\log\left(\frac{\left|R_{i}\right|}{N}\right)\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Olken sample
+\end_layout
+
+\begin_layout Standard
+Olken sampling only applies in the best possible case; when we have random
+ access on 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ and full frequency statistics for 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+.
+ In this case we use rejection sampling (see sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Rejection-sampling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) to produce tuples in 
+\begin_inset Formula $\mathtt{SAMPLE}_{WR}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+ by sampling from tuples 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ in direct proportion to their frequency in 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ (see alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:olkensample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ For 
+\begin_inset Formula $M\coloneqq\max_{v\in D}m_{2}\left(v\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $v\in A\subseteq D$
+\end_inset
+
+, Olken sampling produces a with-replacement sample of 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+ and requires 
+\begin_inset Formula $Mn_{1}/n$
+\end_inset
+
+ iterations for each output tuple 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChaudhuriRandomSampling"
+literal "false"
+
+\end_inset
+
+, where 
+\begin_inset Formula $n\coloneqq\left|R_{1}\bowtie R_{2}\right|$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{1}\coloneqq\left|R_{1}\right|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Olken Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{1}\left(A,\dots\right),R_{2}\left(A,\dots\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $M\coloneqq\max_{v\in D}m_{2}\left(v\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $k\coloneqq\left\lceil f\cdot\left|R_{1}\bowtie R_{2}\right|\right\rceil $
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $S\equiv\mathtt{SAMPLE}_{WR}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S[1,\dots,k]\coloneqq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  // sample 
+\begin_inset Formula $t_{1}$
+\end_inset
+
+ from 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ uniformly
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $t_{1}\sim U(R_{1})$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  // sample matching rows in 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $t_{2}\sim U\left(\left\{ t\mid t\in R_{2}\wedge t.A=t_{1}.A\right\} \right)$
+\end_inset
+
+  
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  for 
+\begin_inset Formula $i\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout LyX-Code
+    // accept in proportion with the
+\end_layout
+
+\begin_layout LyX-Code
+    // frequency 
+\begin_inset Formula $m_{2}\left(v\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $v\coloneqq t_{1}.A$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+    while 
+\begin_inset Formula $m_{2}\left(t_{2}.A\right)<U\left(0,M\right)$
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $t_{1}\sim U(R_{1})$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $t_{2}\sim U\left(\left\{ t\mid t\in R_{2}\wedge t.A=t_{1}.A\right\} \right)$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:olkensample"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $S[i]\coloneqq\left(t_{1},t_{2}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Stream sample
+\end_layout
+
+\begin_layout Standard
+In the circumstances where we have only streaming access to 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ we can use weighted streaming sampling (see sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Weighted-streaming-sampling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) with weights for 
+\begin_inset Formula $t\in R_{1}$
+\end_inset
+
+ defined as 
+\begin_inset Formula $w(t)\coloneqq m_{2}\left(t.A\right)$
+\end_inset
+
+ and join each such tuple with a randomly selected tuple from 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+.
+ See alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:streamsample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Note that we do constant work per ultimately included tuple.
+\end_layout
+
+\begin_layout Subsubsection
+Group sample
+\end_layout
+
+\begin_layout Standard
+In the case where we further reduce our information to only statistics (no
+ index) for 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+, we can weighted sample tuples 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ from 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ and then sample from 
+\begin_inset Formula $t_{i}\bowtie R_{2}$
+\end_inset
+
+.
+ In effect performing a 
+\family typewriter
+GROUP BY
+\family default
+.
+ We perform the second sampling using unweighted sampling with replacement
+ (see sec.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Unweighted-streaming-sampling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The cost of this strategy depends on the cardinalities 
+\begin_inset Formula $\left|t_{i}\bowtie R_{2}\right|$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\alpha_{1}\coloneqq r\times\frac{\sum_{v\in D}m_{1}\left(v\right)m_{2}\left(v\right)^{2}}{\left(\sum_{v\in D}m_{1}\left(v\right)m_{2}\left(v\right)\right)^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Note that in the case of a foreign-key join (where 
+\begin_inset Formula $m_{2}\left(v\right)\in\left\{ 0,1\right\} $
+\end_inset
+
+) and this strategy compares very favorably to naive sampling
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Constructing the entire join and then using unweighted sampling on the result.
+\end_layout
+
+\end_inset
+
+ (the only other possible strategy for this set of circumstances).
+\end_layout
+
+\begin_layout Subsubsection
+Frequency-partition sample
+\end_layout
+
+\begin_layout Standard
+Suppose we now only have an end-biased histogram
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Frequencies for all values that occur 
+\begin_inset Formula $l$
+\end_inset
+
+ or more times.
+\end_layout
+
+\end_inset
+
+ for 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+.
+ We can then logically partition 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ into those tuples with high-frequency 
+\begin_inset Formula $D^{hi}$
+\end_inset
+
+ values and their complement 
+\begin_inset Formula $D^{lo}$
+\end_inset
+
+ (tuples with low-frequency values) and notice that it's the former that's
+ responsible for the skew that is the core of the sampling problem.
+ These 
+\begin_inset Formula $D^{hi}$
+\end_inset
+
+ values also inflate the join between.
+ Therefore we can recover efficiency by taking a hybrid approach; employing
+ Group-Sample strategy on 
+\begin_inset Formula $D^{hi}$
+\end_inset
+
+ (thereby saving having to compute the full join for the bulk of the tuples)
+ and naive sampling on 
+\begin_inset Formula $D^{lo}$
+\end_inset
+
+.
+ Working to our advantage is the fact that there cannot be too many high-frequen
+cy values 
+\shape italic
+and
+\shape default
+ that it is precisely this set of values for which maintaining the frequencies
+ is cheap (since, tautologically, they are observed frequently and can be
+ sketched easily).
+\end_layout
+
+\begin_layout Standard
+The remaining issue is how to determine the allocation of the sample to
+ each group/strategy: take 
+\begin_inset Formula $k\coloneqq\left\lceil f\cdot\left|R_{1}\bowtie R_{2}\right|\right\rceil $
+\end_inset
+
+ from each subset and then cull in each subset in order to reduce the total
+ quantity (by CF sampling with 
+\begin_inset Formula $p$
+\end_inset
+
+ being the relative fractions of tuples in each subset).
+ See alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Frequency-Partition-Sample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The key benefit of this algorithm is that only requires an end-biased histogram
+ for 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+.
+ The cost incurred by the Frequency-partition Sample strategy is 
+\begin_inset Formula $O\left(\alpha_{2}\left|R_{1}\bowtie R_{2}\right|\right)$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\alpha_{2}\coloneqq\frac{\sum_{v\in D^{lo}}m_{1}\left(v\right)m_{2}\left(v\right)+r\times\frac{\sum_{v\in D^{hi}}m_{1}\left(v\right)m_{2}\left(v\right)^{2}}{\sum_{v\in D^{hi}}m_{1}\left(v\right)m_{2}\left(v\right)}}{\sum_{v\in D}m_{1}\left(v\right)m_{2}\left(v\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Index sample
+\end_layout
+
+\begin_layout Standard
+If an index is available for the high-frequency values 
+\begin_inset Formula $R_{2}^{hi}$
+\end_inset
+
+, in addition to just the frequencies themselves, then a more efficient
+ version of frequency-partition sample is possible; we can save having to
+ complete the full join 
+\begin_inset Formula 
+\begin{multline*}
+\left(S_{1}\cup R_{1}^{lo}\right)\bowtie R_{2}\equiv\left(S_{1}\cup R_{1}^{lo}\right)\bowtie\left(R_{2}^{lo}\cup R_{2}^{hi}\right)\\
+\equiv\cancel{\left(S_{1}\bowtie R_{2}^{hi}\right)}\cup\left(S_{1}\bowtie R_{2}^{lo}\right)\cup\left(R_{1}^{lo}\bowtie R_{2}\right)
+\end{multline*}
+
+\end_inset
+
+and instead uses the same idea as in stream sample
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{1}\in S_{1}\wedge t_{2}\sim U\left(\left\{ t\mid t\in R_{2}^{hi}\wedge t.A=t_{1}.A\right\} \right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ to select a random tuple in 
+\begin_inset Formula $R_{2}^{hi}$
+\end_inset
+
+ per tuple in 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+.
+ The cost incurred by the Index sample strategy is 
+\begin_inset Formula $O\left(\alpha_{3}\left|R_{1}\bowtie R_{2}\right|\right)$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+\alpha_{3}\coloneqq\frac{\sum_{v\in D^{lo}}m_{1}\left(v\right)m_{2}\left(v\right)+r}{\sum_{v\in D}m_{1}\left(v\right)m_{2}\left(v\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Count sample
+\end_layout
+
+\begin_layout Standard
+Strictly speaking an index for 
+\begin_inset Formula $R_{2}^{hi}$
+\end_inset
+
+ isn't necessary and can be replaced by a scan across 
+\begin_inset Formula $R_{2}^{hi}$
+\end_inset
+
+ instead.
+ See alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:count-sample"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Correlation-based sampling
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Correlation-based-sampling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Olken sample and its extensions produce uncorrelated samples by enforcing
+ (through various means) that a tuple in 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ is joined with only one tuple in 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+; this leads to 
+\shape italic
+sample inflation
+\shape default
+.
+ Correlated sampling techniques perform better with respect to sample inflation
+ but suffer from poorer error estimates (relative to uncorrelated sampling).
+ Correlation-based samping aims to mitigate the issues of correlated sampling,
+ while preserving the benefits, by maximizing 
+\shape italic
+join randomness
+\shape default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "corrsampling"
+literal "false"
+
+\end_inset
+
+; the join randomness of a sampling technique is the number of different
+ possible samples that can be drawn by the technique given a fixed sample
+ size (and frequencies of attributes).
+ 
+\end_layout
+
+\begin_layout Standard
+To motivate join randomness, consider naive sampling from 
+\begin_inset Formula $K$
+\end_inset
+
+ relations with common attribute 
+\begin_inset Formula $A\subset D$
+\end_inset
+
+ that takes on 
+\begin_inset Formula $\left|D\right|$
+\end_inset
+
+ distinct values.
+ The maximum number of such samples depends combinatorially on the number
+ drawn from each relation:
+\begin_inset Formula 
+\[
+\#\text{Samplings}=\prod_{j=1}^{\left|D\right|}\prod_{k=1}^{K}C_{ms_{k}\left(a_{j}\right)}^{m_{k}\left(a_{j}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $m_{k}\left(a_{j}\right)$
+\end_inset
+
+ are frequencies in 
+\begin_inset Formula $R_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $ms_{k}\left(a_{j}\right)$
+\end_inset
+
+ are the allocations for sample 
+\begin_inset Formula $S_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $R_{k}$
+\end_inset
+
+ (
+\begin_inset Formula $C_{b}^{a}$
+\end_inset
+
+ is the binomial coefficient).
+ For example, suppose 
+\begin_inset Formula $R_{1},R_{2}$
+\end_inset
+
+ include an attribute 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|D\right|\coloneqq2$
+\end_inset
+
+ distinct values 
+\begin_inset Formula $\left\{ a_{1},a_{2}\right\} $
+\end_inset
+
+ and frequencies 
+\begin_inset Formula 
+\begin{align*}
+m_{1}(a_{1})=m_{2}(a_{1}) & =10\\
+m_{1}(a_{2})=m_{2}(a_{2}) & =20
+\end{align*}
+
+\end_inset
+
+If we sample both relations producing 
+\begin_inset Formula $S_{1},S_{2}$
+\end_inset
+
+ and fix the sample size (the number sampled from either 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $S_{2}$
+\end_inset
+
+) to 
+\begin_inset Formula $M=30$
+\end_inset
+
+ then the number of possible samples is 
+\begin_inset Formula 
+\[
+C_{ms_{1}\left(a_{1}\right)}^{10}\times C_{ms_{2}\left(a_{1}\right)}^{10}\times C_{ms_{1}\left(a_{2}\right)}^{20}\times C_{ms_{2}\left(a_{2}\right)}^{20}
+\]
+
+\end_inset
+
+For various allocations of we see orders of magnitude differences in the
+ number of possible samplings:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomspace="1ex">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ms_{1}\left(a_{1}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ms_{2}\left(a_{1}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ms_{1}\left(a_{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ms_{2}\left(a_{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+# Samplings
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="1ex">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2.2\times10^{15}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2.3\times10^{14}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5.3\times10^{13}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.5\times10^{11}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+MaxRand join
+\end_layout
+
+\begin_layout Standard
+\noindent
+In general, the allocation that maximizes the number of possible samplings,
+ per distinct value 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ of attribute 
+\begin_inset Formula $A$
+\end_inset
+
+ for sample 
+\begin_inset Formula $S_{k}$
+\end_inset
+
+, for a given total sample size 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "corrsampling"
+literal "false"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+ms_{k}\left(a_{j}\right)\coloneqq\operatorname{round}\text{\left(\frac{M\cdot m_{k}\left(a_{j}\right)}{\sum_{j=1}^{\left|D\right|}\sum_{k=1}^{K}m_{k}\left(a_{j}\right)}\right)}\label{eq:maxrandjoin}
+\end{equation}
+
+\end_inset
+
+Using this result we use the MaxRand join algorithm to produce a maximally
+ random join (see alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:maxrandjoin"
+
+\end_inset
+
+).
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MaxRand Join
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  relations 
+\begin_inset Formula $R_{1}\left(A,\dots\right),\dots,R_{K}\left(A,\dots\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $M$
+\end_inset
+
+ sample size
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $ms_{k}\left(a_{j}\right)$
+\end_inset
+
+ defined by eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:maxrandjoin"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $M\coloneqq\left\lceil f\cdot\left|R_{1}\bowtie\cdots\bowtie R_{K}\right|\right\rceil $
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $S\equiv\mathtt{SAMPLE}\left(R_{1}\bowtie\cdots\bowtie R_{K},f\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+Init: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S[1,\dots,K]=[]$
+\end_inset
+
+   
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  for 
+\begin_inset Formula $i\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $K$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+    // stream
+\end_layout
+
+\begin_layout LyX-Code
+    while 
+\begin_inset Formula $R_{i}:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $S[i]\coloneqq[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+      for 
+\begin_inset Formula $j\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $\left|D\right|$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+        // independent reservoirs 
+\end_layout
+
+\begin_layout LyX-Code
+        // for each 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+        
+\begin_inset Formula $S[i]\coloneqq S[i]\cup$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:maxrandjoin"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+             
+\begin_inset Formula $\mathtt{ReservoirSample}\left(R_{i},ms_{k}\left(a_{j}\right),a_{j}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S\coloneqq S[1]\bowtie\cdots\bowtie S[K]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The total cost of MaxRand join is the cost of constructing 
+\begin_inset Formula $ms_{k}\left(a_{j}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $k=1,\dots,K$
+\end_inset
+
+ and 
+\begin_inset Formula $j=1,\dots,\left|D\right|$
+\end_inset
+
+ plus the cost of reservoir sampling each 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+; let 
+\begin_inset Formula 
+\[
+N\coloneqq\max_{k,j}ms_{k}\left(a_{j}\right)
+\]
+
+\end_inset
+
+then the total cost is 
+\begin_inset Formula 
+\[
+O\left(\left|D\right|\left|K\right|+\sum_{i=1}^{K}N\left(1+\log\left(\frac{\left|R_{i}\right|}{N}\right)\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ripple join
+\end_layout
+
+\begin_layout Standard
+Ripple join 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ripplejoin"
+literal "false"
+
+\end_inset
+
+ belongs to a class of techniques that address the online aggregation problem
+ directly.
+ Thus Ripple join isn't an operand sampling scheme per se but a streaming
+ join algorithm that by virtue of building the join incrementally produces
+ a sample of 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+; as the full join is approached running estimates for various aggregations
+ converge.
+ 
+\end_layout
+
+\begin_layout Standard
+In order to understand ripple join we first need to understand the streaming
+ nested-loops algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "onlineaggregation"
+literal "false"
+
+\end_inset
+
+.
+ For relations 
+\begin_inset Formula $\left|R_{1}\right|<\left|R_{2}\right|$
+\end_inset
+
+ streaming nested-loops first samples 
+\begin_inset Formula $t_{1}\in R_{1}$
+\end_inset
+
+ and then 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ is looped over in search of tuples 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ that satisfy the join condition.
+ Once all such tuples are discovered the running estimate of the aggregation
+ is updated.
+ Note that for conventional batch processing, a query optimizer would select
+ 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ as the outer relation, while for streaming processing the reverse is preferrabl
+e so that running estimates can be updated more frequently.
+ Despite this optimization, if 
+\begin_inset Formula $\left|R_{1}\right|$
+\end_inset
+
+ is nontrivial then wait times for updates can be excessively long.
+ Furthermore if the aggregation is 
+\begin_inset Quotes eld
+\end_inset
+
+insensitive
+\begin_inset Quotes erd
+\end_inset
+
+ to the attribute values in 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ then this leads to poor convergence because subsequent tuples from 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ don't yield new 
+\begin_inset Quotes eld
+\end_inset
+
+statistical information
+\begin_inset Quotes erd
+\end_inset
+
+; for example in 
+\begin_inset Formula 
+\[
+\mathtt{SELECT\,AVG}\left(R_{2}.A+R_{1}.B/10000000\right)\,\mathtt{FROM\,}R_{1},R_{2}
+\]
+
+\end_inset
+
+
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ripplejoin.png
+	lyxscale 25
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ripple Join for 
+\begin_inset Formula $R_{1}\bowtie R_{2}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wanderjoin"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ripple-Join-for"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Ripple join address both of these issues by adaptively choosing which is
+ the inner relation and which is the outer relation (see fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Ripple-Join-for"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and the 
+\shape italic
+aspect
+\shape default
+ 
+\shape italic
+ratios 
+\begin_inset Formula $\text{\ensuremath{\beta_{1},}\ensuremath{\beta_{2}}}$
+\end_inset
+
+
+\shape default
+ of the join i.e.
+ how many times 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ is sampled per outer loop and how many tuples are selected from 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ per inner loop.
+ 
+\end_layout
+
+\begin_layout Standard
+Using ripple join we can estimate various aggregations by calculating them
+ over the 
+\begin_inset Quotes eld
+\end_inset
+
+current
+\begin_inset Quotes erd
+\end_inset
+
+ set of sampled tuples.
+ Unsurprisingly, the variance of these estimates depends on the aspect ratios
+ 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\hat{\sigma}^{2}\coloneqq\sum_{k=1}^{K}\frac{\hat{d}\left(k\right)}{\beta_{k}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{d}\left(k\right)$
+\end_inset
+
+ is an estimator for a term 
+\begin_inset Formula $d\left(k\right)$
+\end_inset
+
+ that takes a particular form for each aggregation 
+\family typewriter
+SUM
+\family default
+,
+\family typewriter
+ COUNT
+\family default
+, or
+\family typewriter
+ AVG
+\family default
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wanderjoin"
+literal "false"
+
+\end_inset
+
+).
+ Therefore, in turn, the confidence intervals can be minimized subject to
+ an upper bound 
+\begin_inset Formula $c$
+\end_inset
+
+ on the the product of the aspect ratios (since the product of the aspect
+ ratios is the number of matches computed and hence I/O):
+\begin_inset Formula 
+\begin{align}
+\mbox{minimize } & \sum_{k=1}^{K}\frac{\hat{d}\left(k\right)}{\beta_{k}}\nonumber \\
+\mbox{such that } & \prod_{k=1}^{K}\beta_{k}\leq c\label{eq:cost}\\
+ & 1\leq\beta_{k}\leq\left|R_{i}\right|\nonumber \\
+ & \beta_{k}\in\mathbb{N}\nonumber 
+\end{align}
+
+\end_inset
+
+This is a non-linear integer programming problem which is, in general NP-hard
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+By reduction from minimum vertex cover.
+\end_layout
+
+\end_inset
+
+.
+ Ripple join solves a relaxation such that
+\begin_inset Formula 
+\[
+\beta_{k}^{*}=\left(\frac{c}{\prod_{k=1}^{K}\hat{d}\left(k\right)}\right)^{1/K}\hat{d}\left(k\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{d}\left(k\right)$
+\end_inset
+
+ is the estimate from the previous iteration.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hash ripple join
+\end_layout
+
+\begin_layout Standard
+In the case of an equijoin we can use hashing to amortize lookup of previously
+ matched tuples; when a new tuple is fetched from either relation it must
+ be combined with all previously matched tuples from the other relation.
+ If previously tuples are hashed on the join column (here is where we need
+ equijoin) then it is possible to identify them efficiently.
+ This implies a reduction in the cost (eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) of 
+\begin_inset Formula $n$
+\end_inset
+
+sampling steps to 
+\begin_inset Formula $\sum_{k=1}^{K}\beta_{k}\leq c$
+\end_inset
+
+.
+ This then implies the optimal aspect ratios are
+\begin_inset Formula 
+\[
+\beta_{k}^{*}=\frac{c\sqrt{\hat{d}\left(k\right)}}{\sum_{j=1}^{K}\sqrt{\hat{d}\left(j\right)}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Wander join
+\end_layout
+
+\begin_layout Standard
+Wander join
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wanderjoin"
+literal "false"
+
+\end_inset
+
+, like Ripple join, is a solution to the online aggregation problem.
+ The key idea of Wander join is to model a join over 
+\begin_inset Formula $K$
+\end_inset
+
+ relations as a 
+\shape italic
+join graph 
+\shape default
+i.e.
+ a 
+\begin_inset Formula $K$
+\end_inset
+
+-partite graph where each partition corresponds to a relation and edges
+ between vertices indicate a match on the join condition.
+ Once such a model is adopted one can then model streaming joins as random
+ walks in the graph.
+ Such random walks can then be used to construct unbiased estimators of
+ various aggregations.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename wanderjoin.png
+	lyxscale 10
+	width 50line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Wander join for 
+\begin_inset Formula $R_{1}\left(A,B\right)\bowtie R_{2}\left(B,C\right)\bowtie R_{3}\left(C,D\right)$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wanderjoin"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:wanderjoin"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R_{1}\left(A,B\right),R_{2}\left(B,C\right),R_{3}\left(C,D\right)$
+\end_inset
+
+ be the relations of interest, 
+\begin_inset Formula 
+\[
+J\coloneqq R_{1}\left(A,B\right)\bowtie R_{2}\left(B,C\right)\bowtie R_{3}\left(C,D\right)
+\]
+
+\end_inset
+
+be the join of interest, and 
+\begin_inset Formula $d_{i+1}\left(t_{i}\right)$
+\end_inset
+
+ be the number neighbors of 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ in relation 
+\begin_inset Formula $R_{i+1}$
+\end_inset
+
+ i.e the number of tuples in 
+\begin_inset Formula $R_{i+1}$
+\end_inset
+
+ that join with 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+.
+ A random walk (or path) 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ can be sampled from 
+\begin_inset Formula $J$
+\end_inset
+
+ by picking a tuple (vertex) 
+\begin_inset Formula $t_{1}\in R_{1}$
+\end_inset
+
+ uniformly at random and then randomly selecting tuples 
+\begin_inset Formula $t_{2}\in R_{2},t_{3}\in R_{3}$
+\end_inset
+
+ such that 
+\begin_inset Formula $t_{2}.B=t_{1}.B\,\wedge\,t_{3}.C=t_{2}.C$
+\end_inset
+
+ (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:wanderjoin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Then, given an expression 
+\begin_inset Formula $g\left(R_{1},R_{2},R_{3}\right)$
+\end_inset
+
+, we can estimate for 
+\begin_inset Formula $\mathtt{SUM}\left(g\left(R_{1},R_{2},R_{3}\right)\right)$
+\end_inset
+
+, for example, by
+\begin_inset Formula 
+\[
+X_{\gamma}\coloneqq\frac{g\left(\gamma\right)}{p\left(\gamma\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p\left(\gamma\right)$
+\end_inset
+
+ is the probability of sampling 
+\begin_inset Formula $\gamma$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p\left(\gamma\right)\coloneqq\frac{1}{\left|R_{1}\right|}\frac{1}{d_{2}\left(t_{1}\right)}\frac{1}{d_{3}\left(t_{2}\right)}
+\]
+
+\end_inset
+
+This estimator is unbiased 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "horvitzestimator"
+literal "false"
+
+\end_inset
+
+ and therefore the average of many such estimators is also unbiased.
+ That is to say, for a set of sampled paths 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\hat{\mu}_{\Gamma}\coloneqq\frac{1}{\left|\Gamma\right|}\sum_{\gamma\in\Gamma}X_{\gamma}\Rightarrow E\left[\hat{\mu}_{\Gamma}\right]=\mathtt{SUM}\left(g\left(R_{1},R_{2},R_{3}\right)\right)
+\]
+
+\end_inset
+
+with variance 
+\begin_inset Formula 
+\[
+\hat{\sigma}_{\Gamma}^{2}\coloneqq\frac{1}{\left|\Gamma\right|-1}\sum_{\gamma\in\Gamma}\left(X_{\gamma}-\hat{\mu}_{\Gamma}\right)^{2}
+\]
+
+\end_inset
+
+Furthermore the 
+\shape italic
+walk plan, 
+\shape default
+i.e.
+ the order of the relations sampled, can be optimized, in terms of estimator
+ variance; by the law of total variance
+\begin_inset Formula 
+\[
+Var\left(\frac{1}{\left|\Gamma\right|}\sum_{\gamma\in\Gamma}X_{\gamma}\right)=\frac{Var\left[X_{\gamma}\right]E\left[T\right]}{t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $T$
+\end_inset
+
+ is the running time of a single random walk and 
+\begin_inset Formula $t$
+\end_inset
+
+ is the total time taken to sample 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Thus, by estimating both 
+\begin_inset Formula $Var\left[X_{\gamma}\right],E\left[T\right]$
+\end_inset
+
+ from the walks themselves, the walk plan that minimizes the estimator variance.
+\end_layout
+
+\begin_layout Subsubsection
+Wander join for cyclic and acyclic joins
+\end_layout
+
+\begin_layout Standard
+As described, wander join applies to 
+\shape italic
+chain joins 
+\shape default
+(joins where relations can easily be ordered such that consecutive relations
+ share one attribute).
+ The algorithm can be extended to include merely 
+\shape italic
+acyclic joins
+\shape default
+ by incorporating 
+\begin_inset Quotes eld
+\end_inset
+
+jumps
+\begin_inset Quotes erd
+\end_inset
+
+ into the random walk.
+ For example (see fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:wanderjoinacyclic"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), consider 
+\begin_inset Formula 
+\begin{multline*}
+R_{1}\left(A,B\right)\bowtie R_{2}\left(B,C,D\right)\bowtie R_{3}\left(C,E\right)\\
+\bowtie R_{4}\left(D,F\right)\bowtie R_{5}\left(F,G\right)
+\end{multline*}
+
+\end_inset
+
+and fix a 
+\shape italic
+walk order
+\shape default
+ 
+\begin_inset Formula $R_{1},R_{2},R_{3},R_{4},R_{5}$
+\end_inset
+
+; on sampling 
+\begin_inset Formula $t_{3}\in R_{3}$
+\end_inset
+
+ we 
+\begin_inset Quotes eld
+\end_inset
+
+jump back
+\begin_inset Quotes erd
+\end_inset
+
+ to 
+\begin_inset Formula $t_{2}\in R_{2}$
+\end_inset
+
+ and sample 
+\begin_inset Formula $t_{4}\in R_{4}$
+\end_inset
+
+ and so on.
+ Note that different walk orders lead to different execution time and estimator
+ variance.
+ Given relations 
+\begin_inset Formula $R_{1},\dots,R_{K}$
+\end_inset
+
+ and a walk order 
+\begin_inset Formula $\left(R_{\lambda\left(1\right)},\dots,R_{\lambda\left(K\right)}\right)$
+\end_inset
+
+, define 
+\begin_inset Formula $R_{\eta\left(i\right)}$
+\end_inset
+
+ to be the relation corresponding to the 
+\begin_inset Quotes eld
+\end_inset
+
+parent
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $R_{\lambda\left(i\right)}$
+\end_inset
+
+.
+ Then for the path 
+\begin_inset Formula $\gamma\coloneqq\left(t_{\lambda\left(1\right)},\dots,t_{\lambda\left(K\right)}\right)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+p\left(\gamma\right)=\frac{1}{\left|R_{\lambda\left(1\right)}\right|}\prod_{k=2}^{K}\frac{1}{d_{\lambda\left(i\right)}\left(t_{\eta\left(i\right)}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename wanderjoinacyclic.png
+	lyxscale 10
+	width 50line%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Acyclic join 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:wanderjoinacyclic"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename wanderjoincyclic.png
+	lyxscale 10
+	width 50line%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cyclic join 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:wanderjoincyclic"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Join for 
+\begin_inset Formula $R_{1}\left(A,B\right)$
+\end_inset
+
+, 
+\begin_inset Formula $R_{2}\left(B,C,D\right)$
+\end_inset
+
+, 
+\begin_inset Formula $R_{3}\left(C,E\right)$
+\end_inset
+
+, 
+\begin_inset Formula $R_{4}\left(D,F\right)$
+\end_inset
+
+, 
+\begin_inset Formula $R_{5}\left(F,E\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+This same adjustment can be extended to work for cyclic joins by first computing
+ a directed spanning tree
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A 
+\shape italic
+directed tree
+\shape default
+ is a tree in which every edge increases the distance from the root.
+ A directed spanning tree of a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is spanning tree of 
+\begin_inset Formula $G$
+\end_inset
+
+ that is also a directed tree.
+\end_layout
+
+\end_inset
+
+ of the 
+\shape italic
+join query graph
+\shape default
+ (see fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:wanderjoincyclic"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Sketches
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Sketches"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Subsection
+Stream sampling algorithms
+\end_layout
+
+\begin_layout Standard
+We briefly describe some fundamental sampling algorithms that will ultimately
+ be employed as blackbox primitives in more sophisticated algorithms.
+\end_layout
+
+\begin_layout Subsubsection
+Rejection sampling
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Rejection-sampling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rejection sampling is a means of generating samples from some 
+\shape italic
+target
+\shape default
+ 
+\shape italic
+distribution 
+\begin_inset Formula $p(x)$
+\end_inset
+
+
+\shape default
+ that cannot be sampled directly but for which we can construct a 
+\shape italic
+proposal distribution
+\shape default
+ 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ that encompasses the target distribution.
+ It is based on the observation that to sample 
+\begin_inset Formula $p(x)$
+\end_inset
+
+, one can perform a sampling of the region under the graph of 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ distribution
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For probability density function 
+\begin_inset Formula $p(x)$
+\end_inset
+
+, the set of ordered pairs 
+\begin_inset Formula $\left\{ (x,y)\mid0\leq y\leq p(x)\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+, and reject all such samples that fall outside of the graph of 
+\begin_inset Formula $p(x)$
+\end_inset
+
+.
+ In the simplest case the proposal distribution is a uniform distribution
+ 
+\begin_inset Formula $U(a,b)\times U(0,M)$
+\end_inset
+
+, where 
+\begin_inset Formula $\left[a,b\right]$
+\end_inset
+
+ is the support of 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ is the least upperbound of 
+\begin_inset Formula $p(x)$
+\end_inset
+
+.
+ Then the algorithm is straightforward (see alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:rejectionsampling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The number of samples until 
+\begin_inset Quotes eld
+\end_inset
+
+acceptance
+\begin_inset Quotes erd
+\end_inset
+
+ follows a geometric distribution with probability 
+\begin_inset Formula $1/M$
+\end_inset
+
+ and thus has expected number 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Alternative, more efficient, algorithms exist 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "adapativereject"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Rejection Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  target distribution 
+\begin_inset Formula $p$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  with support 
+\begin_inset Formula $\left[a,b\right]$
+\end_inset
+
+ and max 
+\begin_inset Formula $M$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ a draw from 
+\begin_inset Formula $p$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init
+\series default
+: 
+\begin_inset Formula $U_{1}\sim U(a,b)$
+\end_inset
+
+, 
+\begin_inset Formula $U_{2}\sim U(0,M)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $p\left(U_{1}\right)<p\left(U_{2}\right)$
+\end_inset
+
+: // reject if outside
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $U_{1}\sim U(a,b)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $U_{2}\sim U(0,M)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $\left(x,y\right)\coloneqq\left(U_{1},U_{2}\right)$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:rejectionsampling"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Reservoir sampling without replacement
+\end_layout
+
+\begin_layout Standard
+Reservoir sampling algorithms select a simple random sample, without replacement
+, of 
+\begin_inset Formula $k$
+\end_inset
+
+ items from a population of unknown size 
+\begin_inset Formula $n$
+\end_inset
+
+ in a single pass over the items.
+ The simplest such algorithm maintains a 
+\shape italic
+reservoir 
+\shape default
+of size 
+\begin_inset Formula $k$
+\end_inset
+
+ and swaps out elements according to the desired sampling probability.
+ See alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This naive algorithm runs in 
+\begin_inset Formula $O\left(n\right)$
+\end_inset
+
+ time since it called a RNG for each element in the stream.
+ 
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Naive Reservoir Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: stream 
+\begin_inset Formula $S$
+\end_inset
+
+, sample size 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: reservoir 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $k$
+\end_inset
+
+ samples
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init
+\series default
+: for 
+\begin_inset Formula $i\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+: 
+\begin_inset Formula $A[i]\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+   
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  // replace elements with gradually
+\end_layout
+
+\begin_layout LyX-Code
+  // decreasing probability   
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    // randomInteger is inclusive   
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $j\coloneqq$
+\end_inset
+
+ randomInteger
+\begin_inset Formula $(1,i)$
+\end_inset
+
+     
+\end_layout
+
+\begin_layout LyX-Code
+    if 
+\begin_inset Formula $j\leq k$
+\end_inset
+
+:         
+\end_layout
+
+\begin_layout LyX-Code
+       
+\begin_inset Formula $A[j]\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:reservoirnaive"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The naive algorithm can be improved upon by instead discarding elements
+ explicitly rather than including elements explicitly.
+ We describe this algorithm constructively 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/198429.198435"
+literal "false"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+We conceive of naive reservoir sampling as assigning draws 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ from 
+\begin_inset Formula $U\left(0,1\right)$
+\end_inset
+
+ to each entry in the 
+\begin_inset Formula $S$
+\end_inset
+
+ and then selecting the bottom 
+\begin_inset Formula $k$
+\end_inset
+
+ elements.
+ This proceeds by initially filling the reservoir and then successively
+ replacing the largest element in the reservoir if the 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ associated with 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ is smaller than the largest element in the reservoir.
+\end_layout
+
+\begin_layout Enumerate
+We don't actually need to maintain the set of draws 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ for the entire reservoir, just the largest in the reservoir.
+ Call that that value 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ value of the 
+\begin_inset Quotes eld
+\end_inset
+
+next
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ to enter the reservoir is actually be distributed 
+\begin_inset Formula $U\left(0,\theta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X_{i}\sim U(0,\theta)$
+\end_inset
+
+ then for 
+\begin_inset Formula $Y=\max\left(X_{1},\dots,X_{k}\right)$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+P\left(Y\leq y\right)=\left(\frac{y}{\theta}\right)^{n}
+\]
+
+\end_inset
+
+by using 
+\begin_inset Formula $P\left(X_{i}\leq x\right)=x/\theta$
+\end_inset
+
+ and i.i.d.
+ Therefore, by using inverse CDF 
+\begin_inset Formula 
+\[
+U=\left(\frac{Y}{\theta}\right)^{k}\Rightarrow Y\sim\theta U^{1/k}\equiv\theta\exp\left(\frac{\log\left(U\right)}{k}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The number of elements 
+\begin_inset Formula $K$
+\end_inset
+
+ discarded follows a geometric distribution where the probability of success
+ is 
+\begin_inset Formula $\theta$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Recall that the draws 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ are drawn from 
+\begin_inset Formula $U\left(0,1\right)$
+\end_inset
+
+ and for some 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ to enter the reservoir it must be smaller than the current maximum element
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and hence 
+\begin_inset Formula $P\left(X\leq\theta\right)=\theta$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ Thus, again by using inverse CD
+\begin_inset Formula 
+\[
+\begin{aligned}U & =1-\left(1-\theta\right)^{K+1}\Rightarrow\\
+\log\left(1-U\right) & =(K+1)\log\left(1-\theta\right)\Rightarrow\\
+K & =\left\lfloor \frac{\log\left(U\right)}{\log\left(1-\theta\right)}\right\rfloor 
+\end{aligned}
+\]
+
+\end_inset
+
+where we use the fact that 
+\begin_inset Formula $1-U$
+\end_inset
+
+ is also distributed 
+\begin_inset Formula $U\left(0,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+We don't actually need to compare against 
+\begin_inset Formula $\theta$
+\end_inset
+
+ but just update it as a precursor to computing 
+\begin_inset Formula $K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Thus, we can more efficiently reservoir sample by taking 
+\begin_inset Quotes eld
+\end_inset
+
+jumps
+\begin_inset Quotes erd
+\end_inset
+
+ and only querying the RNG for included elements of the stream.
+ See alg.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The running time then is 
+\begin_inset Formula ${\displaystyle O(k(1+\log(n/k)))}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Optimal Reservoir Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: stream 
+\begin_inset Formula $S$
+\end_inset
+
+, sample size 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: reservoir 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $k$
+\end_inset
+
+ samples
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  // initialize the reservoir 
+\end_layout
+
+\begin_layout LyX-Code
+  for 
+\begin_inset Formula $i\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+: 
+\begin_inset Formula $A[i]\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+  
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin:
+\end_layout
+
+\begin_layout LyX-Code
+  // note that 
+\begin_inset Formula $\theta=1$
+\end_inset
+
+ since 
+\begin_inset Formula $A$
+\end_inset
+
+ consists
+\end_layout
+
+\begin_layout LyX-Code
+  // of 
+\begin_inset Formula $k$
+\end_inset
+
+ samples from 
+\begin_inset Formula $U\left(0,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout LyX-Code
+  // 
+\begin_inset Formula $\mathtt{random}()$
+\end_inset
+
+ draws from 
+\begin_inset Formula $U\left(0,1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $\theta\coloneqq$
+\end_inset
+
+ 
+\begin_inset Formula $\exp\left(\frac{\log\left(\mathtt{random}()\right)}{k}\right)$
+\end_inset
+
+  
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $k\coloneqq\left\lfloor \frac{\log\left(U\right)}{\log\left(1-\theta\right)}\right\rfloor $
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // discard 
+\begin_inset Formula $k$
+\end_inset
+
+ elements
+\end_layout
+
+\begin_layout LyX-Code
+    while 
+\begin_inset Formula $S$
+\end_inset
+
+: next
+\begin_inset Formula $(S)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // replace random element
+\end_layout
+
+\begin_layout LyX-Code
+    // since we don't need to compare
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $A[\mathtt{randomInteger}(1,k)]\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:reservoirnaive-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // update 
+\begin_inset Formula $\max$
+\end_inset
+
+ given that stored 
+\end_layout
+
+\begin_layout LyX-Code
+    // element was drawn from 
+\begin_inset Formula $U\left(0,\theta\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $\theta\coloneqq\theta\cdot\exp\left(\frac{\log\left(U\right)}{k}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Unweighted streaming sampling with replacement
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Unweighted-streaming-sampling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We present two algorithms for unweighted sequential sampling with replacement;
+ we omit proofs that these algorithms in fact uniformly sample
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/304181.304206"
+literal "false"
+
+\end_inset
+
+.
+ The first algorithm 
+\shape italic
+Black-Box U1
+\shape default
+ fills the output array with copies (whose quantity depends on a random
+ variable drawn from a binomial distribuiton) of successive tuples from
+ streaming relation 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ See alg 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This in effect simulates sampling with replacement.
+ The disadvantage of the alg 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is that the total size 
+\begin_inset Formula $n$
+\end_inset
+
+ of the relation is a necessary prerequisite.
+ Algorithm 
+\shape italic
+Black-Box U2 
+\shape default
+improves on algorithm Black-Box U1 by eliminating that prerequisite (see
+ alg 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Black-Box U1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  stream 
+\begin_inset Formula $S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  sample size 
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $n\coloneqq\left|S\right|$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: array 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $k$
+\end_inset
+
+ samples
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init
+\series default
+: 
+\begin_inset Formula $x\coloneqq k$
+\end_inset
+
+, 
+\begin_inset Formula $i\coloneqq0$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $x>0$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $X\sim B\left(x,\frac{1}{n-i}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+    // fill 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $X$
+\end_inset
+
+ copies of 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    for 
+\begin_inset Formula $j\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $X$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $A[i+j]\coloneqq t$
+\end_inset
+
+    
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:reservoirnaive-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $x\coloneqq x-X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $i\coloneqq i+1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Black-Box U2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  stream 
+\begin_inset Formula $S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  sample size 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: array 
+\begin_inset Formula $R$
+\end_inset
+
+ with 
+\begin_inset Formula $k$
+\end_inset
+
+ samples
+\end_layout
+
+\begin_layout LyX-Code
+Init: 
+\begin_inset Formula $N\coloneqq0$
+\end_inset
+
+, 
+\begin_inset Formula $A[1,\dots,k]=0$
+\end_inset
+
+    
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+    
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $N\coloneqq N+1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // set 
+\begin_inset Formula $A[j]\coloneqq t$
+\end_inset
+
+ with 
+\end_layout
+
+\begin_layout LyX-Code
+    // probability 
+\begin_inset Formula $1/N$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    for 
+\begin_inset Formula $j\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $X\sim U(0,1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+      if 
+\begin_inset Formula $X\leq\frac{1}{N}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+        
+\begin_inset Formula $A[j]\coloneqq t$
+\end_inset
+
+   
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:reservoirnaive-1-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Weighted streaming sampling
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Weighted-streaming-sampling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The precise semantics of weighted sampling are as such: given a streaming
+ relation 
+\begin_inset Formula $S$
+\end_inset
+
+ with cardinality 
+\begin_inset Formula $n$
+\end_inset
+
+, where each tuple 
+\begin_inset Formula $t\in S$
+\end_inset
+
+ has associated weight 
+\begin_inset Formula $w(t)$
+\end_inset
+
+, a weighted, with replacement, sample is produced by drawing 
+\begin_inset Formula $f\cdot n$
+\end_inset
+
+ tuples with probability proportional 
+\begin_inset Formula $w(t)$
+\end_inset
+
+ (implying normalization if 
+\begin_inset Formula $\sum_{t\in S}w(t)\neq1$
+\end_inset
+
+).
+ We can extend algorithms 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to respect these semantics; see algorithms 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1-3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:reservoirnaive-1-1-4"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Black-Box WR1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  stream 
+\begin_inset Formula $S$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  sample size 
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $n\coloneqq\left|S\right|$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  weights 
+\begin_inset Formula $w(t)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: array 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $k$
+\end_inset
+
+ samples
+\end_layout
+
+\begin_layout LyX-Code
+Init: 
+\begin_inset Formula $x\coloneqq k$
+\end_inset
+
+, 
+\begin_inset Formula $i\coloneqq0$
+\end_inset
+
+, 
+\begin_inset Formula $W\coloneqq\sum_{t\in S}w(t)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $x>0$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+    
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $X\sim B\left(x,\frac{w(t)}{W-i}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // fill 
+\begin_inset Formula $A$
+\end_inset
+
+ with 
+\begin_inset Formula $X$
+\end_inset
+
+ copies of 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    for 
+\begin_inset Formula $j\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $X$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $A[i+j]\coloneqq t$
+\end_inset
+
+    
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:reservoirnaive-1-1-3"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $x\coloneqq x-X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $i\coloneqq i+w(t)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Black-Box WR2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  stream 
+\begin_inset Formula $S$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  sample size 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  weights 
+\begin_inset Formula $w(t)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: array 
+\begin_inset Formula $R$
+\end_inset
+
+ with 
+\begin_inset Formula $k$
+\end_inset
+
+ samples
+\end_layout
+
+\begin_layout LyX-Code
+Init: 
+\begin_inset Formula $W\coloneqq0$
+\end_inset
+
+, 
+\begin_inset Formula $A[1,\dots,k]\coloneqq0$
+\end_inset
+
+    
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S)$
+\end_inset
+
+    
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $W\coloneqq W+w(t)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // set 
+\begin_inset Formula $A[j]\coloneqq t$
+\end_inset
+
+ with 
+\end_layout
+
+\begin_layout LyX-Code
+    // probability 
+\begin_inset Formula $w(t)/W$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    for 
+\begin_inset Formula $j\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+      
+\begin_inset Formula $X\sim U(0,1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+      if 
+\begin_inset Formula $X\leq\frac{w(t)}{W}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+        
+\begin_inset Formula $A[j]\coloneqq t$
+\end_inset
+
+   
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:reservoirnaive-1-1-4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Relation sampling algorithms 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Stream Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{1}\left(A,\dots\right),R_{2}\left(A,\dots\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $k\coloneqq\left\lceil f\cdot\left|R_{1}\bowtie R_{2}\right|\right\rceil $
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $S\equiv\mathtt{SAMPLE}_{WR}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S[1,\dots,k]\coloneqq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $w(t)\coloneqq m_{2}\left(t.A\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $t\in R_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S_{1}\coloneqq$
+\end_inset
+
+ BlackBoxWR2
+\begin_inset Formula $\left(R_{1},k,w(t)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  for 
+\begin_inset Formula $i\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t_{1}\coloneqq$
+\end_inset
+
+ next
+\begin_inset Formula $(S_{1})$
+\end_inset
+
+   
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:streamsample"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t_{2}\sim U\left(\left\{ t\mid t\in R_{2}\wedge t.A=t_{1}.A\right\} \right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $S[i]\coloneqq\left(t_{1},t_{2}\right)$
+\end_inset
+
+  
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Group Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{1}\left(A,\dots\right),R_{2}\left(A,\dots\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $k\coloneqq\left\lceil f\cdot\left|R_{1}\bowtie R_{2}\right|\right\rceil $
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $S\equiv\mathtt{SAMPLE}_{WR}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Init:
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S[1,\dots,k]\coloneqq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $w(t)\coloneqq m_{2}\left(t.A\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $t\in R_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S_{1}\coloneqq$
+\end_inset
+
+ BlackBoxWR2
+\begin_inset Formula $\left(R_{1},k,w(t)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  for 
+\begin_inset Formula $i\coloneqq1$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+:  
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t_{1}\coloneqq S_{1}[i]$
+\end_inset
+
+   
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:groupsample"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t_{2}\coloneqq\mathtt{BlackBoxU2}\left(t_{1}\bowtie R_{2},1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $S[i]\coloneqq\left(t_{1},t_{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Frequency Partition Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Frequency-Partition-Sample"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{1}\left(A,\dots\right),R_{2}\left(A,\dots\right)$
+\end_inset
+
+, 
+\begin_inset Formula $A\subseteq D$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $k\coloneqq\left\lceil f\cdot\left|R_{1}\bowtie R_{2}\right|\right\rceil $
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  // low, high frequency values in 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $D^{lo},D^{hi}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{2}^{lo},R_{2}^{hi}\coloneqq\left.R_{2}\right|_{D^{lo}},\left.R_{2}\right|_{D^{hi}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $w_{2}(t)\coloneqq m_{2}\left(t.A\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $t\in R_{2}^{hi}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $S\equiv\mathtt{SAMPLE}_{WR}\left(R_{1}\bowtie R_{2},f\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  // stream 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+    // partition 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $R_{1}^{lo}\coloneqq\left.R_{1}\right|_{D^{lo}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $R_{1}^{hi}\coloneqq\left.R_{1}\right|_{D^{hi}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // sample but also collect 
+\end_layout
+
+\begin_layout LyX-Code
+    // stats 
+\begin_inset Formula $w_{1}\left(t\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $R_{1}^{hi}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $S_{1},w_{1}\left(t\right)\coloneqq$
+\end_inset
+
+ BlackBoxWR2
+\begin_inset Formula $\left(R_{1}^{hi},k,w(t)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  // integrate/combine stats 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $w\left(t\right)\coloneqq w_{1}\left(t\right)\cup w_{2}\left(t\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  // from 
+\begin_inset Formula $w\left(t\right)$
+\end_inset
+
+ you can approximate
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $n_{hi}\coloneqq\left|R_{1}^{hi}\bowtie R_{2}^{hi}\right|$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{1}^{*}\coloneqq S_{1}\cup R_{1}^{lo}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  // stream join
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $J^{*}\coloneqq R_{1}^{*}\bowtie R_{2}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $n_{lo}\coloneqq\left.J^{*}\right|_{D^{lo}}$
+\end_inset
+
+ // i.e.
+ 
+\begin_inset Formula $n_{lo}\coloneqq\left|R_{1}^{lo}\bowtie R_{2}^{lo}\right|$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // partition 
+\begin_inset Formula $J^{*}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $J^{lo}\coloneqq\mathtt{BlackBoxU2}\left(\left.J^{*}\right|_{D^{lo}},k\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout LyX-Code
+    // 
+\begin_inset Formula $S_{1}\equiv\left\{ s_{i}\right\} $
+\end_inset
+
+ and just 
+\end_layout
+
+\begin_layout LyX-Code
+    // like in Group-Sample
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $J^{hi}\coloneqq\mathtt{BlackBoxU2}\left(s_{i}\bowtie\left.J^{*}\right|_{D^{hi}},k\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  // # of heads and tails
+\end_layout
+
+\begin_layout LyX-Code
+  // 
+\begin_inset Formula $1-p=\frac{n_{lo}}{n_{lo}+n_{hi}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $k_{lo},k_{hi}\coloneqq B\left(k,p=\frac{n_{hi}}{n_{lo}+n_{hi}}\right)$
+\end_inset
+
+   
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S^{lo}\coloneqq\mathtt{BlackBoxUWoR2}\left(J^{lo},k_{lo}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S^{hi}\coloneqq\mathtt{BlackBoxUWoR2}\left(J^{hi},k_{hi}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S\coloneqq S^{lo}\cup S^{hi}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Count Sampling
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Inputs
+\series default
+: 
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $R_{2}\left(A,\dots\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $S_{1}\subseteq R_{1}^{hi}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Output
+\series default
+: 
+\begin_inset Formula $S\equiv\left(S_{1}\bowtie R_{2}^{hi}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+Init:
+\end_layout
+
+\begin_layout LyX-Code
+  
+\begin_inset Formula $H$
+\end_inset
+
+ // hashtable for counting
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+Begin
+\series default
+:
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t\coloneqq\mathtt{next}\left(S_{1}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    // count number of tuples such that
+\end_layout
+
+\begin_layout LyX-Code
+    // 
+\begin_inset Formula $t.A=v$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $H[t.A]\coloneqq H[t.A]+1$
+\end_inset
+
+   
+\end_layout
+
+\begin_layout LyX-Code
+  // sample 
+\begin_inset Formula $S_{2}\subseteq R_{2}$
+\end_inset
+
+ such that 
+\end_layout
+
+\begin_layout LyX-Code
+  // the number of tuples 
+\begin_inset Formula $t$
+\end_inset
+
+ with
+\end_layout
+
+\begin_layout LyX-Code
+  // 
+\begin_inset Formula $t.A\equiv v$
+\end_inset
+
+ is exactly 
+\begin_inset Formula $v$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+  while 
+\begin_inset Formula $S_{2}\coloneqq$
+\end_inset
+
+ BlackBoxWR2
+\begin_inset Formula $\left(R_{2},H\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t_{1}\coloneqq\mathtt{next}\left(S_{2}\right)$
+\end_inset
+
+   
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:count-sample"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $t_{2}\coloneqq\mathtt{BlackBoxWoR}\left(t_{1}\bowtie S_{1},1\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $S[i]\coloneqq\left(t_{1},t_{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Section
+Techniques
+\end_layout
+
+\begin_layout Plain Layout
+Some observations
+\end_layout
+
+\begin_layout Enumerate
+We can transform from WR to WoR by rejecting tuple has already been chosen.
+\end_layout
+
+\begin_layout Enumerate
+We can transform from CF to WoR by drawing a large fraction 
+\begin_inset Formula $f'$
+\end_inset
+
+ and then rejecting an appropriate amount to get an exact 
+\begin_inset Formula $f$
+\end_inset
+
+-fraction
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+TODO: Something something Chernoff bound https://rajsain.files.wordpress.com/2013/1
+1/randomized-algorithms-motwani-and-raghavan.pdf
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+We can transform a WoR sample to a WR sample by sampling with replacement
+ from the WoR sample (while using the correct duplication probabilities).
+\end_layout
+
+\begin_layout Enumerate
+It is impossible to get from WoR or WR to CF because there's a small probability
+ of getting the entire population from CF.
+\end_layout
+
+\begin_layout Subsection
+Joins
+\end_layout
+
+\begin_layout Subsubsection
+On Random Sampling over Joins, Chaudhuri et al.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+One of the first papers.
+ Lays out the model and derives fundamental results that are cited by many
+ others.
+\end_layout
+
+\begin_layout Subsubsection
+Random Sampling over Joins Revisited, Zhao et al.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Wander Join: Online Aggregation via Random Walks, Li et al.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Leapfrog Triejoin: A Simple, Worst-Case Optimal Join Algorithm, Veldhuizen
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Joins on Samples: A Theoretical Guide for Practitioners, Huang et al.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Learning to Optimize Join Queries With Deep Reinforcement Learning, Krishnan
+ et al.
+\end_layout
+
+\begin_layout Subsubsection
+A Unified Correlation-based Approach to Sampling Over Joins, Kamat et al.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+ApproxJoin: Approximate Distributed Joins
+\end_layout
+
+\begin_layout Subsection
+Query approximation
+\end_layout
+
+\begin_layout Subsubsection
+Approximate Query Processing: No Silver Bullet, Chaudhuri et al.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Synopses for Massive Data: Samples Histograms Wavelets Sketches, Cormode
+ et al.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Quickr: Lazily Approximating Complex AdHoc Queries in BigData Clusters,
+ Kandula et al.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "biblio"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
