@@ -1280,17 +1280,17 @@ As in previous sections we consider the problem of constructing a uniform
 
 \begin_layout Itemize
 
-\series bold
+\shape italic
 Frequencies
-\series default
+\shape default
 : complete frequencies (for each possible value) for all relevant attributes.
 \end_layout
 
 \begin_layout Itemize
 
-\series bold
+\shape italic
 Partial frequencies
-\series default
+\shape default
 : frequencies for only the high frequency values; this is a useful category
  since it is in fact these values that distort the ultimate sample.
  
@@ -1298,9 +1298,9 @@ Partial frequencies
 
 \begin_layout Itemize
 
-\series bold
+\shape italic
 Index
-\series default
+\shape default
 : a means to perform indexed access (as opposed to sequential) on tuples
  of a relation according to values of some attribute; crucially we require
  the ability to also evaluate predicates on said attribute.
@@ -3014,7 +3014,11 @@ Output
 \end_layout
 
 \begin_layout LyX-Code
-Init: 
+
+\series bold
+Init
+\series default
+: 
 \end_layout
 
 \begin_layout LyX-Code
@@ -4333,7 +4337,8 @@ noprefix "false"
 \begin_inset Formula $O\left(n\right)$
 \end_inset
 
- time since it called a RNG for each element in the stream.
+ time since it calls random number generator (RNG) for each element in the
+ stream.
  
 \begin_inset Float algorithm
 wide false
@@ -4950,9 +4955,9 @@ literal "false"
 
 .
  The first algorithm 
-\shape italic
+\family typewriter
 Black-Box U1
-\shape default
+\family default
  fills the output array with copies (whose quantity depends on a random
  variable drawn from a binomial distribuiton) of successive tuples from
  streaming relation 
@@ -4988,11 +4993,17 @@ noprefix "false"
 
  of the relation is a necessary prerequisite.
  Algorithm 
+\family typewriter
+Black-Box U2
+\family default
 \shape italic
-Black-Box U2 
+ 
 \shape default
-improves on algorithm Black-Box U1 by eliminating that prerequisite (see
- alg 
+improves on algorithm 
+\family typewriter
+Black-Box U1
+\family default
+ by eliminating that prerequisite (see alg 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "alg:reservoirnaive-1-1-1"
@@ -5250,7 +5261,11 @@ Output
 \end_layout
 
 \begin_layout LyX-Code
-Init: 
+
+\series bold
+Init
+\series default
+: 
 \begin_inset Formula $N\coloneqq0$
 \end_inset
 
@@ -5525,7 +5540,11 @@ Output
 \end_layout
 
 \begin_layout LyX-Code
-Init: 
+
+\series bold
+Init
+\series default
+: 
 \begin_inset Formula $x\coloneqq k$
 \end_inset
 
@@ -5711,7 +5730,11 @@ Output
 \end_layout
 
 \begin_layout LyX-Code
-Init: 
+
+\series bold
+Init
+\series default
+: 
 \begin_inset Formula $W\coloneqq0$
 \end_inset
 
@@ -5919,8 +5942,8 @@ Begin
 \begin_inset Formula $S_{1}\coloneqq$
 \end_inset
 
- BlackBoxWR2
-\begin_inset Formula $\left(R_{1},k,w(t)\right)$
+ 
+\begin_inset Formula $\mathtt{BlackBoxWR2}\left(R_{1},k,w(t)\right)$
 \end_inset
 
 
@@ -6071,8 +6094,8 @@ Begin
 \begin_inset Formula $S_{1}\coloneqq$
 \end_inset
 
- BlackBoxWR2
-\begin_inset Formula $\left(R_{1},k,w(t)\right)$
+ 
+\begin_inset Formula $\mathtt{BlackBoxWR2}\left(R_{1},k,w(t)\right)$
 \end_inset
 
 
@@ -6296,8 +6319,8 @@ Begin
 \begin_inset Formula $S_{1},w_{1}\left(t\right)\coloneqq$
 \end_inset
 
- BlackBoxWR2
-\begin_inset Formula $\left(R_{1}^{hi},k,w(t)\right)$
+ 
+\begin_inset Formula $\mathtt{BlackBoxWR2}\left(R_{1}^{hi},k,w(t)\right)$
 \end_inset
 
 
@@ -6600,8 +6623,8 @@ Begin
 \begin_inset Formula $S_{2}\coloneqq$
 \end_inset
 
- BlackBoxWR2
-\begin_inset Formula $\left(R_{2},H\right)$
+ 
+\begin_inset Formula $\mathtt{BlackBoxWR2}\left(R_{2},H\right)$
 \end_inset
 
 :
