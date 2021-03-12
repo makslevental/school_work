@@ -1,0 +1,1236 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsart
+\begin_preamble
+\usepackage{bbm}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+CMSC33581 Unit 1 Review
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Date
+March 3, 2021
+\end_layout
+
+\begin_layout Exercise
+For some finite set of words 
+\begin_inset Formula $S$
+\end_inset
+
+ and any collision-resistant hash function 
+\begin_inset Formula $h$
+\end_inset
+
+, let 
+\shape italic
+Median Hash
+\shape default
+ 
+\begin_inset Formula $h_{\operatorname{med}}\left(S\right)$
+\end_inset
+
+ be the median value of the image of 
+\begin_inset Formula $S$
+\end_inset
+
+ under 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ That is to say 
+\begin_inset Formula 
+\[
+h_{\operatorname{med}}\left(S\right)\coloneqq\operatorname*{med}\left(\left\{ h\left(s\right)\mid s\in S\right\} \right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+1a
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\sigma\in\Sigma$
+\end_inset
+
+ be a uniformly random permutation and 
+\begin_inset Formula $S,S'$
+\end_inset
+
+ be finite sets of words.
+ Does 
+\begin_inset Formula 
+\[
+\mathbb{P}_{\Sigma}\left[h_{\operatorname{med}}\left(\sigma\left(S\right)\right)=h_{\operatorname{med}}\left(\sigma\left(S'\right)\right)\right]=\operatorname{J}\left(S,S'\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+1a
+\end_layout
+
+\end_inset
+
+
+\series bold
+No
+\series default
+.
+ We prove by contradiction; let 
+\begin_inset Formula 
+\begin{equation}
+S\coloneqq\left\{ \text{'a'}\right\} \quad S'\coloneqq\left\{ \text{'a'},\text{'b'}\right\} \label{eq:medhashdef}
+\end{equation}
+
+\end_inset
+
+Clearly 
+\begin_inset Formula $h_{\operatorname{med}}\left(\sigma\left(S\right)\right)=h\left(\sigma\left(\text{'a'}\right)\right)$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+h_{\operatorname{med}}\left(\sigma\left(S'\right)\right)=\frac{h\left(\sigma\left(\text{'a'}\right)\right)+h\left(\sigma\left(\text{'b'}\right)\right)}{2}
+\]
+
+\end_inset
+
+ for any permutation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ (assuming no collisions).
+ Therefore, since 
+\begin_inset Formula $h$
+\end_inset
+
+ is collision-resistant
+\begin_inset Formula 
+\[
+\mathbb{P}_{\sigma\in\Sigma}\left[h_{\operatorname{med}}\left(\sigma\left(S\right)\right)=h_{\operatorname{med}}\left(\sigma\left(S'\right)\right)\right]=0
+\]
+
+\end_inset
+
+ while 
+\begin_inset Formula 
+\[
+\operatorname{J}\left(S,S'\right)=\frac{\left|\left\{ \text{'a'}\right\} \cap\left\{ \text{'a'},\text{'b'},\text{'b'}\right\} \right|}{\left|\left\{ \text{'a'}\right\} \cup\left\{ \text{'a'},\text{'b'},\text{'b'}\right\} \right|}=\frac{\left|\left\{ \text{'a'}\right\} \right|}{\left|\left\{ \text{'a'},\text{'b'}\right\} \right|}=\frac{1}{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+1b
+\end_layout
+
+\end_inset
+
+Under which conditions would the Median Hash be an exact estimator of Jaccard
+ similarity?
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+1b
+\end_layout
+
+\end_inset
+
+The crux of the issue is that the median of a set of numbers isn't necessarily
+ in the set:
+\begin_inset Formula 
+\[
+\operatorname{med}\left(\left\{ 1,2\right\} \right)=1.5
+\]
+
+\end_inset
+
+Note, further, that 
+\begin_inset Formula 
+\[
+\operatorname{med}\left(\left\{ 1,2\right\} \right)=\operatorname{med}\left(\left\{ 0,3\right\} \right)
+\]
+
+\end_inset
+
+and therefore strings with an even number of words might spuriously appear
+ to have high similarity according to median hash.
+\end_layout
+
+\begin_layout Solution*
+On the other hand, 
+\series bold
+if the cardinality of the set is
+\series default
+ 
+\series bold
+odd
+\series default
+ then the median is necessarily a member of the set.
+ Thus, if the set of words (i.e.
+ after making distinct) has odd cardinality then we claim 
+\begin_inset Formula $h_{\operatorname{med}}\left(S\right)$
+\end_inset
+
+ is an estimator for Jaccard similarity.
+ We prove by reduction to Minimum Hash 
+\begin_inset Formula $h_{\min}$
+\end_inset
+
+ (which is known to accurately estimate Jaccard similarity).
+ First, for any finite set 
+\begin_inset Formula $A$
+\end_inset
+
+ with odd cardinality, let 
+\begin_inset Formula $h'$
+\end_inset
+
+ be the map that maps the minimum of 
+\begin_inset Formula $A$
+\end_inset
+
+ to the median of 
+\begin_inset Formula $A$
+\end_inset
+
+ and vice-versa, but otherwise is the identity:
+\begin_inset Formula 
+\[
+h'\left(a\right)\coloneqq\begin{cases}
+\operatorname*{med}\left(\left\{ a\mid a\in A\right\} \right) & \text{if }s=\operatorname*{min}\left(\left\{ a\mid a\in A\right\} \right)\\
+\operatorname*{min}\left(\left\{ a\mid a\in A\right\} \right) & \text{if }s=\operatorname*{med}\left(\left\{ a\mid a\in A\right\} \right)\\
+a & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $h'$
+\end_inset
+
+ is well defined since 
+\begin_inset Formula $\operatorname*{med}\left(\left\{ a\right\} \right)\in A$
+\end_inset
+
+.
+ Then for any hash function 
+\begin_inset Formula $h$
+\end_inset
+
+, any finite set of words 
+\begin_inset Formula $S$
+\end_inset
+
+ with odd cardinality, and any permutation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\left(h'\circ h\right)_{\operatorname{min}}\left(\sigma\left(S\right)\right)=h_{\operatorname{med}}\left(\sigma\left(S\right)\right)
+\]
+
+\end_inset
+
+and thus
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}_{\sigma\in\Sigma}\left[h_{\operatorname{med}}\left(\sigma\left(S\right)\right)=h_{\operatorname{med}}\left(\sigma\left(S'\right)\right)\right] & =\mathbb{P}_{\sigma\in\Sigma}\left[\left(h'\circ h\right)_{\operatorname{min}}\left(\sigma\left(S\right)\right)=\left(h'\circ h\right)_{\operatorname{min}}\left(\sigma\left(S'\right)\right)\right]\\
+ & =\operatorname{J}\left(S,S'\right)
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $h'\circ h$
+\end_inset
+
+ is a valid hash function.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Exercise
+Let 
+\begin_inset Formula $A\coloneqq\left[\text{NOV−11},\text{DEC−12},\dots,\text{NOV−13},\text{MAR−02}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+2a
+\end_layout
+
+\end_inset
+
+Applying standard dictionary encoding 1 to the collection of dates will?
+\end_layout
+
+\begin_layout Solution*
+\align left
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+2a
+\end_layout
+
+\end_inset
+
+A dictionary encoding will 
+\series bold
+sometimes increase the size of the dataset and sometimes decrease the size
+ of the dataset
+\series default
+; let 
+\begin_inset Formula $D_{I}$
+\end_inset
+
+ be the dictionary encoding that appends '!' i.e.
+ 
+\begin_inset Formula 
+\[
+D_{I}:A[i]\leftrightarrow A[i]\cup\text{!}
+\]
+
+\end_inset
+
+ and let 
+\begin_inset Formula $D_{\mathbb{N}}$
+\end_inset
+
+ be the dictionary encoding that ordinalizes 
+\begin_inset Formula 
+\[
+A[i]\leftrightarrow i
+\]
+
+\end_inset
+
+Then clearly 
+\begin_inset Formula $D_{I}$
+\end_inset
+
+ increases the size of the dataset by approximately 
+\begin_inset Formula $100\times1$
+\end_inset
+
+ bytes and 
+\begin_inset Formula $D_{\mathbb{N}}$
+\end_inset
+
+ reduces the size of the dataset by 
+\begin_inset Formula 
+\begin{align*}
+\Delta & =\left(\sum_{i=1}^{100}\left\lfloor \log_{10}\left(i\right)\right\rfloor +1\right)-100\times6\\
+ & =192-600=-408
+\end{align*}
+
+\end_inset
+
+bytes since the length of a number 
+\begin_inset Formula $i$
+\end_inset
+
+ is 
+\begin_inset Formula $\left\lfloor \log_{10}\left(i\right)\right\rfloor +1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+2b
+\end_layout
+
+\end_inset
+
+Suppose, we calculate an optimal prefix-free code (like Huffman coding)
+ to the collection of dates will?
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+2b
+\end_layout
+
+\end_inset
+
+Code words (and therefore code word lengths) will be 
+\series bold
+arbitrarily associated with each date
+\series default
+ but they won't have arbitrary lengths because otherwise the code wouldn't
+ be an optimal; we know from Huffman coding that the average code length
+ is approximately 
+\begin_inset Formula $\log_{2}\left(100\right)\approx6.644$
+\end_inset
+
+ and therefore at least one code word must have length 
+\begin_inset Formula $<7$
+\end_inset
+
+ and at least one code word must have length 
+\begin_inset Formula $\geq7$
+\end_inset
+
+ (i.e.
+ not same code word lengths).
+ 
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+2c
+\end_layout
+
+\end_inset
+
+Consider the following encoding algorithm...
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+2c
+\end_layout
+
+\end_inset
+
+The algorithm produces a codex 
+\begin_inset Formula $C$
+\end_inset
+
+ with cardinality bounds
+\begin_inset Formula 
+\[
+\left|\left\{ \text{'MAR'},\text{'NOV'},\text{'DEC'}\right\} \right|\times\left|\left\{ \text{'02'},\text{'11'},\text{'12'},\text{'13'}\right\} \right|\le\left|C\right|\leq\left|\left\{ \text{'JAN'},\dots,\text{'DEC'}\right\} \right|\times\left|\left\{ \text{'01'},\dots,\text{'31'}\right\} \right|
+\]
+
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula $12\le\left|C\right|\leq372$
+\end_inset
+
+ depending on how much repetition there is among the months and the days
+ of the month.
+ Thus, the algorithm will 
+\series bold
+sometimes increase the size of the dataset and sometimes decrease the size
+ of the dataset
+\series default
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Exercise
+Suppose, you are given a single hash function 
+\begin_inset Formula $\mathtt{hash}\left(s\right)$
+\end_inset
+
+ that takes in a string 
+\begin_inset Formula $s$
+\end_inset
+
+ as an argument and returns an integer from 1 to 
+\begin_inset Formula $H$
+\end_inset
+
+ and satisfies the simple uniform hashing assumption (SUHA).
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+3a
+\end_layout
+
+\end_inset
+
+Is it guaranteed that at least two different strings from the list have
+ the same hash code?
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+3a
+\end_layout
+
+\end_inset
+
+
+\series bold
+True
+\series default
+,
+\series bold
+ 
+\series default
+by pigeonhole principle.
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+3b
+\end_layout
+
+\end_inset
+
+Define
+\end_layout
+
+\begin_layout LyX-Code
+def h2(s): return hash(str(hash(s)))
+\end_layout
+
+\begin_layout Standard
+The maximum that 
+\begin_inset Formula $\mathtt{h2}$
+\end_inset
+
+ can return is?
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+3b
+\end_layout
+
+\end_inset
+
+The answer depends on whether the question is asking the about 
+\begin_inset Formula $\max$
+\end_inset
+
+ over arbitrary strings or the 
+\begin_inset Formula $\max$
+\end_inset
+
+ over the same set of 
+\begin_inset Formula $N$
+\end_inset
+
+ strings given in the prompt.
+ Regarding, the former (
+\begin_inset Formula $\max$
+\end_inset
+
+ over arbitrary strings) by the simple uniform hashing assumption the answer
+ is 
+\series bold
+always equal to 
+\begin_inset Formula $H$
+\end_inset
+
+ 
+\series default
+since
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Formula 
+\[
+\mathbb{P}\left[\texttt{hash}\left(s\right)=H\right]=\frac{1}{H}
+\]
+
+\end_inset
+
+for any 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Solution*
+Regarding the latter: let 
+\begin_inset Formula $S\coloneqq\left\{ s_{1},\dots,s_{N}\right\} $
+\end_inset
+
+ be the set of 
+\begin_inset Formula $N$
+\end_inset
+
+ strings with 
+\begin_inset Formula $H<N$
+\end_inset
+
+, and 
+\begin_inset Formula $L\coloneqq\left\{ \text{'1'},\dots,\text{'H'}\right\} $
+\end_inset
+
+ be the string representations for integers 
+\begin_inset Formula $\left\{ 1,\dots,H\right\} $
+\end_inset
+
+, and 
+\begin_inset Formula 
+\[
+J\coloneqq\max\left(\text{\left\{  \texttt{hash}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $J\in S'$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\texttt{hs2}\left(s_{i}\right)=l_{s_{i}}$
+\end_inset
+
+ for some 
+\begin_inset Formula $l_{s_{i}}\in L$
+\end_inset
+
+ and by the SUHA
+\begin_inset Formula 
+\[
+\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)=J\right]=\frac{1}{H}\Rightarrow\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)\neq J\right]=1-\frac{1}{H}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $s_{j}\in S$
+\end_inset
+
+.
+ Therefore, by independence of 
+\begin_inset Formula $\texttt{hash}\left(l_{s_{i}}\right),\texttt{hash}\left(l_{s_{j}}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left[\texttt{hs2}\left(l_{s_{1}}\right)\neq J\wedge\cdots\wedge\texttt{hs2}\left(l_{s_{N}}\right)\neq J\right] & =\prod_{i=1}^{N}\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)\neq J\right]\\
+ & =\prod_{i=1}^{N}\left(1-\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)=J\right]\right)\\
+ & =\prod_{i=1}^{N}\left(1-\frac{1}{H}\right)\\
+ & =\left(1-\frac{1}{H}\right)^{N}
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula 
+\[
+\mathbb{P}\left[\max\left(\text{\left\{  \texttt{hash}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)\neq\max\left(\text{\left\{  \texttt{hs2}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)\right]=\left(1-\frac{1}{H}\right)^{N}
+\]
+
+\end_inset
+
+i.e.
+ with small probability 
+\begin_inset Formula $\max\left(\text{\left\{  \texttt{hs2}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)$
+\end_inset
+
+ is 
+\series bold
+possibly less than 
+\begin_inset Formula $\max\left(\text{\left\{  \texttt{hash}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Problem*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+3c
+\end_layout
+
+\end_inset
+
+Define
+\end_layout
+
+\begin_layout LyX-Code
+def h3(s): return hash(s[1:])
+\end_layout
+
+\begin_layout Standard
+What applies under the assumptions above?
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+3c
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Formula $\mathtt{h3}$
+\end_inset
+
+ is independent from 
+\begin_inset Formula $\mathtt{hash}$
+\end_inset
+
+
+\series default
+.
+
+\series bold
+ 
+\series default
+Proof: let 
+\begin_inset Formula $z\coloneqq x\cdot z'$
+\end_inset
+
+ the concatenation of a symbol 
+\begin_inset Formula $x$
+\end_inset
+
+ and a string 
+\begin_inset Formula $z$
+\end_inset
+
+ and let 
+\begin_inset Formula $s$
+\end_inset
+
+be a string such that 
+\begin_inset Formula $s\neq z'$
+\end_inset
+
+.
+ Then by SUHA
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left[\texttt{hs3}\left(z\right)=i\wedge\texttt{hash}\left(s\right)=j\right] & =\mathbb{P}\left[\texttt{hash}\left(z'\right)=i\wedge\texttt{hash}\left(s\right)=j\right]\\
+ & =\mathbb{P}\left[\texttt{hash}\left(z'\right)=i\right]\mathbb{P}\left[\texttt{hash}\left(s\right)=j\right]\\
+ & =\frac{1}{H}\frac{1}{H}\\
+ & =\mathbb{P}\left[\texttt{hs3}\left(z\right)=i\right]\mathbb{P}\left[\texttt{hash}\left(s\right)=j\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Formula $\mathtt{h3}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathtt{hash}$
+\end_inset
+
+ can be combined to make a code space of 
+\begin_inset Formula $H^{2}$
+\end_inset
+
+
+\series default
+.
+ Proof: since both 
+\begin_inset Formula $\texttt{hs3}:S\rightarrow\left\{ 1,\dots,H\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\texttt{hash}:S\rightarrow\left\{ 1,\dots,H\right\} $
+\end_inset
+
+, taking 
+\begin_inset Formula $g\left(s\right)\coloneqq\left(\texttt{hs3}\left(s\right),\texttt{hash}\left(s\right)\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $g\left(s\right)\in H^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Formula $\mathtt{h3}$
+\end_inset
+
+ is independent from 
+\begin_inset Formula $\mathtt{hash}$
+\end_inset
+
+ but will no longer satisfy SUHA
+\series default
+: let 
+\begin_inset Formula $z'\coloneqq x\cdot z$
+\end_inset
+
+ and 
+\begin_inset Formula $z''\coloneqq y\cdot z'$
+\end_inset
+
+ with 
+\begin_inset Formula $x\neq y$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\mathbb{P}\left[\texttt{hs3}\left(z'\right)=i\wedge\texttt{hs3}\left(z''\right)=j\right] & =\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\right]\\
+ & =\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\wedge i\neq j\right]\\
+ & \;+\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\wedge i=j\right]\\
+ & =0+\mathbb{P}\left[\texttt{hash}\left(z\right)=i\right]\\
+ & =\frac{1}{H}
+\end{align*}
+
+\end_inset
+
+which doesn't equal 
+\begin_inset Formula $1/H^{2}$
+\end_inset
+
+, as it should to satisfy SUHA.
+\end_layout
+
+\begin_layout Exercise
+Let 
+\begin_inset Formula $P,Q$
+\end_inset
+
+ be discrete distributions over 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ with 
+\begin_inset Formula $P\left(x\right)>0,Q\left(x\right)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathcal{X}$
+\end_inset
+
+.
+ Prove
+\begin_inset Formula 
+\[
+H\left(P\right)\leq\sum_{x\in\mathcal{X}}\frac{P\left(x\right)}{Q\left(x\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Solution*
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $H\left(P\right)$
+\end_inset
+
+ be the Shannon entropy of 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+H\left(P\right) & =-\sum_{x\in\mathcal{X}}P\left(x\right)\log\left(P\left(x\right)\right)\\
+ & \leq-\sum_{x\in\mathcal{X}}P\left(x\right)\log\left(Q\left(x\right)\right)\quad\text{by Gibb's inequality}\\
+ & =\sum_{x\in\mathcal{X}}P\left(x\right)\log\left(\frac{1}{Q\left(x\right)}\right)\\
+ & \leq\sum_{x\in\mathcal{X}}P\left(x\right)\left(\frac{1}{Q\left(x\right)}-1\right)\quad\text{by }\log\left(x\right)\leq x-1\\
+ & =\sum_{x\in\mathcal{X}}\frac{P\left(x\right)}{Q\left(x\right)}-\sum_{x\in\mathcal{X}}P\left(x\right)\\
+ & =\sum_{x\in\mathcal{X}}\frac{P\left(x\right)}{Q\left(x\right)}-1\leq\sum_{x\in\mathcal{X}}\frac{P\left(x\right)}{Q\left(x\right)}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Exercise
+Derive the optimal number of buckets 
+\begin_inset Formula $M$
+\end_inset
+
+ for a histogram that buckets a discrete random variable 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Solution*
+Let 
+\begin_inset Formula $\left\{ 0,\dots,D-1\right\} $
+\end_inset
+
+ be the support of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then the bins partition the support in 
+\begin_inset Formula $K\coloneqq D/M$
+\end_inset
+
+-width bins 
+\begin_inset Formula 
+\begin{multline*}
+B_{1}\coloneqq\left[0,1K\right],B_{2}\coloneqq\left(1K,2K\right],\dots,\\
+B_{\ell}\coloneqq\left(\left(\ell-1\right)K,\ell K\right],\dots,B_{M}\coloneqq\left(\left(M-1\right)K,MK\right]
+\end{multline*}
+
+\end_inset
+
+and, for a point 
+\begin_inset Formula $x\in B_{\ell}$
+\end_inset
+
+, the point mass
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+As opposed to density.
+\end_layout
+
+\end_inset
+
+ estimator 
+\begin_inset Formula $\hat{p}_{n}$
+\end_inset
+
+ (for 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ i.i.d samples) is defined
+\begin_inset Formula 
+\[
+\hat{p}_{n}\left(x\right)\coloneqq\frac{1}{K}\frac{\left|\left\{ X_{i}\in B_{\ell}\right\} \right|}{n}=\frac{1}{K}\frac{1}{n}\sum_{i=1}^{n}\mathbbm{1}_{B_{\ell}}\left(X_{i}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbbm{1}_{A}$
+\end_inset
+
+ is the indicator
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ then 
+\begin_inset Formula $\mathbbm{1}_{A}\left(a\right)=1$
+\end_inset
+
+ else 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+ over event 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+x^{*}\coloneqq\left(\ell-1\right)K+1
+\]
+
+\end_inset
+
+Then the expectiation of 
+\begin_inset Formula $\hat{p}_{n}\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in B_{\ell}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\hat{p}_{n}\right] & =\frac{1}{K}\frac{1}{n}\sum_{i=1}^{n}\mathbb{E}\left[\mathbbm{1}_{B_{\ell}}\left(X_{i}\right)\right]\\
+ & =\frac{1}{K}\frac{1}{n}\sum_{i=1}^{n}\mathbb{P}\left[X_{i}\in B_{\ell}\right]\quad\text{by }\mathbb{E}\left[\mathbbm{1}_{A}\right]=\mathbb{P}\left[A\right]\\
+ & =\frac{1}{K}\mathbb{P}\left[X_{1}\in B_{\ell}\right]\quad\text{by }X_{i}\;\text{i.i.d}\\
+ & =\frac{1}{K}\sum_{j=\left(\ell-1\right)K+1}^{\ell K}p\left(j\right)\\
+ & \leq\frac{1}{K}\left(\sum_{j=0}^{K-1}p\left(x^{*}\right)+j\Delta\right)\quad\text{by }p\left(j+1\right)-p\left(j\right)\leq\Delta\\
+ & =\frac{1}{K}\left(Kp\left(x^{*}\right)+\frac{\left(K-1\right)K}{2}\Delta\right)\\
+ & =p\left(x^{*}\right)+\frac{\left(K-1\right)}{2}\Delta
+\end{align*}
+
+\end_inset
+
+Therefore, the bias of 
+\begin_inset Formula $\hat{p}_{n}\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in B_{\ell}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{align*}
+\operatorname{Bias}\left[\hat{p}_{n}\right] & =\mathbb{E}\left[\hat{p}_{n}\right]-p\left(x\right)\\
+ & =p\left(x^{*}\right)+\frac{\left(K-1\right)}{2}\Delta-p\left(x\right)\\
+ & \leq\frac{\left(K-1\right)}{2}\Delta+\left(K-1\right)\Delta\quad\text{by }\left|\left(\left(\ell-1\right)K+1\right)-x\right|\leq K-1\\
+ & =\frac{3}{2}\left(K-1\right)\Delta
+\end{align*}
+
+\end_inset
+
+Then the variance of 
+\begin_inset Formula $\hat{p}_{n}\left(x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $x\in B_{\ell}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{align*}
+\operatorname{Var}\left[\hat{p}_{n}\right] & =\frac{1}{K^{2}}\operatorname{Var}\left[\frac{1}{n}\sum_{i=1}^{n}\mathbbm{1}_{B_{\ell}}\left(X_{i}\right)\right]\\
+ & =\frac{1}{K^{2}}\frac{\mathbb{P}\left[X_{i}\in B_{\ell}\right]\left(1-\mathbb{P}\left[X_{i}\in B_{\ell}\right]\right)}{n}\\
+ & \leq\frac{1}{nK^{2}}\mathbb{P}\left[X_{i}\in B_{\ell}\right]\\
+ & \leq\frac{1}{nK^{2}}\left(Kp\left(x^{*}\right)+\frac{\left(K-1\right)K}{2}\Delta\right)\\
+ & =\frac{p\left(x^{*}\right)}{nK}+\frac{\left(K-1\right)}{2nK}\Delta
+\end{align*}
+
+\end_inset
+
+Thus
+\begin_inset Formula 
+\begin{align*}
+\operatorname{MSE}\left[\hat{p}_{n}\right] & =\left(\operatorname{Bias}\left[\hat{p}_{n}\right]\right)^{2}+\operatorname{Var}\left[\hat{p}_{n}\right]\\
+ & \leq\left(\frac{3}{2}\left(K-1\right)\Delta\right)^{2}+\frac{p\left(x^{*}\right)}{nK}+\frac{\left(K-1\right)}{2nK}\Delta\\
+ & \leq\left(2K\Delta\right)^{2}+\frac{p\left(x^{*}\right)}{nK}+\frac{\Delta}{n}
+\end{align*}
+
+\end_inset
+
+Then solving for the optimal 
+\begin_inset Formula $M^{\text{opt}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial K}\left(\left(2K\Delta\right)^{2}+\frac{p\left(x^{*}\right)}{nK}+\frac{\Delta}{n}\right)=0\Rightarrow p\left(x^{*}\right)=8\Delta^{2}K^{3}n
+\]
+
+\end_inset
+
+and therefore
+\begin_inset Formula 
+\[
+K^{\text{opt}}=\frac{1}{2}\left(\frac{p\left(x^{*}\right)}{\Delta^{2}n}\right)^{1/3}\Rightarrow M^{\text{opt}}=2\left(\frac{\Delta^{2}D^{3}n}{p\left(x^{*}\right)}\right)^{1/3}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

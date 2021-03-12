@@ -17,23 +17,6 @@
   numpages   = {12}
 }
 
-@inproceedings{10.1145/3183713.3183739,
-  author    = {Zhao, Zhuoyue and Christensen, Robert and Li, Feifei and Hu, Xiao and Yi, Ke},
-  title     = {Random Sampling over Joins Revisited},
-  year      = {2018},
-  isbn      = {9781450347037},
-  publisher = {Association for Computing Machinery},
-  address   = {New York, NY, USA},
-  url       = {https://doi.org/10.1145/3183713.3183739},
-  doi       = {10.1145/3183713.3183739},
-  abstract  = {Joins are expensive, especially on large data and/or multiple relations. One promising approach in mitigating their high costs is to just return a simple random sample of the full join results, which is sufficient for many tasks. Indeed, in as early as 1999, Chaudhuri et al. posed the problem of sampling over joins as a fundamental challenge in large database systems. They also pointed out a fundamental barrier for this problem, that the sampling operator cannot be pushed through a join, i.e., sample( R bowtie S )≠ sample( R ) bowtie sample( S ). To overcome this barrier, they used precomputed statistics to guide the sampling process, but only showed how this works for two-relation joins.This paper revisits this classic problem for both acyclic and cyclic multi-way joins. We build upon the idea of Chaudhuri et al., but extend it in several nontrivial directions. First, we propose a general framework for random sampling over multi-way joins, which includes the algorithm of Chaudhuri et al. as a special case. Second, we explore several ways to instantiate this framework, depending on what prior information is available about the underlying data, and offer different tradeoffs between sample generation latency and throughput. We analyze the properties of different instantiations and evaluate them against the baseline methods; the results clearly demonstrate the superiority of our new techniques.},
-  booktitle = {Proceedings of the 2018 International Conference on Management of Data},
-  pages     = {1525-1539},
-  numpages  = {15},
-  keywords  = {random sampling, multi-way joins, join sampling framework},
-  location  = {Houston, TX, USA},
-  series    = {SIGMOD '18}
-}
 
 @inproceedings{wanderjoin,
   author    = {Li, Feifei and Wu, Bin and Yi, Ke and Zhao, Zhuoyue},
@@ -300,3 +283,87 @@ location = {Chicago, IL, USA},
 series = {SSDBM '17}
 }
 
+@inproceedings{JoinsRevisited,
+author = {Zhao, Zhuoyue and Christensen, Robert and Li, Feifei and Hu, Xiao and Yi, Ke},
+title = {Random Sampling over Joins Revisited},
+year = {2018},
+isbn = {9781450347037},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3183713.3183739},
+doi = {10.1145/3183713.3183739},
+abstract = {Joins are expensive, especially on large data and/or multiple relations. One promising approach in mitigating their high costs is to just return a simple random sample of the full join results, which is sufficient for many tasks. Indeed, in as early as 1999, Chaudhuri et al. posed the problem of sampling over joins as a fundamental challenge in large database systems. They also pointed out a fundamental barrier for this problem, that the sampling operator cannot be pushed through a join, i.e., sample( R bowtie S )≠ sample( R ) bowtie sample( S ). To overcome this barrier, they used precomputed statistics to guide the sampling process, but only showed how this works for two-relation joins.This paper revisits this classic problem for both acyclic and cyclic multi-way joins. We build upon the idea of Chaudhuri et al., but extend it in several nontrivial directions. First, we propose a general framework for random sampling over multi-way joins, which includes the algorithm of Chaudhuri et al. as a special case. Second, we explore several ways to instantiate this framework, depending on what prior information is available about the underlying data, and offer different tradeoffs between sample generation latency and throughput. We analyze the properties of different instantiations and evaluate them against the baseline methods; the results clearly demonstrate the superiority of our new techniques.},
+booktitle = {Proceedings of the 2018 International Conference on Management of Data},
+pages = {1525-1539},
+numpages = {15},
+keywords = {multi-way joins, random sampling, join sampling framework},
+location = {Houston, TX, USA},
+series = {SIGMOD '18}
+}
+
+@inproceedings{agmbound,
+author = {Atserias, Albert and Grohe, Martin and Marx, D\'{a}niel},
+title = {Size Bounds and Query Plans for Relational Joins},
+year = {2008},
+isbn = {9780769534367},
+publisher = {IEEE Computer Society},
+address = {USA},
+url = {https://doi.org/10.1109/FOCS.2008.43},
+doi = {10.1109/FOCS.2008.43},
+abstract = {Relational joins are at the core of relational algebra, which in turn is the core of the standard database query language SQL. As their evaluation is expensive and very often dominated by the output size, it is an important task for database query optimisers to compute estimates on the size of joins and to find good execution plans for sequences of joins. We study these problems from a theoretical perspective, both in the worst-case model, and in an average-case model where the database is chosen according to a known probability distribution. In the former case, our first key observation is that the worst-case size of a query is characterised by the fractional edge cover number of its underlying hypergraph, a combinatorial parameter previously known to provide an upper bound. We complete the picture by proving a matching lower bound, and by showing that there exist queries for which the join-project plan suggested by the fractional edge cover approach may be substantially better than any join plan that does not use intermediate projections.},
+booktitle = {Proceedings of the 2008 49th Annual IEEE Symposium on Foundations of Computer Science},
+pages = {739-748},
+numpages = {10},
+series = {FOCS '08}
+}
+
+@inproceedings{universeinaccuarate,
+author = {Chen, Yu and Yi, Ke},
+title = {Two-Level Sampling for Join Size Estimation},
+year = {2017},
+isbn = {9781450341974},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3035918.3035921},
+doi = {10.1145/3035918.3035921},
+abstract = {Join size estimation is a critical step in query optimization, and has been extensively studied in the literature. Among the many techniques, sampling based approaches are particularly appealing, due to their ability to handle arbitrary selection predicates. In this paper, we propose a new sampling algorithm for join size estimation, called two-level sampling, which combines the advantages of three previous sampling methods while making further improvements. Both analytical and empirical comparisons show that the new algorithm outperforms all the previous algorithms on a variety of joins, including primary key-foreign key joins, many-to-many joins, and multi-table joins. The new sampling algorithm is also very easy to implement, requiring just one pass over the data. It only relies on some basic statistical information about the data, such as the ℓk-norms and the heavy hitters.},
+booktitle = {Proceedings of the 2017 ACM International Conference on Management of Data},
+pages = {759-774},
+numpages = {16},
+keywords = {joins, sampling},
+location = {Chicago, Illinois, USA},
+series = {SIGMOD '17}
+}
+
+@article{universesampling,
+author = {Hadjieleftheriou, Marios and Yu, Xiaohui and Koudas, Nick and Srivastava, Divesh},
+title = {Hashed Samples: Selectivity Estimators for Set Similarity Selection Queries},
+year = {2008},
+issue_date = {August 2008},
+publisher = {VLDB Endowment},
+volume = {1},
+number = {1},
+issn = {2150-8097},
+url = {https://doi.org/10.14778/1453856.1453883},
+doi = {10.14778/1453856.1453883},
+abstract = {We study selectivity estimation techniques for set similarity queries. A wide variety of similarity measures for sets have been proposed in the past. In this work we concentrate on the class of weighted similarity measures (e.g., TF/IDF and BM25 cosine similarity and variants) and design selectivity estimators based on a priori constructed samples. First, we study the pitfalls associated with straightforward applications of random sampling, and argue that care needs to be taken in how the samples are constructed; uniform random sampling yields very low accuracy, while query sensitive realtime sampling is more expensive than exact solutions (both in CPU and I/O cost). We show how to build robust samples a priori, based on existing synopses for distinct value estimation. We prove the accuracy of our technique theoretically, and verify its performance experimentally. Our algorithm is orders of magnitude faster than exact solutions and has very small space overhead.},
+journal = {Proc. VLDB Endow.},
+month = aug,
+pages = {201-212},
+numpages = {12}
+}
+
+@article{benfordlaw,
+    author = {Formann, Anton K.},
+    journal = {PLOS ONE},
+    publisher = {Public Library of Science},
+    title = {The Newcomb-Benford Law in Its Relation to Some Common Distributions},
+    year = {2010},
+    month = {05},
+    volume = {5},
+    url = {https://doi.org/10.1371/journal.pone.0010541},
+    pages = {1-13},
+    abstract = {An often reported, but nevertheless persistently striking observation, formalized as the Newcomb-Benford law (NBL), is that the frequencies with which the leading digits of numbers occur in a large variety of data are far away from being uniform. Most spectacular seems to be the fact that in many data the leading digit 1 occurs in nearly one third of all cases. Explanations for this uneven distribution of the leading digits were, among others, scale- and base-invariance. Little attention, however, found the interrelation between the distribution of the significant digits and the distribution of the observed variable. It is shown here by simulation that long right-tailed distributions of a random variable are compatible with the NBL, and that for distributions of the ratio of two random variables the fit generally improves. Distributions not putting most mass on small values of the random variable (e.g. symmetric distributions) fail to fit. Hence, the validity of the NBL needs the predominance of small values and, when thinking of real-world data, a majority of small entities. Analyses of data on stock prices, the areas and numbers of inhabitants of countries, and the starting page numbers of papers from a bibliography sustain this conclusion. In all, these findings may help to understand the mechanisms behind the NBL and the conditions needed for its validity. That this law is not only of scientific interest per se, but that, in addition, it has also substantial implications can be seen from those fields where it was suggested to be put into practice. These fields reach from the detection of irregularities in data (e.g. economic fraud) to optimizing the architecture of computers regarding number representation, storage, and round-off errors.},
+    number = {5},
+    doi = {10.1371/journal.pone.0010541}
+}

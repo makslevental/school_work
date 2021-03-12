@@ -1,0 +1,779 @@
+#LyX 1.6.5svn created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass hmcpset
+\begin_preamble
+% info for header block in upper right hand corner
+\name{EricMalm}
+\class{MA198}
+\assignment{Homework \#1}
+\duedate{09/03/2004}
+\end_preamble
+\options boxed, margin=1in
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize letterpaper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Note:
+\series default
+ The Name, class and date is specified in the document preamble of this
+ document (menu 
+\family sans
+Document\SpecialChar \menuseparator
+Settings\SpecialChar \menuseparator
+LaTeX
+\begin_inset space ~
+\end_inset
+
+Preamble
+\family default
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem List
+Rudin 3.5, Saff and Snider 1.5.11, 1.7.5ad,
+\begin_inset Newline newline
+\end_inset
+
+Dummit and Foote 1.1.25, Logan 1.8.6
+\end_layout
+
+\begin_layout Problem
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[Rudin 3.5]
+\end_layout
+
+\end_inset
+
+ For any two real sequences 
+\begin_inset Formula $\{a_{n}\}$
+\end_inset
+
+, 
+\begin_inset Formula $\{b_{n}\}$
+\end_inset
+
+, prove that 
+\begin_inset Formula \[
+\limsup_{n\to\infty}\,(a_{n}+b_{n})\leq\limsup_{n\to\infty}a_{n}+\limsup_{n\to\infty}b_{n},\]
+
+\end_inset
+
+ provided the sum on the right is not of the form 
+\begin_inset Formula $\infty-\infty$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Solution
+Suppose that 
+\begin_inset Formula $\limsup_{n\to\infty}a_{n}+\limsup_{n\to\infty}b_{n}\neq\infty-\infty$
+\end_inset
+
+, so that this sum is determinate.
+ Define 
+\begin_inset Formula \[
+A_{n}=\sup_{k\geq n}a_{n},\quad B_{n}=\sup_{k\geq n}b_{n},\quad\text{and}\quad C_{n}=\sup_{k\geq n}\,(a_{n}+b_{n}).\]
+
+\end_inset
+
+ We first show that 
+\begin_inset Formula $C_{n}\leq A_{n}+B_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $k$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $k\geq n$
+\end_inset
+
+, we have that 
+\begin_inset Formula $a_{k}\leq A_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{k}\leq B_{n}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a_{k}+b_{k}\leq A_{n}+B_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq n$
+\end_inset
+
+, so 
+\begin_inset Formula $C_{n}=\sup_{k\geq n}\,(a_{n}+b_{n})\leq A_{n}+B_{n}$
+\end_inset
+
+.
+ Thus, using the alternate definition of the 
+\begin_inset Formula $\limsup$
+\end_inset
+
+, we have 
+\begin_inset Formula \begin{align*}
+\limsup_{n\to\infty}\,(a_{n}+b_{n}) & =\lim_{n\to\infty}C_{n}\\
+ & \leq\lim_{n\to\infty}\,(A_{n}+B_{n})=\lim_{n\to\infty}A_{n}+\lim_{n\to\infty}B_{n}=\limsup_{n\to\infty}a_{n}+\limsup_{n\to\infty}b_{n}.\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Problem
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[SS 1.5.11]
+\end_layout
+
+\end_inset
+
+ Solve the equation 
+\begin_inset Formula $(z+1)^{5}=z^{5}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Solution
+Taking fifth roots of the equation yields 
+\begin_inset Formula \[
+z+1=ze^{ik\frac{2\pi}{5}},\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+.
+ We note that 
+\begin_inset Formula $k=0$
+\end_inset
+
+ (and all other multiples of 5) yields 
+\begin_inset Formula $z+1=z$
+\end_inset
+
+, which reduces to 
+\begin_inset Formula $1=0$
+\end_inset
+
+, an inconsistent equation.
+ Isolating 
+\begin_inset Formula $z$
+\end_inset
+
+, we therefore have the solutions 
+\begin_inset Formula \[
+\boxed{z=\frac{1}{e^{ik\frac{2\pi}{5}}-1},}\]
+
+\end_inset
+
+ with four unique solutions obtained using 
+\begin_inset Formula $k=1,2,3,4$
+\end_inset
+
+.
+ We expect 4 unique solutions because 
+\begin_inset Formula $(z+1)^{5}-z^{5}$
+\end_inset
+
+ is a fourth-degree polynomial.
+ 
+\end_layout
+
+\begin_layout Problem
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[SS 1.7.5ad]
+\end_layout
+
+\end_inset
+
+ Describe the projections on the Riemann sphere of the following sets in
+ the complex plane: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[
+\end_layout
+
+\end_inset
+
+(
+\shape italic
+a
+\shape default
+)
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\end_inset
+
+ the right half-plane 
+\begin_inset Formula $\{z\mid\text{Re}~z>0\}$
+\end_inset
+
+, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[
+\end_layout
+
+\end_inset
+
+(
+\shape italic
+d
+\shape default
+)
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\end_inset
+
+ the set 
+\begin_inset Formula $\{z\mid|z|>3\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Solution
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[(a)]
+\end_layout
+
+\end_inset
+
+ The right half-plane corresponds to the right open hemisphere 
+\begin_inset Formula $\{(x_{1},x_{2},x_{3})\in\mathbb{R}^{3}\mid x_{1}>0,x_{1}^{2}+x_{2}^{2}+x_{3}^{2}=1\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Solution
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[(d)]
+\end_layout
+
+\end_inset
+
+ Since 
+\begin_inset Formula $|z|>3$
+\end_inset
+
+, 
+\begin_inset Formula $|z|^{2}+1>10$
+\end_inset
+
+, so 
+\begin_inset Formula \[
+x_{3}=\frac{|z|^{2}-1}{|z|^{2}+1}=1-\frac{2}{|z|^{2}+1}>1-\frac{2}{10}=\frac{4}{5}.\]
+
+\end_inset
+
+ Thus, the set 
+\begin_inset Formula $\{z\mid|z|>3\}$
+\end_inset
+
+ corresponds to the dome of the Riemann sphere above the plane 
+\begin_inset Formula $x_{3}=4/5$
+\end_inset
+
+.
+ Hand sketches of these projections are shown below:
+\end_layout
+
+\begin_layout Solution
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(
+\shape italic
+a
+\shape default
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(
+\shape italic
+d
+\shape default
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.75in]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+rule{0pt}{1.5in}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.75in]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+rule{0pt}{1.5in}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(to be drawn in later)
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem
+[DF 1.1.25] Prove that if 
+\begin_inset Formula $x^{2}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in G$
+\end_inset
+
+ then 
+\begin_inset Formula $G$
+\end_inset
+
+ is abelian.
+ 
+\end_layout
+
+\begin_layout Solution
+Suppose 
+\begin_inset Formula $x^{2}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in G$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x=x^{2}x^{-1}=1x^{-1}=x^{-1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in G$
+\end_inset
+
+.
+ For two arbitrary elements 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+, 
+\begin_inset Formula \[
+ab=(ab)^{-1}=b^{-1}a^{-1}=ba,\]
+
+\end_inset
+
+ so 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ commute.
+ Since 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ are arbitrary, 
+\begin_inset Formula $ab=ba$
+\end_inset
+
+ for all 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in G$
+\end_inset
+
+, and 
+\begin_inset Formula $G$
+\end_inset
+
+ is abelian.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Sometimes natural pagebreaks separate problem statements from solutions,
+ and we have to change them manually:
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+[Logan 1.8.6]
+\end_layout
+
+\end_inset
+
+ This exercise illustrates an important numerical procedure for solving
+ Laplace's equation on a reactangle.
+ Consider Laplace's equation on the rectangle 
+\begin_inset Formula $D:0<x<4,0<y<3$
+\end_inset
+
+ with boundary conditions given on the bottom and top by 
+\begin_inset Formula $u(x,0)=0$
+\end_inset
+
+, 
+\begin_inset Formula $u(x,3)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $0\leq x\leq4$
+\end_inset
+
+ and on the sides by 
+\begin_inset Formula $u(0,y)=2y(3-y)$
+\end_inset
+
+, 
+\begin_inset Formula $u(4,y)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $0\leq y\leq3$
+\end_inset
+
+.
+ Apply the average value property
+\begin_inset space ~
+\end_inset
+
+(1.45) with 
+\begin_inset Formula $h=1$
+\end_inset
+
+ at each of the six lattice points 
+\begin_inset Formula $(1,1),(1,2),(2,1),(2,2),(3,1),(3,2)$
+\end_inset
+
+ inside 
+\begin_inset Formula $D$
+\end_inset
+
+ to obtain a system of six equations for the six unknown temperatures on
+ these lattice points.
+ Solve the system to approximate the steady temperature distribution and
+ plot the approximate surface using a software package.
+ 
+\end_layout
+
+\begin_layout Solution
+Applying this average value property with 
+\begin_inset Formula $h=1$
+\end_inset
+
+ yields the following linear system: 
+\begin_inset Formula \begin{align*}
+u(1,1) & =\frac{1}{4}(u(1,0)+u(1,2)+u(0,1)+u(2,1))=\frac{1}{4}(4+u(1,2)+u(2,1)),\\
+u(1,2) & =\frac{1}{4}(u(1,1)+u(1,3)+u(0,2)+u(2,2))=\frac{1}{4}(4+u(1,1)+u(2,2)),\\
+u(2,1) & =\frac{1}{4}(u(2,0)+u(2,2)+u(1,1)+u(3,1))=\frac{1}{4}(u(1,1)+u(2,2)+u(3,1)),\\
+u(2,2) & =\frac{1}{4}(u(2,1)+u(2,3)+u(1,2)+u(3,2))=\frac{1}{4}(u(2,1)+u(2,3)+u(3,2)),\\
+u(3,1) & =\frac{1}{4}(u(3,0)+u(3,2)+u(2,1)+u(4,1))=\frac{1}{4}(u(3,2)+u(2,1)),\\
+u(3,2) & =\frac{1}{4}(u(3,1)+u(3,3)+u(2,2)+u(4,2))=\frac{1}{4}(u(3,1)+u(2,2)),\end{align*}
+
+\end_inset
+
+ which we solve in 
+\emph on
+Mathematica
+\emph default
+ 5.0 to obtain 
+\begin_inset Formula \[
+\newcommand{\arraystretch}{1.25}\begin{pmatrix}u(1,1)\\
+u(1,2)\\
+u(2,1)\\
+u(2,2)\\
+u(3,1)\\
+u(3,2)\end{pmatrix}=\begin{pmatrix}\frac{32}{21}\\
+\frac{32}{21}\\
+\frac{4}{7}\\
+\frac{4}{7}\\
+\frac{4}{21}\\
+\frac{4}{21}\end{pmatrix}.\]
+
+\end_inset
+
+ Plotting these lattice point values yields the following approximate temperatur
+e surface: 
+\end_layout
+
+\begin_layout Solution
+\align center
+\begin_inset Graphics
+	filename logan-1-8-6.pdf
+	scale 80
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

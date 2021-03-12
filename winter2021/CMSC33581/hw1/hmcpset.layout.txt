@@ -1,0 +1,51 @@
+#% Do not delete the line below; configure depends on this
+#  \DeclareLaTeXClass[hmcpset]{homework (Harvey Mudd Problem Set)}
+# hcmpset textclass definition file for the HMC Mathematics Homework Class.
+# Author : Uwe Stöhr <uwestoehr@web.de>
+
+Format 11
+Input stdclass.inc
+
+SecNumDepth		3
+TocDepth		3
+
+NoStyle Chapter
+NoStyle Chapter*
+
+Style Problem
+	Category	MainText
+	LatexType	Environment
+	LatexName	problem
+	LabelType	Static
+	LabelString	"Problem:"
+	Margin		Dynamic
+	LabelSep	xx
+	NextNoIndent	1
+	ParSkip		0.4
+	TopSep		0.7
+	BottomSep	0.7
+	ParSep		0.5
+	Align		Block
+	LabelFont
+	  Series	Bold
+	EndFont
+End
+
+Style Solution
+	CopyStyle	Problem
+	LatexName	solution
+	LabelString	"Solution:"
+End
+
+Style Problem_List
+	CopyStyle	Problem
+	LatexType	command
+	LatexName	problemlist
+	LabelType	No_Label
+	Align		Center
+	Font
+	  Family	Sans
+	  Size		large
+	EndFont
+End
+
