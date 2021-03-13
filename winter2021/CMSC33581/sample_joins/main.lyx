@@ -112,7 +112,7 @@ Abstract
 \end_layout
 
 \begin_layout Standard
-In most relational databases joins 
+In most relational databases, joins 
 \begin_inset Formula $\mathtt{JOIN}\text{\left(R_{1},R_{2}\right)}$
 \end_inset
 
@@ -181,18 +181,17 @@ literal "false"
  By definition, joins are a subset of the cartesian product of some relations
  and therefore incur compute cost proportional to that product (i.e.
  exponential in the number of relations to be joined).
- In many instances joins are employed as a preprocessing step in order to
- compute an aggregation function over resulting data, such as a sum, an
- average, or a count.
+ In many instances, joins are employed as a preprocessing step in order
+ to compute an aggregation function over resulting data, such as a sum,
+ an average, or a count.
  In such instances it is often acceptable, and occasionally even preferable,
- to constuct estimates (along with error guarantees) of the functions based
+ to construct estimates (along with error guarantees) of the functions based
  on a sample of the entire join; one obvious advantage is in the reduction
  on the execution time of the aggregation function.
  Naturally this prompts the question of whether the operand relations in
- the join can be themselves sampled and whether the join need be constructed
- at all.
- Alternatively, when relations are never materialized (e.g.
- for streaming relations) 
+ the join can themselves sampled (as opposed to ultimately sampling the
+ join) and whether the join need be constructed at all.
+ Alternatively, when relations aren't materialized, 
 \shape italic
 online
 \shape default
@@ -282,7 +281,7 @@ relations
  on respective
 \shape italic
  attributes 
-\begin_inset Formula $\left(A,B\right),\left(A,C\right)$
+\begin_inset Formula $\left(A,B\right),\left(B,C\right)$
 \end_inset
 
 .
@@ -311,7 +310,7 @@ natural join
 
 \begin_inset Formula 
 \[
-J\coloneqq\left\{ \left(t_{1},t_{2}\right)\mid t_{1}.A=t_{2}.A\,t_{1}\in R_{1},t_{2}\in R_{2}\right\} 
+J\coloneqq\left\{ \left(t_{1},t_{2}\right)\mid t_{1}.B=t_{2}.B\wedge t_{1}\in R_{1},t_{2}\in R_{2}\right\} 
 \]
 
 \end_inset
@@ -321,11 +320,12 @@ The extension to
 \end_inset
 
  relations and multiple common attributes is the natural conjunction.
- Note that If 
+ Note that if 
 \begin_inset Formula $R_{1},R_{2}$
 \end_inset
 
- have no common attributes then 
+ have no common attributes then the join condition is vacuously true and
+ 
 \begin_inset Formula $R_{1}\bowtie R_{2}\equiv R_{1}\times R_{2}$
 \end_inset
 
@@ -356,8 +356,8 @@ cross join
 \end_inset
 
 .
- We will also have need of considering joins between relations that have
- a predicated relationship between some columns; define a 
+ We will also have need of joins between relations that have a conditional
+ relationship between some columns; define a 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -373,7 +373,7 @@ cross join
 \begin_inset Formula $A,B$
 \end_inset
 
- and some binary operator 
+ with respect to some binary operator 
 \begin_inset Formula $\left\{ <,≤,=,≠,>,≥\right\} $
 \end_inset
 
@@ -385,11 +385,11 @@ cross join
 \begin_inset Formula $a\theta b$
 \end_inset
 
-, for 
+ evaluates to true, for 
 \begin_inset Formula $a\in A,b\in B$
 \end_inset
 
- evaluates to true.
+ .
  The particular case of 
 \begin_inset Formula $\theta$
 \end_inset
@@ -406,11 +406,15 @@ equijoin
 \end_layout
 
 \begin_layout Standard
-We can model 
+We can also model 
 \begin_inset Formula $K$
 \end_inset
 
--joins as a hypergraph
+-joins (joins between 
+\begin_inset Formula $K$
+\end_inset
+
+ relations) as a hypergraph
 \begin_inset Foot
 status collapsed
 
@@ -693,7 +697,7 @@ Let
 \begin_inset Formula $\mathtt{SAMPLE}\left(R,f\right)$
 \end_inset
 
- is defined to be a uniform random sample 
+ is defined to be a uniformly random sample 
 \begin_inset Formula $S$
 \end_inset
 
@@ -703,6 +707,20 @@ Let
 
  such that 
 \begin_inset Formula $\left|S\right|=f\cdot n$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Taking floor or ceiling when 
+\begin_inset Formula $f\cdot n$
+\end_inset
+
+ is not an integer.
+\end_layout
+
 \end_inset
 
 .
@@ -1054,30 +1072,26 @@ Observe that
 
 \end_inset
 
-This shows that there is 
+We observe that there is 
 \shape italic
 skew 
 \shape default
-on the different attribute values for which the join occurs.
+between the relations in the different attribute values for which the join
+ occurs.
  Suppose we wish to construct 
 \begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
 \end_inset
 
-; we should expect that half of the tuples in such a sample will have attribute
- 
-\begin_inset Formula $A$
+; we should expect that half of the tuples 
+\begin_inset Formula $t$
 \end_inset
 
- equal to 
-\begin_inset Formula $a_{1}$
+ in such a sample will have 
+\begin_inset Formula $t.A=a_{1}$
 \end_inset
 
- and the other half will have attribute 
-\begin_inset Formula $A$
-\end_inset
-
- equal to 
-\begin_inset Formula $a_{2}$
+ and the other half will have 
+\begin_inset Formula $t.A=a_{2}$
 \end_inset
 
 .
@@ -1086,7 +1100,7 @@ on the different attribute values for which the join occurs.
 \end_inset
 
  independently and then perform the join we are unlikely to get the correct
- result; the probability that a uniform sample from 
+ result: the probability that a uniform sample from 
 \begin_inset Formula $R_{1}$
 \end_inset
 
@@ -1128,7 +1142,7 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
-This implies that the crux of the 
+This demonstrates that the crux of the 
 \shape italic
 join sampling problem
 \shape default
@@ -1184,7 +1198,7 @@ Thus,
 \end_inset
 
  rather than a uniformly random sample.
- This demonstrates the impossibility of constructing a uniform random sample
+ Thus, it is in general, impossible to construct a uniform random sample
  of 
 \begin_inset Formula $R_{1}\bowtie R_{2}$
 \end_inset
@@ -1193,7 +1207,7 @@ Thus,
 \begin_inset Formula $R_{1},R_{2}$
 \end_inset
 
-.
+:
 \end_layout
 
 \begin_layout Theorem
@@ -1238,7 +1252,7 @@ literal "false"
 
 \end_inset
 
-
+:
 \end_layout
 
 \begin_layout Theorem
@@ -1307,11 +1321,11 @@ Therefore, in general, we cannot commute
 \shape italic
 non-uniformly
 \shape default
- random samples of each of 
+ random sampling each of 
 \begin_inset Formula $R_{1},R_{2}$
 \end_inset
 
- being used to construct a uniformly random sample of 
+ in order to construct a uniformly random sample of 
 \begin_inset Formula $R_{1}\bowtie R_{2}$
 \end_inset
 
@@ -1370,10 +1384,14 @@ GROUP BY
 
 \begin_layout Standard
 where 
-\begin_inset Formula $\mathtt{AGG}\in\left\{ \mathtt{SUM},\mathtt{AVG},\mathtt{COUNT},\dots\right\} $
+\family typewriter
+
+\begin_inset Formula $\theta$
 \end_inset
 
-, 
+ 
+\family default
+is the aforementioned join condition operator, 
 \family typewriter
 
 \begin_inset Formula $g\left(R_{1},R_{2},\dots,R_{K}\right)$
@@ -1385,15 +1403,11 @@ is an expression that involves any attributes of the relations
 \begin_inset Formula $R_{1},R_{2},\dots,R_{K}$
 \end_inset
 
-, and
-\family typewriter
- 
-\begin_inset Formula $\theta$
+, 
+\begin_inset Formula $\mathtt{AGG}\in\left\{ \mathtt{SUM},\mathtt{AVG},\mathtt{COUNT},\dots\right\} $
 \end_inset
 
- 
-\family default
-is the aforementioned join condition operator, and 
+, and 
 \begin_inset Formula $\sigma_{\varphi}$
 \end_inset
 
@@ -1402,7 +1416,8 @@ is the aforementioned join condition operator, and
 \end_inset
 
 .
- An effective online aggregation algorithm produces an estimator 
+ An effective online aggregation algorithm iteratively produces an estimator
+ 
 \begin_inset Formula $\hat{Y}_{n}$
 \end_inset
 
@@ -1430,13 +1445,13 @@ where
 \begin_inset Formula $\epsilon_{n}$
 \end_inset
 
-, called the 
+ (called the 
 \shape italic
 precision
 \shape default
 , or 
 \shape italic
-margin of error
+margin of error)
 \shape default
  is defined as a function of 
 \begin_inset Formula $\alpha$
@@ -1512,7 +1527,12 @@ The unique number such that
  (but not both) is specified by the user and the algorithm reports the other
  as it proceeds; the user terminates the query when the unspecified parameter
  reaches a desired value.
- 
+ This early termination, given the users error preferences, is the chief
+ advantage of online aggregation over evaluating 
+\begin_inset Formula $\mathtt{AGG}\left(g\left(R_{1},R_{2},\dots,R_{K}\right)\right)$
+\end_inset
+
+ on the join in its entirety.
 \end_layout
 
 \begin_layout Section
@@ -1540,10 +1560,9 @@ We consider the problem of constructing
 \begin_inset Formula $A$
 \end_inset
 
- and discuss necessary adjustments extension to multi-attribute joins.
- In the proceeding we partition the approaches to resolving the sampling
- problem according to how much information exists for each of the relations
- 
+ but discuss necessary extensions to multi-attribute joins.
+ In the proceeding we partition techniques according to how much information
+ is at our disposal for each of the relations 
 \begin_inset Formula $R_{i}$
 \end_inset
 
@@ -1589,8 +1608,8 @@ Index
 \end_layout
 
 \begin_layout Standard
-We therefore produce a classification for strategies according to whether
- we have statistics (full or partial) and indices for both 
+Thus, we produce a classification of techniques according to whether we
+ have statistics (full or partial) and indices for both 
 \begin_inset Formula $R_{i}$
 \end_inset
 
@@ -2267,7 +2286,7 @@ reference "subsec:Stream-sampling-algorithms"
 
  for brief descriptions.
  We relegate techniques that are derivations on a theme (and whose pseudo-code
- is extensive) to the appendix as well (see appendix 
+ descriptions are involved) to the appendix as well (see appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Technique-implementations"
@@ -2316,7 +2335,7 @@ noprefix "false"
 \end_inset
 
 ) to produce tuples in 
-\begin_inset Formula $\mathtt{SAMPLE}_{WR}\left(R_{1}\bowtie R_{2},f\right)$
+\begin_inset Formula $\mathtt{SAMPLE}\left(R_{1}\bowtie R_{2},f\right)$
 \end_inset
 
  by sampling from tuples 
@@ -2571,7 +2590,7 @@ Stream sampling
 \end_layout
 
 \begin_layout Standard
-In the circumstances where we have only streaming access to 
+On the occasion where we have only streaming access to 
 \begin_inset Formula $R_{1}$
 \end_inset
 
@@ -2620,8 +2639,8 @@ In the case where we further reduce our information to only statistics (no
 \begin_inset Formula $R_{2}$
 \end_inset
 
-, we can weighted-sample tuples 
-\begin_inset Formula $t_{i}$
+, we can weighted sample tuples 
+\begin_inset Formula $t_{1}$
 \end_inset
 
  from 
@@ -2629,7 +2648,7 @@ In the case where we further reduce our information to only statistics (no
 \end_inset
 
  and then sample from 
-\begin_inset Formula $t_{i}\bowtie R_{2}$
+\begin_inset Formula $t_{1}\bowtie R_{2}$
 \end_inset
 
 .
@@ -2648,7 +2667,7 @@ reference "alg:groupsample"
 ).
  We perform the second sampling using unweighted sampling with replacement.
  The cost of this strategy depends on the cardinalities 
-\begin_inset Formula $\left|t_{i}\bowtie R_{2}\right|$
+\begin_inset Formula $\left|t_{1}\bowtie R_{2}\right|$
 \end_inset
 
 :
@@ -2720,9 +2739,9 @@ Frequencies for all values that occur
 \begin_inset Formula $D^{lo}$
 \end_inset
 
- (tuples with low-frequency values) and notice that it's the former that's
- responsible for the skew that is the core of the sampling problem (see
- alg.
+ (tuples with low-frequency values) and notice that it's the former set
+ of tuples that are responsible for the skew that is the core of the sampling
+ problem (see alg.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2739,7 +2758,7 @@ noprefix "false"
 \end_inset
 
  values function to inflate the join.
- Therefore we can recover efficiency by taking a hybrid approach: by employing
+ Therefore we can improve efficiency by taking a hybrid approach: by employing
  group sample strategy on 
 \begin_inset Formula $D^{hi}$
 \end_inset
@@ -2766,8 +2785,7 @@ cy values and that it is precisely this set of values for which maintaining
 status open
 
 \begin_layout Plain Layout
-Since, tautologically, they are observed frequently and can be sketched
- easily.
+Since, tautologically, they are observed frequently and can be readily sketched.
 \end_layout
 
 \end_inset
@@ -2791,7 +2809,7 @@ By CF sampling with
 \begin_inset Formula $p$
 \end_inset
 
- being the relative fractions of tuples in each subset
+ being equal to the relative fractions of tuples in each subset
 \end_layout
 
 \end_inset
@@ -2828,8 +2846,8 @@ If an index is available for the high-frequency values
 \end_inset
 
 , in addition to just the frequencies themselves, then a more efficient
- version of frequency partition sample is possible; we can save having to
- complete the full join 
+ version of frequency partition sample is possible: we can save having to
+ compute the full join since
 \begin_inset Formula 
 \begin{multline*}
 \left(S_{1}\cup R_{1}^{lo}\right)\bowtie R_{2}\equiv\left(S_{1}\cup R_{1}^{lo}\right)\bowtie\left(R_{2}^{lo}\cup R_{2}^{hi}\right)\\
@@ -3137,7 +3155,7 @@ name "alg:universesampling"
 
 \end_inset
 
-This guarantees when 
+This guarantees that when 
 \begin_inset Formula $t_{1}\in R_{1}$
 \end_inset
 
@@ -3153,7 +3171,7 @@ t_{1}.A=t_{2}.A\iff h\left(t_{1}.A\right)=h\left(t_{2}.A\right)
 
 \end_inset
 
-Hence, universe sampling produces a uniform sample of 
+Hence, universe sampling produces a true uniformly random sample of 
 \begin_inset Formula $R_{1}\bowtie R_{2}$
 \end_inset
 
@@ -3180,8 +3198,8 @@ then
 \end_inset
 
 This can lead to poor performance for approximate queries when the frequencies
- of attributes are highly concentrated.
- Consider sampling from relations 
+ of attributes are highly concentrated: consider sampling from relations
+ 
 \begin_inset Formula $R_{1},R_{2}$
 \end_inset
 
@@ -3316,7 +3334,11 @@ where
 \begin_inset Formula $m_{s_{k}}\left(a_{j}\right)$
 \end_inset
 
- are the allocations for sample 
+ are the allocations of 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ for sample 
 \begin_inset Formula $S_{k}$
 \end_inset
 
@@ -3378,7 +3400,7 @@ C_{m_{s_{1}}\left(a_{1}\right)}^{10}\times C_{m_{s_{2}}\left(a_{1}\right)}^{10}\
 
 \end_inset
 
-For various allocations of we see orders of magnitude differences in the
+For various allocations of we see order of magnitude differences in the
  number of possible samplings:
 \end_layout
 
@@ -3925,8 +3947,7 @@ literal "false"
 
 \end_inset
 
- belongs to a class of techniques that address the online aggregation problem
- directly.
+ belongs to a class of techniques that address the online aggregation problem.
  Thus, ripple join isn't an operand sampling scheme per se but a streaming
  join algorithm that, by virtue of building the join incrementally, produces
  a sample of 
@@ -3934,7 +3955,7 @@ literal "false"
 \end_inset
 
 .
- As the full join is approached running estimates for various aggregations
+ As the full join is approached, running estimates for various aggregations
  converge.
  
 \end_layout
@@ -3958,27 +3979,23 @@ literal "false"
 \end_inset
 
 , with 
-\begin_inset Formula $\left|R_{2}\right|<\left|R_{1}\right|$
+\begin_inset Formula $\left|R_{1}\right|<\left|R_{2}\right|$
 \end_inset
 
 , streaming nested loops first samples 
-\begin_inset Formula $t_{2}\in R_{2}$
+\begin_inset Formula $t_{1}\in R_{1}$
 \end_inset
 
  and then 
-\begin_inset Formula $R_{1}$
+\begin_inset Formula $R_{2}$
 \end_inset
 
- is looped over in search of tuples 
-\begin_inset Formula $t_{i}$
-\end_inset
-
- that satisfy the join condition.
- Once all such tuples are discovered the running estimate of the aggregation
+ is scanned in search of tuples that satisfy the join condition.
+ Once all such tuples are discovered, the running estimate of the aggregation
  function is updated.
  Note that for conventional batch processing, a query optimizer would select
  
-\begin_inset Formula $R_{2}$
+\begin_inset Formula $R_{1}$
 \end_inset
 
  as the outer relation, while for streaming processing the reverse is preferable
@@ -3992,7 +4009,7 @@ Such that running estimates can be updated more frequently.
 \end_inset
 
 .
- Despite this optimization, if 
+ In this case, if 
 \begin_inset Formula $\left|R_{1}\right|$
 \end_inset
 
@@ -4096,8 +4113,8 @@ name "fig:Ripple-Join-for"
 \end_inset
 
 Ripple join address both of these issues by adaptively choosing which is
- the inner relation and which is the outer relation in nested loops (see
- fig.
+ the inner relation and which is the outer relation in the nested loops
+ (see fig.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4194,8 +4211,8 @@ literal "false"
 \end_inset
 
 .
- Therefore, in turn, the confidence intervals can be minimized subject to
- an upper bound 
+ Thus, the confidence intervals can be minimized subject to an upper bound
+ 
 \begin_inset Formula $c$
 \end_inset
 
@@ -4205,7 +4222,7 @@ status open
 
 \begin_layout Plain Layout
 Since the product of the aspect ratios is the number of matches computed
- and hence I/O.
+ and hence proportional to total I/O.
 \end_layout
 
 \end_inset
@@ -4277,8 +4294,7 @@ sampling steps to only
 \begin_inset Formula $\sum_{k=1}^{K}\beta_{k}$
 \end_inset
 
-.
- This then implies the optimal aspect ratios are
+ and therefore the optimal aspect ratios are
 \begin_inset Formula 
 \[
 \beta_{k}^{*}=\frac{c\sqrt{\hat{d}\left(k\right)}}{\sum_{j=1}^{K}\sqrt{\hat{d}\left(j\right)}}
@@ -4303,7 +4319,7 @@ literal "false"
 \end_inset
 
 , like ripple join, is a solution to the online aggregation problem.
- The key idea of wander join is to model a join over 
+ The key idea is to model a join over 
 \begin_inset Formula $K$
 \end_inset
 
@@ -4399,7 +4415,8 @@ J\coloneqq R_{1}\left(A,B\right)\bowtie R_{2}\left(B,C\right)\bowtie R_{3}\left(
 
 \end_inset
 
-be the join of interest, and 
+be the join of interest.
+ Also, let 
 \begin_inset Formula $d_{i+1}\left(t_{i}\right)$
 \end_inset
 
@@ -4432,7 +4449,7 @@ be the join of interest, and
 \begin_inset Formula $t_{1}\in R_{1}$
 \end_inset
 
- uniformly at random and then randomly selecting tuples 
+ uniformly at random and then uniformly at random selecting tuples 
 \begin_inset Formula $t_{2}\in R_{2},t_{3}\in R_{3}$
 \end_inset
 
@@ -4484,12 +4501,11 @@ literal "false"
 
 \end_inset
 
- and therefore the average of many such estimators is also unbiased.
- That is to say, for a set of sampled paths 
+ and hence the average of many such estimators (over paths 
 \begin_inset Formula $\Gamma$
 \end_inset
 
-
+) is also unbiased: 
 \begin_inset Formula 
 \[
 \hat{\mu}_{\Gamma}\coloneqq\frac{1}{\left|\Gamma\right|}\sum_{\gamma\in\Gamma}X_{\gamma}\Rightarrow E\left[\hat{\mu}_{\Gamma}\right]=\mathtt{SUM}\left(g\left(R_{1},R_{2},R_{3}\right)\right)
@@ -4497,7 +4513,15 @@ literal "false"
 
 \end_inset
 
-with variance 
+The variance 
+\begin_inset Formula $\hat{\sigma}_{\Gamma}^{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $\hat{\mu}_{\Gamma}$
+\end_inset
+
+ is
 \begin_inset Formula 
 \[
 \hat{\sigma}_{\Gamma}^{2}\coloneqq\frac{1}{\left|\Gamma\right|-1}\sum_{\gamma\in\Gamma}\left(X_{\gamma}-\hat{\mu}_{\Gamma}\right)^{2}
@@ -4505,13 +4529,17 @@ with variance
 
 \end_inset
 
-Furthermore the 
+Furthermore, the 
 \shape italic
 walk plan, 
 \shape default
 i.e.
  the order of the relations sampled, can be optimized, in terms of estimator
- variance; by the law of total variance
+ variance; by the 
+\shape italic
+law of total variance
+\shape default
+
 \begin_inset Formula 
 \[
 \text{Var}\left(\frac{1}{\left|\Gamma\right|}\sum_{\gamma\in\Gamma}X_{\gamma}\right)=\frac{\textrm{Var}\left[X_{\gamma}\right]E\left[T\right]}{t}
@@ -4540,8 +4568,8 @@ where
 \begin_inset Formula $E\left[T\right]$
 \end_inset
 
- from the walks themselves, we choose the walk plan that minimizes the estimator
- variance.
+ from the walks themselves, we can choose the walk plan that minimizes the
+ estimator variance.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4617,8 +4645,6 @@ jump back
 \end_inset
 
  and so on.
- Note that different walk orders lead to different execution time and estimator
- variance.
  Given relations 
 \begin_inset Formula $R_{1},\dots,R_{K}$
 \end_inset
@@ -4772,8 +4798,10 @@ name "fig:wanderjoincyclic"
 
 \end_inset
 
-This same adjustment can be extended to work for cyclic joins by first computing
- a directed spanning tree
+Note that different walk orders lead to different execution times and estimator
+ variances.
+ This same adjustment can be extended to work for cyclic joins by first
+ computing a directed spanning tree
 \begin_inset Foot
 status collapsed
 
@@ -4783,7 +4811,11 @@ A
 directed tree
 \shape default
  is a tree in which every edge increases the distance from the root.
- A directed spanning tree of a graph 
+ A 
+\shape italic
+directed spanning tree
+\shape default
+ of a graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -4870,7 +4902,7 @@ with
 \begin_inset Formula $w\left(t\right)$
 \end_inset
 
- is not often available but we can make use of a proxy 
+ is not often available, but we can make use of a proxy 
 \begin_inset Formula $W\left(t\right)$
 \end_inset
 
@@ -5118,7 +5150,7 @@ reference "subsec:Frequency-partition-sample"
 
 \end_inset
 
-); in the case of frequency partition sampling 
+): in the case of frequency partition sampling 
 \begin_inset Formula $W\left(t\right)\coloneqq w\left(t\right)$
 \end_inset
 
@@ -5147,7 +5179,7 @@ W\left(t\right)\coloneqq\prod_{j=i+1}^{K}M_{i}
 
 \end_inset
 
-Then 
+and then 
 \begin_inset Formula $W\left(t\right)$
 \end_inset
 
@@ -5159,7 +5191,7 @@ reference "eq:wproperties"
 \end_inset
 
 .
- Essentially this functions as an assumption that every tuple in 
+ Essentially this assumes that every tuple in 
 \begin_inset Formula $R_{i}$
 \end_inset
 
@@ -5438,11 +5470,7 @@ proposal distribution
 \begin_inset Formula $p(x)$
 \end_inset
 
-, one can perform a sampling of the region under the graph of 
-\begin_inset Formula $g(x)$
-\end_inset
-
- distribution
+, one can perform a sampling of the region under the graph
 \begin_inset Foot
 status open
 
@@ -5456,12 +5484,15 @@ For probability density function
 \end_inset
 
 .
- 
 \end_layout
 
 \end_inset
 
-, and reject all such samples that fall outside of the graph of 
+ of 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, and reject all samples that fall outside of the graph of 
 \begin_inset Formula $p(x)$
 \end_inset
 
@@ -5698,8 +5729,8 @@ noprefix "false"
 \begin_inset Formula $O\left(n\right)$
 \end_inset
 
- time since it calls random number generator (RNG) for each element in the
- stream.
+ time since it calls a random number generator (RNG) for each element in
+ the stream.
  
 \begin_inset Float algorithm
 wide false
@@ -5895,7 +5926,11 @@ If fact we don't actually need to maintain the set of draws
 \begin_inset Formula $u_{i}$
 \end_inset
 
- for the entire reservoir, just the largest in the reservoir.
+ for the entire reservoir, just the largest 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ in the reservoir.
  Call that that value 
 \begin_inset Formula $\theta$
 \end_inset
@@ -5908,19 +5943,11 @@ The
 \begin_inset Formula $u_{i}$
 \end_inset
 
- value of the 
-\begin_inset Quotes eld
-\end_inset
-
-next
-\begin_inset Quotes erd
-\end_inset
-
- 
+ of the next 
 \begin_inset Formula $s_{i}$
 \end_inset
 
- to enter the reservoir is actually be distributed 
+ to enter the reservoir is actually distributed 
 \begin_inset Formula $U\left(0,\theta\right)$
 \end_inset
 
@@ -5939,7 +5966,7 @@ If
  we have 
 \begin_inset Formula 
 \[
-P\left(Y\leq y\right)=\left(\frac{y}{\theta}\right)^{n}
+P\left(Y\leq y\right)=\left(\frac{y}{\theta}\right)^{k}
 \]
 
 \end_inset
@@ -6366,7 +6393,8 @@ improves on algorithm
 \family typewriter
 BBU1
 \family default
- by eliminating that prerequisite (see alg 
+ by eliminating that prerequisite (see alg.
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "alg:reservoirnaive-1-1-1"
