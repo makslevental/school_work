@@ -1,5 +1,6 @@
 import math
 import pickle
+from pprint import pprint
 from typing import List, NamedTuple
 
 import matplotlib.pyplot as plt
@@ -72,12 +73,25 @@ def sample_one(tbl):
 
 
 def sample_one_matching(tbl, col_name, val):
+    return sample_n_matching(tbl, col_name, val, 1)[0]
+
+
+def sample_n_matching(tbl, col_name, val, n):
     cur = con.cursor()
-    q = f"""SELECT * FROM {tbl} WHERE ctid IN (SELECT ctid FROM {tbl} WHERE {tbl}.{col_name}={val} ORDER BY RANDOM() LIMIT 1)"""
+    q = f"""SELECT * FROM {tbl} WHERE ctid IN (SELECT ctid FROM {tbl} WHERE {tbl}.{col_name}={val} ORDER BY RANDOM() LIMIT {n})"""
     cur.execute(q)
-    res = cur.fetchone()
+    rows = []
+    row = cur.fetchone()
+    while row is not None and len(rows) < n:
+        rows.append(row)
+        row = cur.fetchone()
+
     cur.close()
-    return res
+    return rows
+
+
+def sample_all_matching(tbl, col_name, val):
+    return sample_n_matching(tbl, col_name, val, 2 ** 32)
 
 
 def sample_indices(full_join_name, samples):
@@ -235,22 +249,23 @@ def olken_sample_two_n(table_name_1, table_name_2, n):
 
     return S
 
+
 def weighted_wr_sample(table, n, weights, weight_col_name):
     col_names = get_column_names(table)
     col_names_to_idx = {name: idx for idx, name in enumerate(col_names)}
 
     cur = con.cursor()
     W = 0
-    A = n*[None]
+    A = n * [None]
 
     cur.execute(f"SELECT * FROM {table}")
 
     row = cur.fetchone()
     while row:
-        w = weights[row[col_names_to_idx[weight_col_name]]]
+        w = weights.get(row[col_names_to_idx[weight_col_name]], 0)
         W += w
         for j in range(len(A)):
-            if np.random.random() <= w/W:
+            if np.random.random() <= w / W:
                 A[j] = row
 
         row = cur.fetchone()
@@ -277,6 +292,58 @@ def stream_sample_two(table_name_1, table_name_2, n):
         samples[-1].update(dict(zip(col_names_2, t2)))
 
     return samples
+
+
+def group_sample_two(table_name_1, table_name_2, n):
+    col_names_1 = get_column_names(table_name_1)
+    col_names_to_idx_1 = {name: idx for idx, name in enumerate(col_names_1)}
+    col_names_2 = get_column_names(table_name_2)
+    col_names_to_idx_2 = {name: idx for idx, name in enumerate(col_names_2)}
+    common_col = get_common_col(table_name_1, table_name_2)
+    m2 = get_freqs(table_name_2, common_col)
+
+    table_1_samples = weighted_wr_sample(table_name_1, n, m2, common_col)
+    samples = [col_names_1 + col_names_2]
+    for t1 in table_1_samples:
+        v = t1[col_names_to_idx_1[common_col]]
+        t2s = sample_all_matching(table_name_2, common_col, v)
+        t2 = t2s[np.random.randint(0, len(t2s))]
+        samples.append(dict(zip(col_names_1, t1)))
+        samples[-1].update(dict(zip(col_names_2, t2)))
+
+    return samples
+
+
+def hash_sample_two(table_name_1, table_name_2, f):
+    cur = con.cursor()
+    col_names_1 = get_column_names(table_name_1)
+    col_names_to_idx_1 = {name: idx for idx, name in enumerate(col_names_1)}
+    col_names_2 = get_column_names(table_name_2)
+    col_names_to_idx_2 = {name: idx for idx, name in enumerate(col_names_2)}
+    common_col = get_common_col(table_name_1, table_name_2)
+
+    q = f"""
+        WITH t1 as (SELECT *
+                    FROM {table_name_1}
+                    WHERE ('x' || substr(md5({table_name_1}.{common_col}::text), 1, 16))::bit(64)::bigint /
+                          9223372036854775807::float8 + 1 < {f} * 2),
+             t2 as (SELECT *
+                    FROM {table_name_2}
+                    WHERE ('x' || substr(md5({table_name_2}.{common_col}::text), 1, 16))::bit(64)::bigint /
+                          9223372036854775807::float8 + 1 < {f} * 2)
+        SELECT * FROM t1 natural join t2
+    """
+    cur.execute(q)
+
+    del col_names_2[col_names_to_idx_2[common_col]]
+    samples = [col_names_1 + col_names_2]
+    row = cur.fetchone()
+    while row is not None:
+        samples.append(dict(zip(samples[0], row)))
+        row = cur.fetchone()
+    cur.close()
+    return samples
+
 
 def gen_bens(n=int(1e6), n_digs=2) -> List[int]:
     chi1 = np.random.default_rng().chisquare(df=1, size=n)
@@ -354,12 +421,6 @@ def loop_all_exps(K, N, loop_body):
             prefix = f"tbl_{k}_{N}_{int(f * 100)}"
             loop_body(k, N, f, prefix)
 
-    # K, N = 3, 10000
-    # for k in range(2, K):
-    #     for f in np.linspace(0.1, 0.9, 9):
-    #         prefix = f"tbl_{k}_{N}_{int(f * 100)}"
-    #         loop_body(k, N, f, prefix)
-
 
 def gen_exps():
     def loop_body(k, N, f, prefix):
@@ -391,7 +452,7 @@ def wander_join_exps():
     loop_all_exps(3, 10000, loop_body)
 
 
-def olken_join_exps():
+def olken_join_exps(N):
     def loop_body(k, N, f, prefix):
         print(f"{k},{N},{f},{prefix}")
         rels = [f"r{i}" for i in range(k)]
@@ -408,7 +469,8 @@ def olken_join_exps():
             ),
         )
 
-    loop_all_exps(3, 10000, loop_body)
+    loop_all_exps(3, N, loop_body)
+
 
 def stream_sample_exps(N):
     def loop_body(k, N, f, prefix):
@@ -429,6 +491,49 @@ def stream_sample_exps(N):
 
     loop_all_exps(3, N, loop_body)
 
+
+def group_sample_exps():
+    def loop_body(k, N, f, prefix):
+        print(f"{k},{N},{f},{prefix}")
+        rels = [f"r{i}" for i in range(k)]
+        n_rows = get_n_rows(f"{prefix}_full_join")
+        samples = group_sample_two(
+            *[f"{prefix}_{r}" for r in rels], math.ceil(f * n_rows)
+        )
+        samp_indxs, full_indxs = sample_indices(f"{prefix}_full_join", samples[1:])
+        pickle.dump(
+            {"samp_indxs": samp_indxs, "full_indxs": full_indxs},
+            open(
+                f"/home/maksim/dev_projects/school_work/winter2021/CMSC33581/sample_joins/{prefix}_groupjoin.p",
+                "wb",
+            ),
+        )
+
+    loop_all_exps(3, 1000, loop_body)
+    loop_all_exps(3, 10000, loop_body)
+
+def hash_sample_exps():
+    def loop_body(k, N, f, prefix):
+        print(f"{k},{N},{f},{prefix}")
+        rels = [f"r{i}" for i in range(k)]
+        n_rows = get_n_rows(f"{prefix}_full_join")
+        samples = hash_sample_two(
+            *[f"{prefix}_{r}" for r in rels], math.ceil(f * n_rows)
+        )
+        samp_indxs, full_indxs = sample_indices(f"{prefix}_full_join", samples[1:])
+        pickle.dump(
+            {"samp_indxs": samp_indxs, "full_indxs": full_indxs},
+            open(
+                f"/home/maksim/dev_projects/school_work/winter2021/CMSC33581/sample_joins/{prefix}_hashjoin.p",
+                "wb",
+            ),
+        )
+
+    loop_all_exps(3, 1000, loop_body)
+    loop_all_exps(3, 10000, loop_body)
+
+
+
 if __name__ == "__main__":
     # gen_exps()
     # print(get_freqs("tbl_2_1000_10_r0", "A0"))
@@ -436,4 +541,9 @@ if __name__ == "__main__":
     # freqs = get_freqs("tbl_2_1000_10_r1", "A1")
     # print(weighted_wr_sample("tbl_2_1000_10_r0", 100, freqs, "a1"))
     # print(stream_sample_two("tbl_2_1000_10_r0", "tbl_2_1000_10_r1", 10))
-    stream_sample_exps(10000)
+    # olken_join_exps(10000)
+    # stream_sample_exps(10000)
+    # print(group_sample_two("tbl_2_1000_10_r0", "tbl_2_1000_10_r1", 10))
+    # group_sample_exps()
+    # pprint(hash_sample_two("tbl_2_1000_10_r0", "tbl_2_1000_10_r1", 0.01))
+    hash_sample_exps()
