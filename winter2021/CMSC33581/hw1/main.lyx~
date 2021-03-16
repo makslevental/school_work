@@ -288,7 +288,7 @@ odd
  then the median is necessarily a member of the set.
  Thus, if the set of words (i.e.
  after making distinct) has odd cardinality then we claim 
-\begin_inset Formula $h_{\operatorname{med}}\left(S\right)$
+\begin_inset Formula $h_{\operatorname{med}}\left(S\right)=h_{\operatorname{med}}\left(S'\right)$
 \end_inset
 
  is an estimator for Jaccard similarity.
@@ -330,10 +330,14 @@ Note that
 \end_inset
 
  is well defined since 
-\begin_inset Formula $\operatorname*{med}\left(\left\{ a\right\} \right)\in A$
+\begin_inset Formula $\operatorname*{med}\left(\left\{ a\mid a\in A\right\} \right)\in A$
 \end_inset
 
-.
+ for 
+\begin_inset Formula $A$
+\end_inset
+
+ with odd cardinality.
  Then for any hash function 
 \begin_inset Formula $h$
 \end_inset
@@ -395,7 +399,7 @@ status open
 
 \end_inset
 
-Applying standard dictionary encoding 1 to the collection of dates will?
+Applying standard dictionary encoding to the collection of dates will?
 \end_layout
 
 \begin_layout Solution*
@@ -409,66 +413,12 @@ status open
 
 \end_inset
 
-A dictionary encoding will 
+By the uniqueness of the 100 strings, a dictionary encoding will 
 \series bold
-sometimes increase the size of the dataset and sometimes decrease the size
- of the dataset
+never decrease the cardinality
 \series default
-; let 
-\begin_inset Formula $D_{I}$
-\end_inset
-
- be the dictionary encoding that appends '!' i.e.
+ of the dataset because otherwise some strings would be lost.
  
-\begin_inset Formula 
-\[
-D_{I}:A[i]\leftrightarrow A[i]\cup\text{!}
-\]
-
-\end_inset
-
- and let 
-\begin_inset Formula $D_{\mathbb{N}}$
-\end_inset
-
- be the dictionary encoding that ordinalizes 
-\begin_inset Formula 
-\[
-A[i]\leftrightarrow i
-\]
-
-\end_inset
-
-Then clearly 
-\begin_inset Formula $D_{I}$
-\end_inset
-
- increases the size of the dataset by approximately 
-\begin_inset Formula $100\times1$
-\end_inset
-
- bytes and 
-\begin_inset Formula $D_{\mathbb{N}}$
-\end_inset
-
- reduces the size of the dataset by 
-\begin_inset Formula 
-\begin{align*}
-\Delta & =\left(\sum_{i=1}^{100}\left\lfloor \log_{10}\left(i\right)\right\rfloor +1\right)-100\times6\\
- & =192-600=-408
-\end{align*}
-
-\end_inset
-
-bytes since the length of a number 
-\begin_inset Formula $i$
-\end_inset
-
- is 
-\begin_inset Formula $\left\lfloor \log_{10}\left(i\right)\right\rfloor +1$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Problem*
@@ -482,7 +432,8 @@ status open
 \end_inset
 
 Suppose, we calculate an optimal prefix-free code (like Huffman coding)
- to the collection of dates will?
+ to...
+ the collection of dates will?
 \end_layout
 
 \begin_layout Solution*
@@ -499,7 +450,8 @@ Code words (and therefore code word lengths) will be
 \series bold
 arbitrarily associated with each date
 \series default
- but they won't have arbitrary lengths because otherwise the code wouldn't
+.
+ But note they won't have arbitrary lengths because otherwise the code wouldn't
  be an optimal; we know from Huffman coding that the average code length
  is approximately 
 \begin_inset Formula $\log_{2}\left(100\right)\approx6.644$
@@ -541,29 +493,30 @@ status open
 
 \end_inset
 
-The algorithm produces a codex 
-\begin_inset Formula $C$
+The algorithm produces two dictionaries 
+\begin_inset Formula $D_{\text{MM}},D_{\text{DD}}$
 \end_inset
 
- with cardinality bounds
+ with
+\begin_inset Formula 
+\begin{align*}
+O\left(\left|\left\{ \text{'MAR'},\text{'NOV'},\text{'DEC'}\right\} \right|\right) & \leq\left|D_{\text{MM}}\right|\leq O\left(\left|\left\{ \text{'JAN'},\dots,\text{'DEC'}\right\} \right|\right)\\
+O\left(\left|\left\{ \text{'02'},\text{'11'},\text{'12'},\text{'13'}\right\} \right|\right) & \leq\left|D_{\text{DD}}\right|\leq O\left(\left|\left\{ \text{'01'},\dots,\text{'31'}\right\} \right|\right)
+\end{align*}
+
+\end_inset
+
+Therefore 
 \begin_inset Formula 
 \[
-\left|\left\{ \text{'MAR'},\text{'NOV'},\text{'DEC'}\right\} \right|\times\left|\left\{ \text{'02'},\text{'11'},\text{'12'},\text{'13'}\right\} \right|\le\left|C\right|\leq\left|\left\{ \text{'JAN'},\dots,\text{'DEC'}\right\} \right|\times\left|\left\{ \text{'01'},\dots,\text{'31'}\right\} \right|
+\left|D_{\text{MM}}\right|+\left|D_{\text{DD}}\right|\leq12+31<100
 \]
 
 \end_inset
 
-i.e.
- 
-\begin_inset Formula $12\le\left|C\right|\leq372$
-\end_inset
-
- depending on how much repetition there is among the months and the days
- of the month.
- Thus, the algorithm will 
+and hence 
 \series bold
-sometimes increase the size of the dataset and sometimes decrease the size
- of the dataset
+will always decrease the size of the dataset
 \series default
 .
  
@@ -574,7 +527,16 @@ sometimes increase the size of the dataset and sometimes decrease the size
 \end_layout
 
 \begin_layout Exercise
-Suppose, you are given a single hash function 
+Let 
+\begin_inset Formula $S\coloneqq\left\{ s_{1},\dots,s_{N}\right\} $
+\end_inset
+
+ be the set a 
+\begin_inset Formula $N$
+\end_inset
+
+ strings.
+ Suppose, you are given a single hash function 
 \begin_inset Formula $\mathtt{hash}\left(s\right)$
 \end_inset
 
@@ -582,8 +544,8 @@ Suppose, you are given a single hash function
 \begin_inset Formula $s$
 \end_inset
 
- as an argument and returns an integer from 1 to 
-\begin_inset Formula $H$
+ as an argument and returns an integer 
+\begin_inset Formula $l\in L\coloneqq\left\{ 1,\dots,H\right\} $
 \end_inset
 
  and satisfies the simple uniform hashing assumption (SUHA).
@@ -659,118 +621,97 @@ status open
 
 \end_inset
 
-The answer depends on whether the question is asking the about 
-\begin_inset Formula $\max$
-\end_inset
 
- over arbitrary strings or the 
-\begin_inset Formula $\max$
-\end_inset
-
- over the same set of 
-\begin_inset Formula $N$
-\end_inset
-
- strings given in the prompt.
- Regarding, the former (
-\begin_inset Formula $\max$
-\end_inset
-
- over arbitrary strings) by the simple uniform hashing assumption the answer
- is 
 \series bold
-always equal to 
+Possibly less than 
 \begin_inset Formula $H$
 \end_inset
 
- 
+
 \series default
-since
-\end_layout
-
-\begin_layout Solution*
-\begin_inset Formula 
-\[
-\mathbb{P}\left[\texttt{hash}\left(s\right)=H\right]=\frac{1}{H}
-\]
-
-\end_inset
-
-for any 
-\begin_inset Formula $s$
-\end_inset
-
 .
-\end_layout
-
-\begin_layout Solution*
-Regarding the latter: let 
-\begin_inset Formula $S\coloneqq\left\{ s_{1},\dots,s_{N}\right\} $
+ Proof: let 
+\begin_inset Formula $S'\coloneqq\left\{ \text{'1'},\dots,\text{'H'}\right\} $
 \end_inset
 
- be the set of 
-\begin_inset Formula $N$
+ be the string representations for integers 
+\begin_inset Formula $L$
 \end_inset
 
- strings with 
+, with 
 \begin_inset Formula $H<N$
 \end_inset
 
 , and 
-\begin_inset Formula $L\coloneqq\left\{ \text{'1'},\dots,\text{'H'}\right\} $
+\begin_inset Formula $j\coloneqq\max\left(\left\{ \texttt{hash}\left(s\right)\mid s\in S\right\} \right)$
 \end_inset
 
- be the string representations for integers 
-\begin_inset Formula $\left\{ 1,\dots,H\right\} $
+.
+ Note that 
+\begin_inset Formula $j\in L$
 \end_inset
 
-, and 
+.
+ If there does not exist 
+\begin_inset Formula $s'\in S'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\texttt{hash}\left(s'\right)=j$
+\end_inset
+
+ then 
+\begin_inset Formula $\texttt{h2}$
+\end_inset
+
+ could not possibly attain the same maximum as 
+\begin_inset Formula $\texttt{hash}$
+\end_inset
+
+ over 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Therefore, suppose there exists 
+\begin_inset Formula $s'\in S'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\texttt{hash}\left(s'\right)=j$
+\end_inset
+
+ and let 
+\begin_inset Formula $l$
+\end_inset
+
+ be the integer corresponding to 
+\begin_inset Formula $s'$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $l\in L$
+\end_inset
+
+.
+ Then by SUHA, for 
+\begin_inset Formula $s\in S$
+\end_inset
+
+ we have
 \begin_inset Formula 
 \[
-J\coloneqq\max\left(\text{\left\{  \texttt{hash}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)
+\mathbb{P}\left[\texttt{hash}\left(s\right)=l\right]=\frac{1}{H}\Rightarrow\mathbb{P}\left[\texttt{hash}\left(s\right)\neq l\right]=1-\frac{1}{H}
 \]
 
 \end_inset
 
-Note that 
-\begin_inset Formula $J\in S'$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $\texttt{hs2}\left(s_{i}\right)=l_{s_{i}}$
-\end_inset
-
- for some 
-\begin_inset Formula $l_{s_{i}}\in L$
-\end_inset
-
- and by the SUHA
-\begin_inset Formula 
-\[
-\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)=J\right]=\frac{1}{H}\Rightarrow\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)\neq J\right]=1-\frac{1}{H}
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $s_{j}\in S$
-\end_inset
-
-.
- Therefore, by independence of 
-\begin_inset Formula $\texttt{hash}\left(l_{s_{i}}\right),\texttt{hash}\left(l_{s_{j}}\right)$
-\end_inset
-
- for 
-\begin_inset Formula $i\neq j$
-\end_inset
-
-
+and furthermore
 \begin_inset Formula 
 \begin{align*}
-\mathbb{P}\left[\texttt{hs2}\left(l_{s_{1}}\right)\neq J\wedge\cdots\wedge\texttt{hs2}\left(l_{s_{N}}\right)\neq J\right] & =\prod_{i=1}^{N}\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)\neq J\right]\\
- & =\prod_{i=1}^{N}\left(1-\mathbb{P}\left[\texttt{hs2}\left(l_{s_{i}}\right)=J\right]\right)\\
+\mathbb{P}\left[\texttt{hash}\left(s_{1}\right)\neq l\wedge\cdots\wedge\texttt{hash}\left(s_{N}\right)\neq l\right] & =\prod_{i=1}^{N}\mathbb{P}\left[\texttt{hash}\left(s_{i}\right)\neq l\right]\\
+ & =\prod_{i=1}^{N}\left(1-\mathbb{P}\left[\texttt{hash}\left(s_{i}\right)\neq l\right]\right)\\
  & =\prod_{i=1}^{N}\left(1-\frac{1}{H}\right)\\
  & =\left(1-\frac{1}{H}\right)^{N}
 \end{align*}
@@ -779,21 +720,22 @@ for all
 
 and hence 
 \begin_inset Formula 
-\[
-\mathbb{P}\left[\max\left(\text{\left\{  \texttt{hash}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)\neq\max\left(\text{\left\{  \texttt{hs2}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)\right]=\left(1-\frac{1}{H}\right)^{N}
-\]
+\begin{align*}
+\mathbb{P}\left[\max\left(\left\{ \texttt{hash}\left(s\right)\mid s\in S\right\} \right)\neq\max\left(\left\{ \texttt{h2}\left(s\right)\mid s\in S\right\} \right)\right] & =\mathbb{P}\left[\texttt{hash}\left(s_{1}\right)\neq l\wedge\cdots\wedge\texttt{hash}\left(s_{N}\right)\neq l\right]\\
+ & =\left(1-\frac{1}{H}\right)^{N}>0
+\end{align*}
 
 \end_inset
 
 i.e.
- with small probability 
-\begin_inset Formula $\max\left(\text{\left\{  \texttt{hs2}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)$
+ with non-zero probability 
+\begin_inset Formula $\max\left(\left\{ \texttt{h2}\left(s\right)\mid s\in S\right\} \right) $
 \end_inset
 
  is 
 \series bold
 possibly less than 
-\begin_inset Formula $\max\left(\text{\left\{  \texttt{hash}\left(s_{i}\right)\mid s_{j}\in S\right\}  }\right)$
+\begin_inset Formula $\max\left(\left\{ \texttt{hash}\left(s\right)\mid s\in S\right\} \right) $
 \end_inset
 
 .
@@ -813,7 +755,7 @@ Define
 \end_layout
 
 \begin_layout LyX-Code
-def h3(s): return hash(s[1:])
+def h2(s): return hash(s[1:])
 \end_layout
 
 \begin_layout Standard
@@ -836,10 +778,19 @@ status open
 \begin_layout Enumerate
 
 \series bold
-\begin_inset Formula $\mathtt{h3}$
+True
+\series default
+:
+\series bold
+ 
+\begin_inset Formula $\mathtt{h2}$
 \end_inset
 
- is independent from 
+
+\series default
+ is independent from
+\series bold
+ 
 \begin_inset Formula $\mathtt{hash}$
 \end_inset
 
@@ -874,10 +825,10 @@ be a string such that
  Then by SUHA
 \begin_inset Formula 
 \begin{align*}
-\mathbb{P}\left[\texttt{hs3}\left(z\right)=i\wedge\texttt{hash}\left(s\right)=j\right] & =\mathbb{P}\left[\texttt{hash}\left(z'\right)=i\wedge\texttt{hash}\left(s\right)=j\right]\\
+\mathbb{P}\left[\texttt{h2}\left(z\right)=i\wedge\texttt{hash}\left(s\right)=j\right] & =\mathbb{P}\left[\texttt{hash}\left(z'\right)=i\wedge\texttt{hash}\left(s\right)=j\right]\\
  & =\mathbb{P}\left[\texttt{hash}\left(z'\right)=i\right]\mathbb{P}\left[\texttt{hash}\left(s\right)=j\right]\\
  & =\frac{1}{H}\frac{1}{H}\\
- & =\mathbb{P}\left[\texttt{hs3}\left(z\right)=i\right]\mathbb{P}\left[\texttt{hash}\left(s\right)=j\right]
+ & =\mathbb{P}\left[\texttt{h2}\left(z\right)=i\right]\mathbb{P}\left[\texttt{hash}\left(s\right)=j\right]
 \end{align*}
 
 \end_inset
@@ -888,34 +839,55 @@ be a string such that
 \begin_layout Enumerate
 
 \series bold
-\begin_inset Formula $\mathtt{h3}$
+False
+\series default
+: every possible code does not 
+\series bold
+necessarily
+\series default
+ appear once if you apply 
+\series bold
+
+\begin_inset Formula $\mathtt{h2}$
 \end_inset
 
- and 
+ 
+\series default
+to each of the 
+\begin_inset Formula $N$
+\end_inset
+
+ strings.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+False
+\series default
+:
+\series bold
+ 
+\begin_inset Formula $\mathtt{h2}$
+\end_inset
+
+ 
+\series default
+and
+\series bold
+ 
 \begin_inset Formula $\mathtt{hash}$
 \end_inset
 
- can be combined to make a code space of 
+ cannot be combined to make a code space of 
 \begin_inset Formula $H^{2}$
 \end_inset
 
 
 \series default
-.
- Proof: since both 
-\begin_inset Formula $\texttt{hs3}:S\rightarrow\left\{ 1,\dots,H\right\} $
-\end_inset
-
- and 
-\begin_inset Formula $\texttt{hash}:S\rightarrow\left\{ 1,\dots,H\right\} $
-\end_inset
-
-, taking 
-\begin_inset Formula $g\left(s\right)\coloneqq\left(\texttt{hs3}\left(s\right),\texttt{hash}\left(s\right)\right)$
-\end_inset
-
- then 
-\begin_inset Formula $g\left(s\right)\in H^{2}$
+ because as in the previous part it's not the case that all code are mapped
+ to by 
+\begin_inset Formula $\texttt{h2}$
 \end_inset
 
 .
@@ -924,7 +896,12 @@ be a string such that
 \begin_layout Enumerate
 
 \series bold
-\begin_inset Formula $\mathtt{h3}$
+True
+\series default
+:
+\series bold
+ 
+\begin_inset Formula $\mathtt{h2}$
 \end_inset
 
  is independent from 
@@ -933,12 +910,13 @@ be a string such that
 
  but will no longer satisfy SUHA
 \series default
-: let 
+.
+ Proof: let 
 \begin_inset Formula $z'\coloneqq x\cdot z$
 \end_inset
 
  and 
-\begin_inset Formula $z''\coloneqq y\cdot z'$
+\begin_inset Formula $z''\coloneqq y\cdot z$
 \end_inset
 
  with 
@@ -949,7 +927,7 @@ be a string such that
  Then 
 \begin_inset Formula 
 \begin{align*}
-\mathbb{P}\left[\texttt{hs3}\left(z'\right)=i\wedge\texttt{hs3}\left(z''\right)=j\right] & =\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\right]\\
+\mathbb{P}\left[\texttt{h2}\left(z'\right)=i\wedge\texttt{h2}\left(z''\right)=j\right] & =\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\right]\\
  & =\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\wedge i\neq j\right]\\
  & \;+\mathbb{P}\left[\texttt{hash}\left(z\right)=i\wedge\texttt{hash}\left(z\right)=j\wedge i=j\right]\\
  & =0+\mathbb{P}\left[\texttt{hash}\left(z\right)=i\right]\\
@@ -958,11 +936,11 @@ be a string such that
 
 \end_inset
 
-
-\begin_inset Newline newline
+which doesn't equal 
+\begin_inset Formula $1/H^{2}$
 \end_inset
 
-
+, as it should to satisfy SUHA.
 \end_layout
 
 \begin_layout Exercise
@@ -1192,7 +1170,7 @@ Then the variance of
 \begin{align*}
 \operatorname{Var}\left[\hat{p}_{n}\right] & =\frac{1}{K^{2}}\operatorname{Var}\left[\frac{1}{n}\sum_{i=1}^{n}\mathbbm{1}_{B_{\ell}}\left(X_{i}\right)\right]\\
  & =\frac{1}{K^{2}}\frac{\mathbb{P}\left[X_{i}\in B_{\ell}\right]\left(1-\mathbb{P}\left[X_{i}\in B_{\ell}\right]\right)}{n}\\
- & \leq\frac{1}{nK^{2}}\mathbb{P}\left[X_{i}\in B_{\ell}\right]\\
+ & \leq\frac{1}{nK^{2}}\mathbb{P}\left[X_{i}\in B_{\ell}\right]\quad\text{since }\left|1-\mathbb{P}\left[X_{i}\in B_{\ell}\right]\right|\leq1\\
  & \leq\frac{1}{nK^{2}}\left(Kp\left(x^{*}\right)+\frac{\left(K-1\right)K}{2}\Delta\right)\\
  & =\frac{p\left(x^{*}\right)}{nK}+\frac{\left(K-1\right)}{2nK}\Delta
 \end{align*}
