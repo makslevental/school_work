@@ -1,0 +1,3557 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass beamer
+\begin_preamble
+\usetheme{Darmstadt}
+%\usetheme{CambridgeUS}
+% or ...
+%\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+
+\setbeamercovered{transparent}
+\setbeamertemplate{theorems}[numbered] 
+
+\newcommand{\R}{\mathbb{R}}%
+\newcommand{\T}{\mathcal{T}}%
+\newcommand{\parens}[1]{\left(#1 \right)}%
+\newcommand{\braces}[1]{\left\{#1 \right\}}%
+\newcommand{\angles}[1]{\langle #1 \rangle}%
+\newcommand\dd{\mathrm{d}}
+\newcommand{\ddd}[1]{\frac{\dd}{\dd #1}}%
+\newcommand{\dddd}[2]{\frac{\dd #1}{\dd #2}}%
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}%
+\newcommand{\pdd}[2]{\frac{\partial #1}{\partial #2}}%
+\newcommand{\evalat}[1]{\Big|_{#1}}%
+\DeclareMathOperator*{\argmax}{argmax}%
+\DeclareMathOperator*{\argmin}{argmin}%
+\newcommand{\E}[1]{\text{E}\left[ #1 \right]}%
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Non-linear protocols for optimal distributed consensus in networks of dynamic
+ agents
+\end_layout
+
+\begin_layout Subtitle
+BUSN 33916 50 (Winter 2021) Consensus and Economics
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pgfdeclareimage[height=0.5cm]{institution-logo}{uchicago_logo.jpeg}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+logo{
+\backslash
+pgfuseimage{institution-logo}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+AtBeginSubsection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+%    %
+\backslash
+frametitle{Outline}   
+\end_layout
+
+\begin_layout Plain Layout
+
+%    %
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+%  }
+\end_layout
+
+\begin_layout Plain Layout
+
+%}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+begin{frame}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+usebeamerfont{title}
+\backslash
+insertsectionhead
+\backslash
+par%
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+end{beamercolorbox}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+end{frame}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSubsection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+begin{frame}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+usebeamerfont{title}
+\backslash
+insertsubsectionhead
+\backslash
+par%
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+end{beamercolorbox}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+vfill
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+end{frame}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+beamerdefaultoverlayspecification{<+->}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+TLDR...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tldr.png
+	lyxscale 10
+	width 75line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Outline
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Definitions
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Agents
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\Gamma={1,\dots,n}$
+\end_inset
+
+ is a set of 
+\shape italic
+agents/players/nodes/vertices
+\shape default
+ and 
+\begin_inset Formula $G=(\Gamma,E)$
+\end_inset
+
+ is a fixed (in time) undirected, connected, network describing the connections
+ between vertices 
+\begin_inset Formula $i\in\Gamma$
+\end_inset
+
+, where 
+\begin_inset Formula $E\subset\Gamma\times\Gamma$
+\end_inset
+
+ is the edge set.
+ 
+\end_layout
+
+\begin_layout Definition
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Neighborhood
+\end_layout
+
+\end_inset
+
+A 
+\shape italic
+neighborhood
+\shape default
+ of a vertex 
+\begin_inset Formula $i$
+\end_inset
+
+ is the set of all vertices 
+\begin_inset Formula $j$
+\end_inset
+
+ for which there is a single edge connecting 
+\begin_inset Formula $i,j$
+\end_inset
+
+, that is to say 
+\begin_inset Formula $N_{i}:=\left\{ j\mid(i,j)\in E\right\} $
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+For two metric spaces 
+\begin_inset Formula $(X,d_{X})$
+\end_inset
+
+ and 
+\begin_inset Formula $(Y,d_{Y})$
+\end_inset
+
+, a function 
+\begin_inset Formula $f:X\rightarrow Y$
+\end_inset
+
+ is called 
+\shape italic
+Lipschitz continuous
+\shape default
+ if there exists a real constant 
+\begin_inset Formula $K\geq0$
+\end_inset
+
+ such that, for all 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ in 
+\begin_inset Formula $X$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+d_{Y}(f(x_{1}),f(x_{2}))\leq Kd_{X}(x_{1},x_{2})
+\]
+
+\end_inset
+
+A function 
+\begin_inset Formula $f$
+\end_inset
+
+ is called 
+\shape italic
+locally Lipschitz continuous
+\shape default
+ if for every 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ there exists a neighborhood 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $f$
+\end_inset
+
+ restricted to 
+\begin_inset Formula $U$
+\end_inset
+
+ is Lipschitz continuous
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename neighbors1.png
+	lyxscale 10
+	width 50line%
+
+\end_inset
+
+
+\begin_inset space \quad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename neighbors2.png
+	lyxscale 10
+	width 33line%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Neighborhoods
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Control policy
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $x_{i}(t)$
+\end_inset
+
+ be the state of the agent 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $t$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ evolves according to a 
+\shape italic
+distributed
+\shape default
+ and 
+\shape italic
+stationary
+\shape default
+ control policy 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+, if 
+\begin_inset Formula $\dot{x}_{i}=u_{i}(x_{i},\mathbf{x}_{N_{i}})$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{x}_{N_{i}}$
+\end_inset
+
+ are the states of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+'s neighbors.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Note, the control policy is distributed because of neighborhood dependency
+ and stationary because of lack of explicit dependence on time.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Protocol
+\end_layout
+
+\end_inset
+
+The 
+\shape italic
+protocol
+\shape default
+ of the network is the collection of controls 
+\begin_inset Formula $\mathbf{u}\left(\mathbf{x}\right):=\left(u_{i}\left(x_{i},\mathbf{x}_{N_{i}}\right)\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\Gamma$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Agreement function
+\end_layout
+
+\end_inset
+
+The 
+\shape italic
+agreement function
+\shape default
+ 
+\begin_inset Formula $\chi:\R^{n}\rightarrow\R$
+\end_inset
+
+ is any continuous, differentiable function which is permutation invariant,
+ i.e.
+\begin_inset Formula 
+\[
+\chi\left(\mathbf{x}\right)=\chi\left(x_{1},\dots,x_{n}\right)=\chi\left(x_{\sigma(1)},\dots,x_{\sigma(n)}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Consensus
+\end_layout
+
+\end_inset
+
+To 
+\shape italic
+reach consensus
+\shape default
+ on 
+\shape italic
+consensus value
+\shape default
+ 
+\begin_inset Formula $\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+ means 
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}\mathbf{x}\left(t\right)=\chi\left(\mathbf{x}\left(0\right)\right)\mathbf{1}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbf{1}:=\left(1,1,\dots,1\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+The consensus problem
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Consensus problem
+\end_layout
+
+\end_inset
+
+Given a network 
+\begin_inset Formula $G$
+\end_inset
+
+ of agents and agreement function 
+\begin_inset Formula $\chi$
+\end_inset
+
+, the 
+\shape italic
+consensus problem
+\shape default
+ is to design a protocol 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ such that consensus is reached for any consensus value 
+\begin_inset Formula $\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Consensus protocol
+\end_layout
+
+\end_inset
+
+A protocol is a 
+\shape italic
+consensus protocol
+\shape default
+ if it is the solution to a consensus problem.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Block
+Since we're interested in agents reaching consensus on values 
+\begin_inset Formula $\chi(\mathbf{x}(0))$
+\end_inset
+
+ that are functions of the whole system we further restrict 
+\begin_inset Formula $\chi$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Block
+\begin_inset Formula 
+\[
+\min_{i\in\Gamma}(x_{i})\leq\chi(\mathbf{x})\leq\max_{i\in\Gamma}(x_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Block
+for 
+\begin_inset Formula $\mathbf{x}\in\R^{n}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Time-invariance of 
+\begin_inset Formula $\chi$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Lemma
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Time invariancy
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ be a stationary consensus protocol.
+ Then 
+\begin_inset Formula $\chi(\mathbf{x}(t))$
+\end_inset
+
+ is stationary, i.e.
+ 
+\begin_inset Formula $\chi(\mathbf{x}(t))=\chi(\mathbf{x}(0))$
+\end_inset
+
+ for all 
+\begin_inset Formula $t>0$
+\end_inset
+
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The key idea is that the protocols used are time-invariant (so the system
+ of differential equations (1) is autonomous) and such that the system has
+ unique solutions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+By assumption 
+\begin_inset Formula $\mathbf{x}\left(t\right)\rightarrow\chi\left(\mathbf{x}\left(0\right)\right)\mathbf{1}$
+\end_inset
+
+.
+ Stationary 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ 
+\begin_inset Formula $\implies$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathbf{x}\left(t\right)$
+\end_inset
+
+ is a solution, then 
+\begin_inset Formula $\mathbf{y}_{s}\left(t\right):=\mathbf{x}\left(t+s\right)$
+\end_inset
+
+, with 
+\begin_inset Formula $\mathbf{y}_{s}\left(0\right):=\mathbf{x}\left(s\right)$
+\end_inset
+
+, is also a solution.
+ For such 
+\begin_inset Formula $\mathbf{y}_{s}$
+\end_inset
+
+ we also have 
+\begin_inset Formula $\mathbf{y}_{s}\left(t\right)\rightarrow\chi\left(\mathbf{y}_{s}\left(0\right)\right)\mathbf{1}$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}\mathbf{y}_{s}\left(t\right)=\chi\left(\mathbf{y}_{s}\left(0\right)\mathbf{1}\right)=\chi\left(\mathbf{x}\left(s\right)\mathbf{1}\right)
+\]
+
+\end_inset
+
+But since both 
+\begin_inset Formula $\mathbf{y}_{s},\mathbf{x}$
+\end_inset
+
+ converge to the same limit we must have 
+\begin_inset Formula $\chi\left(\mathbf{x}\left(s\right)\right)=\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Note that by Lemma 1 we have that 
+\begin_inset Formula $\chi(\chi(\mathbf{x}(0))\mathbf{1})=\chi(\mathbf{x}(0))$
+\end_inset
+
+.
+ In fact, by setting 
+\begin_inset Formula $y=\lambda\mathbf{1}$
+\end_inset
+
+ in eqn.
+ (
+\begin_inset Formula $\ref{eqn:minmax}$
+\end_inset
+
+), we have that 
+\begin_inset Formula $\lambda\mathbf{1}$
+\end_inset
+
+ is a fixed point of 
+\begin_inset Formula $\chi$
+\end_inset
+
+ for any 
+\begin_inset Formula $\lambda\in\R$
+\end_inset
+
+, i.e.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\lambda\leq\chi(\lambda\mathbf{1})\leq\lambda\Rightarrow\chi(\lambda\mathbf{1})=\lambda
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Note
+\begin_inset Formula 
+\[
+\dddd{\chi(\mathbf{x}(t))}{t}=\sum_{i\in\Gamma}\pdd{\chi}{x_{i}}\dot{x}_{i}=\sum_{i\in\Gamma}\pdd{\chi}{x_{i}}u_{i}=0
+\]
+
+\end_inset
+
+Thus, a consensus protocol must satisfy 
+\begin_inset Formula $\nabla\chi\cdot\mathbf{u}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+For 
+\begin_inset Formula $\chi(\mathbf{x})=\min_{i\in\Gamma}\left(x_{i}\right)$
+\end_inset
+
+, a suitable 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+u_{i}=h\left(x_{i},\min_{j\in N_{i}}x_{j}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $h(x,y)=0$
+\end_inset
+
+ when 
+\begin_inset Formula $x=y$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(since 
+\begin_inset Formula $\nabla\chi\neq0$
+\end_inset
+
+ only when 
+\begin_inset Formula $x_{i}=\min_{j\in N_{i}}x_{j}$
+\end_inset
+
+ but then 
+\begin_inset Formula $h=0$
+\end_inset
+
+) Note that though ˆ(x) = min{xi} is not differentiable, at points where
+ the partial derivative ˆ(x)/xi is not defined the protocol ui = 0.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Henceforth, we assume further structure for the agreement function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\chi(\mathbf{x})\coloneqq f\left(\sum_{i\in\Gamma}g(x_{i})\right)\label{eq:agreementfunctionform}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $f,g:\R\rightarrow\R$
+\end_inset
+
+ and 
+\begin_inset Formula $g'\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Fact
+Means of order 
+\begin_inset Formula $p$
+\end_inset
+
+satisfy the assumptions
+\end_layout
+
+\begin_layout Fact
+
+\end_layout
+
+\begin_layout Fact
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row topspace="1bp" bottomspace="1bp">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\chi(\mathbf{x})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f\text{\left(y\right)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $g\text{\left(z\right)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="1bp" bottomspace="1bp">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Arithmetic
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{\left|\Gamma\right|}\sum_{i\in\Gamma}x_{i}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{y}{\left|\Gamma\right|}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $z$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="1bp" bottomspace="1bp">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Geometric
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left(\prod_{i\in\Gamma}x_{i}\right)^{1/\left|\Gamma\right|}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{y/\left|\Gamma\right|}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\log\left(z\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="1bp" bottomspace="1bp">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Harmonic
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\left|\Gamma\right|}{\sum_{i\in\Gamma}x_{i}^{-1}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\left|\Gamma\right|}{y}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{z}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="1bp" bottomspace="1bp">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p-$
+\end_inset
+
+mean
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left(\frac{1}{\left|\Gamma\right|}\sum_{i\in\Gamma}x_{i}^{p}\right)^{1/p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left(\frac{y}{\left|\Gamma\right|}\right)^{1/p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $z^{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Protocol design rule
+\end_layout
+
+\end_inset
+
+The following protocol
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula 
+\begin{equation}
+u_{i}(x_{i},\mathbf{x}_{N_{i}}):=\frac{1}{g'}\sum_{j\in N_{i}}\phi(x_{j},x_{i})\label{eq:protocol}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $g'\neq0$
+\end_inset
+
+, induces time-invariance in 
+\begin_inset Formula $\chi$
+\end_inset
+
+ if 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is antisymmetric, i.e.
+ 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula 
+\[
+\phi(x_{j},x_{i})=-\phi(x_{i},x_{j})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Formula $\chi$
+\end_inset
+
+ is time-invariant iff
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+chain rule
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\dddd{}{t}\sum_{i\in\Gamma}g(x_{i})=\sum_{i\in\Gamma}\dddd{g(x_{i}(t))}{t}=\sum_{i\in\Gamma}\dddd{g(x_{i})}{x_{i}}\dot{x}_{i}=\sum_{i\in\Gamma}g'u_{i}=0
+\]
+
+\end_inset
+
+Finally, since 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is antisymmetric and the graph defining the network is undirected, we have
+ that 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\sum_{i\in\Gamma}g'u_{i}=\frac{1}{g'}\sum_{i\in\Gamma}g'\sum_{j\in N_{i}}\phi(x_{j},x_{i})=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Example
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+to be proved
+\end_layout
+
+\end_inset
+
+Consider 
+\begin_inset Formula $\phi(x_{j},x_{i}):=\alpha\cdot(x_{j}-x_{i})$
+\end_inset
+
+.
+ Then the 
+\begin_inset Formula $p-$
+\end_inset
+
+mean is time invariant under protocol
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+no comments on convergence
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+u_{i}(x_{i},\mathbf{x}_{N_{i}}):=\frac{x_{i}^{1-p}}{p}\sum_{j\in N_{i}}\phi(x_{j},x_{i})=\alpha\cdot\frac{x_{i}^{1-p}}{p}\sum_{j\in N_{i}}(x_{j}-x_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Convergence of 
+\begin_inset Formula $\chi$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Owing to time-invariance of 
+\begin_inset Formula $\chi$
+\end_inset
+
+, if the system converges, it will converge to 
+\begin_inset Formula $\chi(\mathbf{x}(0))\mathbf{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+In this section we prove that the system converges, for any agreement function
+ 
+\begin_inset Formula $\chi$
+\end_inset
+
+ and initial state 
+\begin_inset Formula $\mathbf{x}(0)$
+\end_inset
+
+, when 
+\begin_inset Formula $g$
+\end_inset
+
+ is strictly increasing and the function 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is defined
+\end_layout
+
+\end_inset
+
+We prove convergence if
+\begin_inset Formula 
+\[
+\phi(x_{j},x_{i}):=\alpha\phi(\theta(x_{j})-\theta(x_{i}))
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is continuous, 
+\begin_inset Formula $\theta:\R\rightarrow\R$
+\end_inset
+
+ is differentiable with 
+\begin_inset Formula $\theta'$
+\end_inset
+
+ locally Lipschitz and strictly positive.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+where 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is continuous, locally Lipschitz, odd and strictly increasing, and 
+\begin_inset Formula $\theta:\R\rightarrow\R$
+\end_inset
+
+ is differentiable with 
+\begin_inset Formula $\theta'$
+\end_inset
+
+ locally Lipschitz and strictly positive.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+Thus, the protocol (
+\begin_inset Formula $\ref{eq:protocol}$
+\end_inset
+
+) becomes
+\begin_inset Formula 
+\begin{equation}
+u_{i}(x_{i},\mathbf{x}_{N_{i}}):=\frac{\alpha}{g'}\sum_{j\in N_{i}}\phi\left(\theta(x_{j})-\theta(x_{i})\right)\label{eqn:protocol2}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $g$
+\end_inset
+
+ is strictly increasing.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+First we study the equilibria of the system.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Lemma
+Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a network and 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ be a protocol with components defined by eqn.
+ (
+\begin_inset Formula $\ref{eqn:protocol2}$
+\end_inset
+
+).
+ Then all equilibria 
+\begin_inset Formula $\mathbf{x}^{*}$
+\end_inset
+
+ of the network have the following properties: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{x}^{*}=\lambda\mathbf{1}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $\mathbf{x}\left(t\right)$
+\end_inset
+
+ converges to the equilibrium 
+\begin_inset Formula $\lambda_{0}\mathbf{1}$
+\end_inset
+
+, then 
+\begin_inset Formula $\lambda_{0}=\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+, for any initial state 
+\begin_inset Formula $\mathbf{x}(0)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Proof (sketch)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Sufficiency
+\begin_inset space \space{}
+\end_inset
+
+1 
+\begin_inset Formula $\mathbf{x}=\lambda\mathbf{1}$
+\end_inset
+
+, then 
+\begin_inset Formula $\phi\left(\theta(\lambda)-\theta(\lambda)\right)=0$
+\end_inset
+
+ since 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is odd and continuous.
+\end_layout
+
+\begin_layout Description
+Necessity
+\begin_inset space \space{}
+\end_inset
+
+1 
+\begin_inset Formula $\mathbf{x}^{*}\neq\lambda$
+\end_inset
+
+, then there exists 
+\begin_inset Formula $u_{i}<0$
+\end_inset
+
+ (contradicts equilibrium).
+\end_layout
+
+\begin_layout Description
+Convergence if 
+\begin_inset Formula $\lambda\neq\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+ then 
+\begin_inset Formula $\chi$
+\end_inset
+
+ is not time-invariant.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem
+Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a network of agents that implement a distributed and stationary protocol
+\begin_inset Formula 
+\[
+u_{i}(x_{i},\mathbf{x}_{N_{i}}):=\frac{\alpha}{g'}\sum_{j\in N_{i}}\phi\left(\theta(x_{j})-\theta(x_{i})\right)
+\]
+
+\end_inset
+
+against agreement function of the form (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:agreementfunctionform"
+
+\end_inset
+
+) with 
+\begin_inset Formula $g'>0$
+\end_inset
+
+.
+ Then the agents asymptotically reach consensus on 
+\begin_inset Formula $\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+ for any initial state 
+\begin_inset Formula $\mathbf{x}(0)$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Consequently.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Proof (idea)
+\end_layout
+
+\end_inset
+
+Define 
+\begin_inset Formula 
+\[
+\ensuremath{\eta_{i}:=g(x_{i})-g\left(\chi\left(\mathbf{x}\left(0\right)\right)\right)}
+\]
+
+\end_inset
+
+and note that, since 
+\begin_inset Formula $\boldsymbol{\eta}$
+\end_inset
+
+ is strictly increasing (since 
+\begin_inset Formula $g$
+\end_inset
+
+ is ) and 
+\begin_inset Formula $\boldsymbol{\eta}=0$
+\end_inset
+
+ iff 
+\begin_inset Formula $\mathbf{x}=\chi\left(\mathbf{x}\left(0\right)\right)$
+\end_inset
+
+, consensus corresponds to asymptotic stability of 
+\begin_inset Formula $\boldsymbol{\eta}$
+\end_inset
+
+ around 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Introduce a candidate Lyapunov function
+\begin_inset Formula 
+\[
+V\left(\boldsymbol{\eta}\right):=\frac{1}{2}\sum_{i\in\Gamma}\eta_{i}^{^{2}}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $V\left(\boldsymbol{\eta}\right)=0$
+\end_inset
+
+ iff 
+\begin_inset Formula $\boldsymbol{\eta}=0$
+\end_inset
+
+, 
+\begin_inset Formula $V\left(\boldsymbol{\eta}\right)>0$
+\end_inset
+
+ if 
+\begin_inset Formula $\boldsymbol{\eta}\neq0$
+\end_inset
+
+, and 
+\begin_inset Formula $\dot{V}\left(\boldsymbol{\eta}\right)<0$
+\end_inset
+
+ if 
+\begin_inset Formula $\boldsymbol{\eta}\neq0$
+\end_inset
+
+ proves stability.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Geometric-meaning-of-the-Lyapunov-function.png
+	lyxscale 10
+	width 75line%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lyapunov function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Mechanism design problem
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Individual objective function
+\end_layout
+
+\end_inset
+
+Define an 
+\shape italic
+individual objective function
+\shape default
+ for an agent 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+J_{i}(x_{i},\mathbf{x}_{N_{i}},u_{i}):=\lim_{T\rightarrow\infty}\int_{0}^{T}\left(F(x_{i},\mathbf{x}_{N_{i}})+\rho u_{i}^{2}\right)\dd t
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho>0$
+\end_inset
+
+ and 
+\begin_inset Formula $F:\R\times\R^{n}\rightarrow\R$
+\end_inset
+
+ is a non-negative 
+\shape italic
+penalty function.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+that measures the deviation of agent 
+\begin_inset Formula $i$
+\end_inset
+
+'s state 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ from its neighbors' states.
+\end_layout
+
+\end_inset
+
+
+\shape default
+ A protocol is 
+\shape italic
+optimal
+\shape default
+ if each 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ optimizes an agent's corresponding individual objective.
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Mechanism design problem
+\end_layout
+
+\end_inset
+
+Consider a network of agents.
+ The 
+\shape italic
+mechanism design problem
+\shape default
+ is, for any agreement function 
+\begin_inset Formula $\chi$
+\end_inset
+
+, to determine a penalty 
+\begin_inset Formula $F$
+\end_inset
+
+ such that there exists an optimal consensus protocol 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\chi(\mathbf{x}(0))$
+\end_inset
+
+ for any initial state 
+\begin_inset Formula $x(0)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Note that the mechanism design problem is over an infinite 
+\shape italic
+planning horizon
+\shape default
+ 
+\begin_inset Formula $T\rightarrow\infty$
+\end_inset
+
+.
+ We need to discretize:
+\end_layout
+
+\begin_layout Definition
+Let a one-step
+\shape italic
+ action/planning period 
+\shape default
+be 
+\begin_inset Formula $\delta=t_{k+1}-t_{k}$
+\end_inset
+
+.
+ Further let 
+\begin_inset Formula $\hat{x}_{i}\left(\tau,t_{k}\right)$
+\end_inset
+
+ , 
+\begin_inset Formula $\hat{\mathbf{x}}_{N_{i}}\left(\tau,t_{k}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\hat{u}_{i}\left(\tau,t_{k}\right)$
+\end_inset
+
+ be agent and neighboring states and agent controls, for 
+\begin_inset Formula $\tau\geq t_{k}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+
+\end_layout
+
+\begin_layout Standard
+Hence, we keep neighboring agents' states constant over a single planning
+ period and ultimately let 
+\begin_inset Formula $\delta\rightarrow0$
+\end_inset
+
+ to get an approximation to the original problem.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Block
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Receding horizon problem
+\end_layout
+
+\end_inset
+
+Define the 
+\shape italic
+receding horizon objective function
+\shape default
+
+\begin_inset Formula 
+\[
+\hat{J}_{i}(\hat{x}_{i},\hat{\mathbf{x}}_{N_{i}},\hat{u}_{i}):=\lim_{T\rightarrow\infty}\int_{t_{k}}^{T}\left(\hat{F}(\hat{x}_{i}\left(\tau,t_{k}\right),\hat{\mathbf{x}}_{N_{i}}\left(\tau,t_{k}\right))+\rho\hat{u}_{i}^{2}\right)\dd\tau
+\]
+
+\end_inset
+
+Then for all agents 
+\begin_inset Formula $i\in\Gamma$
+\end_inset
+
+ and discrete time steps 
+\begin_inset Formula $t_{k}$
+\end_inset
+
+, given initial states 
+\begin_inset Formula $x_{i}(t_{0}),\mathbf{x}_{N_{i}}(t_{0})$
+\end_inset
+
+ find
+\begin_inset Formula 
+\[
+\hat{u}_{i}^{*}:=\argmin\hat{J}_{i}(\hat{x}_{i},\hat{\mathbf{x}}_{N_{i}},\hat{u}_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Block
+subject to
+\begin_inset Formula 
+\[
+\begin{aligned}\dot{\hat{x}}_{i}(\tau,t_{k}) & =\hat{u}_{i}(\tau,t_{k})\\
+\dot{\hat{x}}_{j}(\tau,t_{k}) & =\hat{u}_{j}(\tau,t_{k})=0\quad\forall j\in N_{i}\\
+\hat{x}_{i}(t_{k},t_{k}) & =x_{i}(t_{k})\\
+\hat{x}_{j}(t_{k},t_{k}) & =x_{j}(t_{k})\quad\forall j\in N_{i}
+\end{aligned}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Note that the assumption that all neighboring states are fixed during an
+ action step implies 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+that 
+\begin_inset Formula $\hat{\mathbf{x}}_{N_{i}}$
+\end_inset
+
+ is constant (over the step) and so, over a particular time step 
+\begin_inset Formula $t_{k}$
+\end_inset
+
+, eqn.
+ receding horizon objective function reduces
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\hat{J}_{i}(\hat{x}_{i},\hat{u}_{i}):=\lim_{T\rightarrow\infty}\int_{t_{k}}^{T}\left(\hat{F}(\hat{x}_{i}(\tau,t_{k}))+\rho\hat{u}_{i}^{2}(\tau,t_{k})\right)\dd\tau
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, we use Pontryagin's minimum principle.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Pontryagin's minimum principle
+\end_layout
+
+\end_inset
+
+Let 
+\shape italic
+Hamiltonian 
+\shape default
+be
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula 
+\[
+H(\hat{x}_{i},\hat{u}_{i},p_{i})=L(\hat{x}_{i},\hat{u}_{i})+p_{i}\hat{u}_{i}
+\]
+
+\end_inset
+
+where the 
+\shape italic
+Lagrangian
+\shape default
+ 
+\begin_inset Formula $L:=F(\hat{x}_{i}+\rho\hat{u}_{i}^{2})$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $H$
+\end_inset
+
+ abides by the Pontryagin necessary conditions at the optimum 
+\begin_inset Formula $(\hat{x}_{i}^{\*},\hat{u}_{i}^{\*},p_{i}^{\*})$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula $\begin{aligned}\pdd{H}{\hat{u}_{i}}=0\Rightarrow p_{i}=-2\rho\hat{u}_{i} & \quad\text{optimality}\\
+\dot{p}_{i}=-\pdd{H}{x_{i}} & \quad\text{multiplier}\\
+\dot{\hat{x}}_{i}=-\pdd{H}{p_{i}}\Rightarrow\dot{\hat{x}}_{i}=\hat{u}_{i} & \quad\text{costate equation}\\
+\frac{\partial^{2}H}{\partial\hat{u}_{i}^{2}}\evalat{\hat{x}_{i}=\hat{x}_{i}^{*},\hat{u}_{i}=\hat{u}_{i}^{*},p_{i}=p_{i}^{*}}\geq0\Rightarrow\rho\geq0 & \quad\text{minimality equation}\\
+H(\hat{x}_{i}^{*},\hat{u}_{i}^{*},p_{i}^{*})=0 & \quad\text{boundary}
+\end{aligned}
+$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem
+Consider the penalty function
+\begin_inset Formula 
+\[
+F(\hat{x}_{i}(\tau,t_{k})):=\rho\left(\frac{1}{g'}\sum_{j\in N_{i}}\theta(x_{j}(t_{k}))-\theta(\hat{x}_{i}(\tau,t_{k}))\right)^{2}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $g$
+\end_inset
+
+ is increasing, 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is concave, and 
+\begin_inset Formula $(1/g')$
+\end_inset
+
+ is convex.
+ Then 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula 
+\[
+\hat{u}_{i}^{*}:=\frac{\alpha}{g'}\sum_{j\in N_{i}}\theta(x_{j}(t_{k}))-\theta(x_{i}(\tau))
+\]
+
+\end_inset
+
+solves the mechanism design problem.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Proof (idea)
+\end_layout
+
+\end_inset
+
+Check each of the conditions of Pontryagin's minimum principle.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Corollary
+Taking 
+\begin_inset Formula $\delta\rightarrow0$
+\end_inset
+
+ we get that the penalty function
+\end_layout
+
+\begin_layout Corollary
+\begin_inset Formula 
+\[
+F(x_{i},\mathbf{x}_{N_{i}}):=\rho\left(\frac{1}{g'}\sum_{j\in N_{i}}\theta(x_{j})-\theta(x_{i})\right)^{2}
+\]
+
+\end_inset
+
+and the optimal control law
+\begin_inset Formula 
+\[
+u_{i}(x_{i},\mathbf{x}_{N_{i}}):=\frac{1}{g'}\sum_{j\in N_{i}}\theta(x_{j})-\theta(x_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Simulations
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename arith.png
+	lyxscale 10
+	width 75line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{\scriptstyle F:=\left(\sum_{j\in N_{i}}(x_{j}-x_{i})\right)^{2}\Rightarrow u_{i}=\sum_{j\in N_{i}}\left(x_{j}\left(t\right)-x_{i}\left(t\right)\right)\Rightarrow\lim_{t\rightarrow\infty}\chi\left(\mathbf{x}\left(t\right)\right)\rightarrow\frac{1}{\left|\Gamma\right|}\sum_{i\in\Gamma}x_{i}\left(0\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename geom.png
+	lyxscale 10
+	width 75line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{\scriptstyle F:=\left(\sum_{j\in N_{i}}x_{i}(x_{j}-x_{i})\right)^{2}\Rightarrow u_{i}=x_{i}\sum_{j\in N_{i}}\left(x_{j}\left(t\right)-x_{i}\left(t\right)\right)\Rightarrow\lim_{t\rightarrow\infty}\chi\left(\mathbf{x}\left(t\right)\right)\rightarrow\left(\prod_{i\in\Gamma}x_{i}\left(0\right)\right)^{1/\left|\Gamma\right|}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename harm.png
+	lyxscale 10
+	width 75line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{\scriptstyle F:=\left(x_{i}^{2}\sum_{j\in N_{i}}(x_{j}-x_{i})\right)^{2}\Rightarrow u_{i}=-x_{i}^{2}\sum_{j\in N_{i}}\left(x_{j}\left(t\right)-x_{i}\left(t\right)\right)\Rightarrow\lim_{t\rightarrow\infty}\chi\left(\mathbf{x}\left(t\right)\right)\rightarrow\frac{\left|\Gamma\right|}{\sum_{i\in\Gamma}\left(x_{i}\left(0\right)\right)^{-1}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename two.png
+	lyxscale 10
+	width 75line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+{\scriptstyle F:=\frac{1}{2x_{i}}\left(\sum_{j\in N_{i}}(x_{j}-x_{i})\right)^{2}\Rightarrow u_{i}=\frac{1}{2x_{i}}\sum_{j\in N_{i}}\left(x_{j}\left(t\right)-x_{i}\left(t\right)\right)\Rightarrow\lim_{t\rightarrow\infty}\chi\left(\mathbf{x}\left(t\right)\right)\rightarrow\sqrt{\frac{1}{\left|\Gamma\right|}\sum_{i\in\Gamma}\left(x_{i}\left(0\right)\right)^{2}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+In general
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F\left(x_{i},\mathbf{x}_{N_{i}}\right) & :=\left(\frac{x_{i}^{1-p}}{p}\sum_{j\in N_{i}}(x_{j}-x_{i})\right)^{2}\Rightarrow\\
+u_{i}(x_{i},\mathbf{x}_{N_{i}}) & :=\frac{x_{i}^{1-p}}{p}\sum_{j\in N_{i}}(x_{j}-x_{i})\Rightarrow\\
+\lim_{t\rightarrow\infty}\chi\left(\mathbf{x}\left(t\right)\right) & \;\rightarrow\left(\frac{1}{\left|\Gamma\right|}\sum_{i\in\Gamma}\left(x_{i}\left(0\right)\right)^{p}\right)^{1/p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Bonus 1: Graph Laplacian
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definitions
+The 
+\shape italic
+adjacency matrix
+\shape default
+ of a graph 
+\begin_inset Formula $G=\left(\Gamma,E\right)$
+\end_inset
+
+ is defined
+\begin_inset Formula 
+\[
+\Delta A_{ij}\left(G\right)\coloneqq\begin{cases}
+1 & \left(i,j\right)\in E\\
+1 & \left(j,i\right)\in E\\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+The 
+\shape italic
+degree matrix
+\shape default
+ of a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined
+\begin_inset Formula 
+\[
+\Delta_{ij}\left(G\right)\coloneqq\begin{cases}
+\deg\left(v_{i}\right) & i=j\\
+0 & i\neq j
+\end{cases}
+\]
+
+\end_inset
+
+The 
+\shape italic
+Laplacian
+\shape default
+ of the graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined
+\begin_inset Formula 
+\[
+L\left(G\right)\coloneqq\Delta\left(G\right)-A\left(G\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Theorem
+Suppose that each node 
+\begin_inset Formula $v\in G$
+\end_inset
+
+ of a connected graph 
+\begin_inset Formula $G$
+\end_inset
+
+ receives the information from its neighboring nodes after a fixed delay
+ 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+ and applies a linear protocol.
+ Then for 
+\begin_inset Formula 
+\[
+\delta=\delta^{*}\coloneqq\frac{\pi}{2\lambda_{n}}\quad\lambda_{n}=\lambda_{\max}\left(L\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ are eigenvalues of the Laplacian, the system has a globally asymptotically
+ stable oscillatory solution with frequency 
+\begin_inset Formula $\omega=\lambda_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Consensus protocols for networks of dynamic agents
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "35line%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename oscill.png
+	lyxscale 10
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \quad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "60line%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename oscill2.png
+	lyxscale 10
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Bonus 2: Computational Power
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Definition
+\begin_inset Formula $\mathsf{PSPACE}$
+\end_inset
+
+ is the set of all decision problems that can be solved by a Turing machine
+ using a polynomial amount of space.
+\end_layout
+
+\begin_layout Definition
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45line%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename inclusions.png
+	lyxscale 10
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \quad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45line%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pspace.png
+	lyxscale 10
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+The computational power of networks of small resource-limited mobile agents
+ is explored.
+ Two new models of computation based on pairwise interactions of finite-state
+ agents in populations of finite but unbounded size are defined.
+ With a fairness condition on interactions, the concept of stable computation
+ of a function or predicate is defined.
+ Protocols are given that stably compute any predicate in the class definable
+ by formulas of Presburger arithmetic, which includes Boolean combinations
+ of threshold-
+\begin_inset Formula $k$
+\end_inset
+
+, majority, and equivalence modulo 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ All stably computable predicates are shown to be in 
+\begin_inset Formula $\mathsf{NL}\coloneqq\mathsf{NSPACE}(\log n)$
+\end_inset
+
+.
+ Assuming uniform random sampling of interacting pairs yields the model
+ of conjugating automata.
+ Any counter machine with 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ counters of capacity 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ can be simulated with high probability by a conjugating automaton in a
+ population of size 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ All predicates computable with high probability in this model are shown
+ to be in 
+\begin_inset Formula $P$
+\end_inset
+
+; they can also be computed by a randomized logspace machine in exponential
+ time.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Computation in Networks of Passively Mobile Finite-State Sensors
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Population protocols are a formal model of computation by identical, anonymous
+ mobile agents interacting in pairs.
+ Their computational power is rather limited: Angluin et al.
+ have shown that they can only compute the predicates over 
+\begin_inset Formula $\mathbf{\mathbb{N}}^{k}$
+\end_inset
+
+ expressible in Presburger arithmetic.
+ For this reason, several extensions of the model have been proposed, including
+ the addition of devices called cover-time services, absence detectors,
+ and clocks.
+ All these extensions increase the expressive power to the class of predicates
+ over 
+\begin_inset Formula $\mathbf{\mathbb{N}}^{k}$
+\end_inset
+
+ lying in the complexity class 
+\series bold
+
+\begin_inset Formula $\mathsf{NL}$
+\end_inset
+
+
+\series default
+ when the input is given in unary.
+ However, these devices are difficult to implement, since they require that
+ an agent atomically receives messages from all other agents in a population
+ of unknown size; moreover, the agent must know that they have all been
+ received.
+ Inspired by the work of the verification community on Emerson and Namjoshi’s
+ broadcast protocols, we show that 
+\series bold
+
+\begin_inset Formula $\mathsf{NL}$
+\end_inset
+
+
+\series default
+-power is also achieved by extending population protocols with reliable
+ broadcasts, a simpler, standard communication primitive.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Expressive Power of Broadcast Consensus Protocols
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Broadcast consensus protocols (BCPs) are a model of computation, in which
+ anonymous, identical, finite-state agents compute by sending/receiving
+ global broadcasts.
+ BCPs are known to compute all number predicates in 
+\begin_inset Formula $\mathsf{NL}=\mathsf{NSPACE}(\log n)$
+\end_inset
+
+ where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of agents.
+ They can be considered an extension of the well-established model of population
+ protocols.
+ This paper investigates execution time characteristics of BCPs.
+ We show that every predicate computable by population protocols is computable
+ by a BCP with expected 
+\begin_inset Formula $O\left(n\log n\right)$
+\end_inset
+
+ interactions, which is asymptotically optimal.
+ We further show that every log-space, randomized Turing machine can be
+ simulated by a BCP with 
+\begin_inset Formula $O\left(n\log n\cdot T\right)$
+\end_inset
+
+ interactions in expectation, where 
+\begin_inset Formula $T$
+\end_inset
+
+ is the expected runtime of the Turing machine.
+ This allows us to characterise polynomial-time BCPs as computing exactly
+ the number predicates in 
+\begin_inset Formula $\mathsf{ZPL}$
+\end_inset
+
+, i.e.
+ predicates decidable by log-space bounded randomised Turing machine with
+ zero-error in expected polynomial time where the input is encoded as unary.
+\begin_inset Quotes erd
+\end_inset
+
+ unary.
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Running Time Analysis of Broadcast Consensus Protocols
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 3
+status open
+
+\begin_layout Plain Layout
+allowframebreaks
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Bibliography
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "biblio"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_body
+\end_document
