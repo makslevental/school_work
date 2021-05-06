@@ -6,19 +6,19 @@
 \origin unavailable
 \textclass beamer
 \begin_preamble
-\usetheme{Boadilla}
-\usecolortheme{beaver}
-%\usetheme{CambridgeUS}
-% or ...
-%\usepackage{pgfpages}
-%\setbeameroption{show notes}
-%\setbeameroption{show notes on second screen=right}
+\usetheme{Luebeck}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}[frame number]{}
 
-\setbeamercovered{transparent}
-%\setbeamertemplate{theorems}[numbered]
+\definecolor{UCmaroon}{rgb}{0.5, 0.0, 0.0}
+\logo{\includegraphics[height=0.5cm]{uchicago_logo.jpeg}}
+\usecolortheme[named=UCmaroon]{structure}
+
+% puts some alpha over sequentially revealed sections
+%\setbeamercovered{transparent}
+\setbeamertemplate{theorems}[numbered]
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \beamertemplatenavigationsymbolsempty
-
 
 \newcommand{\R}{\mathbb{R}}%
 \newcommand{\T}{\mathcal{T}}%
@@ -574,10 +574,6 @@ agents/players/nodes/vertices
 \end_layout
 
 \end_deeper
-\begin_layout Frame
-
-\end_layout
-
 \begin_layout Frame
 
 \end_layout

@@ -1,16 +1,19 @@
+import glob
 import math
 import pickle
 from pprint import pprint
+from os import path
 from typing import List, NamedTuple
+import tikzplotlib
 
 import matplotlib.pyplot as plt
 import numpy as np
 import psycopg2
 from scipy import stats
 
-con = psycopg2.connect(
-    "host=localhost dbname=postgres user=postgres password=mysecretpassword"
-)
+# con = psycopg2.connect(
+#     "host=localhost dbname=postgres user=postgres password=mysecretpassword"
+# )
 
 
 def get_freqs(tbl, col):
@@ -118,9 +121,8 @@ def kolmogorov_smirnov_test(rvs1: np.ndarray, rvs2: np.ndarray):
     # null hypothesis => same distribution
     # low prval or high stat => reject null => diff distributions
 
-    assert len(rvs1) == len(rvs2)
     stat, pval = stats.ks_2samp(rvs1, rvs2)
-    print(f"n={len(rvs1)} samples; stat={stat:.4f}; p={pval:.4f} ")
+    # print(f"n={len(rvs1)} samples; stat={stat:.4f}; p={pval:.4f}")
     return stat, pval
 
 
@@ -398,6 +400,8 @@ def plot_hist_ax(ax: plt.Axes, density, bin_edges, label):
     bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
     ax.fill_between(bin_center, density, step="pre", alpha=0.2)
     ax.plot(bin_center, density, drawstyle="steps", label=label, alpha=0.5)
+    ax.legend()
+    ax.grid(True)
 
 
 def plot_n_hists(hists: List[Hist], title="", labels=None):
@@ -512,6 +516,7 @@ def group_sample_exps():
     loop_all_exps(3, 1000, loop_body)
     loop_all_exps(3, 10000, loop_body)
 
+
 def hash_sample_exps():
     def loop_body(k, N, f, prefix):
         print(f"{k},{N},{f},{prefix}")
@@ -533,6 +538,76 @@ def hash_sample_exps():
     loop_all_exps(3, 10000, loop_body)
 
 
+def plots():
+    # methods = {
+    #     "groupjoin": [],
+    #     "wanderjoin": [],
+    #     "olkenjoin": [],
+    #     "hashjoin": [],
+    #     "streamjoin": [],
+    # }
+    # for pkl_fp in glob.glob("data/*.p"):
+    #     _, n_rels, n_samps, p, alg = path.split(pkl_fp)[-1].replace(".p", "").split("_")
+    #     n_rels, n_samps, p = map(int, [n_rels, n_samps, p])
+    #     print(n_rels, n_samps, p, alg)
+    #     f = pickle.load(open(pkl_fp, "rb"))
+    #     # print(f.keys())
+    #     # print(len(f["samp_indxs"]))
+    #     # h1 = gen_hist(f["samp_indxs"])
+    #     # h2 = gen_hist(f["full_indxs"])
+    #     stat, pval = kolmogorov_smirnov_test(f["samp_indxs"], f["full_indxs"])
+    #     # fig, ax = plt.subplots()
+    #     # plot_hist_ax(ax, h1.density, h1.bin_edges, "samp")
+    #     # plot_hist_ax(ax, h2.density, h2.bin_edges, "full")
+    #     # ax.set_title(f"{n_rels=}, {n_samps=}, {p=}, {alg=}, {stat=:.4f}, {pval=:.4f}")
+    #     # # fig.savefig(f"plots/{alg}_{n_rels}_{n_samps:05d}_{p}.png")
+    #     # tikzplotlib.save(f"plots/{alg}_{n_rels}_{n_samps:05d}_{p}.tex", figure=fig)
+    #     # plt.close(fig)
+    #
+    #     methods[alg].append(
+    #         (n_rels, n_samps, p, stat, pval)
+    #     )
+    # pickle.dump(methods, open("methods.p", "wb"))
+    methods = pickle.load(open("methods.p", "rb"))
+
+    for method in ["groupjoin", "wanderjoin", "olkenjoin", "hashjoin", "streamjoin"]:
+        fig, ax = plt.subplots()
+        for n_sampes in [1000,10000]:
+            methods[method].sort(key=lambda x: x[2])
+            ax.plot(
+                [
+                    p/100
+                    for n_rels, n_samps, p, stat, pval in methods[method]
+                    if n_rels == 2 and n_samps == n_sampes
+                ],
+                [
+                    pval
+                    for n_rels, n_samps, p, stat, pval in methods[method]
+                    if n_rels == 2 and n_samps == n_sampes
+                ],
+                label=f"$p$ @ $10^{int(math.log10(n_sampes))}$"
+            )
+            ax.plot(
+                [
+                    p / 100
+                    for n_rels, n_samps, p, stat, pval in methods[method]
+                    if n_rels == 2 and n_samps == n_sampes
+                ],
+                [
+                    stat
+                    for n_rels, n_samps, p, stat, pval in methods[method]
+                    if n_rels == 2 and n_samps == n_sampes
+                ],
+                label=f"$D_{{n,m}}$ @ $10^{int(math.log10(n_sampes))}$"
+            )
+
+        ax.set_xlabel("sample $f$")
+        ax.legend(loc="upper right")
+        # if "hash" not in method and "wander" not in method:
+        #     ax.set_yscale("log")
+        # ax.set_title(f"{method}")
+        tikzplotlib.save(f"plots/{method}.tex", figure=fig)
+
 
 if __name__ == "__main__":
     # gen_exps()
@@ -541,11 +616,12 @@ if __name__ == "__main__":
     # freqs = get_freqs("tbl_2_1000_10_r1", "A1")
     # print(weighted_wr_sample("tbl_2_1000_10_r0", 100, freqs, "a1"))
     # print(stream_sample_two("tbl_2_1000_10_r0", "tbl_2_1000_10_r1", 10))
-    print("olken_join_exps")
-    olken_join_exps(1000)
-    print("stream_sample_exps")
-    stream_sample_exps(1000)
+    # print("olken_join_exps")
+    # olken_join_exps(1000)
+    # print("stream_sample_exps")
+    # stream_sample_exps(1000)
     # print(group_sample_two("tbl_2_1000_10_r0", "tbl_2_1000_10_r1", 10))
     # group_sample_exps()
     # pprint(hash_sample_two("tbl_2_1000_10_r0", "tbl_2_1000_10_r1", 0.01))
     # hash_sample_exps()
+    plots()

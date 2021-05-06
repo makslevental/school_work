@@ -1,0 +1,777 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Tensor Network Contractions for Simulating Quantum Circuits on FPGAs
+\end_layout
+
+\begin_layout Author
+Maksim Levental
+\end_layout
+
+\begin_layout Abstract
+Most research in quantum computing today is performed against simulations
+ of quantum computers rather than true quantum computers.
+ Simulating a quantum computer entails implementing all of the unitary operators
+ corresponding to the quantum gates as matrices.
+ For high numbers of qubits, performing matrix multiplications for these
+ simulations becomes quite expensive, since 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit operators correspond to 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+-dimensional matrix representations.
+ One way to accelerate such a simulation is to use field programmable gate
+ array (FPGA) hardware to efficiently compute the matrix multiplications.
+ Though FPGAs can efficiently perform matrix multiplications they are memory
+ bound, having relatively small block random access memory.
+ One way to potentially reduce the memory footprint of a quantum computing
+ system is to represent it as a tensor network; tensor networks are a formalism
+ for representing compositions of tensors wherein economical tensor contractions
+ are readily identified.
+ Thus we explore tensor networks as a means to reducing the memory footprint
+ of quantum computing systems and broadly accelerating simulations of such
+ systems.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Quantum computing (QC) refers to the manipulation and exploitation of properties
+ of quantum mechanical (QM) systems to perform computation.
+ QM systems exhibit properties such as superposition and entanglement and
+ clever 
+\shape italic
+quantum algorithms
+\shape default
+ transform these systems to perform general computation.
+ Unsurprisingly, the technique was intially conceived of as a way to simulate
+ physical systems themselves:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+\SpecialChar ldots
+ [N]ature isn't classical, dammit, and if you want to make a simulation
+ of nature, you'd better make it quantum mechanical, and by golly it's a
+ wonderful problem, because it doesn't look so easy.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This closing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "feynman1982simulating"
+literal "false"
+
+\end_inset
+
+ remark from the keynote at the 1
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+st
+\end_layout
+
+\end_inset
+
+ Physics of Computation Conference in 1981, delivered by the late Richard
+ Feynman, cavalierly, but accurately, expresses that initial goal of quantum
+ computing.
+ Although modeling and simulating physical systems on quantum computers
+ remains a thriving area of research we narrow our focus here to QC as it
+ pertains to solving general computational problems.
+ Such problems include unstructured search 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/237814.237866"
+literal "false"
+
+\end_inset
+
+, integer factorization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "365700"
+literal "false"
+
+\end_inset
+
+, combinatorial optimization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "farhi2014quantum"
+literal "false"
+
+\end_inset
+
+, and many others.
+ It is conjectured that some quantum algorithms enable quantum computers
+ to exceed the computational power of classical computers 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhong1460"
+literal "false"
+
+\end_inset
+
+.
+ QC systems are composed of so-called quantum bits, or 
+\shape italic
+qubits
+\shape default
+, that encode initial and intermediate states of computations (final states
+ are the results of measurement and therefore are encoded on classical bits).
+ Transformations between states are effected by time-reversible 
+\shape italic
+unitary
+\shape default
+ 
+\shape italic
+operators.
+
+\shape default
+ A formalism for representing quantum computation is the 
+\shape italic
+quantum circuit
+\shape default
+ formalism, where semenatically related collections of 
+\begin_inset Formula $n$
+\end_inset
+
+ qubits are represented as 
+\shape italic
+registers
+\shape default
+ and transformations are represented as gates, connected to those registers
+ by wires, and applied in sequence (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Quantum-Circuit-representing"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{quantikz}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+gategroup[wires=3,steps=11]{}
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\backslash
+lstick{$|{0}
+\backslash
+rangle$} & 
+\backslash
+gate{H}&
+\backslash
+ctrl{1} & 
+\backslash
+ctrl{2} &
+\backslash
+qw &
+\backslash
+qw 
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+rstick[wires=3]{$
+\backslash
+frac{|{000}
+\backslash
+rangle + |{111}
+\backslash
+rangle}{
+\backslash
+sqrt{2}}$} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\backslash
+lstick{$|{0}
+\backslash
+rangle$} & 
+\backslash
+gate{H}& 
+\backslash
+control{} & 
+\backslash
+qw& 
+\backslash
+gate{H} &
+\backslash
+qw
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&
+\backslash
+lstick{$|{0}
+\backslash
+rangle$} & 
+\backslash
+gate{H}& 
+\backslash
+qw & 
+\backslash
+control{} & 
+\backslash
+gate{H} &
+\backslash
+qw
+\end_layout
+
+\begin_layout Plain Layout
+
+&&&&
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{quantikz}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Quantum Circuit representing 3-qubit entanglement effected by application
+ of success Hadamard gates.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Quantum-Circuit-representing"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As already mentioned, in hardware, quantum circuits correspond to physical
+ systems that readily exhibit quantum mechnical properties; examples of
+ physical qubits include transmons, ion traps and topological quantum computers
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NAP25196"
+literal "false"
+
+\end_inset
+
+.
+ Current state of the art QC systems are termed Noisy Intermediate-Scale
+ Quantum (NISQ) systems.
+ Such systems are characterized by moderate quantities of physical qubits
+ (50-100) but relatively few logical qubits (i.e.
+ qubits robust to inteference and noise).
+ Due to these limitations (and, more broadly, the relative scarcity of functioni
+ng QC systems), most research on quantum algorithms is performed with the
+ assistance of simulators of QC systems.
+ Such simulators perform simulations by representing 
+\begin_inset Formula $n$
+\end_inset
+
+-qubit circuit as 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+-dimensional complex vectors and transformations on those vectors as 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+-dimensional complex matrix-vector multiplication.
+ Naturally, due to this exponential growth, naively executing such simulations
+ quickly become infeasible for 
+\begin_inset Formula $n>50$
+\end_inset
+
+ qubits 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pednault2020paretoefficient"
+literal "false"
+
+\end_inset
+
+, both due to memory constraints and compute time.
+ 
+\end_layout
+
+\begin_layout Standard
+A field-programmable gate array (FPGA) is a device designed to be configured
+ by a user into various arrangements of (classical) gates and memory.
+ FPGAs consist of arrays (hence the name) of configurable logic blocks (CLBs),
+ block ram (BRAM), and programmable busses that connect CLBs and RAM into
+ various topologies (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FPGA-floorplan-diagram"
+
+\end_inset
+
+).
+ The CLBs typically contain arithmetic logic units and lookup tables (LUTs),
+ that can be programmed to represent truth tables for many boolean functions.
+ Using high-level description languages (such as VHDL or Verilog) designers
+ specify modules and compose them into circuits (also known as a 
+\shape italic
+dataflows
+\shape default
+) that perform arbitrary computation.
+ Typically FPGAs run at lower clock speeds (100-300MHz) than either conventional
+ processors or even graphics processors but nonetheless they excel at latency
+ constrained computations owing to their fully synchronous nature (all modules
+ in the same 
+\shape italic
+clock domain
+\shape default
+ execute simultaneously).
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename murra1-2998435.gif
+	width 50text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+FPGA floorplan diagram 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "9103284"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FPGA-floorplan-diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+At first glance FPGAs seem like a suitable platform for performant simulation
+ of quantum systems when runtime is of the essence.
+ Unfortunately BRAM is one of the more limited resources on an FPGA and
+ therefore it becomes necessary to explore memory reduction strategies for
+ simulations (as well as runtime reduction strategies).
+ 
+\end_layout
+
+\begin_layout Standard
+It's the case that matrices are a subclass of a more general mathematical
+ object called a 
+\shape italic
+tensor
+\shape default
+ and composition of matrices as 
+\shape italic
+tensor contraction
+\shape default
+.
+
+\shape italic
+ Tensor networks
+\shape default
+ (TNs) are decompositions (i.e.
+ factorizations) of very high-dimensional tensors into networks (i.e.
+ graphs) of low-dimensional tensors.
+ TNs have been successfullly employed in reducing the memory requirements
+ of simulations of QC systems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pednault2020paretoefficient"
+literal "false"
+
+\end_inset
+
+.
+ The critical feature of tensor networks that make them useful for QC is
+ the potential to perform tensor contractions on the smaller tensors in
+ an order such that, ultimately, the memory and compute time requirements
+ are lower than for the matrix-vector multiplication representation.
+ Existing applications of TNs to quantum circuits focus primarily on memory
+ constraints on general purpose computers 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fried_2018"
+literal "false"
+
+\end_inset
+
+ and distributed environments 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McCaskey_2018"
+literal "false"
+
+\end_inset
+
+.
+ Hence, we explore tensor networks as a means of reducing the memory footprint
+ of quantum circuits with particular attention to dimensions of the designs
+ space as they pertain to deployment to FPGAs.
+\end_layout
+
+\begin_layout Standard
+The remainder of this report is organized as follows: section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Background"
+
+\end_inset
+
+ covers the necessary background wherein section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Quantum-Circuits"
+
+\end_inset
+
+ very briefly reviews quantum computation and quantum circuits, section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Tensor-Networks"
+
+\end_inset
+
+ defines tensor networks rigorously and discusses algorithms for identifying
+ optimal contraction orders, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:FPGAs"
+
+\end_inset
+
+ discusses the constraints imposed by virtue of deploying to FPGA, section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Implementation"
+
+\end_inset
+
+ describes our implementation of <>, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Evaluation"
+
+\end_inset
+
+ reports our results on various empirical experiments, and section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conclusion"
+
+\end_inset
+
+ concludes with future research directions.
+\end_layout
+
+\begin_layout Section
+Background
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Background"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Quantum Circuits
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Quantum-Circuits"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Tensor Networks
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Tensor-Networks"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sdfsdf
+\end_layout
+
+\begin_layout Subsection
+FPGAs
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:FPGAs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+asdasd
+\end_layout
+
+\begin_layout Section
+Implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Implementation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+asdsd
+\end_layout
+
+\begin_layout Section
+Evaluation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Evaluation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+assd
+\end_layout
+
+\begin_layout Section
+Conclusion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "biblio"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
