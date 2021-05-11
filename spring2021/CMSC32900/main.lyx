@@ -52,7 +52,16 @@ figs-within-sections
 \index_command default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref page
+\pdf_pdfusetitle true
 \papersize letterpaper
 \use_geometry true
 \use_package amsmath 1
@@ -104,7 +113,7 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Tensor Network Contractions for Simulating Quantum Circuits on FPGAs
+Tensor Networks for Simulating Quantum Circuits on FPGAs
 \end_layout
 
 \begin_layout Author
@@ -115,20 +124,20 @@ Maksim Levental
 Most research in quantum computing today is performed against simulations
  of quantum computers rather than true quantum computers.
  Simulating a quantum computer entails implementing all of the unitary operators
- corresponding to the quantum gates as matrices.
- For high numbers of qubits, performing matrix multiplications for these
+ corresponding to the quantum gates as tensors.
+ For high numbers of qubits, performing tensor multiplications for these
  simulations becomes quite expensive, since 
-\begin_inset Formula $n$
+\begin_inset Formula $N$
 \end_inset
 
--qubit operators correspond to 
-\begin_inset Formula $2^{n}$
+-qubit gates correspond to 
+\begin_inset Formula $2^{N}$
 \end_inset
 
--dimensional matrix representations.
+-dimensional tensors.
  One way to accelerate such a simulation is to use field programmable gate
  array (FPGA) hardware to efficiently compute the matrix multiplications.
- Though FPGAs can efficiently perform matrix multiplications they are memory
+ Though FPGAs can efficiently perform tensor multiplications, they are memory
  bound, having relatively small block random access memory.
  One way to potentially reduce the memory footprint of a quantum computing
  system is to represent it as a tensor network; tensor networks are a formalism
@@ -216,7 +225,7 @@ Quantum computing (QC) refers to the manipulation and exploitation of properties
 \shape italic
 quantum algorithms
 \shape default
- transform these systems to perform general computation.
+ operate on these systems to perform general computation.
  Unsurprisingly, the technique was intially conceived of as a way to simulate
  physical systems themselves:
 \end_layout
@@ -236,15 +245,7 @@ quantum algorithms
 \end_layout
 
 \begin_layout Standard
-This closing 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "feynman1982simulating"
-literal "false"
-
-\end_inset
-
- remark from the keynote at the 1
+This closing remark from the keynote at the 1
 \begin_inset script superscript
 
 \begin_layout Plain Layout
@@ -254,8 +255,15 @@ st
 \end_inset
 
  Physics of Computation Conference in 1981, delivered by the late Richard
- Feynman, cavalierly, but accurately, expresses that initial goal of quantum
- computing.
+ Feynman 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "feynman1982simulating"
+literal "false"
+
+\end_inset
+
+, succinctly, but accurately, expresses that initial goal of quantum computing.
  Although modeling and simulating physical systems on quantum computers
  remains a thriving area of research we narrow our focus here to QC as it
  pertains to solving general computational problems.
@@ -294,13 +302,17 @@ literal "false"
 \end_inset
 
 .
- QC systems are composed of so-called quantum bits, or 
+ 
+\end_layout
+
+\begin_layout Standard
+QC systems are composed of so-called quantum bits, or 
 \shape italic
 qubits
 \shape default
-, that encode initial and intermediate states of computations (final states
- are the results of measurement and therefore are encoded on classical bits).
- Transformations between states are effected by time-reversible 
+, that encode initial and intermediate states of computations.
+ Transformations between states are effected by time-reversible transforms,
+ called 
 \shape italic
 unitary
 \shape default
@@ -314,19 +326,23 @@ operators.
 quantum circuit
 \shape default
  formalism, where semenatically related collections of 
-\begin_inset Formula $n$
+\begin_inset Formula $N$
 \end_inset
 
  qubits are represented as 
 \shape italic
 registers
 \shape default
- and transformations are represented as gates, connected to those registers
- by wires, and applied in sequence.
-\end_layout
-
-\begin_layout Standard
-As already mentioned, in hardware, quantum circuits correspond to physical
+ and transformations are represented as 
+\shape italic
+gates
+\shape default
+, connected to those registers by 
+\shape italic
+wires
+\shape default
+, and applied in sequence.
+ As already mentioned, in hardware, quantum circuits correspond to physical
  systems that readily exhibit quantum mechnical properties; examples of
  physical qubits include transmons, ion traps and topological quantum computers
  
@@ -347,21 +363,21 @@ literal "false"
 ng QC systems), most research on quantum algorithms is performed with the
  assistance of simulators of QC systems.
  Such simulators perform simulations by representing 
-\begin_inset Formula $n$
+\begin_inset Formula $N$
 \end_inset
 
--qubit circuit as 
-\begin_inset Formula $2^{n}$
+-qubit circuits as 
+\begin_inset Formula $2^{N}$
 \end_inset
 
 -dimensional complex vectors and transformations on those vectors as 
-\begin_inset Formula $2^{n}$
+\begin_inset Formula $2^{N}$
 \end_inset
 
 -dimensional complex matrix-vector multiplication.
  Naturally, due to this exponential growth, naively executing such simulations
  quickly become infeasible for 
-\begin_inset Formula $n>50$
+\begin_inset Formula $N>50$
 \end_inset
 
  qubits 
@@ -377,55 +393,12 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-A field-programmable gate array (FPGA) is a device designed to be configured
- by a user into various arrangements of (classical) gates and memory.
- FPGAs consist of arrays (hence the name) of configurable logic blocks (CLBs),
- block ram (BRAM), and programmable busses that connect CLBs and RAM into
- various topologies (see figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:FPGA-floorplan-diagram"
-
-\end_inset
-
-).
- The CLBs typically contain arithmetic logic units and lookup tables (LUTs),
- that can be programmed to represent truth tables for many boolean functions.
- Using high-level description languages (such as VHDL or Verilog) designers
- specify modules and compose them into circuits (also known as a 
-\shape italic
-dataflows
-\shape default
-) that perform arbitrary computation.
- Typically FPGAs run at lower clock speeds (100-300MHz) than either conventional
- processors or even graphics processors but nonetheless they excel at latency
- constrained computations owing to their fully 
-\begin_inset Quotes eld
-\end_inset
-
-synchronous
-\begin_inset Quotes erd
-\end_inset
-
- nature (all modules in the same 
-\shape italic
-clock domain
-\shape default
- execute simultaneously).At first glance FPGAs seem like a suitable platform
- for performant simulation of quantum systems when runtime is of the essence.
- Unfortunately BRAM is one of the more limited resources on an FPGA and
- therefore it becomes necessary to explore memory reduction strategies for
- simulations (as well as runtime reduction strategies).
- 
-\end_layout
-
-\begin_layout Standard
 It's the case that matrices are a subclass of a more general mathematical
  object called a 
 \shape italic
 tensor
 \shape default
- and composition of matrices as 
+ and composition of matrices can be expressed as 
 \shape italic
 tensor contraction
 \shape default
@@ -448,9 +421,9 @@ literal "false"
 
 .
  The critical feature of tensor networks that make them useful for QC is
- the potential to perform tensor contractions on the smaller tensors in
- an order such that, ultimately, the memory and compute time requirements
- are lower than for the matrix-vector multiplication representation.
+ the potential to perform tensor contractions on the low-dimensional tensors
+ in an order such that, ultimately, the memory and compute time requirements
+ are lower than for the traditional representation.
  Existing applications of TNs to quantum circuits focus primarily on memory
  constraints on general purpose computers 
 \begin_inset CommandInset citation
@@ -469,9 +442,43 @@ literal "false"
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+FPGAs are known to be performant for matrix multiplication uses cases 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/3020078.3021740"
+literal "false"
+
+\end_inset
+
+.
+ Though FPGAs typically run at lower clock speeds (100-300MHz) than either
+ conventional processors or even graphics processors they, nonetheless,
+ excel at latency constrained computations owing to their fully 
+\begin_inset Quotes eld
+\end_inset
+
+synchronous
+\begin_inset Quotes erd
+\end_inset
+
+ nature (all modules in the same 
+\shape italic
+clock domain
+\shape default
+ execute simultaneously).
+ At first glance FPGAs seem like a suitable platform for performant simulation
+ of quantum systems when runtime is of the essence.
+ Unfortunately, BRAM is one of the more limited resources on an FPGA and
+ therefore it becomes necessary to explore memory reduction strategies for
+ simulations (as well as runtime reduction strategies).
  Hence, we explore tensor networks as a means of reducing the memory footprint
  of quantum circuits with particular attention to dimensions of the designs
  space as they pertain to deployment to FPGAs.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -498,8 +505,8 @@ reference "sec:Tensor-Networks"
 
 \end_inset
 
- defines tensor networks fairly rigorously and discusses algorithms for
- identifying optimal contraction orders, section 
+ defines tensors and tensor networks fairly rigorously and discusses algorithms
+ for identifying optimal contraction orders, section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:FPGAs"
@@ -514,14 +521,14 @@ reference "sec:Implementation"
 
 \end_inset
 
- describes our implementation of <TODO>, section 
+ describes our implementation of TNs on FPGAs, section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Evaluation"
 
 \end_inset
 
- reports our results on various empirical experiments, and section 
+ reports our results on various random circuits, and section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Conclusion"
@@ -618,7 +625,8 @@ We say that the qubit is in a superposition of the basis vectors/states.
 
 \end_inset
 
-.
+ in that the squares of the coefficients are the probabilities of measuring
+ the system in the corresponding basis state.
  Collections of qubits have state vectors that represented by the 
 \shape italic
 tensor product 
@@ -658,27 +666,34 @@ where the second
 
  and thus we observe exponential growth in the size of the representation
  of an 
-\begin_inset Formula $n$
+\begin_inset Formula $N$
 \end_inset
 
 -qubit system.
- An alternative notation for state vectors is Dirac notation:
+ An alternative notation for state vectors is Dirac notation; for example,
+ for a single qubit
 \begin_inset Formula 
 \[
-\psi\equiv\alpha\kket 0+\beta\kket 1
+\ket{\psi}\equiv\alpha\kket 0+\beta\kket 1
 \]
 
 \end_inset
 
-
+and a 2-qubit system
 \begin_inset Formula 
-\[
-\psi\otimes\phi\equiv\alpha\alpha'\kket{00}+\alpha\beta'\kket{01}+\beta\alpha'\kket{10}+\beta\beta'\kket{11}
-\]
+\begin{align*}
+\ket{\psi}\otimes\ket{\phi} & \equiv\left(\alpha\kket 0+\beta\kket 1\right)\otimes\left(\alpha'\kket 0+\beta'\kket 1\right)\\
+ & \equiv\alpha\alpha'\kket 0\otimes\kket 0+\alpha\beta'\kket 0\otimes\kket 1+\beta\alpha'\kket 1\otimes\kket 0+\beta\beta'\kket 1\otimes\kket 1\\
+ & \equiv\alpha\alpha'\kket 0\kket 0+\alpha\beta'\kket 0\kket 1+\beta\alpha'\kket 1\kket 0+\beta\beta'\kket 1\kket 1\\
+ & \equiv\alpha\alpha'\kket{00}+\alpha\beta'\kket{01}+\beta\alpha'\kket{10}+\beta\beta'\kket{11}\\
+ & \equiv\alpha\alpha'\kket 0+\alpha\beta'\kket 1+\beta\alpha'\kket 2+\beta\beta'\kket 3
+\end{align*}
 
 \end_inset
 
-Of particular import for QC are the 
+where in the last line we've used the decimal representation for the bit
+ strings identifying the basis states.
+ Of particular import for QC are the 
 \shape italic
 entangled 
 \shape default
@@ -689,7 +704,7 @@ bell states
 ; they correspond to multi-qubit states, such as 
 \begin_inset Formula 
 \[
-\xi=\frac{1}{\sqrt{2}}\ket{00}+\frac{1}{\sqrt{2}}\ket{11}
+\ket{\xi}=\frac{1}{\sqrt{2}}\ket{00}+\frac{1}{\sqrt{2}}\ket{11}
 \]
 
 \end_inset
@@ -1053,7 +1068,7 @@ The output of a combinational logic circuit at any time is only a function
 \end_layout
 
 \begin_layout Subsection
-Tensor Networks
+Tensors and Tensor Networks
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Tensor-Networks"
@@ -1064,11 +1079,12 @@ name "sec:Tensor-Networks"
 \end_layout
 
 \begin_layout Standard
-We quickly define tensors and and then move on to tensor network methods.
+We quickly define tensors and tensor networks and then move on to tensor
+ network methods for simulating quantum circuits.
 \end_layout
 
 \begin_layout Subsubsection
-Definition
+Tensors
 \end_layout
 
 \begin_layout Standard
@@ -1282,19 +1298,50 @@ order
 \series bold
 Note that we do not use rank to mean either of these things
 \series default
-.
- Note further that eqn.
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The 
+\shape italic
+rank
+\shape default
+ of a tensor is the minimum number of distinct basis tensors necessary to
+ define it; the tensor in eqn.
  
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "eq:tensor_coord"
+
+\end_inset
+
+ is in fact a rank 1 tensor.
+ The definition is a generalization of the rank of a matrix (which, recalling,
+ is the dimension of its column space, i.e.
+ number of basis elements).
+ Despite this obvious, reasonable definition for rank, one should be aware
+ that almost all literature in this area of research uses rank to mean order.
+\end_layout
+
+\end_inset
+
+.
+ Furthermore, eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:tensor_coord"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
  in fact represents a linear sum of basis elements, as it employs Einstein
  summation convention
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Repeated indices in juxtapose position indicate summation 
@@ -1307,7 +1354,9 @@ Repeated indices in juxtapose position indicate summation
 \end_inset
 
 .
- 
+ Note we make liberal use of summation convention in the following but occasiona
+lly use explicit sums when it improves presentation (i.e.
+ when we would like to emphasize a particular contraction).
 \end_layout
 
 \begin_layout Standard
@@ -1397,10 +1446,10 @@ th and
 th bases: 
 \begin_inset Formula 
 \begin{align*}
-Y & :=T_{j_{1}\dots j_{q}}^{i_{1}\dots i_{p}}\;\mathbf{e}_{i_{1}}\otimes\cdots\left[\mathbf{e}_{i_{a}}\right]\cdots\otimes\mathbf{e}_{i_{p}}\otimes\left(\mathbf{e}_{i_{a}}\cdot\mathbf{e}^{j_{b}}\right)\otimes\mathbf{e}^{j_{1}}\otimes\cdots\left[\mathbf{e}^{j_{b}}\right]\cdots\otimes\mathbf{e}^{j_{q}}\\
- & \;=T_{j_{1}\dots j_{q}}^{i_{1}\dots i_{p}}\delta_{i_{a}}^{j_{b}}\;\mathbf{e}_{i_{1}}\otimes\cdots\left[\mathbf{e}_{i_{a}}\right]\cdots\otimes\mathbf{e}_{i_{p}}\otimes\mathbf{e}^{j_{1}}\otimes\cdots\left[\mathbf{e}^{j_{b}}\right]\cdots\otimes\mathbf{e}^{j_{q}}\qquad\left(\text{since }\mathbf{e}_{i}\cdot\mathbf{e}^{j}=\delta_{i}^{j}\right)\\
- & \;=\left(\sum_{j_{b}}T_{j_{1}\dots j_{b}\dots j_{q}}^{i_{1}\dots j_{b}\dots i_{p}}\right)\;\mathbf{e}_{i_{1}}\otimes\cdots\left[\mathbf{e}_{i_{a}}\right]\cdots\otimes\mathbf{e}_{i_{p}}\otimes\mathbf{e}^{j_{1}}\otimes\cdots\left[\mathbf{e}^{j_{b}}\right]\cdots\otimes\mathbf{e}^{j_{q}}\\
- & :=Y_{j_{1}\dots\left[j_{b}\right]\dots j_{q}}^{i_{1}\dots\left[i_{a}\right]\dots i_{p}}\;\mathbf{e}_{i_{1}}\otimes\cdots\left[\mathbf{e}_{i_{a}}\right]\cdots\otimes\mathbf{e}_{i_{p}}\otimes\mathbf{e}^{j_{1}}\otimes\cdots\left[\mathbf{e}^{j_{b}}\right]\cdots\otimes\mathbf{e}^{j_{q}}
+Y & :=T_{j_{1}\dots j_{q}}^{i_{1}\dots i_{p}}\;\mathbf{e}_{i_{1}}\otimes\cdots\otimes\mathbf{e}_{i_{a-1}}\otimes\mathbf{e}_{i_{a+1}}\otimes\cdots\otimes\mathbf{e}_{i_{p}}\otimes\left(\mathbf{e}_{i_{a}}\cdot\mathbf{e}^{j_{b}}\right)\otimes\mathbf{e}^{j_{1}}\otimes\cdots\otimes\mathbf{e}^{j_{b-1}}\otimes\mathbf{e}^{j_{b+1}}\otimes\cdots\otimes\mathbf{e}^{j_{q}}\\
+ & \;=T_{j_{1}\dots j_{q}}^{i_{1}\dots i_{p}}\delta_{i_{a}}^{j_{b}}\;\mathbf{e}_{i_{1}}\otimes\cdots\otimes\mathbf{e}_{i_{a-1}}\otimes\mathbf{e}_{i_{a+1}}\otimes\cdots\otimes\mathbf{e}_{i_{p}}\otimes\mathbf{e}^{j_{1}}\otimes\cdots\otimes\mathbf{e}^{j_{b-1}}\otimes\mathbf{e}^{j_{b+1}}\otimes\cdots\otimes\mathbf{e}^{j_{q}}\qquad\left(\text{since }\mathbf{e}_{i}\cdot\mathbf{e}^{j}=\delta_{i}^{j}\right)\\
+ & \;=\sum_{j_{b}}T_{j_{1}\dots j_{b}\dots j_{q}}^{i_{1}\dots j_{b}\dots i_{p}}\;\mathbf{e}_{i_{1}}\otimes\cdots\otimes\mathbf{e}_{i_{a-1}}\otimes\mathbf{e}_{i_{a+1}}\otimes\cdots\otimes\mathbf{e}_{i_{p}}\otimes\mathbf{e}^{j_{1}}\otimes\cdots\otimes\mathbf{e}^{j_{b-1}}\otimes\mathbf{e}^{j_{b+1}}\otimes\cdots\otimes\mathbf{e}^{j_{q}}\\
+ & :=Y_{j_{1}\dots i_{b-1}i_{b+1}\dots j_{q}}^{i_{1}\dots i_{a-1}i_{a+1}\dots i_{p}}\;\mathbf{e}_{i_{1}}\otimes\cdots\otimes\mathbf{e}_{i_{a-1}}\otimes\mathbf{e}_{i_{a+1}}\otimes\cdots\otimes\mathbf{e}_{i_{p}}\otimes\mathbf{e}^{j_{1}}\otimes\cdots\otimes\mathbf{e}^{j_{b-1}}\otimes\mathbf{e}^{j_{b+1}}\otimes\cdots\otimes\mathbf{e}^{j_{q}}
 \end{align*}
 
 \end_inset
@@ -1409,11 +1458,7 @@ where
 \begin_inset Formula $\left(\cdot\right)$
 \end_inset
 
- means inner product and 
-\begin_inset Formula $\left[\cdot\right]$
-\end_inset
-
- means omission from sequence.
+ means inner product.
  Notice that the order of 
 \begin_inset Formula $Y$
 \end_inset
@@ -1431,7 +1476,7 @@ es.
 \begin_layout Standard
 As mentioned in the introduction, matrices can be represented as tensors;
  for example, the two dimensional 
-\begin_inset Formula $n\times n$
+\begin_inset Formula $N\times N$
 \end_inset
 
  matrix 
@@ -1457,7 +1502,7 @@ where upper indices correspond to the row index and lower indices correspond
 \end_inset
 
  to 
-\begin_inset Formula $n$
+\begin_inset Formula $N$
 \end_inset
 
 .
@@ -1477,7 +1522,7 @@ where upper indices correspond to the row index and lower indices correspond
 \begin_layout Standard
 \begin_inset Formula 
 \[
-M_{j}^{i}\left(\mathbf{e}_{i}\cdot\mathbf{e}^{j}\right)=M_{j}^{i}\delta_{i}^{j}=\sum_{i}M_{i}^{i}
+M_{j}^{i}\left(\mathbf{e}_{i}\cdot\mathbf{e}^{j}\right)=M_{j}^{i}\delta_{i}^{j}=\sum_{i=1}^{N}M_{i}^{i}
 \]
 
 \end_inset
@@ -1516,7 +1561,7 @@ n (and tensor composition more broadly); for two type
 \end_inset
 
  tensors 
-\begin_inset Formula $M,N$
+\begin_inset Formula $M,L$
 \end_inset
 
  we can form the type 
@@ -1528,11 +1573,11 @@ n (and tensor composition more broadly); for two type
 \end_inset
 
  corresponding to matrix product 
-\begin_inset Formula $M\cdot N$
+\begin_inset Formula $M\cdot L$
 \end_inset
 
  of 
-\begin_inset Formula $n\times n$
+\begin_inset Formula $N\times N$
 \end_inset
 
  by first taking the tensor product
@@ -1541,25 +1586,29 @@ n (and tensor composition more broadly); for two type
 \begin_layout Standard
 \begin_inset Formula 
 \[
-Z_{lj}^{ik}:=M_{l}^{i}N_{j}^{k}
+Z_{lj}^{ik}:=M_{l}^{i}L_{j}^{k}
 \]
 
 \end_inset
 
-and then contracting along the off diagonal
+The attentive reader will notice that the coordinate representation of two
+ tensors is exactly the Kronecker product of two matrices.
+ Then contracting along the off diagonal
 \begin_inset Formula 
-\[
-Z_{j}^{i}:=Z_{kj}^{ik}=M_{k}^{i}N_{j}^{k}\equiv\sum_{k=1}^{n}M_{k}^{i}N_{j}^{k}
-\]
+\begin{equation}
+Z_{j}^{i}:=Z_{kj}^{ik}=M_{k}^{i}L_{j}^{k}\equiv\sum_{k=1}^{N}M_{k}^{i}L_{j}^{k}\label{eq:matrix_mult}
+\end{equation}
 
 \end_inset
 
 One can confirm that this is indeed conventional matrix multipliation of
  two 
-\begin_inset Formula $n\times n$
+\begin_inset Formula $N\times N$
 \end_inset
 
  matrices.
+ In general, stated simply, when contracting indices of a tensor product,
+ contraction can be understood to be a sum over shared indices.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1567,6 +1616,10 @@ Tensor Networks
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -1658,6 +1711,773 @@ name "fig:Projected-Entangled-Pair"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tensor_net_contract.png
+	lyxscale 25
+	width 75text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Contraction 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Tensor-networks-demonstrating"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename state_vector.png
+	lyxscale 25
+	width 75text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+State vector representation
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:State-vector-representation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename factorizations.png
+	lyxscale 25
+	width 75text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+State vector factorization
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:State-vector-factorization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tensor network diagrammatic contraction.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "evenbly2019tensortrace"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tensor networks (TNs) are a way to factor tensors with large orders into
+ networks of tensors with lower orders; since the number of parameters a
+ tensor consists of is exponential in the order of the tensor, smaller order
+ tensors are much preferrable computationally.
+ They were first used to study ground states of one dimensional quantum
+ many-body systems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PhysRevLett.69.2863"
+literal "false"
+
+\end_inset
+
+ but have since been applied in other areas (such as machine learning 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "glasser2019expressive"
+literal "false"
+
+\end_inset
+
+).
+ TNs lend themselves to a diagrammatic representation which can be used
+ to reason about such factorizations (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Tensor-networks-demonstrating"
+
+\end_inset
+
+).
+ We will primarily be interested in TNs as a means to factoring the state-vector
+ of an 
+\begin_inset Formula $N$
+\end_inset
+
+-qubit system (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:State-vector-representation"
+
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{equation}
+\ket{\psi}:=\sum_{i_{1}i_{2}\dots i_{N}}C^{i_{1}i_{2}\dots i_{N}}\ket{i_{1}}\ket{i_{2}}\cdots\ket{i_{N}}\label{eq:state_vector}
+\end{equation}
+
+\end_inset
+
+for which its common to propose an ansatz factorizations: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Matrix Product States (MPS)
+\series default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kl_mper_1993"
+literal "false"
+
+\end_inset
+
+, which yields factorization
+\begin_inset Formula 
+\[
+C^{i_{1}i_{2}\dots i_{N}}\equiv A_{j_{1}}^{i_{1}}A_{j_{2}}^{i_{1}j_{1}}\cdots A_{j_{N-1}}^{i_{N-1}j_{N-2}}A^{i_{N}j_{N-1}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $j$
+\end_inset
+
+ are called 
+\shape italic
+bond indices.
+ 
+\shape default
+If each index 
+\begin_inset Formula $i$
+\end_inset
+
+ has dimension 
+\begin_inset Formula $d$
+\end_inset
+
+ (i.e.
+ takes on values 1 to 
+\begin_inset Formula $d$
+\end_inset
+
+) then 
+\begin_inset Formula $C$
+\end_inset
+
+ is specified by 
+\begin_inset Formula $d^{N}$
+\end_inset
+
+ parameters and can always be represented by an MPS factorization 
+\begin_inset Formula $Ndm^{2}$
+\end_inset
+
+ parameters, where 
+\begin_inset Formula $m:=d^{N/2}$
+\end_inset
+
+ is the bond dimension.
+ While for this naive representation 
+\begin_inset Formula $d^{N}<Ndm^{2}$
+\end_inset
+
+, in practice 
+\begin_inset Formula $m$
+\end_inset
+
+ is fixed to some moderate size such that 
+\begin_inset Formula $d^{N}>Ndm^{2}$
+\end_inset
+
+ and the MPS factorization functions as an approximation.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Projected Entangled Pair States (PEPS)
+\series default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Verstraete:2004cf"
+literal "false"
+
+\end_inset
+
+, which is a generalization of MPS to higher spatial dimensions, i.e.
+ TNs that correspond to lattices of contractions of tensors, which themselves
+ represent pairwise entangled quantum systems.
+ Naturally, such a series of contractions doesn't lend itself to being expressed
+ in traditional notation and thus we observe the power of tensor network
+ diagrams (see PEPS in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:State-vector-factorization"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tree Tensor Networks (TTN) 
+\series default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PhysRevA.74.022320"
+literal "false"
+
+\end_inset
+
+, a further generalization where tensors are entangled (and therefore contracted
+) hierarchically.
+
+\series bold
+ 
+\series default
+In fact TTNs bear the closest resemblance to quantum circuits.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Multi-scale Entanglement Renormalization Ansatz (MERA) 
+\series default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PhysRevLett.99.220405"
+literal "false"
+
+\end_inset
+
+, a specific type of TTN where the tensors are alternatingly unitaries and
+ isometries
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A tensor, seen as a multlinear map, that preserves distances under the ambient
+ distance metric.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+TNs for Simulating Quantum Circuits
+\end_layout
+
+\begin_layout Standard
+Factoring eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:state_vector"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is only the first step to successfully simulating a quantum circuit.
+ By representing some final state as a tensor as well, and contracting across
+ all indices (called 
+\shape italic
+contracting the network
+\shape default
+), we can calculate the amplitude for that particular state.
+ Since tensor contraction is associative
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This can be observed by noting that summing is an associative operation
+ (or by analog with matrix-matrix multiplication).
+\end_layout
+
+\end_inset
+
+, the order in which tensors are actually contracted is a 
+\begin_inset Quotes eld
+\end_inset
+
+hyperparameter
+\begin_inset Quotes erd
+\end_inset
+
+ of TN methods; finding the optimal contraction order, with respect to accuracy
+ (assuming some approximation has been made in constructing the factorization),
+ compute time, and memory requirements is critical.
+ 
+\end_layout
+
+\begin_layout Standard
+In particular we focus on contraction orders for TTNs as they most closely
+ resemble quantum circuits.
+ For a TTN consisting of 
+\begin_inset Formula $N$
+\end_inset
+
+ tensors (corresponding to 
+\begin_inset Formula $N$
+\end_inset
+
+ gates) with maximum order 
+\begin_inset Formula $p$
+\end_inset
+
+, worst case, we can see that contraction time takes 
+\begin_inset Formula $O\left(N\exp\left(O\left(p\right)\right)\right)$
+\end_inset
+
+ since, in general, contracting across all indices of a pair of tensors
+ is exponential in their orders
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Consider contracting two 
+\begin_inset Formula $\left(1,1\right)$
+\end_inset
+
+ tensors (as in eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:matrix_mult"
+
+\end_inset
+
+), i.e.
+ two order 2 tensors, which effectively is matrix multplication followed
+ by trace.
+ The complexity of this contraction is then 
+\begin_inset Formula $O\left(N^{2+1}+N\right)\equiv O\left(\exp\left(2\log N\right)\left(1+N\right)\right)$
+\end_inset
+
+ (where 
+\begin_inset Formula $N$
+\end_inset
+
+ here is the characteristic dimension of the matrix).
+ Assuming the ranges of all tensor indices is the same (i.e.
+ 
+\begin_inset Formula $N$
+\end_inset
+
+ is constant across all tensors), for example 
+\begin_inset Formula $N=2$
+\end_inset
+
+ as in the case of matrices derived of unitary transformations operating
+ on single qubits, we recover the stated complexity.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Markov et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1137/050644756"
+literal "false"
+
+\end_inset
+
+ showed that there in fact exists a contraction ordering which results in
+ a contraction time of 
+\begin_inset Formula $O\left(N^{O\left(1\right)}\exp\left(O\left(\operatorname{tw}\left(G^{L}\right)\right)\right)\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+ is the line graph
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A 
+\shape italic
+line graph 
+\shape default
+captures edge adjacency; given a graph 
+\begin_inset Formula $G$
+\end_inset
+
+, 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+ is defined such that each edge of 
+\begin_inset Formula $G$
+\end_inset
+
+ corresponds to a vertex of 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+ and two vertices are are connected in 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+ if the edges in 
+\begin_inset Formula $G$
+\end_inset
+
+ that they correspond to are adjacent on the same vertex (in 
+\begin_inset Formula $G$
+\end_inset
+
+).
+ 
+\end_layout
+
+\end_inset
+
+ of the tensor network and 
+\begin_inset Formula $\operatorname{tw}\left(G^{L}\right)$
+\end_inset
+
+ is the tree-width
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A
+\shape italic
+ tree decomposition
+\shape default
+ of a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is a tree 
+\begin_inset Formula $T$
+\end_inset
+
+ and a mapping from the vertices of 
+\begin_inset Formula $G$
+\end_inset
+
+ into 
+\begin_inset Quotes eld
+\end_inset
+
+bags
+\begin_inset Quotes erd
+\end_inset
+
+ that satisfy the following properties
+\end_layout
+
+\begin_layout Enumerate
+Each vertex must appear in at least one bag.
+\end_layout
+
+\begin_layout Enumerate
+For each edge in 
+\begin_inset Formula $G$
+\end_inset
+
+, at least one bag must contain both of the vertices it is adjacent on.
+\end_layout
+
+\begin_layout Enumerate
+All bags containing a given vertex in 
+\begin_inset Formula $G$
+\end_inset
+
+ must be connected in 
+\begin_inset Formula $T$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+The width 
+\begin_inset Formula $w$
+\end_inset
+
+ of a tree decomposition is the cardinality of the largest bag (minus one).
+ Finally the 
+\shape italic
+tree-width 
+\shape default
+of 
+\begin_inset Formula $G$
+\end_inset
+
+ is the minimum width over all possible tree decompositions.
+ Intuitively, a graph has low tree-width if it can be constructed by joining
+ small graphs together into a tree.
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Thus, in general, we can simulate arbitrary quantum circuits by
+\end_layout
+
+\begin_layout Enumerate
+Constructing the TTN (with graph 
+\begin_inset Formula $G$
+\end_inset
+
+) that corresponds to the quantum circuit.
+\end_layout
+
+\begin_layout Enumerate
+Computing a tree-decomposition of 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+ with width 
+\begin_inset Formula $\operatorname{tw}\left(G^{L}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Finding a contraction ordering
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Markov et al.
+ also show that one can recover a contraction order from the tree-decomposition
+ of 
+\begin_inset Formula $G^{L}$
+\end_inset
+
+ in polynomial time.
+\end_layout
+
+\end_inset
+
+ for the TTN and fully contracting to a single, real, number (i.e.
+ order 0 tensor).
+\end_layout
+
+\begin_layout Plain Layout
+Note that, in general, computing the tree-width of a graph is NP-hard 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Arnborg87complexityof"
+literal "false"
+
+\end_inset
+
+ and Markov et al.'s results rely on generating 
+\shape italic
+any
+\shape default
+ tree-decomposition that has a tree-width that suits their needs (i.e.
+ overall runtime complexity).
+\end_layout
+
+\end_inset
+
+ For quantum circuits consisting of many few qubit gates this technique
+ produces a much more (runtime) efficient evaluation of the circuit; indeed
+ Markov et al.
+ further show that any TTN corresponding to a quantum circuit with 
+\begin_inset Formula $N$
+\end_inset
+
+ gates, where the number of gates that act on any pair of qubits is bounded
+ by 
+\begin_inset Formula $r$
+\end_inset
+
+, has contraction time 
+\begin_inset Formula $O\left(N^{O\left(1\right)}\exp\left(O\left(r\right)\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Markov et al.'s results are not tight; their construction finds some tree-decompo
+sition with the correct corresponding tensor contraction order that suits
+ their aim (overall runtime complexity of the translation from quantum circuit
+ to TTN and the ultimate contraction).
+ In reality there are often contraction orders that are much more space
+ and runtime efficient.
+ Though, in general problem is NP-hard 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Arnborg87complexityof"
+literal "false"
+
+\end_inset
+
+, for particular TTNs (corresponding to circuits) there are heuristics,
+ such as non-adjacent contractions 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pednault2020paretoefficient"
+literal "false"
+
+\end_inset
+
+, that produce more efficient orders.
+ Alternatively, randomized search and Bayesian optimization can be used
+ to identify efficient contraction orders 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gray_2021,Fried_2018"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 FPGAs
 \begin_inset CommandInset label
@@ -1667,19 +2487,6 @@ name "sec:FPGAs"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-FPGAs consist of arrays (hence the name) of configurable logic blocks (CLBs),
- block ram (BRAM), and programmable busses that connect CLBs and RAM into
- various topologies (see figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:FPGA-floorplan-diagram"
-
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Standard
@@ -1728,6 +2535,293 @@ name "fig:FPGA-floorplan-diagram"
 
 \end_layout
 
+\begin_layout Standard
+A field-programmable gate array (FPGA) is a device designed to be configured
+ by a user into various arrangements of (classical) gates and memory.
+ FPGAs consist of arrays (hence the name) of configurable logic blocks (CLBs),
+ block ram (BRAM), and programmable busses that connect CLBs and RAM into
+ various topologies (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FPGA-floorplan-diagram"
+
+\end_inset
+
+).
+ The CLBs typically contain arithmetic units (such as adders, multipliers,
+ and accumulators) and lookup tables (LUTs), that can be programmed to represent
+ truth tables for many boolean functions.
+ Using hardware description languages (such as VHDL or Verilog) designers
+ specify modules and compose them into circuits (also known as a 
+\shape italic
+dataflows
+\shape default
+) that perform arbitrary computation.
+ These circuits then go through a 
+\shape italic
+place and route
+\shape default
+ procedure before ultimately being instantiated on the FPGA as 
+\shape italic
+processing elements
+\shape default
+ (PEs) and connections between PEs.
+\end_layout
+
+\begin_layout Standard
+While modules consisting purely of combinational logic compute their outputs
+ at the stated clock speed of the FPGA, inevitably I/O (i.e.
+ fetching data from memory) interleaved with such modules (otherwise arranged
+ into a pipeline architecture) creates pipeline stalls.
+ Thus, it's essential that FPGA designs are as compute bound as possible
+ (rather than I/O bound).
+ In particular, we explore I/O minimal generalized matrix multiplication
+ (GEMM) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/3373087.3375296"
+literal "false"
+
+\end_inset
+
+ and other 
+\shape italic
+systolic array
+\shape default
+ architectures 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/3431920.3439292,genc2019gemmini"
+literal "false"
+
+\end_inset
+
+.
+ A systolic architecture 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "1653825"
+literal "false"
+
+\end_inset
+
+ is a gridded, pipelined, array of PEs that processes data as the data flows
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The relationship to cardiovascular 
+\begin_inset Quotes eld
+\end_inset
+
+systolic
+\begin_inset Quotes erd
+\end_inset
+
+ is in association with the flow of data into the array, akin to how blood
+ flows through the veins into the human heart.
+\end_layout
+
+\end_inset
+
+ through the array.
+ Crucially, a systolic architecture propagates partial results as well as
+ input data through the pipeline (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:systolic-array-2"
+
+\end_inset
+
+).
+ Systolic arrays are particularly suited for I/O efficient matrix multiplication
+ owing to the pipelining of inputs (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:systolic-array"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename systolic_arch_detail.png
+	lyxscale 25
+	width 80text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gemmini systolic array architecture.
+ The processing elements (PEs) are either of type Weight Stationary (WS)
+ or Output Stationary (OS).
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "genc2019gemmini"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:systolic-array-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename systolic_array.png
+	lyxscale 25
+	width 80text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Systolic array architecture implementing matrix multiplication.
+ Input matrices 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ stream by to produce output matrix 
+\begin_inset Formula $C$
+\end_inset
+
+ via successive MAC operations.
+ Note that 
+\begin_inset Formula $C$
+\end_inset
+
+ remains in the processing elements (i.e.
+ this is a diagram of an OS architecture).
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1007/978-3-030-05677-3_16"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:systolic-array"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Systolic arrays
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One remaining hurdle to simulating quantum compuations (i.e.
+ carrying out tensor contractions) on FPGAs is BRAM.
+ The standard remediation is to perform arithmetic with reduced precision
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Germaine to this issue is the fact that arithmetic on FPGAs is typically
+ performed in fixed precision (via an integer representation), owing to
+ higher compute cost incurred for floating point arithmetic.
+\end_layout
+
+\end_inset
+
+.
+ There is evidence that suggests that simulations of quantum circuits, of
+ varying depths 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "betelu2020limits"
+literal "false"
+
+\end_inset
+
+, are robust to reduced precision computation as long as that loss of precision
+ is uncorrelated 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "10.1145/3295500.3356155"
+literal "false"
+
+\end_inset
+
+ i.e.
+ insofar as it can be treated as uncorrelated noise.
+\end_layout
+
 \begin_layout Section
 Implementation
 \begin_inset CommandInset label
@@ -1740,7 +2834,57 @@ name "sec:Implementation"
 \end_layout
 
 \begin_layout Standard
-asdsd
+We use quimb 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gray2018"
+literal "false"
+
+\end_inset
+
+ to specify quantum circuit and generate TNs therefrom.
+ We also use CoTenGra 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gray_2021"
+literal "false"
+
+\end_inset
+
+ to find optimal tensor contraction orders.
+ For deploying circuits to FPGAs we use Chisel 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "6241660"
+literal "false"
+
+\end_inset
+
+ as a HDL, by way of an adaptation of the Gemmini systolic array generator
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "genc2019gemmini"
+literal "false"
+
+\end_inset
+
+.
+ Notably we experiment with using Gemmini as an accelerator (i.e.
+ fully parameterizing the weights/entries of the matrices) and 
+\begin_inset Quotes eld
+\end_inset
+
+hardcoding
+\begin_inset Quotes erd
+\end_inset
+
+ certain gates/tensors and routing data instead.
+ The advantage of the latter approach over the former is a reduction in
+ loads from memory for the weights.
+ The success of the approach depends heavily on whether certain sequences
+ of fixed gates can actually be pipelined in this way.
+ We hypothesize that this might be the case for low-depth circuits/TNs.
 \end_layout
 
 \begin_layout Section
@@ -1755,7 +2899,7 @@ name "sec:Evaluation"
 \end_layout
 
 \begin_layout Standard
-assd
+TODO
 \end_layout
 
 \begin_layout Section
@@ -1767,6 +2911,10 @@ name "sec:Conclusion"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+TODO
 \end_layout
 
 \begin_layout Standard
