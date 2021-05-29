@@ -24,7 +24,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \usepackage{tikz}
-\usetikzlibrary{quantikz}
+%\usetikzlibrary{quantikz}
 \usetikzlibrary{calc,matrix,fit}
 \tikzset{pics/grid/.style={code={\tikzset{wonderich/.cd,#1}
     \def\pv##1{\pgfkeysvalueof{/tikz/wonderich/##1}}%
@@ -37,7 +37,11 @@ pics/nodes/.style={code={\tikzset{wonderich/.cd,#1}
 }},
 wonderich/.cd,nx/.initial=4,ny/.initial=4,r/.initial=4pt,
     style/.initial={circle,fill}}
-\usepackage{braket}
+\usepackage[braket, qm]{qcircuit}
+
+\newcommand{\inputgroupvv}[5]{\POS"#1,0"."#2,0"."#1,0"."#2,0"!C*+<#3>\frm{\{}, \POS"#1,0"."#2,0"."#1,0"."#2,0"*!C!<1.7em,#4>=<0em>{#5}}
+    % Constructs an input group with label #5 and a grouping { from rows #1 to #2 with #3 and #4 controlling the spacing
+\usepackage{pgfplots}
 
 \@ifundefined{showcaptionsetup}{}{%
  \PassOptionsToPackage{caption=false}{subfig}}
@@ -255,18 +259,22 @@ U\otimes V:=\begin{pmatrix}U_{00}V & U_{01}V\\ U_{10}V & U_{11}V \end{pmatrix}:=
 a function of number of qubits. 
 
 \begin{figure}
-\begin{quantikz}
-%\gategroup[wires=3,steps=11]{}
-&\lstick{$|{0}\rangle$} & \gate{H}&\ctrl{1} & \ctrl{2} &\qw &\qw 
- \rstick[wires=3]{$\frac{|{000}\rangle + |{111}\rangle}{\sqrt{2}}$} 
-\\
-&\lstick{$|{0}\rangle$} & \gate{H}& \control{} & \qw& \gate{H} &\qw
-\\
-&\lstick{$|{0}\rangle$} & \gate{H}& \qw & \control{} & \gate{H} &\qw
-&&&&
-\end{quantikz}
-\centering{}\caption{Quantum Circuit representing 3-qubit entanglement effected by application
-of success Hadamard gates.\label{fig:Quantum-Circuit-representing-1}}
+\begin{equation*}
+    \psi\begin{cases}\qquad\qquad\quad
+	\Qcircuit @C=1.0em @R=0.7em {
+	 	\lstick{ q_0 := \ket{0} } & \gate{H} & \ctrl{1} & \ctrl{2} & \qw & \qw & \qw
+		 \\
+	 	\lstick{ q_1 := \ket{0}  } & \gate{H} & \targ & \qw & \gate{H} & \qw & \qw 
+		 \\
+	 	\lstick{ q_2 := \ket{0}  } & \gate{H} & \qw & \targ & \gate{H} & \qw & \qw
+		 \\
+	 	%\lstick{c:} & {/_{_{1}}} \cw & \cw & \cw & \cw & \cw & \cw\\
+	 }
+	\end{cases} 
+	\Rightarrow\; \frac{\ket{000} + \ket{111}}{\sqrt{2}}
+\end{equation*}
+\centering{}\caption{Quantum Circuit representing 3-qubit $q_{0},q_{1},q_{2}$ entanglement
+effected by application of successive Hadamard gates.\label{fig:Quantum-Circuit-representing-1}}
 \end{figure}
 
 As already alluded to, quantum circuits are a formalism for representing
@@ -631,28 +639,253 @@ as uncorrelated noise.
 
 \section{Implementation\label{sec:Implementation}}
 
+\begin{figure}
+\begin{equation*}
+	n\underbrace{\begin{cases}\qquad
+    \Qcircuit @C=0.5em @R=1.0em @!R { 	 	\lstick{ {q}_{0} :  } & \gate{H} & \ctrl{1} & \gate{R_z} & \gate{R_x} & \qw & \ctrl{1} & \gate{R_z} & \gate{R_x} & \qw & \ctrl{1} & \gate{R_z} & \gate{R_x} & \qw & \ctrl{1} & \gate{R_z} & \gate{R_x} & \gate{H} & \qw & \qw & \qw && \cdots\\ 	 	\lstick{ {q}_{1} :  } & \gate{H} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \gate{H} & \qw & \qw && \cdots\\ 	 	\lstick{ {q}_{2} :  } & \gate{H} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \gate{H} & \qw & \qw && \cdots\\ 	 	\lstick{ {q}_{3} :  } & \gate{H} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \targ & \gate{R_z} & \ctrl{1} & \gate{R_x} & \gate{H} & \qw & \qw && \cdots\\ 	 	\lstick{ {q}_{4} :  } & \gate{H} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \ctrl{1} & \gate{R_z} & \control\qw & \gate{R_x} & \gate{H} & \qw & \qw && \cdots\\ 	 	\lstick{ {q}_{5} :  } & \gate{H} & \targ & \gate{R_z} & \gate{R_x} & \qw & \targ & \gate{R_z} & \gate{R_x} & \qw & \targ & \gate{R_z} & \gate{R_x} & \qw & \targ & \gate{R_z} & \gate{R_x} & \gate{H} & \qw & \qw & \qw && \cdots\\ 	 	\lstick{\vdots} & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots && \vdots \\ \\	 }
+	\end{cases}}_{k}
+\end{equation*}
+\centering{}\caption{Test quantum circuit for $n$ qubits and rounds $k$.\label{fig:Quantum-Circuit-representing-1-1}}
+\end{figure}
+
 We use quimb \cite{Gray2018} to specify quantum circuit and generate
-TNs therefrom. We also use CoTenGra \cite{Gray_2021} to find optimal
-tensor contraction orders. For deploying circuits to FPGAs we use
-Chisel \cite{6241660} as a HDL, by way of an adaptation of the Gemmini
-systolic array generator \cite{genc2019gemmini}. Notably we experiment
-with using Gemmini as an accelerator (i.e. fully parameterizing the
-weights/entries of the matrices) and ``hardcoding'' certain gates/tensors
-and routing data instead. The advantage of the latter approach over
-the former is a reduction in loads from memory for the weights. The
-success of the approach depends heavily on whether certain sequences
-of fixed gates can actually be pipelined in this way. We hypothesize
-that this might be the case for low-depth circuits/TNs.
+TNs therefrom. In particular we simulate circuits for $n=2,4,10$
+qubits and \textit{rounds} $k=2,4,10$ where each consists round consists
+of alternating qubit couplings according of the form in figure \ref{fig:Quantum-Circuit-representing-1-1}.
+We also use CoTenGra \cite{Gray_2021} to find optimal tensor contraction
+orders. For deploying circuits to FPGAs we use Chisel \cite{6241660}
+as a HDL, by way of an adaptation of the Gemmini systolic array generator
+\cite{genc2019gemmini}. Notably we experiment with using Gemmini
+as an accelerator (i.e. fully parameterizing the weights/entries of
+the matrices) and ``hardcoding'' certain gates/tensors and routing
+data instead. The advantage of the latter approach over the former
+is a reduction in loads from memory for the weights. The success of
+the approach depends heavily on whether certain sequences of fixed
+gates can actually be pipelined in this way. We hypothesize that this
+might be the case for low-depth circuits/TNs.
 
 \section{Evaluation\label{sec:Evaluation}}
 
-TODO
+\begin{figure}
+\subfloat[Runtimes for optimal contraction strategy.\label{fig:Quantum-Circuit-representing-1-1-1-1-1}]{% This file was created by tikzplotlib v0.9.8.
+\begin{tikzpicture}
+
+\begin{axis}[
+colorbar,
+colorbar style={ylabel={}},
+colormap/viridis,
+point meta max=0.5678581,
+point meta min=0.0073435,
+tick align=outside,
+tick pos=left,
+x grid style={white!69.0196078431373!black},
+xlabel={num qubits},
+xmin=0.7, xmax=29.3,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ylabel={num rounds},
+ymin=1.4, ymax=14.6,
+ytick style={color=black}
+]
+\addplot [
+  colormap/viridis,
+  only marks,
+  scatter,
+  scatter src=explicit,
+  scatter/@pre marker code/.append style={/tikz/mark size=\perpointmarksize},
+  visualization depends on={\thisrow{sizedata} \as\perpointmarksize}
+]
+table [x=x, y=y, meta=colordata]{%
+x  y  colordata  sizedata
+2 8 0.014041600000000001 2.114138145400701
+2 10 0.013769600000000002 2.0935615130194587
+2 12 0.015611 2.2291558117850703
+2 14 0.009201999999999998 1.7114577332389023
+4 6 0.01370965 2.0889990739872544
+4 8 0.009170599999999998 1.7085352329516268
+4 10 0.009034999999999998 1.6958566630675331
+4 12 0.009337900000000001 1.724049270234357
+4 14 0.009318799999999999 1.7222851585522962
+6 4 0.01380215 2.096034540648509
+6 6 0.0093112 1.7215827056039197
+6 8 0.048068999999999994 3.911628550740552
+6 12 0.0470719 3.870846306875898
+6 14 0.009306699999999998 1.7211666443859188
+8 2 0.0098659 1.7721211883222492
+8 4 0.009144900000000001 1.7061395248226765
+8 6 0.0092672 1.717510226241004
+8 8 0.0483214 3.9218846661065165
+8 10 0.046570799999999996 3.850187793795009
+8 12 0.0089567 1.6884922734742844
+8 14 0.009395500000000001 1.7293584173443648
+10 2 0.013566599999999998 2.0780719193283503
+10 4 0.014333050000000002 2.1359661781420094
+10 6 0.0468923 3.8634547591367197
+10 8 0.046985 3.8672716483776264
+10 10 0.0455763 3.808856372413943
+12 2 0.0073435 1.52889131372726
+12 4 0.5678580999999999 13.444509927087102
+12 6 0.0464031 3.8432493387204345
+12 10 0.046626799999999996 3.8525019663998057
+12 12 0.0090037 1.692916631802345
+12 14 0.0480242 3.909805319458707
+14 2 0.013781550000000002 2.0944697686851965
+14 4 0.0093156 1.7219894238158724
+14 6 0.047868999999999995 3.9034825402109683
+14 8 0.5628554 13.385157388388528
+14 10 0.0454605 3.804014534785352
+14 12 0.045375700000000005 3.8004649587267387
+14 14 0.0474879 3.887913070544046
+16 2 0.01375595 2.0925235670954616
+16 4 0.047262700000000005 3.8786833665225426
+16 6 0.04679610000000001 3.8594897674233173
+16 8 0.0467371 3.857055999277226
+16 10 0.046142 3.8324215280019067
+16 14 0.047298200000000006 3.880139773087842
+18 2 0.013555849999999998 2.077248437386472
+18 4 0.0471931 3.8758264008673367
+18 8 0.0088638 1.6797128234183019
+18 12 0.04721299999999999 3.876643478112903
+18 14 0.0458865 3.8217962520747375
+20 2 0.0132719 2.0553775756397297
+20 4 0.5555990999999999 13.298597154768487
+20 6 0.0088702 1.680319122198953
+20 8 0.046558 3.8496586447300656
+20 10 0.0094773 1.736870255468047
+20 14 0.0091107 1.702946235221377
+22 2 0.0091275 1.7045156162800472
+22 4 0.5510534999999999 13.244084599026822
+22 6 0.046277 3.8380237887391058
+22 8 0.009069299999999999 1.699072644346513
+24 2 0.015064866666666664 2.189816429301928
+24 4 0.0090818 1.7002431368318915
+24 6 0.5599425 13.350476899514385
+24 8 0.046919100000000005 3.8645586269127676
+24 10 0.0475875 3.891988143452025
+24 12 0.04551809999999999 3.8064236798210467
+26 2 0.014012150000000001 2.111919949167156
+26 4 0.0092823 1.7189089145512628
+26 6 0.0092419 1.7151641720610815
+26 8 0.046721599999999995 3.856416364751684
+26 10 0.046856600000000005 3.861983818319208
+26 12 0.047094899999999995 3.8717918666732336
+28 2 0.009108799999999997 1.7027686546536236
+28 4 0.009212499999999998 1.7124338896635312
+28 6 0.0136726 2.0861744293889943
+28 12 0.0092231 1.7134187787174855
+};
+\end{axis}
+
+\end{tikzpicture}
+\centering{}}
+
+\hfill{}\subfloat[Runtimes for greedy contraction strategy.\label{fig:Quantum-Circuit-representing-1-1-1-1}]{% This file was created by tikzplotlib v0.9.8.
+\begin{tikzpicture}
+
+\begin{axis}[
+colorbar,
+colorbar style={ylabel={}},
+colormap/viridis,
+point meta max=0.0616001,
+point meta min=0.0087104,
+tick align=outside,
+tick pos=left,
+x grid style={white!69.0196078431373!black},
+xlabel={num qubits},
+xmin=0.7, xmax=29.3,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ylabel={num rounds},
+ymin=1.4, ymax=14.6,
+ytick style={color=black}
+]
+\addplot [
+  colormap/viridis,
+  only marks,
+  scatter,
+  scatter src=explicit,
+  scatter/@pre marker code/.append style={/tikz/mark size=\perpointmarksize},
+  visualization depends on={\thisrow{sizedata} \as\perpointmarksize}
+]
+table [x=x, y=y, meta=colordata]{%
+x  y  colordata  sizedata
+2 2 0.015495566666666665 2.22089893106823
+2 4 0.013989350000000001 2.1102010345664257
+2 6 0.013740950000000002 2.0913823731104646
+2 8 0.013808049999999999 2.096482488340909
+2 10 0.0137095 2.088987645879381
+2 12 0.0139794 2.1094504551938837
+2 14 0.013835 2.098527406385903
+4 2 0.0090867 1.7007017500979562
+4 4 0.05080520000000001 4.021417340881785
+4 6 0.0464044 3.843303173368853
+4 8 0.0466712 3.8543357871442563
+4 10 0.048891500000000004 3.944952192404213
+4 12 0.0481764 3.9159959653636998
+4 14 0.047275000000000005 3.8791880425339924
+6 2 0.0139827 2.109699420662121
+6 4 0.0485813 3.932417586378714
+6 6 0.046500400000000004 3.8472765733049066
+6 8 0.0465955 3.851208680619218
+6 10 0.0480405 3.9104687810047016
+6 12 0.0478006 3.900692700728539
+6 14 0.06160009999999999 4.4280831992985545
+8 2 0.009261799999999999 1.7170097564827733
+8 4 0.0466416 3.8531133369562194
+8 6 0.04784 3.902299957080766
+8 8 0.046665 3.8540797654909262
+8 10 0.0459605 3.8248766678090567
+8 12 0.04776849999999999 3.8993827457907235
+8 14 0.0472837 3.8795449688524686
+10 2 0.0132136 2.0508582379282427
+10 4 0.047919100000000006 3.905524710846122
+10 6 0.046026199999999996 3.8276094998670365
+10 12 0.0462656 3.8375510250972282
+12 2 0.009119799999999999 1.703796496069567
+12 4 0.046374000000000005 3.8420440733920675
+12 6 0.046118599999999996 3.831449636489532
+12 8 0.0470455 3.8697606838743304
+12 12 0.047656699999999996 3.894816908776978
+14 2 0.01371665 2.089532316170988
+14 4 0.0463552 3.841265212924884
+14 6 0.0475169 3.8891000283878743
+16 2 0.009189300000000001 1.710276304317144
+16 4 0.046451 3.845232440714509
+16 10 0.008710400000000002 1.665114540389126
+18 2 0.01385195 2.099812522089427
+18 4 0.04854970000000001 3.9311384459539434
+18 6 0.047036699999999994 3.869398741853973
+20 2 0.0087724 1.6710301150962794
+20 4 0.047033599999999995 3.8692712314871307
+20 6 0.0470217 3.8687817171776895
+20 12 0.0098028 1.7664450606465132
+22 2 0.013486149999999999 2.0719012697417627
+22 4 0.0464897 3.846833907997403
+22 6 0.0466608 3.853906321804491
+24 2 0.0093269 1.723033510250917
+24 4 0.04852820000000001 3.930267906734124
+24 6 0.04739120000000001 3.883952558684679
+26 2 0.013852749999999999 2.099873157081757
+26 4 0.046646499999999994 3.8533157288071
+26 6 0.0469076 3.864084990933142
+26 8 0.0464272 3.8442472277198934
+28 2 0.009089200000000002 1.700935688820042
+28 6 0.047786 3.900096950228112
+28 8 0.0466899 3.8551078785077557
+};
+\end{axis}
+
+\end{tikzpicture}
+\centering{}}\caption{Test quantum circuit for $n$ qubits and rounds $k$.\label{fig:Quantum-Circuit-representing-1-1-1}}
+\end{figure}
+
 
 \section{Conclusion\label{sec:Conclusion}}
 
 TODO
 
 \bibliographystyle{plain}
-\phantomsection\addcontentsline{toc}{section}{\refname}\bibliography{biblio}
+\phantomsection\addcontentsline{toc}{section}{\refname}\nocite{*}
+\bibliography{biblio}
 
 \end{document}
